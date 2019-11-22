@@ -1,0 +1,72 @@
+A Brief Introduction to JavaScript
+
+Lightweight, Cross-platforms, Objecti-oriented
+Programming Language.
+JavasScript one of the Core technologies.
+Lots of JavaScript frameworks.
+React,Angular,Jquery.
+
+Variables and Data Types
+
+Variable are like an container.
+var keyword.
+Datatypes 
+Numbers: that are floating type.
+String: Sequence of characters.
+Boolean: Logical values like binary true or false.
+Undefined: Datatype that dosen't have any value yet.
+Null: Also like undefined that are non-existent.
+JavaScript is a Dynamic Typing language.
+You don't have to specify data types.
+
+Variable Mutation and Type Coercion
+
+Comments 
+Single line //.
+Multiples lines /**/.
+JavaScript automatically convert data types.
+alert is command to an pop-up window.
+prompt is command to get an value you can store in an variable from the input.
+
+Basic Operators.
+
+Math operators: +,-,/,*
+typepof: A operator that shows the type of an variable.
+
+Operator predence
+
+Different operators does executes differently before each other.
+List of different operators you can find on mozarilla developer.
+
+
+Objects and Properties
+
+List of variables separties with an comma.
+Another object within an object.
+Call var john.properties
+Brackets to retrieve an Properties
+Mutate object => john. Job = ‘designer’
+Create a new object
+Var jane = new Object();
+
+Objects and methods
+
+Function keyword.
+Function body.
+Calling like an variable.
+This keyword means current object.
+
+
+Loops and iterations
+
+Repetitive tasks.
+For-loop three parts.
+Loop-block.
+John.length an dynamic way of loop through an array.
+While-loops.
+Continue quit with the current itertion and begin the next iteration.
+Break exit the current iteration and the loop .
+
+
+
+
