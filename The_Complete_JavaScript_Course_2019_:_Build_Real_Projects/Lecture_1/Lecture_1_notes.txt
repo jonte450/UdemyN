@@ -72,6 +72,27 @@ Truthy values: Values that are not falsy.
 == the types dosen't has to match this operator uses types conversion.
 === strict operator avoids type-conversion.
 
+Functions
+
+Functions are like containers and rerun an piece of code.
+Can take arguments.
+Recieves some input and does something and returns something else.
+DRY = Don't repeat yourself.
+
+Functions Statements and Expressions
+
+return terminates the function immediatly.
+Saves things in a variable when a function returns.
+Functions calls are an expression.
+Statements dosen't produce any sort of value.
+
+Arrays
+
+They are declared as [] and new Array().
+Zero based first number is 0.
+arrayName.length shows how many elements that exists in the array.
+
+
 
 
 Objects and Properties
