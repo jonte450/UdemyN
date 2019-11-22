@@ -36,7 +36,42 @@ typepof: A operator that shows the type of an variable.
 Operator predence
 
 Different operators does executes differently before each other.
-List of different operators you can find on mozarilla developer.
+List of different operators you can find on mozarilla developer on google search.
+
+If / else Statements
+
+Only execute some parts of the code.
+Logical operator ===.
+if and else have some codeblocks that execute some codes.
+True values dosen't need any comparison if it are only boolean value.
+
+Boolean Logic.
+
+else if to have after an if-statement to test an range.
+Three boolean logic operators:
+And (&&) => if All are true.
+OR (||) => true if One is true.
+NOT (!) => inverts true/false value.
+Logical operators also has an precedence.
+
+The Ternary Operator and Switch Statements.
+
+Ternary Operateror is that you write an if/else statement on one line: age >= 18 ? console.log(firstName + ' drinks beer.') : console.log(firstName + ' drinks juice.').
+You can assign variables with the hep with ternary operator.
+Switch statement is that you have mutiples if/else statements.
+Cases in switch must have break statements because it will continue to evalute the next case statements.
+switch(true) to work with ranges.
+default: standard like else-statements.
+
+Truthy and Falsy values and equality operators
+
+Falsy values things that are considered false.
+Falsy values: undefined, null, 0, '', NaN.
+Truthy values things that are considered true.
+Truthy values: Values that are not falsy.
+== the types dosen't has to match this operator uses types conversion.
+=== strict operator avoids type-conversion.
+
 
 
 Objects and Properties
