@@ -91,6 +91,14 @@ Arrays
 They are declared as [] and new Array().
 Zero based first number is 0.
 arrayName.length shows how many elements that exists in the array.
+You can mutate arrays to change the elements.
+You can have different datatypes in the array too.
+Methods in the array.
+Push: This method will add an element last in the array.
+Unshift: This method will add an element to the beginning.
+Pop: This will method will remove an element at the end.
+Shift: This method will remove the first Item from the array.
+indexOf: This method will return the position index of the element in the array.
 
 
 

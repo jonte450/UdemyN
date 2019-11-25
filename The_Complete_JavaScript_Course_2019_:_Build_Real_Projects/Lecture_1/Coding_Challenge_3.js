@@ -11,3 +11,26 @@ In the end, John would like to have 2 arrays:
 (NOTE: To calculate 20% of a value, simply multiply it with 20/100 = 0.2)
 GOOD LUCK 😀
 */
+
+function calc_tips(bill){
+  var tip;
+  if(50 > bill){
+    tip = bill*.2;
+  }
+  else if (bill >=50 && bill < 200) {
+    tip = bill*.15;
+    //console.log("Hello");
+
+  }
+  else {
+    tip = bill*.10;
+
+  }
+  return tip;
+}
+
+bills = [124,48,268];
+//console.log("Wrong",calc_tips(bills[0]));
+tips = [calc_tips(bills[0]), calc_tips(bills[1]),calc_tips(bills[2])];
+final_sum =  [bills[0]+tips[0],bills[1]+tips[1],bills[2]+tips[2]];
+console.log(tips,final_sum);
