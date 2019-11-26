@@ -1,0 +1,115 @@
+JavaScript in the Browser DOM Manipulation and Events
+
+The DOM and DOM Manipulation
+
+DOM: Document Object Model
+Structured representation of an HTML Document
+The DOM is used to connect webppages to scripts like JavaScript.
+For each HTML box there is an object in the DOM that we can access and interact with.
+
+First DOM Access and Manipulation
+
+-How to create our fudamental game variables.
+
+Array for the two playerscores
+roundScores
+Activeplayer.
+
+
+-How to generate a random number.
+Generate a random number.
+Math.random.
+Gives random number by multiplying an number.
+Floor removes the decimals parts.
+And to add one.
+
+-How to manipulate the DOM.
+document.querySelector(): Select with string and # “  and change to a text.
+Can become more dynamic if you add activeplayer.
+innerHTML needs to be an string.
+Reading too.
+
+-How to read from the DOM.
+You can use the querySelector to change the CSS-elements.
+You use an dot to select an property.
+
+-How to change CSS styles.
+
+
+Events and Event Handling: Rolling the Dice
+
+-Events : Notifications that are sent to notify the
+Code that something happened on the webpage.
+-Event listener: A function that perfoms an action
+Based on a certain event, It waits for a specific event
+to happen.
+
+An event can only happen after the execution stack
+Is empty.
+Messagesqueue
+An event listner gets its own Execution Context.
+
+-How to set up an event handler
+Need to select the element.
+We do something with that selection.
+Write addEventListener(‘Lots of events to choose from’,’function to handle the event’).
+
+-What a callback function is
+A function that is not called by us but called by another
+Function.
+
+
+
+
+-What an anonymous function is.
+Is an function that dosen’t have any name.
+And cannot be reused.
+
+-Another way to select elements by ID
+document.getElementById(‘id-name’).textContent.
+
+-How to change the image in an <img> element
+Use src.
+
+
+Updating Scores and Changing the Active Player
+
+-What the ternary operator is.
+With if/else state if not dice == 1 then continue with the dice.
+Change the activeplayer status.
+
+-How to add, remove and toggle HTML classes.
+ document.querySelector(‘.player-0-panel’).classList.remove(‘Classname’);
+ document.querySelector(‘.player-0-panel’).classList.add(‘Classname’);
+ document.querySelector(‘.player-0-panel’).classList.toggle(‘Classname’);
+
+Implementing Our 'Hold' Function and the DRY Principle
+
+-How to use functions to correctly apply the DRY principle.
+Uses this in the hold-function.
+Creates a new function next_player().
+
+
+-How to think about the game logic like a programmer.
+Check the active player with an if/else statement.
+document.querySelector(‘#name-’ + activePlayer).textContent = ‘winner’;
+document.querySelector(‘.player-’+ activePlayer+ ‘-panel’).classList.add(‘winner’);
+
+
+Creating a Game Initialization Function
+
+-Pracice, Practice
+New-game event.
+document.querySelector(.btn-new).addEventListener:
+Reset everything.
+Calling an init function that is declared outside.
+getElmentById and change it to player 1 and player 2.
+classList.remove(‘classname’).
+
+Finishing Touches: State Variables
+
+-What a state variable is, how to use it and why
+Condition variable of a system.
+To remeber something.
+Gameplaying variable.
+Adding the condition variable when you checks the game.
