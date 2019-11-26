@@ -1,0 +1,58 @@
+Lecture Notes
+
+How our code executes behind the scene in JavaScript.
+
+First the JavaScript Engine runs the code.
+After that parser check the code and if it is correct.
+After that it is converted to an Abstract Syntax Tree.
+After that is is converted to Machine Code.
+Finally the code runs.
+
+Execution context and the exectution Stack.
+
+When your code runs it will store all global variables and functions in the
+Global executetion context.
+
+And when you call a function it will create an exectution context and stack all
+contexts on each other.
+
+The Execution in detail: Creation and Execution Phases and Hoisting
+
+Execution Context Object.
+1. Creation phase
+A. Variable Object(VO).
+The argument object is created, containing all the arguments that were passed into the function.
+Hoisting
+Code is scanned for function declarations: for each function , a code property is created in the
+Variable Object, pointing to the function.
+Code is scanned for variable declarations:for each variable a property is created in the Variable Object,
+and set to undefined.
+B. Creation of the scope chain.
+C. Determine value of the 'this' variable.
+2. Execution phase.
+Code run line by line.
+
+Hoisting in practice
+
+It only works for functions declarations.
+Execution context have each independent variables.
+All variables in the creation phase is set to undefined.
+
+Scoping and the scope chain
+
+Lexical Scoping an function starts from itself to the parent function and finally to the global scope
+to find variables that are used. It's does not working the other way.
+Execution stack does not determine the scoope chain.
+
+The this keyword.
+
+this variable is stored in Execution context object.
+Regular function call: points to the global object.
+This variable points to the object that is calling the method.
+This keyword is not assigned until it is used to call something.
+
+The 'this' keyword in practice
+
+unregluar calls of the this keyword always points to the window object.
+Refers always to the own object.
+     
