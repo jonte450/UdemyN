@@ -65,11 +65,11 @@ function calc_aver(list){
   for(i = 0; i <list.length;i++){
     sum += list[i];
   }
-  return (sum/list.length);
+  return sum/list.length;
 }
 
 var Mark_tip = { full_name: 'Mark Miller',
-                 bills: [77,375,110,45],
+                 bills: [77,475,110,45],
                  tips: [],
                  total_sums:[],
                  calc_tips:function(){
@@ -83,11 +83,11 @@ var Mark_tip = { full_name: 'Mark Miller',
 
                     }
                     else if(index_bill>=100 && index_bill<300){
-                      this.tips[index] = index_bill*0.15;
+                      this.tips[index] = index_bill*0.10;
                       this.total_sums[index] = index_bill+ this.tips[index];
                     }
                     else{
-                      this.tips[index] = index_bill*0.10;
+                      this.tips[index] = index_bill*0.25;
                       this.total_sums[index] = index_bill + this.tips[index];
                     }
                   }
@@ -96,9 +96,11 @@ var Mark_tip = { full_name: 'Mark Miller',
 }
 
 Mark_tip.calc_tips();
-average_John = calc_aver(John_tip.total_sums);
-average_Mark = calc_aver(Mark_tip.total_sums);
+average_John = calc_aver(John_tip.tips);
+average_Mark = calc_aver(Mark_tip.tips);
 
+console.log(Mark_tip,John_tip);
+console.log(average_John,average_Mark);
 if(average_John > average_Mark){
   console.log(John_tip.full_name +" has the highest average: " +average_John);
 }

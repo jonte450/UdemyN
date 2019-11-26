@@ -10,7 +10,7 @@ Variables and Data Types
 
 Variable are like an container.
 var keyword.
-Datatypes 
+Datatypes
 Numbers: that are floating type.
 String: Sequence of characters.
 Boolean: Logical values like binary true or false.
@@ -21,7 +21,7 @@ You don't have to specify data types.
 
 Variable Mutation and Type Coercion
 
-Comments 
+Comments
 Single line //.
 Multiples lines /**/.
 JavaScript automatically convert data types.
@@ -131,6 +131,12 @@ While-loops.
 Continue quit with the current itertion and begin the next iteration.
 Break exit the current iteration and the loop .
 
+JavaScript Versions
 
-
-
+1996 was called live script first but changed to JavaScript to attract developers.
+1997 the first standard version ES1 was released.
+2009 ES5 was released with tons of new packages.
+2015 ES6 was released.
+ES5 fully used today.
+All browsers can't use ES6,ES8,ES9.
+Transpiling needs to convert all these new versions to ES5.
