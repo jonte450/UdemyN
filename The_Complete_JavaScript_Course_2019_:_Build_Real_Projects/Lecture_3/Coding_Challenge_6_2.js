@@ -28,22 +28,18 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     if(gamePlaying) {
 
         // 1. Random number
-        var dice_1 = Math.floor(Math.random() * 6) + 1;
-        var dice_2 = Math.floor(Math.random() * 6) + 1;
-        //2. Display the result for Dice 1
-        var diceDOM_1 = document.querySelector('#d1');
-        diceDOM_1.style.display = 'block';
-        diceDOM_1.src = 'dice-' + dice_1 + '.png';
+        var dice = Math.floor(Math.random() * 6) + 1;
 
-        //Display the result for Dice 2
-        var diceDOM_2 = document.querySelector('#d2');
-        diceDOM_2.style.display = 'block';
-        diceDOM_2.src = 'dice-'+dice_2 + '.png';
+        //2. Display the result
+        var diceDOM = document.querySelector('.dice_1');
+        diceDOM.style.display = 'block';
+        diceDOM.src = 'dice-' + dice + '.png';
+
         //1.Check the result of the current dice and previous dice both is six
 
-       if (dice_1 !== 1 && dice_2 !== 1) {
+      if (dice !== 1) {
             //Add score
-            roundScore += dice_1+dice_2;
+            roundScore += dice;
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
         }
         else {
@@ -75,6 +71,7 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
         }
     }
 });
+//Challenge 2
 document.querySelector('#get_limit').addEventListener('click',function(){
   var check = document.getElementById('limit').value;
   if(isNaN(check) === false){

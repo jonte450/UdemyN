@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -32,8 +32,11 @@
             <button class="btn-new"><i class="ion-ios-plus-outline"></i>New game</button>
             <button class="btn-roll"><i class="ion-ios-loop"></i>Roll dice</button>
             <button class="btn-hold"><i class="ion-ios-download-outline"></i>Hold</button>
-
-            <img src="dice-5.png" alt="Dice" class="dice">
+            <input type="text" id="limit" class="player-current-box" placeholder="Set an limit within this text-box!">
+            <button class="player-current-label" id="get_limit">Submit the limit on this button!</button>
+            <div class="player-current-label" id='error-message'></div>
+            <img src="dice-5.png" alt="Dice" class="dice_1" id="d1">
+            <img src="dice-5.png" alt="Dice" class="dice_2" id="d2">
         </div>
 
         <script src="app.js"></script>

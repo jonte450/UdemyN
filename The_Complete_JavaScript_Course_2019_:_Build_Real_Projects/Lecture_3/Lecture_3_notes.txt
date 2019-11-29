@@ -113,3 +113,4 @@ Condition variable of a system.
 To remeber something.
 Gameplaying variable.
 Adding the condition variable when you checks the game.
+c
