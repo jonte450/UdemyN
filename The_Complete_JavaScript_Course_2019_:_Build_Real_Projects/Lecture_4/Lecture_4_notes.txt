@@ -1,0 +1,145 @@
+Everything Is an Object: Inheritance and the Prototype Chain
+Almost everthing is an object.
+Primitives
+-Numbers
+-Strings
+-Booleans
+-Undefined
+-Null
+Everything else
+-Arrays
+-Functions
+-Objects
+-Dates
+-Wrappers for Numbers,Strings,Booleans
+Is an objects
+Objects-oriented programming
+Objects interacting with one
+Another through methods
+And properties.
+Used to store data,structure applications
+Into modules and keeping code clean.
+Cretate an blueprint.
+Constructor creating the same object.
+Inheritance one object based on another.
+Proto-type based language
+Each and every object we create
+Is a prototype of object object.
+Prototype-chain.
+The final link after the object
+Is null in the prototype chain.
+Null is the only that has no prototype.
+
+Creating Objects: Function Constructors
+Blueprints.
+Function constructor.
+Write it with an capital letter.
+Using keyword this.
+When you create an object you are
+Using the new keyword.
+Called instansisation.
+New operator an empty object is
+Created and its pointed to the new
+Empty object.
+Called an function constructor.
+Prototype will allow access to an function.
+Inheritance with prototype chain.
+
+ The Prototype Chain in the Console
+Console.log uses to inspect
+The object.
+Arrow to show the more
+information
+Prototype chain of the object
+Will show all the added methods.
+The prototype of is the prototype
+Of the functions persons con
+All obeject are properties
+Of objects objects function
+Constructor.
+Can ask if an object has its
+Own propertiy
+hasOwnPropertity().
+instanceOf() check what the
+Object is instance of.
+Console.info to check obecjects
+Properties.
+
+Creating Objects: Object.create
+Object.create() makes an inheritance to
+Some object.
+Object.create has an second argument.
+You can give the instances of the second argument
+To the object.create() method.
+Objects.create() makes inheritance directly.
+Object.create() makes it simpler to make
+Complex inheritance.
+
+Primitives vs. Objects
+Number,strings,boolean,undefined
+Are primitives.
+Primitives holds the variables itself.
+Object declared as an object holds
+An reference to the memory it is located,.
+Variables holds each own copy of  the data.
+When we make two obejcts equal to each other
+We make istself references to the object.
+Functions  works exact the same way as objects.
+When we pass an simple primitive to an function
+An copy is created and when we pass an object as
+An function a reference is created.
+
+ First Class Functions: Passing Functions as Arguments
+-A function is an instance of the Object type.
+-A function behaves like any other object.
+-We can store functions in a variable.
+-We can pass a function as an argument to another function.
+-We can return a function from a function.
+-Called First-class functions.
+Callback functions functions as argument
+to an function and call it later.
+Make an function that takes an array and an
+Function and the function makes an calculation
+On every element an push that to an new array
+And return the new array.
+
+First Class Functions: Functions Returning Functions
+Makes an interviewQuestion() function
+That are returning functions with console.log
+Question to the applicant.
+Create an generic function and one more
+Specific questions.
+
+Immediately Invoked Function Expressions (IIFE)
+To hide a score.
+() will make javascript intererpt this as an
+Expression not as an declaration.
+Created data privacy.
+Create an new scope don’t interfere
+With other variables.
+
+Closures
+Writes retirement function.
+Somehow is the variables are there.
+Closure summary
+An inner function has always
+Access to the variables and
+Parameters of its outer function
+, even after the outer dunction has returned.
+Scoop-chain is still intact.
+The object is still there.
+Scoop-chain is a pointer to variable objects.
+Has closed in.
+Write an variable with interviewquestions
+.
+
+Bind, Call and Apply
+Functions special kind of objects.
+Call method you can use other objects that
+Dosen’t has the same method.
+Call() method is calling for method borrowing.
+Apply method same but takes an array as second
+Argument.
+Bind() method generates a copy of the function
+instead.
+Carrying creating an function based on another function.
