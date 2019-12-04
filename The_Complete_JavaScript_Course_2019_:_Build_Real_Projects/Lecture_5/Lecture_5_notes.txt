@@ -1,0 +1,327 @@
+Project Planning andArchitecture: Step 1
+Bigger project you must have an plan.
+Not just to copy the code.
+1.Add event handler.
+2.Get input values.
+3.Add the new item to our data structure
+4.Add the new item to the UI.
+5.Calculate the budget.
+6.Update the UI.
+Modules
+-Important aspect of any robust application’s architecture.
+-Keep the units of code for a project both cleanly separated and organized.
+-Encapsulate some data into privacy and expose other data publicity.
+UI MODULE
+-Get input values.
+-Add the new item to our data structure
+-Update the UI.
+DATA MODULE
+-Add the new item to our data structure
+-Calculate the budget.
+CONTROLLER MODULE
+-Add event handler.
+
+Implementing the Module Pattern
+What you will learn in this lecture
+-How to use the module pattern.
+-More about private and public data, encapsulation and separation of concerns.
+Piece of code that are related to each other.
+Keep the code safe.
+Public methods that expose so other can use it.
+Public interface someties called API.
+Know IFEEs and Closeures.
+IFFE create an new scope cannot be accessed of outside functions.
+UIController anonoymous functions.
+Return public methods and have private outside return.
+Separation of concerns modules should work indenpendntly.
+Appcontroller.
+You can pass inputs to the modules.
+And modules to connect them as input to one 
+Of the modules.
+And the modules can use the code.
+
+
+
+Setting up the First Event Listeners
+WHAT YOU WILL LEARN IN THIS LECTURE.
+-How to set up event listeners to keypress events.
+-How to use event object.
+Add an controller and select an element with
+An id name.
+1.Get the filled input data.
+2.Add the item to the budget controller.
+3.Add the item to the UI.
+4.Calculate the budget.
+5.Display the budget.
+Add an eventListener Global document.
+When somebody presses the key.
+Keypressevent.
+Keycodes.
+Older browsers uses which.
+DRY ctrlAddItem.
+
+Reading Input Data
+How to read data from different HTML input types.
+Controller tells the others modules what to do.
+Writing an method to get the input in the UI controller.
+Return an object with method getinput.
+The budget value and the income in the toppart.
+Type get inc or expenses.
+Description add__description.
+Add__value.
+Return an object with three properties.
+Under controller module input UICtrl.getInput().
+Create an object DOMstring and put all the strings.
+Create DOMstrings acess-methods.
+
+Creating an Initialization Function
+WHAT YOU WILL LEARN IN THIS LECTURE
+-How and why to create an initialization function.
+Set-up eventlisteners.
+You return it as an init function to call setUpEventlisteners.
+Call it from outside with controller.init().
+
+
+
+
+
+
+
+Creating Income and Expense Function Constructors
+-How to choose function constructors that meet our application’s needs.
+-How to set up a proper data structure for our budget controller.
+Create an constructors when you want to create a lot of obkects.
+This keyword to instansiate.
+Expense needs more income than then income.
+The new keyword that points to expenses.
+Store incomes objects into an array example 10 incomes objects.
+Same for expense.
+One object to store all arrays to keep it organized.
+And an object type for totals exp and inc.
+
+Adding a New Item to Our Budget Controller
+WHAT YOU WILL LEARN IN THIS LECTURE
+-How to avoid conflicts in our data structures.
+-How and why to pass data from one module to another.
+Create a public method in the budget control.
+addItem:type,description,val
+Store it in an new variable newItem.
+Check the type and create a Expense or Income object.
+Return the newItem so other can have access to it.
+Specify an id increment it.
+Problems with it when you are deleted.
+Id should only exists once.
+Id should be determine nextId = LastID + 1.
+Store the newItem in a variable.
+So if the array.length is > zero you could add
+Else ID should be zero.
+ 
+ Adding a New Item to the UI
+WHAT YOU WILL LEARN IN THIS LECTURE
+-A technique for adding big chunks of HTML into the DOM.
+-How to replace parts of strings.
+-How to do DOM manipulation using the insertAdjacentHTML method.
+UIinterface controller addListItem: object,type
+Create an HTML-string with placeholder text.
+Insert the HTML into the dome.
+Single quotes double quotes while been seen as an string.
+Store it.
+Check the type inc/exp if else.
+String replace search for id.
+Use the adjacentHTMLmethod takes position and the element.
+New domes and incomelist.
+And same for expenses.
+Element to decide from DOMstrings.
+ 
+Clearing Our Input Fields
+WHAT YOU WILL LEARN IN THIS LECTURE
+-How to clear HTML fields.
+-How to use querySelectorAll.
+-How to convert a list to an array.
+-A better way to loop over an array then for loop: foreach.
+Public method clear fields.
+querySelectorAll() inputDescription and inputValue.
+Slice method is in Array.prototype.call(fields);
+forEachMethod
+-choose the current.value =””;.
+Focusmethod makes it back to the descriptiion
+ 
+Updating the Budget: Controller.
+WHAT YOU WILL LEARN IN THIS LECTURE
+-How to convert field inputs to numbers.
+-How to prevent false inputs.
+updatebudget()
+-1. Calculate the budget
+-2. Return the budget.
+-3. Display the budget on the UI.
+parseFloat converts things to floats.
+if/else check the description and isNaN and input.value >0.
+ 
+ 
+ 
+ 
+ 
+Updating the Budget: Budget Controller
+WHAT YOU WILL LEARN IN THIS LECTURE
+-How and why to create simple,reusable functions with only one purpose.
+-How to sum all elements of an array using forEach method.
+Create an public method calculateBudget.
+Calculate total income and expensese.
+Calculate the budget: income - expenses
+Calculate the percentage of income that we spent
+Calulate the total.
+Store the sums in totals.
+Data budget = data.totals.inc-data.totals.exp;
+Data.percentage = data.totals.exp / data.totals.inc;
+Return objects getBudget.
+-data.budget.
+-data.totals.inc.
+-data.totals.exp.
+-data.percentage.
+ 
+Updating the Budget: UI Controller
+WHAT YOU WILL LEARN IN THIS LECTURE
+-Practice DOM manipulation by
+Updating the budget and total values.
+Add an new method to UIcontroller.
+Displaybudget():object.
+Need to know the class elements to html-file.
+Budgetvalue.
+Totalincome.
+incomeLabel.
+expensesLabel.
+procentageLabel.
+document.querySelector(‘labe’).textContent.
+ 
+ 
+ 
+ 
+ 
+Project Planning and Architecture: Step 2
+Draw an diagram.
+Delecting an item in the app.
+-1.Add event handler.
+-2.Delete the item from our data structure.
+-3.Delete the item to the UI.
+-4.Re-calculate budget.
+-5.Update the UI.
+ 
+Event Delegation
+Event-bubbling.
+Clicking on the button.
+It will also be fired on the parent element.
+Up to the DOM tree.
+The parent element will know where the element 
+Was fired.
+Event Delegation
+Event Bubbling -> Target Element -> Event Delegation
+Use cases for event delegation.
+1.When we have an element with lots of child elements that we are intrested in.
+2.When we want an event handler attached to an element that
+Is not yet in the DOM when our page is loaded.
+ 
+Setting up the Delete Event Listener Using Event Delegation
+WHAT YOU WILL LEARN IN THIS LECTURE
+-How to use event delegation in practice.
+-How to use IDs in HTML to connect UI with the data model.
+-How to use the parentNode property for DOM traversing.
+Find the parent to income and expenses.
+Attach the eventhandler to the parent.
+Event looking on the target property.
+DOM-traversing.
+Moved up to the parent-node.
+Need the id-property.
+Check if itemID exists.
+Use split transforms primitives to an object.
+Split to see the type.
+First delete the item from the data-structure.
+Second delete the item from the UI.
+Third update and show the new budget.
+ 
+Deleting an Item from Our Budget Controller
+WHAT YOU WILL LEARN IN THIS LECTURE
+-Yet another method to loop over an array:map.
+-How to remove elements from an array using the splice method.
+Add an public-method to the budget-controller.
+deleteItem():type,id.
+Problem not in order.
+Create an array of the id-numbers.
+Map always returns a new array.
+If index  is different then we want to delete.
+Splice method.
+ 
+Deleting an Item from the UI
+WHAT YOU WILL LEARN IN THIS LECTURE
+-More DOM manipulation: how to remove an element from the DOM.
+deleteListItem(): ID.
+document.getElementByID(ID).parentNode.removeChild().
+el.parentNode.removeChild(ID).
+ 
+Project Planning and Architecture: Step 3
+Calulate the percentages.
+Update percentages in UI.
+Display the current month and year
+Number formatting.
+Improve input field UX.
+ 
+ 
+ 
+ 
+ 
+ 
+Updating the Percentages: Controller
+WHAT YOU WILL LEARN IN THIS LECTURE
+-Reinforcing the concepts and techniques we have learned so far.
+You should update the percentages.
+-1.Calculate the percentages
+-2.Read percentages from the budget controller.
+-3.Update the UI with the new percentages.
+ 
+Updating the Percentages: Budget Controller 
+WHAT YOU WILL LEARN IN THIS LECTURE
+-How to make our budget controller interact with the Expense prototype.
+Public-method to the budget-controller.
+Calculate the expenses.
+Expand the expense object with an method.
+Uses prototypeChain.
+Create an new property in the expense constuctor.
+Math.round().
+Create an method getPercentage() retrieve an procentage 
+From the object.
+Map to store the percentages.
+ 
+Updating the Percentages: UI Controller
+WHAT YOU WILL LEARN IN THIS LECTURE
+-How to create our own forEach function but for nodeLists instead of arrays.
+displayPercentages():percentageArray.
+Label: Itempercentages.
+Fields and callback function(current,index)
+Callback-functions really powerful.
+ 
+Formatting Our Budget Numbers: String Manipulation
+WHAT YOU WILL LEARN IN THIS LECTURE
+How to use different String methods to manipulate strings.
+All numbers have an decimal part.
+Num = Math.abs(num);
+num.toFixed(2) this method adds 2 decimal numbers;
+split.method().
+Substring to use to take only an part of the string.
+Length property makes it more dynamically.
+ 
+Displaying the Current Month and Year
+WHAT YOU WILL LEARN IN THIS LECTURE
+-How to get the current date by using the Date object constructor.
+New Date.
+Nothing to the date constructor it will give the current date.
+ 
+Finishing Touches: Improving the UX
+WHAT YOU WILL LEARN IN THIS LECTURE
+-How and when to use change events.
+ Add or to remove css classes.
+Uses the toggle classes.
+ 
+ 
+
+
+
+
