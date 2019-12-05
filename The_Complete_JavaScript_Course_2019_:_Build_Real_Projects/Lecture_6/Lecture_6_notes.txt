@@ -1,0 +1,142 @@
+What's new in ES6 / ES2015
+Transpile back to ES5
+Two new ways to declare 
+Variables let and const..
+Blocks and IFEE’s.
+Arrowfunctions.
+Maps.
+Classes and subclasses.
+The spread generator.
+Rest and Default Parameters.
+
+Variable Declarations with let and const
+Consts are values we don’t want to change.
+We use let if we want to change some variable.
+Let keyword makes the variable to use only in an scope.
+Let is block-scoped variables.
+Cannot use const outside
+the block.
+Hoisting doesn’t work on let and const.
+Temporal death zone.
+
+Blocks and IIFEs
+Data-rivacy.
+Curly braces and some variables in it.
+With const and let variables.
+Var keyword is function-scoped.
+
+Strings in ES6 / ES2015
+Let stringname.
+Template-literals
++signs to concatencate strings.
+Back-ticks instead of 
++Signs.
+New string-methods.
+string.startsWith(‘letter’).
+string.endsWith(‘letter’)
+Check true or false
+If a string starts or ends with something.
+n.includer(‘character’).
+Check if something includinging in
+The string.
+repeat(‘number’).
+Repeat the string sometimes.
+
+
+Arrow Functions: Basics
+Takes away function keyword.
+Much shorter.
+No braces just 
+element=> do something with elements.
+More than one line you must need 
+Curly braces.
+
+Arrow Functions: Lexical 'this' Keyword
+Share this keyword.
+They don’t have this keyword.
+Function call this will always point
+To the window-object.
+Arrowfunctions shares this
+Keyword with the sourindings.
+Need to preserve the value of this keyword.
+Bind(this) to bind this keyword to the object.
+
+Destructuring
+To extract data from an data structure.
+Create an array with variables where the 
+Elements are stored in.
+You can do this with objects too.
+Return multiple variables from an function.
+Deconstructing makes it easier to get the variables.
+
+Arrays in ES6 / ES2015
+Uses the slice method to convert an list to array.
+Call it Array.from(boxes) to an array.
+Makes it looks shorter.
+For-off loop.
+for(const cur of boxesArr6){
+}
+Two new array-methods:
+-findIndex() takes in a function and returns the index.
+-find() takes in a function and returns the element.
+
+The Spread Operator
+Apply method takes an array as an argument.
+...arrayname. Takes in array as an argument and 
+helps it.  You can use the spread operator to unify
+Two arrays or makes them joins.
+Spread operator also works on other data-structures as well.
+
+
+Rest Parameters
+Receives values and transforms it into an array.
+...variabelname in the function and transforms 
+The arguments into an array.
+For-each method makes the code easier to read.
+
+Default Parameters
+Straight-forward.
+Ternary-expression in ES5 to define Default-parameters.
+Write in arguments that arguments = ‘name’.
+
+Maps
+In JavaScripts objects are like hash-maps.
+In maps you can use anything as keys.
+In object you are restricted to strings.
+New Map();
+map.set(‘question’,’The question describes’).
+map.get(‘data’).
+map.delete(data).
+Nothing happens when you delete something two times.
+map.clear() empties the map.
+You can loop over maps.
+For-off loop deconstructing.
+typeof() check the keys numbers.
+
+Classes
+Just syntactic sugar.
+ES5 called function constructors.
+Class Person6{
+constructor(arguments){
+This and so on.
+}
+functions()...
+}
+Static methods that are attached to the class.
+Must first implement the class first and then after
+It begin to use it.
+
+Classes with Subclasses
+You must call the inherent class.
+Object create sets the prototype between the classes 
+In ES5.
+Methods inherits the superclass.
+ES6 creates an subclass of person
+Extends class.
+Constructors. 
+And so on.
+super() and this calls the parent class.
+
+
+
+
