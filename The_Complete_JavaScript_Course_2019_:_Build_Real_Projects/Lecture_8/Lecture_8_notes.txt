@@ -1,0 +1,368 @@
+
+
+New Lecture
+
+Section Intro
+Use ES6 and asynchronous calls.
+Build food-recipe with Babel.
+
+Project Overview
+A search for recipes.
+Fetching data from real-world.
+Save the recipes.
+Delete ingredients.
+Also make likes.
+
+An Overview of Modern JavaScript
+Has changed much recent years.
+Modern JavaScript: A brief overview.
+-3-rd party packages.
+-node js and npm to help install packages.
+-Libraries/frameworks like react,angular,jquery,lodash.
+-Development tools.
+-Babel to convert newer versions to ES5.
+-ES6 modules bundle together with webpack.
+
+
+
+
+
+
+
+A Brief Introduction to the Command Line
+Called command-prompt.
+Always in a folder.
+Ls list all directories.
+Cd to move to a dir.
+Tab to auto-complete.
+Cd .. means folder above.
+Clear to remove text from terminal.
+Mkdir create a new dir.
+Touch create a new file.
+Cp command to copy file.
+Mv move a file.
+Rm to delete files.
+-r delete all files recursively.
+Open command to open a file.
+
+A Modern Setup: Installing Node.js and NPM
+Head over to nodejs.org
+To install node.js.
+Node -v check version.
+Npm init
+Add information about
+The project.
+Package.json.file.
+Npm install webpack.
+--save-dev.
+Npm install jquery -save.
+Move to another a computer
+Then dependecies are important.
+Share the package JSON
+File.
+NPM-install will install all
+The packages from Package.json.file.
+Live-server create local.
+-g install globally.
+
+
+
+
+
+
+
+
+
+
+A Modern Setup: Configuring Webpack
+Bundles all kinds of sets.
+Bundles all these together .js,.css,.jpg,.png.
+Webpack.config.js.
+Object to use as a configuration.
+-entry point start the bundling.
+-the output where to save the bundle file..
+-loaders.
+-plugins.
+Import from a module.
+Dev call webpack.
+Another module to access the webpack.
+Npm run dev to create the webpack modules.
+
+A Modern Setup: The Webpack Dev Server
+Autmatically save the file whenever we change the file.
+Npm install webpack-dev-server.
+Contentbase ‘./dist’.
+Start “webpackserver dev mode”.
+Plugins complex processing.
+Include htmlwebpackplugin recieves an array of plugins.
+Filename:’index.html’
+template:’./src/index.html’
+
+ A Modern Setup: Babel
+Babel is a javascript compiler.
+Npm install babel-core babel-preset-env babel-loader.
+--save dev.
+Module:rules all the loaders
+We need an object.
+Test propertity.
+Test all javascript files.
+Use : object babeloader.
+Exclude all node_modules.
+Preset an array.
+Preset is collection code transforms.
+Browers last 5 versions.
+Ie >= 8.
+All versions will be converted to ES5.
+Npm install babel-polyfill.
+
+Planning our Project Architecture with MVC
+Architecture is essential before beginning.
+Model-View-Controller.
+Controller between Model and View.
+Index.js is the controller.
+Search.js in the model.
+View in the searchView.js
+
+How ES6 Modules Work
+What you will learn in this lecture
+-How to use ES6 modules.
+-Default and named exports and imports.
+Create a file searchView.js
+And Search.js.
+Export defaults.
+Named exports.
+Export const add.
+Import and curly braces.
+As keyword for different names.
+
+Making our First API Calls
+What you will learn in this lecture
+-How to use a real-world API.
+-What API keys are and why we need them.
+We can search for recipes and then
+Select data for the requests.
+API key are a unique password.
+So the API-Key can track your requests.
+Npm Axios save.
+Axios better than fetch.
+Try and catch error.
+Axios in try-statement.
+
+Building the Search Model
+What you will learn in this lecture
+-How to build a simple data model using ES& classes.
+The data model is just the query and the search.
+Constructor with a query.
+Method get search method.
+Initialize the object with the query example pizza.
+This is capitalized in the object.
+
+Building the Search Controller
+What you will learn in this lecture
+-The concept of application state.
+-A simple way of implementing state.
+What is the current states in the controller.
+We want all that defines our current state
+In a variable.
+We want
+-Search object.
+-Current recipe object.
+-Shopping list object.
+-Liked recipes.
+Eventlistener get into the controller.
+-1.Get a query from the view.
+-2.Create a new search object and add it to state,
+-3.Prepare UI for results.
+-4.Search for recipes.
+-5.Render results on UI.
+
+Building the Search View - Part 1
+What you will learn in this lecture
+-Advanced DOM manipulation techniques.
+-How to use ES6 template strings to render entire HTML components.
+-How to create a loading spinner.
+Using named export.
+Export elements created as an object.
+Recieve the result.
+Render results.
+Create an element list element to
+Render recipe element.
+Markup variable.
+Put the element on the end of the list.
+Clear the result from previous search.
+
+ Building the Search View - Part 2
+Limitrecipetitle: if title.length > limit
+Then split ‘ ’ into an array and after
+That use reduce with an callback function
+And choose an sentence less than 17 words.
+
+Rendering an AJAX Loading Spinner
+Put it afterbegin loader.
+In the result list.
+If tthis is loader.
+To remove a thing you must go up to the parent.
+
+Implementing Search Results Pagination
+What you will learn in this lecture
+-How to use the .closest method for easier event handling.
+-How and why to use data-* attributes in HTML5.
+Change the render function.
+Pass in the page you want to display.
+Pass in eventhandlers.
+Start = (page-1)*resPerPage.
+End = page*resPerPage.
+Buttons we need to know which page we are on.
+Pages = numberOfresults/resPerPage.
+Cases:
+-1.Page === 1 && pages > 1
+-2.page < pages.
+-3.page === pages && pages >1.
+Function create button: page ,type.
+Add it to dom afterbegin.
+insertAdjacentHTML.
+Controller check what is clicked.
+Event-delegation.
+Figure out where is clicked.
+Closest.method(‘intrested in’) works in DOM.
+Clear the results.
+
+Building the Recipe Model - Part 1
+Create a new file.
+Export an class calling recipe.
+Method getRecipe declared as async.
+Check the documentation how to get
+The recipe.
+
+Building the Recipe Controller
+ What you will learn in this lecture
+-How to read data from the page URL.
+-How to respond to the hashchange event.
+-How to add the same event listener to multiple events.
+Hash-change event fired off.
+Window.addEventListener with
+hash change.
+Windows.location.hash.replace.
+1.Prepare for UI changes.
+2.Create new recipe object.
+3.Get recipe data.
+4.Calculate servings and time.
+5.Render recipe.
+You must addEventlister for load.
+
+
+
+
+
+Building the Recipe Model - Part 2
+ What you will learn in this lecture
+-Use array methods like map,slice,findIndex and inclludes.
+-How and why to use eval().
+Add a method parse ingredients.
+-1.Uniform units.
+Map ,forEach, replace.
+-2.Remove parentheses.
+Regular expression.
+-3.Parse ingredients into count,unit and ingredient.
+ Convert to an array with the split method.
+findIndex().
+Includes returns true if an elements is in the units array.
+Check if the ingredients has an unit.
+Slice the index to get numbers.
+Eval calculates strings.
+
+Building the Recipe View - Part 1
+Render the recipe.
+Get the recipe object.
+
+Building the Recipe View - Part 2
+Small functions that converts decimal
+Number to half again.
+Fraction.js
+Check if we have a count.
+
+Updating Recipe Servings
+ What you will learn in this lecture
+-Yet another way of implementing event delegation .matches
+Update servings.
+Ternary expression.
+Hard to target specific button.
+Matches method to see which button.
+Update the elements.
+
+
+
+
+
+
+
+
+
+
+Building the Shopping List Model
+ What you will learn in this lecture
+-How and why to create uniques IDs using an external package.
+-Difference between Array.slice and Array.splice.
+-More uses cases for Array.findIndex and Array.find.
+Create a class with items with a list to add.
+A small library called uniqid().
+Current process.
+Splice method.
+Splice mutates the original array.
+
+Building the Shopping List View
+One to render the items and another one to
+Delete the items.
+Create a markup variable.
+Import base class.
+
+Building the Shopping List Controller
+1.Create a n new list if there are none.
+2.Add each ingrediant to the list.
+Handle the eventlistener.
+If e.target.matches test if that was the one we click on.
+Read the current element that was just clicked.
+
+Building the Likes Model
+Like and unlike things.
+Save the likes.
+Create an empty array.
+addLike method: id,title,author,img.
+And push it to the likes array.
+Delete the likes.
+isLiked:id.
+
+Building the Likes Controller
+Create a new Like object.
+User has not liked the current recipe.
+User has liked the current recipe.
+Add like to the UI list.
+Remove like.
+
+
+
+
+
+Building the Likes View
+Toogle the like.
+Ternary expression.
+Recipe view.
+Save it in the browser in the next lecture.
+numLikes.
+renderLikes
+Add deleteLike functions.
+
+Implementing Persistent Data with localStorage
+What you will learn in this lecture
+-How to use the localStorage API.
+-How to set, get and delete items from local storage.
+localStorage.setItem(‘key’,value).
+Only strings.
+Add persistDataMethod().
+Convert to strings.
+Read the data back from the localstorage.
+JSON.parse() must convert this back into an object.
+
+Wrapping up: Final Considerations
+Bug increases the numbers.
+When you reach the number 6.

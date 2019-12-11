@@ -46,7 +46,7 @@ class Park extends info{
 }
 
 class Street extends info{
-   constructor(name,year_build,length,description='Normal'){
+   constructor(name,year_build,length,description= 3){
      super(name,year_build);
      this.length = length;
      this.description = description;
@@ -116,16 +116,13 @@ classify_streets(streets){
       street.set_description('Huge');
       desc.push(street);
     }
-    else{
-      desc.push(street);
-    }
   }
   this.city_info.set('Streets classified',desc);
 
 }
 
 initialize_info(){
-  var ages = this.parks.map(e=> {return e.get_age()});
+  var ages = this.parks.map(e=> {return new Date().getFullYear()-e.get_age()});
   var average_age = this.calc_average_age(ages,this.parks);
   this.city_info.set('Park average_age', Math.floor(average_age));
   var trees_thou = this.park_1000_trees(this.parks);

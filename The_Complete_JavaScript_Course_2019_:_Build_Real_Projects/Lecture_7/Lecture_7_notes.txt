@@ -1,0 +1,107 @@
+An Example of Asynchronous JavaScript
+Two const function first and second.
+Asynchronous functions you run a
+Function after some set seconds.
+
+Understanding Asynchronous JavaScript: The Event Loop
+Synchronous
+One instruction after another instruction
+Is executed.
+Asynchronous
+-Allow asynchronous functions to run in
+The “background”
+-We pass in callbacks that run once
+The function has finished its work.
+-Move on immediately. Non-blockig!
+Execute the funciton after som time.
+We do not wait for a function to do
+It’s work.
+Event-loop.
+Execution-stack once again.
+Callback is created in Web-apis.
+Moves to the message-queue waiting to be
+To be executed.
+Pushes the to execution stack.
+
+ The Old Way: Asynchronous JavaScript with Callbacks
+ Select an recept from an server.
+An array with recipes-id.
+Define timeouts to simulate the behaviours.
+Fresh Tomato Pasta.
+Three ajax calls.
+Callback Hell.
+One callback after another callback
+Indside an callback function.
+
+From Callback Hell to Promises
+What are promises
+-Object that keeps track about whether
+A certain event has happened or not.
+-Determines what happens after the event
+Has happened.
+-Implements the concept of a future value that
+We’re expecting.
+Promise states
+-Pending -> Event Happens -> Settled/Resolve
+ -Fullfilled or rejected.
+Resolve function return an value.
+getIDs.then(IDs).
+Catch error.
+Using a reject function to say that a function
+Is rejected.
+You can chain promises with then keyword.
+Call an new promise function and return an
+New object.
+
+From Promises to Async/Await
+ES8 to make it easier to consume promises.
+Async keyword.
+Create an async function.
+Keeps running in the background.
+Await will stop the async function.
+Easier than promises.
+Await expression can only
+Be used in an async function.
+Use then method of the resolve
+
+AJAX and APIs
+What are AJAX and APIS?
+Asynchronous JavaScript and XML.
+Get asynchronous http request
+In the background.
+Remote server(API).
+Application Programming Interface.
+You can build your own api
+Or use 3rd-party APIs:
+
+Making AJAX Calls with Fetch and Promises
+API called Fetch.
+Fetch the api.
+Using an api called metaweather.
+Location and returns some methods.
+JSON-viewer.
+Text-based JSON object.
+Easily convert it to an javascript-object.
+Same origin called.
+Cross Origin Sharing.
+Channel the request through the own server.
+Proxy call cross origin.
+Fetch-api returns the data.
+Then and catch.
+Process the response to get the result.
+Use the JSON-method to return the promise.
+JSON.method converts to a
+JavaScript-object.
+Two then methods to handle the fetch-method.
+
+Making AJAX Calls with Fetch and Async/Await
+Await the fetch.
+Await the data.json().
+Handling error with
+aync/await try and catch.
+Wrap all the code in a
+Try-statement.
+Catch the error if something happens.
+Use then method to
+Handle the next promise
+If more fetch are declared.
