@@ -1,0 +1,208 @@
+HTML Forms
+Create forms login forms for example.
+form-tag need to have actual forms.
+input-tag has an type of text and is an selfclosing tag.
+input-tag can have type as submit too and will create an button.
+input-tag can have a type as reset that will clear all fields.
+input-tag can have type as date that will create an calender.
+input-tag can have type as radio that will create an selector button.
+input-tag can have a type called checkbox that will create that you can select multipal.
+input-tag have an name attribute like gender that will place all input fields under same name and that the buttons are connected. 
+value attribute can give an name to the button.
+attribute required will make some mark that says that users must fill in some field.
+
+HTML Forms 2
+Select-tag within put options-tags like volvo.
+Select-tag creates an drop-down menu.
+input-tag has an type as password and it haves an min attribute that creates minimal password.
+
+Submitting A Form
+Must add a name attribute to the fields.
+When you write in the fields it is going to the query string and gets attached to being send to the back-end.
+Post will attach it to the body.
+Forms has an action attribute runs this script.
+Forms has an method attribute Post or Get.
+Names are variables and be assioated.
+For radio buttons must have an value attribute.
+
+Html-Tags 3
+Comment <!--comments-->
+div-tag wrap the form makes it to divide the content and helps us to add style.
+span-tag is an inline element add to an specific line. Can add style to just one line.
+
+HTML vs HTML 5
+HTML dosen't have so many features.
+HTML5 add features for user experince.
+HTML5 wants so that it dosen't effect old websites.
+HTML5 semantic elements try to understand the websites so you can pagerank its in searchengines.
+HTML5 wants to improve the web performance.
+
+Copy A Website
+View an source code.
+
+HTML challenge
+Create your own first website.
+
+
+HTML Quiz
+Question 1 of 40:
+What does HTML stand for?
+Hyper-text format.
+
+Question 2 of 40:
+Who is making the Web standards?
+The World Wide Web Consortium.
+
+Question 3 of 40:
+Choose the correct HTML element for the largest heading:
+<h1>
+
+Question 4 of 40:
+What is the correct HTML element for inserting a line break?
+<br>
+
+Question 5 of 40:
+What is the correct HTML for adding a background color?
+<body style="background-color:yellow;">
+
+Question 6 of 40:
+Choose the correct HTML element to define important text
+<strong>
+
+Question 7 of 40:
+Choose the correct HTML element to define emphasized text
+<em>
+
+Question 8 of 40:
+What is the correct HTML for creating a hyperlink?
+<a hred="http://www.w3schools.com">W3Schools</a>
+
+Question 9 of 40:
+Which character is used to indicate an end tag?
+/
+
+Question 10 of 40:
+How can you open a link in a new tab/browser window?
+<a href="url" target="_blank">
+
+Question 11 of 40:
+Which of these elements are all <table> elements?
+<table><tr><td>
+
+Question 12 of 40:
+Inline elements are normally displayed without starting a new line.
+False
+
+Question 13 of 40:
+How can you make a numbered list?
+<ol>
+
+Question 14 of 40:
+How can you make a bulleted list?
+<ul>
+
+Question 15 of 40:
+What is the correct HTML for making a checkbox?
+<input type="checkbox">
+
+Question 16 of 40:
+What is the correct HTML for making a text input field?
+<input type="text">
+
+Question 17 of 40:
+What is the correct HTML for making a drop-down list?
+<select>
+
+Question 18 of 40:
+What is the correct HTML for making a text area?
+<textarea>
+
+Question 19 of 40:
+What is the correct HTML for inserting an image?
+<img src="image.gif" alt="MyImage">
+
+Question 20 of 40:
+What is the correct HTML for inserting a background image?
+<background img="background.gif">
+
+Question 21 of 40:
+An <iframe> is used to display a web page within a web page.
+True
+
+Question 22 of 40:
+HTML comments start with <!-- and end with -->
+True
+
+Question 23 of 40:
+Block elements are normally displayed without starting a new line.
+False
+
+Question 24 of 40:
+Which HTML element defines the title of a document?
+<title>
+
+Question 25 of 40:
+Which HTML attribute specifies an alternate text for an image, if the image cannot be displayed?
+src
+
+Question 26 of 40:
+Which doctype is correct for HTML5?
+<!DOCTYPE html>
+
+Question 27 of 40:
+Which HTML element is used to specify a footer for a document or section?
+<footer>
+
+Question 28 of 40:
+In HTML, you can embed SVG elements directly into an HTML page.
+True
+
+Question 29 of 40:
+What is the correct HTML element for playing video files?
+<video>
+
+Question 30 of 40:
+What is the correct HTML element for playing audio files?
+<audio>
+
+Question 31 of 40:
+The HTML global attribute, "contenteditable" is used to:
+
+Specify whether the content of an element should be editable or not
+
+Question 32 of 40:
+In HTML, onblur and onfocus are:
+Event attributes
+
+Question 33 of 40:
+Graphics defined by SVG is in which format?
+XML
+
+Question 34 of 40:
+The HTML <canvas> element is used to:
+draw graphics
+
+Question 35 of 40:
+In HTML, which attribute is used to specify that an input field must be filled out?
+required
+
+Question 36 of 40:
+Which input type defines a slider control?
+range
+
+Question 37 of 40:
+Which HTML element is used to display a scalar measurement within a range?
+<meter>
+
+
+Question 38 of 40:
+Which HTML element defines navigation links?
+<nav>
+
+Question 39 of 40:
+In HTML, what does the <aside> element define?
+Content aside from the page content
+
+Question 40 of 40:
+Which HTML element is used to specify a header for a document or section?
+<header>

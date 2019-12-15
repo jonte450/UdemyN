@@ -1,0 +1,64 @@
+Critical Render Path
+How things works under the hood.
+Website be on a server.
+Request the HTML file.
+Sees the CSS file in the HTML-file.
+Look at both HTML and CSS files.
+Sees it needs an font-file.
+You will not able to render until you recives CSS-file.
+Minify CSS file.
+Minify removes the whitespace.
+
+Exercise File:Code-Along images.
+
+Flex-box
+Adding images.
+Massive images.
+Adding an link.
+Flex-box helps stretching the images.
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+text-align:center;
+You build websites with flex-box.
+
+Optional Exercise: Flexbox Froggy
+
+justify-content:Defines how the browser distributes space between and around content items along the main-axis.
+
+align-items: property defines the default behavior for how items are laid out along the cross axis (perpendicular to the main axis).
+
+flex-direction: Arranges the column and rows and reverse.
+
+order: Arranges the order of the elements.
+
+align-self:property overrides a grid or flex item's align-items value. In Grid, it aligns the item inside the grid area. Or the center elements.
+
+flex-wrap: property sets whether flex items are forced onto one line or can wrap onto multiple lines. 
+
+flex-flow: combination of flew-wrap and flex-direction.
+
+align-content: property sets the distribution of space between and around content items along a flexbox's cross-axis or a grid's block axis.
+
+CSS 3
+Constantly evolves added new properties and new designs.
+Some browsers will work with different properties.
+transistion: all 1;
+transistion: scale(1.1);
+animation:
+Checkup your browser to check the properties.
+If a browser dosen't support some property you must add an sort of prefix.
+caniuse.com checkup browsers.
+
+Optional exercise:
+transisition-property: Which property should be effected.
+transistion-duration: How long will the transistion be in effect.
+scale: Scale up the object.
+rotate: Rotates the object.
+translate: Moves the object up and down.
+skew: Makes the object act like rubber.
+transform-origin: combine aboves.
+
+Responsive UI
+How it looks on a phone or ipad.
+No matter where the screen is it looks good.

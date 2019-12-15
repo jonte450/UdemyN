@@ -1,0 +1,51 @@
+Build Your First Website
+Text-editor allows us to write code.
+Plain text you can choose between options and sublime helps you to write code.
+Rules must have an html head and an body.
+Mimicked an server when an browser gets an html file.
+Tags have an opening and closing tags.
+
+DEVELOPER FUNDAMENTALS:III
+Must get really good to solve problems.
+Googling at lot.
+Heads up that we are gonna use HTML with DOCTYPE.
+Googling much when you are gonna get stuck on something.
+
+HTML Tags
+Ton of HTML tags.
+Going through 10-15 tags that are used 99% of time.
+h1 tag will get an header.
+Different sizes in header-tags.
+p-tag paragraphs appears nicely when you do not put text as usual.
+b-tag makes the text bolded.
+Today we use strong as bolded and italized as em tag.
+
+HTML Tags 2
+ol-tag ordered lists.
+Without numbers ul-tag.
+
+Self-Closing HTML-Tags
+br-tag a break line.
+hr-tag horizontal line.
+img-tag is self-closing too.
+Some HTML-Tags can have an attribute.
+You can specify width and height.
+alt attribute specifies a text on the object.
+
+Anchor Tag
+Ability to link to other documents.
+a-tag href reference to another document.
+You can wrap anchor tags into an H1 tag too.
+
+Q&A:index.html
+Why does we name it index.html.
+Which file does the server knows which file to return first.
+Common practice.
+
+Q&A: Relative vs Absolute Path
+Why does some site has http.
+Using the file protocol is called a relative path.
+Relative to decribe on the local computer.
+Http-protocol will get to the absolute path.
+
+ 

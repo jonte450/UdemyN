@@ -1,0 +1,34 @@
+WWW vs Internet
+Problems in the past.
+The whole being a web-developer.
+Tim Burns Lee.
+Started with ARPA-net 1969.
+They needed a way to sharing documents.
+world wide web is a common language.
+Tim created the first webbrowser and server and website.
+Link to other documents.
+
+HTML.CSS,JavaScript
+HTML is a way for us to write text on the website share documents.
+1995-1996 CSS solved the problem with visual aspects.
+JavaScript make us shop and interactivty things.
+
+DEVELOPER FUNDANMENTALS:II
+Multiple webbrowsers.
+They must have common way to agree to read HTML,CSS,JavaScript.
+Biggest problems as the webdeveloper.
+Ipads and smartphones.
+
+Developer History
+Jquery a way to allowed us to write javascript in fine way.
+LAMP-stack
+-Php to write files that allowed to server files to have logic.
+-Apache is a software that serves up files.
+-MySQL Database.
+Learn in this course.
+-Node Server.
+-Node.js.
+-Express.js
+-PostgreSQL.
+-MongoDB.
+

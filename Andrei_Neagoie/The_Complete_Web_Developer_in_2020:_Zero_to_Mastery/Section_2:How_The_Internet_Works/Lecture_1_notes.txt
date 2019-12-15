@@ -1,0 +1,60 @@
+Browsing the Web
+When press enter your questions goes to ISP.
+After that to the DNS-server.
+Phonebook.
+Servers as computer.
+Web Browser receives HTML,CSS, JavaScript.
+
+Breaking Google
+Developer mode element selector.
+Get the value.
+You can play around.
+Break the website.
+Browsers a program that reads files.
+
+The Internet Backbone
+Connect with Wifi.
+From the router.
+Modem.
+ISP connected to internet backbone.
+Physical cables.
+
+Traceroute
+From the terminal.
+
+traceroute google.com
+
+traceroute to google.com (216.58.207.206), 64 hops max
+  1   192.168.1.1  1,846ms  1,743ms  1,780ms
+  2   158.174.61.33  3,313ms  3,794ms  2,763ms
+  3   46.59.112.172  2,892ms  6,614ms  2,711ms
+  4   176.10.179.248  3,096ms  2,940ms  2,719ms
+  5   176.10.179.246  11,927ms  2,123ms  2,588ms
+  6   176.10.179.244  3,109ms  2,886ms  2,854ms
+  7   176.10.179.242  2,483ms  3,755ms  3,662ms
+  8   46.59.112.254  3,536ms  3,360ms  4,199ms
+  9   46.59.112.142  2,930ms  3,981ms  2,632ms
+ 10   46.59.113.179  3,051ms  2,621ms  2,467ms
+ 11   209.85.174.232  5,906ms  2,674ms  2,611ms
+ 12   108.170.254.33  4,421ms  5,190ms  3,567ms
+ 13   209.85.246.57  4,654ms  4,825ms  3,098ms
+ 14   216.58.207.206  3,129ms  3,099ms  2,962ms
+
+Developer Fundamentals: I
+
+How to improve a website performance.
+Location of the server.
+If the location of the server hops.
+How many trips.
+Size of the files.
+
+
+What does a Developer Do?
+Front-end Developer.
+The user sees.
+
+Back-end Developer.
+Works with the server.
+
+Full-stack Developer.
+Work with all techniques.

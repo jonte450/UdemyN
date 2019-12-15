@@ -1,0 +1,70 @@
+Bootstrap_introduction
+CSS file and javascript file.
+Writing css from scratch can be pain.
+You using somebody else CSS files.
+Default-bootstrap car.
+You can add your CSS to the top of the bootstrap files.
+
+Boostrap 4
+You download a bunch of CSS and javascript files.
+CDN content delivery network.
+You copy the links.
+And add it to the header.
+And javascript files to the body.
+
+Bootstrap 4 Grid
+Using ideas as columns.
+Adding column background-color.
+The grid system has numbers between 1-12.
+
+Exercise: Startup Landing Page
+Build a site where you can collect emails.
+
+Exercise: Startup Landing Page 2
+We have three files and have google-fonts.
+Bootstrap cdn.
+Bootstrap is constantly evolving.
+Stylesheet.
+
+Exercise: Startup Landing Page 3
+Replace the text in h1 element.
+Copy an meta-tag.
+
+
+Exercise: Startup Landing Page 5
+How bootstrap does layout.
+Create an div-tag with class container.
+Wrap it up in an div-tag with bootstrap class container.
+Divide it up in different sections.
+An class bootstrap class called text-center.
+Expand the system with class col-12.
+New feature with d-flex class.
+align-items-center.
+The container is not covering the full page class h-100.
+Add an new buffer class and gives it an col-12 class.
+
+Exercise: Adding Email Subscribe Form With MailChimp
+Using MailChimp,
+
+DEVELOPER FUNDAMENTALS:IV
+Animate CSS
+A massive CSS file all the properties preset.
+You can add several different kinds of animations.
+Then fundamental is very rare that we build from scratch.
+True for both JavaScript and CSS.
+
+Using templates
+Tons of free resources online.
+mashup.
+You can customize free websites.
+Shares pieces of code.
+Templates allows us to create websites.
+
+
+
+
+
+
+
+
+
