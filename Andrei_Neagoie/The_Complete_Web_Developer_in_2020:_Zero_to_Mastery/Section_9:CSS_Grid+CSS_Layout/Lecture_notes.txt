@@ -1,0 +1,55 @@
+Section Overview
+How do i create a Layout on the web.
+Some grids and how do we make it responsive without trial error.
+CSS grid are relly powerful.
+Build responsive layouts really fast.
+
+CSS Grid vs Flexbox vs Bootstrap
+One is flexbox another one was Bootstrap 4.
+There is always a trade-off.
+You use them both togheter.
+Flexbox is good on one-dimesional.
+CSS-grid is good when it are two-dimensional.
+More important to learn flex-box and css grid.
+
+CSS Grid 1
+Animal cards with just simple divs.
+Nice looking cards.
+display: blocks makes all cards take one row.
+Need an conatainer div around the pictures.
+Display grid.
+grid-template-columns:300px 300px 2 grids with 300 pixels.
+grid-gap:20px gap between the pictures.
+fr means one fraction proptions to the others fractions.
+
+CSS Grid 2
+grid-template-rows: 1fr 2fr; The second fra2 makes the second row more bigger.
+Repeat things.
+auto propertity filling in the available space as possible.
+Automating scaling the proptions.
+
+CSS Grid 3
+justify-items: start. Means it alignes items towards the rows and end towards the end rows.
+auto-fill makes the grid-system fills to the columns.
+minmax the minum smallest pixels for the columns.
+
+CSS Grid 4
+Induvudal items.
+We want some funky function.
+grid-column-start: 1 and grid-column-end:3 has an numbering system makes it haves 3 grid system.
+Dosen't makes it responsive.
+grid-column: 1/-1; makes it goes to the end.
+grid-column:span 1 makes it always cover two grids.
+same for grid-row
+
+CSS Grid 5
+justify-self:start goes to the start column
+align-self: end goes to the end of the row.
+
+Exercise CSS Layout
+Foundations of building websites.
+But most of the time is JavaScript.
+Being able to build websites fast.
+Buildning to an layout.
+
+

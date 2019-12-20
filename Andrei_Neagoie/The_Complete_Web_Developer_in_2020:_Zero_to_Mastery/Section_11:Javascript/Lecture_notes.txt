@@ -1,0 +1,204 @@
+Introduction To Javascript
+Feeling confused first time when i first learned javascript.
+Don't have to know every keyword.
+It going to feeling very attached.
+
+What is Javascript
+Think javascript as an verb you are doing on the website.
+On the time 1995 Netscape was the most popular browser. Every browser had 
+their own version.
+ECMAscript.
+The same issue.
+Make sure that every browser understand your javascript.
+Open up the browser.
+Instagram uses javascrip and virtually relity, program drones, robotics.
+Node.js learn this topics is pretty much javascript and so Express js and React.
+Its just a file.
+
+Your First Javsscript
+Console is where you can write Javascript.
+Has 7 types think types as values Javascript can have.
+-Numbers do operations 
+-Strings just a piece of text ""
+-Boolean very simple means just true or false
+
+// Guess what answers you would get if you ran this in the
+// Javascript Console in Google Chrome. Once you have an answer  to the questions then 
+// check them by copying them and running it in the console yourself line by line 
+
+
+//Evaluate the below:
+5 + "34" => "345" => Right
+5 - "4" => 1 => Right
+10 % 5 => 0 => Right
+5 % 10 => 5 => Right
+"Java" + "Script" => "JavaScript" => Right
+" " + " " => "  " => Right
+" " + 0 => "0" => Wrong => " 0"
+true + true => true => Wrong => 2
+true + false => 1 => Right
+false + true => 1 => Right
+false - true => -1 => Right
+3 - 4 => -1 => Right
+"Bob" - "bill" => Error => Wrong => NaN
+
+
+//Evaluate the below comparisons:
+5 >= 1 => True => Right
+0 === 1 => False => Right
+4 <= 1 => False =>  Right
+1 != 1 => False => Right
+"A" > "B" => True => Wrong Its False
+"B" < "C" => True => Right
+"a" > "A" => True => Right
+"b" < "A" => False => Right
+true === false => False => Right
+true != true => False =>  Right
+
+
+// Make the string: "Hi There! It ts "sunny" out" by using the + sign:
+"Hi There " + "It\'s \"sunny\" out"
+
+Variables
+How does Javascript remebers things.
+Do something hundred of times.
+Has variables to remeber things.
+Store things in variables.
+Rules with a variable must start with a letter , $ , _.
+Camelcase firstName.
+Prompt get inputs.
+Number() to convert some text to an number.
+alert() pop-up window.
+
+// Evaluate what answers you would get if you ran this in the
+// Javascript Console in Google Chrome. Answer the questions then 
+// check them by copying them and running it in the console yourself 
+// line by line 
+
+
+// add variable "firstName" and "lastName" // so that they equal your name
+// add variable "firstName" and "lastName" // so that they equal your name
+var firstName = "Jonte";
+var lastName = "Y";
+
+// create a variable that holds the answer // of "firstName" + " " + "LastName"
+var fullName = firstName + " " + lastName;
+
+// create a variable that holds the answer // of "firstName" + " " + "lastName"
+
+// Evaluate this question. What is a + b?
+var a = 34;
+var b = 21;
+a = 2;
+a + b // what is the answer here?
+23 Right
+
+// What is c equal to?
+var c;
+undefined.
+
+Why to use semicolon means end of an expression.
+
+The official guidelines say that JS uses a semi colon to terminate a statement. The ECMAScript spec describes how, if a statement is not explicitly terminated with a semicolon, sometimes a semicolon will be automatically inserted by JavaScript engine (called “Automatic Semicolon Insertion” (ASI)).
+
+Control Flow
+Flows like a water.
+If we want to go one way or another way.
+Handles other cases.
+We want an alternative route.
+Else.
+Else if multiple conditions.
+Or || , And &&, ! Not Equal.
+
+Javascript On Our Page
+How does javascript gets implemented in the browser.
+There exist an script-tag.
+It has an attribute called type="text/javascript"
+You can have multiply script tags.
+If put the script-tags gonna make the html being delayed.
+
+Functions
+What are functions.
+Pieces of codes that perform an action or multiple actions.
+Types of functions in Javascript prompt(),alert().
+Calling an function for example alert().
+Arguments in functions alert("hi there").
+The greatest advantages of using functions it's that you can call it multiple times.
+Creating an function with keyword function.
+You can have an function creating is called anomynous function.
+DRY do not repeat yourself.
+Used an argument to the function sing().
+When the function in javascript dosen't return anything it returns as default undefined.
+To return a value you must use keyword return-keyword.
+arguments its called when you are calling an function.
+parameters its called the variables the function is using.
+Functions are the core of javascript.
+
+Data Structures: Arrays
+What is an data-structure.
+Data-structures are like comportant holders.
+Gives the ability to store things.
+Create with [].
+Starting from 0.
+You can have numbers,booleans,functions.
+You can even mix numbers,booleans,functions.
+
+Data Structures: Objects
+Curly brackets {}.
+Key and values.
+Looks a bit different from an array.
+Object is more dynamic.
+Arrays has an index.
+How do i grab properties.
+You can easily add properties to an object.
+Array is just like an index with elements.
+You want to have all things organized.
+But an object is better to containing user information.
+You can a list of objects.
+You can add functions to an object.
+Function inside an object is called an method.
+Console is also an object.
+Something called Null.
+Special type Null.
+Means nothing in the object.
+
+Exercise: Build Facebook
+We have an sign-up form.
+Have an variable with is an array called database.
+Prompt accepts username and password.
+Facebook is made of full small chunks.
+
+Javascript Terminology
+Function 
+And expression is something that produces an value.
+Calling or invoking an function.
+Method is a function inside a object and is accessed with a dot.
+
+Loops
+Doing over and over.
+Todo-list.
+Todo-list was hundred of lines.
+for-loop.
+Length tells how many items in the list.
+Tells the loop to stop with 5 < todos.length.
+Save the list length variable in separate variable.
+While-loop evalutating separate declared variables.
+Infinite-loop will make the programmet crash.
+do-while-loop do the stuff first and after that check the condition.
+Most of the time use for-loop.
+For-each loop takes in a list an function with an argument and asks what to do with the arguments.
+Second argument in the for-each loop is the index.
+For-each is really powerful.
+
+Exercise: Build Facebook 2
+Adding more users.
+We add a an loop to check the users.
+If the userName and Password is equal show the newsfeed.
+Create an new function for that is called isUserValid().
+This returns true or false.
+
+Javascript Keywords
+It has its own language called keywords.
+Predefined name meaning attached to it.
+You cannot use keywords.
+
