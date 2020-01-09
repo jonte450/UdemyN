@@ -1,0 +1,186 @@
+Scope
+A function part of window scope if you write in the console.log.
+The variable is only living with the scope.
+Creating an child scope within an function.
+The last check is in the window object.
+
+Advanced Control Flow
+ternary operator: condition ? expr1 : expr2.
+An ternary operator is really nicer to write code.
+Switch-statements can be used in games to check directions.
+Case-statements what happens right,left,up,down.
+Having a lot of conditions for example of if-else condition.
+
+ES5 and ES6
+Everything changes in javascript.
+Learn new features.
+ECMA-script international is JavaScript.
+Something helps support this Babel.
+You transforms the code thanks to babel.
+let and const.
+New ways of declaring variables.
+Let is creating an own scope everytime it wrapped with {}.
+Const variables cannot be changed.
+You cant change properties with const but not the obeject.
+Destrucring to choose properties from an object.
+New way to declare properties [] good when you should calculate things.
+Template strings easier way to declare strings.
+Default parameters if not is declared you set in an standard value.
+Symbols creates unique type and avoiding conflicts.
+Arrow functions sick and tired of writing function over and over.
+
+Advanced Functions
+We want to mimize the errors and bugs in the code.
+Understand functions as an small university.
+Closures function runs.
+The childs scope always the parents scope.
+Currying convert a function that takes multiple arguments to one that takes one at the time.
+Currying makes things more extensive.
+Compose takes two functions as an parameter an a argument for example.
+Avoiding side-effects and functional purity creates an deterministic value always the  same value.
+
+Advanced arrays
+Map
+Always returns an new array.
+Expects to return something.
+You use it when you want to do something on the arrays the elements.
+
+Filter
+Filter away values on conditions and you must always return something.
+
+Reduce
+Takes in an accumlator and an number.
+Accumaltor is something you want to store an number information.
+
+Advanced Objects
+Reference type saying that we are just storing an reference.
+True for all references but not for the same object.
+
+Context
+Tells where we are in the object.
+Using this keyword.
+This refers to which object we are within.
+
+Instansitation
+Class is a instance you want to do an copy of.
+Constructor to set variables. 
+Super in the constructor every time an class extends another class.
+
+Pass By Value vs Pass By Reference
+Primitive types are immutiable.
+When we are creating values we are creating somewhere and its called passed by value.
+Pass by reference which means we don't copy values like primitive types.
+Objects can be pointed to exatcly same shelf in the memory.
+Saving space in the memory.
+Object.assign copy the to another object.
+What happens when we have another object in a object.
+When we does this it creates an shallow clone.
+We can only clone the first layer.
+
+Type Coercion
+When the operator are different types one of them will be converted to a right value.
+Converting a type to another type.
+Happens when you use ==.
+Happens in if-statements too.
+
+ES7 (ES2016)
+Only had two addtions to the language.
+include.
+Checks the array if something has some element.
+x**2 x to the power of 2.
+
+ES8 (ES2017)
+String padding: padStart() and padEnd().
+Make more lining characters.
+
+Making easier to add more parameters and looking nicer.
+
+object.values and object.entries.
+Entries gives you all the entries and values all the values.
+
+ES10 (ES2019)
+flat() if we had nested arrays inside flat removes nested arrays.
+We can tell how many layers we can flatten the arrays.
+You don't need to count the nested arrays.
+trimStart() and trimEnd() removes blank spaces from an string.
+Object.fromEntries() transforms an array into an object.
+try and catch try an piece of code and catch it.
+ 
+Advanced Loops
+Typical for-loops.
+ForEach-Loops looks much cleaner than an for-loop.
+for-of loop example below.
+for(item of basket){
+	console.log(item);
+}
+You can iterate over strings too
+for(item of 'basket'){
+	console.log(item);
+}
+
+for-in loops works with objects.
+for(item in detailedBasket){
+	console.log(item);
+}
+
+for-in loops over objects are called enumeratebal.
+
+Debugging
+Seeking why the program is not working.
+You can use an keyword called debugger.
+Freeze in some part of the program.
+
+How Does Javascript Work?
+WHAT IS A PROGRAM 
+-allocate memory
+-parse and execute
+
+JavaEngine 
+-Memory Heap
+Where memory is allocated.
+Has limited memory and can lead to memory leak.
+-Call Stack
+Where your code is read and executed.
+
+Javascript is a single threaded language that can be non-blocking.
+It has only one call-stack the thing is top of the call-stack get runned first.
+Language that has several call-stacks is called multithreaded.
+
+Stack Overflow means that the call-stack becomes overflooded of functions-calls.
+We need something more than Asynchronous programming.
+To API-calls because Synchronous can be too slow.
+
+Javascript Run-Time Enviroment
+Is part of the browser.
+Web-Apis
+-DOM(document).
+-AJAX(XMLHttpRequest).
+
+-Timeout(setTimeout).
+
+-Call Stack
+
+-Web API Send to the callback
+
+-Callback queue 
+Callback has the function
+
+-Event loop 
+Event-loop is goona check the the call-stack an if the call-stack is empty it 
+gonna take the function execute it.
+
+Modules
+
+Created an mental image how things works.
+Inline the script in the Javascript file.
+An massive javascript file.
+Polution of the global namespace.
+You can have collision when the programmers has the same name.
+Outside of the HTML.
+Lack of the dependency resolution some scripts can be depended on some other declared later.
+IIFE after you evalataued you run this function creates an new scope and dosen't polute the global namespace.
+browserify it actually uses common js.
+browserify is an Module bundler.
+Introduction ES6 import and export files.
+Webpack is also an Module bundler all the import and export files into an single file.
+

@@ -1,0 +1,77 @@
+Document Object Model
+The true power comes when you combine HTML,CSS,Javascript.
+Change things when the user is on the page.
+Change how the HTML looks.
+Javascript can do the things for you.
+Browser creates the DOM head element, head element.
+Why do we need the DOM.
+Is something the browser creates so we can change things on the page.
+Every browser has their own engine.
+We can use JavaScript to talk to the DOM.
+Window is the big parent that describes the browser.
+Javascript is read by the browser engine.
+
+DOM Selectors
+Just hide the fact that is an object.
+We can use selectors.
+getElementByTagName("");
+getElementByTagId("");
+getElementByTagClass("");
+
+querySelector();
+Select the first element.
+querySelectorAll();
+Selects all the elements.
+
+getAttribute();
+Get the attribute and store the element
+setAttribute();
+Change the attibute with an css-class.
+style tag.
+The separation of concerns.
+classList() checks the list of classes.
+toogle somethings on and off.
+innerhtml little dangerous.
+You can choose children or the parent.
+Important to save the selectors in variables to save memory.
+
+DOM Events
+The DOM can listen to events for example click,keypress.
+MouseEvents and clickevents.
+addEventListener(event,function).
+createElement().
+Appendchild().
+Attach with we grab the unordered list and attach it.
+Skip add when there is nothing in the text-value.
+Create an empty string to the text.value.
+Do Not Repeat Yourself.
+Refactoring creatilistelement and inputlength.
+
+Exercise: Background Generator
+Change text and styles.
+Background-generator.
+Few lines of Javascript.
+Linear-gradeient gives the beginning color and ending color.
+Read the color.
+Add event listener.
+body.style.background.
+Create function to set the background.
+
+JQuery
+It takes an few tries to learn everything.
+Even worse for few years ago.
+JQuery one of the most popular libary for javascript.
+Adding more to the langauage.
+Loading with an script-tag cdn.
+Had the $ sign.
+Made the code very imperative.
+When the website becomes larger it becomes more complicated.
+Pyramid of DOM.
+React is declarative.
+
+DEVELOPER FUNDAMENTALS: V
+Accessing the DOM.
+Takes time for the webbrowser.
+We want to make websites better.
+Minimize the DOM manipulations.
+ 

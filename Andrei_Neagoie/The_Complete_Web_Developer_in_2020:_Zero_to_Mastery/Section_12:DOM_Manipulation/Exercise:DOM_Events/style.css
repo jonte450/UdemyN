@@ -1,0 +1,23 @@
+
+body{
+  background-image: url("shopping.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+li{
+  margin: 15px;
+}
+
+button{
+  display:flex;
+  flex-direction: column;
+}   
+.done {
+  text-decoration: line-through;
+}
+
