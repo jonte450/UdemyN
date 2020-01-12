@@ -1,0 +1,17 @@
+Sublime Text 3
+Everything is set up properly.
+Preferences choose color scheme.
+You can add packages through the package control.
+Settings you have default settings and user setting.
+You can change fonts.
+
+VS Code
+You get's annoying popups.
+VS Code gets noisy.
+You can access different properties.
+You can open up the terminal.
+Quokka.js evalutes things you are writing.
+You have different themes.
+
+Terminal
+Set up the workstation.

@@ -1,0 +1,71 @@
+Introduction To React.js
+We had jqeury before react.
+What to change and becomes more complex.
+Is like an bread-machine makes magic under the hood.
+Easy to scale and manage.
+Thinking in components.
+Was as small components like lego-blocks and build it ensembled.
+One way data flow.
+Data flows from top to bottom.
+Virtual DOM we have to reduce DOM-manipulations.
+We were like painters.
+Virtual DOM is like an javascript-object.
+React takes care of DOM-Manipulations.
+We can change the canvas to whatever we want.
+Has an great Ecosystem.
+
+create-react-app
+Create an folder and install react.
+create-react-app creates folder contains babel,lintin,webpack.
+Package.json,readme file.
+Scripts makes it awesome.
+React-scripts helps with installing webpack,babel,browserify.
+React-scripts helps us with that.
+eject helps with React-Scripts.
+package-lock.json helps with the correct version.
+gitignore helps us to ignore some files when we push it on github.
+node_modules.
+public folder.
+manifest.json helps to download a shortcut to your website.
+src folder all the magic happens.
+react.render helps with to set up things on your website.
+
+create-react-app 2
+It is always to update upgrades.
+If you want to update all you have to do is go to the json file and npm install after that npm install.
+
+create-react-app 3
+You can use npx to create react-apps.
+
+Quick Note:Class vs Functional App.js
+serviceworker makes progessive webapps.
+functions vs class.
+extends from react.components.
+use render to return the code.
+
+Your First React Component
+React has webbpack underneath the hood.
+Two things 
+-React
+-ReactDOM
+It can be used in multiple places for websites.
+import./index.css add css files for every components.
+registerServiceWorkers new feature to make the app works faster and work offline.
+We are creating our own custom html-tags.
+Rule we all ways to have an render function.
+We have to export it too.
+Multiple lines you must wrap it in brackets.
+tachyons to help with css things.
+You must have className instead of class.
+JSX React has the idea of components it's better to have functionality so
+that components are only concerned about themselves.
+Everytime i make an change.
+React uses their fake dome and compares the DOM hmm i need to make 
+changes to the DOM.
+You can add props think them as attributes.
+
+Building A React App 1
+Create an card Component.
+You must have import React because of JSX.
+
+

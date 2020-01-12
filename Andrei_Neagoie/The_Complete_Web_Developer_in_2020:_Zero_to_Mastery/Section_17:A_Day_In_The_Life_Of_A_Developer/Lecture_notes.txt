@@ -1,0 +1,10 @@
+A Typical Day
+A similar work pattern.
+What to expect.
+Trello board.
+Git Pull.
+Something working on.
+Standup to give evertbody updates SCRUM.
+Working on some bugs.
+Merging.
+QA quality meetup.

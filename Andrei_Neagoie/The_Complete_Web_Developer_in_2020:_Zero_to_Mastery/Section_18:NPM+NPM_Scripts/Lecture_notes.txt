@@ -1,0 +1,68 @@
+Introduction To NPM
+Share code to build on.
+Used collectively inteligence to build upon.
+Search for packages.
+NPM registery.
+Find list files.
+You got expertices from others.
+Not all packages is good code.
+Negatively your project gets to big.
+
+Three types of packages.
+1.Packages you can use on the browser.
+2.Gives you new command on the command line.
+3.You can use on the backend.
+
+Node Package Manager.
+
+Why it is really important.
+See it in every single projects.
+
+Three must do things.
+1. HTML + CSS + Javascript
+2. Github Repo + Git
+3. Package.json file
+This part focuses on.
+
+Setting Up NPM and package.json
+Go to the website and download it.
+Node allows us to run js files without browser.
+Node js was created to use the V8 engine.
+npm init creates a package json file.
+json is an file format it looks like an javascript object.
+
+Update: Latest Node.js and NPM
+Download with the latest on the website.
+
+Installing And Using Packages
+Grab React and have it part of the packages.
+Loaddash and Liveserver.
+Install two ways globally and locally.
+Package only in one specific folder is locally.
+Globally using it anywhere in the computer.
+Live-server creates an fake server for you.
+npm install loadash install locally.
+You have to use the require syntax sometimes.
+Install browserify to make your files adapt to your browser.
+Create an bundle file with browserify.
+Change your html to bundle.js.
+You must think if you really needs the package and you must think of dependencies.
+You can easily share packages with others developers.
+dev-dependecies are just for testing.
+You can add commands to your package.json files.
+
+Why Update Packages?
+Libraries are always evolving.
+Security risks github helps with security issues.
+semver package versions.
+
+Create A Portfolio
+We are going to build an portfolio website to show the employer.
+npm install and npm start.
+Change in template.html
+Change picturs and templates.
+Hatch free create your own logo for free.
+scss just like css but gives us more options.
+In scss you can have variables.
+
+

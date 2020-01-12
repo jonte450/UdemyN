@@ -1,0 +1,40 @@
+Git + Github  Part 1
+You are not only the developer in the team.
+Think it likes Google Docs.
+Always conflcting when more than one developer works on a project.
+Github helps us to notice merge conflict.
+Most people uses the terminal.
+git clone clone this project from github.com.
+git status shows untracked files.
+git add you adds files.
+git commit -m "message which files".
+git push send the commit to the reposotoriry.
+git pull to pull the changes direcltly from github.
+
+Git + Github Part 2
+Master branch as the authority.
+Creates an branch that you can work own your to not break things.
+git branch littlefeature.
+git checkout littlefeature switch to the branch little feature.
+git merge with the master.
+
+Contributing To Open Source 1
+What is open source.
+Everything has been built on the Open Source.
+Example of an open source project is Linux everybody can change and add something to it.
+You don't have to create something big.
+Open Source contributor.
+Perfect to mimic real works.
+Zero to Repository projects.
+Add a name to the contributor files.
+Use fork to clone it to your repository.
+Create an branch with checkout.
+Make an change to the contributor with syntax.
+Add commit and push to your own created branch.
+Make an pull request with the managers name.
+
+Contributing To Open Source 2
+Hacktokctoberfest.
+Animation fest.
+Create your own animation in css.
+

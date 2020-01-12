@@ -1,0 +1,9 @@
+Using the terminal
+The main way to communting with the computer.
+Acecess server in different courses.
+ls lists everything in the current directory.
+cd going in to different files.
+clear to clear up my terminal.
+pwd for present working irectory.
+open . open the current folders.
+Creating files with touch.
