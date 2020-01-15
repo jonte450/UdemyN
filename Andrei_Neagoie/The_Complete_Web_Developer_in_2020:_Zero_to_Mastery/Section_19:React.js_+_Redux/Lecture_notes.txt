@@ -43,8 +43,8 @@ functions vs class.
 extends from react.components.
 use render to return the code.
 
-Your First React Component
-React has webbpack underneath the hood.
+Your First React omponent
+React hCas webbpack underneath the hood.
 Two things 
 -React
 -ReactDOM
@@ -67,5 +67,313 @@ You can add props think them as attributes.
 Building A React App 1
 Create an card Component.
 You must have import React because of JSX.
+Using an robohash.org to generate random robot pictures.
+You can only to copy the Components to generate several cards reuse the card.
+For things that are not deafaults you must destruct them.
+Wrap props in brackets because of JSX.
+You can destruct props.
+
+Building A React App 2
+Always a parent that has different children.
+Create an cardlist component to render cards children.
+Cardlist will return the cards.
+Acessed to the robots from the props.
+Make an loop through the props.
+Warning each element array should have an unique keyprops.
+You can add everything in brackets in javascript.
+
+Building A React App 3
+Adding an searchbox.
+Giving an header and creating an app called searchbox.
+How can we make it more interactive.
+Searchbox needs to communicate with the cardlist.
+One way data flow they need to send their information to the parent.
+React has something called state.
+Pure components the components only need to get something and return something.
+We need an memory for this and that is just an state.
+States are able to change.
+The child can never changed the state.
+Constructor to add state.
+Using the this.state in the constructor.
+We have to use super to call the component constructor.
+State usally lives in the parent component.
+Givingsearch change as an propt to the searchbox app.
+Use arrowfunctions on events.
+When you change states use this.setState.
+
+Styling Your React App
+Using linear-gradient.
+Acess it with the URL.
+Always remeber to import it.
+
+Building A React App 4
+We use an API.
+We want to make an request somewhere and make an request.
+We call components with an state an smart components.
+lifecyclemethods will automatic trigger to load things on the website.
+We have three sections.
+-Mounting
+When mounting replacing root with the app.
+Mounting is the startup of the app.
+When mounting React is checking these method: 
+*-constructor()
+*-componentWillMount()
+*-render()
+*-componentDidMount().
+
+-Updating
+Whenever component changes.
+It are checking these methods:
+*-componentWillRecieveProps()
+*-shouldComponentUpdate()
+*-componentWillUpdate()
+*-render()
+*-componentDidUpdate()
+
+-Unmounting
+When an component is removed from the page.
+These methods are being checked.
+*-componentWillUnmount()
+
+You don't have to call these methods ever.
+For example componentDidMount()
+checking if the components are being rendered.
+
+You can do something intresting.
+fetch making some http-request.
+Convert some repsone to json.
+Fetch is on the window-object.
+
+Building A React App 5
+Wouldn't be nice to make the searchbar follows you.
+Creating components that are reuseable.
+Using an tag called scrollable to create in an app.
+How to make the scrollable to render things in.
+props.children creates an object with children.
+Every objects has props.children.
+Tells with state it has and react takes care of the rest.
+Manipulating the DOM and optimizes everything and makes it very fast.
+
+Building A React App 6
+Add an final thing.
+If we take look at the project we have a lot of files.
+Folders structures one of the most important thing.
+Creating folders.
+
+-components
+These are the simple components just like.
+*-Card
+*-CardList
+*-Scroll
+*-SearchBox
+
+-containers
+Is the smart components.
+They are not pure functions.
+App that are the parent of all the components.
+
+../Components/CardList leave and getting to folder Components.
+Making some desecrucrting.
+Tenary statements.
+Command npm run build optimizes the project.
+
+Keeping Your Projects Up To Date
+Sharing an project with others.
+Clone robotfriends.
+We have an package.json file.
+Fix errors with npm audit fix.
+npm update looks on the version with is the highest version.
+npm audit --force.
+Make sure you review the updates.
+You can change the versions and npm install again.
+
+React Review
+You have learned components and building it.
+One way data flows.
+Once an child component changes you send it to the parent.
+React worries about the painting.
+React has an awesome ecosystem.
+
+Error Boundary in React
+Let's add one more tool.
+Adding a module error-boundary.
+Create an class ErrorBoundry.
+Have the props parameter.
+We can wrap an component with the ErrorBoundry Component.
+if this.state.hasError show if something has an error.
+componentDidCatach() is method to catch an error just like try and catch.
+Errorboundaries is good when your put into production.
+
+Deploying Our React App
+You are using github sources.
+Adding homepage.
+Install github pages.
+Adding two lines.
+predeploy and deploy in json.packages.
+Change github pages.
+
+State management
+When we are building an react app.
+React is a group of components that are rendered.
+Is something is changed.
+States is just like memory.
+Mainly just states.
+We can interact with something.
+States describes how the states should look.
+State-management is getting more difficult when apps gets more bigger.
+We can have different states.
+More complex updates.
+Keeping track of all the states.
+Redux are helping us with that.
+Whats if all the components just has props and keeps it in store.
+Pass down the states to the store.
+We can have an massive object that keeps tracks of all the states that is a store.
+
+Why Redux
+Most also have redux.
+React and Redux gets well togheter.
+React is an view layer.
+-Good for managing large state.
+-Useful for sharing data between containers.
+-Predictable state management using the 3 principles.
+
+The 3 Principles
+
+-1.Single source of truth.
+We have one single source object that describes the state.
+-2.State is read only.
+States is read-only not change the object.
+-3.Changes using pure functions.
+Changes are made only by pure functions.
+
+-Action
+An action is something an user does.
+-Reducer
+Is simply an pure function that creates an output.
+-Store
+Get's updated.
+-Make changes
+Redux makes changes.
+
+More actions that triggers more complex changes.
+One reducer that makes changes.
+
+Flux Pattern one way data-flow.
+-Action
+-Dispatcher
+-Store
+-View
+
+MVC before Flux Pattern.
+Controller updates the model.
+Problem with craziness with making changes.
+Redux === this.state.
+
+Installing Redux
+Show how the redux is working.
+npm install redux.
+Redux is an great tool to learn.
+We need to connect redux to react.
+npm install react-redux.
+Connect the containers to the redux.
+
+Redux Actions and Reducers
+Create something called an action.
+export const setSearchfield =(text) =>type:Change search field.
+Send an payload to the reducer whatever the reducer enters.
+Nice to have an file with all actions.
+Create an constant called searchfield.
+After the action we have the reducer.
+Create an file reducers.js.
+Reducers takes in a state and action.
+return Object.assign().
+Update the searchField with payload.
+Recommends to use swith-statements.
+
+Redux Store and Provider
+Connecting to the React Application.
+react-reduce have provider and connect.
+Create the store that is the source of truth.
+More and more actions to be taken.
+In the store we want to combine all the reducers.
+Pass down the store as an prop.
+Wrap the store in provider component.
+
+Redux connect
+Using the other method that comes with react-redux.
+The yellow little components.
+Which redux components that exist.
+Calling these smart conatainers.
+export default connect()(App);
+Higher order functions.
+connect accepts two parameters are mapstate and dispatch.
+dispatch to send actions.
+dispatch are going to have an event.
+remove searchField from the app.
+
+Redux Middleware
+Come back to the app and monitor the things.
+Middleware works simarly to an triggers.
+npm install redux-loggers.
+applymiddelware giving any middleware we are intersted in.
+middleWare caught the actions.
+Instant loggings in the application.
+Clean system to monitoring the actions.
+Going back in time to watch the actions.
+Able to scale it up on predictable view.
+Redux DevTools good tool to play around with.
+
+Redux Async Actions
+One final piece of the puzzle.
+Async request.
+Everything has been synchronous.
+So how can we create actions.
+redux-thunk is a middleware that provides get_state and dispatch functions.
+Apply the thunkmiddleware.
+How do we actually use it.
+Create an constant.
+Request_robots three states: pending,success,failed.
+import these states.
+dispatch pending.
+fetch the users.
+Once we recevied the users dispatch(success).
+catch are going to dispatch(failed).
+Adding an reducer function.
+Case request pending.
+Creates two initials states search.
+Create an new states that has three states.
+initialstates:false,robots_array, error.
+combineReducers all the reducers to an root reducer.
+redux-thunk returns an functions.
+thunk-middle-ware going through functions.
+adding to dispatch the onRequestRobots.
+redux-thunk actions going through the middleware.
+Going in the middleware dispatch and make changes.
+
+Redux Project Structures
+Building larger and larger applications.
+Having one is not realistic.
+Grows more and more containers getting bigger and bigger.
+Group everything according to the components.
+Components that have their owns folders.
+API folder that are making fetch-calls.
+
+Popular Tool For React + Redux
+React is a viewlayer.
+Simple ways to handle events.
+Building new components.
+As applications grow.
+React Router is like to changing pages.
+Very easy to use.
+Utility librairies,
+Adding functions to javascript.
+loadash extra tools.
+Styling glamorous,css modules.
+Gatsby.js that is simple react.
+Next.js popular for server side.
+reselect helps with selectrs.
+Redux-saga for more asynchronous functions.
+IMMUTABLE.js make objects immutable.
+
 
 
