@@ -1,0 +1,119 @@
+HTTP/HTTPS
+Tim Berner Lee invented HTML.
+Tim built http.
+How to do things protocol.
+HTTP is a protocol.
+We can grab html-pages.
+Foundation for getting into the web.
+Client-server.
+Http is a language for the server and client to talk to each other.
+Reqeust send by the browsers.
+Response send by the server.
+
+Request part
+-GET
+To fetch an html-page.
+
+-POST
+I want to send something to add to the server.
+
+-PUT
+I am going  to send an data and update it to something existing data.
+
+-DELETE
+Remove an data.
+
+Http can update on demand called AJAX.
+
+Response part
+Sends two main things.
+-HTTPS messages.
+-HTML or some data.
+Network tab in developer mode.
+query string.
+body of the request.
+form-method get-request.
+Adds an query strings to the server.
+Body of the request.
+Any person that are monitoring us.
+HTTPs to handle with security means encrypted.
+secure layer.
+
+JSON
+Can we post anything.
+The data can only be text.
+The server can use any type of language.
+Text can be understand by all other.
+
+What is JSON
+-JavaScript Object Notation.
+-JSON is a syntax for storing and exchaning data.
+-JSON is text, written with JavaScript object notation.
+
+Both XML and JSON can be used to send data.
+Standard is more to JSON.
+JSON can be read by any languages.
+-JSON.parse()
+return an object.
+-JSON.stringigy()
+returns an JSON object.
+
+AJAX
+Sometimes all things has to be reloaded.
+Udemy website.
+I can click on tabs and it loads data automatically on the page.
+Read from the webpage after was loaded.
+Allowed to load the page and send data in background.
+How are we able to do it.
+XML HTTP request.
+fetch().
+Page updater is more faster.
+Lets make it changes dynamically.
+Load an base and build  rest.
+fetch returns an json object.
+
+Promises
+A new feature to ES6.
+Promise
+-A promise is an object that may produce a single value some time in the future.
+-Either a resolved value, or a reason that it's not resolved(rejected).
+
+Three states 
+-fullfilled
+-rejected
+-pending
+
+What did we have before promises.
+Callbacks.
+Example move players with callbacks fuctions pyramid of doom.
+An app like twitter.
+Grab an tweets.
+We have to check for errors.
+Promises that resolves or rejects.
+What can we do with promises.
+Changing with promises.
+Catch errors.
+Catch only read between lines.
+A promise has an resolve and reject.
+We can give it to an variable.
+Do something chained and catch errors.
+Promise.all().
+Promises can only fail once.
+Good for AJAX calls.
+
+ES8-Async Await
+Is built on top of the promises.
+Makes codes easier to read.
+Makes codes that are not synchornous look like it.
+Async Await call for synctactic sugar.
+You can wait and assign it to variables.
+Do something more different.
+
+
+ES9(ES2018)-Async
+Object spread operator.
+Creates an arraylist.
+
+ES9 (ES2018)-Async
+Finally 
+for await of loop though promises.
