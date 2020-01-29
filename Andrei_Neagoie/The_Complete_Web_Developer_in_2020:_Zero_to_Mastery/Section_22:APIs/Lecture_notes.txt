@@ -1,0 +1,16 @@
+Introduction to APIs
+Found things from different websites.
+Having things listed can increases the revenue.
+Allow strangers to speak to each other.
+Window-object has fetch.
+Fetch is an API.
+So that i can communicate with the website.
+Your are sitting to order hey waiter this is the menu item.
+TV is an API for example.
+Robohash is an API.
+People builds API for bussniess.
+XML API.
+Comply to industry standard makes it easier for developers.
+Create website based on the data.
+NPM package can be a API.
+Have information about how we can build websites.SWPI apis

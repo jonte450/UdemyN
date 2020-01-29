@@ -1,1 +1,64 @@
-.
+Backend Basics
+The browser reads the file.
+And we manipulate the DOM.
+How many trips we make.
+Content-deliveries.
+AJAX we can ust fetch things.
+HTTP-Requests.
+Back-end developers are working with servers and databases.
+An server is just an computer that are somewhere in the world is just listening.
+Old ways
+Lamp-stack.
+-Linux server.
+-Apache server accepting requests.
+-PHP just an logic for the servers.
+-Filesystem.
+You can run Apache from your computer.
+
+New way doing things
+
+Application server
+
+Node Server
+-Node.js
+-Express.js
+
+Databases
+-PostgreSQL
+-MongoDB
+
+Filesystem
+-index.html
+-script.js
+-style.js
+-about.html
+
+With nodejs we can work with javascript on the server side.
+Building an project that incoperates all that.
+
+Load balancer making copys of your server.
+They still uses same databases.
+Load balancers are balancing the load for the server.
+
+Full Stack Developer pictures of Front End and Back End
+
+Front End Developer
+-HTML5
+-CSS3
+-Javascript + React
+
+In between Front-End and Back-End
+-HTTP
+-AJAX
+
+Back-End Developer
+
+Node Server
+-Node.js
+-Express.js
+
+Database
+-PostgreSQL
+-MongoDB
+
+ 

@@ -1,0 +1,76 @@
+Setting Up Our Server
+Working on the final project.
+We can actually deploy.
+Sign-in to register users.
+If we build an back-end we can communicate with it.
+We are simply creates URI.
+Sign-in end points, register end points.
+Postman gonna help us test our front-end.
+Created an folder called smart-brain.
+Create an basic route.
+app.get('/',).
+You wanna make sure how the API will looking like.
+Sign-in route post-request and will respond with sucess and failed.
+Register-route post-request => new user object.
+profile router --> GET = user.
+/image --> PUT --> user
+
+/isignin and /register
+Test using postman build the server working properly.
+app.post('./signin').
+Check what user writes.
+Needs an database.
+Create an variable object called database.
+Sending: email, password.
+Importing body-parser.
+One of the packages.
+Regestring push to the database array.
+
+/profile/:id and /image
+Add a route get.request().
+Loop through the database and retrieve the id.
+
+Quick Note: Bcrypt
+b.crypt node.js package has been decrypted.
+We are gonna use b.crypt. 
+
+Storing User Passwords
+Wanna stores password in hashes.
+bcrypt creates powerful logins.
+Have things like logins.
+That has an id.
+Email will refernce someone.
+Add it as an postrequest.
+Only the server can see the password.
+bycrypt allows us to store password.
+An hash is something that makes it harder for the man in the middle.
+
+Connecting To Our Front-End
+Intergrating the server with the site.
+We use fetch.
+componentDidMount() we wanna fetch from a special site with json.
+Communicating outside world chrome is limiting this.
+CORS.
+NPM package called CORSE.
+Send sign-in information from the front-end to the backend.
+Sign-in component to an smart component.
+That will have an render method.
+Two event-listeners with consturctors with props.
+We wanna make an postrequest.
+body will contain the states.
+
+Registering Users
+Convert the Register Component to an class.
+Copy routes from sign-in.
+Destructring our components.
+Adding an userprofil object.
+loadUser as an props.
+
+User Profile Update
+Once we sign-in we have sign-in information.
+Our last route our image.
+Everytime we submit.
+If clarify gives us an response we want to fetch the local-host.
+Run image.
+Put is an way to update things.
+

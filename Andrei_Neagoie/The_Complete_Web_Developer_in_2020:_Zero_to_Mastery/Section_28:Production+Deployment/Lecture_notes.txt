@@ -1,0 +1,90 @@
+Code Review
+You can always to improve the code.
+An simply code review.
+We never clear the state.
+We have the on route change.
+We never clear up the user face.
+Create an initial state.
+Always important to have an catch-state.
+Improve the error-handling.
+Many ways to things.
+We can have shared-form.
+Improve the backend.
+Four simpel routes.
+In reality we have many routes.
+Controllers are things that controls when an endpoint gets hit.
+Dependency injections.
+We haven't changed the functionality.
+We separate more things.
+Going to the controllers.
+
+Security Review
+Doing a quick review of security.
+Two main problems.
+-Validation
+If a user dosen't enter an proper email.
+Same with register. We technically register them.
+Making sure when you comunicating with front-end and back-end.
+Front-End checking the validation.
+After that it sends to back-end.
+Can't set headers after their settings.
+The server and the client should do their own validations.
+We can add things.
+-Submitting an image
+Somebody could steal your API-key.
+Moving the API-key to the back-end.
+
+Environmental Variables
+Created an simple server.
+node server.js.
+Sometimes we don't want to hardcode to which port to listen to.
+Inject variables on specific locations.
+Where ever you looking there always going to be an enviromental variable.
+process.env.Port.
+We have to inject the variable.
+
+Deploying On Heroku
+Deploying our App.
+If we ever get users we want to have it online.
+We are going to deploy them separately.
+We are gonna use Heroku.
+Why are we using hostgator.
+Simple to hosting websites.
+They allow you to run different files.
+We are using Heroku here.
+Sign-up.
+You can use different documentations.
+Deploying with Git.
+Publish Server and database on Heroku.
+And Front-End on github for example.
+heroku create.
+git remote -v.
+git push heroku master.
+--tail gets a log on whats is running.
+Heroku has its own ports and dosen't care about it.
+Database not defined.
+Tell the front-end to point.
+
+Deploying On Heroku Part 2
+The backend database is not connected to the server.
+Check the documentation.
+heroku addons.
+heroku pg:info.
+heroku pg:pgsql.
+Still refering to wrong host.
+
+Deploying On Heroku Part 3
+Reasons the image don't working was because i had left portnumber 3000.
+
+Deploying On Heroku Part 4
+Put the Front-End application.
+We can simply add.
+heroku login.
+We make sure that is setup.
+A new link.
+Recap:
+We have created three different servers.
+And now in production.
+Small configurations.
+
+

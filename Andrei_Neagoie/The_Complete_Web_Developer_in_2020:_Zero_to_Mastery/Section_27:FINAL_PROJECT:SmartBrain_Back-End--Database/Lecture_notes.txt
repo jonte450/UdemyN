@@ -1,0 +1,91 @@
+Setting Up Your Database
+A unified understanding.
+Front-End.
+A Server on localhost\3000
+Responding back to the front-end.
+Create an database called smart-brain.
+Think of three separeted computers.
+We have different things.
+Expand our app.
+We want to separate them away.
+
+Create table users(
+  id serial primary key,
+  name VARCHAR(100),
+  email text UNIQUE NOT Null,
+  entries BIGINT DEFAULT 0,
+  joined TIMESTAMP NOT NULL
+);
+
+CREATE TABLE login(
+ id serial key,
+ hash varchar(100) not null,
+ email text unique not null,
+);
+
+Connectiong To The Database
+We are using an node package.
+Knex.js.
+Pg-promise is also very popular.
+Go to server.js.
+client:'pg',
+user:Andrei
+non-password,
+database: called smartbrain.
+knex.select(*).from('users');
+Assign knex to an variable.
+
+Registering A User Part 1
+Knex builds our query-statements.
+Has all the information we need to speak with the database.
+db.('users').insert({
+	email: email,
+	name: name,
+	joined: new Date()
+});
+
+Registering A User Part 2
+Respond to the frontend.
+What should you respond by.
+Use return().
+Return user[0].
+Returning information about the database.
+Not giving the client information about the database system.
+
+Getting User Profiles
+Sometimes backend-users makes endpoints thats are never used.
+db.select('*').from('users').
+db.select('*').from('users').where({id})
+You get good on reading documentation.
+respone.json.
+
+Updating Entries
+Working on the image endpoint.
+How can we grab from the database and update it.
+increment('entries',1).
+
+Sign in
+There might something you realized when working with users.
+We want to capture their password.
+We want insert the password.
+We want to store.
+Concept of transactions.
+Doing multiple operations.
+If one fails everything fails.
+trx parameter.
+trx first transaction hash email.
+You create an transaction.
+db.select(email,hash).from(login).where(email = req.body.email).
+Always return things.
+
+Putting it All Togheter
+The moment of truth.
+Have the frontend working.
+A string will have and gonna be true.
+Check if the user has an id.
+
+What's Next
+Good job to get this far.
+Thank you to sticking in.
+Building the database.
+Expand it to make bigger.

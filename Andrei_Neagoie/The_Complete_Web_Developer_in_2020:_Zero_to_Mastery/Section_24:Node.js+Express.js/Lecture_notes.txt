@@ -1,0 +1,130 @@
+Introduction To Node.js
+Kind of used in previous videos.
+Use it to build an server.
+Before Node.js could only run in the browser.
+Node.js is used for running javascript out of the browser.
+Creates robots by johnny-five.
+Press node console is changing.
+If you type in window you gets an error.
+Node comes with global.
+
+Running script.js in Node
+Script.js do anything like in JavaScript.
+node and script name to run the file.
+__dir gives the directory.
+
+Modules in Node
+Creating an new file script2.js.
+unexpected token import.
+importing you use require('filename').
+Module is an global modul to use to export.
+
+Types of Modules
+Three kinds of modules you can have.
+-Built-in-modules preinstalled modules.
+Read through the text-files.
+-readFiles
+-http 
+Module to build an server.
+-nodemon keeps listen to changes and keeps to run in the background.
+Beacuse of it is the packages.
+--save-dev when we are releasing our app.
+
+Building a Server
+Create an file server.js.
+Node comes with http module.
+http.createServer() creates an server.
+Lets give a response.
+response.setHeader('content-type','text/html')
+request.headers listen on requests.
+
+Introduction to Express.js
+Developers are good on D.R.Y.
+People uses libraries.
+Express.js is the most popular library.
+Creating an express server.
+const express = require('express').
+const app = express().
+app.get('/',(req,res)).
+res.send("helllo").
+
+Express Middleware
+Important concept is Middleware.
+app.use() pass through the use function.
+Makes it easier to work with.
+next must be called to continue.
+Great scripts to add to the server.
+
+Postman
+Let's try to get the post work.
+www.getpostman.com one of the best servers.
+Helps getting request and posts.
+We wanna send a response.
+We have an tool to tests requests.
+Couple of options.
+Send requests.
+You must use some middlewears.
+body-parser is gonna take some data and parse it.
+Use JSON too.
+Objects with different properties that are being parsed.
+
+RESTfuls APIs
+Define an set-functions which developers can perform with protocol.
+Google-servers can send. 
+Something that follows rules.
+Everyone plays nicely.
+An way to specify something and how to use it.
+REST-APIs are stateless.
+An server doesn't respond to anything.
+-red.query 
+When do an get-query.
+-req.body
+To recieves things.
+-req.header
+To recieve different headers.
+-req.params
+To see the parameters.
+
+When send an response we want to add some options.
+static assets html,css,javascript.
+express.static(__dirname + 'public').
+We are gonna build or server or our backend for that.
+
+Node File System Module
+fs-modules.
+const fs = require('fs').
+fs is the filesystem and allows us to access the file-system.
+fs.readFile('/hello.txt', (err,data) => {
+	if(err){
+	console.log('erroorr');
+	}
+	console.log(data);
+})
+Hello there.
+Buffer what is that.
+
+Why does we use toString uses utf8 is an type of encoding.
+Everyone uses it on the web.
+fs.readFileSync('./hello.txt');
+fs.readFile is synchronous.
+Which one should you use.
+Massives files.
+Building an server with files it is important not to block things.
+fs.append gives more texts to the line.
+fs.writefile('bye.txt', 'Sad to see you go').
+Delete we can fs.unlink.
+Excel-sheets don't want to be caught.
+Using like node sends five emails.
+
+Exercise: Santa's Node Helper
+Advent-code dosen't matter which language you uses.
+You need an answer to the first part and the second part.
+Solving the logic problem.
+Figuring the problem using node.
+See which code that is faster.
+Read the file.
+console.time('funchallenge');
+Start an timer.
+
+
+Solution: Santa's Node Helper

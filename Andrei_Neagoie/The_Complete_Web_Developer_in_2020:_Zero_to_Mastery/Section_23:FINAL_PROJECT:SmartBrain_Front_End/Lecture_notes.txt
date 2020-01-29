@@ -1,0 +1,94 @@
+What We Are Building
+We are add to our portfolio to impress our future employer.
+Everything we learned to this point.
+That has a front-end using react, image-recognition API,node and express,own,server,databases also.
+We are going to create to sign-in.
+When we are push in a image and detect the face for it.
+
+Building Our Components
+Imaging what we are trying to build.
+We wanna have a logo, sum of face detections,sign-in and sign-out.
+URL input to detect an image.
+We want it to responsive.
+There is an input-form component.
+Navigation component.
+Logo Component.
+ImageLinkForm component.
+FaceRecognition component.
+Begining with navigation component.
+Style-attribut.
+We are going to need some CSS going to install tachiyons.
+Adding some things.
+Adding an nice background.
+Adding an linear-gradient.
+Doing the logo first.
+Making Babel as default.
+Class name as tachyons.
+React-tilt allow some hover and tilt over.
+Checking the documentation and copy.
+Using things people has built.
+Adding some back-ground to the logo.
+You can add some options to tilt.
+Grab an free logo.
+Lower the brain logo.
+Nice to use the different components to build the website.
+What we need in ImagelinkForm: div-tag,p-tag,div-tag, input of type text,button that will say detect.
+Inline togheter flex.
+Wrap it up and make it smaller.
+Create an form class.
+CSS3 pattern-gallery.
+Display flex so everything is on the frontline.
+Add some functionality.
+Rank component.
+Select all the features.
+Avoiding to see whats is best style it is individually.
+Particles.js lets us have an background that is interactiv.
+CSS-syntax fix.
+z-index: What layer it should be on.
+
+Image Recognition API
+Creating functionality by creating an state.
+Define an constructor.
+Some functionality to detect some images.
+Creates some states.
+onInputOnChange check events.
+Getting an proxy event.
+Clicking on detect to detect things.
+How to display an image and detect an face.
+Using an API called clarify.
+Send url with API-key oh thats is Andrei for example.
+Machine Learning to train their models.
+Using their face-detection.
+Common js require.
+Very similar API-keys.
+Facerecognition to just to display an image.
+Predict-method.
+They have an tons of models.
+Tell which model we wanna use.
+src/index.js all their models we can use.
+Using different models to predict whats it is in it.
+Set an image and get analysis.
+
+Face Detection Box
+We are getting bounding boxes.
+They have an bounding box class.
+New state object in bounding box.
+Calcface location based on the inputs.
+Create id called inputimage to grab it.
+Using the procentages times height-image and times width-image
+to calculate the borders - the total procentage.
+Add some CCS to verify that everything works.
+Adding the properties to the style-tag with the box-properties.
+
+Sign in Form And Routing
+Create an registration form.
+Grab some code of sign-in forms.
+Need an bit of state.
+Problem common in apps.
+Create an route state.
+onRouteChange sign-in to change the pages.
+Nothing happens when you click on sign-out.
+Tricky to add the register-component.
+Combining with ternary-expressions.
+Change an boolean variable depending if the person is signed in or not.
+

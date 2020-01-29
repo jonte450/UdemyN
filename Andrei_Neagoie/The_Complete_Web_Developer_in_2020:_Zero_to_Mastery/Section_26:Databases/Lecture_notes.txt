@@ -1,0 +1,102 @@
+Introduction To Databases
+All Companies stores data.
+Need something to store informations.
+Iterating over things is not so efficeny.
+There could be different things.
+Organize the data.
+DBMS Data Management System.
+DBMS is a kind of a box allows us to communicate.
+1960.
+Two types of DBMS
+-Postgre
+-MongoDBMS
+
+Relational-database.
+Two or more tables.
+Schema must be cleared defined.
+Connecting different tables.
+Username is a foreign key.
+That identifies each row is called primary key.
+How do they communicates with the server.
+SQL allows us to communicate with the database.
+
+Non-Relational Databases.
+Allowing us to build an database without an schema.
+Define it as we go.
+Aren't clear.
+Are more like folders.
+MongoDB is called documented.
+
+RELATIONAL VS NON-RELATIONAL DATABASES
+Relational-Database
+-Blog Post
+-Blog Tags
+-Blog Comments
+Organizes structured data fields into defined columns
+
+Non-Relational Database
+-Comments
+-Tags
+-Catergories
+-All other related data
+Data can be stored in a single documented file
+
+Installing PostgreSQL
+MongoDB has been popular.
+MongoDB is very simple.
+Think it is an JSON-file.
+Brew will install postgrsql also.
+Asks for the host.
+
+SQL:Create Table
+Create Table to enter an table.
+Every coloumn has an datatype.
+Their site has different datatypes.
+Datatypes
+-Text
+-Smallint
+-Date
+
+SQL:Insert Into + Select   
+Insert into and values with names and everything.
+How can we grab information.
+We use Select name,age,birthday FROM users;
+Select *FROM.
+
+SQL:After Table + Update
+How can we add an new table to the table.
+Update table_name.
+Where some column equal some name.
+Update set scores where name="some name".
+
+SQL:Conditional Selections
+Select * From  where name like 'A%'.
+Getting everything sorted in order.
+Select * FROM users ORDER BY score DEC;
+
+SQL:Functions
+Can also have functions.
+Select AVG(score) From users.
+Select SUM(age) From users.
+Select COUNT(name) From users.
+
+SQL:Joining Tables Part 1
+CREATE TABLE datatype serial.
+Serial is an unique key to create for the users.
+Primary keys are only one per table.
+Fast way to grabbing information.
+Unique to make every word if it exist don't insert.
+Not null must have some characters.
+Foreign key is referencing a column.
+
+SQL:Joining Tables Part 2
+Having tables connecting them through Primary Key and a Foreign Key.
+Join a powerful keyword in SQL.
+Concerned with minimal information.
+When you create a primary key SQL creates another file.
+By using JOINS login.name = users.name.
+
+SQL:Delete From + Drop Table
+Key tablename Where name = 'some_name';
+Delete Table => DROP TABLE tablename.
+
