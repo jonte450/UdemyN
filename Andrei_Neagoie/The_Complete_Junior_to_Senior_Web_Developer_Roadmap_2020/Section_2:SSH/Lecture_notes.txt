@@ -1,0 +1,110 @@
+Bruno's Request
+Can you set up the SSH on your github account.
+
+Introduction to SSH
+Course was mean to connect the dots.
+Software that compete.
+SSH is a protocol to speak with each other.
+Protocols.
+
+-HTTP
+Helps sending HTML,CSS,JAVASCRIPTS files.
+
+-FTP
+Allows you to send files like hostgator.
+
+-HTTPS
+Similar to HTTP but it is encrypted.
+
+-SSH
+Allows us to communicate with the internet.
+Share files and controls.
+An secure way to communicate.
+An protocol allowed for the shell.
+Between the host and client.
+
+SSH Command
+ssh {user} @ {host}.
+Digital ocean is an provider that is really cheap.
+Created droplets.
+How to set everything up.
+PUTTY.
+With SSH you can connect with any computer.
+Story time
+First day Andrei was asked to connect github with ssh.
+No idea how to do.
+You will use SSH all time in your career
+Remotely access another computer.
+
+IP
+192.168.1.168 
+192.168.122.1 
+172.17.0.1 
+fd71:60e3:c70c:0:5d0:6506:80e0:5923 fd71:60e3:c70c:0:9d07:72b0:b978:1cd1  
+
+Saving The Day Through SSH
+We need to install git.
+Go to the zero-to-mastery.
+Git clone repo.
+Run nodejs install.
+Use rsync.
+
+How SSH Works
+About the encryption techniq.
+Three Techniques in SSH.
+-Symmetrical Encryption
+-Asymmetrical Encryption
+-Hashing
+
+Symmetric Encryption
+To hide some text. 
+To make it have some secrets.
+Can have an key to turn something to jibberish.
+The host has the same key.
+One problem you notice here.
+If mr Bad guy notices the key he can decrypt the message.
+Key-ExChange algorithm.
+Make some key-exchange.
+
+Asymmetric Ecryption
+Uses two separate keys for encryption and decryption.
+The two forms key-pair.
+These two keys are linked.
+One-way relationship.
+Diffie Hellman Key Exchange.
+Share their respective keys with each other.
+
+Hashing
+Most uses symetric encryption to send.
+Someone can be in the middle and temper with the message.
+To solve this you use hashning.
+One way the hash-function it encrypt that spits out jibberish.
+HMX must contain an mac-address.
+
+Passwords Or SSH?
+1.Diffie-Hellman Key Exchange
+2.Arrive at Symmertric Key
+3.Make sure of no funny busniess
+4.Authenticate User
+The server must check the sender.
+We wanna make sure he or she be able to communicate.
+Make sure.
+Two-ways to authenticate to the server.
+Digital-ocean email me.
+It is not recommended to use passwords to communicate.
+
+SSH Into A Server
+Use RSA.
+Go into an Folder that should be up.
+ssh-keygen -C to generate an key.
+This public key you can share with someone else.
+pbcopy to share the key.
+mkdir .ssh ls directory.
+Copy the public key.
+Add your key.
+
+Exercise: Set Up SSH on Github
+Setup the SSH to your Github.
+You go into settings and add your ssh keys.
+
+Section Summary
