@@ -1,1 +1,257 @@
-aaaa
+Bruno's Request
+Finally start working with the project.
+The performance is really slow.
+Your are an performance Ninja right.
+
+Introduction to Performance
+Internets speed vary very much.
+All big companies wants fasts website.
+Lose many searches per day.
+Client and a Server.
+You make an request to the server.
+I have an style sheet.
+We also have an image that we need.
+How can we think about performance.
+We want to improve our website.
+
+3 Keys To Performance
+-What happens to the client-side
+-Improve the transfer to client
+-Improve the processing on the backend
+Infinite ways to optimize your website.
+
+Front-End
+-Critical Render Pat
+-Optimized Code
+-Progressive Web App
+
+Transfer
+-Minimize Files
+-Minimize Delivery
+
+Back-End
+-CDNs
+-Caching
+-Load Balancing
+-DB Scaling
+-GZIP
+
+Network Performance
+End of the many phsyical things.
+Everytime we open a computer we must send files.
+Everytime we type in google is a miracle.
+
+-Honey I shrunk the files.
+How do you reduce the files.
+
+-*Minimize Text
+Uglify.js takes away spaces removing spaces.
+Part of an build process.
+
+-*Minimize Images
+
+
+-The traveling deliveryman.
+
+Image File Formats
+Minimizing images are more complex.
+Primary way to change the size of the file is to change the format.
+
+-SVG:Vector graphics used often for graphics designers.
+-JPG:Used for photos and does not allows transparency.
+-GIF:Everybody knows gif limits the color you can use.
+-PNG:Limited the number of color, used for logos.
+You want to choose the right format to compress them.
+
+Image Optimizations
+-If you want transparency: use a PNG
+-If you want animations: use a GIF
+-If you want colorful images: use a JPG
+-If you want simple icons like, icons, logos,illustrutations: use a SVG
+-Reduce PNG with TinyPNG
+-Reduce JPG with JPEG-optimizer
+-If you want transparency: use a PNG
+-Try to choose simple illustrations over highly detailed photographs
+-Always lower JPEG image quality(30-60%)
+-Resize image based on size it will be displayed
+-Display different sized images for different backgrounds
+-Use CDNs like imigx
+-Remove image metadata
+
+Reduce some images with some tools.
+JPEG-OPTIMIZER
+Set the compression level.
+Optimize photo.
+Tiny-JPG.
+Without losing any quality.
+Be concesius about images you choose.
+Chop the image down.
+Adjust the size on the image.
+
+Image Optimizations 2
+In the world there different sizes on the screen.
+Why would we like to send large background.
+Media-queries when you want to apply different.
+@media screen has different screens.
+Using css you can make different sizes.
+Simple index-file.
+Simple syntax.
+Max-widths.
+Dependlty on the size of the widths the image is showing.
+Media queries controls the things with changes on different screens.
+When we are going to the elements.
+Anytime the we change the screen it also changes the elements tags.
+Browser is smart enough to know what it needs to download.
+image-xs takes care of the images for you.
+Give us all the images and upload it on our websites.
+They take care of optimize it.
+Remove photos-metatags.
+When you take a picture you get infos with EXIF.
+
+Delivery Optimizations 
+More fundamental principes.
+Reduce the number of http requests.
+Less trips.
+We only send files that we are needing.
+Not only necessary.
+Simplified query-selectors.
+Find libraries that are light-weight.
+Just less files.
+Can't we make the postman take everything at the same time.
+Combine files into one.
+Review.
+We make request from the server.
+We can minimize the files.
+We can reduce the files.
+
+Exercise:#2-Network Optimizations
+A fun little exercise can't we do make some advance stuff.
+Every video is an lego block.
+Hang in there.
+Minimize files.
+Enjoy using chrome.
+
+
+Solution:#2-Network Optimizations
+
+Critical Render Path Introduction
+The HTML files arrives.
+We explore under the hood.
+We request the website.
+1.HTML file arrives.
+2.Creates the DOM,
+3.DOM describes the content of the page.
+4.Asks for the CSS file.
+5.DOM generates a CSS tree.
+6.See a Javascript-tag and also to read the javascript-file.
+7.DOM combines the HTML and CCS tree and creates the render-tree.
+8.Figure the Layout and paint the pixels.
+Critical Render Path
+1.DOM
+2.CSSOM
+3.Render Tree
+4.Layout
+5.Paint
+
+Critical Render Path 1
+Starts streaming to the page.
+Parsing the Document Object Model.
+Images files takes low priority.
+Load CSS files so soon as possible.
+And then later JavaScript files.
+Script blocks the rendering.
+Have the script tags at the bottom html document.
+Style-tags above.
+
+Critical Render Path 2
+CSSA is render blocking.
+Make it render-blocking.
+We can easily add more with thousands line long.
+We only have one style-sheet.
+Only load what is needs.
+See whats is above.
+Using an script-tag we can easily do it.
+if(document.createStylesheet){
+	document.createStyleSheet(src){
+
+	}else{
+	const stylesheet = document.createElement('link');
+	stylesheet.href = src;
+	stylesheet.type = 'text/css';
+	stylesheet.,rel = 'stylesheet';
+	document.getElementByTagName('head')[0].appendChild(stylesheet);
+	}
+}
+
+Incorparated with window.onload = function(){
+	console.log('window done!');
+	loadStyleSheet('./style3.css');
+}
+window.onload(./style-sheet-3)
+Less specificity don't use it so much when you are designing css-classes.
+Have an good and a bad.
+More information sent the more bytes are sent.
+
+Critical Render Path 3
+Talk about JavaScript.
+JavaScript is the worse.
+The JavaScript cannot be executed before HTML and CSS is constucted.
+JavaScript is called parserblocking.
+Two new attributes to add to the Script-tag
+
+-async
+When i'am working on the HTML-parsing the JavaScript file downloading on a low priority.
+Add them to anything that dosen't effect the DOM or CSSA.
+If the core functionality requires Javascript async is the best.
+
+-defer
+It will not blocking the page.
+Wait until the HTML-parsing is finished.
+If it dosen't require core functionality requires Javascript defer is the best.
+
+-Minimize the DOM-manipulations
+Inline script-tag.
+JavaScript gets executed before the render tree.
+
+Critical Render Path 4
+We build the render tree.
+The browser figures out the layout.
+JavaScript keep going with Render Tree -> Layout -> Paint.
+
+Exercise #4-Keiko Corp Website
+Good website.
+Lets put the website to the test.
+We have some optimizations to do.
+PageSpeed.com is great to check the website.
+www.webpagetest.org.
+
+Solution: Keiko Corp Website
+Check the style-sheet.
+Some files you can minimize.
+Do really we need all the CSS files.
+See so much scripts-tag.
+Move down all the scripts-tags down.
+Scrools-to.
+Combine all scripts-files to one file.
+Add an style-tag.
+Have some style.
+Load CSS after the page loads.
+Minimize the DOM-manipulations.
+You don't need JQuery website.
+
+HTTP/2
+It is a protocol update.
+How fast we can deliver pages.
+Bundle the files with an bundle.
+Server requests is faster.
+Many files sent to it.
+Widely adopted to it.
+
+Section Summary
+Wow look on this website it is really fast.
+Stay sharp.
+Zero users you are wasting your time.
+Looking on the picture.
+
+
+

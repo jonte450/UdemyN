@@ -1,0 +1,137 @@
+Bruno's Request
+Robofriends App needs really a upgrade.
+Take an lead.
+
+Section Overview
+Websites has become more and more complicated.
+This is all powered up by javascript.
+How do we manage this by bigger teams.
+Massive codebases.
+Tools like React+Redux helps create code that contains less bugs.
+
+Angular vs React vs Vue
+The state of web-development.
+This the top frame-works to build the webpages.
+There is no shortage of the articles.
+These are just tools.
+Each one of them is perfect for each usecase.
+You need to be able to adapt.
+Look at them and pick the tools for each problem.
+If i was working for a large bank i should pick Angular.
+Specific ways to doing things.
+I would pick React with a strong developer theme that has flexibility.
+I would pick Vue if we want to write a code in a friendly way.
+React is an clear winner in terms of jobwinner.
+Reason i teach React in this course.
+React teach you good Javascript priniciples.
+Angular: As an kitchen.
+React: As an oven to add different tools.
+Vue:Less complicated as Angular and React.
+
+CWD: Introduction To React.js
+It is getting more fun.
+Development gets faster.
+What did we have before React.
+Jquery created a lot of onconstiency.
+Hard for teams to manage it.
+Created React to solve this.
+Analogy as an bread machine.
+Does all the magic under the hood.
+Does a thing really well.
+Make the DOM to change the view change.
+You can build many things.
+Many companies uses React.
+Thinking in components.
+Would it be nice if we had components.
+Combine these Lego blocks to build the website.
+Think in components
+-Atoms
+-Molecules
+-Organisms
+-Templates
+-Pages
+Reuse the Components.
+One-way data flow.
+Look on the tree liked sturcture.
+Everyone has children.
+Only the children knows about the changes.
+Creates really bug-free code.
+Virtual Dom. 
+Minimize the DOM manipulations.
+Beforehand we was the painter.
+With React we have the React-Bot.
+The JavaScript Object describes the website.
+Helps to paint the picture.
+Virtual DOM is just an copy of the DOM.
+React has an great ECO-system.
+
+
+CWD: CRA Growing Pains
+
+CWD: create-react-app
+
+CWD: create-react-app 2
+
+CWD: create-react-app 3
+
+Quick Note: Class vs Functional App.js
+
+CWD: Code From Previous video
+
+CWD: Your First React Component
+
+CWD: Building A React App 1
+
+React.Fragment and Semantic HTML
+
+CWD: Building A React App 2
+
+CWD: Building A React App 3
+
+CWD: Building A React App 4
+
+CWD: Building A React App 5
+
+CWD: Building A React App 6
+
+CWD: Keeping Your Project Up To Date
+
+CWD: React Review
+
+CWD: Error Boundary in React
+
+CWD: Deploying Our React App
+
+Introduction To Redux And Webpack
+
+State Management
+
+Why Redux?
+
+Installing Redux
+
+Redux Actions And Reducers
+
+Redux Store And Provider
+
+Redux Connect
+
+Redux Middleware
+
+Redux Async Actions
+
+Redux Project Structures
+
+Popular Tools For React + Redux
+
+Module Bundlers
+
+Introduction To Webpack
+
+Webpack 4
+
+Updating Libraries: Babel 7 + ESlint
+
+Parcel
+
+Section Summary

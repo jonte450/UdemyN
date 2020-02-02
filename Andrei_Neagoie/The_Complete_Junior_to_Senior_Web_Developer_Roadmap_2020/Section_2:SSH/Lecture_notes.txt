@@ -108,3 +108,8 @@ Setup the SSH to your Github.
 You go into settings and add your ssh keys.
 
 Section Summary
+Share a secret to make it able to talk with each other.
+No funny bussniess.
+Two things.
+With password or SSH-keys allows to proves that you can communicate
+securitely.
