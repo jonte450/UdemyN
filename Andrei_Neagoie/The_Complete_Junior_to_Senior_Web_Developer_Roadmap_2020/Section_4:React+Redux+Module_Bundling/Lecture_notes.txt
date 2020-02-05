@@ -65,73 +65,584 @@ Helps to paint the picture.
 Virtual DOM is just an copy of the DOM.
 React has an great ECO-system.
 
-
-CWD: CRA Growing Pains
-
 CWD: create-react-app
+We need to install React.
+React is so common.
+Create-React-App contains Babel.
+Creates the intrastructure.
+We get a ton of modules.
+All the dependicies.
+Run two commands.
+gitignore helps us to ignore files.
+We don't care about testing and a couple another things.
+We also have an public folder.
+src folder have all the magic.
+The app is saying that this is a component.
+The final thing is showing.
 
 CWD: create-react-app 2
+A newer version that have a new more features.
+Keep things updated.
+Make you experince better.
+Really changes is an new front-page.
+How can this be more useful.
+You can easily change the version in json.package.
+Latest react version.
+Really big updates can break the computer.
 
 CWD: create-react-app 3
+A easier way to create-react app.
+NPX is package runner tool.
+cd into the project.
 
 Quick Note: Class vs Functional App.js
-
-CWD: Code From Previous video
+Few minor changes.
+If we goes to the src folder.
+Service worker.
+We don't use the serviceworker.
+Notice a big change.
+We have nice looking logo.
+Do an class App extends React.Component.
+Use the class component to begin to learn React.
 
 CWD: Your First React Component
+We are going to build our first Component.
+Import other packages.
+React or React DOM.
+React can be used in multiple places.
+Depending on the screen of what you render.
+React is a view gallery.
+React allows to add CSS to each component.
+./ means the same dicrectories.
+Think serviceworkers as.
+ReactDom.render is making things to render.
+Why can we use the HTML-tag.
+We have a few files.
+A component has a rule it most rendering things.
+We create our components that we can easy can add.
+Creating Components.
+Create an new .js file called.
+Shows us where the errors are in the browsers.
+One rule always have a render function.
+Return Hello World.
+We have to export things.
+We need to wrap things in brackets to render multiple lines.
+Show a cool package called Tachyons.
+Must write className instead of class.
+JSX allow you to write HTML in your javascript.
+Separations of concerns.
+Reacts idea is components are just concerned about themselves.
+Virtual DOM changes.
+Virtual DOM creates a fake DOM
+Ohh this part has changed i must change this too.
+class is a reserved keyword in Javascript.
+You can add props to your react component props={props}.
+This.props.greetings.
+We just create functions and render things.
+props.attribut.
 
 CWD: Building A React App 1
+To gets started we must think on components.
+If we can build one card-component so can we build more.
+Delete things we don't need.
+We just have some things left.
+Creating an Card Component.
+Import it from Card.js.
+Make sure you are using Babel.
+Building the function.
+It has an div-tag.
+Has an img=src.
+Jane Doe.
+Error React must be in scope when you are using JSX.
+We need an image.
+For people that don't have an API.
+Make sure that the size is small.
+What if i want have multiple cards.
+className = 'bg-light-green grow shadows'.
+We don't want static we want to have dynamic.
+Using an array of robot users.
+You must use {} for the sake of JSX.
+You can use destructring.
 
 React.Fragment and Semantic HTML
+Use Fragment-tag instead of div-tag.
 
 CWD: Building A React App 2
+If you are looking on RobotsFriend.js it is useless to use severall things
+Create an cardlist Component for render Cards.
+It should return the cards.
+CardList is expecting the RobotsList.
+Export CardList.
+We import Cards to CardList.
+We wanna loop over the robots and create each card.
+We use map.
+We use javascript to return things really fast.
+We must give an unique key to the render things.
+React makes you a really good JavaScript programmer.
 
 CWD: Building A React App 3
+We need a title and a SecrchBox.
+App will be the father of all components.
+In the app creates an header.
+We create a serachbox component.
+Returns an input.
+Good idea to wrap everything in a div.
+className with background.
+How can we make it interactive.
+The chidren needs to send the information to the parent and the parent needs to tell the children what to do.
+To do this React has something called state.
+These components is called pure functions.
+Really nice we always knows how it looks like.
+State is simple an object that describes the application.
+State is able to change.
+Able to change whats is gonna be displayed.
+As soon the child component recieves it able to change.
+State: robots: robots, searchField: ''.
+States is things that can change.
+We have two values.
+onsearchChange onChange event.
+With an event we have an target.
+Have my App component.
+Have the value of the searchInput.
+const filteredRobots = this.state.robots.filter(robots => 
+                       return robots.name.toLowerCase().includes(searchfield.toLowerCase()));
+
+Arrow functions make use of the enviroment.
+
+CWD: Styling Your React App
+Got up and running quickly.
+Using Linear Gradient.
+CuFonts add different fonts and download. 
 
 CWD: Building A React App 4
+We would like to use an API to grab things in a server.
+They have an URL.
+Make the App more realistic.
+App.state has a state make we call the smart components.
+A piece of state and we call them a smart component.
+Comes with some other Components called LifeCycleHooks.
+Automatically trigger when a app gets loaded on the website.
+Check every some functions.
+Called LifeCycleHooks.
+Put them into to your class.
+We want to use componentDidMount().
+Putting this.setState under ComponentDidMount().
+Why did render() run again.
+Because we updated the state it runs render() again.
+fetch command to get a list of users.
+Fetch is part of the window object.
+Is a tool to make requests to the server.
+If something is really slow you must return something else with if statements.
 
 CWD: Building A React App 5
+One issue.
+When i scroll down i loses the searchbar.
+You can create components that are reusable.
+Create a component called scroll.
+Dosen't make sense to return something.
+Render whatever what is inside you.
+Children.
+return props.children.
+Props.children is just something everything in react has.
+We can create components that wrap others component.
+JavaScript description.
 
 CWD: Building A React App 6
+Add one final thing.
+We need a way to organize things.
+Make it cleaner.
+Containings components.
+npm build creates an file that is optimized.
 
 CWD: Keeping Your Project Up To Date
+Maybe you are sharing the object with others developers.
+How to update the project.
+Quite a lot of vunerabilities.
+Somethings may be breaking our app.
+You may use an older version of your modules.
+npm updates check the version of your upgrades.
+React version 17 seven-teen.
+NPM audit fix --force to force all the updates and change.
+Update all the updates to React DOM.
+Push up it to Github after fixing security issues.
+Simply update the packages.
 
 CWD: React Review
+Things getting a bit more overwhelming.
+There is one-way data flow.
+It is a container component.
+Triggering an event by the parent.
+Elegant solution to build websites.
 
 CWD: Error Boundary in React
+Let's add a new more tool to React.
+If there a error in a component.
+Class with error-boundary.
+Constructor with super.
+Props this.state = {hasError:false}.
+Wrap a cardlist within the component ErrorBoundary.
+How we be able to change the hasError.
+componentDidCatch() is going to be called.
 
 CWD: Deploying Our React App
+You should be able to put the RobotFriends on your website.
+You can use Github pages.
+Homepage:robotfriends...
+npm install --save-dev gh-pages.
+Add two lines predeploy and deploy in package.json.
+Scroll all the way down to github-pages.
 
 Introduction To Redux And Webpack
+Two main bottle-necks.
+Minimize the DOM-minimization.
+How to build an simple JavaScript.
+Be smart with the rendering in javascript.
+Learn little about webpack.
+Talking about Redux.
+Keiko-corp want to add Redux.
+Why we want to learn Redux.
+Talking about state-management.
 
 State Management
+Before we learning about Redux.
+We heard about berfore.
+State describes how our app looks like.
+React is just a group of components.
+Each of these components has a state.
+Anytime a change happens we update it.
+Think on a state like a memory.
+Each time we show our state.
+The robotfriend has an state. 
+Robots Being filtered.
+States was pretty easy to understand.
+Seeing in the later part of the course that the states gets more and more complicated.
+Nice views better componments.
+What if we just remove all states and keep everything in a store.
+One single object in just big store.
+Any update that is happening.
 
 Why Redux?
+With any company they also have Redux.
+React and Redux go really well togheter.
+It all will make sense in the end.
+Really good to manage states.
+Redux solves the problem when React Apps gets really big.
+We use Redux when things gets bigger.
+Move the states up one layer.
+But with redux this gets easier.
+The 3 prinicples.
+-Single source of truth.
+-State is read only.
+-Changes using pure functions
+Recieves an input an gets the same output thousands time.
+-Actions: Something a user does.
+-Reducers: A functions that recieves from the user.
+-Store: Updates the variables.
+
+React makes changes after.
+Useful for sharing data.
+Flux-pattern
+-Action
+-Dispatcher
+-Store
+-View
+Having an action that dispatches to the store.
+And after that to the view.
+MVC we had before.
+-Action
+-Controller
+-Model
+-View
 
 Installing Redux
+We know how the RoboFriends works but we need to add the Redux to the app.
+npm install the packages.
+Everything running smothly.
+The very first thing is to install Redux.
+Gives us some tools.
+Some cool parts of the Redux package.
+You still writing JavaScript.
+Great concepts you are using in your career.
+We need to connect Redux to React.
+npm install react-redux.
+It will connects the container to the Redux-store.
+We install the Redux-package.
 
 Redux Actions And Reducers
+The first thing we wanna do is to create an reducer.
+An action and a reducers.
+setSerchfield = (text) => ({
+	type: 'CHANGE_SEARCH_FIELD',
+	payload: text
+})
+Payload we are sending whatever the users enters.
+Constants are usally capitilized.
+With just a string we got errors when we are running the app.
+Creating a new file.
+More and more actions we can keep adding things.
+We have an reducers that spits out the state.
+We create the reducers.
+Reducers first take in the state and after that the action.
+Initial state. 
+Actions is just objects.
+Return the new state.
 
 Redux Store And Provider
+Let's start connecting our Redux to React.
+Comes with nice and easy API.
+Using Provider and Connect.
+Create the Store in Redux.
+It is the source of all the truth.
+We can keep adding actions.
+Combine all the reducers to one reducers.
+We Redux we can remove all the Reducers.
+getState to get the statefield.
+There exist an suscribe function too.
+Use the Connect function.
+Created the yellow functions.
 
 Redux Connect
+Which one of these React Components we want to be smart.
+We call these smart components as App.js or containers.
+Use the connect-method.
+How it works.
+connect()(App);
+Connect is an higher-order function.
+Connect is going to return an higher-order function.
+Connect accepts two parameters mapToprops, mapToDispatch.
+What we need to tell to be intrested in.
+mapStateToProps returns an object.
+You have to get used.
+In order to send the action we needs the dispatch.
+onSearchChange is going to recieve an event.
+So that the reducers are aware of that.
+Remove some functions.
 
 Redux Middleware
+Lied a little bit.
+We have something called MiddleWare.
+We have a tunnel we can track the actions.
+We can install something called Redux-logger.
+The way we use it is like a trigger.
+npm install redux-logger.
+npm install create-logger.
+We can apply the logger function to the applymiddleware.
+We need to run the logger.
+The middleware catch the actions.
+Logger helps us work with the code better.
+The beauty with Redux makes it easier for us to monotoring our actions.
+We can listen to each login functions.
+We can go back in the time to check whats has run and not.
+Instead of having messy action.
+Redux makes us think us in a way so that flows into a predictable view.
+Managing all these people.
+Thinking in a flow diagram.
+Redux DevTools helps to log into.
 
 Redux Async Actions
+One final piece of the puzzle we want with Redux.
+We have an asynchronous request to setting the state.
+Everything we has done has been synchronous.
+We are sending an action.
+Reducers are going to check the reducers.
+How can we create Asycnhronous functions to make it go through the reducers.
+Able to handle Ajax calls.
+npm install redux-thunks.
+Redux-thunks is the best to start of it.
+thunkMiddleware from.
+We have our apply middleware function.
+We have the middleware implemented here.
+Create a constant.
+We have the robots Array.
+We need three states.
+-pending
+-success
+-failed
+Create the actions.
+Import these constants.
+Let's create these actions now.
+dispatch.
+Pass the dispatch.
+Within it very first thing is to dispatch the pending action.
+Next we have a fetch call.
+.then after we have two actions.
+type Request_robots_sucess.
+error is going to dispatch the failed constants.
+These actions is more complicated fetch the users.
+Either success or failed.
+We are going to create an new reducer function.
+We return some new states.
+Create some new states that are pending.
+We want to change the state ispending.
+Always with an reducers return state.
+Import the other reducers.
+combinereducers all the reducers to one reducer.
+Thunk-middleware is a tunnel that everything go throughs.
+We want to return a function has the dispatch method.
+Dispatch is going to work as long we use Redux-Thunk.
+The requests robots is returning a function.
+Actions is being triggered.
 
 Redux Project Structures
+This is a simple example.
+Building larger applications.
+Files gets larger with more methods.
+You are going to have multipe components.
+Having a smart searchfield.
+Each folder i going to have own.
+Components that is having each folders.
+Having a lot of fetch calls.
+Thinking in organize terms is a good way of doing things.
 
 Popular Tools For React + Redux
+Going through one video.
+React is only a view library.
+It has it owns local management.
+Simple library that helps build things.
+We first has react-routers.
+You utils library.
+Add functions to loadash.
+You wanna think like styling like glamorous,css modules.
+Gatsby.js really good for websites.
+Next.js popular for rendering server-side.
+We are able to build reusable components.
+Semantic UI.
+material-ui.
+Reselect helps with selectors.
+Redux-Saga as Redux-thunck but more complex and stronger.
+IMMUABLE.js enforce immutably.
 
 Module Bundlers
+We feel really comfortable with React and Redux.
+Tons of JavaScripts files that we can rendering.
+We need a bundler.
+Put all it to one or slice it apart.
+Things like bundlers helps us to combine things.
+Whenever we runs npm start.
+Let's couple of videos with bundling.
+-PARCEL: Zero configurations
+-webpack: Many configurations
+-rollup.js: With treeshaking
 
 Introduction To Webpack
+Something used under the hood to create react-app.
+Bundle the files and creates static assets.
+Four main ideas.
+-Entries: Where does webpack enters into the project.
+-Output: Where should webpack output the files.
+-Loaders: Are tools that transpiles to a different forms.
+-Plug-ins:Different sort of plugins
 
 Webpack 4
+Let's get to some exiting coding.
+Trying to build one.
+Make a simple project with webpack.
+npm init -y
+Open up the project.
+The whole single application is going to have html and js file.
+We can creating older mkdir dist.
+index.html.
+html.
+Entrypoint <div id="app"> </div>
+<script src="/bundle.js"><script>
+You use webpack to serve in local enviroment.
+We need webpack-cli.
+
+-webpack-dev-server
+-webpack-cli
+-webpack
+
+Configurations always change.
+Only understand why.
+Going to the start: "webpack-dev-server --config ./webpack.config.js --mode development"
+Some people needs some defaults.
+touch webpack.config.js
+We gonna add the webpack-configurations.
+module.exports = { 
+    entry: [./index.js],
+    output: {__dirname + '/dist',
+             publicPath:'/,
+             filename: "bundle.js"
+},
+devServer:{
+	contentBase: './dist'
+}
+}
+mkdir src
+console.log('webpack wizards!!').
+npm start compiled sucessfully.
+We also need something like Babel to transpile to ES5 or older versions.
+Spit out exact same code with Babel.
+Set up Babel.
+npm install --save-dev.
+We need something like Babel-core.
+We need something like Babel-loader.
+We need something like Babel-preset.
+Expremental features.
+Npm install --babel-preset-stage 2.
+Add an babel property to json.config.
+babel: {
+	presets: [env,
+	          stage-2,
+	          react]
+}
+npm install react-preset.
+Also use Babel to the webpack file.
+module:{
+	rules:[/\.(.js|jsx)$/,
+	exclude: /node_modules/,
+	use: ['babel-loader']]
+}
+
+resolve: {
+	extensions:[js,jsx]
+}
+npm install react-dom.
+Anytime we have an syntax error we can install esLint.
+Think it as spell checker.
+npm install --save-dev install eslint.
+We need ESLint loader.
+Now we can use it in ESLint.
+
+{
+	rules:[/\.(.js|jsx)$/,
+	exclude: /node_modules/,
+	use: ['eslint-loader']]
+}
+In the regex we don't need dots.
+create a .eslintrc.
+{	parser: "babel-eslint",
+	rules:{}
+	no-console: "warn"
+}
+You also need Babel-ESlint.
+npm install --save-dev eslint-config-airbnb esling-plugin-import eslint-plugin-jsx-ally.
+extends: [airbnb-base]
 
 Updating Libraries: Babel 7 + ESlint
+Libraries is constantly evolving.
+Upgrading things can break things.
+Two main changes.
+Babel-7 removed preset.
+preset-7.
 
 Parcel
+Figuration is really complex.
+I personally want this keep going.
+Quick demo how PARCEL works.
+npm install --save-dev parcel-bundle babel-preset.
+touch .babelrc
+{
+	prests: [env , react]
+}
+start: parcel index.html
+
 
 Section Summary
+Hey it is Bruno here i love the Redux thing.
+Keep track of what we just learn.
+We have React to manage states.
+Luckily for us Redux helps us to create a store.
+Why we just learn Redux.
+Understand the three principles.
+
