@@ -1,0 +1,156 @@
+Bruno's Request
+We want to have a better experience with our RobotApp.
+Sweet sweeters.
+We turn our APP progressive Web-App so it can run off-line.
+We use knowledge from previous sections to build the App.
+
+Section Overview
+We talk about performance.
+Front-End.
+Optimize code.
+Developers-overlook.
+Talk about progressive webApps.
+With increased mobil use in the world.
+And don't with best internet.
+Have it on google play store.
+Think critically.
+
+Optimizing Code
+Let's talk about code-optimizing.
+JavaScript is executing in the background.
+The time for the javascript engine to parse and read code.
+Performance-tag to record what is happening.
+Able to output what is happening on a time-period.
+Watch things what is going loaded on the page.
+Look in the summary tab.
+Waiting for the files to load.
+Scripting includes parses and compile.
+The yellow part it is taking most time.
+Culprints.
+JavaScript is big part of the loading.
+Makes delays.
+JavaScript execution is also taking too much time.
+We can block the execution with javascript.
+Webpagetest hit start.
+Once it is done.
+Main takeaway it's that JavaScript delays most.
+Angular 2 (Ahead-of-Time)
+Compile it and ship the tool.
+Pros and cons.
+Limiting the processing on the website.
+Triggering animations in scrolling
+But it also have to process everything.
+Putting a script-tag.
+Build on different mobile-devices.
+Keep an eye on javascript code.
+-Time to first meaningful paint.
+-Time to interactive.
+
+Code Splitting Introduction
+We need to delivering javascript.
+Modern websites ships many javascripts files.
+Sending it when user requests it.
+Problem getting bigger and more complex.
+Is no longer the case.
+Modern Apps benefits being in smaller chunks.
+With Code Splitting.
+As more resources arrives.
+Once the users visiting the Homepage the page can for example load About.
+We can create the vendor file.
+Production Build:
+$ npm run build
+It will build the react build.
+Able to log all of us actions.
+You make an simple if-statement.
+The App can do Lazy-Loading.
+
+Exercise: #1-Code Splitting
+
+Before changes
+File sizes after gzip:
+
+  39.85 KB  build/static/js/2.06d8d549.chunk.js
+  784 B     build/static/js/runtime-main.c808f878.js
+  634 B     build/static/js/main.eba5e589.chunk.js
+  547 B     build/static/css/main.d1b05096.chunk.css
+
+After changes
+File sizes after gzip:
+
+  39.84 KB (-2 B)  build/static/js/2.2e719fb3.chunk.js
+  784 B            build/static/js/runtime-main.c808f878.js
+  614 B (-20 B)    build/static/js/main.910fbe55.chunk.js
+  547 B            build/static/css/main.d1b05096.chunk.css
+
+Code Splitting Part 1
+Create-React-project code-splitting.
+Creating three Page components.
+Import the Logo.
+Creating Buttons in the components.
+Have something called routing.
+Only rendering when we are on Page 1 and so on.
+Creating an event called onRouteChange.
+Using arrow functions.
+Setstate on route changes.
+Exporting pages.
+Having some routing logic.
+If-statements to route the pages.
+Add some CSS to look better.
+Bundle.js take the longest time to load.
+Load the file whenever the user clicks on a page.
+
+Code Splitting Part 2
+Import keyword is usually top of the file.
+Dynamic import.
+Chaning the if-statements.
+return <this.state.component onRouteChange={this.onRouteChange}/>
+If the page is different page than page1 make some funny bussniess.
+if(route === page1)
+ this.setState({route:route})
+ else if(route === page2)
+ import('./components/Page2').then((Page2) => this.setState({route: route,component; Page2}));
+ Error on creating document.
+ Add page.default.
+ Takes away bytes.
+
+Code Splitting Part 3
+
+
+Code Splitting Part 4
+
+Exercise: #2-Code Splitting
+
+Solution: React.lazy() Code Splitting
+
+React Performance Optimizations
+
+React Performance Optimizations 2 
+
+Optimizing Code Review
+
+Progressive Web Apps
+
+Progressive Web Apps Examples
+
+PWA-HTTPS
+
+PWA-App Manifest
+
+PWA-Service Workers
+
+PWA-Final thoughts
+
+Exercise: #3-PWA
+
+Deploying Our React App
+
+Service Worker Updates
+
+Solution Part 1 -PWA
+
+Solution Part 2 -PWA
+
+Section Summary
+
+
+
