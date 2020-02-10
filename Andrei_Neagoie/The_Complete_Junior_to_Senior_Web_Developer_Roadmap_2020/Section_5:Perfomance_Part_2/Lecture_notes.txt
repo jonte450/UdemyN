@@ -114,9 +114,33 @@ if(route === page1)
  Takes away bytes.
 
 Code Splitting Part 3
-
+Cleaner way to do code splitting.
+Wrap it with an component.
+Create an asynch component.
+Create an new file called asynchcomponent.
+Create an higher-order-component that is component 
+that are returning an component.
+React-docs.
+It is going to need a component as a parameter.
+Calling the componentDidMount()
+With the await keyword.
+Set the state.
+render the component.
+return Component ?<Component {...this.props}/> : null;
+How can we use the this high-order component.
+Using AsyncComponent(()=> import('./components/Page2'));
+Takes a parameter that takes the component.
+Remove some code from onRouteChange().
+Always think of trade-off.
 
 Code Splitting Part 4
+Add an quick note about code-splitting.
+Splitting up the code in the routes.
+Component based on component-splitting.
+For example a little side-bar.
+Clicks on the button.
+Code Splitting vs Component-Splitting.
+React-Loadable.
 
 Exercise: #2-Code Splitting
 
