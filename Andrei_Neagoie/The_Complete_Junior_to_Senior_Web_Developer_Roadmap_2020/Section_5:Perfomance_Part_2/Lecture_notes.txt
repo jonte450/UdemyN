@@ -142,27 +142,284 @@ Clicks on the button.
 Code Splitting vs Component-Splitting.
 React-Loadable.
 
-Exercise: #2-Code Splitting
-
 Solution: React.lazy() Code Splitting
+import React, { Component , Suspense} from 'react';
+import './App.css';
+
+import Page1 from './Components/Page1';
+// Part 1 - No Code Splitting
+//import Page2 from './Components/Page2';
+//import Page3 from './Components/Page3';
+//Part 3 - Cleaner Code Splitting
+//import AsyncComponent from './AsyncComponent';
+//Part 4 - React.lazy
+const Page2Lazy = React.lazy(()=> import('./Components/Page2'))
+const Page3Lazy = React.lazy(()=> import('./Components/Page3'))
+
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      route: 'page1',
+      // Part 2 - Code Splitting - manual
+      // component: null
+    }
+  }
+  onRouteChange = (route) => {
+    // Part 1 - No Code Splitting
+    this.setState({ route: route });
+    // Part 2 - Code Splitting - manual
+    // if (route === 'page1') {
+    //   this.setState({ route: route })
+    // } else if (route === 'page2') {
+    //   import('./Components/Page2')
+    //     .then((Page2) => {
+    //       this.setState({ route: route, component: Page2.default })
+    //     })
+    //     .catch(err => {
+    //     });
+    // } else {
+    //   import('./Components/Page3')
+    //     .then((Page3) => {
+    //       this.setState({ route: route, component: Page3.default })
+    //     })
+    //     .catch(err => {
+    //       console.log(err)
+    //     });
+    // }
+  }
+  render() {
+    // Part 1 - No code splitting
+    //if (this.state.route === 'page1') {
+      //return <Page1 onRouteChange={this.onRouteChange} />
+    //} else if (this.state.route === 'page2') { 
+      //return <Page2 onRouteChange={this.onRouteChange} />
+    //} else {
+      //return <Page3 onRouteChange={this.onRouteChange} />
+    //}
+
+    // Part 2 - No Code Splitting - manual
+    // if (this.state.route === 'page1') {
+    //   return <Page1 onRouteChange={this.onRouteChange} />
+    // } else {
+    //   return <this.state.component onRouteChange={this.onRouteChange} />
+    // }
+
+    // Part 3 - Cleaner Code Splitting
+     //if (this.state.route === 'page1') {
+          //return <Page1 onRouteChange={this.onRouteChange} />
+     //} else if (this.state.route === 'page2') {
+     //  const AsyncPage2 = AsyncComponent(() => import("./Components/Page2"));
+      // return <AsyncPage2 onRouteChange={this.onRouteChange} />
+     //} else {
+       //const AsyncPage3 = AsyncComponent(() => import("./Components/Page3"));
+      // return <AsyncPage3 onRouteChange={this.onRouteChange} />
+     //}
+
+     //Part 4- React.Lazy
+
+      if (this.state.route === 'page1') {
+         return <Page1 onRouteChange={this.onRouteChange} />
+     } else if (this.state.route === 'page2') {
+
+       return (
+        <Suspense fallback={<div>Loading...</div>}>
+        <Page2Lazy onRouteChange={this.onRouteChange} />
+       </Suspense>
+       );
+
+     } else {
+
+
+       return (
+        <Suspense fallback={<div>Loading...</div>}>
+        <Page3Lazy onRouteChange={this.onRouteChange} />
+        </Suspense>
+        );
+
+     }
+
+  }
+}
+
+export default App;
 
 React Performance Optimizations
+A feature that has come out it is the performance tool.
+Open your developer tools.
+Using react_perf.
+Checking the CPU section.
+These components are updating.
+It is hogging the main thread because JavaScript is single thread.
+The reverse christmas tree.
+When it updates it will pass down the props.
+Reduce the connect components.
+Running on development tools.
+Test the bottlenecks.
+How can we help the process using redux.
+Top-level.
+Do you want to use connect on a deeper level.
+React Developer Code.
+All the children components.
+Shows all the children.
+React highlight updates.
+Showing whats is being rendred.
+Color is showing what is being rendred.
+Closer it is blue.
+Everytime you are doing some rendering.
+Seeing yellow or red is not being an bad thing.
+You wanna see how your app is being rendered.
 
 React Performance Optimizations 2 
+There few steps you can take if you discover unseccary components.
+Create an header component.
+Return the Header Component.
+Adding a console.log to find what is being rendered.
+Checking the logger.
+Removing the logger.
+You see that the header is rendered twice.
+Lifecyclecomponent.
+shouldComponentUpdate():If it returns true it will update the component otherwise false.
+shouldComponentUpdate(nextProps, nextState){
+	return false;
+}
+This makes the component not to updates.
+Should it gives us the power to control the updates.
+Copy the header.
+Doing more than h1-tag.
+CounterButton(){
+	constructor(){
+	super();
+	count in the state.
+	}
+}
+Create a function updateCount
+Import the counter button.
+Funny side-effects.
+States updates is not synchronous.
+Checking the nextProps and the nextState.
+nextProps is red.
+nextState is the countnumber.
+in shouldComponentUpdate 
+if(this.state.count !== nextState.count)
+  return true;
+  otherwise
+  return false;
+ Dumb components kinda like a cardcomponent.
+ React has an component called pure component.
+ PureComponents will only renders when the props are changed.
+ ShouldComponentUpdate also has performance issus.
+ One tool why did you update is a tool that tells you in
+ the console. 
 
 Optimizing Code Review
+How do we optimize our code:
+Only load what's needed:
+-Code Splitting: Splitting up code to be load up.
+-Tree Shaking: Removes unsued code.
+
+1.Avoid blocking main thread: Minimizing JavaScript.
+2.Avoid Memory Leaks: Don't keep adding memory to the App.
+3.Avoid Multiple re-rendering: Avoid numbers of rendering and DOM.
 
 Progressive Web Apps
+What is an progressive web app.
+Let's the user interact.
+Inside a browser window.
+An native app is on smartphones.
+Are a new technology makes similar experinces.
+Native apps-have all the user needs.
+Unlike the web-apps.
+The only thing you can do with ordinary webapps is that bookmark.
+Native-apps are build to work offline.
+With Native-apps has access to the phones hardware.
+Mobile apps works nicer.
+You can now make webapps work like native apps.
+Think as webapps and behaves like native apps.
+Update directly.
+The same App going to run on several different browsers.
+What's the goal it is to make better user expericnes and faster website.
+Getting more and more powers with websites.
+Different companies has different views on this.
+Facebook has react-native.
+Constant battle with this.
+It's ehance the websites.
+Create-react-apps helps us with this.
+Google has created an plug-in called light-house.
 
 Progressive Web Apps Examples
+Companies like twitter has converted to PWA.
+Tons of companies are going to PWA.
+pokedx.org that shows pokemon info.
+If you turn out the wifi the site still works.
+Hacker News a playground to rebuild the hacker news.
+We have an simple.
+Appears shows mobileusers.
+You can add to your desktop.
+Three most importing parts to build PWA.
+-HTTPS
+-App Manifest
+-Service Worker
 
 PWA-HTTPS
+PWA has a certain checklist.
+Checklist looks completely overwhelming.
+HTTPS prevents bad actors from communication.
+We can encrypt it with the help of HTTPS.
+Google is pushing for HTTPS.
+Chrome will show not secure.
+Not all websites can be hosted on github.
+Let's Encrypt helps with that.
+Let's Encrypt gives you easy certificates.
+Cloudflare is another CDN.
 
 PWA-App Manifest
+To make it behave like an native app.
+Idea to make the webapps undistingsble.
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+Helps adjusting the file screen.
+App Manifest file gets free from react.
+manifest.json.
+Defines how the is going to look and work.
+Missing some things like icons.
+realfavicongenerator provide an image.
+Include them in the public folder and manifest them in 
+manifest.json.
+What is an splash screen.
+Splash add an background color.
+Loading with background color.
+Loading shows some background.
 
 PWA-Service Workers
+What is a Service Worker.
+It is a script the browser runs in the background.
+As another worker that works in the background.
+This is the reason that we can make the app work offline.
+Allows user experience.
+Created the file registerServiceWorker
+Checks for service-workers in the browser.
+isServiceWorkersReady.
+When we do navigator.
+If it is an Service-Worker you want to register it.
+Make the install.
+It is going to be in one of two states, terminated or fetching something.
+Check on the Application on Dev-Tools.
+Without the service workers.
+When the browser sends it must speak with the service worker.
+Service workers acts like an proxy.
+The Service worker going to try contact Web API: Cache Api.
+Cache storage of files of javascript and html.
+We cach the Web.
+Download sw-precach.
 
 PWA-Final thoughts
+Have great goal to make the website faster.
+It is not the best for safari.
+Things like push notifications is not supported by all browsers.
+Similiar so possible.
+Not get caught with the hype.
+Depends on the situation.
 
 Exercise: #3-PWA
 
