@@ -421,17 +421,45 @@ Similiar so possible.
 Not get caught with the hype.
 Depends on the situation.
 
-Exercise: #3-PWA
-
-Deploying Our React App
-
 Service Worker Updates
+We have the extremly long name.
+Things has changed when you creates an new create-app.
+We have serviceWorker.unregistred().
+We dont register the service worker.
+Copy the import statement.
+import serviceworker from ./serviceWorker;
+Changed unregister to register.
 
 Solution Part 1 -PWA
+Lighthouse is giving resources directly.
+Of what you can do.
+For example accessibility open.
+Add aria-lable='Search Robots'.
+SEO document dosen't have an meta description.
+Add content to the meta-tag in index.html.
+Check the images with Serve images sizes.
+We give an query parameter size=200x200.
+Things are looking better after changes.
 
 Solution Part 2 -PWA
+We have caching and service workers.
+Go to chache storage in applications.
+And we can see in the service workers that is working.
+We don't have so much in the manifest file.
+The manifest dosen't have icon files in 192 px and 512 px.
+We can generate in realfavicongenerator website.
+And add some link-tags in the index.html.
+Go to the manifest.json and add files.
+The name by the generated favicongenerator.
+website with tools for testing optimizing below
+www.progressivetooling.com
 
 Section Summary
+I love this PWA from Bruno.
+Code optimizing only loading what we need.
+Tree shaking to avoid unecessary code.
+Talking about progressive webaps.
+Deliver websites with service workers.
 
 
 

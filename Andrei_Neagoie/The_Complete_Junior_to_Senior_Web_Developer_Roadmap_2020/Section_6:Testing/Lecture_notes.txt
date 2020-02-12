@@ -1,0 +1,166 @@
+Bruno's Request
+We haven't really writing any tests for Robotfriends.
+In this section we are gonna learn about tools.
+Why that we needs that.
+Future we can avoid bugs.
+
+Section Overview
+Testing is really importance in programming.
+Files worked under different persons in the company.
+Complexity of the code makes it harder and harder to fix.
+You creating new bugs with your new features.
+Almost growing your product.
+Creating a monster for the company.
+Individuals of the source code is working properly.
+When i first started as developer i didn't know so much about testing.
+Master the written test skill.
+Its a file that you run.
+We are going to unpack to see which tools we need.
+TDD test driven.
+
+Types of Tests
+-Unit Tests
+Most common and easiest to implement.
+Test function and classes indiviually.
+Cheapest and easiest to implement.
+
+-Integration Tests
+Test different pieces of code work togheter.
+How a function works with another function.
+
+-Automation Tests
+Live simulation for example on the browser.
+Expected behavior on the web is correct.
+Programically make code runs through this.
+
+Testing Libraries
+Talk about all the tools we can run our tests.
+Maybe if-statements that test.
+We want use existent tools.
+Need a testing library.
+Make some function calls.
+-Jasmine
+-Jest
+-Mocha
+
+Insertion library
+-Jasmine has it's own.
+-Jest has it's own.
+-Chai paired with moccha.
+Tools to test the expected values.
+BDD
+Expect this library to not have this property.
+
+Testrunner
+Allows to run our tests.
+-Jasmine includes.
+-Jest includes.
+-Mocha includes.
+-Karma allows to run test in the browser.
+You run different test in different enviroments.
+Puppeteer headless browser to control a headless brows.
+Can be configured to do different cool things.
+JSDOM is a fake DOM that you can make to DOM tests.
+
+-Mock
+Faking a function to test different parts.
+
+-Spies
+Provide information about functions.
+
+-Stubbs
+Replace functions with functions to see if different part is working.
+Sinon can fake a server to make an test.
+
+Code-coverage.
+That shows with class or compents covers tests.
+Also has header.js.
+Istanbul giving us rapports what is missing tests.
+
+Once you know one it is getting easier.
+Jest has overtaken Jasmine.
+Mocha comabined Chai and Sinon.js.
+Two things that are unique to React.
+-Snapshot
+-Enzyme  
+
+Unit Tests
+Unit should cover all small pure functions.
+Pure function is a function that dosen't has any side effects.
+React components is allmost a pure functions.
+Unit tests are very good.
+Dosen't test contract.
+Contract between database or a another function.
+Write it test separately.
+
+Integration Tests
+All about communtication.
+Spies and effected side-effects.
+Stubs to mock and modify specified in a test.
+Return a fake user.
+Integration tests has different integration.
+To see connecte componentes to test connections.
+Also has much of moving parts.
+Fragile and harder to write.
+Hard to say if 100% writing is done.
+
+Automation Testing
+End to end testing.
+Are UI tests that is running in a browser enviroment.
+To make sure that is working in enviroment.
+In a ideal world we have automation world we have everywhere.
+Hardest to write because it is really difficult.
+-Nightwatch
+-Webdriver
+-Cypress 
+-TestCafe
+Usually in bigger companies.
+You want to test the entire process.
+Hire people to do automation testing.
+Creating two different procees
+1.Unit tests and integration tests.
+2.Automation tests.
+
+Final Note On Testing
+Unified picture of testing.
+App.js 
+App.test.js is meant for development.
+Saving this with --save-dev
+Jest running in the background.
+Read the tests and run the tests.
+
+Setting Up Jest
+
+Our First Tests
+
+Writing Tests
+
+Asynchronous Tests
+
+Asynchronous Tests 2
+
+Mocks and Spies
+
+Introduction To Enzyme
+
+Snapshot Testing
+
+Snapshot Testing + Code Coverage
+
+Testing Stateful Components
+
+Quick Recap
+
+Testing Connected Components
+
+Testing Connected Components 2
+
+Testing Reducers
+
+Testing Actions
+
+Section Summary
+
+
+
+
