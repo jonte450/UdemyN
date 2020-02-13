@@ -130,22 +130,215 @@ Jest running in the background.
 Read the tests and run the tests.
 
 Setting Up Jest
+Jest has great documentation.
+Create a project foler called test.
+Create a script js file.
+npm install jest.
+Usually npm install --save-dev jest.
+set test:jest in scripts file.
+Make an Google request.
+const googleDatabase = [
+'cats.com',
+'soups.com',
+'animales.com',
+'catpicturs.com',
+'myfavoritecats.com'
+];
+
+const googleSearch = (searchInput) => {
+	const matches = googleDatabase.filter(website => {
+	return website.includes(searchInput);
+	})
+	return matches.length > 3 ? matches.slice(0,3) : matches;
+}
+
+googleSearch('soup') for example.
+Add another website www.myfavoritecats2.com.
+Thats is fun but how can we test this.
+Jest automatically looks for a file that contains __test__.
+One way it function it('this is a test', function).
 
 Our First Tests
+Write a test for the googlesearch function.
+module export = googleSearchTests.
+Test the function in the it function.
+"test" : "jest --watch *.js" everytime we make changes 
+jest is gonna run the tests.
+Have the tests running constantly.
+Now when we have the googleSearch function.
+You wanna mock an database you wanna fake it.
+dbMock = [
+'dog.com',
+'cheesepuff.com',
+'disney.com',
+'dogpictures.com'
+ ];
+ GoogleSearch dosen't have access to the database.
+ You want the functions shall be pure.
+ Have the database injected to the googleSearch.
+ We wanna assert that it expects what it shall do.
+ Expect keyword.
+ expect('hello').toBe('noooo').
+ Using this logic to see the expected value.
+ it('is a silly test',() => {
+ expect(googleSearch('testtest',dbmock)
+        .toEqual([]))
+ })
 
 Writing Tests
+With tests the more you more better.
+More tests to cover more scenarios.
+It's okay to repeat itself when it comming to tests.
+Check for undefined value.
 
-Asynchronous Tests
+it('work with undefined and null input', () => {
+	expect(googleSearch(undefined,dbmock)
+        .toEqual([]))
+    expect(googleSearch(null,dbmock)
+        .toEqual([]))
+})
+
+it('does not return more than 3 matches', () => {
+	expect(googleSearch('.com',dbmock).length
+        .toEqual(3))
+})
+
+If your tests pass it doesn't mean that it is right.
+We have a function we run our tests in.
+We can group tests that are similar in a function
+describe('googleSearch' () =>{)
+All the written tests
+}
+
+Asynchronous Tests 
+Create another script with harder functions to test.
+Asynchronous test is harder to write.
+We test call that is Asycnhronous.
+SWAPI.
+Request multiple things.
+fetch in node won't work.
+npm install node-fetch.
+const fetch = require('node-fetch').
+const getPeople = fetch => {
+	return fetch('https://swapi.co/api/people')
+	            .then(response => response.json())
+	  			.then(data => {
+	  			 return {
+	  			 count: data.count,
+	  			 results: data.results
+	  			 }
+	  			});
+}
+
+console.log(getPeople(fetch));
+Asynch await function.
+The first thing we are gonna do.
+Create an new file script2.test.js
+const fetch = require('node-fetch');
+const swapi = require('./script2');
+module export = {
+	getPeople,
+	getPeopleTest
+}
 
 Asynchronous Tests 2
+Writing some tests.
+
+const fetch = require('node-fetch');
+const swapi = require('./script');
+
+it('calls swapi to get people',() => {
+	swapi.getPeople(fetch).then(data => {
+	expect(data.count).toEqual(87)
+	})
+})
+
+We add another test.
+
+it('calls swapi to get people with a promise',() => {
+	swapi.getPeoplePromise(fetch).then(data => {
+	expect(data.count).toEqual(87)
+	})
+})
+It looks by working.
+expect.assertions(1) that we want check.
+Promise is much slower because of the pending state.
+We can use done.
+Make done() to make it wait.
+Another way to make the function to wait.
+return the promise.
+Jest is smart enough to wait for the promise to be finished.
+Add another assertion.
+expect(data.result.length).toBegreatherThen(5).
+Use Jest Cheat Sheet
 
 Mocks and Spies
+These tests are fairly fine.
+More and more test with asynchronous tests it is going to take longer.
+How can we improve this.
+We can use mocks to let us to spy on a function.
+it(getPeople returns count and results , () => {
+	const mockFetch = jest.fn().mockReturnValue(Promise.resolve({
+	count: 87,
+	results: [0,1,2,3,4,5]
+	}))
+ 	expect.assertions(2);
+	return swapi.getPeoplePromisr(mockFetch).then(data => {
+	expect(mockfetch.mock.calls.length).toBe(1);
+	expect(mockfetch.toBeCallWith('https://swapi.co/api/people');
+	});
+
+})
 
 Introduction To Enzyme
+How about testing our React App.
+How do we test our React Component.
+Enzyme that is stable in AirBnb.
+Installing Enzyme.
+Take at look package.json.
+Enzyme adapater.
+All these libraries has documentation for libraries.
+import {configure} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({adapter: new Adapter()});
+How can we actually test our components.
+import {shallow, mount, render} from 'enzyme';
+From these we can render everthing we can check if they are returning a div-tag.
+90% of the time you want to use shallow.
+Makes everything easy and simple.
+Create a test file.
+console.log(shallow(<Card/>));
+Shallow renders the card component.
+Shallowly renders one component.
+It constrains yourself to only test a component at a time.
+This keeps your test clean.
+it('expect to render Card component', () => {
+	expect(shallow(<Card/>).length).toEqual(1)
+})
+Mount does a full render and mounts on the DOM.
+Render to a static html.
 
 Snapshot Testing
+One is the Enzyme library.
+Use whichever component.
+Snapshot testing.
+They are not using the class and it is stateless.
+A lot of a repeated work.
+Would it be great to take a snapshot and if it dosen't look 
+like the snapshot it will give errors.
+expect(shallow(<Card />).toMatchSnapshot());
+Creates an folder __snapshots__.
+You can make a simple change of an attribute and will make the test automatically failed.
+You can update the snapshot with u after Press w to show more.
+Covered 100% with a simple line.
+Write tests simple.
 
 Snapshot Testing + Code Coverage
+CardList is just Rendering undefined.
+In our test when we are rendering cards.
+Create an mock with dummy data.
+
 
 Testing Stateful Components
 
