@@ -338,11 +338,53 @@ Snapshot Testing + Code Coverage
 CardList is just Rendering undefined.
 In our test when we are rendering cards.
 Create an mock with dummy data.
-
+const mockRobots = [{
+	id: 1,
+	name: 'JohnJohn',
+	email: 'john@gmail.com'
+}];
+We got an error when something changes. 
 
 Testing Stateful Components
+Doing some more diffucult tests.
+We have states and more logic.
+We want to test the state function.
+Create a file counterButton.test.js
+Create an props called mockColor = 'red'.
+expect(shallow(<CounterButton color={mockColor}/>)).toMatchSnapshot();
+Create a second test.
+
+it('coorectly increaments the counter', () => {
+	const mockColor = 'red'
+	const wrapper = shallow(<CounterButton color={mockColor}/>);
+	wrapper.find('[id="counter"]').simulate('click');
+	wrapper.find('[id="counter"]').simulate('click');
+	expect(wrapper.state()).toEqual({count:3});
+	wrapper.find('[id="counter"]').simulate('click');
+	expect(wrapper.state()).toEqual({count:4});
+    wrapper.find('[id="counter"]').simulate('keypress');
+    expect(wrapper.state()).toEqual({count:4});
+    expect(wrapper.props().color).toEqual('red');
+})
+Wrapper.find() where we find the id of the counter.
+Going into the counter button.
+And add the id.
+Now we can find the id and call simulate('events').
+Events can be like click or keypress.
+And we expect different states to be different after some events has happened.
+Remove the counter now i have two failed tests.
+We weren't able to find the id after we removed the id counter from the CounterButton Component.
+Using your time wisely.
+You are going to push your snapshot to your github if a another developer comes.
 
 Quick Recap
+We are going through the slides.
+We have Jest that comes with insertion librabry.
+Jest comes with an test runner.
+We have mocking functions that we can use.
+We could mock the functions.
+We could code-coverage over we have tests and were we don't
+Anytime use an DOM-API or JS-DOM.
 
 Testing Connected Components
 
