@@ -1,0 +1,44 @@
+Bruno's Request
+
+
+Section Overview
+
+Dynamic vs Static Typing
+
+Weakly vs Strongly Typed
+
+Static Typing In JavaScript
+
+TypeScript Compiler
+
+TypeScript 
+
+TypeScript 2
+
+TypeScript 3
+
+TypeScript 4
+
+TypeScript 5
+
+TypeScript 6
+
+TypeScript 7
+
+TypeScript 8
+
+TypeScript 9
+
+TypeScript 10
+
+DefinitelyTyped
+
+Update: Create React App with TypeScript
+
+Exercise:#1-TypeScript In Robofriends
+
+Solution:#1-TypeScript In Robofriends
+
+A Little Joke
+
+Section Summary

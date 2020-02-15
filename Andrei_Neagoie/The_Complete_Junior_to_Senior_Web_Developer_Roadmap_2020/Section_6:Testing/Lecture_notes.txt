@@ -386,16 +386,174 @@ We could mock the functions.
 We could code-coverage over we have tests and were we don't
 Anytime use an DOM-API or JS-DOM.
 
-Testing Connected Components
+Testing Connected Component
+Create a new file App.test.js.
+Error an Invariant violation.
+You can test with mock store.
+Our store is not just a emoty object.
+We had several methods.
+Means we have to mock everything.
+You has tools for doing this for us.
+There exist an NPM package called mock-store.
+It is not rendering the APP.
+Testing the Connect APP.
+How can i make the component simpler.
+Do two things.
+Connect to the store.
+And rendering many things.
+Move the stuff to another Component called MainPage.js
+Let's make the APP.js to be connected.
+Copy the entire file.
+Remove some stuff from the MainPage.js.
+Create MainPage.css file.
+We don't have the connect anymore in MainPage.js.
+In Render in App.js remove and just add MainPage component.
+App.js component just became an small file.
+Moved away all the logic to the MainPage.
+Make your test easy.
+Return from the render function.
+Problem with the SEGA font.
+Now we have the MainPage that we can access easier.
+Create an Wrapper in MainPage.test.js
+beforeEach() test function makes something runs before each tests.
+wrapper = shallow(<MainPage { ...mockProps}/>)
+And this mainpage can just recieve this props.
+Test Snapshot.
+Filters the robots correctly.
+Expect wrapper.
+Make the function more cleaner.
+Instance will make possible to access all the methods of MainPage.
 
 Testing Connected Components 2
+Start see things that are cleanup.
+Check if we expect the filteredRobots props.
+We have SnapShot testing also.
+And we can check code-coverage.
+Testing that cardcomponent is rendering.
 
 Testing Reducers
+Our reduecers are easy to test because they are pure functions.
+import *as reducers from './reducers';
+Create an describe block.
+Create an file called reducers.test.js
+expect(reducers.searchRobot(undefined,{})).toEqual({searchField: ''}).
+When we see an new searchField is going to get the state
+We are going to write this 
+
+it('should handle CHANGE_SEARCHFIELD', () => {
+	expect(reducers.searchRobots(initialStateSearch, {
+	type: type.CHANGE_SEARCHFIELD,
+	payload: 'abc'
+	})).toEqual({
+	searchField: 'abc'
+	}))
+})
+
+With reducers we give it some input and expect some output.
+And we can keep going forever.
+
+describe('requestRobots', () => {
+	const initialStateRobots = {
+	 robots: [],
+	 isPending: true
+	}
+
+it('should return the initial state', () => {
+	expect(reducers.requestRobots(undefined, {})).toEqual(initialStateRobots)
+})
+
+it('should handle REQUEST_ROBOTS_PENDING action', () => {
+	expect(reducers.requestRobots(initialStateRobots,{
+	type: REQUEST_ROBOTS_PENDING}).toEqual({
+	robots:[]
+	isPending:true
+	})
+})
+})
+
+it('should handle REQUEST_ROBOTS_SUCCESS action', () => {
+	expect(reducers.requestRobots(initialStateRobots,{
+	type: REQUEST_ROBOTS_SUCCESS
+	payload: }).toEqual({
+	robots:[{
+	id: '123',
+	name: 'test',
+	email: 'test@gmail.com'
+	}],
+	isPending:false
+	})
+})
+})
+Change isPending to false.
+You copy much code and the code is easy to writing.
+
 
 Testing Actions
+But why not test Constants.
+It is just strings.
+Try to avoid rabbit hole.
+Not specially smart to write tests.
+You have to decide for yourself the trade-of.
+import * as actions from 'actions';
+
+it('should create an action to search robots', () => {
+	const text = 'woo',
+	const expectedAction = {
+	type: CHANGE_SEARCHFIELD,
+	payload: text
+	}
+	expect(actions.setSearchField(text)).toEqual(expectedAction)
+})
+Diffucult to test RequestRobots and we need the thunk for this testing.
+
+it('handles requesting robots API', () => {
+    const expectedAction = {
+    type: REQUEST_ROBOTS_PENDING,
+    }
+	expect(actions.requestRobots)).toEqual(expectedAction)
+})
+TypeError: dispatch is not a function.
+There is a special package that we can use.
+Redux-mock-store gives us an fake store we can use for testing.
+import configureStore from 'redux-mock-store';
+import thunkMiddleware from 'redux-thunk';
+const mockstore = configureMockStore([thunkMiddleware]).
+Now we can create the store and run it.
+And now get the actions.
+it('handles requesting robots API', () => {
+	const store = mockStore();
+	store.dispatch(actions.requestRobots());
+	const actions = store.getActions();
+    const expectedAction = {
+    type: REQUEST_ROBOTS_PENDING,
+    }
+	expect(actions.requestRobots)).toEqual(expectedAction)
+})
+
+Redux-thunk expects an function.
+Run the function within dispatch.
+We got an anoymous function.
+Actions is returning an array.
+expect(action[0]).toEqual(expectedAction).
+All we did was to create an fake store.
+Two things that are great for Async Testings.
+-nock
+-Supertest
 
 Section Summary
 
-
+Bruno is pleased with the work.
+Keiko Corp is happy.
+We are not Junior Developers to testing.
+-Unit test are the easiest to write.
+Learned all the tools that are available.
+Also learned it is not neccessary to have complete code-coverage.
+React has enzyme and snapshot to test.
+As the code grows code lines increases.
+What are the key tests.
+Make the tests readable for other developers.
+Do the tests before you write code.
+-Good Quality
+-Write code in small testable units
 
 
