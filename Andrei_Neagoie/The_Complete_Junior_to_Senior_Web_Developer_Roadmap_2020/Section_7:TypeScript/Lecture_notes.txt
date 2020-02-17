@@ -1,41 +1,290 @@
 Bruno's Request
-
+I have been impressed by your work.
+It is not time for to give TypeScript for minimize bugs.
 
 Section Overview
+Whatever we should add the typescript to our project.
 
 Dynamic vs Static Typing
+There are a ton of programming languages.
+Node.js we can use JavaScript outside the web.
+If we would catergorisize all the programming languages.
+It should look like this below.
+Dynamic Weak
+-Pearl
+-VB
+-PHP
+-JavaScript
+
+Static Weak
+-C
+-C++
+
+Static Strong
+-C#
+-Java 
+-Scala
+-Haskell
+
+Dynamic Strong
+-Erlang
+-Clojure
+-Python
+-Groovy
+-Ruby
+
+But what does dynamically and statically really mean.
+var a = 100
+Dynamically typed languages lets us skip to write which type it should be.
+int a;
+a = 100;
+
+With statically languages we must declare types
+but not in dynamically.
+Type checking is checked in run-time in dynamically languages.
+JavaScript get runned in the browser.
+Why Dynamically is not the best practice.
+Focus on pros and cons.
+
+Statically Typed Language
+
+Pros
+-Documentation Prints Errors for types
+-AutoCompletion before you run this it should be this type
+-Less Bugs We catch the bugs in production
+
+Cons
+-Harder to read adding an extra layer
+-Writing tests 
+-Slower development process create and run codes
+
+Dynamic allows us to be more flexible.
+
 
 Weakly vs Strongly Typed
+JavaScript is Weakly typed.
+var a = "booooya"M
+a+17
+I will turn it to an string.
+boooya17;
+Python will think we are crazy and threw an error.
+Checking these out.
+How can we add typescript to make JavaScript type safe.
 
 Static Typing In JavaScript
+We can many things that are like typescript.
+
+-Flow
+Is able types to our JavaScript and send it to Babel.
+Is static type checker.
+@flow comes prebuilt to create-react-app.
+
+-Elm
+Just like Reason Ml.
+
+-Reason ML
+Easy for JavaScript programmers to pick it up.
+Reason is completely it's own language.
+
+-TypeScript
+Differs from flow. Has its own compiler.
+Is a superset of JavaScript.
+Adds extra features to JavaScript.
+
+They all try to make JavaScript Static.
+Growth of TypeScript outweighs all the other Type checker.
+Once you learn it is easy to pick up another.
+Why is Angular a fan of TypeScript.
+TypeScript adds an extra layer of safe with more code.
+When your project grows larger and larger to avoid bugs add TypeScript.
 
 TypeScript Compiler
+Recommend their documentation.
+We must install node on our computer.
+Why do we need Node for our TypeScript.
+TypeScript Compiler needs an enviroment to run in.
+Now we are able to run TypeScript in the terminal.
 
-TypeScript 
+TypeScript
+How to use the compiler.
+Have dot.js on the end to declare an file.
+All we have to create an TypeScript File just add ts on the end.Plug-in gives an nice Symbol.
+Install packages in sublime.
+Write an simple line in typescript.
+function sum(a, b) => {
+	return a + b;
+}
+tsc typescript.se.
+TypeScript detects the errors.
+An typescript js file was created.
+Does Babel transpile code.
+Let's run.
+Compiling down code to ES5 code.
+Compiling down to someting Browser understands.
+const sum = ( a: number, b:number) => {
+	return a + b;
+}
+The compiler removes number parameter.
+Then sum(4+5); => gives errors.
+Then sum('hello',5); => Gives an assign errors.
+TypeScript catches errors on productions.
+Less errorprone.
 
 TypeScript 2
+We can have the TypeScript running automatically.
+tsc --init creates an config file.
+target: 'ES2017'.
+Tons of options for the compiler.
+Config file explains everything we can do.
+tsc typescript.ts --watch.
+Everytime you change it are going to save and compile automatically.
 
 TypeScript 3
+Different types that comes with TypesScript.
+let isCool: boolean = 'true';
+TypesScript gives an nice highlighting.
+let age: number = 56;
+//string
+let eyeColor: string = 'brown';
+let favouriteQuote: string = 'Im not old, i'm only ${age}';
+Arrays
+let pets: string[] = ['cat','dog','pig'].
+let pets2: Array<string> = ['lion','dragon','lizard'].
+let wizard: Object = {
+	a: 'John'
+} 
+let meh: undefined = undefined;
+let noo: null = null;
+Typescript gives extra features.
 
 TypeScript 4
+Tuples a new type.
+TypeScript allows us to use them.
+let basket: [string,number];
+basket = ['basketball',5]
+basket = [5,'basketball'] will throw an error.
+enum Size {Small = 1, Medium = 2, Large = 3}
+let sizeName: string = Size[2];
+Throws no error but gives funky outputs in js file.
+With Enum you can have different Datastructures to organize your datastructure.
+let sizeName: number = Size.Small;
+You must write numbers.
+Size small is now equal to 1.
+Enum allows to assigns name to constants.
+Create distinct classes.
 
 TypeScript 5
+A type that is not recommend to be using.
+Any-type
+let whatever: any = 'aghhhhhhh noooo';
+whatever = 5;
+whatever = basket;
+What's the type of Any.
+Working to convert JavaScript to TypeScript.
+void is right common when working with functions.
+Add void for nothing to return.
+void gives an nice errors.
+let error = (): never => {
+	throw Error('ooops');
+}
+Never test two things:
+-Functions never returns.
+-A variable under a type-guard is never true.
 
 TypeScript 6
+Interface can be really used with Objects.
+
+interface RobotArmy {
+	count: number,
+	type:  string,
+	magic: string
+}
+let fightRobotArmy2 = (robots: {count: number, type:string, type:string}) {
+	console.log('FIGHT!');
+}
+It's going to have an count,string,magic properties.
+We are creating an interface to make sure that certain objects has certain properties.
+In React Interfaces we are gonna see this a lot.
 
 TypeScript 7
+Type assertions.
+Hey compiler calm down this is the type i want.
+
+let dog = {} as CatArmy;
+Telling dog calm down trust me this is CatArmy.
+dog.count
+
+interface RobotArmy {
+	count: number,
+	type:  string,
+	magic?: string
+}
+Questions mark says this may or may not be part of the object.
+?
 
 TypeScript 8
+Functions and Classes.
+Can be quite similar to what we already done.
+
+let fightRobotsArmy3 = (robot: RobotArmy): void => {
+	console.log('FIGHT!')
+}
+This will not return anything because of void.
+Extra layer of complexity.
+
+We have an animal class.
+
+class Animal{
+	sing: string;
+	constructor(sound:string) {
+	this.sing = sound;
+	}
+	greet(){
+	return 'Hello ${this.sing}'
+	}
+}
+
+let lion = new Animal('RAAAWWWR')
+console.log(lion.greet());
+TypeScript will react to the private keyword.
+If you tries to access it.
 
 TypeScript 9
+Union type is for example.
+let confused: string | number | boolean = true
 
 TypeScript 10
+Type inferences is smart enough yeah you mean an number.
+let x: number = 4
+x = 'hello'
+TypeScript is gonna remark when you first set a type a number 
+and then changes it to hello and react to that.
 
 DefinitelyTyped
+Third party Libraries and how they react to TypeScript.
+TypeScript allows declarations.
+You can add files to tell TypeScript hey i use these files.
+@types/react makes it understandable that we are using react.
+We has all te types available for us.
+Using Defintely Typed.
+Learn new types that library have.
 
 Update: Create React App with TypeScript
+Convert our Robofriends to TypeScript.
+We are able to add TypeScript to our robofriends.
+npx create-react-app filename --typescript.
+Rename index.js to index.tsx.
+Notice an tsconfig.json added to our project.
 
 Exercise:#1-TypeScript In Robofriends
+We are always confrontend about task that hasen't a real 
+solution.
+You go along with the exercise out with it.
+So now here we have the robofriends-typeScript.
+We also allow JSX to React.
+TypeScript needs to understand JSX.
+There also something called TSXLint to make sure that our code is pretty.
+Add TypeScript for components and functions in RobotFriends.
 
 Solution:#1-TypeScript In Robofriends
 
