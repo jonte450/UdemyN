@@ -1,0 +1,33 @@
+Bruno's Request
+How's your weekend.
+We think of Server-Side Rendering.
+It is time for another task at hand.
+We are gonna dive in Server-side render vs Client-Side Rendering.
+
+Section Overview
+
+CSR vs SSR
+
+Server Side Rendering React
+
+CSR vs SSR Part 2
+
+SSR React Libraries
+
+Setting Up Next.js
+
+Client Side Routing 
+
+Exercise: #1 - Client Side vs Server Side Routing
+
+Shared Components
+
+Dynamic Apps with Next.js
+
+Updating To Latest Version Of Next.js
+
+Exercise: #2-SSR Robotfriends
+
+Understand JavaScript SEO
+
+Section Summary

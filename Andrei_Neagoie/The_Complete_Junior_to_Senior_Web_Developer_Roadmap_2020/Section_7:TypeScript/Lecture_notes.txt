@@ -287,7 +287,58 @@ There also something called TSXLint to make sure that our code is pretty.
 Add TypeScript for components and functions in RobotFriends.
 
 Solution:#1-TypeScript In Robofriends
+Came by default.
+document.getElementByID('root') as HTMLElement.
+Start with CardList.
+Receving the Robots List.
+import {IRobot} from './containers/App';
+const CardList = ({robots}: {robots: Array<IRobot})
+We gonna have an Interface with Array<IRobot>.
+interface CardStateLessProps {
+	name:string,
+	email:string,
+	id:number
+}
+
+const Card React.SFC
+In the react index.d.ts file with different types.
+Check the Scroll Component.
+type Props = {
+	children: JSX.Element
+}
+JSX is the syntax we use with React.
+And then just add
+const Scroll = (props: Props) =>.
+Special things that happens with the SearchBox component.
+
+What is SearchChange.
+It is just an event that dosen't return anything.
+This will take an event.
+React has its owns implemented events.
+SyntheticEvent is gonna to be an Html-input element.
+And it's going to return void.
+
+
+interface ISearch {
+  searchChange(event: React.SyntheticEvent<HTMLInputElement>): void  
+}
+const SearchBox = ({ searchChange }: ISearch) => {
+Giving the constructor the IAppprops.
+Change the input for the onSearchChange.
+JSX.Element.
 
 A Little Joke
+Lauging at a programming joke.
+Java is a strongly typed langaunge.
 
 Section Summary
+Really Apricited the programming language.
+Okay we finished another section in the course.
+TypeScript reduces bugs in the production.
+We should not automatically include it.
+It promesing a new feature.
+What is the goals and your times.
+Keiko Corp benefits of unit-tests.
+Frustrates something new developers.
+TypeScript is not the best decision.
+To understand how an tool can benefit you.
