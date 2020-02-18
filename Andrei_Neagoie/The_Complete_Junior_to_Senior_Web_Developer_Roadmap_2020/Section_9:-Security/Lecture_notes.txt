@@ -1,0 +1,37 @@
+Bruno's Request
+
+Section Overview
+
+Star of Security
+
+Injections
+
+Exercise:#1-Injections
+
+Exercise:#2-Security Files
+
+3rd Party Libraries
+
+Logging
+
+HTTPS Everywhere
+
+XSS + CSRF
+
+Exercise:#3- XSS + CSRF
+
+Code Secrets
+
+Secure Headers
+
+Access Control
+
+Data Management
+
+Don't trust Anyone
+
+Authentication
+
+Exercise:#4-Optional Hacking
+
+Section Summary

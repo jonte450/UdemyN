@@ -5,14 +5,149 @@ It is time for another task at hand.
 We are gonna dive in Server-side render vs Client-Side Rendering.
 
 Section Overview
+Initially Web-pages is displayed in different fashions.
+Anchor-tag to link pages togheter.
+If you click on the About page a request is send to the Server.
+Check how web-sites used to be.
+Every time you switch link.
+Life was good.
+By using Server Side Render.
+Rendered and sent it to the Client.
+Most Webpages was just displayed web-pages.
+Didn't mattered if it was the just same Web-page.
+JavaScript came along and did complex things.
+Navigating in webpages is being done in JavaScript.
+Single Web-applications became used more.
+Popularized by frameworks.
+Because of updating just part of the webpages.
+Older wordpress websites.
+Client-side is the future.
+Too much of one thing is not good.
+Two major issues with single-page application.
+-More JavaScript is send to the client.Longer and then execute.
+-SEO performance a lot harder to do on single-web-page applications.
+
+When to one thing over the other.
+New HTML-files generated.
+We make another on another requests.
+Server-Side Rendering worked great at the time.
+A little to do with interactivity.
+Navigating between links.
+Play around with the pages.
+Web-Sites is more like application.
 
 CSR vs SSR
+From simple text websites we are shipping more and more JavaScript.
+We had the div-page.
+We are shipping more and more JavaScript.
+We had only one simple element.
+With Client-Side Rendering you get a back-bone.
+Server response with a fully loaded page.
+We first request the HTML-page.
+Once the HTML file arrives we notice the JavaScript file.
+We then wait for the js file to be evaluated.
+Once the page becomes interactiv.
+Your are rendering through the browser.
+Load content.
+This is much faster.
+We can just rerender our page.
+With Client-side rendering you.
+With Server Side Rendering.
+Render on the initial request.
+Our Server respondes with a full rendered page.
+To the user.
+Pros and cons with everything.
+Can we make RobotFriends to Server-Side Rendering.
+ServerSide Rendering makes the user get the webpage faster.
+Pros and cons for everything.
 
 Server Side Rendering React
+Check the other course.
+const app = express();
+app.use(express.static('/public'));
+Use the express.static says that we wanna serve static files using express static middleware.
+We are gonna use the public folder.
+React.createElement(App);
+Create an React Element from React.
+app.get('/',(request,response)) => {
+	response.render('index',{
+	content: RenderToString(RobofriendsApp({data: robots}))
+	});
+}
+We are using a method called RenderToString()
+That is a special package that comes from react-dom/server.
+Hey just render the robotfriendsapp and conert it into a string.
+Everytime we send through the wire we must use string.
+We are giving it some data {data: robots}.
+We pass it down as props.
+const robots = JSON.parse(fs.readFileSync('/public/robot.json','utf8'));
+All we are doing is convert our react App to string to send
+it over the wire.
+We can send HTML and make the page-load faster.
+We need React both on the Server and the Browser.
+We are using
+-ReactDOMServer.renderToNodeStream()
+-ReactDOMServer.renderToString()
+Convert the React App to a string.
+And send it to the server.
+-ReactDOM.hydrate()
+Like calling the RenderMethod in components.
+React are going to perserve the markup.
+Attach event-listeners.
+Once it is rendering.
+
+Make webpages that dosen't work with JavaScript.
+We need React to build the DOM.
+Actually run render to string.
+These are two main prinicples on rendering.
 
 CSR vs SSR Part 2
+Getting rendering in the browser.
+Getting a very tiny HTML document with a JavaScript file.
+
+CSR
+
+Because of the server dosen't have to render.
+The server responds much faster.
+Faster Web-experience with CSR.
+We work with this daily.
+
+Pros
+-Rich Interactions
+-Faster Response
+-Web Applications
+
+Have diffuclt to work with SEO.
+Has description look.
+Google-bots has difficult times with it.
+Work with these bots.
+Hotell-Company an Server-Side my be better for them.
+
+Cons
+-Low SEO potential
+-Longer initial load
+
+SSR
+
+Server-side is good for SEO.
+Content is ranked high.
+Static sites that are not so dynamic.
+And look very nice.
+Appears a little bit faster.
+If our App is really big it can take longer times for loading parts of the site.
+With added complexity is now going to make the server-side rendering work more time.
+
+Pros
+-Static Sites
+-SEO
+-Initial Page Load
+
+Cons
+-Full Page Reloads
+-Slower page rendering # Requests to the Server
 
 SSR React Libraries
+
 
 Setting Up Next.js
 
