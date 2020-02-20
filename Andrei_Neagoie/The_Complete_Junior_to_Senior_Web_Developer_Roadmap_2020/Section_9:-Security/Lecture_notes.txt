@@ -1,10 +1,84 @@
 Bruno's Request
+Hey it is Bruno here.
+I had an meeting with an CEO and he had worries about Keiko Corp being hacked.
+It is time to update the security.
+-Data Breaches
+-Viruses
 
 Section Overview
+We all know that Security is important.
+Many are attacked by hackers.
+Is like playing defense in soccer.
+Defensemen in soccer.
+You trying to create something that is stable and secure.
+Senior developers knows this.
+Dosen't cost much-
+We have the responisbility to build secure apps.
+What are the 80% problems for the security.
 
 Star of Security
 
+Topics in this section.
+-Authentication
+-Don't trust Anyone
+-Data Management 
+-Access Control
+-Secure Headers
+-Code Secrets
+-XSS & CSRF
+-HTTPS Everywhere
+-Logging
+-3rd Party Libraries 
+-Injections
+
 Injections
+These are the most common attacks.
+If you are preventing agains Injections you are covering a very big part.
+Means to injecting code to another code.
+We are recieving code from another one.
+SQL-injections are the most famous one.
+PSequel.
+Two tables.
+Create Table sqlinjection.
+We have the email and the id coloumn.
+INSERT INTO sqlinjection (email) VALUES ('lol');
+INSERT INTO sqlinjection (email) VALUES ('', DROP TABLE sqlinjection; --);
+You can drop entire companies databases.
+Extremly dangerous.
+' or 1=1--.
+'; DROP TABLE users; -- 
+Does the password match and return the user database.
+Injections happens with user inputs.
+Starting an server.
+We are using userinput where we are sending to the backend with
+an post-request.
+What happens if add an script-tag with an alert('boom').
+They are not running at the time.
+Enter an image-tage for example.
+<img src='/' oneerror='alert('boom');/>
+What we has just done is to inject this to websites.
+How are preventing against it.
+var textnode = document.createTextNode(input);
+p.appendChild(textnode);
+Converting it to an pure text.
+Three main things to fix it
+
+-Sanitize input
+Make sure the user only enters the proper type.
+Using whitelist and blacklists.
+
+-Parametrics Queries
+Also called prepare statements.
+Think it off an function.
+function sqlSelect(name, email , id) {
+	if(name === number)
+}
+Object relational matters.
+Think it off like variables.
+
+-Knex.js or other ORMS
+We are able to give parameters.
+Knex.js takes cares of the parametes.
 
 Exercise:#1-Injections
 

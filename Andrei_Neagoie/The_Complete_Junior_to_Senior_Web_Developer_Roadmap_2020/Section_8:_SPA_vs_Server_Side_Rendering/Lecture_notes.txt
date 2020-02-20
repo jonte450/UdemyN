@@ -147,22 +147,198 @@ Cons
 -Slower page rendering # Requests to the Server
 
 SSR React Libraries
+SSR its not the perfect solution.
+It feel like to put a square block in a round hole.
+Uses these tool to set up things.
 
+-Gatsby.js
+Blazing fast site generator.
+If you want to uses static sites with server-side rendering.
+
+-Next.js 
+Unlike Gatsby full blown too to build applications.
+Dynamic applications.
+Set-up web-pack.
+Everything is included.
+Server-side rendering you use Next.js.
 
 Setting Up Next.js
+Installing Next.js.
+You are going to see why it is a so good tool.
+npm init -y.
+npm install next react react-dom
+We need these three packages.
+What Next.js provide for us.
+It includes routing so we go from page to page.
+"start": "next"
+Create an new folder.
+"next": "5.1.0".
+Does a tons of things under the hood.
+Go to local host folder.
+Create an folder called index.js.
+Create an index component.
+
+const Index = () => (
+	<div>
+		<h1>SSR Magican</h1>
+	</div>
+);
+export default Index.
+
+We didn't import the React Dom.
+All the repetitie things  you don't has to do it anymore.
+I am going render this.
+Next allow us to track errors.
+Open Page view Source.
+We also has a few things that comes up
+
+Next.js Pages
+Create an Component called About.
+
+const About = () => {
+	return(
+	<div>
+	<h1>About</h1>
+	<a href='./about.js'>About</a>
+	</div>
+	)
+}
+
+default export Index;
+I get a ton of stuff.
+And i click on About.
+Next provides an cool tool.
+import Link from 'next/link';
+We are gonna use Link-tag instead of a-tag.
+Quite difficult.
+You can wrap it into an Link-tag.
+<Link href='/'>
+<button> Back </button>
+</Link>
+<p> I was a magician once</p>
+It dosen't look so impressing.
+But with this you can use Server-side routing.
+
+How can we link these two pages togheter.
+
+Let's make the page a little bigger.
+We are gonna return another <div>.
 
 Client Side Routing 
+Add a quick note about Routing.
+You don't need to reresh the page every time.
+Routing is handling internally by the JavaScript.
+Handling the Routing with JavaScript.
+All the time the url changes.
+With client-side rendering.
+The entire page was reloaded.
+Only a part of the page is effected by the loading.
 
 Exercise: #1 - Client Side vs Server Side Routing
 
 Shared Components
+Let's add another component.
+Create an Component folder.
+It dosen't really matter.
+
+const Image = () => (
+	<img src='' />
+
+);
 
 Dynamic Apps with Next.js
+We could build blog.
+Apps are more complex than that.
+For example fetch data and render it on the page.
+How can we have Dynamic pages.
+With API get's initial props.
+And it will pass down the props.
+The cool thing is that we can do the API call on the server or the front-end.
+npm install isomorphic-unfetch.
+Create an new page.
+A file called Robots.js.
+
+import Link from 'next/link';
+import fetch from 'isomorphic-unfetch';
+
+const Robots = () => {
+	return {
+	 <div>
+	    <h1> Robots</h1>
+	    <Link href='/'>
+	    <button> Home </button>
+	    </Link>
+	    <div>Robots data</div>
+	    </div>
+
+	}
+}
+
+Create another link-tag to the Robots.js
+In the index.js.
+Now we have two buttons.
+Make it to About.
+Error unexpected token.
+We are using json.placeholder.
+Let's to load some data.
+As the name suggest before we load the Robot thing lets just first get some props.
+Now these props has the robots data.
+
+Robots.getInitialProps = async function(){
+	const res = await fetch('jsonplaceholder')
+	const data = await res.json();
+	return {
+	robots: data
+	}
+}
+
+Create an li-tag.
+See what's happening.
+If we would use some link.
+We can use some links-tags.
 
 Updating To Latest Version Of Next.js
+Next.js has something called now.
+Now makes things very easy.
+Check that out.
+
+Updating To Latest Version Of Next.js
+They are introducing create-next-app.
+npx is a command we have seen.
+That is all we have to do.
+The other change is that Next9 is already out.
+Clone an repistory.
+Command npm audit fix --force.
+npm update.
+Open it up in sublime.
+Install it with npm install next@latest.
+Check it out on local host.
+
 
 Exercise: #2-SSR Robotfriends
+???//TODO
 
 Understand JavaScript SEO
+Have some content that describes the site.
+Have meta-tags.
 
 Section Summary
+Another task has been done.
+Smart decision to done what.
+Server-side rendering is great for static-pages.
+Client-side is great for interactions.
+It had the drawback with longer initial loads.
+Wasted time with when html file arrives and then JS 
+arrives. And then it gets painted.
+
+Server-side Rendering
+HTML-Arrives uncanny valley.
+We can use progressively rendering.
+We can use something like code-splitting.
+
+Check the load line.
+Many companies uses this to make their sites fast.
+Aliexpress and flip-card.
+There always trade-offs.
+A tool called prerender.io.
+Many things you can use 
