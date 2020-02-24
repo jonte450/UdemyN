@@ -1,0 +1,137 @@
+Bruno's Request
+Hey there Bruno.
+People are getting frustrated with the local development.
+And that is slowing us down.
+We would really apricate if could use Docker instead.
+Docker has changed the entire landscape.
+
+Section Overview
+One problem we applications getting bigger and bigger.
+It becomes one big monster and make things hard to manage.
+Certain Operating System.
+Most often when we are running on different computers.
+We must be able to run it anywhere.
+Companies like Netflix and Amazon have their products composed.
+Monolithic App and we have microservices instead.
+Breaking down our App into smaller services.
+Each service may have their own requierments it can be a challenge to run on different services.
+Think about our previous section.
+How difficult it was to setting up things.
+We had to do many things.
+Would it be nice to just to setup things.
+Docker take care so everything runs everywhere.
+Docker helps us to take care of this.
+
+Docker Containers
+History lesson.
+Why was this tool built.
+Before we had docker we had virtual machines.
+Has a entire operating system.
+Like to have a computer on another computer.
+We had big things it took a few minutes to boot up.
+Docker came along and wrapped up the system.
+Anything you could install on a server we could use it for docker.
+Container is so small and thin.
+Container is much faster to run small single applications.
+They are just easy to grow and grow.
+Container orchestration and is managed by kubernetes.
+Make sure that it will run everywhere.
+Can be explained by a diagram.
+Host
+On top of the host is the containers.
+Something we create with Docker.
+Within an container we have an image.
+Within the Image we can have an node server.
+The enviroment is isolated from the whole server.
+Image has an writeable file-system.
+Docker executes the image that is in the container.
+The image thing sounds complicated.
+We have Docker Hub is kind like NPM.
+We can download images.
+I have different node versions on the docker hub.
+Using the image and it is going to create the container.
+Development setup we are going to create an docker-container.
+Bring in our Postgres.
+We can do it in just an single command.
+Modern companies has load balancer the distribute that to different API-servers that are just docker-containers.
+API connected to different databases.
+Having Docker helps us a lot.
+
+Installing Docker
+We have our documentation.
+Docker for mac and for windows.
+
+Dockerfile
+Let's go to the SmartBrain-API.
+What we need to do.
+Build an image-file.
+touch Dockerfile.
+This Dockerfile will be our image.
+In there we can include images.
+We check the node-version.
+
+In the Docker file below.
+
+Tells with image we want to run from the Docker Hub.
+FROM node:carbon
+
+Commands we want to run in the container CMD.
+
+CMD ["/bin/bash"] 
+
+Run the command.
+docker build -t superawesomecontainer .
+It runs faster the second time.
+It cache the image.
+docker run -it superawesomecontainer
+We are inside the container.
+Go into the bash-shell.
+You always want to check the container.
+Without the it we can go into the container.
+
+Docker Commands
+We had docker run and docker build.
+It was to go into the Container.
+We just have our node-version.
+We extend the container to have the server.
+Be nice to run in the background.
+docker run -it -d superawesomecontainer.
+docker ps we see all the containers that are currently running.
+docker exec -it hash bash.
+Let's us to get back to the container.
+docker stop containerid.
+Now we stopped it.
+
+Dockerfile 2
+We learned an new few docker commands.
+How can we run the smart-brain in the container.
+WORKDIR /usr/src/smart-brain-api;
+It is the working directory.
+When we go into the bash we will be in the WORKDIR.
+COPY ./ ./
+RUN npm install We want to run in this in the container.
+What is the difference between RUN and CMD.
+Run is what is called image built-step.
+CMD is executing by default when you are executing the image.
+Docker run-it superawesomecontainer.
+ls list all the packages now.
+Container dosen't know about the machine.
+We actually have to tell the container to expose. 
+docker run -it -p 3000:3000 superawesomecontainer.
+
+Docker-Compose 
+
+Docker-Compose 2 
+
+Docker-Compose 3
+
+Docker-Compose 4
+
+Docker-Compose 5
+
+Docker-Compose 6
+
+Docker-Compose 7
+
+Section Summary
+

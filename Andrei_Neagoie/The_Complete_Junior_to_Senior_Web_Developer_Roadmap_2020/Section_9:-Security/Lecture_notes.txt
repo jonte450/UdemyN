@@ -492,10 +492,28 @@ bcrypt.compare('soup',hash, function(err,res){
 });	
 
 Don't trust Anyone
-
+We can't expect that there good people evrywhere.
+And everything is gonna workout with our code.
+And we can't assume that everything is good.
+Write good.
+Allow my server to have access to some websites.
+Add a ratelimiter to limit the request to the server.
+How can you prevent bad actors.
 
 Authentication
+You maybe thinking logging and htps overlaps.
+Authentication means that the other person on the other side 
+says who they are.
+Authentication is a very important thing.
+We talk about token authentication and session authentication.
+Implementing good passwords.
+Perhaps signing into twitter.
 
 Exercise:#4-Optional Hacking
+Check it on the night!
 
 Section Summary
+I think the CEO is gonna like it with your security.
+Maybe you need an promotion now.
+One of my favorite topics.
+Often overlooked.

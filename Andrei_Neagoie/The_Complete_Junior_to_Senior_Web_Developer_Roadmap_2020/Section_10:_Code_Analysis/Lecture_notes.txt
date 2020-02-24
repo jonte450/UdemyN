@@ -1,0 +1,185 @@
+Bruno's Request
+Move to the new Flag-Ship project.
+It uses Machine Learning to detect faces.
+Blurring faces i think i need someone like you on the project.
+Can you make the project to detect more faces.
+
+Section Overview
+We are gonna talk about code analysis.
+Very rare that you building from scratch.
+Go grab the files and the codes.
+You must start analyze the code and keep building it.
+Adding more features.
+Adding Sections.
+Analyze the code base to continue working on the project.
+We can take an high level view how it is working.
+You are going to set up your client and server.
+You have to google around to resolve the errors.
+
+Setting Up Your Enviroment
+Let's begin with set up the smart-brain project.
+There is client application.
+Server is important.
+Just fork the project and you make your pull request from the forked project.
+Because we wanna two things it is good to have two terminals.
+One for the server and another one for the client-side.
+Begin with npm install.
+Put two windows togheter.
+JSON files to check dependencies.
+And to google it to begin with.
+So i have an idea what it is uses.
+Do the samething for the client-side.
+npm start.
+Test to create an account.
+400 bad-request.
+Looks like it is an connection error.
+We need an database to remeber these things.
+So let's us set up the database.
+db is using this knex.
+Check the knex package.
+Go to Github to check it up.
+Looks like we are able to create connect.
+knex.select(properties).from(table).
+Looks there is an connection here.
+host:127.0.0.1.
+We also see that there is a smart-brain database.
+Looks that we have to setup the database ourself.
+Try and connect to the datanase.
+Is the server running.
+So first you must run a database on your computer.
+Services start and stop your database.
+You have your login-table.
+What we had a different database.
+Connect to a database smartbrain1.
+createdb 'smartbrain1'.
+If you are going back you can create databases.
+Create usertables.
+CREATE TABLE users {
+	id serial PRIMARY KEY,
+	name VARCHAR(100),
+	email text UNIQUE NOT NULL,
+	entries BIGINT DEFAULT 0,
+	joined TIMESTAMP NOT NULL
+}
+
+Before we can assign we must say which types our database should have.
+
+Create loginTable.
+
+Create TABLE login (
+    id serial PRIMARY KEY,
+    hash varchar(100) NOT NULL,
+    email text UNIQUE NOT NULL
+    );
+
+Our app should work now.
+Are going to say smartbrain 1.
+Refresh the Database and a timestamp when
+i joined.
+We should be able to work with our App.
+Paste an image.
+Where is the face-detection.
+Bad request.
+Unable to work with API.
+We are using an API called Clarify.
+It is an API that return an response.
+You need an API key for this.
+Clarify is free.
+The best i can do is to search for the API-key.
+You should never show your API-key for other people.
+API-keys are very valuable.
+All you have to is to create an account.
+The API-keys are being generated.
+As a developer we are always thinking what is wrong and sometimes it is just a silly mistake.
+We don't won't to change so much for the code.
+Logically make sense this is not an URL.
+
+Exercise:#1-SmartBrain App
+Stuck???
+
+Optional: CWD-Installing PostgreSQL
+We can also run the Database on our computer.
+Once you understand relational database you can understand many other.
+We want to use a gui for databasese.
+It will be completely fast.
+Once you have this application installed.
+Use brew.
+Run these commands.
+In order for us to use postgreSql we must create an database.
+
+How To Analyze Code
+API-keys from the Team.
+Check the End-points.
+We have an server.js file.
+Look at the folders structure.
+Check the packages they are using.
+Cors to get access to servers.
+We have our controllers.
+We have an base express setup.
+Body-parser to be able to read from the JSON packages.
+Check the Endpoints.
+Make an API-call to the Clarify.
+We look at the Profile.
+We get the profile id.
+Returning the users.
+We also use the Users table.
+We don't have to learn too much about the code base.
+Which end-points are used.
+We have multiple folders.
+Check the components.
+Check the initial states about what the App information is going to look like.
+Ok this calculates the image.
+We have onroutechanges.
+They are loading up the navigation.
+They have the navigation.
+Immidiately we have little idea of what the App looks like.
+Everything you could do browse.
+The first the Programmer does is to critize the project.
+Happens a quite a lot.
+With the lack of the information you can't critize the project.
+The goal is to integrate the project and make it better.
+By the names you know what is which.
+Ok we are getting the data from Clarify API.
+If everything succeds and once we set the states.
+Always start with the big picture and narrow things down.
+
+
+Exercise:#2-Analyze Code
+
+Exercise:#3-Multiple Face Detection
+
+Solution:#3-Multiple Face Detection
+Move things around.
+Let's have a look.
+Hit detect.
+Description.
+Data may be things we may be intrested in.
+Let's go to calculate face detection.
+Let's see whats the response is returning.
+Get the image.
+Copy and paste open the console.
+We get input and output.
+Go to their documentation and see what we need.
+We notice that there are an array called regions that have more than one element.
+And we test with one face and notice that there are one when we add a picture with just one face.
+Perhaps we can loop over the clarifaiFace and return mutliple objects than just one object.
+Let's map over regions.
+Two items in the array.
+Because we are looping over we can move all the info into the 
+the map statement.
+Go over to display face box.
+Change box to boxes on a few places in the code.
+And we go to <FaceRecognition and see that it has the boxes as props.
+And change all the box to boxes in Facerecognition.
+We might perhaps doing that something is off.
+When we go into the boxes.
+Let's go back to our App.
+We make that we return multiple div-tags with boxes as props.
+Array should have key-props that are unique.
+Remeber:
+You want to find the simplest solution to the problem.
+Overcomplicating code, most of the time, is not the right 
+answer.
+
+Section Summary
+Hey there monsterman it are doing the monster app more intresting. Reading the code and stratigically think about the code. Most of the time we are entering big projects you start from the top and then after that you are looking at the code one by one.
