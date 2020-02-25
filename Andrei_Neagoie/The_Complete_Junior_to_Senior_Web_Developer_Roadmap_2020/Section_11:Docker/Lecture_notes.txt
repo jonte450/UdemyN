@@ -119,19 +119,140 @@ Container dosen't know about the machine.
 We actually have to tell the container to expose. 
 docker run -it -p 3000:3000 superawesomecontainer.
 
-Docker-Compose 
+Docker-Compose
+We learned how docker is created.
+We can use it for our Postgres.
+Orchesters the development.
+Bruno's request that we are running from on command without for us to set up a database.
+We are gonna use Docker Compose that contains
+-Redis
+-Database
+-API
+To combine database we create an docker-compose.yml file.
+version: '3.6'
+
+services:
+   smart-brain-api:
+      container_name: backend 
+      #image: node:8.11.1
+      build: ./
+      command: npm start
+      working_dir: /app
+      ports:
+        - "3000:3000"
+
+The way we run is docker-compose build.
+Our Docker Compose to create an service called smart-brain-api.
+docker-compose run smart-brain-api.
+Docker-compose run smart-brain-api.
+npm install morgan.
+const morgan = require('morgan').
+docker-compose down getting down.
+Bring down containers.
+docker-compose up --build.
+Bring up the containers.
+Docker-Compose builds our image instead of the container.
 
 Docker-Compose 2 
+Using the build.
+It maps the containers port to our port.
+Docker-compose run.
+Docker-compose run is not the most optional.
+Docker-compose up is more ideal to start several containers.
+Any time we add something to the we rebuild everything and rerun everything.
+We can add volumes:
+             - ./:/usr/src/smart-brain-api
+
+Container file-system is going to see the changes.
+Now it is listen to changes.
+Volumes is complex topic.
 
 Docker-Compose 3
+Quick commands.
+docker-compose down
+Bring down all the containers.
+Run docker-compose up.
+docker-compose exec smart-brain-api bash.
+Then i'am in the bash of the container.
 
 Docker-Compose 4
+Make sure that there is no containers that run.
+
+To add PostgresSql it is quite simple.
+We just add an new service in the docker-compose.yml
+postgres:
+     container_name: postgres
+     image: postgres
+     ports:
+       - "5432:5432"
+Cannot create container Postgresql in use.
+The name is already set.
+A more likely scenario it is a username and a password.
+We are going to use enviromental variable.
+POSTGRES_USER: Sally
+POSTGRES_PASSWORD: secret
+POSTGRES_DB: smart-brain-docker
+POSTGRES_HOST: postgres
+links:
+   -postgres
+
+Now we have all the enviromental variables.
+host : process.env.POSTGRES_HOST, 
+user : process.env.POSTGRES_USER,
+password : process.env.POSTGRES_PASSWORD,
+database : process.env.POSTGRES_DB 
+
+Now we have to restart the docker compose.
+Roll Sally dosen't exists.
+Thinking about it critically.
+We need to give the enviromental variables to the Postgre too.
+POSTGRES_URI: postgres://sally:secret@postgres:5432/smart-brain-docker
+Go to the server file.js and remove and this to the connection.
+connection: process.env.POSTGRES_URI.
 
 Docker-Compose 5
+Go to the Front-End and start with 
+npm-start.
+Create an new user.
+We are getting  an error now.
+Looking on the login.
+We need to create tables.
 
 Docker-Compose 6
+Reason is that keep developers dosen't have to create new tables with Docker.
+Following along.
+Created an PostgreFolder.
+We are gonna customize the docker.
+FROM postgres:10.3
+
+ADD /table/ /docker-entrypoint-initdb.d/tables/
+We want create our user and login tables.
+We create Table-folders.
+Good practice when you work with SQL is that you use transaction.
+If something fails don't create the user table.
+
+BEGIN TRANSACTION;
+
+COMMIT.
+
+We are creating two SQL files.
+deploy_schemas.sql.
+\i gonna to run the new file we create.
+\i /docker-entrypoint-initdb.d/tables/users.sql
+\i /docker-entrypoint-initdb.d/tables/login.sql
+Run these SQL commands.
+Now we have the tables.
+Create Database call.
+Anytime we wanna use an docker-file we want to build ./postgres.
 
 Docker-Compose 7
+Wouldn't be nice that there are some users we wanna test with.
+\i /docker-entrypoint-initdb.d/seed/seed.sql
+Create an new folder called Seed.
+BEGIN TRANSACTION
+
+Insert into users(name, email, entries, joined) values('Jessie','jessie@gmail.com',)
+COMMIT
 
 Section Summary
 

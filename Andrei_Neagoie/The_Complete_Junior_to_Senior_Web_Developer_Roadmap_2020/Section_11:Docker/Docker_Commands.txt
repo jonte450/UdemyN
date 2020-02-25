@@ -1,0 +1,7 @@
+sudo docker run -it -p 3000:3000 myfirstcontainer
+sudo docker build -t myfirstcontainer .
+sudo docker run -it -p 3000:3000 myfirstcontainer
+sudo docker run -it myfirstcontainer
+sudo docker run -it -d myfirstcontainer
+sudo docker ps
+sudo docker exec -it 367d62468749 bash
