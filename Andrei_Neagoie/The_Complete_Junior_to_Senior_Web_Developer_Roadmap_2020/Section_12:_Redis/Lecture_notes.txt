@@ -1,0 +1,18 @@
+Bruno's Request
+
+Section Overview
+
+Introduction To Databases
+
+Installing Redis
+
+Redis Commands
+
+Redis Data Types
+
+Redis Lists
+
+Redis Sets + Sorted Lists
+
+Section Summary
+

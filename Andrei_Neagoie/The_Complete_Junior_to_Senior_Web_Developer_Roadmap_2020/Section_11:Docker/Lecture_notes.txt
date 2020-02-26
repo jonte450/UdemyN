@@ -255,4 +255,16 @@ Insert into users(name, email, entries, joined) values('Jessie','jessie@gmail.co
 COMMIT
 
 Section Summary
+Everybody is so happy that they don't have to set up the database.
 
+Let's pause.
+We need to make sure that other services are installed in the right way.
+
+We wanna make sure it for the deployment
+We also use docker-compose.
+Now we are able to run from one single command.
+Orchestra our services.
+We did some fun thing with SQL.
+Without Docker each developer had to do much more work.
+With Docker we can keep duplicate them.
+Having each servers running in different locations.
