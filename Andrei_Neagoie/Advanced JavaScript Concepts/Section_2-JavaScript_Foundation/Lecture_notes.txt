@@ -1,0 +1,359 @@
+Section Overview
+I already know how JavaScript works.
+How does JavaScript execute.
+I want to build the foundation to build javascript.
+More importantly you know more than people in the industry.
+Learn about writing optimized code.
+Node.js how it fit in.
+Higher and higher level concepts.
+Little bit of coding.
+
+Javascript Engine
+Has heard of the v8 Engine.
+JavaScript is a interpted language.
+const happy = true;
+How does the computer reads it.
+Tell the computer how to display it.
+The computer only understands 1 or 0.
+Computer dosen't know what JavaScript is.
+You created an translator.
+This engine understands JavaScript and translates it to binary.
+There are ton of Engines.
+Anytime we use an engine we give it an JavaScript file.
+Before v8 engine there was slow browsers.
+Google had a problem with Google Maps.
+Zoom in and out. 
+Google that is an search-engine they said we are going to 
+write the v8 Engine to speed things up.
+
+Exercise: JavaScript Engine
+A fun little question who do you think created JavaScript Engine.
+The first creator was Brendan Eich who also created JavaScript.
+Created spiderMonkey.
+To implement the Engine.
+
+Inside the Engine
+What is happening inside the Engine.
+It can be built by anybody.
+Just a program.
+v8 is the fatest like Chrome browser.
+Inside it looks like this.
+We give a js-file.
+-Parser
+Lexical analysis.
+
+-AST
+Formed as an Abstract Syntax Tree.
+Figure out the text is divided.
+Goes to astexplorer.net.
+Breaks into different parts.
+
+-Interpreter
+
+-Bytecode
+-Profiler
+-Compiler
+-Optimized code
+
+Create an engine like this.
+
+function jsengine(code){
+	return code.split(/\s+/)
+}
+
+jsengine('var a = 5')
+
+Breaks things apart into a different parts
+
+Exercise: JS Engine For All
+But remeber ECMAScript engines it will be total chaos.
+Hey here is the standard.
+Tell Engines how the Engine should work.
+People and companies battles to make the fatest engines.
+This can be implemented how we want.
+Applies to most of the JavaScript Engines.
+Understand to write optimized code.
+
+Interpreters and Compilers
+Generally two ways to translate to machine languages.
+Python, Java gonna use this concepts.
+Within interpretator is translate the file line by line.
+
+function someCalculation(x,y){
+	return x+y;
+}
+for(let i = 0; i < 1000; i++){
+	someCalculation(5,4);
+}
+
+Gives the file to an interprator sees the line.
+I should loop over it.
+I am gonna run sometimes.
+Keeps running.
+Interpret code is just tell the computer to how do things.
+Compiler works ahead of time and compiles down to a language so that a machine understands.
+Compiler tries to translate it and convert it to some language.
+Interpreter spits out bytecode instead the compiler translate it to a machine code.
+
+Inside the v8 Engine
+Interpretator is quick to get up and running.
+Just give it to interprator.
+It is good for JavaScript because we want to execute the code right away.
+That's why JavaScript uses this.
+Problem when you running the code more the once it can get really slow.
+Compiler takes more time to set-up.
+Compiler is gonna running the same code more then once the compiler can simplify the code.
+Repeat the code is gonna execute faster.
+Combine this two into a compiler called the JIT compiler.
+Just-in-time-compiler.
+We parsed the code and it goes to the Interpreter.
+Ignition called when the code is sent to the interpretator.
+And takes the AST and spits out Bytecode.
+Profiler monitors the code takes notes and optimizes the code.
+If the code is run the same time.
+Profiler pass it out to the compiler.
+Compiler makes some optimizations.
+Optimized Code.
+Exectution code is going to improve.
+Now we can write more optimized code.
+The compiler is not perfect.
+Compiler makes some mistakes too.
+
+Comparing Other Languages
+Quick video about what we learned and how it applies to other programming languages.
+.exe and it starts running.
+Created by C++. 
+Use an command like g++ your_program.cpp -o your_program.
+Translates it to an executeable.
+Java uses JVM that transforms into bytecode.
+Java virtual machine converts into machine code.
+Is JavaScript an interpreted language.
+Initially it was that with spider-monkey.
+Things has changed.
+Depends on the implementation.
+
+Writing Optimized Code
+We want to write the code so that it works with the optimizations.
+Uses cases are very rare.
+Things we want to be careful with.
+
+-eval()
+-arguments
+-for in
+-with 
+-delete
+
+Two main things that makes the code less optimized.
+
+-Hidden classes
+function Animal(x,y){
+	this.x = x;
+	this.y = y;
+}
+
+const obj1 = new Animal(1,2);
+const obj2 = new Animal(3,4);
+
+obj1.a = 30;
+obj1.b = 100;
+obj2.b = 30;
+obj2.a = 100;
+
+Add things in the same order.
+
+
+-Inline caching
+function findUser(user){
+	return 'found ${user.firstname} ${user.lastname}'
+}
+
+const userData {
+	firstName: 'Johnson'
+	lastName: 'Junior'
+}
+
+findUser(userData);
+
+We should write code that is predictale.
+
+WebAssembly
+Why not use Machine code in ahead of time.
+We don't have to worry about that.
+JavaScript would be superfast.
+Every browser would have an standard for machine code.
+They didn't get along.
+Things may change in future.
+We didn't competing browsers compile the code on the browser.
+Keep an eye on WebAssembly we may don't have to all interpreters.
+
+Call Stack and Memory Heap
+Something any Senior Developer knows.
+We learned that the JavaScript engine things for us.
+We need to reading the code and executing the code.
+We use Call-stack and memory-Heap.
+We need the memory-heap to store and read information.
+We need to keep track of we are in the code.
+Memory Heap is memory is.
+Call-stack where we are in the program.
+
+const number = 610;
+const string = 'some text'
+
+Going to the string the string is pointing to somewhere in the memory.
+
+const human = { //allocate memory for an object... and it's values.
+	first: 'Andrei',
+	last: 'Neagoie'
+}
+
+Memory-heap is large region that JavaScript provides for us to store memory. Put data into storage boxes.
+
+Call-Stack.
+
+function subtractTwo(num){
+	return num -2;
+}
+
+function calculate(){
+	const sumTotal = 4 + 5;
+	return subtractTwo(sumTotal);
+}
+
+calculate();
+Everytime we run the calculate() we use Call-stack.
+So we can think of call-stack operates first-in last-out.
+Anomymous is the Global Exectuion Context.
+Call-stack
+subtractTwo()
+calculate()
+(anonymous)
+
+When we are done with calulateTwo() we going back to the calculate() and that pop off anonymous.
+Call-stack stores functions and let us know where we are in the code.
+We can keep adding to the stack.
+We use memory-heap to point to different places in the memory.
+It is not simple 100% where things are allocated in the memory.
+
+Stack Overflow
+What happens when we are calling functions over and over again.
+We keep growing this stack until we can't do it anymore.
+Stackoverflow can be create very easily.
+
+function inception(){
+	inception();
+}
+
+Recursion keeps growing and adding things.
+Error:Uncaught RangeError: Maximum call stack size exceeded.
+Each entry.
+JavaScript is gonna print the stackframe.
+Back in the day it wouldn't give this warning.
+
+Garbage Collection
+Before we can talk about memory-heap. 
+We must talk about Garbage Collection.
+Only the data that is still useful to us remains.
+Garbage collector gives a false sense of security.
+False impression to not care about the memory.
+Low-level language like C you control garbage collection.
+How does it works in JavaScript.
+JavaScript uses an algorithm called Mark and Sweep.
+Variables points to different objects.
+As soon we remove the reference.
+We mark what we need we sweep that we need.
+
+Memory Leaks
+Let's create an memory-leak.
+Easiest way to do that is to create an array.
+let array = [];
+for(let i = 5; i > 5; i++){
+	array.push(i-1);
+}
+
+We are going run an inifinite loop until it is nothing memory left.
+We just crashed the browser.
+Three common memory leaks.
+
+-Global variables
+var a = 1;
+Keep adding variables to the global memory.
+
+-Event listensers
+var element = document.getElementById(button);
+element.addEventListeners('click','onClick');
+You add eventlisteners and never removes them.
+
+-setInterval
+setInterval() => {
+	
+})
+Soundcloud application can be running in the background.
+People didn't want to close the application.
+
+
+Single Threaded
+Means that only set of functions executes at a time.
+When JavaScripts was born 1995 things was very easy.
+I am eating one thing at the time.
+JavaScript is synchronous.
+That dosen't mean that JavaScript is super fast.
+
+Exercise: Issue With Single Thread
+With JavaScript synchronously code.
+It is going to be difficult with really long runnning tasks.
+alert('hi') for example is running to long.
+We need to introduce the idea of asynchronous code.
+
+JavaScript Runtime
+It has only one stack and one heap.
+It has to wait to the previous long time to execute.
+Web-browser.
+It uses the Web API to communicate.
+Web-API comes with the browser.
+It is application that can do different events.
+Can be used to caching.
+window is part of the web-API.
+setTimeout they are provided by the browsers.
+Anything that can be uploaded we can do it in the browser.
+Under the hood the C++ works.
+
+Web API
+-DOM
+-fetch
+-setTimeout
+
+These web-apis is asynchronous.
+Call-stack have an function it dosen't know about it is going to send to the browser and the browser sees that and are using the web-API to execute that.
+The browser then places that in callback-queue and in the callback queue the data is waiting for the Event-loop to get that.
+If the call-stack is empty it is going to get whats in the queue.
+console.log('1');
+This below will be sent to the web-API.
+setTimeout(() => {console.log('2'), 1000});
+console.log('3');
+Executing this will give 
+1
+3
+undefined
+2
+
+Node.js
+You should know the clear difference between 
+JavaScript Engine and the JavaScript Runtime.
+JS file is like an musical note to write programs.
+JavaScript Engine is like the composer that can read the notes.
+JavaScript Runtime is like the musican that plays the music.
+What does you think about what node.js is.
+Node is JavaScript runtime.
+Ryan Doll decided it should be nice to run it outside the browser.
+C++ program that provides the runtime.
+Works almost equal to the browser engine.
+In node we almost of things in the background.
+It uses libuv to extend.
+Node dosen't have window.
+Node is serverside and is non-blocking.
+It creates the runtime.
+Node js has one single thread.
+Adds this extra feature to the JavaScript.
+
+
+Exercise: Fix This Code 
