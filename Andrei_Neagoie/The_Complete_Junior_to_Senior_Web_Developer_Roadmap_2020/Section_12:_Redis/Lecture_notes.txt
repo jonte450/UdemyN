@@ -1,18 +1,128 @@
 Bruno's Request
+Getting complaints with that users can seen other users sessions.
+Getting into a topic a secure way to handle sessions.
+Especially problem for users to see others users.
 
 Section Overview
+With Databases it is tons of them.
+You have to define your schemas.
+Postgresql is to define relationship.
+All companies used a tons of different databases.
+Redis is NoSQL in memory database.
+Used to build high scalabale perfomance applications.
+Have different types.
+Your profile has different of databases.
+Document 
+Are good to store document data.
+
+-mongoDB
+-CouchDB
+
+Graph
+For social media.
+-neo4j
+
+Wide Column
+-cassandra
+
+Key-value
+Similar to how we handle objects.
+
+-redis 
+In memory data-base.
+You wanna use a small piece of data.
+Used for short-memory.
+Super flexible.
 
 Introduction To Databases
+All companies store data.
+In order to store information
+We want to do a loop.
+Is just a collection of data.
+DBMS is tool that allows us to communicate with Databases.
+Consist of more than one table.
+Schema,us be defined.
+We can connect tables.
+Indentifies one row is called primary Key. 
 
 Installing Redis
+Let's install Redis.
+It is very simple to download Redis.
+Might use it later.
 
 Redis Commands
+Super fast to access.
+It only takes an snap-shot.
+Using in only in session-management.
+We are gonna talk about the data-types.
+Is a key-value storage.
+Set name "Godzilla"
+Now i can get command to get the value back.
+Get name results in "Godzilla" back.
+EXISTS name return 1.
+DEL name removes the name.
+Documentation tab.
+Full lists of command.
+Expire command.
+Sets an Key to expire to some seconds or minuts.
+SET counter 1000; 
+INCRBY counter 33.
+DECR counter 33.
+Increament and decreament of the counter variable.
 
 Redis Data Types
+MSET to set multituple things.
+GET a.
+MGET a b.
+You noticed some things we only worked on strings.
+
+Five major datatypes.
+
+-strings
+-hashes
+-Lists
+-Sets
+-Sorted Sets
+
+Redis Hashes
+Are maps between strings fields and strings values.
+Think on them as objects.
+HMSET user id 45 name "Jonny" [].
+HGet user name 
+Gives back Jonny.
+HGETALL users gives back all the user info.
 
 Redis Lists
+The next Datatype is implemented as LinkedLists.
+Insertions is really fast.
+It takes a bit a time.
+Add elements to the lists.
+LPUSH ourlists 10
+RPUSH ourlists  "Hello".
+LRANGE key start stop 0 1
+1) "10"
+2) "Hello"
+
+LTRIM to trim the lists.
 
 Redis Sets + Sorted Lists
+Sets are in Redis are unordered collections of strings.
+With sets it is able to remove strings.
+Adding more elements is not gonna effect the sets.
+SADD ourset 1 2 3 4 5.
+SMEMEBERS ourset 
+Gives the elements of the set.
+SISMEMBER ourset 5 gives 1 or 0 if the 5 is memeber of the sets.
+Sorted Sets do the no-repeating of the string.
+And we have an score that ranges from the smallest to the greatest.
+ZADD team 50 "Wizards"
+ZADD team 40 "Cavaliers"
+ZRANGE team 0 1.
 
 Section Summary
+In this section we learned Redis.
+We are gonna add this to our Docker-Container.
+This is a special section.
+Add to our Docker-container.
+A lot of fun.
 

@@ -1,0 +1,62 @@
+Section Overview
+
+Coockies vs Tokens
+
+What are we building
+
+JWT
+
+Project Goals
+
+Profile Icon
+
+Profile Dropdown
+
+Profile Styling
+
+Profile Modal 1
+
+Profile Modal 2
+
+Profile Modal 3
+
+Profile Modal 4
+
+Updating Profile 1
+
+Updating Profile 2
+
+Updating Profile 3
+
+User Authentication
+
+Sending The JWT Token
+
+Adding Redis
+
+Exercise: #3 Adding Redis to Docker Compose
+
+Solution: #3 Adding Redis to Docker Compose
+
+Storing JWT Tokens
+
+Retreiving Auth Token
+
+Client Session Management
+
+Session Sign In
+
+Authorization Middleware
+
+Fixing A Bug 
+
+Reviewing Our Code
+
+Updating Our App
+
+Optional: Why bcrypt-nodejs?
+
+Section Summary
+
+Exercise: #4-Improving SmartBrain
+
