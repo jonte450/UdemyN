@@ -1,0 +1,203 @@
+Section Overview
+Understanding the fundamental principles in the language.
+Comming up in the Senior Developer Interviews.
+Important.
+
+Execution Context
+function printName(){
+	return 'Andrei Neaogoie'
+}
+
+function findName(){
+	return printName();
+}
+
+function sayMyName(){
+	return findName();
+}
+
+sayMyName();
+This is a test.
+JavaScript will create an execution context.
+What is happening here.
+When JavaScript see those brackets.
+Oh i'am gonna to create an execution context.
+And when it see the brackets the execution context is created.
+Exectution Context Blocks
+-printName().
+return Andrei Neaogoie.
+-findName().
+Gets the string Andrie Neagoie
+-sayMyName().
+Gets the string Andrie Neagoie
+-global()
+
+Whenever we run code the code will always be a part of the execution context.
+
+When JavaScript creates the Global Execution Context
+It creates.
+-Global Object.
+-this
+
+I can give an empty file.
+To the Global Variable we can assign variables.
+You can add more different things to the Global Context.
+When you add an new function an new exectutuion context is added.
+
+Lexical Enviroment
+What does Lexical means?
+Is simply where you write something.
+Think the Execution context as each own lexical analysis.
+Compilers is checking to see which universe where the code is executing.
+Which part of the universe.
+
+function printName(){
+	return 'Andrei Neaogoie'
+}
+
+function findName(){
+	return a();
+}
+
+function sayMyName(){
+	return findName();
+}
+
+Compiler can decide to put things.
+There are different planets.
+In JavaScript whenever we have an new function we have an new world.
+They can communicate with each other.
+Lexical Enviroment will tell us where code is written.
+Determenis our Internal variable.
+Because findName is global scope it will have access to certain things.
+
+Hoisting
+Creation phase someting is missing.
+One important thing missing.
+We have something called Hoisting.
+Hoisting is to moving variables to the top.
+Variables and functions are hoisted.
+
+console.log(teddy);
+console.log(sing())
+var teddy = 'bear';
+function sing(){
+	console.log('ohhh la la la');
+}
+
+It will print out teddy as undefined.
+It allocating places for the variables before JavaScript is 
+executing it.
+It will assign functions and variables to be undefined.
+There is what it is looking on hoisting.
+Variables are partially hoisted.
+Functions are fully hoisted.
+(function sing(){
+	console.log('ohhh la la la');
+})
+ReferenceError: sing is not defined.
+const teddy = 'bear':
+Teddy is not defined.
+
+var sing2 = function(){
+	console.log('uhh la la la');
+}
+This will get us an error.
+Hoisting is unique to Javascript.
+JavaScript is allocating memory to the variables.
+
+Exercise Hoisting
+one = undefined;
+var one = 1;
+var one = 2;
+console.log(one);
+
+a()
+
+function a(){
+	console.log('hi');
+}
+
+function a(){
+	console.log('bye');
+}
+
+
+Answer:
+bye
+undefined
+
+Because this same thing this is going to rewrite the memory.
+
+Exercise Hoisting 2
+Becomes hoisted first to undefined.
+After that it becomes assigned to grapes
+var favouriteFood = "grapes";
+Creation phase is down.
+
+An new execution context is created.
+And it is gonna hoist up the foodThoughts up.
+var foodThoughts = function() {
+console.log("Orgininal favourite food: " + favouriteFood);
+
+var favouriteFood = "sushi";
+
+console.log("New favourite food: " + favouriteFood);
+
+};
+
+foodThoughts()
+
+Answer:
+
+Orgininal favourite food: undefined
+VM554:8 New favourite food: sushi
+undefined
+
+Isn't hoisting confusing.
+There are arguments if we should use hoisting.
+Avoiding Hoisting if you can.
+We can use const instead of var keyword to catch errors before the future.
+
+Exercise Hoisting 3
+
+Function Invocation
+
+arguments Keyword
+
+Variable Enviroment
+
+Scope Chain
+
+[[scope]]
+
+Exercise: JS is Weird
+
+Function Scope vs Block Scope
+
+Exercise: Block Scope
+
+Global Variables
+
+IIFE
+
+this Keyword
+
+Exercise: Dynamic Scope vs Lexical Scope
+
+call(),apply(),bind()
+
+Exercise: call(), apply()
+
+bind and currying
+
+Exercise: this Keyword
+
+Exercise: this Keyword 2
+
+Context vs Scope
+
+Section Review
+
+
+

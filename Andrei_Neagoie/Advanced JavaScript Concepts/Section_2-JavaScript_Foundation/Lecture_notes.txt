@@ -355,5 +355,27 @@ It creates the runtime.
 Node js has one single thread.
 Adds this extra feature to the JavaScript.
 
-
 Exercise: Fix This Code 
+const list = new Array(60000).join('1.1').split('.');
+
+function removeItemsFromList(){
+	var item I= list.pop();
+
+    if(list.length === 0){
+       return 0;
+    }
+
+   if(item){
+     return removeItemsFromList();
+   }
+
+}
+
+Section Review
+We learned about the JavaScript Engine.
+Send us optimized code that we can learn how to do that.
+More of the rest of the Course.
+Call-Stack
+Memory Heap
+JavaScript Runtime that runs in the background.
+Learned one thing important to the JavaScript.
