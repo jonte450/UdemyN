@@ -161,31 +161,546 @@ We can use const instead of var keyword to catch errors before the future.
 
 Exercise Hoisting 3
 
-Function Invocation
+function bigBrother(){
+  function littleBrother() {
+    return 'it is me!';
+  }
+  return littleBrother();
+  function littleBrother() {
+    return 'no me!';
+  }
+}
 
+// Before running this code, what do you think the output is?
+bigBrother();
+
+Answer: no me
+
+Function Invocation
+Without functions our programs wouldn't do anything.
+Let's define functions and some common between them.
+
+Function Expression
+
+var canada = function(){
+	console.log('cold')
+}
+
+Function Declaration
+
+function india(){
+	console.log('warm');
+}
+
+Functions declarations get hoisted but Functions Declarations don't get's hoisted.
+With our functions we can do.
+-Invocation
+-Call
+-Execution
+
+We assigned the values.
+
+canada()
+canada() function is defined at runtime.
+
+india()
+Get's defined at parse-time.
+When the compiler looks at the code.
+
+When the function get's invoked it creates an new execute context above the global.
+-this.
+-arguments.
+
+function marry(person1, person2){
+	console.log(arguments);
+	return `${person1} is now married to ${person2}`
+}
+
+marry('Tim','Tina');
+
+prints out the special object.
+{0: 'Tim', 1: 'Tina'}
+
+We don't get the arguments with the global context.
+ 
 arguments Keyword
+Dangerous to use.
+Arguments looks like an array but it isn't an array.
+Few little tools to avoid arguments.
+console.log(Array.from)
+We can use array methods at the arguments.
+Use the spread operator ..args.
+With modern JavaScript you want to avoid the Key-Word arguments.
 
 Variable Enviroment
+We learned that there can be many execution context.
+On each Execution Context we have 
+-this
+-arguments
+-Variable Enviroment
+
+This is a place where variables can live in.
+Think of each Exectution Context as each own world.
+Function one and two get's hoisted to the top.
+isValid memory space isValid get's change to false.
+one() an new execution context is created.
+one() var isValid = true is gonna be put into the new exection context or the enviroment variable.
+In function two() an new Execution Context is created and two() var isValid; is put into the newly created Execution Context and becomes assigned to undefined.
+In each Execution Context isValid will have isValid assigned to.
+And we pop-of each Exection Context every variable will be gone.
+
+-two()
+isValid = undefined.
+
+-one()
+isValid = true.
+
+-global
+isValid = false.
+
+
+function two(){
+	var isValid;
+}
+
+function one(){
+	var isValid = true;
+}
+
+var isValid = false;
+one();
+
+Each Execution Context has each own variable-enviroment.
 
 Scope Chain
+We haven't discussed.
+Each execution context enviroment variables has own links to the outside world.
+The outer enviroment depends on where the function sits lexical.
+Every functions is gonna have an access to the outside world to x.
+Evrey function has.
+Each own
+-Variable Enviroment
+-Execution Context
+-Scope Chain
+The Scope chain is the link to the Global Execution context.
+When in printName() function doesen't finds the x variable in the enviroment variables it the goes down to the scope chain.
+
+In javascript our lexical scope (available data + variables where the function was defined)
+determines our available variables. Not where the function is called (dynamic scope).
+
+Matters where the function is written in the code.
+JavaScript attaches all the scope-chain before it runs the code.
+
+
+var x = 'x'
+
+function findName(){
+	var b = 'b'
+	return printName();
+}
+
+function printName(){
+    var c = 'c'
+	return 'Andrei Neaogoie'
+}
+
+function sayMyName(){
+	var a = 'a'
+	return findName();
+}
+
+sayMyName();
+
+Same code but written in a different order.
+
+var x = 'x'
+function sayMyName(){
+	var a = 'a';
+	return function findName(){
+	var b = 'b';
+	return function printName{
+    var c = 'c';
+	return 'Andrei Neaogoie'
+}
+}
+}
+
+sayMyName();
+When the code runs it just only returns 
+
+return function findName(){
+	var b = 'b';
+	return function printName{
+    var c = 'c';
+	return 'Andrei Neaogoie'
+}
+}
+
+Invoke the function again.
+sayMyName()();
+Returns 	return function printName{
+    var c = 'c';
+	return 'Andrei Neaogoie'
+}
+
+sayMyName()()();
+Returns Andrei Neagoie.
+
+What does it have now.
+The functions are linked togheter in a function lexical enviroment.
+They can now access each owns variable.
+Going up the scope-chain but you cannot go down the scope chain.
+This principle is very important in the rest of the course.
+Undefined is actually a type in JavaScript.
 
 [[scope]]
+One little diagram. When a function is called.
+But also that points to the outer scope.
+JavaScripts has this internally.
+Creates an function a(){}.
+And goes into the console we have something [[scope]].
+We have type: "global".
+When we don't have in the local scope we are going into [[scope]].
 
 Exercise: JS is Weird
+function weird(){
+	height = 50;
+	return weird;
+}
+weird();
+Where is height located.
+But is weird being created locally in the Enviroment variables.
+Well no.
+leackage of global scope.
+Only when height has keyword like var , const , let it is created in the Enviromental variables.
+It is going up the global enviroment.
+The global enviroment will create that for the function.
+'use strict' helps us to avoid this.
+
+var heyhey = function doodle() {
+	//do something
+	return 'heyhey'
+}
+
+heyhey();
+doodle();
+When it runs doodle() function it will be a reference error.
+doodle gets added to it's own enviromental variable.
+We can only access doodle inside the function.
 
 Function Scope vs Block Scope
+Scope means which variables we has access to.
+Most other programming languages has something called 
+block scope.
+
+if(5 > 4 ){
+  var secret = '12345';
+}
+secret;
+
+In function-scope you can access password like this.
+
+function a(){
+  var secret = '12345';
+}
+secret;
+We can't access the secret.
+Anytime we see an function an new scope is created.
+With the new ES6 with let,const allows to use block-scoping.
+We can't access the secret.
+It can be access with var keyword.
+Let and const is just block-scope variables.
 
 Exercise: Block Scope
+function loop(){
+	for(var i = 0; i < 5; i++){
+	console.log(i)
+	}
+	console.log('final',i)
+}
+loop();
+After we run it.
+
+0
+1
+2
+3
+4
+5
+final 5
+i is not defined because of let keyword.
+You won't have access to i.
+Uncaught ReferenceError: i is not defined
+    at loop (<anonymous>:5:22)
+    at <anonymous>:7:1
+
+Block-scope is whenever you are using curly brackets.
 
 Global Variables
+Global variables are evil.
+Andrei why doesen't we use global variables all the time.
+Everything has access to everything.
+Few issues polluting the global namespace.
+We have limited memory.
+Too much memory and makes everything slower.
+I only gonna declare a few global variables.
+Issues with Global variables we can have conflicts.
+Think like we have many scripts-tags.
+
+<script>var z = 1</script>
+<script>var zz = 2</script>
+<script>var zzz = 3</script>
+<script>var z = 10000</script>
+I have overwridden z because of a collision.
+All the scripts-tags gets combined.
+They override each other.
+Creates possible bugs.
+Idea of modules.
 
 IIFE
+How can we minimize this thing with global scope.
+Immediately invoked function expression.
+With () this make this function expression.
+We immediately invoke the function.
+You cannot call a function declaration directly.
+But you can with IIFE.
+No global properties is being assigned.
+Call immediately the function.
+It will create an new variable enviroment.
+It is going to have its own variable scope.
+If we move the () call inside nothing changes.
+We had this before ES6.
+
+
+(function() {
+var a = 1;
+	
+})();
+
+Is a common design pattern.
+The idea was that use this pattern we place this in private scopes.
+
+<script>
+var z = 1;
+
+var script1 = (function() {
+	function a() {
+	 return 5;
+	}
+	return {
+	a:a;
+	}
+})() 
+</script>
+
+Runs a() "hahahaha".
+script.a() returns 5.
+But the good thing we can only have one function.
+We attaching this to the functional namespace.
+JQuery did this a lot.
+JQuery has a tons of functions.
+We gets an speed-boost.
 
 this Keyword
+Some hate this in the code.
+What is this all about.
+Dive deep in the OOP section.
+So what is this.
+this is the object that the function is a property of.
+obj.someFunc(this).
+This referes to the object.
+this gets sets in Execution Context.
+The window object is the global object.
+function a(){
+	console.log(this)
+}
+The function is property of the window object.
+We never wants this to refer to the global object.
+function b() {
+	'use strict'
+	console.log(this)
+}
+I will get undefined.
+use strict to avoid things in javascript.
+Why did they include this in the language.
+
+const obj = {
+	name: 'Billy',
+	sing: function(){
+			return 'lalala' + this.name; 
+	}
+}
+
+obj.sing()
+
+You can change on only one place in the code.
+What's is the to the left of the dot.
+
+Another example give a another function.
+
+const obj = {
+	name: 'Billy',
+	sing: function(){
+			return 'lalala' + this.name; 
+	},
+	singAgain(){
+		return this.sing() + this.name + '!' 
+	}
+}
+
+obj.singAgain();
+We just copy code over and over again.
+We are not repeating ourselves.
+1: Gives methods access to their objects.
+2: Execute same code for multiple objects.
+
+Another example.
+
+function importPerson() {
+	console.log(this.name)
+}
+
+this is going to refer to the window object.
+window.importantPerson().
+
+const name = 'Sunny';
+const obj1 = {
+	name: 'Cassidy',
+	importantPerson: importantPerson
+}
+
+const obj2 = {
+	name: 'Jacob',
+	importantPerson: importantPerson
+}
+importantPerson();
+obj1.importantPerson();
+obj2.importantPerson();
+Cool we access each own properties.
+Who called me?
+this key word acts as an placeholder.
 
 Exercise: Dynamic Scope vs Lexical Scope
+//Exercise:
+const a = function() {
+  console.log(this)
+  const b = function() {
+    console.log(this)
+    const c = {
+      hi: function() {
+     console.log(this)
+    }}
+    c.hi()
+  }
+  b()
+}
+a()
+
+Add a,b,c to console.log().
+a refers to the window-object.
+b refers to the window-object.
+c is an object gets called is refers to the c-object.
+It looks like that the lexical-scope dosen't matter.
+
+//JS is weird:
+const obj = {
+  name: 'Billy',
+  sing: function() {
+    console.log(this) // in this case, it's a method on an object.
+    var anotherFunc = function() {
+      console.log(this)// this points to windows!
+    }
+    anotherFunc()
+  }
+}
+anotherFunc is refering to the window object.
+It dosen't matters where it is written.
+obj.sing() didn't called anotherFunc() the sing did that.
+
+In javascript our lexical scope (available data + variables where the function was defined)
+determines our available variables.
+Not where the function is called (dynamic scope).
+This keyword is actually dynamically scoped.
+It matters how the function is called.
+
+const obj = {
+  name: 'Billy',
+  sing: function() {
+    console.log(this) // in this case, it's a method on an object.
+    var anotherFunc = () => {
+      console.log(this)// this points to windows!
+    }
+    anotherFunc()
+  }
+obj.sing().
+
+Arrowfunctions prevents this problem.
 
 call(),apply(),bind()
+Three important methods.
+-call()
+-apply()
+-bind()
+
+function a(){
+	console.log('hi');
+}
+
+a.call().
+
+Call and apply calls the function.
+
+Another example we create an Game.
+Merlin has an health of 100 and has an heal() function.
+We add another character Archer named Robin Hood.
+Health for Robin Hood has health 30.
+Wouldn't it awesome if we could borrow one method.
+This will create less bugs in our code.
+Calls a method of an object, substituting another object for the current object.
+Calls example of method borrowing.
+
+wizard.heal.call(archer) this borrows the method from merlin and applies it on Robin Hood.
+
+Differences between call and apply is that apply takes an array of parameters.
+
+wizard.heal.call(archer,30,50);
+wizard.heal.apply(archer,[30,50]);
+
+Which is the easier way to pass the parameters.
+
+What happens when we use bind().
+Bind returns a new function and special context.
+We can use the function later.
+
+const healArcher = wizard.heal.bind(archer, 50, 60);
+console.log(archer)
+healArcher()
+console.log(archer)
+
+
+
+const wizard = {
+  name: 'Merlin',
+  health: 100,
+  heal: function(num1, num2) {
+    this.health += num1 + num2;
+  }
+}
+
+const archer = {
+  name: 'Robin Hood',
+  health: 50
+}
+
+wizard.heal.call(archer, 50, 60)
+wizard.heal.apply(archer, [20, 30])
+archer
+// function borrowing
+
+const healArcher = wizard.heal.bind(archer, 50, 60);
+console.log(archer)
+healArcher()
+console.log(archer)
 
 Exercise: call(), apply()
 
