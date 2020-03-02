@@ -1,0 +1,207 @@
+Section Overview
+All programming languages has types.
+Two types of languages.
+The idea of type.
+Primitive types.
+How they relate to each other.
+
+Javascript Types
+The different types of types in JavaScript.
+-numbers
+-boolean
+-undefined
+-null
+-Symbol
+-Object
+
+typeOf checks the type.
+typeOf Null is an object.
+This actually an mistake.
+typeOf symbol is new in ES6.
+It is useful to indentify an object.
+A new type to do with objects.
+typeOf Symbol('just me').
+Null is abscence of a value.
+typeOf {} object
+typeOf [] object
+typeOf function() {}
+That is arrays and functions are Objects.
+
+function a(){
+	return 5;
+}
+
+a.hi = 'hihihihi';
+
+We have two distinction of types.
+
+Primitive
+-numbers
+-boolean
+-undefined
+-null
+-Symbol
+
+Non-Primitive types
+-Objects
+-Arrays
+-functions.
+
+What is primitive type.
+It is a data that represent an single value.
+It is like atoms.
+Symbols dosen't contain the value directly.
+JavaScript-built in objects.
+-Infinity
+-NaN
+Objects are primitive.
+Numbers.
+JavaScript creates an wrapper object.
+For example 
+Boolean.(true).toString()
+Able to use some methods.
+Not everything in JavaScript is objects.
+types in JavaScript can be a little confusing.
+
+Array.isArray()
+var array = [1,2,3];
+var array  = {
+	0: 1,
+	1: 2,
+	2: 3
+}
+
+Array.isArray()
+Array.isArray({}) is evaluated to false.
+Once again arrays in JavaScript is Objects.
+
+Pass By Value vs Pass By Reference
+Primitive types are imutable.
+If variable you have to move something from the memory.
+
+Pass By Value
+var a = goes to something in the memory
+var b = goes to something in the memory
+
+
+var a = 5;
+var b = 10;
+
+var a = 5;
+var b = a;
+
+b++;
+
+console.log(a);
+console.log(b);
+Answer:
+5
+6
+Copied the value and created an memory stake.
+
+let obj1 = {name: 'Yao',password:'123'};
+let obj2 = obj1;
+
+obj2.password = 'easypeasy';
+console.log(obj1);
+console.log(obj2);
+
+Answer:
+
+Due to pass by reference.
+We don't copy any value in objects.
+
+{name: 'Yao',password:'easypease'};
+{name: 'Yao',password:'easypeasy'};
+
+Just to having pass by reference we are saving memory.
+Why will it be bad?
+Someone changes the property.
+
+var c = [1,2,3,4,5];
+var d = c;
+d.push(187628761);
+console.log(c);
+console.log(d);
+Answers:
+
+[1,2,3,4,5,187628761]
+[1,2,3,4,5,187628761]
+
+Object are more difficult to clone.
+var a = 5;
+var b = a;
+
+b++;
+
+let obj = {a: 'a',b:'b',c:'c'};
+
+With this Object.assign you can clone objects.
+let clone = Object.assign({},obj);
+let clone2 = {...obj};
+console.log(clone);
+
+obj.c = 5;
+console.log(obj,obj);
+console.log(clone,clone);
+console.log(clone2,clone2);
+
+Answer:
+obj:{a: 'a',b:'b',c: 5 }
+clone: {a: 'a',b:'b',c:'c'}
+clone2: {a: 'a',b:'b',c:'c'}
+
+What if you change obj.c.deep.
+Shallow clone is an memory address.
+How can do deep cloneing.
+It is a bit funky we use 
+let superClone = JSON.parse(JSON.stringify())
+Turn everything to a string.
+It can have performance implications.
+
+Code:
+var c = [1,2,3];
+var d = c;
+d.push( 4 );
+
+console.log(c);   // [1,2,3,4]
+console.log(d);   // [1,2,3,4]
+
+var a = 5;
+var b = a;
+
+b++;
+
+let obj = {
+  a: 'a',
+  b: 'b',
+  c: {
+    deep: 'try and copy me'
+  }
+};
+let clone = Object.assign({}, obj);
+let clone2 = {...obj}
+How you clone the an obj in a obj to create a deep clone.
+let superClone = JSON.parse(JSON.stringify(obj))
+
+obj.c.deep = 'hahaha';
+console.log(obj)
+console.log(clone)
+console.log(clone2)
+console.log(superClone)
+
+Exercise: Compare Objects
+var user1 = {name : "nerd", org: "dev"};
+var user2 = {name : "nerd", org: "dev"};
+var eq = user1 == user2;
+alert(eq); // gives false
+
+Exercise: Pass By Reference
+
+Type Coercion
+
+JTS: Dynamic vs Static
+
+JTS: Weakly vs Strongly Typed
+
+JTS: Static Typing in JavaScript

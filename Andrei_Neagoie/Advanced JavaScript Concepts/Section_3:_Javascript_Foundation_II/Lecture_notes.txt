@@ -704,15 +704,88 @@ console.log(archer)
 
 Exercise: call(), apply()
 
+const array = [1,2,3];
+ 
+function getMaxNumber(arr){
+  return Math.max.call(null, arr); 
+}
+ 
+getMaxNumber(array) // should return 3
+ 
 bind and currying
+function currying.
+You can do something intresting with Currying.
+We are giving some function parameters.
+
+function multiply(a,b){
+	return a*b;
+}
+
+let multiplyByTwo = multiply.bind(this,2);
+
+console.log(multiplyByTwo(4));
+
+let multiplyByTwo = multiply.bind(this,2);
+
+let multiplyByTen = multiply.bind(this,10);
+
+console.log(multiplyByTen(4));
+
+You can create another function arguments.
+How cool is that.
 
 Exercise: this Keyword
+Each of this object has a name and a method.
+
+var b = {
+  name: 'jay',
+  say() {console.log(this)}
+}
+
+var c = {
+  name: 'jay',
+  say() {return function() {console.log(this)}}
+}
+
+var d = {
+  name: 'jay',
+  say() {return () => console.log(this)}
+}
+ 
+b.say();
+In c we are returning an function.
+A function in another functions.
+c.say()()
+c gets called first and after that another call
+You get the Window object after c.say()().
+What about d.say().
+You use d.say()() d objects function was lexically scoped in the function.
+Because of the arrow-function.
 
 Exercise: this Keyword 2
+const character = {
+  name: 'Simon',
+  getCharacter() {
+    return this.name;
+  }
+};
+
+const giveMeTheCharacterNOW = character.getCharacter.bind(character);
+ 
+//How Would you fix this?
+console.log('?', giveMeTheCharacterNOW()); 
 
 Context vs Scope
+Scope is a function based thing.
+What is the variable access of the function.
+Context is more like object-thing.
 
 Section Review
+Finally done with the foundations.
+Once a JavaScript is executed.
+Learned about hoisting.
+Function Scope vs Block Scope.
+This keyword benefits of having this keyword.
 
 
 
