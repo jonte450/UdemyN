@@ -197,11 +197,144 @@ var eq = user1 == user2;
 alert(eq); // gives false
 
 Exercise: Pass By Reference
+const number = 100
+const string = "Jay"
+let obj1 = {
+  value: "a"
+}
+let obj2 = {
+  value: "b"
+}
+let obj3 = obj2;
+ 
+function change(number, string, obj1, obj2) {
+    number = number * 10;
+    string = "Pete";
+    obj1 = obj2;
+    obj2.value = "c";
+}
+ 
+change(number, string, obj1, obj2);
+ 
+//Guess the outputs here before you run the code: 
+console.log(number); 
+console.log(string);
+console.log(obj1.value);
+
+Native Browser JavaScript
+Object remains because of the function?   
+100
+Jay
+a
+=> undefined
 
 Type Coercion
+If you google type coercion.
+We are gonna talk about that.
+Most of the tricky parts you should use it in your code.
+JavaScript going to converting a type into a certain type.
+Do all languages have type coercion?
+Yes they do?
+Different types looks different.
+There are different levels of the stack.
+Happens when you use 1 == 1.
+False.
+Be explicit.
+1 === '1'
+Double equals can coerce.
+It is not predictable code.
+Always use  ===
+if(0){
+	console.log(5);
+}
+JavaScript coerce this 0 above to false.
+Object.is works almost like ===.
+NaN === NaN becomes false.
+
+Exercise: Type Coercion
+JS can be weird when it comes to type coercion. Try to guess what the output for each of the lines below are:
+
+false == "" 
+true
+
+false == []
+true 
+
+false == {}
+false
+
+"" == 0
+true
+
+"" == []
+true 
+
+"" == {}
+false
+
+0 == []?
+true
+
+0 == {}
+false 
+
+0 == null?    
+false
+
 
 JTS: Dynamic vs Static
+We can use JavaScript outside the web.
+If we had to catergorize the language.
+Dynamically typed language.
+Java,Haskell are static typed language.
+In some languages type coercion shouldn't work.
+You see with static typed language.
+You should write the type.
+While the user is browsering through the type.
+Assign variables.
+You might getting errors.
+Holy war that static programming languages and dynamically languages.
+Pros with the statically typed language is we get documentation.
+A new developer came along.
+sum('hello', null);
+You can see which types the function should have.
+Favorite text editors.
+You are going to get less bugs.
+Before we send it on to production.
+You should have unit tests in JavaScript.
+JavaScript became popular because of less debugging.
+Dynamic allows you to write software faster.
 
 JTS: Weakly vs Strongly Typed
+Weak typing vs Strong typing.
+JavaScript is a dynamic language that is weakly typed.
+var a = "boooya";
+a + 17
+"boooya17"
+Python would think that you arecrazy when you do that.
 
 JTS: Static Typing in JavaScript
+Finally get into things.
+Many ways we can add.
+All these languages tries to make JavaScript static typed.
+Popular language comming from facebook.
+Goals to make JavaScript less buggy.
+Flow is able to give it to Babel.
+Changes code to ES5.
+Flow checks everything.
+Flow comes built-in create-react-app.
+TypeScript differs from Flow because it has it's own compiler.
+
+RE-ML
+flow
+TS
+
+
+
+Questions
+
+https://www.udemy.com/course/advanced-javascript-concepts/learn/lecture/13512840#questions/9543074
+
+https://www.udemy.com/course/advanced-javascript-concepts/learn/lecture/13512840#questions/9542770
+
+

@@ -1,0 +1,51 @@
+Section Overview
+
+Functions are Objects
+
+First Class Citizens
+
+Extra Bits: Functions
+
+Higher Order Functions
+
+Exercise: Higher Order Functions
+
+Closures
+
+Exercise: Closures
+
+Closures and Memory
+
+Closures and Encapsulation
+
+Exercise: Closures 2
+
+Solution: Closures 2
+
+Exercise: Closures 3
+
+Solution: Closures 3
+
+Closures Review
+
+Prototypal Inheritance
+
+Prototypal Inheritance 2
+
+Prototypal Inheritance 3
+
+Prototypal Inheritance 4
+
+Prototypal Inheritance 5
+
+Prototypal Inheritance 6
+
+Exercise: Prototypal Inheritance
+
+Solution: Prototypal Inheritance
+
+Exercise: Prototypal Inheritance with this
+
+Section Review
+
+
