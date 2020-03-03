@@ -1,48 +1,577 @@
 Section Overview
+The two pillars.
+Most important pillars of JavaScript.
+If you understand these two topics you are going to evolve.
 
 Functions are Objects
+Let's start!.
+When we are invoke an functions we get two things.
+-this keyword
+-arguments is an array
+-Variable Enviroment
+If we add arguments.
+If we define our arguments.
+We have a few ways of invoking functions.
+
+function one(){
+	return 1
+}
+
+one()
+
+const obj = {
+	two: function(){
+		return 2;
+	}
+}
+
+obj.two();
+
+function three(){
+	return 3
+}
+Strange way to invoke a function.
+const four = new Function('num','return num')
+
+four(4)
+
+This Function() is a function constructor.
+function woohoooo(){
+	console.log('woohoo')
+}
+
+woohoooo.yell = 'ahhhhhh'
+
+const specialObj = {
+	yell:ahhhhh,
+	name: woohooo,
+	(): console.log('wooohoooo')
+}
+
+somefunc()
+-Code()
+-Name (optional)
+-Properties
+
+Functions are objects.
+They are callable.
+Why do we care.
+Functions is like objects.
+We can store them as data.
+Functions has some properties but not objects.
+Becase Functions is Objects we can pass them in JavaScript.
 
 First Class Citizens
+Functions can pass like data.
+1.Functions can be assigned to variables and properties.
+For example:
+		var stuff = function() {}
+
+2.Pass functions as arguments an call it.
+function a(fn){
+		fn()	
+}
+a(function(){console.log('hi there')})
+
+Almost like pass it as an string.
+
+3.Return functions from functions in JavaScript.
+
+function b(){
+	return function c() {console.log('bye')}
+}
+
+This idea of First-class citizen introduces functional programming.
+
 
 Extra Bits: Functions
+Careful to initialize functions in a loop.
+You want initialize the function at the top.
+And not in the loop.
+
+function a(){
+}
+
+for(let i = 0; i < 5; i++){
+	 a(){
+
+	}
+}
+
+function a(param=6){
+	return param
+}
+It is good to have default values.
 
 Higher Order Functions
+It's an function that can take a function.
+And to return a function.
+
+Problem with ordinary functions.
+
+function letAdamLogin(){
+	let array = [];
+	for(let i = 0; i <1000000; i++){
+	array.push(i)
+	}
+	return 'Access Granted to Adam'
+}
+
+function letEvaLogin(){
+	let array = [];
+	for(let i = 0; i <1000000; i++){
+	array.push(i)
+	}
+	return 'Access Granted to Eva'
+}
+
+letAdamLogin();
+letEvaLogin();
+
+We created an code that repeats itself.
+Hundred of employees that repeat themselves.
+Let's go from a function to a more generic case.
+
+const giveAccessTo = (name) =>
+		'Access Granted to ' + name
+
+function letUserLogin(user){
+	let array = [];
+	for(let i = 0; i <1000000; i++){
+	array.push(i)
+	}
+	return giveAccessTo(user);
+}
+
+letUserLogin('Adam');
+We now tell which data we use when we call it.
+When we actually call it.
+We now have a more generic data.
+Instead of defining Eva in the function we can decide it much later.
+This gives us more flexibility.
+
+function letAdminLogin(user){
+	let array = [];
+	for(let i = 0; i <5000000; i++){
+	array.push(i)
+	}
+	return giveAccessTo(user);
+}
+
+
+Think it as authentication thing for the user to login.
+We defined the function.
+We have Admin above.
+This admin needs to go through more security issuses.
+With high-order functions we can give the data and tell the functions what to do with the data.
+We copy much more code.
+Maybe we have guest,secretaries.
+Create an authenticate function.
+
+function authenticate(verify){
+	let array = [];
+	for(let i = 0; i <verify; i++){
+	array.push(i)
+	}
+	return true;
+}
+
+function letPerson(person, fn){
+	if(person.level === 'admin'){
+	fn(50000)
+	}else if(person.level === 'user'){
+	 fn(1000000)
+	}
+	return giveAccessTo(person.name)
+}
+
+letPerson({level: 'user', name:'Time'},authenticate).
+We created an generic functions that accepts a person as an parameter.
+We could been more descriptive.
 
 Exercise: Higher Order Functions
 
+You can manipulate functions to return and make it more generic.
+
+const multiplyBy = function(num)  {
+      return function(num2){
+        return num*num2;
+      }
+   
+}
+
+const multiplyByTwo = multiplyBy(2);
+console.log(multiplyByTwo(4));
+console.log(multiplyByTwo(10));
+
+const multiplyByTen = multiplyBy(10);
+console.log(multiplyByTen(4));
+console.log(multiplyByTen(10));
+
 Closures
+The first pillar of JavaScript.
+After these few videos we are unlocking superpowers.
+Functions are a first-class citizens.
+Combinations of function() and Lexical Enviroment.
+
+function a(){
+	let grandpa = 'grandpa'
+	return function b() {
+	return function c() {
+	let son = 'son'
+	return ´${grandpa} > ${father} > ${son}´
+	}
+	}
+} 
+
+function a and b are high-order function.
+a()()() returns grandpa > father > son.
+const one = a();
+What happens when we remove a function from the stack.
+When we invoke a() both functions b and c has access to variable granpha depsite that function a has been popped off the stack.
+When we haven't give it any other parameters.
+We have still the chain left.
+But grandpha remains and left in the box.
+When the garbage-collector comes in it takes grandpha and leaves that in a box.
+Father also be left in the closure-box.
+When c() is been executed they are going to the closure box and gets grandpha and father.
+JavaScript will keep around things that are still around.
+Already knows which function has access to a the variable.
+Where we write the function it is still matters.
+
+const boo(string) => (name) => (name2){
+	    console.log(´${string} ${name} ${name2}´)
+	  }
+	  boo('hi')('tim')('becca');
+We can have some hidden powers with closures.
+const booString = boo('hi');
+//five years
+const booStringName = booString();
+I can wait five years and have access to the variables and execute it then.
 
 Exercise: Closures
+//exercise:
+function callMeMaybe() {
+    const callMe = 'Hi!';
+    setTimeout(function() {
+        console.log(callMe);
+    }, 4000);
+
+}
+
+callMeMaybe();
+What are we using here is closures.
+We start a timer and send a function to callback queue.
+It is going to run the function callMe.
+Because of closures.
+We are able to remeber the variable.
+We can place callMe everywhere in function.
+callMeMaybe are using closure.
 
 Closures and Memory
+Benefits.
+-memory efficient
+-Encapsulation
+These two are the coolest part of closures.
+
+function heavyDuty(index){
+	const bigArray = new Array(7000).fill('Smile Face')
+	return bigArray[index];
+}
+
+heavyDuty(688)
+heavyDuty(688)
+heavyDuty(688)
+heavyDuty(688)
+
+We run heavyDuty(688) many times.
+We are creating an big array.
+That dosen't change everything and be destroyed.
+
+We are using 
+function heavyDuty2(){
+	const bigArray = new Array(7000).fill('smileFace')
+	console.log('created Again!')
+	return function(index){
+	  return bigArray[index]
+	}
+}
+
+heavyDuty(688)
+heavyDuty(688)
+heavyDuty(688)
+heavyDuty(688)
+const getHeavyDuty = heavyDuty2();
+getHeavyDuty(688);
+getHeavyDuty(700);
+getHeavyDuty(800);
 
 Closures and Encapsulation
+// Exercise:
+Launch an nuclearBomb.
+Let's figure out how much time we have.
+How long time has been without nuclearDestruction.
+Return an launch function.
+Total peace time.
+Assign a variable ohhno to an variable.
+Ohhno.launch().
+Hiding information from the outside world.
+Main benefities of closure. 
+
+const makeNuclearButton = () => {
+  let timeWithoutDestruction = 0;
+  const passTime = () => timeWithoutDestruction++;
+  const totalPeaceTime = () => timeWithoutDestruction;
+  const launch = () => {
+    timeWithoutDestruction = -1;
+    return '💥';
+  }
+
+  setInterval(passTime, 1000);
+  return {totalPeaceTime}
+}
+
+const ww3 = makeNuclearButton();
+ww3.totalPeaceTime()
 
 Exercise: Closures 2
 
-Solution: Closures 2
+let view;
+function initialize() {
+  let called = 0;
+  return function() {
+    if (called > 0) {
+      return
+    } else {
+      view = '🏔';
+      called = true;
+      console.log('view has been set!')
+    }
 
+  }
+}
+
+const start = initialize();
+start();
+start();
+start();
+console.log(view)
 Exercise: Closures 3
+const array = [1,2,3,4];
+for(let i=0; i < array.length; i++) {
+  setTimeout(function(){
+    console.log('I am at index ' + i)
+  }, 3000)
+}
+Change var to let because let is an scoped variable.
+Solution 2
 
-Solution: Closures 3
+const array = [1,2,3,4];
+for(var i=0; i < array.length; i++) {
+  (function(closurevar){
+  setTimeout(function(){
+    console.log('I am at index ' + array[closurevar])
+  }, 3000)
+  })(i)
+}
+This closure has an IFFE that's going to have it's own private space and nothing will have access to it's variables.
 
 Closures Review
+The first Pillar of JavaScript.
+Functions are an lexical analyze.
+Closures allows us to have an private scope.
+Popularized the concept.
+Added to different languages.
 
 Prototypal Inheritance
+There are two pillar in JavaScript.
+Hope you find this fascinating.
+Help us understand.
+Remebers these chains with binds the Object with Arrays and Functions.
+Inheritance is an object getting access to the properties and methods of a another object.
+Array object and the function object gets access to the object.
+const array = [];
+I created an new array.
+Was created from an constructor.
+proto__ if i go up the prototype-chain__-
+We have toString method on it.
+Because of the prototype chain.
+function a(){}
+a.__proto__.__proto__.
+We only have an prototype chain in JavaScript.
 
 Prototypal Inheritance 2
+let dragon = {
+	name: 'Tanya',
+	fire: true,
+	fight(){
+	  return 5;
+	}
+	sing(){
+	   if(this.fire){
+	   return 'I am ${this.name}, the breather of fire '
+	   }
+	}
+},
+
+dragon.sing()
+
+let lizard = {
+	name: 'Kiki',
+	fight() {
+	 return 1
+	}
+}
+
+const 
+If we want to borrow an method from the dragon method.
+const singLizard = dragon.sing.bind(lizard)
+console.log(singLizard()).
+If it becomes more difficult if we add more methods it becomes more difficult to keep a track of the methods you need to borrow.
+
+But if we do like this.
+
+lizard.__proto__ = dragon;
+lizard.sing();
+The Lizard is able to inherent from the dragon.
+It is going up the prototype chain.
+Base object 
+const dragon = {}
+All objects inherents from base Object.
 
 Prototypal Inheritance 3
+lizard.__proto__ = dragon:
+for(let prop in lizard){
+	if(lizard.hasOwnProperty(prop)){
+	console.log(prop)
+	}
+}
+Only log out what Lizard has of it's owm properties.
+Lizard only has name and fight.
+JavaScript looks after the Prototypes-chain.
+They work in different fashion.
+You should never use __proto__.
+We never manually want to make this.
+Points to the same place in the memory.
+Instead of copying it to many places in memory.
+We are being effcient in the code.
+What happens when we get's to the base object.
+const obj = {}.
+obj.__proto__.__proto__
+We gets null.
+null means absolutely nothing.
+Pass the base object.
+End of the chain.
 
 Prototypal Inheritance 4
+const obj = {name: 'Sally'}
+obj.hasOwnProperty('name').
+Gives us true.
+function a(){
+	
+}
+a.hasOwnProperty('call') i get's false.
+a.hasOwnProperty('name').
+
+All functions has call,apply,bind.
+a.hasOwnProperty() aboves gives false.
+multiplyBy5()
+-Code
+-Name(optional)
+-Properties
+It is up the prototype-chain.
+multiplyBy5.__proto__
+f () { [native code]}
+We have an base-function.
+Store it in an variable like temp1.
+multiplyBy5() has
+-Code()
+-__proto__
+-Name (optional)
+-prototype:{}
+-Properties
+
+__proto links to Function()
+has these
+-Code()
+-prototype:{
+    Here it lives.
+	call,
+	apply,
+	bind
+}
+-Properties
+
+And after that __proto__ links to Object.
+multiplyBy5.__proto__
+f () {[native code]}
+__proto is a reference to prototype: {...}.
+const array = array[].
+[].hasOwnProperty('map')
+Does it have its own map no.
+array.__proto__.hasOwnproperty('map')
+Gives true.
+array.__proto__ points to the father of array.
 
 Prototypal Inheritance 5
+How can we create our own prototypes.
+let human = {
+	mortal: true
+}
+let socrates = Object.create(human);
+socrates.age = 45;
+console.log(socrates.mortal);
+We have used Obeject.create.
+console.log(human.isPrototypeOf (socrates));
+Without __proto__ you use Object.create.
 
 Prototypal Inheritance 6
+Only functions have the prototype property.
+function multiplyBy5(){
+	return num*5;
+}
+multiplyBy5.prototype 
+This prototype we never use it.
+The only time we use is when we have constructor functions.
+multiplyBy5.__proto__.__proto__.
+Prototype functions only exists on functions.
+typeOf Object 
+You get the functions.
+We have all these fundamental objects.
+The Object constructor constructs the wrapper.
+const obj = {}
+It uses the Object constructor.
+This can be hairy and complicated.
+Every function has an prototype property and it references to Object used to attach to properties.
+Object is an function.
+Everything in JavaScript is an object.
+You can go up the prototype chain.
+With prototype you can avoid repeating yourself. 
 
-Exercise: Prototypal Inheritance
+//Exercise - extend the functionality of a built in object
 
-Solution: Prototypal Inheritance
+//#1
+//Date object => to have new method .lastYear() which shows you last year 'YYYY' format.
+Date.prototype.lastYear = function(){
+        return this.getFullYear() - 1;
+}
+
+new Date('1900-10-10').lastYear();
+//'1899'
+
+
+//#Bonus
+// Mofify .map() to print '🗺' at the end of each item.
+Array.prototype.map = function() {
+  var new_arr = [];
+  for(let index = 0; index < this.length; index++){
+        new_arr.push(this[index]+ '🗺');
+  }
+  return new_arr;
+}
+console.log([1,2,3].map())
+//1🗺, 2🗺, 3🗺
+
 
 Exercise: Prototypal Inheritance with this
 
