@@ -1,0 +1,40 @@
+Section Overview
+
+Functional Programming Introduction
+
+Exercise Amazon
+
+Pure Functions
+
+Pure Functions 2
+
+Can Everything Be Pure?
+
+Idempotent
+
+Imperative vs Declarative
+
+Immutability
+
+High Order Functions and Closure
+
+Currying
+
+Partial Application
+
+MCI: Memoization 1
+
+MCI: Memoization 2
+
+Compose and Pipe
+
+Arity
+
+Is FP The Answer To Everything?
+
+Solution Amazon
+
+Reviewing FP
+
+
+

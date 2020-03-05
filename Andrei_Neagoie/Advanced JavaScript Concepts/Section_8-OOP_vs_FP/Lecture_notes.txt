@@ -1,0 +1,6 @@
+Composition vs Inheritance
+
+OOP vs FP
+
+OOP vs FP 2
+
