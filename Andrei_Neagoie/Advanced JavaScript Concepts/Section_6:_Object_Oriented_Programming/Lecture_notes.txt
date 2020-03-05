@@ -1,0 +1,576 @@
+Section Overview
+This is the most exiting section.
+Both Object-oriented and Functional is both programming paradigms.
+It is easy to reason about them.
+
+-Clear + Understandable
+-Easy to Extend
+-Easy to Maintain
+-Memory Effcient
+-DRY(Don't Repeat Yourself)
+
+Make complex code more organized.
+We had machine code before.
+Procedral style of programming creates organization.
+Machine code was just hey load that register computer.
+Fundamental Programming.
+That was functional and Object-oriented programming takes
+effect.
+More people began to consider to approach a way to write programming languages.
+C++ came to a existence.
+Object C.
+The age of internet Java began to become more popular.
+Object programming was kept up with the trend.
+But as the years progressed the programmes think of the art of the good practices.
+Functional and Object was the most developed.
+
+OOP and FP
+Two main components
+-Data
+-Behaviour
+Languages like Scheme and Java.
+Scheme and Java was inspirations of JavaScript.
+Objects allowed us to make inheritance.
+Bring the data to a single location.
+Function-programming says that data and functions is being separated.
+Object-programming says that it creates components and like an arm and leg to build an robot.
+Functional-programming says give me an data and i return something new from the data.
+It's not one over the other.
+The beauty of JavaScript is that is multi-paradigm.
+Pick the right paradigm for the specific problem.
+
+OOP Introduction
+Keywords.
+-This
+-New
+-Public/Private
+Has been around the 1970.
+An object is an box.
+We are modeling real-worlds objects.
+Data can be called states.
+Contains some data of the dragon and methods helps us manipulate.
+-Class based programming
+-Prototypical heritance
+
+OOP1: Factory Functions
+
+Factory Functions
+To show you an example.
+Start from the very basics.
+We need an good example.
+We start an fairy-tale game.
+Let's created an program that is Object-oriented.
+
+const elf = {
+	name: 'Orwell',
+	weapon: 'bow',
+	attack(){
+	 return 'attack with ' + elf.weapon
+	}
+}
+
+elf.attack();
+
+We are going to have multiple different elves.
+
+const elf2 = {
+	name: 'Sally',
+	weapon: 'bow',
+	attack(){
+	 return 'attack with ' + elf.weapon
+	}
+}
+elf2.attack()
+
+We have encapsulation here.We have grouped functionality togheter.
+We can modify our states.
+Model-real world.
+Problem with this is when we need more elves we need to copy and paste over and over again.
+We are not keeping to DRY priniciple.
+//factory functions
+function createElf(name, weapon) {
+    return {
+	name: name,
+	weapon: weapon,
+	attack() {
+	    return 'attack with ' + weapon
+	}
+}
+}
+const peter = createElf('Peter','stones');
+peter.attack();
+const sam = createElf('Sam','fire');
+peter.attack();
+sam.attack();
+Instead of copying and pasteing code.
+We have moved up to Object-oriented programming.
+But this created problem with different locations in the memory.
+
+OOP2: Object.create()
+Solving to have same functionality on every functions.
+const
+
+
+function createElf(name, weapon) {
+    return {
+	name: name,
+	weapon: weapon,
+	attack() {
+	    return 'attack with ' + weapon
+	}
+}
+}
+
+const peter = createElf('Peter','stones');
+peter.attack();
+const sam = createElf('Sam','fire');
+peter.attack();
+sam.attack();
+
+We can manually to this by adding these lines of code.
+
+const elfFunctions = {
+	attack(){
+	  return 'attack with ' + weapon 
+	}
+}
+
+We get the error weapon is not defined.
+sam.attack = elfFunctions.attack
+sam.attack();
+This fucntion has no idea of the weapon.
+
+const elfFunctions = {
+	attack(){
+	  return 'attack with ' + this.weapon 
+	}
+}
+Keyword this helps the function to indentify with the right weapon.
+It is still to much manually work.
+We can use Object.create().
+Object.create helps us to create the link between the objects.
+
+const elfFunctions = {
+	attack() {
+	    return 'attack with ' + this.weapon
+	}
+}
+
+function createElf(name,weapon) {
+	let newElf = Object.create(elfFunctions)
+	  newElf.name: name;
+	  newElf.weapon: weapon;
+	  return newElf
+}
+
+Why we are able to that is thanks to Object.create.
+Object.create creates an link betweem the function and the object.
+Object.create creates the prototype-chain.
+Personally like this.
+Won't see that in the most code-bases.
+Our goal is to get closer to Object-programming.
+We are not using necessarly Object-programming.
+
+OOP3: Constructor Functions
+We didn't have Object.create i the beginning.
+Constructor functions.
+
+function elf(name,weapon){
+	this.name = name;
+	this.weapon = weapon;	
+}
+
+const peter = new elf('Peter', 'stones');
+const sam = new elf('Sam', 'fire');
+sam.name
+The new Keyword automatically returns the object for us and creates the elf-constructor.
+Any functions that are invoked use constructor functions.
+All constuctor functions should start with a capital letter like Elf.
+
+function elf(name,weapon){
+	this.name = name;
+	this.weapon = weapon;	
+}
+
+An new execution is created and we therefore we get automatically gets this keyword.
+New changes the pointer of this keyword.
+If remove new cannot read property name.
+Functions are special type of objects in JavaScript.
+The new key is creating the object,returning the object,assign the object.
+It is callable objects.
+We also get the prototype with the new keyword.
+Prototype finally gets useful.
+
+Elf.prototype.attack = functions(){
+	return 'attack with '+ this.weapon
+} 
+
+We were able to use constuctor functions thanks to new.
+We can also extend our functionality with new functionlaity.
+Arrow-functions is lexiacally scoped.
+Functions is dynamically scoped where it depends who is calling the function.
+
+More Constructor Functions
+function Elf(name,weapon){
+	console.log('this',this);
+	this.name = name;
+	this.weapon = weapon;
+}
+
+function Elf(name,weapon){
+	this.name = name;
+	this.weapon = weapon;
+	console.log('this',this);
+}
+The only thing we can add to the constuctor is to use the this keyword.
+
+function Elf(name,weapon){
+	this.name = name;
+	this.weapon = weapon;
+}
+
+If we comment out the prototype we get error.
+TypeError: sam.attack is not a function.
+Every function we creates get the prototype.
+peter.prototyp gives us undefined because peter is not a function. 
+Only functions get's prototype.
+
+
+//Elf.prototype.attack = function() {
+//	return 'attack with ' + this.weapon
+//}
+
+undefined 
+attack with fire
+undefined
+
+Elf.prototype.build = function() {
+    function building(){
+	return this.name + ' builds a house';
+}
+building();
+}
+
+Building is assigned to the window object.
+We can solve this by.
+const self = this 
+and self.name.
+Prototype is kinda weird and ugly.
+It can get very confusing with prototype.
+
+const peter = Elf('Peter','stones')
+console.log(peter.__proto__)
+const sam = Elf('Sam','fire')
+console.log(sam.attack())
+
+this keyword is very Object-oriented.
+How can we improve this.
+
+Funny Thing About JS..
+One more thing.
+var a = new Number(5)
+typeof a
+var b = 5;
+typeof b
+a === b
+Gives us false.
+When you do a == b gives us true
+because it is coerced.
+b.toString gives us methods availbale to us.
+Methods gives us access to different methods.
+new Date() has built in methods to us.
+Technically everything is almost objects in JavaScript.
+
+OOP4: ES6 Classes
+With ES6 JavaScript finally got the class.
+We are modeling life scenarios.
+Blueprint of what we want to create.
+We have an constructor.
+The beauty of classes we can keep all the methods and instances togheter.
+Get rid of the prototype.
+Much more cleaner.
+This is a true beauty of Object-oriented programming.
+We can keep adding things to the class.
+An instances happens when we call the class.
+instanceof the class.
+We are instanstiate the class.
+This is synctactic sugar.
+This is closest JavaScript for classes.
+Classes are not answer to everything.
+
+Brendan Eich
+
+If i had done classes in JavaScript back in May 1995,
+I would have been told that it was too much like Java or that
+JavaScript was competing with Java. I was under marketing orders to make it look like Java but not make it too big for its britches ... [it] needed to be a silly little brother language. 
+
+Create a language that was to attaract other Java Developers.
+Well they have synctactic sugar.
+We have gone from repetetive code to more grouping.
+Constructor gets runned.
+
+
+class Elf {
+	constructor(name,weapon){
+	this.name = name;
+	this.weapon = weapon;
+	}
+	attack(){
+	  return 'attack with ' + this.weapon
+	}
+}
+
+Object.create() vs Classes
+A big debate with classes.
+Avoid seeing the this keyword.
+No right or wrong.
+Object.create().
+We are able to create links.
+Most of the Community dosen't use Object.create so much.
+The beauty of JavaScript that it is multi-paradigm.
+
+this- 4-ways
+// new binding
+Was used with constructor functions.
+As soon we call it.
+
+function Person(name, age) {
+  this.name = name;
+  this.age =age;
+  console.log(this);
+}
+
+const person1 = new Person('Xavier', 55)
+
+//implicit binding
+Within is when we use implied.
+We created an object and the object will refer to it.
+
+const person = {
+  name: 'Karen',
+  age: 40,
+  hi() {
+    console.log('hi' + this.name)
+  }
+}
+
+person.hi()
+
+//explicit binding
+And this when we dictacte what this keyword should refer to.
+If we want it to refer to window.
+I want to tell what it should refer to with bind(window)
+
+const person3 = {
+  name: 'Karen',
+  age: 40,
+  hi: function() {
+    console.log('hi' + this.setTimeout)
+  }.bind(window)
+}
+
+person3.hi()
+
+// arrow functions
+With arrow functions we can lexically bind it.
+This should not work with just function name just 
+arrow-functions.
+
+const person4 = {
+  name: 'Karen',
+  age: 40,
+  hi: function() {
+    var inner = () => {
+      console.log('hi ' + this.name)
+    }
+    return inner()
+  }
+}
+
+person4.hi()
+
+person4.hi();
+
+Inheritance
+Create an fairy-tail game.
+King and Queen.
+Using the inheritence.
+One option.
+Let's copy the Elf and extend it.
+Elf instance with all these properties.
+We have an Elf class.
+const ogre = {...fiona}
+Look at ogre you now have Fiona as parameters.
+ogre.__proto__.
+These objects dosen't refernece the same memory.
+How can we extended this.
+It used to be difficult.
+
+class Character{
+	constructor(name,weapon){
+	  this.name = name;
+	  this.weapon = weapon;
+	}
+	attack(){
+	 return 'attack with '+ this.weapon;
+	}
+	
+}
+
+This below calls sub-classes in JavaScript.
+We wanna inherent all the properties and methods.
+
+class Elf extends Character {
+		constructor(name,weapon,type){
+		  this.type = type;
+		}
+	
+}
+
+const fiona = new Elf('Fiona','ninja stars');
+fiona
+
+This below creates an refernece error. 
+Must call super constructor in  derived class before accessing 'this' or returning from derived constructor.
+We have the keyword super() to call the super class.
+We must pass the name and the weapon in the constructor.
+
+class Elf extends Character {
+		constructor(name,weapon,type){
+		  super(name,weapon);
+		  this.type = type;
+		}
+	
+}
+
+const dolby = new Elf('Dolby','cloth','house');
+dolby.attack();
+
+Extends the class and point to the Character class.
+Whenever the elf-class is missing an method or property check on the upper prototype chain.
+We want to set any thing we have to call the super class.
+this points to the newly created object.
+this means who am i or rather who is calling me.
+
+class Ogre extends Character {
+	constructor(name,weapon,color){
+	super(name,weapon);	
+	this.color = color;
+	}
+	makefort(){
+	 return 'strongest fort in the world made'
+	}
+}
+
+Able to make Fort function.
+We are able to keep our code nice and organized.
+We can keep creating new things and we can also reruse code.
+More and more classes.
+
+Inheritance 2
+Ogre.protoptype is equal to use classes.
+Using the new keyword.
+We are using underneath the hood the protoype.
+console.log(Ogre.isPrototypeOf(shrek))
+console.log(Character.protoype.isPrototypeOf)
+
+Using instanceOf keyword.
+console.log(dolby instanceOf Character);
+InstanceOf is when we are using the new keyword.
+Instead it dosen't find something it is gonna look up higher instanceOf.
+There are no classes technically.
+In JavaScript we are linking of.
+Javascripts links up the prototype chain.
+Creating effcient linking and saves memory unlike Java for example.
+Because Java copies the object.
+
+Public vs Private
+The idea of private of public fields.
+Add an underscore to an mehtod.
+shrek._attack = false;
+shrek._.
+Other languages has private.
+You can solve this with weak-maps in JavaScript.
+The EccmaScript is in Phase 3.
+A few things that can happen.
+We add #age = 54;
+Private methods are something we working for.
+Not the fatest.
+Private and public is still in work in JavaScript-
+
+OOP in React.js
+You can spot Object oriented programming in the wild.
+Example 
+class Toogle extends React.component.
+We extendeds that use props.
+We have the bind.
+We this setState to refer to bind.
+You can understand this.
+Object-oriented programming is evrywhere.
+
+4 Pillars of OOP
+We started with Object-oriented programming and keep it more organized.
+
+-encapsulation
+Like procedural programming. OOP puts everything into an container. We wrap code into boxes.
+Easier to maintain.
+Nice packages.
+
+-abstraction
+Hiding the complexity from the user.
+The idea of the abstraction.
+Here are the properties and methods.
+
+-Inheritance
+Avoid to rewrite the same code.
+Very importance of OOP.
+
+-Polymorphism
+Means many forms.
+Many interpretation.
+Call the same method but with different results.
+
+
+Exercise: OOP and Polymorphism
+
+class Character {
+  constructor(name, weapon) {
+    this.name = name;
+    this.weapon = weapon;
+  }
+  attack() {
+    return 'atack with ' + this.weapon
+  }
+}
+//Polymorphism--
+//Extend the Character class to have a Queen class. The output of the below code should be:
+
+class Queen extends Character {
+  constructor(name,weapon,type){
+    super(name,weapon);
+    if(type === 'hearts' || type === 'clubs' || type === 'spades' || type === 'diamonds'){
+      this.type = type;
+    }
+    else {
+      this.type = undefined;
+    }
+  }
+  attack(){
+    console.log(super.attack());
+    return 'I am the ' + this.name + ' of '+ this.type +' ,now bow down to me!';
+  }
+}
+
+const victoria = new Queen('Victoria', 'army', 'hearts'); // create a new instace with the queen having (name, weapon, type). Type inlcudes: 'hearts', 'clubs', 'spades', 'diamonds'
+
+victoria.attack() // will console.log the attack() method in Character class AND will return another string: 'I am the Victoria of hearts, now bow down to me! '
+
+Reviewing OOP
+You just finished the Object-Oriented Programming in this course. 
+We learned about this keyword and new.
+How JavaScript can be language and to act like Java.
+Public and Private fields.
+-encapsulation
+-abstraction
+-polymorphism
+-inheritance.

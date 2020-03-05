@@ -575,6 +575,24 @@ console.log([1,2,3].map())
 
 Exercise: Prototypal Inheritance with this
 
+Function.prototype.bind = function(whoIsCallingMe){
+  const self = this;
+  return function(){
+    return self.apply(whoIsCallingMe, arguments);
+  };
+}
+
 Section Review
+We have now have the tools to push our ablilities.
+Closures and Prototypes is very important topic to 
+become an very good programmer.
+Scheme + Java.
+Scheme was an programming language that was created at MIT.
+Everybody wanted Java-developer.
+Brendan Eich wanted to created a very easy programming language.
+Pressure from the Java-Community.
+In Scheme was functions the main thing.
+We have an multiprogramming language.
+You can use multiparadigm to build you app.
 
 
