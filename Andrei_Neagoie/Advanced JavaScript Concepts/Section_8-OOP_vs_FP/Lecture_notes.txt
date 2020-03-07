@@ -1,6 +1,75 @@
 Composition vs Inheritance
+Inheritance is a super-class.
+Extended to more pieces.
+Composition is smaller pieces to create something bigger.
+Debate between these two is really big.
+You can do both things.
+What is the character classes.
+We structure our things of what they are.
+Compisition of what it has.
+Elf gonna have these methods and properties.
+sleep method.
+Which is good.
+Tight coupling problem.
+Opposite of reusable code.
+Rippling effects on to these sub-classes.
+Ogre made something different.
+You can change something on one place can break things.
+//Tight Coupling problem.
+//Fragile Base Class Problem
+//Hierarchy problem
+We can get to a situation we character,ogre.
+We also add an watcher class.
+We want to start sharing methods.
+A classis Gorilla Banana problem.
+You ask for just one Banana and get too much.
+Changing small things.
+How can we fix these with compisition.
+Begin to remove all the methods.
+function Elf(name, weapon, type){
+	let elf = {
+	  name,
+	  weapon,
+	  type
+	}
+}
+The abilities it has.
+
+function attack(character){
+	return Object.assign({}, character,{attackFn()})
+}
+return getAttack(elf)
+Keep adding things.
 
 OOP vs FP
+They are both paradigms.
+Writing code compliant.
+An object is a box that is containing information.
+In FP the box is composed of functions and cannot change the outside world.
+FP is based on different paradigm.
+Pillars of these paradigms.
+Helps us hide information.
+FP it is the idea of pure functions.
+Object-oritented programming is common in Java, C#.
+FP is common in Haskell and Closejure.
+Some languages prefer languages like JavaScript has both.
 
 OOP vs FP 2
+Pros and cons of each.
 
+
+FP
+Good processing large data for applications if you are analyzing.
+
+//Many operations on fixed data
+//stateless
+//pure
+//declarative 
+
+OOP
+Many things like a game. But not too many operations.
+ 
+//few operations on common data.
+//stateful
+//side effects
+//imperative

@@ -1,40 +1,546 @@
 Section Overview
+These are the topics we are going to cover in this part.
+-Composition vs Inheritance
+-Curry
+-Partial Application
+-Pure Functions
+-Referential Transparency
+-Compose
+-Pipe
+
+How are these make us a better programmers.
+When to choose over Obejct-Oriented and Functional Programming Language.
+
+Sometimes it can get very confusing.
+Programming languages like fp work well on distritbuted data.
+React/Redux has popularized this Functional Programming.
+Multiple machines working with data and parallelism.
+
+Joke
+
+CODE WRITTEN IN HASKELL IS GURANTEED TO HAVE NO SIDE EFFECTS.
+...BECAUSE NO ONE WILL EVER RUN IT?
+
 
 Functional Programming Introduction
+What is Functional Programming.
+It is separation of concern.
+Packaing our code into chunks.
+Classes to divide up.
+Separate data and functions.
+There is no general distinction about what is and isn't fp.
+Don't have these concepts.
+Rather operates on the data rather than belonging to the data-sturcture.
+One pillar for FP.
+-Pure Functions
+Separation of a program.
+When something is created it cannot be changed.
 
 Exercise Amazon
+When i learned about the FP learned concepts.
+An exercise why FP can make you an better programmer.
+User experience.
+Allow user to purchase something.
+With these four functions and 
+// Amazon shopping
+const user = {
+  name: 'Kim',
+  active: true,
+  cart: [],
+  purchases: []
+}
+
+
+//Implement a cart feature:
+// 1. Add items to cart.
+function addItem(item){
+    user.cart.push(item);
+}
+
+// 2. Add 3% tax to item in cart
+function give_taxe(){
+  return function(item){
+    return item + item*0.03;
+  }
+}
+
+// 3. Buy item: cart --> purchases
+function buy_item(){
+  return function(elem){
+    var item = user.cart.find(function(cartElem) {
+      return elem === cartElem;});
+    user.purchases.push(item);
+    const index = user.cart.indexOf(elem);
+    user.cart.splice(index,1);  
+  }
+}
+
+
+// 4. Empty cart
+function clear_cart(){
+  user.cart.length = 0;
+}
+
+//Bonus:
+// accept refunds.
+
+// Track user history.
+function createUserHistory(){
+  return function(name) {
+  var user_history = {
+    user_name: name,
+    active:true,
+    bought:0,
+    addedToCart:0
+  }
+  return user_history;
+  }
+}
 
 Pure Functions
+Step by step pure functions.
+And finally when learning all these terms.
+
+What is pure things.
+-No side effects
+-Same input --> output
+
+This function modifies something outside itself.
+An this is called an side effect.
+
+We are sharing an global state.
+How can avoid side effects.
+
+const array = [1,2,3]
+function mutateArray(arr){
+	arr.pop();
+}
+
+function mutateArray2(arr){
+	arr.forEach(item => {
+	arr.push(1)
+	})
+} 
+
+a(array);
+mutateArray2(array);
+console.log(array);
 
 Pure Functions 2
 
+//Side effects:
+const array = [1,2,3];
+function mutateArray(arr) {
+  arr.pop()
+}
+function mutateArray2(arr) {
+  arr.forEach(item => arr.push(1
+  ))
+}
+//The order of the function calls will matter.
+mutateArray(array)
+mutateArray2(array)
+array
+
+// map and concat methods can fix this issue of mutation
+How can we make this function to avoid side-effects.
+
+function removeLastItem(arr){
+Here we have an new copy of the array.
+	const newArray = [].concat(arr);
+	newArray.pop();
+	return newArray;
+}
+
+console.log we get an new array and  we are not modiying anything outside world.
+And because we are not modyfing the array we can expect what to come back.
+
+And another example for avoiding side-effects is this 
+
+function multipleBy2(arr){
+	return arr.map(item => item*2)
+}
+
+We get different arrays and no side effects.
+
+This is function a has side-effects.
+
+function a(){
+	console.log('hi');
+}
+//input --> output
+function a(num1,num2){
+	return num1 + num2;
+}
+
+function b(num){
+	return num*2;
+}
+
+Referential transparency
+b(a(3,4)).
+No matter the input will also give me the same output.
+Makes functions easy to compose.
+Is it possible to have pure functions everywhere.
+
 Can Everything Be Pure?
+We have no side-effects and how matter of times we call it we get the same output.
+Can we do anything without side-effects.
+A program cannot exist without any side-effects.
+We have to interact with the DOM.
+The goal is to minimize side-effects.
+You know where to look when you have a bug.
+Side-effects is not entirely.
+With pure functions is to make your code more predictable.
+We wanna build pure things to make it more predictable.
+One pure functions should do one task only.
+
+Pure functions should be followed.
+-1 Task
+-return Statement
+-Pure
+-No shared state
+-Immutable
+-Composeable
+-Predictable
+
+Making your code predictable.
 
 Idempotent
+function notGood(num){
+	return Math.random(num);
+}
+
+notGood();
+Idempotent always returns what we expect it to.
+
+function notGood(num){
+	return Math.random(num);
+}
+notGood(5)
+Gives always the same answer.
+When we delete a person from a database.
+It is going to return us the same result like an empty string.
+Why do we care about idempotence valuable comes to distributed computation.
+Being able to for exampe calling an function inside itself always gives us the same result.
+
+Math.abs(Math.abs(-50)) 
 
 Imperative vs Declarative
 
+Imperative code is that it tells the computer what to do and how to do it.
+
+Declarative code tells what to do and what should happen.
+
+A computer is better to Imperative things.
+Humans is more declarative for example and don't give so much instructions to get a cup of water for example.
+
+When we go up on higher language we get more declarative.
+How can we make this down below more declarative.
+
+for(let i = 0; i < 1000;i++){
+	console.log(i)
+}
+
+[1,2,3].forEach(item => console.log(item))
+I don't tell the program how to do.
+JQuery is much more imperative than Angular and React.
+We tell exactly how to do it and what to do.
+React for example is being very imperative.
+Is Pending then do this.
+Functional Programming helps us to become more declarative.
+Important to remember.
+React library itself.
+But the idea for us to get up step higher.
+
 Immutability
+Means not to change the data.
+And not to change the state.
+Making copies of the state.
+obj.name = 'Nana'.
+We can change things.
+
+function updateName(obj){
+	const obj2 = clone(obj);
+	obj2.name = 'Nana'
+	return obj2;
+}
+
+const updateObj = updateName
+
+const obj = {name: 'Andrei'}
+function clone(obj){
+	return {...obj};
+}
+obj.name = 'Nana'
+
+The idea behind any sort of data-structure is created.
+Only the changes to the state will be copied.
+In this age memory is cheap.
+We don't copy everything.
+Only the changes is copied.
+We have immutability.
+I'am just going to borrow it and play with and return it.
 
 High Order Functions and Closure
+//HOF
+Simply means one or more things.
+-Takes functions as parameters.
+-Returns a function as a result.
+const hof = () => () => 5;
+hof()()
+
+const hof = () => fn(5);
+hof(function a (x) {return x})
+
+Functions is first-class citizen in JavaScript.
+
+//Closures 
+Closures is something to contain an mechanied state.
+Fairyly easy to create an closure.
+
+const closure = function(){
+	let count = 0;
+	return function increament(){
+		return count++; 
+	}
+}
+
+const increamentFn = closure();
+increamentFn();
+Get's 1.
+
+increamentFn();
+Get's 2.
+
+increamentFn();
+Get's 3.
+
+We are modyfiying the state outside the function.
+We can't use closures.
+We still have access to the Data.
+With closure we are creating Data-privacy.
+We are able to have access.
+Keep going with our programming terminology.
 
 Currying
+Technique to translate evalutation.
+That takes multiple arguments.
+You take a function that takes multiple parameters.
+
+const multiply = (a,b) => a*b;
+How to make this take a parameters one at the time.
+const curriedMultiply = (a) => (b) => a*b;
+curriedMultiply5(5)(3);
+So we are giving a parameter at the time.
+We can also make the function remeber 5.
+const curriedMultiplyBy5 = curriedMultiply(5);
+
+From 10 years 
+curriedMultiplyBy5(4)
+Calling it many times.
+Currying reminds of the methods to save the memory.
 
 Partial Application
+Let's talk about something similar to currying.
+Partially apply a function.
+Taking a function and later use closure.
+//Partial Application
+const multiply = (a,b,c) => a*b*c;
+
+Curried version below.
+const curriedMultiply = (a) => (b) => (c) => a*b;
+curryiedMultiply(3)(4)(10);
+const curriedMultiplyBy(5) = curriedMultiply(5);
+
+Partial Application says no no i want you to do is to call the function once and apply the rest of the arguments.
+
+const partialMultiplyBy5 = multiply.bind(null,5);
+partialMultiplyBy5(4,10)
+
+On the second call i expect all the parameters.
 
 MCI: Memoization 1
+In order to understand Memoization.
+It is like caching.
+You have an small back-pack with tools to use over and over.
+To held some data.
+
+function addTo80(n){
+	console.log('long time')
+	return n + 80;
+}
+
+addTo80(5);
+addTo80(5);
+What if we has to run this muliple times.
+Is it a kinda a way to optimize this.
+
+let cache = {};
+
+function memoizedAddTo80(n) {
+	if(n in cache){
+	  return cache[n];
+	}else {
+	 console.log('long time')
+	 cache[n] = n +80;
+	 return cache[n];
+	}
+}
+
+console.log('1',memoizedAddTo80(5));
+console.log('2',memoizedAddTo80(5));
+Memozization is that we kinda cache the data.
+It is using a cache version.
+It is that you remeber a subproblem.
 
 MCI: Memoization 2
+It is good to have the cache living inside the function.
+The way we bring in the function.
+But the bad thing is that the cache is going to be reset every time we call the function memoizedAddTo80().
+To get around this is to use closure.
+Because of the closure w
+
+function memoizedAddTo80(n) {
+   let cache = {};
+   return function(n) {
+	if(n in cache){
+	  return cache[n];
+	}else {
+	 console.log('long time')
+	 cache[n] = n +80;
+	 return cache[n];
+	}
+}
+} 
+
+const memized = memoizedAddTo80();
+This is going to return a function with cache object that is accessed in the private size.
+It allows to be effecient with our code.
+Memozization to optimize our code.
 
 Compose and Pipe
+We learned a bunch of terminology.
+When we work on our final exercise.
+//Compose
+Any data transformation we know.
+data --> fn --> data --> fn.
+How we can compose of a factory.
+Can be assembled to get the desired output.
+This will become easier.
+We wanna do two things at the time.
+-50 * 3 -
+How can we compose this togheter.
+
+const multiplyBy3AndAbsolute = compose(multiplyBy3, makePositive);
+
+Want a compose function.
+
+const multiplyBy3 = (num) => num*3;
+const makePositive = (num) => Math.abs(num);
+const compose = (f,g) => (data) => f(g(data)).
+
+Best libraries is lambda.
+Just like an assembly line.
+Using compose we can combine functions.
+Move things around so the orders as machines.
+Build functions togheter and create an data-flow.
+All the functions are pure.
+
+//Pipe
+Same thing except going from right to left it goes from left to right.
+
+const pipe = (f,g) => (data) => g(f(data))
+The functions is inverted.
+compose(fn1,fn2,fn3)(50).
+I want to evalatue from left to right.
+pipe(fn3,fn2,fn1);
 
 Arity
+Arity simply means the number of arguments a function takes as 
+parameters.
+Fewer parameters there are the simpler is it to use the function.
 
 Is FP The Answer To Everything?
+Why is fp so great.
+Next video going through the amazon-exercise.
+We have an piece of data we are doing some transformation.
+The idea that a function takes input and makes it predictable.
+It is not the answer to everything.
+Good for parallelism.
+Depends on the problem.
 
 Solution Amazon
+We need to compose these functions togheter.
+Factory called purchaseItem.
+
+
+
+const user = {
+	name:'Kim',
+	active: true,
+	cart: [],
+	purchases: []
+}
+
+const amazonhistory = [];
+
+const compose = (f,g) =>(...args) => f(g(...args));
+
+
+purchaseItem(...fns) => fns.reduce(compose)
+
+function purchaseItem(user,item){
+	return Object.assign({}, user, {purchases:item})
+}
+
+function addItemToCart(user, item) {
+	const updateCart = user.cart.concat(item);
+	return Object.assign({}, user, {cart: updateCart})
+}
+
+function applyTaxToItems(user) {
+	amazonhistory.push(user)
+	const {cart} = user;
+	const taxRate = 1.3;
+	const updatedCart = cart.map(item => {
+	 name: item.name,
+	 price: item.price*taxRate
+	})
+}
+return Object.assign({},user,{cart:updatedCart})
+}
+
+function buyItem(user) {
+	return Object.assign({}, user,{purchases:user.cart})
+}
+
+function emptyCart() {
+	return Object.assign({},user,{cart:[]})
+}
+
+function refundItem(){
+ 	console.log(amazonhistory);
+}
+
+Needed to add an new functionality you can easily add it to the compose.
+Mostly like in a place.
+Why are concepts.
+
 
 Reviewing FP
+We limit repiptition.
+Although the goal is still the same.
+The one benefit at good doing one to one transformation.
+Notice that fp is quite powerful.
+Lists being transformed.
+It could anything you want.
+It lays foundation reuseable code.
+JavaScript makes it easy to pipe functions.
+Learned a lot.
+Build pure functions to avoid side-effects.
+connect in Redux looks like compose.
+Redux really popularized.
 
 
 
