@@ -1,0 +1,211 @@
+Section Overview
+Modules is a very important concept.
+Just like a painter to combine to different arts.
+Modules is just like that.
+Separation of concern.
+Contain things to their own functionality.
+Move around to not disrupt things.
+Go from the very beginning.
+Import code we want to use.
+Our code is broken up to different files.
+Import dependencies.
+
+Not just one massive file.
+Export functionality.
+This idea goes beyond to distributed systems.
+
+What is A Module?
+What are programs in general.
+Modifing the data-
+As human if we had some few variables it is  easy.
+Because of how scope works in JavaScript.
+
+user = {};
+
+function signin(){
+	var textfield = 'heheheh'
+}
+
+function isHuman(user){
+
+}
+
+We are working on a function at time.
+Without talking to other functions.
+We cannot share data.
+We moved the piece of data up the scope chain.
+What's the problem with the code.
+
+//Tight Coupling
+Means everything is connected.
+If we just modify some little part.
+A lot of things makes it hard to debug.
+Polutions of the global data.
+Add different script-files.
+Just adding script-files.
+JavaScript combine every script file as one.
+
+var harry = 'potter'
+var voldemort = 'He who must not be named'
+
+If we just copy this function.
+Funny little function that fights.
+Just randomally generating a number.
+Copy and paste it to the script file.
+Problem arises when we have another script.
+<script> var fight = 'hahaha' </script>
+This the major problem with the scope.
+You start have big problem to debug JavaScript.
+We can no longer have a simple one script file.
+JavaScript has something called ES module.
+
+function fight(char1, char2) {
+  var attack1 = Math.floor(Math.random() * char1.length);
+  var attack2 = Math.floor(Math.random() * char2.length);
+  console.log(attack1);
+  return attack1 > attack2 ? `${char1} wins` : `${char2} wins`
+}
+
+fight(harry, voldemort) 
+
+Module Pattern
+Modules gives us a better way 
+	Global Scope
+	  Module Scope
+		Function Scope
+			Block Scope- let and const
+
+Module Scope can be used to share variables and functions.
+I want to export and import this function.
+This is what i want to import.
+We used closure and encapsulation to use our own modules.
+
+//IIFE
+
+var fightModule =  (function() {
+
+var harry = 'potter'
+var voldemort = 'He who must not be named'
+
+function fight(char1, char2) {
+  var attack1 = Math.floor(Math.random() * char1.length);
+  var attack2 = Math.floor(Math.random() * char2.length);
+  console.log(attack1);
+  return attack1 > attack2 ? `${char1} wins` : `${char2} wins`
+}
+return {
+ fight:fight
+}
+ 	
+})()
+
+We could access the window object still in IIFE.
+We assign an variable to this IIFE.
+We return fight and we can use this functionality.
+Everything we do not export you cannot touch.
+We can have private functions and variables.
+Other benefits was that it was used by JQuery.
+Define a JQuery variable to have access to different things.
+And we can pass globalSecret to the IIFE.
+Adding inside the module JQuery.
+Modify the dollar sign.
+Making things available to the outside world.
+
+Module Pattern Pros and Cons
+Using an IIFE we can wrap an entire JavaScript file.
+Run immeadiately inovoking it.
+Clear benefits only making one variable availbale.
+Good for maintainability.
+Lower dependendcies.
+Import variables to the Module.
+Updating a single module is much easier.
+We can have different engineer team working on different modules.
+Reuseability you skip copy and paste code.
+
+Two main problem with this.
+-Polluting the global namespace
+-Order is important 
+
+CommonJS, AMD, UMD
+Can we design any way to avoid these problems.
+
+CommonJS looks like this.
+var module1 = require('module1')
+var module2 = require('module2')
+
+function fight(){
+	
+}
+
+Export this function. 
+
+module.exports = {
+	fight: fight
+};
+
+Dosen't need js at the end.
+Node is still using it.
+Node.js was creating it.
+Made code very easy to share and made node popular.
+Modules has been made to load synchroncity.
+It is not good for the browser.
+That's why common js is used on the server.
+
+browserIfy let you require modules in the browser.
+Output it into a bundle.js.
+Taking all the scripts.
+
+AMD
+
+define(['module1','module2'],
+  function (module1Import, module2Import) {
+     var module1 = module1Import //.fight;
+     var module2 = module2Import //.importedFunc2;
+
+     function dance(){
+
+     }
+
+     return {
+       dance:dance,
+     };
+  })
+
+  AMD was designed for browsers and loads it asynchronously.
+  People that dosen't like Common.js used AMD.
+  Require.js is AMD.
+
+  UMD
+  Was universal to indentify the module.
+  We needed something to export to import modules.
+
+ES6 Modules
+You can use JavaScript everywhere.
+Lucklily we don't have to worry about AMD,UMD,CommonJS.
+
+
+
+const harry = 'potter'
+const voldemort = 'He who must not be named'
+
+export function fight(char1, char2) {
+  const attack1 = Math.floor(Math.random() * char1.length);
+  const attack2 = Math.floor(Math.random() * char2.length);
+  return attack1 > attack2 ? `${char1} wins` : `${char2} wins`
+}
+
+Using the export keyword.
+And then we are using import {fight} from 'script';
+You can export it like default to.
+You have to define the script as type="module".
+We need to serve it from the server.
+live-server.
+
+Section Review
+We begin with simple script-files.
+Some problems came up when we started with script files.
+Libraries like commonJs and AMD came up.
+JavaScript is an serious language right now.
+We are able to break up our code into different files.
+We can isolate different parts.
+Without modules think how hard it is to build applications.

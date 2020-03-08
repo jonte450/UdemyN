@@ -1,0 +1,125 @@
+What is A Programming Language
+Programmin is simple we give instructions to an computer.
+Wouldn't be able to play pokemon.
+Computer dosen't speak english.
+They speak in 1 or 0.
+Humans have developing programming languages.
+Some languages are closer.
+There are lots of programming languages.
+What are we missing.
+Website to show information.
+Get these files into 1 or 0.
+We need an translater.
+Translater and also understands machines languages.
+What is the translater.
+It can either be a interpreter or compiler.
+Compiler reads all things all at once.
+Interprator takes line by line.
+
+Python Interpreter
+Programming language is just  a set of codes that we are giving to an translator. We need an Machine that reads Python.
+Understands why we are doing things.
+You should be able to teach.
+Different languages has different ways to.
+Afterwards you learn an language things becomes easier an easier.
+We are going into deep topics.
+Talking about the implementation.
+Translation machines we can have different compilers and interpretors.
+The actual language you are downloading is C code.
+Most people talks about cpython.
+PY
+Interpretator
+Machine Code
+Cypython VM
+1 or 0.
+
+How To Run Python Code
+How can we finally run python code.
+Proffesional setup with Python.
+Terminal 
+Where we can run python.
+
+Code Editors
+
+IDEs
+
+Notebooks
+
+Good to have the skills to approach.
+These tools you has to install different.
+All of us to start right the way.
+repl.it favorite tools and allows you to save python files online.
+Name your repl.
+You only need an connection.
+Folders for Python structure.
+Glot.io
+Take your time.
+
+Our First Python Program
+So what is our first program going to do.
+print('Andrei Neagoie')
+You can change font size.
+It runs this piece code on the right side.
+We have Andrei Neagoie.
+We have our main.py to the interpretator and after that in Cpython JVM.
+Input is going to give us a way to capture information
+input('What is your name?').
+We can store information.
+
+name = input('What is your name?')
+
+print(name)
+This is not pure magic.
+We gives this code our interpretator.
+
+Convert code to bytecode.
+
+Python 2 vs Python 3
+You encounter this topic it is unvoidable.
+Python is created by a human.
+Programming language are constantly evolving.
+To make it better and better.
+Python was created in 1991.
+And in 2008 Python 2 had something they wanted to change.
+When you update software on your phone you are expecting to working.
+Python 3 had some breaking changes.
+Something stopped working in 2008.
+Different things.
+In Python 2 print looked like this
+print 'Hello, Geeks' 
+
+Python 3
+print('Hope You like these facts')
+
+Differents are not that big.
+When we learn python.
+You may see some Python 2 code.
+Start using Python 3 and stop using Python 2 because of security codes.
+Searching for answers.
+Reference you can choose.
+You may find answers that are still using Python 2
+
+Why So Many Languages?
+Tackle the question.
+One can we just have one programming language.
+In your career you don't have to know 6 languages.
+No way in your lifetime to learn all of these languages.
+Different programming languages are good at different things.
+It is impossible to build different things.
+Python is slower than Java,C++.
+You don't want to write code for low-level systems and hardware interactions.
+Python is good at one thing.
+Developer productivity.
+Write code really fast.
+Build an app on Android.
+Build scripts.
+Every programming languages excels at something.
+Everything has an trade-off.
+
+Exercise: How Does Python Work?
+Recommend you really do it.
+How does Python works.
+Teach somebody how Python works.
+Go to the buddies challenge.
+It dosen't matter.
+

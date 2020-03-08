@@ -1,0 +1,20 @@
+Course Outline
+Where we are starting and where we are ending.
+Python Basics.
+It is gonna be helpful.
+Python Basics
+Python Basics 2
+Developer Enviroment
+PyCharm
+OOP,FP
+Advanced Python
+Careers Options in python
+Scripting
+Build a password checker
+Data Scraping 
+Automation Selenium
+Web development and ML + Data Science
+
+Build our own Machine Learning.
+See the Magic of Machine Learning.
+Going to make sense.

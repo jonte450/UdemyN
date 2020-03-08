@@ -1,18 +1,305 @@
 Section Overview
+The idea about callbacks and webapi.
+Asynchronous means that we don't have it anymore.
+We have to make requests to fetch-api.
+
+-Web APIs
+-Async/Await
+-Callbacks
+-Microtask Queue (Job Queue)
+-Task Queue (Callback Queue)
+-Promises
+-Event loop 
+
+JavaScript is single thread.
+Browser allows us to use Asynchronous Functions.
+SetTimeOut.
+Promise that's resolves.
+When we run this we have an weird output.
+The whole process begins with ohh that is promise i come back later.
+The event-loop monitors the callback.
 
 How JavaScript Works
+JavaScript is language that is non-blocking.
+We don't need to know how JavaScript works internally.
+What is a program.
+-allocate memory
+-parse and execute scripts
+V8 engine reads the engine.
+Consists of two parts.
+-memory heap.
+-call-stack
+Tells where we are in the memory.
+
+const a = 1;
+const b = 10;
+const c = 100;
+There is  a memory leak.
+
+By increasing the variables.
+Memory leaks is happening laying fills up the memory heap.
+We fill up the memory with Global variables.
+With Call-stack we can have.
+console.log('1')
+console.log('2')
+console.log('3')
+
+Let's pop it up to the call-stack.
+Complex example.
+
+const one = () => {
+	const two = () => {
+	  console.log('4')
+	}
+	two();
+}
+
+console.log(4)
+
+two()
+
+one()
+
+It is gonna remove.
+JavaScript is language is single-threaded language.
+Other languages can have multi-call stack.
+It can have several call-stacks.
+With JavaScript you only have call-stack.
+Wondered what StackOverflow means.
+StackOverflow with call-stack it get's bigger and bigger.
+
+//Recursion
+function foo(){
+	foo()
+}
+
+foo()
+
+Recursion means a function that call itself.
+Single-threaded.
+What if line was an big task.
+The users will be freezed.
+With synchronous task.
+If everybody eats on a resturang we need something non-blocking.
+Asynchronous means non-blocking.
+How do we do Asynchronous programmming.
+
+setTimeout.
+In order for JavaScript to run.
+We need an JavaScript runtime enviroment.
+
+-Call Stack
+-Callback Queue
+-Event Loop
+-Web API's
+
+It triggers the Web API.
+Web-Api starts as a timer.
+Event-loop is checking the Queue.
+Event-listeners.
+Asynchronous is happening a lot.
+JavsScript is a single-thread language.
+Callbacks-functions.
 
 Promises
+Watch it later to understand.
+
+It is a new feature in JavaScript.
+It is everywhere.
+Why we should jumping joy.
+Three possible states.
+-fullfilled
+-pending
+-failed
+
+We have an element we are adding an event-listener to.
+We have an game moving a player.
+Run a callback function to move the player.
+And we have the pyramid of DOM.
+Complicated game.
+grabTweets(error).
+It dosen't look like it is pretty.
+Promises make.
+
+const promise = new Promise((resolve,reject) => {
+	if(true){
+	 resolve('stuff worked.')
+	}
+})
+
+promise.then(result => console.log(result) );
+With promises.catch.
+Where you put the catch-statements matters.
+As promise has a resolve and reject.
+We can keep chaining the promise.
+Assign it to an variable.
+Promises are great for Asynchronous programs.
+Promise.all() takes all the promises.
+Waited to all the promises was resolved.
+When we wanna use promises.
+JSON placeholder gives us userdata.
+You wanna grab some information.
+If everything fails we get an reject from the promise.
 
 ES8-Async Await
+All the hype is about.
+Built on promises.
+Asynchronous code with action.
+With Async Await makes code easier to read.
+Make code look Asynchrnous.
+I promise to return something to you in the future.
+We are gonna keep working.
+Async await is synctactic sugar.
+async word in front of the function.
+await says pause the function before i have something for you.
+The cool thing you can assign variable to the await.
+It makes it look Asynchronous.
+Fetch is a promise.
 
 ES9 (ES2018)
+Let's ES9.
+The first is the object spread operator.
+const animals = {
+	tiget: 23,
+	lion: 5 ,
+	monkey: 2
+}
+
+const { tiger, ...rest} = animals;
+tiger has tiget and rest lion and monkeys.
+Being able to spread the array.
+And this new spread operator you can do it with objects to.
 
 ES9 (ES2018)-Async
+Two other new ES8 features.
+Where we are looping.
+//finally
+.finally()
+After the promise is done the finally is going to be called.
+We get extra and undefined.
+What happens when error is throwed.
+As soon an error is throwed.
+Extra is being called.
+finally is good when it must be called when something must be called depite fail or success.
+
+//for await of
+Make our code more like synchronous function.
+Now we are able to loop through the await.
+loopThrough.
+Array of promises and is iterable.
+We are using for await(let request of arrayPromise).
+We have the useres.
+We have the posts.
 
 Job Queue
+But with the new update with JavaScript.
+They were added newly.
+Event loop has the 
+//Callback Queue.
+We need another queue called the Job Queue.
+Similar to the Callback queue.
+But the Job Queue is smaller but has a higher priority.
+This Jobqueue implemented by the browser.
+Calls the timeout.
+We it see the promise it sends it to the Job Queue.
+JavaScript file hasen't even has returned yet.
 
 Parallel, Sequence and Race
+When it comes to promises there three things that are crucial.
+
+-Parallel
+-Sequencencial
+-Race
+
+We have an function called promisify that takes an item and a delay.
+
+Giving them a delay.
+Resolve with an setTimeOut.
+
+
+const promisify = (item, delay) =>
+  new Promise((resolve) =>
+    setTimeout(() =>
+      resolve(item), delay));
+
+If we call these three functions we have three promises.
+
+const a = () => promisify('a', 100);
+const b = () => promisify('b', 5000);
+const c = () => promisify('c', 3000);
+
+Create an async function here that has promises.
+To run all these promises we are gonna to have output1,output2, output3.
+
+parallel().then(console.log)
+
+async function parallel() {
+  const promises = [a(), b(), c()];
+  const [output1, output2, output3] = await Promise.all(promises);
+  return `prallel is done: ${output1} ${output2} ${output3}`
+}
+
+Want to have a race with all promises.
+Race comes with promises.
+
+
+async function race() {
+  const promises = [a(), b(), c()];
+  const output1 = await Promise.race(promises);
+  return `race is done: ${output1}`;
+}
+
+Sometimes we wanna make sure we done things in order.
+Sequence is really nice.
+We can pause the execution.
+
+async function sequence() {
+  const output1 = await a();
+  const output2 = await b();
+  const output3 = await c();
+  return `sequence is done ${output1} ${output2} ${output3}`
+}
+
+Race between all these three things.
+
+sequence().then(console.log)
+parallel().then(console.log)
+race().then(console.log)
+
+Race is the fatest.
 
 Threads, Concurrency and Parallelism
+
+JavaScript is single thread language.
+We are able to do the complex things thanks to the 
+Async Await.
+
+Where does the computer have the power to run these.
+
+When i create an new tab.
+JavaScript Creates an new thread.
+If it something complicated it takes care it for me.
+Traditional model we have to spot another thread.
+Node.js is able to do this because of workers thread.
+Pass things off to LIBUV.
+Webworker is running parrallel.
+
+var worker = new Worker('worker.js').
+We can span an new worker.
+worker.postMessage('Helloooo')
+
+Webworker is running.
+They don't have access to document.
+Using fetch() calls on the web-API.
+When we do something in the background node does that for us.
+
+Think it just like one-mouth to eat something and you have your hands free.
+
+We are using Concurrency allows to work in the back-ground.
+
+Concurrency + Parallelism (Multi-Core CPU)
+Node makes that possible.
+How do we create threads to run on all these nodes.
+
+const {spawn} = requitr('child_process').
 

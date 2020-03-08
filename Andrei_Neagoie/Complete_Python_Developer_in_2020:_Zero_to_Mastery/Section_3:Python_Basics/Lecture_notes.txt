@@ -1,0 +1,84 @@
+Learning Python
+
+Python Data Types
+
+Latest Version Of Python
+
+How To Succeed
+
+Numbers
+
+Math Functions
+
+DEVELOPER FUNDAMENTALS:I
+
+Operator Precedence
+
+Optional: bin and complex
+
+Variables
+
+Expressions vs Statements
+
+Augumented Assignment Operator
+
+Strings
+
+String Concatenation
+
+Type Conversion
+
+Escape Sequences
+
+Formatted Strings
+
+String indexes
+
+Immutability
+
+Built-In Functions + Methods
+
+Booleans
+
+Exercise: Type Conversion
+
+DEVELOPER FUNDAMENTALS: II
+
+Exercise: Password Checker
+
+Lists
+
+List Slicing
+
+Matrix
+
+List Methods
+
+List Methods 2
+
+List Methods 3
+
+Common List Patterns
+
+List Unpacking
+
+None
+
+DEVELOPER FUNDAMENTALS: III
+
+Dictionary Keys
+
+Dictionary Methods 
+
+Dictionary Methods 2
+
+Tuples 
+
+Tuples 2
+
+Sets
+
+Sets 2
+
+
+
