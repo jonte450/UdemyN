@@ -1,0 +1,266 @@
+Breaking The Flow
+Few a best practices.
+There are built in functions.
+Most of the data-types have their own methods.
+Get to an area that is exiting.
+Discorvered programming with machines.
+The real power comes with running same lines over and over or skipping an line.
+In this section we are gonn talking about looping.
+Machines can do some tasks a lot better than humans.
+We are going to break things apart
+
+Conditional Logic
+We have learned about Booleans.
+Booleans are really important.
+is_old = True
+is_license = True
+
+We can use the if-keyword.
+if condition evaluates to True or False
+
+This is code block here.
+
+if is_old:
+	print('You are old enough to drive')
+print('checkcheck')	
+
+is_old False only checkcheck is going to be printed out.
+We are able to skip lines.
+So we learned if key-word.
+An else simple says.
+If this is true do this else do this.
+Else runs when something aren't true.
+We are controlling our flow in the program.
+You uses elif combination with if.
+Do another condition.
+We get's true for the first block.
+Else is a catch-all if all the other conditions fails.
+An expression is something that produces a value.
+and keyword to combine conditions.
+Both must be true.
+Elif is really useful becomes you can add so many you want.  
+
+Identation In Python
+In order to organize your code with identation.
+Because it is spaces  Python Compiler see that the code is part of a block.
+In Java yo have {} for creating blocks.
+Python is very clean and nice to read.
+In the programming world there is debate about tabs and spaces.
+
+Truthy vs Falsey
+What do they mean?
+Python can do other things as well.
+
+is_old = True
+Python will evalutate this anyway to true.
+is_licensed = 5
+
+if is_old and is_licensed:
+	print('you are old enough to drive, and you have a licesense')
+else:
+  print('you are not of age!')
+
+print('okokoko')
+Python is converting the type to boolean.
+This below is called truthy values because Python convertes this to true.
+
+print(bool('hello'))
+print(bool(5))
+
+This below is going to be converted to Falsy because of Python type conversions.
+
+print(bool(''))
+print(bool(0))
+
+Use stackoverflow to ask questions.
+password = '123'
+username = 'johnny'
+
+if password and username: exists you can skip to convert this into booleans.
+That is a lot nice.
+
+Ternary Operator
+Another way to do conditional logic.
+This is a shortcut.
+Can also be called conditional expression.
+That is something that evaluates to something.
+condition_if_true if condition else condition_if_else
+if is gonna check the condition.
+
+Try to determine if a user is your friend.
+
+is_friend = True
+
+can_message = "message allowed" if is_friend else "not allowed to message"
+
+Prints message allowed.
+
+Short Circuting
+is_Friend = True
+is_User = True
+
+is_Friend and is_User
+is_Friend or is_User
+
+Which operations is performed the most is it the or the and.
+Or skips checks.
+Short Circuting means when the compiler skip checking.
+if False and is_User: False here will skip to check the is_User.
+
+We want our machines to be effecient.
+
+Logicical Operators
+and, or , >, <, == these are logical operators.
+For example print(4 < 5)
+
+= is used to assign variables in python and cannot be used to compare things.
+
+print('a' > 'A') because of the ASCII table when the compiler checks it.
+
+After this course you must google things on your own.
+print(1 < 2 > 3 < 4)
+This will short circuit.
+
+You can also do 3 <= 3.
+0 != 0 is the opposite of saying that they are equal to.
+
+We learned < > == >= <= !=
+and or not
+
+not is the opposite for example 
+not(True) gives false.
+
+Exercise: Logicical Operators
+We are creating a magican game.
+
+is_magican = False
+is_expert = True
+
+#check if magican AND expert: "you are a master magician"
+
+if is_magican and is_expert:
+	print("you are a master magician")
+
+#check if magician but not expert: "At least you're getting there"
+
+elif is_magican and not is_expert:
+	print("At least you're getting there")
+
+#check if you're not a magician: "You need magic powers"
+
+elif not is_magican:
+	print("You need magic powers")
+
+You should focus on read ability.
+Make your code simple and nice.
+Solve the problem in  a simple manner.
+
+is vs ==
+print(True == 1)
+#True 
+print('' == 1)
+#False
+print([] == 1)
+#False
+print(10 == 10.0)
+#True
+print([] == [])
+#True
+
+== equal checks for equality.
+It will convert 1 for exmple to an boolean value.
+[],'' Falsy values.
+Change '1' == 1 gives false back.
+There is another check that we can do and it is.
+Keyword is.
+For example we change == to is instead.
+
+print(True is 1)
+#False 
+print('' is 1)
+#False
+print([] is 1)
+#False
+print(10 is 10.0)
+#False
+print([] is [])
+#False
+
+We get false for everything now.
+is checking for the same memory space.
+But why does this works for numbers and strings.
+Thats because strings and numbers are existing in the same memory location.
+== checks for values.
+
+For Loops
+The concept of loops keeps us running the same code over and over again.
+for item in 'Zero to Mastery':
+	item is variable we can call it whatever.
+	Do something.
+	print(item) prints ever character.
+Things that we can loop over is called iterable like this string 'Zero to Mastery'.
+Goes to every bookshelf.
+Works for array, tuples.
+
+for item in (1,2,3,4,5)
+	print(item)
+print(item)
+Item will be printed because when the loop ends.
+The item will be assigned to 5.
+
+We can nest loops to.
+
+for item in (1,2,3,4,5)
+	for x in ['a','b','c']
+	    print(item,x)	
+
+This will print 1 a 1b 1c and so on.
+
+Iterables
+
+
+Exercise: Tricky Counter
+
+range()
+
+enumerate()
+
+While Loops
+
+While Loops 2
+
+break, continue, pass
+
+Our First Gui
+
+DEVELOPER FUNDAMENTALS: IV
+
+Exercise: Find Duplicates
+
+Default Parameters and Keyword Arguments
+
+return
+
+Exercise: Tesla
+
+Methods vs Functions
+
+Docstrings
+
+Clean Code
+
+*args and **kwargs
+
+Exercise: Functions
+
+Scope
+
+Scope Rules
+
+global Keyword
+
+nonlocal Keyword
+
+Why Do We Need Scope?
+
+Python Exam: Testing Your Understanding

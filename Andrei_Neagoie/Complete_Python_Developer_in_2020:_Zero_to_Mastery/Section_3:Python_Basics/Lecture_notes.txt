@@ -461,24 +461,226 @@ new_sentence = ''.join(['hi','my','name','is','JOJO'])
 print(new_sentence);
 
 List Unpacking
+I have simple list
+a,b,c = [1,2,3]
+print(a)
+print(b)
+print(c)
+1
+2
+3
+
+We can eaisly extend the list
+And we can easily extend the list with below.
+a,b,c, *other = [1,2,3,4,5,6,7,8,9]
+print(a)
+print(b)
+print(c)
+print(other)
+
+1
+2
+3
+[4,5,6,7,8,9]
+
+This is a really nice feature.
+You can add d to get the last element.
 
 None
+Remeber that we had none.
+That is a special data-type.
+It means abscene of value.
+a = none
+weapons = None
+This is completely valid python.
+
+Dictionaries
+I other languages hashes.
+dict is a datatype in python and is also a datastructure.
+Is a way tp organize our data.
+Lists are easily ordred.
+
+dictionary = {
+	'a': 1,
+	'b': 2
+}
+
+In here we have a and b as key-values pairs.
+In order to access the values dictionary['b'] gives back the value if the b-key exists.
+
+A dictionary is unordered values and that means that they are not beside each other in memory.
+
+If i had a very large dictionary it would print the key-values in order.
+Dictionaries is container around data.
+You can have Bools and [1,2,3] or strings as values.
+You also can have like an array of dictionaries.
 
 DEVELOPER FUNDAMENTALS: III
+A really good programmer is to decide which data-structure to use what.
+The thing take practice and time.
+When should you use a list or a dictionary.
+Dictionary has no order.
+But maybe you have a user that plays a game then perhaps a list is better.
+Dictionary holds much more information than an list.
+As we learn different data-structures to use and not to use.
 
 Dictionary Keys
+What about the keys.
+Can use 123 as key below.
 
-Dictionary Methods 
+dictionary = {
+	123: [1,2,3],
+	True: 'hello',
+	[100]: True 
+}
+
+And it works.
+print(dictionary['a'][1])
+
+What about a key: True also works
+
+It dosen't works with a list[100].
+A key must be something that cannot change.
+A list can be changed.
+Dictionary dosen't want to lose it's keys.
+95-99% is most like a string.
+A key in a dictionary must be unique.
+
+Dictionary Methods
+user = {
+	basket: [1,2,3],
+	greet: 'hello'
+}
+
+user['basket'] gives us [1,2,3].
+Errors when we try to access a key dosen't exit.
+We can use user.get('age') gives back None.
+This helps us to avoid these errors.
+
+user.get('age',55) if age dosen't exist set key age with 55.
+
+Keyword must be variables.
 
 Dictionary Methods 2
+We used the keyword in.
+user = {
+	basket: [1,2,3],
+	greet: 'hello'
+}
 
+We can do this to check for example if basket exists in user.
+'basket' in user.
+
+Here it is get's intresting.
+'basket' in user.keys() simple checks the keys.
+
+Which gives us true.
+
+
+'hello' in user.values() this checks the value instead of keys.
+
+
+user.items() grabs the entire dictionary with keys and values.
+Looks like an array.
+
+user.clear() empties totally the dictionary.
+
+user2 = user.copy()
+We then gets two users dictionaries.
+
+user.pop('age') removes the key and returns the key values.
+popitem() it randomally pops off items.
+
+user.update({'age':55}) this method updates the key-values.
+If the key-value doesn't exist it will update it anyway.
+ 
 Tuples 
+Tuples is like lists but you cannot modify them.
+my_tuple = (1,2,3,4,5)
+my_tuple[1] = 'z' it will give us a error.
+You can access this tuple and use the keyword in.
+print(my_tuple[1])  
+print( 5 in my_tuple)
+
+Why do we have to learn tuples we already have lists.
+Tells the programmer to not modify it.
+You cannot sort or reverse them.
+They are faster than lists
+user.it() returns tuples from dictionary.
+
+You can use tuples as keys in a dictionary.
 
 Tuples 2
+Tuples are like lists.
+And you can slice them like a list.
+
+my_tuple = [1,2,3,4,5]
+new_tuple = my_tuple[1:2]
+
+print(new_tuple) gives us (2,)
+Assign different things
+x = my_tuple[0]
+y = my_tuple[1]
+
+And you can assign on one-line with this below.
+
+x,y,z,*other = [1,2,3,4,5]
+
+Tuples only have two methods: count and index.
+my_tuple.count(5) gives 1 because we have one in the my_tuple.
+my_tuple.index(5) gives 4 because this is the index.
+You can also use len() on tuples to.
 
 Sets
+You are thinking why are we learning these things.
+Because these things are lego-blocks.
+All these boring parts is going to make sense.
+Sets are unordered collection of unique objects.
+my_set = {1,2,3,4,5}
+print(my_set)
+You can only write in one value once in a set.
+The set are always returning back one value of everything you have add.
+No duplicates.
+If i gave you an array[1,2,3,4,5,5].
+You can convert an set to set(array).
+my_set[0] will give an error because sets dosen't support indexing.
+1 in my_set to check if an element exist in the set.
+my_set.copy() copy the set to.
 
 Sets 2
+my_set = {1,2,3,4,5}
+your_set = {4,5,6,7,8,9,10}
 
+Seen venn-diagram is quite equal.
+
+Methods in sets
+-.difference()
+It it going to see the difference between two sets.
+my_set.difference(your_set).
+
+-.discard()
+Removes an element from the set.
+my_set.discard(5) for example.
+
+-.difference_update()
+my_set.difference_update(your_set) this is going to modify my_set with the difference.
+
+-.intersection()
+It will give back of what is common in the two sets.
+my_set.intersection(your_set) for example.
+
+-.isdisjoint()
+Are those circles disjointed or rather gives true if the two set has nothing in common.
+my_set.isdisjoint(your_set)
+
+-.issubset()
+This method will give true if my_set.issubset(your_set) for example if my_set {4,5} exists in your_set.
+
+-.issuperset()
+This will give the opposite of issubset.
+If it will give true if the set encompasses the other set.
+
+-.union()
+This method unifies two sets and removes duplicates.
 
 
