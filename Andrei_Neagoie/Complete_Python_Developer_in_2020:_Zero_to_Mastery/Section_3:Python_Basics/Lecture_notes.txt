@@ -1,64 +1,464 @@
 Learning Python
+Four key things you must master.
+-Terms
+-Data Types
+-Actions
+-Best Practices (Good or bad way to learn programming language)
 
 Python Data Types
+-int
+-float
+-bool
+-str
+-list
+-tuple
+-set
+-dict
+
+All about storing information and modyfying the information.
+Learn how to manipulate the data types.
+These data-types calls for the fundamental.
+
+#Classes -> custom classes
+
+#Specialized Data Types
+Special packages and modules.
+Extensions add to the languages
+
+#None
+Like abscenes of values.
 
 Latest Version Of Python
-
-How To Succeed
+All ways keep the latest version of python
 
 Numbers
+int stands for integer.
+1,2,3,4,5
+We can use print to see the answer.
+And some operations.
+You can write print(type(2 + 4)) to get the type.
+We get float when we divide 2/4 by four.
+Why do we need to make this distinction.
+Because of that float is taking more memory than int.
+Floating stores the one part and another part in different parts of memory.
+Both int and float are made for numbers.
+print(type(20+1.1)) python will automatically convert it into a float.
+print(2 ** 2)
+print(2 // 4) returns an integer rounded down.
+print(5 % 4) returns the remainder of the division.
+
+float stands for floating point number.
 
 Math Functions
+There's specific math functions that are built-in on to Python.
+There are some functions we can use.
+Round is rounding up the decimal number.
+round(3.1) => returns 2
+round(3.9) => returns 4
+
+Abs removes - character.
+abs(-20) => returns 20
+
+Some you should google up some functions.
 
 DEVELOPER FUNDAMENTALS:I
+Sprinkled out of the course.
+Tell how to avoid mistakes.
+People don't have an clear path.
+Effcient learning python.
+
+-Don't read the dictionary
+Tendancy to learn every single thing.
+But it's not how it works.
+Understand what's exist.
+There somethings that's don't get's used so much.
+Jump around and slowly.
+Ohh i remeber i can't use that.
 
 Operator Precedence
+What does that means.
+Following operators get's evaluated in order.
+
+That's the idea of 20 - 3 * 4 multiply this first.
+First the brackets ().
+Second the **.
+Third  * and /.
+Fourth + and - operators.
+
+Exercise: Operator Precedence 
+# Guess the output of each answer before you click RUN
+# Try to write down your answer before and see how you do... keep it mind I made it a little tricky for you :)
+
+print((5 + 4) * 10 / 2)
+#45.0
+print(((5 + 4) * 10) / 2)
+#45.0
+print((5 + 4) * (10 / 2))
+#45.0
+print(5 + (4 * 10) / 2)
+#25.0
+print(5 + 4 * 10 // 2)
+#25
 
 Optional: bin and complex
+Extra data-type called complex.
+Only using Complex type when doing some Complex math.
+
+Numbers gets stored as binary.
+bin(5) going to return 0b101.
+b stands for binary.
+Just intresting that it exist.
+int('0b101', 2) return an numer base 2 returns 5.
 
 Variables
+We are missing an important concept.
+Called variables.
+What are they exactly.
+They store information.
+You need to hold information on the computer.
+
+For example we have an quiz-program.
+iq = 190
+Once we assign we a variable we can use it later.
+print(iq).
+Programs are simple data are being manipulated.
+Assigning an value is sometimes called binding.
+Our computer knows how to look after information.
+Dosen't matter how our machine stores it.
+Best practices about to write variables.
+-snake_case
+-Start with lowercase or underscore
+-Letters, numbers, underscores
+-Case sensitive
+-Don't overwrite keywords
+
+Underscore in python signifies an private variable.
+We cannot use keywords in python.
+Colors are going to change when you write.
+Rule is that variables are being descriptive.
+Variables can reassigned.
+You can use variables how you want.
+We are talking about classes later on.
+
+#Constants 
+Are things that never changes.
+These variables should be left alone.
+
+Like PI = 3.14.
+__ called dunder variables.
 
 Expressions vs Statements
+You are gonna hear this a lot.
+Expression are something that produces a value.
+iq = 100
+user_age = iq / 5;
+Like iq / 5;
+
+This following is statements.
+iq = 100
+user_age = iq / 5;
 
 Augumented Assignment Operator
+some_value = 5
+some_value = 5 + 2
+some_value = some_value + 2.
+Something neater way to do this.
+You can do something like this.
+some_value += 2 or some_value -= 2
+For this to work you must create the value.
 
 Strings
+str stands for strings.
+A string is simple a type of text.
+'hi hello there'
+Also with "hi hello there"
+print(type("hi hello there"))
+<class 'str'>.
+Creating some login-form.
+
+username = 'supercoder'
+password = 'supersecret'
+long_string = '''
+WOW
+O O 
+---
+'''
+
+''' For more line than one '''
+
+print(long_string)
+
+first_name = 'Andrei'
+last_name = 'Neagoie'
+full_name = first_name +' ' +last_name;
+print(full_name)
+
+And use ' ' this for space between.
 
 String Concatenation
+It simply means adding strings togheter.
+print('hello' +' Andrei')
+print('hello' + 5)
+This gives us typerror.
 
 Type Conversion
+str is a built in action
+str(100) is a number.
+print str(100)
+I get an 100.
+Let's check the type.
+print(type(str(100)))
+Gives us back <class 'str'>
+print(type(int(str(100)))
+We get's this back <class 'int'>
+
+a = str(100)
+b = int(a)
+c = type(b)
+print(c)
+Gives back <class 'int'>
+It is called type conversion.
+Talking a lot about that in the course.
 
 Escape Sequences
+weather = 'It's sunny'
+We can add this below to fix this error
+weather = "It's sunny"
+But if we wanted to change this to 
+weather = "It's "kind of " sunny"
+We can use escape sequences for that
+weather = "It\'s \"kind of\" sunny"
+\ means that for the python interpreter everything that comes after is a string.
+\t i want you to add a tab spacing to the string.
+\n i want you to add a new line.
 
 Formatted Strings
+We want a program that dynamic.
+When a user login we wanna display what the user has in the cart.
+
+name = 'Johnny' 
+
+We wanna display on the page.
+print('hi ' +name)
+
+We get more and more information like 
+age = 55
+print('hi ' +name+'. You are ' + str(age) + ' year old')
+We can get different information.
+print(f'hi {name}. You are {age} years old')
+With f we can skip some conversions and + and ''.
+You didn't have this.
+What we had was .format().
+Works the same way.
+print(f'hi {1}. You are {0} years old'.format(name,age))
+We can define the order to.
+You can also create new variables to in.
 
 String indexes
+str is an ordered sequence of characters.
+String underneath the hood as an ordered sequuence.
+'me me me' space are being stored.
+Everything is ordered in like an book-shelf.
+We are gonna to look in a shelf-number.
+Using an index
+#01234567
+selfish = '01234567'
+print(selfish[::-2])
+Quite unique to python.
 
 Immutability
+What does immutability mean.
+selfish = '8'
+print(selfish)
+You cannot change the string.
+Immutability.
+You cannot change the string.
 
 Built-In Functions + Methods
+Strings has len.
+print(len('helllooooo'))
+The len is 9.
+A neat thing.
+greet = 'helllooooo'
+print(greet[0:len(greet)])
+This len is quite useful.
+Methods are similar to functions.
+Let's explore string methods.
+Only the string can perform.
+Usually has a dot before.
+
+quote = 'to be or not to be'
+print(quote.upper()) 
+Everything get's captialized.
+print(quote.capitalize())
+First letter get's capitalized.
+print(quote.find()) 
+Does be exist.
+Gives the first occurrence.
+print(quote.replace('be',me))
+We can overwrite strings but we cannot change it.
 
 Booleans
+bool has only two options true or false.
+name = 'Andrei'
+is_cool = False
+
+is_cool = True
+
+bools is like 0 or 1
+That's it.
+They can be used to control or flag values.
+bool(1) true bool(0) false.
+Convert a string to boolean.
 
 Exercise: Type Conversion
+How do you think how facebook works under the hood.
+name = 'Andrei Neagoie'
+age = 50
+relationship_status = 'single'
+
+relationship_status = 'it\'s complicated'
+
+birth_year = input('what year were you born?')
+age = 2019 - birth_year
+print(f'Your age is {birth_year_c}')
 
 DEVELOPER FUNDAMENTALS: II
+Added an comment with #.
+As soon the python sees am # it skips this line.
+Comments is very important.
+Comes with practice.
+The idea is to write code easy to read.
+The only time you want to add code it is when it is complicated.
+Maybe my code is hard to read.
+But remeber more comments dosen't mean it is better code.
 
 Exercise: Password Checker
 
+name = input('what is your username?')
+password = input('what is your password?')
+
+hidden_password = '*' * len(password)
+password_length = len(password)
+
+print(f'{name} your password {hidden_password} is {password_length} letters long')
+
 Lists
+Let's talk about our next data type.
+Lists li = [1,2,3,4,5]
+li2 = ['a','b','c']
+We can also mix and match
+li3 = [1,2,'a',True]
+Lists are forms of arrays.
+They are a collection of items.
+
+# Data structure
+Fridges are good to stuff food.
+Container that has pros and cons to access data.
+
+amazon_cart = ['notebooks','sunglasses']
+amazon_cart[0] to access the item.
+amazon_cart[2] Error index out of range.
 
 List Slicing
+amazon_cart = ['notebooks','sunglasses','toys','grapes']
+print(amazon_cart[0:2])
+
+Go almost to the end.
+print(amazon_cart[0::2])
+
+Strings are immutable but lists are mutable.
+amazon_cart[0] = 'laptop'
+You can change lists.
+Create another 
+print(amazon_cart[0:3])
+print(amazon_cart) 
+With lists slicing your are creating an new list.
+new_cart = amazon_cart we are not copying we are simply changing.
+If you want to copy an list you simply do this below
+new_cart = amazon_cart[:].
+This idea of copying and modyfing the list.
 
 Matrix
+A way to describe multidimensional lists.
+matrix = [[1,2,3],
+		  [2,4,6],
+		  [7,8,9]]
+
+These things are comming up a lot in Machine Learning or Image Recognition.
+Maybe we could have 0 or 1 to act as pixels.
+With Matrixs we can do heavy work.
 
 List Methods
+Check out actions we can do on lists.
+basket = [1,2,3,4,5]
+print(len(basket))
+Gives 5.
+Mehtod is owned by objects.
+The way we use these methods.
+#Adding
+print(basket.append(100))
+
+new_list = basket.append(100)
+print(basket)
+print(new_list)
+Gives none with new list.
+Append changes the list on place.
+I just changing it for you.
+After we appended it we can reference it.
+
+basket.insert(4,100)
+Added 100 at index 4.
+Insert also only modifies the list on the place.
+
+new_list = basket.extend([100])
+Also adding things to the list.
+
+#removing
+basket.pop()
+print(basket)
+Basket pop off whats end of the list.
+basket.pop(0) removes anything at index 0.
+
+basket.remove(4) we give the value we want to remove
+but the basket.pop() we give the index.
+
+Remove is just changing things at place.
+Pop returns whatever what we have removed.
+basket.clear() empties the list or clear it.
 
 List Methods 2
+basket = [1,2,3,4,5]
+print(basket.index(2)) gives us the index of an element.
+Keyword is what we use a python key-word.
+We can use in that means something. 
+Like print('d' in basket)
+Works for strings too.
+print('i' in 'hi mi name is ian')
+
+print(basket.count('d'))
+Returns how many times d occurs in the list.
 
 List Methods 3
+sort() modifies the list in the place.
+Sorts the list.
+sorted(basket) produces an new array.
+That's difference between by sort and sorted.
+copy returns an new list.
+basket.reverse() is just switching indexes to opposite sides.
 
 Common List Patterns
+
+Using len() lot.
+print(basket[::-1])
+This list slicecing creates an new list.
+You see basket[::-1] reversed the basket and creates an new list version or a copy.
+list(range(1,100)) gives a new list with a range between 0 to 100.
+''.join([]) actually takes an list and joins it.
+Joins with whatever that is in front of it.
+This below is the best practice for using join for strings.
+new_sentence = ''.join(['hi','my','name','is','JOJO'])
+print(new_sentence);
 
 List Unpacking
 
