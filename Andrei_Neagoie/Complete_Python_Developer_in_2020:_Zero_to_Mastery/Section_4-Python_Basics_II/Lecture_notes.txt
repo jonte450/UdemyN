@@ -217,50 +217,1445 @@ for item in (1,2,3,4,5)
 This will print 1 a 1b 1c and so on.
 
 Iterables
+You are going to hear this term in many programming languages.
+It means an object or a collection that can be itarated over.
+It can be list ,dictionary ,tuple ,set ,string
 
+They can be itrated over that's why it is called iterable.
+One by one check each item in the collection.
+Iterable is called an action.
+
+For example we have
+
+user = {
+	name: 'Golem',
+	age: 5006',
+	can_swim: False
+}
+
+for item in user:
+	print(item)
+
+This Results with that the key-values becomes printed.
+name
+age 
+can_swim
+
+But if i wanted to get the values.
+
+for item in user.items():
+	print(item)
+
+This will print out the tuples.
+
+('name','Golem')
+('age', 5006)
+('can_swim', False)
+
+for item in user.values():
+	print(item)
+
+This will print out the values
+
+for item in user.keys():
+	print(item)
+
+
+To get the keys and values quickly
+
+for key, values in user.items():
+	print(key,values)
 
 Exercise: Tricky Counter
+#counter
+Count the items in a list
+
+my_list = [1,2,3,4,5,6,7,8,9,10]
+
+sum = 0
+for num in my_list:
+	sum += num
+
+print(sum)
+
+Think about the indentitation.	
 
 range()
+One of the most common tool in looping is using range.
+It returns a object that produces a sequence of intergers from start to stop.
+
+print(range(100))
+We gets range(0,100).
+for number in range(0,100):
+  print(number)
+
+I can tell the loop how many times i wanna loop.
+
+If an programmer dosen't need an variable you can use _.
+For example below
+
+for _ in range(0,100):
+  print(_)
+
+I just wanna make the loop i don't care about the variables.
+
+For example you can add an step here for a third parameter.
+
+for _ in range(0,10,2):
+  print(_)
+
+
+for _ in range(10,0,-1):
+  print(_)
+
+If you wanna do this reverse.
+
+for _ in range(2):
+  print(list(range(10)))
+
+In this example above you can create to lists
+[0,1,2,3,4,5,6,7,8,9]
+[0,1,2,3,4,5,6,7,8,9]
 
 enumerate()
+This is not common as range.
+We wrap this around something we want to iterate over.
+It will return an index counter and the item at the index.
+
+for i, char in enumerate('Hellooo')
+	print(i,char)
+
+Very useful if you needs the index and the counter
+
+for i, char in enumerate(list(range(100))):
+  print(i,char)
+  if char == 50:
+         print('Index of 50 is: '+str(i))
 
 While Loops
+They are little different.
+
+i = 0
+while 0 < 50:
+   print(i)
+
+It is becomming an inifinte loop.
+Kept going.
+The program dosen't know when to stop.
+We have to be really careful.
+We can use a break-statement.
+
+i = 0
+while 0 < 50:
+   print(i)
+   break
+
+We want to loop 50 times.
+
+i = 0
+while 0 < 50:
+   print(i)
+   i = i + 1
+
+i = 0
+while 0 < 50:
+   print(i)
+   i = i + 1
+else:
+   print('done with all the work')
+Why you wanna write a else here.
+You wanna make sure that the loop is finished at there.
 
 While Loops 2
+When should you use a for-loop or while-loop.
+We can loop over a list in both a while-loop and for-loop.
+
+my_list = [1,2,3]
+
+for item in my_list:
+	print(item)
+
+i = 0
+while i < len(my_list):
+	print(i)
+	i +=1	
+
+While-loops are very flexible.
+We must to create a variables.
+We can do a lot.
+
+For-loops are simpler.
+
+The golden rule: When it is simple objects for-loops may be a better choice.
+
+Not sure how long it will take for looping.
+When you a long email-list.
+And so long keep sending email.
+For example below:
+
+while True:
+	input('say something:')
+
+We can use conditional logic.
+
+while True:
+	response = input('say something:')
+	if( response == 'bye')
+		break
 
 break, continue, pass
+When we use break we stops the for-loop.
+
+Two other things we use beside break.
+continue.
+
+my_list = [1,2,3]
+for item in my_list:
+	print(item)
+	continue
+
+Continue seems useless.
+
+for item in my_list:
+    continue
+	print(item)
+
+Nothing get's printed and we always starts over.
+Compiler will go back over and over again when it sees continue.
+
+Pass i used when the programmer has not comed up of what he wanna do for example with the for-loop below.
+
+my_list = [1,2,3]
+for item in my_list:
+	# thinking about it
+	pass
+	
+
+pass use to skip the line.
 
 Our First Gui
+We are gonna do a little fun exercise.
+Simulate a GUI.
+I see images on my screen.
+
+#Exercise
+#Exercise!
+#Display the image below to the right hand side where the 0 is going to be ' ', and the 1 is going to be '*'. This will reveal an image!
+
+#Exercise!
+#Display the image below to the right hand side where the 0 is going to be ' ', and the 1 is going to be '*'. This will reveal an image!
+picture = [
+  [0,0,0,1,0,0,0],
+  [0,0,1,1,1,0,0],
+  [0,1,1,1,1,1,0],
+  [1,1,1,1,1,1,1],
+  [0,0,0,1,0,0,0],
+  [0,0,0,1,0,0,0]
+]
+
+for row in picture:
+  for col in row:
+    if col == 1:
+      print('*', end ="")
+    else:
+      print(' ', end ="")
+  print('')
+
+We add new end='\n'
+
+#1 iterate over picture
+    # if 0 -> print ''
+    # if 1 -> print *
+end="" means we don't want a new line.
+Add a print empty line.    
 
 DEVELOPER FUNDAMENTALS: IV
+What is good code?
+How does it mean that his a good programmer.
+
+#clean
+Do we follow the best practices.
+Or making lists funky.
+We make sure that every line is readable.
+
+#Readability
+Is the code easy to understand.
+Commenting important.
+Depending on your style you want to add comments.
+
+#Predictability
+Using the newest feature.
+You does things very well.
+As we get into more in the course.
+
+#DRY
+You don't want to have code that dosen't repeat over and over.
+Maybe using functions.
 
 Exercise: Find Duplicates
+Print the duplicates.
+some_lists = ['a','b','c','b','d','m','n','n']
+
+check_elem = dict()
+
+for check in some_lists:
+	if check in check_elem:
+		check_elem[check] += 1
+	else:
+		check_elem[check] = 1
+
+
+for key,value in check_elem.items():
+	if value > 1:
+		print(key)
+
+Functions
+Allows to perform actions to or data-types.
+We use def is short for define a functions.
+
+def say_hello():
+   print('helloooo')
+
+We defined and created the say_hello().
+After we define say_hello() i get hello.
+The reason functions is so powerful because of DRY.
+You want to do something over and over again.
+Remeber the Christmas Tree you should run that over and over again.
+show_tree().
+Keeps our code DRY.
+If you call show_tree() before you define it you will get an error.
+If you print(show_tree) you get the memory place. 
 
 Default Parameters and Keyword Arguments
+We will give parameters inside the brackets.
+The function is able to recieve these variables.
+
+def say_hello(name, emoji):
+	print(f'hellloooo {name} {emoji}') 
+
+Arguments are the actual values we provide to the function.
+Parameters 
+say_hello('Andrei','Smiley face') #call invoking the function.
+You can extense the function with other names.
+
+Postitional arguments.
+keywords arguments dosen't matter.
+You should to follow same practices.
+Make sure that the arguments are in order.
+Default parameters.
+
+def say_hello(name='Darth Vader', emoiji= default) {
+	print(f'Helloooooo {name}{emoiji})
+}
+
+This will still return Helloooooo Darth Vader Emoji with
+say_hello()
+
+This is great way to run if you called the function in wrong way.
+
+Postional Arguments is good because of clearity.
 
 return
+It is a keyword in Python.
+
+def sum(num1,num2):
+	num1 + num2
+
+sum(4,5)
+
+Functions must always return something. And if they don't return something we get back None.
+
+Because Functions can do two things.
+-Return a value.
+-Modifies a value.
+
+# A function should do one thing very well.
+# Should return something.
+
+Functions should do things predictable.
+total = sum(10,5)
+total will have 15 as a value.
+This is the power of functions.
+Able to call and return them.
+
+What's happen if i do this?
+
+def sum(num1,num2):
+	def another_func(num1,num2):
+		return num1 + num2
+
+total = sum(10, 20)
+print(total)
+
+We get None.
+another_func dosen't get call.
+
+def sum(num1,num2):
+	def another_func(n1,n2):
+		return n1 + n2
+	return another_func(num1,num2)
+
+total = sum(10, 20)
+print(total)
+
+Now we get the function.
+And replace num1 and num2 with n1 and n2 instead for claritity.
+
+One last thing a return keyword exits the function.
 
 Exercise: Tesla
 
+def checkDriverAge(age=0):
+  if int(age) < 18:
+    print("Sorry, you are too young to drive this car. Powering off")
+  elif int(age) > 18:
+	  print("Powering On. Enjoy the ride!");
+  elif int(age) == 18:
+	  print("Congratulations on your first year of driving. Enjoy the ride!")
+
+#1. Wrap the above code in a function called checkDriverAge(). Whenever you call this function, you will get prompted for age. 
+# Notice the benefit in having checkDriverAge() instead of copying and pasting the function everytime?
+
+age = input("What is your age?: ")
+checkDriverAge(age)
+checkDriverAge()
+
+
+
+#2 Instead of using the input(). Now, make the checkDriverAge() function accept an argument of age, so that if you enter:
+#checkDriverAge(92);
+#it returns "Powering On. Enjoy the ride!"
+#also make it so that the default age is set to 0 if no argument is given.
+
 Methods vs Functions
 
+Methods and Functions.
+We have functions like
+These are built-in functions.
+
+-list()
+-print()
+-max()
+-min()
+-input()
+
+def some_random_stuff():
+	pass
+
+some_random_stuff()
+
+Mehtods are different you use the .
+for example 'heelloo'.string mehtods.
+.captialiaze only will you an error.
+
+An method most be owned by something.
+For example string owns captialiaze() method.
+There are ways to build your own methods.
+
+Methods and Functions makes us to take actions on our data-types.
+
 Docstrings
+There are unique way we can do with functions.
+
+def test(a):
+	'''
+	Info this function test and prints param a
+	'''
+	print(a)
+
+test('!!!!!')
+
+When you hover over the function this let's the user to know what the function does.
+
+help(test) You will get 	Info this function test and prints param a
+
+print(test.__doc__) You get the same things.
 
 Clean Code
+Code example to do with functions.
+def is_even(num):
+	if num % 2 == 0
+	  return True
+	elif num 2 != 0
+	  return False
+
+is_even(50)
+
+How can we clean up the code.
+If we only checks for even.
+We don't even need the elif.
+
+def is_even(num):
+	if num % 2 == 0
+	  return True
+	else:
+	  return False
+
+Or because of the return statement stops the function we can clean this up
+
+def is_even(num):
+	if num % 2 == 0
+	  return True
+	return False
+
+Or just return the function.
+
+def is_even(num):
+	return num % 2 == 0
+
+You can only to clean up code.
 
 *args and **kwargs
+How can we use these keywords.
+
+def super_func(args):
+	return sum(args)
+
+super_func(1,2,3,4,5)
+
+Will give you an error.
+
+Traceback (most recent call last):
+  File "main.py", line 5, in <module>
+    super_func(1,2,3,4,5)
+TypeError: super_func() takes 1 positional argument but 5 were given
+
+def super_func(*args):
+	print(args)
+	return sum(args)
+
+super_func(1,2,3,4,5)
+
+*Args is an tuple of arguments.
+We can extend any function to take any number of parameters.
+
+**kwargs
+def super_func(*args,**kwargs):
+	print(kwargs)
+	for items in kwargs.values():
+		total += items
+	return sum(args) + total
+
+print(super_func(1,2,3,4,5,num1=5, num2=10))
+
+We have the *args allows us to grab the positional arguments.
+We have the **kwargs allows us to grab any number of keywords arguments and get an dictionary.
+
+And use it however we want.
+
+Rule of the ordering.
+
+#Rule: params, *args , default parameters, **kwargs
+This means that you must define the arguments in this order when you are writing your function.
 
 Exercise: Functions
+Create an function highest_even(li):
+First of all create an new list called even.
+If the number is even you add it.
+And return the highest number.
+
+def highest_even(li):
+  even_numbers = []
+  for num in li:
+    if num % 2 == 0:
+      even_numbers.append(num)
+  return max(even_numbers)
+
+print(highest_even([10,2,3,4,8,11]))
+Check the identatation.
 
 Scope
+In order to finalize the term of functions.
+Scope is something present in a lot of programming languages.
+
+print(name())
+
+What variables do you have access to.
+Scope in Python has a functional scope.
+
+Total in a functional scope now.
+
+def some_func():
+	total 100
+
+
+total = 100
+Total is in the global scope.
+
+if True:
+	x = 10
+
+When we create an function we create an new world.
+Scope is who has access to who. 	
 
 Scope Rules
+a = 1
+
+def confusion():
+	a = 5
+	return a
+
+print(a)
+print(confusion())
+1 and 5 will be printed.
+
+First we assign a = 1 and we created an new function called confusion(). 
+Print a checks the global scope.
+
+Why is a equal to 1.
+When the Python compiler run the confusion() it will create it's own universe.
+
+The order the Python compiler follows.
+
+#1 - start with local scope
+#2 - It's their a Parent local scope
+#3 - Global Indentation of nothing
+#4 - Built-in python functions
+
+def parent():
+	a = 10
+	def confusion():
+		return a
+	return confusion()
+
+We return and run confusion() so confusion reassings it.
+
+print(parent())
+print(a)
+
+def parent():
+	def confusion():
+		return sum
+	return confusion()
+
+Is sum a built-in function.
+This is the scope rules Python follows.
 
 global Keyword
+a = 10
+
+def confusion(b):
+	print(b)
+	a = 90
+
+confusion(300)
+Parameters are local variables we can use it inside the function.
+
+It it a way to refer to a global variabel.
+example creating a counter.
+
+total = 0
+
+def count():
+	total += 1
+	return total
+
+print(count())
+
+We will get the error below:
+
+Traceback (most recent call last):
+  File "main.py", line 7, in <module>
+    print(count())
+  File "main.py", line 4, in count
+    total += 1
+UnboundLocalError: local variable 'total' referenced before assignment
+
+If you run the total it will reset the total.
+We can fix this with the global keyword.
+
+total = 0
+
+def count():
+	global total
+	total += 1
+	return total
+
+print(count())
+print(count())
+print(count())
+
+Will print 3.
+This is not a good way to do things.
+
+Dependecy injection.
+Confusing we are able to focus on it's health.
+In this way we able to.
+print(count(count(count()))
 
 nonlocal Keyword
+A new keyword in Python 3.
+The non-local is used to refer to parent-local.
+I want to use something outside the scope of the function. 
+
+# Scope - what variables do I have access to?
+def outer():
+    x = "local"
+    def inner():
+        nonlocal x
+        x = "nonlocal"
+        print("inner:", x)
+    inner()
+    print("outer:", x)
+outer()
+
+#1 - start with local
+#2 - Parent local?
+#3 - global
+#4 - built in python functions
+
+Prints:
+inner: nonlocal
+outer: nonlocal
+
+We have an outer function.
+We have an x local that is local.
+non-local is reassigns x to nonlocal.
 
 Why Do We Need Scope?
+I wanna adress a question.
+Why not all global.
+It would make the headache go away.
+Computers dosen't have inifite powers or memory.
+When we create a funtion we create a space in memory.
+But as programs get's larger and larger.
+When you call a function Python destorys the local variables.
+Python will call the garbage collector.
+Python automatically removes and saves memory.
 
 Python Exam: Testing Your Understanding
+
+Python Quiz
+
+Test 1:
+
+Question 1 of 25:
+
+What is a correct syntax to output "Hello World" in Python?
+print("Hello World")  
+
+Question 2 of 25:
+How do you insert COMMENTS in Python code?
+#This is a comment  
+
+Question 3 of 25:
+Which one is NOT a legal variable name?
+my-var  
+
+Question 4 of 25:
+How do you create a variable with the numeric value 5?
+x = int(5)
+x = 5
+Both the other answers are correct  
+
+Question 5 of 25:
+What is the correct file extension for Python files?
+.py  
+
+Question 6 of 25:
+How do you create a variable with the floating number 2.8?
+x = 2.8
+x = float(2.8)
+Both the other answers are correct  
+
+Question 7 of 25:
+What is the correct syntax to output the type of a variable or object in Python?
+print(type(x))  
+
+Question 8 of 25:
+What is the correct way to create a function in Python?
+def myFunction():  
+
+Question 9:
+In Python, 'Hello', is the same as "Hello"
+True  
+
+Question 10 of 25:
+What is a correct syntax to return the first character in a string?
+x = "Hello"[0] 
+
+
+Question 11 of 25:
+Which method can be used to remove any whitespace from both the beginning and the end of a string?
+strip()  
+
+Question 12 of 25:
+Which method can be used to return a string in upper case letters?
+upper()  
+
+Question 13 of 25:
+Which method can be used to replace parts of a string?
+replace()  
+
+Question 14 of 25:
+Which operator is used to multiply numbers?
+*
+
+Question 15 of 25:
+Which operator can be used to compare two values?
+== 
+
+Question 16 of 25:
+Which of these collections defines a LIST?
+["apple", "banana", "cherry"]  
+
+Question 17 of 25:
+Which of these collections defines a TUPLE?
+("apple", "banana", "cherry")  
+
+Question 18:
+Which of these collections defines a SET?
+{"apple", "banana", "cherry"}  
+
+Question 19:
+Which of these collections defines a DICTIONARY?
+{"name": "apple", "color": "green"}  
+
+Question 20 of 25:
+Which collection is ordered, changeable, and allows duplicate members?
+LIST  
+
+Question 21 of 25:
+Which collection does not allow duplicate members?
+SET  
+
+Question 22 of 25:
+How do you start writing an if statement in Python?
+if x > y:   
+
+Question 23 of 25:
+How do you start writing a while loop in Python?
+while x > y:  
+
+Question 24 of 25:
+How do you start writing a for loop in Python?
+for x in y: 
+
+Question 25 of 25:
+Which statement is used to stop a loop?
+break 
+
+
+Test 2:
+Exercise:
+Insert the missing part of the code below to output "Hello World".
+
+print("Hello World")
+
+
+Exercise:
+Comments in Python are written with a special character, which one?
+
+#This is a comment
+
+Exercise:
+Use a multiline string to make the a multi line comment:
+
+
+'''
+This is a comment
+written in 
+more that just one line
+'''
+
+Exercise:
+Create a variable named carname and assign the value Volvo to it.
+
+
+carname= "Volvo"
+
+Create a variable named x and assign the value 50 to it.
+x = 50
+
+Display the sum of 5 + 10, using two variables: x and y.
+
+x = 5
+y = 10
+print(x + y)
+
+Create a variable called z, assign x + y to it, and display the result.
+
+x = 5
+y = 10
+z = x + y
+print(z)
+
+Remove the illegal characters in the variable name:
+myfirst_name = "John"
+
+Insert the correct syntax to assign the same value to all three variables in one code line.
+x = y = z = "Orange"
+
+Insert the correct keyword to make the variable x belong to the global scope.
+
+def myfunc():
+  global x
+  x = "fantastic"
+
+The following code example would print the data type of x, what data type would that be?
+
+x = 5
+print(type(x))
+
+int
+
+The following code example would print the data type of x, what data type would that be?
+
+x = "Hello World"
+print(type(x))
+
+str
+
+The following code example would print the data type of x, what data type would that be?
+
+x = 20.5
+print(type(x))
+
+float
+
+The following code example would print the data type of x, what data type would that be?
+
+x = ["apple", "banana", "cherry"]
+print(type(x))
+
+list
+
+The following code example would print the data type of x, what data type would that be?
+
+x = ("apple", "banana", "cherry")
+print(type(x))
+
+tuple
+
+The following code example would print the data type of x, what data type would that be?
+
+x = {"name" : "John", "age" : 36}
+print(type(x))
+
+dict
+
+The following code example would print the data type of x, what data type would that be?
+
+x = True
+print(type(x))
+
+bool
+
+Insert the correct syntax to convert x into a decimal number.
+
+x = 5
+x = float(x)
+
+Insert the correct syntax to convert x into a integer.
+
+x = 5.5
+x = int(x)
+
+Insert the correct syntax to convert x into a complex number.
+
+x = 5
+x = complex(x)
+
+Use the len method to print the length of the string.
+
+x = "Hello World"
+print(len(x))
+
+Get the first character of the string txt.
+
+txt = "Hello World"
+x = txt[0]
+
+Get the characters from index 2 to index 4 (llo).
+
+txt = "Hello World"
+x = 
+txt[2:5]
+
+Return the string without any whitespace at the beginning or the end.
+
+txt = " Hello World "
+x = 
+txt.strip()
+
+Convert the value of txt to upper case.
+
+txt = "Hello World"
+txt = txt.upper()
+
+Convert the value of txt to lower case.
+
+txt = "Hello World"
+txt = txt.lower()
+
+Replace the character H with a J.
+
+
+txt = "Hello World"
+txt = txt.replace("H", "J")
+
+Insert the correct syntax to add a placeholder for the age parameter.
+
+age = 36
+txt = "My name is John, and I am {}"
+print(txt.format(age))
+
+The statement below would print a Boolean value, which one?
+
+print(10 > 9)
+
+True
+
+The statement below would print a Boolean value, which one?
+
+print(10 == 9)
+
+False
+
+The statement below would print a Boolean value, which one?
+
+print(10 < 9)
+
+False
+
+The statement below would print a Boolean value, which one?
+
+
+print(bool("abc"))
+
+True
+
+The statement below would print a Boolean value, which one?
+
+print(bool(0))
+
+False
+
+Multiply 10 with 5, and print the result.
+
+print(10 *5)
+
+Divide 10 by 2, and print the result.
+
+print(10/2)
+
+Use the correct membership operator to check if "apple" is present in the fruits object.
+
+
+fruits = ["apple", "banana"]
+if "apple" in fruits:
+  print("Yes, apple is a fruit!")
+
+
+Use the correct comparison operator to check if 5 is not equal to 10.
+
+
+if 5 !=10:
+   print("5 and 10 is not equal")
+
+
+Use the correct logical operator to check if at least one of two statements is True.
+
+
+if 5 == 10 or 4 == 4:
+  print("At least one of the statements is true")
+
+Print the second item in the fruits list.
+
+
+fruits = ["apple", "banana", "cherry"]
+print(fruits[1])
+
+Change the value from "apple" to "kiwi", in the fruits list.
+
+
+fruits = ["apple", "banana", "cherry"]
+fruits[0] = "kiwi"
+
+Use the append method to add "orange" to the fruits list.
+
+fruits = ["apple", "banana", "cherry"]
+fruits.append("orange")
+
+
+Use the insert method to add "lemon" as the second item in the fruits list.
+
+fruits = ["apple", "banana", "cherry"]
+fruits.insert(1,"lemon")
+
+Use the remove method to remove "banana" from the fruits list.
+
+fruits = ["apple", "banana", "cherry"]
+fruits.remove("banana")
+
+Use negative indexing to print the last item in the list.
+
+fruits = ["apple", "banana", "cherry"]
+print(fruits[-1])
+
+Use a range of indexes to print the third, fourth, and fifth item in the list.
+
+fruits = ["apple", "banana", "cherry", "orange", "kiwi", "melon", "mango"]
+print(fruits[2:5])
+
+Use the correct syntax to print the number of items in the list.
+
+fruits = ["apple", "banana", "cherry"]
+print(len(fruits))
+
+Use the correct syntax to print the first item in the fruits tuple.
+
+fruits = ("apple", "banana", "cherry")
+print(fruits[0])
+
+Use the correct syntax to print the number of items in the fruits tuple.
+
+fruits = ("apple", "banana", "cherry")
+print(len(fruits))
+
+Use negative indexing to print the last item in the tuple.
+
+fruits = ("apple", "banana", "cherry")
+print(fruits[-1])
+
+Use a range of indexes to print the third, fourth, and fifth item in the list.
+
+
+fruits = ("apple", "banana", "cherry", "orange", "kiwi", "melon", "mango")
+print(fruits[2:5])
+
+
+Check if "apple" is present in the fruits set.
+
+
+fruits = {"apple", "banana", "cherry"}
+if "apple" in fruits:
+  print("Yes, apple is a fruit!")
+
+
+Use the add method to add "orange" to the fruits set.
+
+fruits = {"apple", "banana", "cherry"}
+fruits.add("orange")
+
+Use the correct method to add multiple items (more_fruits) to the fruits set.
+
+fruits = {"apple", "banana", "cherry"}
+more_fruits = ["orange", "mango", "grapes"]
+fruits.update(more_fruits)
+
+Use the remove method to remove "banana" from the fruits set.
+
+fruits = {"apple", "banana", "cherry"}
+fruits.remove("banana")
+
+Use the discard method to remove "banana" from the fruits set.
+
+fruits = {"apple", "banana", "cherry"}
+fruits.discard("banana")
+
+Use the get method to print the value of the "model" key of the car dictionary.
+
+
+car =	{
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+
+print(car.get("model"))
+
+Change the "year" value from 1964 to 2020.
+
+
+car =	{
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+car["year"] = 2020
+
+Add the key/value pair "color" : "red" to the car dictionary.
+
+
+car =	{
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+car["color"] = "red"
+
+
+Use the pop method to remove "model" from the car dictionary.
+
+car =	{
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+
+car.pop("model")
+
+Use the clear method to empty the car dictionary.
+
+car =	{
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+
+car.clear()
+
+
+Print "Hello World" if a is greater than b.
+
+
+a = 50
+b = 10
+if a > b:
+  print("Hello World")
+
+
+Print "Yes" if a is equal to b, otherwise print "No".
+
+
+a = 50
+b = 10
+if a != b:
+  print("Hello World")
+
+a = 50
+b = 10
+if a == b:
+  print("Yes")
+else:
+  print("No")  
+
+Print "1" if a is equal to b, print "2" if a is greater than b, otherwise print "3".
+
+
+a = 50
+b = 10
+if a == b:
+  print("1")
+elif a > b:
+  print("2")
+else:
+  print("3")
+
+Print "Hello" if a is equal to b, and c is equal to d.
+
+
+if a == b and c == d:
+  print("Hello")
+
+Print "Hello" if a is equal to b, or if c is equal to d.
+
+if a == b or c == d:
+  print("Hello")
+
+This example misses indentations to be correct.
+
+Insert the missing indentation to make the code correct:
+
+if 5 > 2:
+    print("Five is greater than two!")
+
+Use the correct short hand syntax to put the following statement on one line:
+
+if 5 > 2:print("Five is greater than two!")
+
+Use the correct short hand syntax to write the following conditional expression in one line:
+
+print("Yes") if 5 > 2 else print("No")
+
+Print i as long as i is less than 6.
+
+
+i = 1
+while i < 6:
+  print(i)
+  i += 1
+
+Stop the loop if i is 3.
+
+
+i = 1
+while i < 6:
+  if i == 3:
+    break
+    i += 1
+
+
+
+In the loop, when i is 3, jump directly to the next iteration.
+
+
+i = 0
+while i < 6:
+  i += 1
+  if i == 3:
+    continue
+  print(i)    
+
+Print a message once the condition is false.
+
+i = 1
+while i < 6:
+  print(i)
+  i += 1
+else:
+  print("i is no longer less than 6")
+
+
+  Loop through the items in the fruits list.
+
+
+fruits = ["apple", "banana", "cherry"]
+for x in fruits:
+  print(x)
+
+
+In the loop, when the item value is "banana", jump directly to the next item.
+
+
+fruits = ["apple", "banana", "cherry"]
+for x in fruits:
+  if x == "banana":
+    continue
+   print(x)
+
+Use the range function to loop through a code set 6 times.
+
+for x in range(6):
+  print(x)   
+
+
+
+Exit the loop when x is "banana".
+
+fruits = ["apple", "banana", "cherry"]
+for x in fruits:
+  if x == "banana":
+    break
+  print(x)
+
+
+Create a function named my_function.
+
+def my_function():
+  print("Hello from a function")
+
+
+  Execute a function named my_function.
+
+def my_function():
+  print("Hello from a function")
+
+my_function()
+
+Inside a function with two parameters, print the first parameter.
+
+def my_function(fname, lname):
+  print(fname)
+
+Let the function return the x parameter + 5.
+
+
+def my_function(x):
+  
+return x + 5
+
+If you do not know the number of arguments that will be passed into your function, there is a prefix you can add in the function definition, which prefix?
+
+
+def my_function(*kids):
+	print("The youngest child is " + kids[2])
+
+If you do not know the number of keyword arguments that will be passed into your function, there is a prefix you can add in the function definition, which prefix?
+
+
+def my_function(**kid):
+  print("His last name is " + kid["lname"])
+
+Create a lambda function that takes one parameter (a) and returns it.
+
+x = lambda a : a
+
+Create a class named MyClass:
+
+class MyClass:
+  x = 5
+
+
+Create an object of MyClass called p1:
+
+
+class MyClass:
+  x = 5
+
+p1 = MyClass()
+
+
+Use the p1 object to print the value of x:
+
+
+class MyClass:
+  x = 5
+
+p1 = MyClass()
+
+print(p1.x)
+
+
+What is the correct syntax to assign a "init" function to a class?
+
+
+class Person:
+  def __init__(self, name, age):
+    			self.name = name
+    			self.age = age
+
+
+What is the correct syntax to create a class named Student that will inherit properties and methods from a class named Person?
+
+class Student(Person):
+
+We have used the Student class to created an object named x.
+
+What is the correct syntax to execute the printname method of the object x?
+
+
+class Person:
+  def __init__(self, fname):
+    self.firstname = fname
+
+  def printname(self):
+    print(self.firstname)
+
+class Student(Person):
+  pass
+
+x = Student("Mike")
+x.printname()
+
+What is the correct syntax to import a module named "mymodule"?
+
+import mymodule
+
+If you want to refer to a module by using a different name, you can create an alias.
+
+What is the correct syntax for creating an alias for a module?
+
+import mymodule as mx
+
+What is the correct syntax of printing all variables and function names of the "mymodule" module?
+
+import mymodule
+
+print(dir(mymodule))
+
+What is the correct syntax of importing only the person1 dictionary of the "mymodule" module?
+
+from mymodule import person1
+
