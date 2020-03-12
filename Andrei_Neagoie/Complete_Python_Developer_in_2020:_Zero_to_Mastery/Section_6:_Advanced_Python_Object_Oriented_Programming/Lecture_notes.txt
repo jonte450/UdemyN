@@ -1,0 +1,607 @@
+What is OOP?
+Everything in Python is a Object.
+What do i mean about this.
+For example <class 'bool'>.
+Object has methods and properties.
+Would it great if we could create our own objects.
+Key takeaway we that we able to create our own data-types.
+
+We working for Amazon.
+We need delivery Drones.
+As codes get's bigger it becomes millions row of code.
+Programming something as drone becomes more difficult.
+OOP is something like a paradigm.
+We break it up to small pieces.
+I might code propeller and another holds the package.
+We are breaking up small pieces to combine them.
+Create a delivery system.
+Extend functionality.
+We are writing millions of code.
+We need a way to structure our code.
+
+What is OOP? Part 2
+We started with assembly language.
+We started writing more code in the 60-70 ths.
+Up until that point we wrote procedural code.
+We went from the top of the line to the bottom.
+With Object-Oriented paradigm.
+Let's us model something like reality.
+Like car motor and so on.
+We can think in the terms as models.
+Orginize things and different groups.
+It's able to support object and models.
+Capitiliazed and using Camelcase
+
+class BigObject:
+	pass
+
+
+The idea of a class and a object.
+Class is an blueprint what are basic properties and methods.
+So we are using the Class to create instances that are all object.
+
+obj1 = BigObject() #instanciate object
+
+I can creat an list for example over and over again with methods.
+
+Everytime we create an object we can just go to one place in memory.
+
+Creating Our Own Objects
+We want to create a wizard game.
+How can we create the game.
+From this blue print we can create many player characters.
+
+We created this class and it looks confusing.
+This __init__ is a special method.
+It is called a dunder method.
+Called a instructor method.
+
+
+class PlayerCharacter:
+	def __init__(self,name):
+		self.name = name
+
+	def run(self):
+		print('run')
+
+player1 = PlayerCharacter('Cindy')
+print(player1)
+
+It looks a memory character.
+
+What is self?
+Self refers to the player character.
+If we remove self they are going to say PlayerCharacter has no attribute name.
+
+Self is a reference to something that hasen't been created yet.
+[]. for example . refers to the list we created to the left with self.
+
+We can have same piece of code with different data.
+We can easily extend with attributes.
+
+If we create different players they live in different places in the memory.
+
+We are able to keep it safe.
+
+Attributes and Methods
+OOP you need to know and how to grouping data with methods.
+Mimic from the real world.
+help(list) shows the blueprint of an object.
+
+class PlayerCharacter:
+	memebership = True
+
+	def __init__(self,name, age):
+		if(self.memebership):
+			self.name = name
+			self.age = age
+
+	def run(self):
+		print('run')
+		return 'done'
+
+	def shout(self):
+		print(f'my name is {self.name}')
+
+
+player1 = PlayerCharacter('Cindy')
+print(player1)
+
+That are pieces of data that is dynamic.
+You have to gotten a memebership.
+All the players have attribute memership.
+This memership is not dynamic.
+All objects that it's instaciated.
+We have to use self.name to get access to variables in the class.
+
+__init__
+
+We can give condition that must be set before instation.
+We can do different things.
+
+def __init__(self, name='anonymous', age):
+			if(age > 18):
+				self.name = name
+				self.age = age
+
+Like when we call the constructor with 
+
+player1 = PlayerCharacter('Tom',10)
+This is giving us a error because Tom is 10.
+
+Exercise: Cats Everywhere
+
+#Given the below class:
+class Cat:
+    species = 'mammal'
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def get_name():
+      return self.name
+
+
+    def get_age():
+      return self.age
+
+# 1 Instantiate the Cat object with 3 cats
+cat1 = Cat('Kathy',3)
+cat2 = Cat('Tim',4)
+cat3 = Cat('Ted',6)
+
+
+# 2 Create a function that finds the oldest cat
+def find_oldest(*args):
+      return max(args)
+
+
+# 3 Print out: "The oldest cat is x years old.". x will be the oldest cat age by using the function in #2
+
+oldest_age = find_oldest(cat1, cat2, cat3)
+
+print("The oldest cat is : "+str(oldest_age))
+
+@classmethod and @staticmethod
+@classmethod with this decorater.
+adding_things(,cls,num1,num2):
+	return num1 + num2
+
+cls to refer to a class.
+How is that a class method.
+We can use that.
+It is method on the classmethod.
+Or rather it is a method on the actual class.
+
+You can instasiate things.
+You can create new objects in the acutal class.
+cls is refering to the actual PlayerCharacter Class.
+def adding_things(cls, num1, num2):
+	return cls('Teddy', num1 + num2)
+
+@staticmethod
+def adding_things(cls, num1, num2):
+	return num1 + num2
+
+@staticmethod dosen't to the cls.
+
+We would use static method when we don't care about the state of the class.
+
+There are cases when cls is useful.
+
+Reviewing What We Know So Far
+OOP is a paradigm to think to structure our code.
+Classical OOP.
+We can create a class with camelcase letters.
+Class object attributes.
+We learned that we can create a class with class keyword.
+
+DEVELOPER FUNDAMENTALS: V
+Test your assumption.
+Whenever you learn something.
+You wanna test things.
+self is refering to the player character.
+Test is what is that i expecting.
+Look into to it.
+__main__ i doesen't understand.
+The idea is to test yourself.
+How can we test it.
+Hopefully you test it.
+
+Encapsulation
+Learning about OOP is the four pillars of OOP.
+
+-Encapsulation
+Binding of data and functions.
+Keeps everything in a box.
+Data and functions in a box.
+Functions that can act on the data and functions.
+Package you can create multiple functions.
+You methods you can access to.
+Why you wanna package data functions.
+This gives us extra powers.
+Dictionary acts as the same but it uses bracket notation.
+Classes you are combining things.
+
+Abstraction
+Hides information and only giving access to useful information.
+player.speak() we only knows that the object has access to it and do we need know how the speak is impleamented.
+Sometimes we only need an method.
+Same as print(len((1,2,3,4))) we don't know how len is implemented.
+If we have a class that is abstracted away some bad programmer can come and change it.
+
+Private vs Public Variables
+In Python there is the idea of Public and Private.
+The player just randomly can change the name.
+Some language provides to call private like Java.
+Languages like Python dosen't have this feature.
+
+
+def __init__(self, name, age):
+    self._name = name
+    self._age = age
+
+Underscore in our code means private variable.
+It still works but you can still change.
+__init__ is called a dunder method.
+You should not change dunder methods.
+
+Inheritance
+Allows new objects get properties from already existing.
+We have users that can be wizards, elfs, archers.
+They have different attacks.
+
+users can have different forms in our game
+-Wizards
+-Archers
+-Ogres
+How can we make so Wizards and Archers has access to sign_in()
+We can use inheritance.
+
+class User()
+	def sign_in(self):
+		print('loggid in')
+
+We want to create a bunch of subclasses.
+
+class Wizard(User):
+	def __init__(self,name,power):
+		self.name = name
+		self.power = power
+
+	def attack():
+		print(f'attacking with power of {self.power}')
+
+class Archer(User):
+	def __init__(self,name, num_arrows):
+			self.name = name
+			self.num_arrows = num_arrows
+
+	def attack():
+		print(f'attacking with arrows: arrows left {self.num_arrows}')
+
+
+wizard1 = Wizard('Merlin',50)
+archer = Archer('Robin',100)
+print(wizard1.sign_in())
+Wizard can use it now.
+Both have sign_in() method.
+And both has their own properties and attacking methods.
+
+Inheritance 2
+class Wizard(User):
+	def __init__(self,name,power):
+		self.name = name
+		self.power = power
+
+	def attack():
+		print(f'attacking with power of {self.power}')
+
+class Archer(User):
+	def __init__(self,name, num_arrows):
+			self.name = name
+			self.num_arrows = num_arrows
+
+	def attack():
+		print(f'attacking with arrows: arrows left {self.num_arrows}')
+
+wizard1 = Wizard('Merlin',50)
+archer1 = Archer('Robin',100)
+print(wizard1.sign_in())
+
+Python gives us a useful tool called 
+isinstance(instance,Class).
+
+wizard1 = Wizard('Merlin', 60)
+isinstance(wizard1, Wizard) gives us True.
+isinstance(wizard1, User) gives us True. 
+wizard1. also gives us dunder methods.
+Everything in Python inherits from the base object.
+isinstance(wizard1, object) gives us also true.
+That's why we get all these different methods.
+
+Polymorphism
+Poly means many morph means forms.
+Refers to the way that Python Classes.
+Different classes can share different methods.
+But each own does different based on the attribute.
+Wizard and Archer are sharing the same method name but their 
+attack() method will all give different output.
+
+class User()
+	def sign_in(self):
+		print('loggid in')
+
+class Wizard(User):
+	def __init__(self,name,power):
+		self.name = name
+		self.power = power
+
+	def attack():
+		print(f'attacking with power of {self.power}')
+
+class Archer(User):
+	def __init__(self,name, num_arrows):
+			self.name = name
+			self.num_arrows = num_arrows
+
+	def attack():
+		print(f'attacking with arrows: arrows left {self.num_arrows}')
+
+wizard1 = Wizard('Merlin',60)
+archer1 = Archer('Robin',30)
+
+def player_attack(char):
+	char.attack()
+
+player_attack(wizard1)
+player_attack(archer1)
+Gives different outputs for example.
+
+We can do a for-loop it also gives two different outputs.
+We are able to customize this to our need.	
+The power to rediseign our methods.
+This useful.
+We are able to modify our classes.
+
+Exercise: Pets Everywhere
+class Pets():
+    animals = []
+    def __init__(self, animals):
+        self.animals = animals
+
+    def walk(self):
+        for animal in self.animals:
+            print(animal.walk())
+
+class Cat():
+    is_lazy = True
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def walk(self):
+        return f'{self.name} is just walking around'
+
+class Simon(Cat):
+    def sing(self, sounds):
+        return f'{sounds}'
+
+class Sally(Cat):
+    def sing(self, sounds):
+        return f'{sounds}'
+
+#1 Add nother Cat
+class Kathy(Cat):
+  def sing(self, sounds):
+    return f'{sounds}'
+
+#2 Create a list of all of the pets (create 3 cat instances from the above)
+
+cat1 = Simon('Simon',3)
+cat2 = Sally('Sally',7)
+cat3 = Kathy('Kathy',5)
+
+my_cats = [cat1,cat2,cat3]
+
+#3 Instantiate the Pet class with all your cats use variable my_pets
+my_pets = Pets(my_cats)
+
+#4 Output all of the cats walking using the my_pets instance
+
+my_pets.walk()
+
+super()
+class User(object):
+	def __init__(self, email):
+		self.email = email
+
+And we have the same wizard and instanciate right now with
+wizard1 = Wizard('Merlin',60)
+print(wizard1.email)		
+Wizard dosen't have attribute email.
+We might inherent sign_in.
+Wizard already have a own constructor.
+
+class User(object):
+	def __init__(self,name,power,email):
+		User.__init__(self, email)
+		self.name = name
+		self.power = power
+
+And we can add email to Wizard instation here.
+
+wizard1 = Wizard('Merlin',60,'merlin@gmail.com')
+print(wizard1.email)
+
+We called run the User.init() function.
+Another way to do this is to use super.
+
+class User(object):
+	def __init__(self,name,power,email):
+		super().__init__(email)
+		self.name = name
+		self.power = power
+
+super is refering to the class above.
+
+Object Introspection
+Means ability to determine the type of an object.
+It one of Pythons strength.
+Python allows to do Introspection.
+print(dir(wizard1)) shows what we access to.
+To list out what you have access to.
+What are the dunder methods.
+
+Dunder Methods
+Underscore is special methods.
+They allow us to.
+
+class Toy():
+	def __init__(self, color, age):
+				self.color = color
+				self.age = age
+				self.my_dict = {
+					'name': 'Yoyo',
+					'has_pets': False
+				}
+
+	def __str__(self):
+		return f'{self.color}'
+
+	def __len__(self):
+			return 5
+
+	def __del__(self):
+			print('deleted!')
+
+	def __call__(self):
+			return('yess??')
+
+	def __getitem__(self, i):
+			return self.my_dict[i]
+
+
+action_figure = Toy('red', 0)
+print(action_figure)
+print(action_figure.__str__())
+
+Python Documentation under the name special methods.
+How they work underhood.
+Sometimes you want a class to behave in a certain way.
+
+print(len(action_figure)) gives us red.
+print(len(action_figure)) gives us 5.
+del action_figure gives us string deleted!
+print(action_figure()) gives us yes.
+print(action_figure['name']) gives us Yoyo
+
+These special magic methods allows us to customize our len and so on.
+
+Exercise: Extending List
+class SuperList(list):
+
+	def __len__(self):
+	  	return 1000
+
+super_list1 = SuperList():
+
+print(len(super_list1))
+print(super_list1.append(5))
+print(super_list1[0])
+
+issubclass checks if a class is a subclass of something.
+
+print(issubclass(SuperList,list))
+  
+Multiple Inheritance
+Remeber we had our user and archer class.
+What happens when we want to create a new class called 
+HybridBorg.
+
+It is a special type of character. 
+It has both types of Archer and Wizard
+
+class User()
+	def sign_in(self):
+		print('loggid in')
+
+class Wizard(User):
+	def __init__(self,name,power):
+		self.name = name
+		self.power = power
+
+	def attack():
+		print(f'attacking with power of {self.power}')
+
+class Archer(User):
+	def __init__(self,name, num_arrows):
+			self.name = name
+			self.num_arrows = num_arrows
+
+	def check_arrows(self):
+		print(f'{self.arrows} remaining')
+
+	def run(self):
+		print('ran really fast')		
+
+	def attack():
+		print(f'attacking with arrows: arrows left {self.num_arrows}')
+
+wizard1 = Wizard('Merlin',60)
+archer1 = Archer('Robin',30)
+
+class HybridBorg(Wizard, Archer):
+	def __init__(self, name,power, arrows):
+		Archer.__init__(self,name,arrows)
+		Wizard.__init__(self,name,power)
+
+
+We have to pass parameters.
+hb1 = HybridBorg('borgie',50,100)
+print(hb1.run())
+print(hb1.check_arrows())
+print(hb1.attack())
+print(hb1.sign_in())
+
+
+Tricky thing about how to make sure these classes can inherent things with multiple things.
+
+You call these parent classes with their __init__ both Archer and Wizard.
+
+Some Programming Languages dosen't allow multiple inherents.
+
+MRO-Method Resolution Order
+Let's say we have class B and C that inherents from A and class
+D that inherents from both class B and C.
+
+To determine which method to run in inherents.
+
+
+class A:
+	num = 10
+
+class B(A):
+	pass
+
+class C(A):
+	num = 1
+
+class D(B, C):
+	pass
+
+
+print(D.num)
+D.__str__ base obeject has this.
+print(D.mro()) gives back the order.
+First it checks B then after that C and then A and after that 
+A.
+
+If write pass at all classes we get error
+
+
+We get 1 because we go from D to C before A.
+
+The order of MRO depends in which order you pass the inherents.
+It uses Depth First Search.

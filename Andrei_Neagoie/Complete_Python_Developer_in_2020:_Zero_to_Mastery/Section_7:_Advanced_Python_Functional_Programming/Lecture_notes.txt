@@ -1,0 +1,324 @@
+Functional Programming
+We began with procedural Programming.
+There are also an idea of Functional programming.
+A Paradigm is way to think of our code.
+We can use the concept of both trade-offs.
+
+What is Functional Programming?
+Is all about separation of concern.
+Packaing to small chunks.
+Each parts concern it self on what it is good at.
+It is all separate data and functions.
+There is data where it becomes interactivity.
+There is no correct definition.
+Functions operates on data and dosen't belonging to  a object.
+-Clear + Understandable
+-Easy to Extend
+-Easy to Maintain
+-Memory Efficient
+-DRY (Don't Repeat Yourself)
+
+Pure Functions
+What is a Pure Function.
+A box we give a simple list [1,2,3] to a box.
+We would recieve [2,4,6].
+It should always result in the same output.
+A function should not produce any side-effect.
+
+def multiply_by2(li):
+	new_list = []
+	for item in li:
+		new_list.append(item*2)
+	return new_list
+
+print(multiply_by2([1,2,3]))
+It always return the same output.
+It dosen't touch anything in the outside world.
+
+This code below has side-effects.
+def multiply_by2(li):
+	new_list = []
+	for item in li:
+		new_list.append(item*2)
+	return print(new_list)
+
+This below has side effects because of that new_list is defined outside the function and it effect it.
+
+new_list = []
+
+def multiply_by2(li):
+	for item in li:
+		new_list.append(item*2)
+	return print(new_list)
+
+The idea is that we contain all things in the function with pure functions.
+
+With Pure Functions you have less bugs.
+Makes your life easier.
+Pure functions are like a guideline.
+It is impossible to have pure functions everywhere.
+
+wizard = {
+	'name':'Merlin',
+	'power': 50
+}
+
+With pure functions lets difference the OOP let's keep data and methods separated.
+
+map()
+Useful functions that allows us to think in a functional way.
+
+-map
+-filter
+-zip
+-reduce
+
+For example map allows us to simplify this code below.
+
+
+def multiply_by2(li):
+	new_list = []
+	for item in li:
+		new_list.append(item*2)
+	return print(new_list)
+
+print(list(map(multiply_by2,[1,2,3])))
+Gives us a map obeject back
+The neat thing about map we dosen't need creation of a list.
+The thing with map is to use return item * 2.
+The map says hey just give me the function and i does the rest.
+
+def multiply_by2(li):
+	new_list = [] //Map removes this
+	for item in li://Map removes for loop
+		new_list.append(item*2)//Map removes append
+	return print(new_list)
+
+And this becomes instead
+def multiply_by2(li):
+	return item*2	
+map is gonna take each item and multiply_by2 on.
+map returns an new map object.
+We converts it into a list.
+
+my_list hasen't changed.
+
+print(list(map(multiply_by2, my_list)))
+print(my_list)
+
+We don't effect the outside world.
+We always get's the same output.
+map is gonna be one of the functions you uses most.
+
+filter()
+It filter things for us.
+def check_odd():
+	return item % 2 != 0
+
+Filter will try to get an True or False value.
+If it becomes true we will add it to the list.
+Else discard it.
+
+print(list(filter(check_odd,my_list)))
+print(my_list)
+
+We might filter away the usernames with letters starting with a.
+
+We get a new list and the same output. 
+
+zip()
+Let's create an new function.
+We have two lists and we can zip them togheter.
+my_list = [1,2,3]
+your_list = [10,20,30]
+their_list = (5,4,3)
+
+print(list(zip(my_list,your_list)))
+print(my_list)
+
+We get 
+[(1,10), (2,20), (3,30)]
+[1,2,3]
+Takes 1 and 1 from each list and creates tuple of it.
+That is a important function that can be used togheter.
+print(list(zip(my_list,your_list,their_list)))
+[(1,10,5), (2,20,4), (3,30,3)]
+We can keep zipping it togheter.
+We dosen't modify the data.
+
+reduce()
+To use reduce you must.
+from functool import reduce
+
+functools is toolbelt we can use.
+my_list = [1,2,3]
+
+The first element will be in item.
+
+
+def accumulator(acc, item):
+	print(acc, item)
+	return acc + item	
+
+print(reduce(accumulator, my_list, 0))
+print(my_list)
+
+Reduce allows us to reduce something.
+Accumalator is going acc is going to be 0 and item is going be 1.
+
+We just accumulate the values and got a list.
+It's like a sum function.
+Reduce is a little hard to understand.
+Programmers really loves these methods.
+
+Exercise: map, filter, zip, reduce
+
+from functools import reduce
+
+#1 Capitalize all of the pet names and print the list
+my_pets = ['sisi', 'bibi', 'titi', 'carla']
+def cap(el):
+  return el.upper()
+
+new_pets = list(map(cap,my_pets))
+print(new_pets)
+
+#2 Zip the 2 lists into a list of tuples, but sort the numbers from lowest to highest.
+my_strings = ['a', 'b', 'c', 'd', 'e']
+my_numbers = [5,4,3,2,1]
+
+my_numbers.sort()
+
+ziped_list = list(zip(my_strings,my_numbers))
+print(ziped_list)
+
+
+#3 Filter the scores that pass over 50%
+scores = [73, 20, 65, 19, 76, 100, 88]
+
+def check_score(score):
+    return score > 50
+
+filtered_score = list(filter(check_score,scores))
+print(filtered_score)
+
+#4 Combine all of the numbers that are in a list on this file using reduce (my_numbers and scores). What is the total?
+
+def accumulator(acc,item):
+  print(acc,item)
+  return acc + item
+
+result = reduce(accumulator,(scores + my_numbers),0)
+print(result)
+
+Lambda Expression
+Lambda is compabtibel with function programming.
+Only use once.
+For those occasions and we only use them once.
+Run it and then a i'am done with it.
+
+lambda param: action(param)
+
+print(list(map(lambda item: item*2, my_list)))
+I didn't use the multiply_by2 once.
+lambda you don't run it by once.
+lambda automatically returns the function.
+
+Nice to not have Python clutter with functions.
+And so with filter.
+
+print(list(filter(lambda item: item % 2 != 0 , my_list)))
+
+And what about reduce.
+
+print(filter(lambda acc, item: acc + item , my_list))
+
+Now we just have one line function.
+We gonna discover it more in List Comprehension.
+Makes the code really confusing.
+
+Exercise: Lambda Expression
+#Square
+
+my_list = [5,4,3]
+squared_list = list(map(lambda x: x*x , my_list))
+print(squared_list)
+
+#List Sorting Based on the second
+a = [(0,2),(4,3),(9.9),(10,-1)]
+
+a.sort(key=lambda x: x[1])
+
+print(a)
+We don't have to write these complicated functions.
+
+List Comprehensions
+Is one of our key-terms.
+What are these comprhensions.
+my_list = []
+for char in 'hello':
+	my_list.append(char)
+
+print(my_list)
+
+Is it any faster and cleaner way to this.
+Syntax for List Comprehension becomes this below.
+
+my_list =[param for param in iterable]
+
+And translated
+my_list =[char for char in 'hello']
+my_list2 = [num for num in range(0,100)]
+
+If i want to multiply this list with 2 you can easily multiply it with num*2 below.
+
+my_list3 = [num*2 for num in range(0,100)]
+
+This time i want to only keep the even numbers.
+
+my_list4 = [num*2 for num in range(0,100) if num % 2 == 0]
+
+This is short-hand form to create lists.
+num*2 is what we wanna do to each item.
+We loop with for num in range(0,100).
+If we want we can use a condition if num % 2 == 0 if we want to add things.
+
+my_list4 = [num*2 for num in range(0,100) if num % 2 == 0]
+
+Set and Dictionary Comprehension
+We remove the [] notations and add brackets instead {}.
+You get a set then.
+
+my_list ={char for char in 'hello'}
+
+But what with Dictionary Comprhension.
+simple_dict = {
+				'a': 1,
+				'b': 2
+			}
+
+What i wanna do with value key:value**2.
+This is the for-loop for key,value in simple_dict.items()
+my_dict = {key:value**2 for key,value in simple_dict.items()}
+print(my_dict)
+
+And add the values only when v is even you can add the below
+if v%2 == 0
+
+my_dict = {k:v**2 for k,v in simple_dict.items() 
+if v%2 == 0}
+
+This makes your code less readable.
+
+We can use this to create keys with values times 2.
+my_dict = {num:num*2 for num in [1,2,3]}
+
+Exercise: Comprehension
+some_list = ['a','b','c','b','d','m','n','n']
+
+duplicates = list({char for char in some_list if some_list.count(char) > 1})
+
+print(duplicates)
+
+We Still Have More To Go!
+
