@@ -1,0 +1,157 @@
+Errors in Python
+You can't avoid bugs.
+You can't avoid Programms breaking.
+An Error that crashes our programs is called an exception.
+An exception is going to stop Python from running.
+How can we handle our exceptions.
+
+#Error Handling
+If we get an Error we can handle our Error.
+It let's our program keep running.
+
+Types of Error
+-Typeerror
+-Syntax Error
+-Name Error
+-IndexError
+-KeyError
+-ZeroDivisionError
+
+How do we avoid these errors.
+Programs is interacting with the outside world.
+User may giving us something bad.
+
+Error Handling
+Allows to take users input.
+
+age = input('what is your age? ')
+print(age)
+
+We have the try:
+
+try: 
+  age = input('what is your age? ')
+  print(age)
+except:
+	print('please enter a number')
+
+Now i am handling my errors.
+If an error happens we will catch it in the except-block.
+
+while True:
+try: 
+  age = input('what is your age? ')
+  print(age)
+except:
+	print('please enter a number')
+else:
+	print('thank you')	
+
+While-block to keep the program running.
+We can stop the loop with else block.
+We can do use many things with try and except.
+How do we handle different errors?
+In the except block you can give types of errors to handle.
+Except block will only run once.
+
+while True:
+try: 
+  age = input('what is your age? ')
+  age/10
+except ValueError:
+	print('please enter a number')
+except ZeroDivisionError:
+	print('please enter age higher than 0')	
+else:
+	print('thank you')	
+
+
+Error Handling 2
+
+def sum(num1,num2):
+	return num1 + num2
+
+print(sum('1',2))
+
+Gives an typerror.
+
+def sum(num1,num2):
+	try:
+		return num1 + num2
+	except TypeError:
+		print('please enter numbers')	
+
+Common pattern to write Error Handling is to write it as.
+
+def sum(num1,num2):
+	try:
+		return num1 + num2
+	except TypeError as err:
+		print('please enter numbers '+ err)
+
+You get an error object.
+You wrap the errors togheter.
+Use en f-string to get a nicer or just print the error.
+
+def sum(num1,num2):
+	try:
+		return num1 + num2
+	except (TypeError, ZeroDivisionError) as err:
+		print(err)		
+
+Exercise: Error Handling
+
+Another piece to the execept.
+We also have finally.
+It runs after all has executed.
+
+
+while True:
+try: 
+  age = input('what is your age? ')
+  age/10
+except ValueError:
+	print('please enter a number')
+	continue
+except ZeroDivisionError:
+	print('please enter age higher than 0')	
+	break
+else:
+	print('thank you')
+	break
+finally:
+	print('ok i am finally done')
+print('can you hear me')		
+
+We want log some activity from a hacker or bad-user.
+What is going to happen when i enter 0.
+The loops breaks.
+Enter jibberish.
+Continue dosen't break the loop.
+Login we get's thank you ok i am finally done.
+
+
+Error Handling 3
+Sometime we want to raise exception.
+Display it right away.
+Useful when you are creating your own library.
+Errors are unavoidable.
+Your task is to anticipate errors.
+Functions accepting arguments.
+Errors are bound to happen.
+There is no perfect program.
+
+while True:
+try: 
+  age = input('what is your age? ')
+  age/10
+  raise ValueError('hey cut it out')
+except ZeroDivisionError:
+	print('please enter age higher than 0')	
+	break
+else:
+	print('thank you')
+	break
+finally:
+	print('ok i am finally done')
+print('can you hear me')

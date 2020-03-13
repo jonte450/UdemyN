@@ -1,0 +1,186 @@
+Decorators
+Actually seen decorators before.
+@classmethod
+@staticmethod
+
+Functions is first class citizen in Python.
+
+def hello():
+	print('helllloooooooo')
+
+What happens if we delete hello Function.
+greet = hello
+del hello
+
+print(greet()) 
+
+Greet is still working.
+del hello is only deleting the reference in the memory.
+Greet is still pointing to the hello in memory.
+Functions in Python is like variables.
+
+def hello(func):
+	func()
+
+def greet():
+	print('still here')
+a = hello(greet)
+
+print(a)	
+
+Call function hello that runs function greet.
+Decoraters are only possible beacause of these features.
+Decorators super-charges our functions.
+
+Tells the Python compiler to give this function extra features.
+
+@decorater
+	def hello()
+		pass
+
+Higher Order Function
+Understand the idea of Higher-Order Function.
+These definitions below describe a higher-order function.
+
+-def greet(func):
+		func()
+
+A function that takes another function as parameter.   		
+
+-def greet2():
+		def func():
+			return 5
+	 return fun		
+
+A function that returns another function.
+
+Decorators 2
+It simply a function that wraps another function.
+
+def my_decorator(func):
+	def wrap_func():
+		print('***********')
+		func()
+		print('***********')
+    return wrap_func
+
+As soon we writes @ a decorator is gonna be used.
+
+@my_decorator
+def hello():
+	print('hellloooo')
+
+hello()
+
+Decorator is something that enhances the function but how can we enhance the function.
+
+We now get 
+***********
+hellloooo
+***********
+
+@my_decorator
+def bye():
+	print('see ya later')
+
+We also here get
+
+***********
+see ya later
+***********	
+
+How does the Python interpreter does this.
+
+a = my_decorator(hello)
+a()
+
+Decorators 3
+What happens if the decorator took an parameter?
+
+def my_decorator(func):
+	def wrap_func(x,emoji):
+		print('***********')
+		func(x,emoi)
+		print('***********')
+    return wrap_func
+
+@my_decorator
+def hello(greeting,emoji):
+	print(greeting)
+
+hello('hii')
+
+We are calling hello with hii.
+a = my_decorator(hello)
+a('hiii',':)')
+
+How can we solve this when to add more and more parameters.
+#Decorator Pattern
+def my_decorator(func):
+	def wrap_func(*args, **kwargs):
+		print('***********')
+		func(*args,**kwargs)
+		print('***********')
+    return wrap_func
+
+@my_decorator
+def hello(greeting,emoji=':('):
+	print(greeting,emoji)    
+
+hello('hii')
+
+We get hello with a sad face.
+We can easily extend the decorator with Decorator Pattern.
+
+Why Do We Need Decorators?
+#Decorators
+Practical applications of Decorators.
+
+from time import time
+
+def perfomance(fn):
+	def wrapper(*args, **kwargs):
+	t1 = time()
+	result = fn(*args, **kwargs)
+	t2 = time()
+	print(f'took {t2-t1} s')
+	return result
+return wrapper
+
+
+@perfomance
+def long_time():
+	for i in range(100000):
+		i*5
+
+Now i have this decorator to give to any function.
+And i can give this to any function.
+Check for optimizitions.
+Decorators are used a lot.
+
+Exercise: @authenticated
+
+# Create an @authenticated decorator that only allows the function to run is user1 has 'valid' set to True:
+user1 = {
+    'name': 'Sorna',
+    'valid': False #changing this will either run or not run the message_friends function.
+}
+
+def authenticated(fn):
+  def check_valid(*args,**kwargs):
+    if args[0]['valid'] == True:
+      print(args[0]['name'] + ' has authorization')
+      return fn(*args,**kwargs)
+    else:
+      print('Denied Authorization to '+ args[0]['name'])
+  return check_valid    
+
+
+@authenticated
+def message_friends(user):
+    print('message has been sent')
+
+message_friends(user1)
+
+
+ 

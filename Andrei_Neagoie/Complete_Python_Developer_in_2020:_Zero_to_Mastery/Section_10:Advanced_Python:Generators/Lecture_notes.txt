@@ -1,0 +1,189 @@
+Generators
+A very important key-term.
+They allows to generate a sequence over a time.
+range(100) is generator.
+Using yield.
+
+list(range(100)) a list creates an giant list in the memory.
+range is creating things one by one.
+
+def make_list(number):
+	result = []
+	for i in range(number):
+		result.append(i*2)
+	return result
+
+my_list = make_list(100)
+print(my_list)
+
+my_list lives in the memory.
+Range is generator dosen't create on it's own.
+Range hey one thing at the time.
+
+print(list(range(100)))
+
+This will result in a large memory used up in the computer.
+
+Generators 2
+Every iterable has __iter__.
+iteration takes an iterable.
+Everything that are generator is iterable.
+Everything that isn't a iterable are generators.
+
+def generator_function(num):
+	for i in range(num):
+		yield i
+
+What does yield.
+Hey pause the function when i will keep going if you tell me.
+
+for item in generator_function(1000):
+	print(item)
+
+g = generator_function(100)
+print(g)
+
+We will get an generate object:
+<generator object generator_function at 0x7fa3a77e0c80>
+
+def generator_function(num):
+	for i in range(num):
+		yield i*2
+
+print(next(g))
+print(next(g))
+print(next(g))
+
+This will return 0 1 2 but a value at a time.
+yield keyword pauses the function.
+If it has yield key-word it remebers the previuosly value.
+If it has only 1 and you keep calling you get a stopiteration error.
+
+Generators Perfomance
+Generators are bad you think.
+We have two functions here.
+
+@perfomance
+def long_time():
+	print(1)
+	for i in range(1000000):
+		i*5
+
+@perfomance
+def long_time2():
+	print(2)
+	for i in list(range(1000000)):
+		i*5
+
+Let's test this performance.
+long_time()
+long_time2()		
+
+long_time() goes faster to complete than long_time2()
+Generator goes much faster than list.
+Generators dosen't consume less memory than list.
+Range is a generators.
+Generators is really useful when you are calculating large amounts of data.
+
+All the we had to do to create generator is to first to create a function with keyword yield in it.
+
+Under The Hood Of Generators
+Implemeating our range.
+
+This how for-loops looks under the hood.
+Next is gonna output the element.
+That is for-loops looks.
+Underneath the hood the for-loop is recevieng a iterable.
+We are gonna use the iter to convert so we can use the next().
+I wanna try.
+except we wanna stop the special_for.
+We see that the element exist in the same memory space.
+It will keep going and running until.
+next function will out the element
+
+def special_for(iterable):
+	iterator = iter(iterable)
+	while True:
+		try:
+		   print(iterator)
+		   next(iterator)
+		   next(iterator)
+		except StopIteration:
+			break   
+
+special_for([1,2,3])
+
+#Range function
+We create a class.
+This class will have constructor.
+We are using a class because we are creating our own data-type.
+We can have our dunder method that __iter__ that will return the actual class.
+We will need to the next method.
+We need a state or variable to keep track we are.
+current.
+We want to increament our current variable.
+We use raise at exception when 
+
+class MyGen():
+   current = 0
+
+   def __init__(self, first , last):
+   	   self.first = first
+   	   self.last = last
+
+   	def __iter__(self):
+   		  return self
+
+   	def __next__(self):
+   		if MyGen.current < self.last
+   			num = MyGen.current
+   			MyGen.current += 1
+   			return num
+   	    raise StopIteration	     
+
+gen = MyGen(0,100)
+for i in gen:
+	print(i)   	   
+
+Exercise: Fibonacci Numbers
+Try to implement the fibonacci numbers.
+This grows exptionally.
+Shows up in the natura a lot.
+
+#Fibonacci Generator
+
+def fib(number):
+    x_minus_one = 0
+    x_minus_two = 1
+    fib_num = x_minus_one
+    for num in range(number+1):
+      yield fib_num
+      fib_num = x_minus_one + x_minus_two
+      x_minus_two = x_minus_one
+      x_minus_one = fib_num
+
+
+for fib_num in fib(20):
+  print(fib_num)
+
+  #Fibonacci List 
+  #Fibonacci List 
+  def fib2(number):
+    x_minus_one = 0
+    x_minus_two = 1
+    fib_num = x_minus_one
+    fib_list = []
+    for num in range(number+1):
+      fib_list.append(fib_num)
+      fib_num = x_minus_one + x_minus_two
+      x_minus_two = x_minus_one
+      x_minus_one = fib_num
+    return fib_list
+
+
+fib_list = fib2(20)  
+print(fib_list)   
+
+Python Exam: Testing Your Understanding
+
+Python Exercises
