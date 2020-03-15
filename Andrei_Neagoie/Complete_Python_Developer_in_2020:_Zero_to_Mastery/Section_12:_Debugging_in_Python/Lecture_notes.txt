@@ -1,0 +1,40 @@
+How To Debug Code
+Nobody writes perfect programms.
+Programms are full of errors.
+The act of removing the bugs.
+Figiuring why it dosen't works.
+
+#linting
+Allows us to detect.
+num + 4 notices hey there is undefined num.
+You are using Sublime code
+
+#ide / editor
+Has these built-in.
+It allows us to detect errors before we are running code.
+
+#read errors
+4 + 'asdskfm'
+This is giving us a type:error.
+Being able to read errors is very important.
+
+#pdb
+It's an built-in module.
+It's extrememly useful.
+
+def add(num1,num2):
+	pdb.set_trace)
+	return num1 + num2
+
+pdb gives us a extra boost.
+It gives a debugger.
+num1 = 4
+num2 = ksdfldsk
+
+type in help you get's command you can use in the terminal.
+We also have step.
+Step allows us to get to the next line.
+
+a gives us the arguments.
+w gives us the context.
+You are also able to change variables.

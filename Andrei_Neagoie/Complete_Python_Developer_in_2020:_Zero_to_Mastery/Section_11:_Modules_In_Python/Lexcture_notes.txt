@@ -1,0 +1,375 @@
+Modules in Python
+We learned about we writes Python in a single file.
+Functions is not allow to repeat over and over again.
+After that we learned about classes we can use to instaciate Objects.
+
+We also learned about functional Programming.
+We use functions.
+That is for keeping our code clean and organized.
+It becomes harder and harder to keep everything in the head.
+How do we stay organized.
+If we have multiple files of Python.
+Each.py files are like each own modules.
+
+We have main.py.
+utility.py there are modules.
+When writing modules we are using snake-cases.
+
+We want to divide our files into chunks.
+Think about we are working at NetFlix.
+We might have a file dedicated to videos,login,analytics.
+We wanna group our functions and methods togheter.
+We might create an utility modul.
+
+def multiply(num1, num2):
+	return num1*num2
+
+def divide(num1, num2):
+	return num1/num2
+
+import utility 
+
+print(utility)
+
+We get an modul utility.
+We generated a pycache folder.
+It is created evertime we import a folder.
+I am going to cache the file.
+It is going to load things from utility.cpython-36.pyc.
+Caching is something about to remeber things.
+Happens also when we use PyCharm.
+
+print(utility.multiply(2,3))
+
+Now we are able to use the utility field.	
+
+Packages in Python
+Our project is getting bigger.
+We have a new shopping functionality.
+We create an new folder shooping_cart.py.
+
+In shopping_cart.py
+
+def buy(item):
+	cart = []
+	cart.append(item)
+	return cart
+
+And we import shopping_cart
+
+print(shopping_cart)
+Package is simply a folder containing modules.
+You can have multiple modules.
+
+print(shopping.shopping_cart)
+
+I want to copy everything into PyCharm.
+We can pick a interpreter Python 3.
+
+main.py
+
+venv
+
+import utility
+To import from the Package file.
+
+import shopping.shopping_cart.buy
+
+Adding an utitlity.py file.
+
+Now we have these files.
+
+-main.py
+-__pycache__
+-shopping
+ -__pycache__
+ -__init__.py
+ -shopping_cart.py
+ -utility.py
+
+We have the __init__ .py.
+On the root of the package you must have __init__.py file.
+As projects get's bigger and bigger you divide the code's into different modules.
+
+Different Ways To Import
+We can a package in another package.
+Move it into to more_shopping.
+It still works.
+For example 
+shopping.more_shopping.shopping_cart('apple')
+How can we make it better.
+Instead we can make it better with
+import shopping.more_shopping.shopping_cart import buy
+And we can just write
+print(buy('apple'))
+
+As if it was part of the main file.
+
+And we can do the same for utility too.
+
+from utility import multiply, divide
+print(divide(5,2))
+print(multiply(5,2))
+
+And sometimes you can have name collisions.
+
+And in the utility module we have max 
+and it can give an errors because we have max in the built-in functions.
+
+.__name__
+We have to talk about about __name__
+
+if __name__ == '__main__':
+
+print(__name__) in the utility file and one other.
+I get utility and shopping.more_shopping.shopping_cart printed.
+Each module is given an name.
+And the interpreter has access to the files.
+And if we print(__name__) in the main file we get
+__main__ file.
+Sometime we wanna check if the module is the right.
+Then we wanna run it
+
+if __name__ == '__main__':
+	print('please run this')
+
+Only run the code in the main file.
+if __name__ == '__main__':
+  print(shopping_cart.buy('apple'))
+  print(divide(5,2))
+  print(multiply(5,2))
+  print(max([1,2,3])
+
+Remeber when we had the main class.
+
+Python Built-in Modules
+One of the key-features.
+We have covered the most of Python.
+We also learned how to organize the code.
+Why are Python so popular?
+It is because of external modules and packages that is outside of what we have an entire package system.
+
+These are called the Python built-in modules.
+They are really nice.
+We have email module.
+In other languages it may be called standard library.
+
+Let's use one of them Random.
+
+import random
+
+print(random)
+Where is it?
+In <Python 3.7 (modules)>
+
+import random
+
+help(random)
+This describes this documentation of the module.
+
+print(dir(random)) shows all methods that are available on this package.
+
+print(random.choice([1,2,3,4,5]))
+
+Gives us Random-Choice.
+
+import random as oulala
+
+oulalala.shuffle(my_list)
+You can avoid name collisions.
+
+Python Built-in Modules 2
+import sys
+print(sys)
+I got <module 'sys' (built-in).
+sys has sys.argv.
+What if we had a file 1.py
+print('hiiii')
+What if i want to give parameters to the file.
+
+import sys
+
+first = sys.argv[1]
+last = sys.argv[2]
+
+print(f'{first} {last}')
+
+And you can run the program with
+
+1.py andrei neagoie
+
+Make an game you can guess.
+Besides of asking for using inputs
+
+Exercise: Guessing Game
+
+Andrei's solutin my Guess Number exist in the Game Project Repository named Guess_Game.py
+
+from random import randint
+
+# you will need to run this on your machine and not this website for the sys.argv to work!
+
+import sys
+
+answer = randint(int(sys.argv[1]), int(sys.argv[2]))
+
+while True:
+    try:
+        guess = int(input(f'guess a number {sys.argv[1]}~{sys.argv[2]}:  '))
+        if  0 < guess < 11:
+            if guess == answer:
+                print('you are a genius!')
+                break
+        else:
+            print('hey bozo, I said 1~10')
+    except ValueError:
+        print('please enter a number')
+        continue
+
+Python Package Index
+The ability to have these built-in modules.
+These are called the Standard Library.
+Why Python is big in any company is because of
+developers like you and my can share Python files.
+We don't keep reinventing the wheel.
+We can share the module and import it.
+Really good modules like numpy,pandas,tensorflow.
+Libraries built out of outside developers.
+We are using pip-install.
+If we wanna build something we can use modules to make it faster.
+
+How can we gain knowledge about this.
+https://pypi.org
+
+Unlike the Python index.
+You can search for images and email there.
+There a lot of packages.
+
+First check if it exist in the built-in modules.
+And then check https://pypi.org.
+Check the release project.
+There so many packages so that you can do whatever you want.
+They share code.
+You can create your own packages to.
+
+pip install
+I just found pyjokes.
+Completely useless packages.
+You are able to put up your code.
+Star giveing by developers.
+pip install pyjokes.
+You can search for packages.
+Search for Pyjokes.
+
+import sys
+
+sys.path.append('/usr/local/lib/python3.7/dist-packages/')
+
+import pyjokes
+
+print(pyjokes.get_joke())
+
+Real programmers can write assembly code in any language
+
+Most programmers will use their terminal.
+
+To install it in the terminal.
+
+sudo pip3 install pyjokes
+And upgrade pip.
+
+pip3 list
+
+Virtual Enviroments
+Leverage all these modules people has build.
+Packages has versions numbers.
+For example we have
+
+pyjokes 0 Breaking Changes . New features 5. Bugfixes 0
+
+pycodestyl 2.5.0 Looks like an mature library.
+Libraries are maintained by programmers.
+It will always be bugs.
+Versions is always increasing.
+
+To go to an older version of package you can do the following.
+
+pip3 uninstall pyjokes 
+And after that you 
+pip3 install pyjokes==0.4.0
+
+The reason you want sometimes get back to older versions.
+
+Of can we have two different version.
+
+There is a tool some you can install called pipenv.
+
+In Pycharm you can use something called Virtualenv.
+
+Useful Modules
+Using third-party libraries.
+Some of the useful modules helps us to have more data-types.
+
+Specialized Data-types.
+These can make our programs very fast.
+
+Collection module.
+
+from collections import Counter
+defaultdict, OrderedDict.
+
+li = [1,2,3,4,5,6,7]
+print(Counter(li))
+It creates an Dictionary {1: 1, 2:1, 3:1, 4:1, 5:1 , 6:1, 7:1}
+It creates an dictionary of how many times an element occurred in the list.
+If you want to count the duplicate users.
+
+dictionary = {'a': 1,'b': 2}
+
+dictionary = defaultdict(lambda:5 ,{'a': 1, 'b':2})
+print(dictionary['c'])
+
+We get's five because of lambda 5 set 5 as default value. 
+
+OrderedDict
+
+d = OrderedDict()
+d['a'] = 1
+d['b'] = 2
+
+d2 = OrderedDict()
+d2[b] = 2
+d2[a] = 1
+
+print(d2 == d)
+Gives back false because of that d2 dosen't follow the order of d. 
+
+Useful Modules 2
+Date time value.
+
+import datetime
+
+print(datetime.time())
+
+This will give you the todays date.
+And user sign-up and they want to keep track of users logged-in.
+
+print(datetime.date.today())
+
+from array import array
+lists in python is called for dynamic.
+We can increamently the array.
+We can create an array with typecode.
+arr = array('i',[1,2,3])
+
+print(arr[0])
+
+DEVELOPER FUNDAMENTALS: VI
+Pros and cons libraries.
+
+You wanna be careful with using packages.
+You have to develop the skill to check if the package is good.
+Everytime your adding a package your project get's more heavier.
+
+That's make programming powerful.
+When you are working as developer you draw in packages.
