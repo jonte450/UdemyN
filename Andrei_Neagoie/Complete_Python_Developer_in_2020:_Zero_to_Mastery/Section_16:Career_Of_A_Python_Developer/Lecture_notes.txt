@@ -1,0 +1,101 @@
+Python Careers
+Many of you may wonder i become a Python Developer.
+Offer one of the best employement.
+
+Software Engineer.
+Work for a company like Google.
+
+Python Developer
+Solves problems with Python.
+
+Research Analyst
+Analyzes Data with Python.
+
+Data Analyst
+Make decision.
+
+Data Scientist
+Level up from a data-analyst.
+
+Backend Developer
+Building API-services.
+
+Testing/Automation
+Writing script to test companies user.
+
+Machine Learning
+Create models for a company.
+
+In this Course we gonna touch on each area.
+Learning Python opens up for new possibilities.
+
+Endorsements On LinkedIN
+
+What If I Don't Have Enough Experience
+What i am going to learn in this job.
+Or i am doing the same thing.
+By making job-tougher to remove.
+Do you feel confident.
+
+Every application should.
+But sometimes without a resume.
+How can you have good experience when you just started.
+
+Experience dosen't always comes from big companies.
+-GitHub
+-Website
+-1 to 2 Big Projects.
+-Contribuiting to Open Source Projects.
+
+You don't have to build your website from the scratch.
+There exists templates.
+
+Kevin Kelly
+It is very simple basic clean layout.
+As long you have an special website.
+Job-Board.
+
+List projects on the interview.
+Heard the most difficult projects.
+Spend one or two big projects.
+Creating Section Management hashing password.
+Deployed our project.
+One big project.
+
+Finally we have the blogpost.
+Medium.com post an blogpost.
+What if wrote about an special technology.
+It gives you an leg-up.
+
+Learning Guideline
+Nothing
+
+Now What??
+We learned the syntax.
+We can write Python now.
+When a really hard jump is to create value for a company.
+What projects should i build now.
+Where can you write Python code and make it work.
+We can run Python anywhere.
+We can Python on a mobile.
+You can run Python on servers.
+There is the power.
+We can now automating things.
+That's why machines are so powerful.
+We use Python to be more productive.
+We are gonna show where we can apply Python.
+How we can apply Python on projects.
+
+-Web Development
+-Image Processing
+-Emails
+-SMS
+-Machine Learning
+-Twitter Bots
+-Data Scraping
+-Automation
+-Data Visualization
+-General Scripting
+-File processing
+
+I wanna show you where you can apply the skills.

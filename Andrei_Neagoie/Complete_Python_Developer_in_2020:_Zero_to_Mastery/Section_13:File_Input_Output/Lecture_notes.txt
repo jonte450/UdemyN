@@ -1,9 +1,113 @@
 Working With Files In Python
+What's does I/O mean.
+Most of the time the machines are not communicating in one enviroment.
+Usually you want to speak with different parts.
+Maybe you are speaking with an database.
+I want you to input something to the outside world and you want to output something to the outside world.
+Write an script to output compressed image.
+
+Built-in function to write to files.
+Called open.
+
+my_file = open('test.txt')
+print(my_file)
+
+<_io.TextIOWrapper name='test.txt' mode='r' encoding='UTF-8'>
+
+Shows how the file is encoded.
+Encodings how the file is encoded.
+
+Below to read a file!
+
+my_file = open('test.txt')
+print(my_file.read())
+You get's
+
+hi my name is Andrei Neagoie
+
+Open has the idea of a cursor.
+You can only read the file once.
+Cursor will be the end of the file after the first read.
+You can fix this with
+my_file.seek[0]
+
+reads.lines() gives all the lines.
+You have to manually close the file after you have open it.
 
 Read,Write,Append
 
+with open('test.txt') as my_file:
+	print(my_file.readlines())
+
+You don't have to close the file.
+With the statement above.
+
+To read and to write to a file.
+
+with open('test.txt', mode='r+') as my_file:
+	text = my_file.write('hey is\' me')
+	print(text)
+
+When we opens to the file the cursor resets.
+You can use a to append to the end of the file.
+You use the right mode.
+w creates an new file if it dosen't exist.
+
 File Paths
+We can change directories.
+Create an new directory.
+mkdir app.
+Move the sad text to the app folder.
+If we tries to read the file we get an error.
+
+You define the new path in open app/sad.txt
+
+with open('app/sad.txt', mode='r+') as my_file:
+	print(my_file.read())
+
+Absolute Path from the root user.
+./ means from the current folder.
+
+A built-in module called pathlib.
+Key thing builind a program reads from the file-system.
+Make it works on both.
+Pathlib are gonna take care of operating system file-system.
 
 File IO Errors
+One of the common things when you are working with file-systems is to put them in try and catch-block.
+
+try:
+with open('app/sad.txt', mode='r+') as my_file:
+	print(my_file.read())
+except FileNotFoundError as err:
+	print('file does not exist')
+	raise err
+except IOErrro as err:
+	print('IO error')
+	raise err
+
 
 Exercise: Translator
+
+from translate import Translator
+
+translator= Translator(to_lang="ja")
+
+try:
+	with open('file.txt', mode='r+') as my_file:
+		text = ''.join(my_file.readlines())
+		translation = translator.translate(text)
+
+	with open('./test-ja.txt', mode="w") as my_file2:
+		my_file2.write(translation)
+
+
+except FileNotFoundError as err:
+	print('file does not exist')
+	raise err
+
+
+
+translated_text = translator.translate(text)
+
+print(translated_text)

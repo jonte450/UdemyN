@@ -1,0 +1,102 @@
+Regular Expressions
+Regular Expressions are not unique to Python.
+They are very useful.
+For finding things
+
+import re
+
+string = 'search inside of this text please!'
+print('search' in string)
+
+Regular Expressions are more powerful than above.
+
+a = re.search('this', string)
+
+Get's back a match object.
+Where it occurs in the string.
+
+print(a.span())
+Tells where it occurs as a tuple.
+
+print(a.start()) 
+Tells where the text starts as an index.
+
+print(a.group())
+Group helps us do multiple searches.
+
+If the regular Expressions dosen't find anything it returns none.
+
+
+import re
+re.compile() gives us a pattern
+This pattern we use to do the search for us.
+
+pattern = re.compile('search this inside of this text please')
+string = 'search this inside of this text please! Andrei'
+
+a = pattern.search(string)
+
+Finds all instances below of the string in a list.
+b = pattern.findall(string)
+
+Gives an match object if the strings equal exatly each other.
+c = pattern.fullmatch(string)
+
+Still gives you a match object even if they not match each other exactly.
+d = pattern.match(string)
+print(b)
+
+And we get's back both instances.
+['this','this']
+
+Regular Expressions 2
+You can think regular expression as a language itself.
+We has special sequences.
+And things can get really complicated.
+regex101.com it is really useful to test.
+
+Check if the letters are in a range [a-z A-Z].
+We can also group things ([a-z A-Z])([a])
+We have a two groups.
+([a-z A-Z]).([a]) dot means match the first group and that after a.
+We have a two groups.
+
+pattern = re.compile(r"[a-zA-Z].([a])")
+
+r stands for raw string.
+^ starts of string.
+
+Exercise: Interactive RegEx
+Skips this exercise.
+
+Regular Expressions 3
+How can we apply this on real-life scenario.
+For example we want to collect proper with emails.
+We want that some are a correct emails.
+Great for validations.
+Emails in correct forms.
+
+r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
+[] i trying to capture an group.
+These email can be number letters +- matches unlimited times.
+
+@ we need to have 
+
++ means how many times.
+. it is the exactly what we are looking for.
+
+
+Exercise: Password Validation
+# At least 8 char long
+# contain any sort letters, numbers $%#@
+# has to end with a number
+
+[A-zaz0-9$%#@]{8,}\d
+
+Exercise: Password Validation 2
+
+In the previous video, we created the password checker, but we did not implement the last rule: password has to end with a number
+
+How would you go about changing the regex we created in the previous video to accommodate that rule? Give it a try and check out the solution regex in the solution Repl!
+
+#([A-Za-z0-9$%#@]{7,}[0-9])

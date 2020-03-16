@@ -1,0 +1,63 @@
+Section Overview
+
+What is Image Processing
+
+DEVELOPER FUNDAMENTALS: VII
+
+Images With Python
+
+Images With Python 2
+
+Images With Python 3 
+
+Exercise: JPG to PNG
+
+Solution: JPG to PNG Pokedex Converter
+
+Open CV
+
+PDF's With Python
+
+Exercise: PDF Merger
+
+Exercise: Watermarker
+
+Solution: Watermarker
+
+Sending Emails With	Python
+
+Sending Emails With Python 2
+
+Sending Emails With Python 3
+
+Password Checker Project
+
+How Hackers Work
+
+Password API
+
+Optional: Hash Function
+
+Password Checker
+
+Password Checker 2
+
+Password Checker 3
+
+Password Checker 4
+
+Twitter API
+
+Our First Twitter Bot
+
+Our First Twitter Bot 2
+
+Our First Twitter Bot 3
+
+Our First Twitter Bot 4
+
+SMS With Python
+
+SMS With Python 2
+
+SMS With Python 3
