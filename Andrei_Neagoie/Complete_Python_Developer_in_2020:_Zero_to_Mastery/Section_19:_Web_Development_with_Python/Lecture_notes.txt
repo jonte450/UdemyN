@@ -1,0 +1,207 @@
+Section Overview
+I got into programming because of Web-development.
+In this section we are going to show how we can use Python
+in Web-development.
+Mobile-development.
+There are lot of mobile-applications.
+General overview.
+Use Python to build our own server.
+Portfolio website.
+Understand how the web works.
+
+How Websites Work
+We are not going to go super deep into this topic.
+Focus on the Python side.
+Change your portfolio.
+How is my browser able to display the web-page for me.
+We have our browser.
+All the way to a machine called a server.
+Browser is going to say which machine can serve me this site.
+First they communicate between http/https.
+They need to communicate with some rules.
+I want to use http-protocol.
+The server is going to respond with some data.
+Html-file content of the website.
+Css-file to style the page.
+JavaScript is allowing us to perform actions.
+These files get's sent to the browser.
+There is one piece that can be really be written in Python.
+The server can be written in Python.
+But Python programmers can write the rules for the server.
+Touch about the HTML,CSS,JavaScript files.
+We can write any server in any language.
+
+How Websites Work 2
+How can we check these files.
+Go into Developer Tools.
+Focus on the Network Tab.
+Make sure no filter no search.
+Response Server had these files.
+We can see A webcomic of romance.
+JavaScript allows us to do some interactivity.
+
+Building Our First Server
+Created a folder called web server.
+We have index.html, script.js, style.css.
+
+Begin with empty files.
+We have opening tags and closing-tags.
+Body is what that becomes displayed on websites.
+Double-click on it.
+
+index.html
+href says where the style.css is located
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link type="text/css" href="style.css">
+</head>
+<body>
+<script src="script.js"></script>
+</body>
+</html>
+
+style.css
+
+body {
+	background-color: green
+}
+
+All we care about these three files.
+Url-path looks different.
+We didn't create a real web-server.
+Do you want to people all over the world to access your server.
+You want to do it on some other place in the world.
+
+Setting Up Flask
+It is time to use Python to build our first server.
+I wonder if Python has a module for that.
+Python has Http-server.
+Building Servers is a very common things.
+And when you have problem is constantly being solved we have something called frameworks.
+We can use a framework called Flask to build Server.
+You can think it like a kitchen instead Flask is the kitchen.
+Two really popular frameworks.
+-Flask
+-Django
+
+Django is very big.
+Flask is micro-framework.
+
+Flask is very clean and small.
+Python3 comes with venv built-in.
+
+python3 -m venv web\_server/
+. web\_server/bin/activate
+Now you are in the web-server right now.
+After that you type in 
+pip3 install flask.
+
+Building A Flask Server
+Process on how you work as a developer.
+Hey use Django instead of flask.
+
+from flask import Flask
+Instanciate the app with flask.
+
+app = Flask(__name__)
+Our name is the main folder.
+So we have created an instance of our flask app.
+
+print(__name__)
+
+We are using a decorator.
+Frame-works gives us a higher level of abstraction.
+Anytime we hit the root we want to define hello world.
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
+Flask also gives us a command line to run our server.
+
+export FLASK_APP=server.py
+And after that 
+flask run
+
+And this below is where you are running your server on the local-host.
+
+* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+Somebody needs our resource.
+We are going to return "Hello World"
+We are turning on the debug-mode
+export FLASK_ENV=development
+and flask run.
+And flask run.
+And the server notices the changes and make the changes for us.
+
+Flask Templates
+Server usally accepts requests from the server.
+We want our server to listen to a blog-route as well
+
+@app.route('/blog')
+def blog():
+	return "These are my thoughts on the blog!"
+
+We now have multiple routes.
+Flask automatically converts things for us.
+
+Let's create another route!
+
+@app.route('/blog/2020/dogs')
+def blog2():
+	return "this is my dog"
+
+We have this beautiful website right now.
+
+flask has render_template
+
+def hello_world():
+	return render_template('./index.html')
+Flask is checking a Folder named the template folder.
+Flask uses templates to allow us to add multiple files.
+
+
+Flask Static Files
+
+Favicon
+
+Templating Engine
+
+URL Parameters
+
+MIME Types
+
+Building A Portfolio
+
+FREE HTML Templates
+
+Building A Portfolio 2
+
+Building A Portfolio 3
+
+Building A Portfolio 4
+
+HTML Forms
+
+Building A Portfolio 5
+
+Building A Portfolio 6
+
+Building A Portfolio 7
+
+Quick Fix: newline
+
+Quick Note About Databases
+
+Upcomming Video
+
+Optional: How Databases Work
+
+Building A Portfolio 8
+
+Building A Portfolio 9
+
+Bonus Exercise: Customize Your Portfolio
+

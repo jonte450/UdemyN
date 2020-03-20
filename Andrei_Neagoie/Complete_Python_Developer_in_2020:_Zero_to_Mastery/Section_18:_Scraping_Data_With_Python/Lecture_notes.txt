@@ -1,0 +1,255 @@
+Web Scraping Intriduction
+Means grabbing data from Amazon.
+Any website can be scrapped.
+A server is a computer that has three files.
+Like html,css, JavaScript file.
+All a browser does is going to know if you type in a address.
+A page going to be displayed.
+Web-scraping is simply that grabbing data and keeping all data that we are want.
+
+Web Scraping and API's
+Would you want the people to scrap your data.
+It depends.
+Most web-sites does want you to scrape their website.
+robots.txt.
+This is you allowed and not allowed to.
+Bing searchbot. 
+Hacker news.
+As long you dosen't use these URL you allows scrape this.
+If we their website we should use crawl.
+Their data should not be used for commercial thing.
+There are some allowed area.
+Udemy give us a Instructor-API.
+Sometimes you need a token to access their API.
+JSON-placeholder.
+
+How Googlebot Works
+How does searchsites works.
+Googlebot is a serchengine.
+Create database with all the websites.
+How does it know.
+It uses a Google-bot.
+A crawler.
+If a website mention soup-recipes.
+I know these things.
+Constantly crawling websites.
+
+Our Hacker News Project
+In order to learn about webscraping.
+We want to build a useful website for hackernews.
+A lot programmers.
+Everytime you refresh a new story is published.
+Checking the point-system.
+Remove all the stories that has less than 100 points.
+We want to use a tool called beautiful-soup.
+A tool most web-scraping projects use.
+
+Requesting Data
+In order to do is to download  beautifulsoup4.
+The other thing we need is the requests library.
+Allows to bring HTML-files.
+Allows to bring the data and scrape it.
+
+import requests
+from bs4 import BeautifulSoup
+We are doing an get request now.
+We want a html news with all the news.
+
+res = requests.get('https://news.ycombinator.com/news')
+print(res)
+print(res.text)
+
+We only care about the text.
+We can now use BeautifulSoup to clean up.
+
+BeatuifulSoup Basics
+
+import requests
+from bs4 import BeautifulSoup
+
+res = requests.get('https://news.ycombinator.com/news')
+print(res)
+print(res.text)
+
+We recieved many html-text files.
+Using Python to modify our data.
+
+import requests
+from bs4 import BeautifulSoup
+
+res = requests.get('https://news.ycombinator.com/news')
+soup = BeautifulSoup(res.text, 'html.parser')
+print(soup)
+
+To grab the body-tag.
+print(soup.body)
+
+You get all the contents in a list form.
+print(soup.body.contents)
+
+You get all the div-tag.
+print(soup.find_all('div'))
+
+Finds the first thing
+print(soup.find('a'))
+
+Get the score from a-tag.
+Allowing us to select with data we want.
+
+BeatuifulSoup Selectors
+
+import requests
+from bs4 import BeautifulSoup
+
+res = requests.get('https://news.ycombinator.com/news')
+soup = BeautifulSoup(res.text, 'html.parser')
+print(soup.select(id='score_20514755'))
+
+Allows us to grab a piece of data.
+With help of a CSS-selector.
+List of different ways to grab elements.
+This will select all the scores.
+
+print(soup.select('.score'))
+
+Gets complicated when we want difficult nested elements.
+Let's grab all elements that has story link.
+
+print(soup.select('.storylink')[0])
+
+Story-links grabs all the news-tags.
+
+Down below we have the essential information to grab what we want. 
+
+links = soup.select('.storylink')
+votes = soup.select('.score')
+print(votes[0])
+print(votes[0].get('id'))
+
+Hacker News Project
+
+import requests
+from bs4 import BeautifulSoup
+
+res = requests.get('https://news.ycombinator.com/news')
+soup = BeautifulSoup(res.text, 'html.parser')
+
+links = soup.select('.storylink')
+votes = soup.select('.score')
+
+#We Grab the link and the title
+def create_custom_hn(links, votes):
+	hn = []
+	for index, item in enumerate(links):
+		title = links[index].getText()
+		href = links[index].get('href', None)
+		points = int(votes[index].getText().replace('points',''))
+		print(points)
+		hn.append({'title': title, 'link': href})
+	return hn
+
+print(create_custom_hn(links, votes)) 
+
+Hacker News Project 2
+
+We should grab the subtext instead of the points.
+
+import requests
+from bs4 import BeautifulSoup
+import pprint
+
+res = requests.get('https://news.ycombinator.com/news')
+soup = BeautifulSoup(res.text, 'html.parser')
+
+links = soup.select('.storylink')
+subtext = soup.select('.subtext')
+
+#We Grab the link and the title
+def create_custom_hn(links, subtext):
+	hn = []
+	for index, item in enumerate(links):
+		title = item[index].getText()
+		href = item[index].get('href', None)
+		vote = subtext[idx].select('.score')
+		if len(vote):
+		points = int(vote[0].getText().replace('points',''))
+		if points > 99:
+		hn.append({'title': title, 'link': href, 'votes':points})
+	return hn
+
+pprint.pprint(create_custom_hn(links, subtext))
+
+When you are web-scraping you are testing your assumption. 
+
+Why did we want to use enumerate.
+We need the index so that we can access the subtext.
+
+We only cares of the votes that has over 100 points.
+So let's us add an if-statement here.
+
+Hacker News Project 3
+
+We are creating a sort function here.
+
+def sort_stories_by_votes(hnlist):
+	return sorted(hnlist, key= lambda k:k['votes'], reverse=True)
+
+Now we have everything sorted.
+We can give the key we want to sort by.
+Now you skip to vist.
+
+Solution: Hacker News Project
+When you click on more.
+You get page 2 , 3.
+All we need is to get a second response.
+
+res2 = requests.get('https://news.ycombinator.com/news?p=2')
+
+soup2 = BeautifulSoup(res2.text, 'html.parser')
+
+And we use mega_links and mgea_subtext to combine our pages.
+
+import requests
+from bs4 import BeautifulSoup
+import pprint
+
+res = requests.get('https://news.ycombinator.com/news')
+res2 = requests.get('https://news.ycombinator.com/news?p=2')
+soup = BeautifulSoup(res.text, 'html.parser')
+soup2 = BeautifulSoup(res2.text, 'html.parser')
+
+links = soup.select('.storylink')
+subtext = soup.select('.subtext')
+links2 = soup2.select('.storylink')
+subtext2 = soup2.select('.subtext')
+
+mega_links = links + links2
+mega_subtext = subtext + subtext2
+
+def sort_stories_by_votes(hnlist):
+  return sorted(hnlist, key= lambda k:k['votes'], reverse=True)
+
+def create_custom_hn(links, subtext):
+  hn = []
+  for idx, item in enumerate(links):
+    title = item.getText()
+    href = item.get('href', None)
+    vote = subtext[idx].select('.score')
+    if len(vote):
+      points = int(vote[0].getText().replace(' points', ''))
+      if points > 99:
+        hn.append({'title': title, 'link': href, 'votes': points})
+  return sort_stories_by_votes(hn)
+ 
+pprint.pprint(create_custom_hn(mega_links, mega_subtext))
+
+
+What To Do Next With Scraping?
+Learn the basics of WebScraping.
+Go further.
+Get more familiar with BeautifulSoup.
+Maybe you can use an API.
+Read out a data.
+Scrapy 1.6 like BeautifulSoup but more features.
+Scarpes massives of data.
+Data-Bases to save the data.

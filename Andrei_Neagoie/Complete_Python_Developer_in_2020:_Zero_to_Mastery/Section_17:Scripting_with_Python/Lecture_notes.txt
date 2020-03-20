@@ -1,63 +1,700 @@
 Section Overview
+We are writing scripts to help us to be more productive.
+How we can use it to make it more efficient.
+We are gonna build an Twitter-bot.
 
 What is Image Processing
+This something that happens a lot.
+Many companies are using images.
+Image that i uploaded to Instagram was very large.
+Instagram makes images small.
+Save them a bit of money.
+Each of these pictures saves money.
+Udemy host all the money.
+If they host all the videos in the original format Udemy would lose much money.
+Help other students to watch videos.
+Iternet is your friend.
+OpenCV.
+We are going to use Pillow to manipulate images.
 
 DEVELOPER FUNDAMENTALS: VII
+Pick the Right Library.
+We installed Pillow.
+We have some warnings like Pillow and Pil cannot exist in the same enviroment.
+You pick the latest library and it it's constantly updated.
+And have a large community.
+Forked Pil and developed into Pillow because of Python 3.
 
 Images With Python
+Process some image with python knowledge.
+But this tool really shines it's when it is hundred libraries.
+Reference to the official documentation.
+from PIL import image
+
+img = Image.open('./Pokedex/pikachu.jp')
+print(img)
+
+We get's back a JPG object.
+What can we do.
+print(img.format)
+print(img.size)
+print(img.mode)
+
+We are able to 
+print(dir(img))
+
+Get all these things image has given to us.
+
+from PIL import Image, ImageFilter
+
+And after that we can use 
+
+filtered_img = img.filter(ImageFilter.BLUR)
+filtered_img.save("blur.png", 'png')
+
+filtered_img = img.filter(ImageFilter.SMOOTH)
+filtered_img = img.filter(ImageFilter.SHARPEN)
+
+png allows this filters.
+
+filtered_img = img.convert('L')
+Pikachu appears in black and white.
 
 Images With Python 2
+Actually use the save method and show like below.
+filtered_img.show()
 
-Images With Python 3 
+We rotatate the image.
+
+crooked = filtered_img.rotate(90)
+crooked.save('grey.png','png')
+
+resize = filtered_img.resize((300, 300)
+resize.save("grey.png",'png')
+
+box = (100,100,400,400)
+region = filtered_img.crop(box)
+
+Images With Python 3
+unsplash download good images.
+Pick any image.
+img = Image.open('./astro.jpg')
+new_img = img.resize((400,400))
+
+We get a tinier image.
+When we make things smaller and smaller ration dissapear.
+
+new_img = img.thumbnail((400,200))
+To try to keep the Aspect ratio.
+Thumbnail is good to keep the aspect ratio.
 
 Exercise: JPG to PNG
+Png is better when develop websites.
+
+import sys
+import os
+from Pillow import Image
+
+#Grab first and second argument
+
+#check is new/ exist, if not created
+
+#Loop through the Pokedx and convert it to PNG
+#Save to the new folder
 
 Solution: JPG to PNG Pokedex Converter
+#Not my solution
+#My code is in Python_Script
+
+import sys
+import os
+from PIL import Image
+
+path = sys.argv[1]
+directory = sys.argv[2]
+
+if not os.path.exists(directory):
+    os.makedirs(directory)
+
+for filename in os.listdir(path):
+  clean_name = os.path.splitext(filename)[0]
+  img = Image.open(f'{path}{filename}')
+  #added the / in case user doesn't enter it. You may want to check for this and add or remover it. 
+  img.save(f'{directory}/{clean_name}.png', 'png')
+  print('all done!')
 
 Open CV
+Video parsing is just similar to Image parsing.
+Open CV is very powerful language.
+Explore OpenCV to analyzing images.
 
 PDF's With Python
+We have learned to work with files.
+We can manipulate any pdf files.
+How can we use files.
+We have
+-Dummy pdf file
+-A Simple PDF File
+-A Simple PDF File 2
+-Watermark PDF
+
+Find a library to process PDF files.
+pyPDF2.
+It is not a big library.
+
+import PyPDF2 
+
+with open('dummy.pdf','r') as file:
+	print(file)
+
+Grab the dummy PDF.
+We get text io wrapper.
+We can use the PyPDF to read the file.
+
+with open('dummy.pdf','r') as file:
+	reader = PyPDF2.PdfFileReader(file)
+	print(reader.numpages)
+
+Depending on the program you are running we want to read the binary.
+
+Convert with 'rb'.
+Now we get the pages.
+getPage(0) returns a Page-Object.
+To rotate the pdf page = reader.getPage(0)
+page.rotateCounterClockvise(180)
+
+We must update the Dummy pdf.
+writer = PyPDF2.PdfFileWriter()
+with open('tilt.pdf', 'wb') as file:
+	writer.write()
 
 Exercise: PDF Merger
+To combine pdfs.
+And we can just keep adding PDF's to combine.
+inputs = sys.argv[1:]
+
+def pdf_combiner(pdf_list):
+	merger = PyPDF2.PdfFileMerger()
+	for pdf in pdf_list:
+		print(pdf)
+		merger.append(pdf)
+		merger.write('super.pdf')
 
 Exercise: Watermarker
+I have attached a watermark pdf.
+Builds an watermarks.
+Why would it be useful.
+Say you are working on a script.
+We don't want to leak to them to the press.
+They have the name on the script and have to leak the script.
+
 
 Solution: Watermarker
 
+import sys
+from PyPDF2 import PdfFileMerger
+from PyPDF2 import PdfFileReader, PdfFileWriter
+
+output = PdfFileWriter()
+watermark = PdfFileReader(open('watermark.pdf','rb'))
+ipdf = PdfFileReader(open('super.pdf','rb'))
+
+
+for index in range(ipdf.getNumPages()):
+	page = ipdf.getPage(index)
+	page.mergePage(watermark.getPage(0))
+	output.addPage(page)
+
+
+with open('watermark_pdf.pdf', 'wb') as f:
+	output.write(f)
+
 Sending Emails With	Python
+We are going to send email with Python.
+Why this may be useful later on.
+
+Outdated ways to send email to send emails.
+Imagine you a list of emails.
+Sends email to several people directly.
+Mailchimp can be used for that.
+Send email to customers.
+
+import smtplib
+from email.message import EmailMessage
+
+smtp going to allows to create an smtp-server.
+When you send email you need a server.
+Emails has protocols.
 
 Sending Emails With Python 2
 
+import smtplib
+from email.message import EmailMessage
+
+email = EmailMessage()
+
+This is gonna be our email-object.
+email['from'] = 'Andrei Neagoie'
+email['to'] = 'andrei@zerotomastery.io'
+email['subject'] = 'You won 1.000.000 dollars!'
+
+email.set_content('I am a Python Master')
+But we need to send the email.
+
+with smtplib.SMTP(host='smtp.gmail.com', port=587) as smtp: 
+	smtp.ehlo()
+	smtp.starttls() Encryption mechanism Connect securely to the server.
+	smtp.login('zerotomastery1@gmail.com', 'helloztmmyoldfriend1')
+	smtp.send_messages(email)
+	print('all good bosses')
+
 Sending Emails With Python 3
 
+import smtplib
+from email.message import EmailMessage
+from string import Template
+from pathlib import Path
+
+We can import template using dollar sign to substitute variables these dollar signs with who and what for example.
+
+We could also import the Os module
+
+html = Template(Path('index.html').read_text())
+email = EmailMessage()
+
+email['from'] = 'Andrei Neagoie'
+email['to'] = 'andrei@zerotomastery.io'
+email['subject'] = 'You won 1.000.000 dollars!'
+
+To replace the name variable.
+email.set_content(html.substitute({name= 'TinTin'}),'html')
+
+with smtplib.SMTP(host='smtp.gmail.com', port=587) as smtp: 
+	smtp.ehlo()
+	smtp.starttls() Encryption mechanism Connect securely to the server.
+	smtp.login('zerotomastery1@gmail.com', 'helloztmmyoldfriend1')
+	smtp.send_messages(email)
+	print('all good bosses')
+
+Imagine we have a databases with all the friends.
+We are gonna to have more dynamic.
+
+<DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+ 	You just won so much money $name
+</body>
+</html>
+
+Programatically send an email.
+Customer thanks for you bought our product.
+
+
 Password Checker Project
+This is my favorite project in the whole course.
+Dosen't sound so exiting.
+You can talk with you employer and they are going to be impressed.
+
+Build a password-checker.
+Check if your password ever been hacked.
+
+python3 checkmypass.py hello password123 ladkaskdasok
 
 How Hackers Work
+How shall we build this tool.
+Passwords get's hacked all time.
+Hackers compile the leaked password.
+Massive XLS files.
+Email has been part of a data breach.
+You can check your password.
+Hackers use something like a dictionary attacks.
+Tries to login to websites.
+Hackers loop through the massive list.
+This is not a Web-development course.
+Keeper, sticky password.
+We are gonna build this ourselves.
 
 Password API
+checkmypass.py
+
+import requests
+
+url = 'https://api.pwnedpasswords.com/range/' + 'password123'
+
+res = requests.get(url)
+print(res)
+
+Api is using a hashing.
+SHA1 Hash Generator
+You should always hash a password to make it jibbrish.
+Hashing is one-way function.
+We want to be secure as possible.
+We want to send our hashed.
+
+Kate Anomity allows to recieve information about us yet not to know who we still are.
+
+We are using only the first five characters of our hashed password.
+
+It's gonna look in the database we are gonna get our password to check the rest of the SHA1 hashed functions.
 
 Optional: Hash Function
+Hash-function is function that generates a length.
+We give it a input and outputs a random pattern.
+Practical input.
+No matter how many times it's is gonna put hello there.
+That is called idempotent.
+We get really fast data-accesses.
+Generates some jibbrish and converts it.
+We can decide where we can put into the memory.
 
 Password Checker
+import requests
+import hashlib
+
+
+def request_api_data(query_char):
+	url = 'https://api.pwnedpasswords.com/range/'+'CBFDA'
+	res = requests.get(url)
+	if res.status_code != 200:
+		raise RunTimeError(f'Error fetching: {res.status_code} check the API and try again!')
+	return res	
+
+def pwned_api_check(password):
+	sha1password = hashlib.sha1(password.encode('utf-8').hexdigest().upper())
+	return sha1password
+
+
+request_api_data('123')
+pwned_api_check('123')
+
+We only trusts ourselves.
+We can caluculate on our machine.
+They have 600 million passwords in the database.
+Res is have many passwords to check against.
 
 Password Checker 2
+import requests
+import hashlib
+
+#Check if the Requests are working
+
+def request_api_data(query_char):
+	url = 'https://api.pwnedpasswords.com/range/'+'CBFDA'
+	res = requests.get(url)
+	if res.status_code != 200:
+		raise RunTimeError(f'Error fetching: {res.status_code} check the API and try again!')
+	return res	
+
+def get_password_leaks_count(hashes, hash_to_check):
+	hashes = (line.split(':') for line in hashes.text.splitlines())
+	for h, count in hashes:
+		print(h,count)
+
+#Return the password
+#Converting the password to SHA1
+def pwned_api_check(password):
+	sha1password = hashlib.sha1(password.encode('utf-8').hexdigest().upper())
+	first5_char, tail = sha1password[:5], sha1password[5:]
+	response = request_api_data(first5_char)
+	print(response)
+	return get_password_leaks_count(response, tail)
+
+request_api_data('123')
+pwned_api_check('123')
+
+We get all the hashes that matches.
 
 Password Checker 3
 
+import requests
+import hashlib
+import sys
+
+#Check if the Requests are working
+
+def request_api_data(query_char):
+	url = 'https://api.pwnedpasswords.com/range/'+'CBFDA'
+	res = requests.get(url)
+	if res.status_code != 200:
+		raise RunTimeError(f'Error fetching: {res.status_code} check the API and try again!')
+	return res
+
+#Split up the hashes to count.
+def get_password_leaks_count(hashes, hash_to_check):
+	hashes = (line.split(':') for line in hashes.text.splitlines())
+	for h, count in hashes:
+		if h == hash_to_check:
+			return count
+		return 0
+
+#Return the password
+#Converting the password to SHA1
+def pwned_api_check(password):
+	sha1password = hashlib.sha1(password.encode('utf-8').hexdigest().upper())
+	first5_char, tail = sha1password[:5], sha1password[5:]
+	response = request_api_data(first5_char)
+	print(response)
+	return get_password_leaks_count(response, tail)
+
+def main(args):
+	for password in args:
+		count = pwned_api_check(password)
+		if count:
+		print(f'{password} was found {count} times... you should probaly change your password!')
+		else:
+		 print(f'{password} was NOT found. Carry on')
+	   return 'done'
+
+
+main(sys.argv[1])
+
+We get all the hashes that matches.
+
 Password Checker 4
 
+If you talk with an interviwer it's gonna be impressed.
+You may have different shells.
+Run only if it is the main file being run.
+sys.exit to leave the process.
+
+
+#You will not be able to run this file here and will need to copy it onto your computer and run it on your machine. 
+#You will also need to make sure you have installed the requests module from PyPi (pip install)
+import requests
+import hashlib
+import sys
+
+def request_api_data(query_char):
+  url = 'https://api.pwnedpasswords.com/range/' + query_char
+  res = requests.get(url)
+  if res.status_code != 200:
+    raise RuntimeError(f'Error fetching: {res.status_code}, check the api and try again')
+  return res
+
+def get_password_leaks_count(hashes, hash_to_check):
+  hashes = (line.split(':') for line in hashes.text.splitlines())
+  for h, count in hashes:
+    if h == hash_to_check:
+      return count
+  return 0
+
+def pwned_api_check(password):
+  sha1password = hashlib.sha1(password.encode('utf-8')).hexdigest().upper()
+  first5_char, tail = sha1password[:5], sha1password[5:]
+  response = request_api_data(first5_char)
+  return get_password_leaks_count(response, tail)
+
+def main(args):
+  for password in args:
+    count = pwned_api_check(password)
+    if count:
+      print(f'{password} was found {count} times... you should probably change your password!')
+    else:
+      print(f'{password} was NOT found. Carry on!')
+  return 'done!'
+
+if __name__ == '__main__':
+  sys.exit(main(sys.argv[1:]))
+
 Twitter API
+Time for another Project.
+This Twitter bot will help us with twitter.
+Require us to work with Twitter API.
+Permessive API.
+We must get permission from twitter to get the data.
+Once you created an account you have something like that.
+Create an app.
+Provide Twitter Bot.
+Tweepy library to interact with the API.
 
 Our First Twitter Bot
+This library has really good documentation
+
+import tweepy
+#Twitter API use this to allow access for this
+
+auth = tweepy.OAuthHandler(API-Key, API secret key)
+auth.set_access_token(Access Token , Access Token Secret)
+
+api = tweppy.API(auth)
+
+public_tweets = api.home_timeline()
+#Loop over the Tweets
+for tweet in public_tweets:
+	print(tweet_text)
+
+What else does the Twitter-API gives us.
+
+api = tweepy.API(auth)
+user = api.me()
+
+print(user.name)
+print(user.screen_name)
+print(user.followers_count)
+
+Build something useful with the Twitter Bot.
 
 Our First Twitter Bot 2
+Make our bot help us follow people that follows Andrei Neagoie.
+
+import tweepy
+#Twitter API use this to allow access for this
+
+auth = tweepy.OAuthHandler(API-Key, API secret key)
+auth.set_access_token(Access Token , Access Token Secret)
+
+api = tweppy.API(auth)
+
+public_tweets = api.home_timeline()
+#Loop over the Tweets
+for tweet in public_tweets:
+	print(tweet_text)
+
+What else does the Twitter-API gives us.
+
+api = tweepy.API(auth)
+user = api.me()
+
+#Generous Bot
+#Click thorugh different pages.
+#Easy way to go through the whole Twitter.
+import time
+
+#We create a function limit_handler() that takes care over
+#so that we are not hitting the twitter server to much.
+#Everytime we hit the rate-limit.
+
+def limit_handler(cursor):
+	try:
+	while True:
+		yield cursor.next()
+	except tweepy.RateLimitError:
+		time.sleep(1000)
+
+for followers in limit_handler(tweppy.cursor(api.followers).items()):
+	if follower.name == 'Nnesandz_05':
+		follower.follow()
+		print(follower.name)
+
+#We are going to hit the Twitter-API.
+#Overload the server and crash the server.
 
 Our First Twitter Bot 3
 
+import tweepy
+#Twitter API use this to allow access for this
+
+auth = tweepy.OAuthHandler(API-Key, API secret key)
+auth.set_access_token(Access Token , Access Token Secret)
+
+api = tweppy.API(auth)
+
+public_tweets = api.home_timeline()
+#Loop over the Tweets
+for tweet in public_tweets:
+	print(tweet_text)
+
+What else does the Twitter-API gives us.
+
+api = tweepy.API(auth)
+user = api.me()
+
+#Generous Bot
+#Click thorugh different pages.
+#Easy way to go through the whole Twitter.
+import time
+
+#We create a function limit_handler() that takes care over
+#so that we are not hitting the twitter server to much.
+#Everytime we hit the rate-limit.
+
+def limit_handler(cursor):
+	try:
+	while True:
+		yield cursor.next()
+	except tweepy.RateLimitError:
+		time.sleep(300)
+
+for followers in limit_handler(tweppy.cursor(api.followers).items()):
+	if follower.name == 'Ajeasmith':
+		follower.follow()
+		print(follower.name)
+		break
+
+You may want follow like on other condition.
+
 Our First Twitter Bot 4
 
+import tweepy
+#Twitter API use this to allow access for this
+
+auth = tweepy.OAuthHandler(API-Key, API secret key)
+auth.set_access_token(Access Token , Access Token Secret)
+
+api = tweppy.API(auth)
+
+public_tweets = api.home_timeline()
+#Loop over the Tweets
+for tweet in public_tweets:
+	print(tweet_text)
+
+What else does the Twitter-API gives us.
+
+api = tweepy.API(auth)
+user = api.me()
+
+
+#We create a function limit_handler() that takes care over
+#so that we are not hitting the twitter server to much.
+#Everytime we hit the rate-limit.
+
+def limit_handler(cursor):
+	try:
+	while True:
+		yield cursor.next()
+	except tweepy.RateLimitError:
+		time.sleep(1000)
+
+#Returns a Tweet on a specified criteria.
+search_string = 'python'
+numbersOfTweets = 2
+
+for tweet in tweepy.Cursor(api_search, search_string).items(numbersOfTweets):
+try:
+	tweet.favorite()
+	print('I liked that tweet')
+except tweepy.TweepError as e:
+	print(e.reason)
+except StopIteration:
+	break	
+#We have build an narcisstic bot.
+
 SMS With Python
+Going to Attempt to try this.
+Create an script that sends when it is good time to buy something.
+
+Twillio is a great API to use for text communication.
+Once you created a count you need to create a project.
+
+Programmable SMS.
 
 SMS With Python 2
+Get started.
+Just exploring.
 
 SMS With Python 3
+
+from twillio.rest import Client
+
+account_sid = 'lalalalala'
+auth_token = '[AuthToken]'
+client = client(account_side, auth_token)
+
+message = client.messages.create(from_='1226602469'
+								 to = '16472617454'
+								 )
+
+print(message.sid)
+Verify the number on Twiflo page.
