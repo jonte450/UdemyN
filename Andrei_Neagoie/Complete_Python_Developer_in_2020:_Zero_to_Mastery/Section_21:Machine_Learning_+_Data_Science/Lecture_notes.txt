@@ -1,0 +1,466 @@
+Section Overview
+We learned that Machines are good on certain things.
+Are really good on what we can describe.
+When you play a game of chess.
+When we stop have certain rules things are going to break.
+The harder things get to describe the harder it get's to solve it.
+With Machine Learning you so many things.
+So many applications.
+Make computers get more similar to humans.
+
+AI/Machine Learning/Data Science
+We talked about Python-Careers.
+What is Machine Learning.
+It starts with AI.
+AI is like a machine.
+Machine can be good detecting images.
+Machine Learning is a subset of AI.
+Find pattern in a set of data.
+Getting Machines to do things.
+Deep Learning is just one of the techniques to implement Machine Learning.
+Data Science and Machine Learning is overlapping.
+There a lot of overlaps with data.
+You can do one with other.
+
+How Machine Learning Works
+Topics of Machine Learning.
+Ask a computer is this a snake.
+The computer does not getting to know about it.
+There are so many factors that it depends on it.
+With Machine Learning we can pretend if it knows it.
+We give a input[1,2,3] and outputs[2,4,6].
+We writes the input and the functions and output.
+Machine Learning says give the input and the output.
+And then machines is going to figure out it for us.
+You figuire out it itself.
+With Machine Learning the functions is created.
+Machines is writing the functions.
+We are pretending that the machine is a brain.
+
+History Of Data
+Understand the why of everything.
+Why does we care about Machine Learning?
+Ability for the bussiniess to gain a edge.
+Spreadsheets storing data.
+Forecasting high sales.
+As companies get's more and more data.
+A better way to organize this.
+We got Relational DB MySQL.
+Use the data we gather to make decision.
+Fancy term "Big Data".
+User actions, likes.
+Companies had so much data.
+NoSQL and Mongo DB ever since then getting more and more data.
+We be wasting all the data.
+Google and Facebook turning itself to Machine Learning.
+Because of the growth in Data and CPU.
+
+Types of Machine Learning
+Use machines to predict results.
+Machine Learning catergories.
+
+-Supervised Learning
+Data already has catergories.
+The data is labeled.
+Classification. 
+Draws a line.
+Hire engieneer based on inputs.
+Can be used in supervised systems.
+
+-Unsupervised Learning
+Data dosen't have any labels.
+Sometimes we need to create these groups.
+We are giving data-points this is a group.
+
+-Reinforcement Learning
+This is trial and error.
+Rewards and punishments.
+Playing a game with a score and.
+Real-time learning.
+
+Machine Learning 101
+To be Machine Learning you should have an PHD.
+
+#1 -- Import the data CSV-datafile.
+We import a csv-file.
+
+#2 -- Clean the data.
+In ideal world we have all the coloumns filled in.
+Clean the data so it gives us any errors.
+
+#3 -- Split the data. Training Set/Test Set.
+Deciding 80 rows should be training set.
+And the 20 rows are test set.
+Test-set test the outputs.
+
+#4 -- Create a Model import.
+Create a model. Import an algorithm.
+Usually you use a library.
+Deciding with algorithm to use.
+
+#5 -- Check the output
+We have output of the training set.
+Check the output with the test set.
+
+#6 -- Improve
+Change model improve the coloumns.
+You repeats the sets.
+
+Define our goals.
+Test our data.
+Model our a function.
+What is the hardest part!
+It is grabbing our data.
+It is tough to collect good data!.
+
+Tools In Machine Learning
+Python has so big community and easy to express.
+Python has the best tools available tools to do machine learning.
+
+-NumPY
+Helps us to use list and arrays in machine learning.
+
+-pandas
+Helps us to manipulate data in tabular structure.
+We usally read an CSV-file.
+You can do aggreagations.
+
+-scikit-learn
+Scikit comes prebuilt models to do the machine-learning-
+
+-matplotlib
+Helps us to visualize the data.
+
+-jupyter notebook
+Really useful.
+It allows to step through  the code to see the visualizations.
+Give to different people in the companies.
+Helps us to communicate better.
+
+-Kaggle
+Is machine learning community.
+We have free access to data.
+Download these data-sets to play around.
+
+Data Science 1
+We are going to explore some data from Kaggle.
+In order to learn Machine Learning we need to import some data-sets.
+Fifa 2019 Data-Set.
+Uploaded one month ago.
+CSV-file it is a big data-set.
+Unzip the file and put it on your Jupyter notebook.
+We are going to use panda data-file.
+We can any type of data possible.
+
+import pandas as pd
+
+data_frame = pd.read_csv('data.csv')
+#Gives us how many rows and coloumns.
+data_frame.shape
+
+#It describes the data that we have.
+#Mean average information.
+
+data_frame.describe()
+
+#Gives the individual player we can play with
+data_frame.values
+
+You get's your data.
+We get this output.
+All these information is in the data_frame.
+
+Data Science 2
+Learn about to clean data.
+What players are best and have a lower salary.
+Which players are a good deal?
+Know which player that is under-valued.
+
+Grab some columns.
+df1 = pd.DataFrame(data_frame, columns=['Name','Wage','Value'])
+
+Now we have a table.
+We wanna sort the data.
+We wanna take the value-wage.
+
+Data dosen't mean anything to us right now.
+We need to convert this into a float.
+
+def value_to_float(x):
+    if type(x) == float or type(x) == int:
+        return x
+    if 'K' in x:
+        if len(x) > 1:
+            return float(x.replace('K', '')) * 1000
+        return 1000.0
+    if 'M' in x:
+        if len(x) > 1:
+            return float(x.replace('M', '')) * 1000000
+        return 1000000.0
+    if 'B' in x:
+        return float(x.replace('B', '')) * 1000000000
+    return 0.0
+
+We need to convert this and remove the euro-sign and k and m numbers to convert.
+Learn how to start googling and find the answers.
+And this gives us back the tables with a difference coloumn.
+
+wage = df1['Wage'].replace('[\£,]', '', regex=True).apply(value_to_float)
+value = df1['Value'].replace('[\£,]', '', regex=True).apply(value_to_float)
+df1['Wage'] = wage
+df1['Value'] = value
+
+df1['difference'] = df1['Value'] - df1['Wage']
+And we want to sort the also too.
+df1.sort_values('difference', ascending=False)
+
+Data Science 3
+We finally created some data.
+Wouldn't it be nice to visualize the data.
+You need that in some format.
+matplotlib to visualize the data.
+seaborn and is really easy to use.
+
+You must make this cells to run in order.
+Let's use seaborn.
+
+import seaborn as sns
+sns.set()
+
+graph = sns.scatterplot(x="Wage" , y="Value", data=df1)
+graph
+
+Seaborn was imported for me.
+All of the sudden i have a graph.
+
+Now we have one problem.
+Wouldn't be nice to hover.
+Bokeh can help us with that.
+
+from bokeh.plotting import figure,show
+from bokeh.models import HoverTool
+
+# create a new plot with a title and axis labels
+
+TOOLTIPS = [("index","$index"),"(Wage","Value)","($Wage",$Value)",("Name","$Name")]
+p = figure(title="Soccer 2019", x_axis_label='Wage', y_axis_label='Value',plot_width=700, plot_height=700 , tools=[hover])
+hover = HoverTool(TOOLTIPS)
+But we must draw the lines.
+p.circle('Wage','Value',size=10,source=df1)
+show(p)
+
+Opens up a html file for us.
+Now we have an interactive plot.
+Messi is geeting played.
+This is just the tip of the ice-berg.
+Grab data and trying to understand it.
+
+Machine Learning 1
+We have used ton of libraries.
+This may a bit overwhelming.
+It is not complicated as we thought.
+We are going to use scikit-learn.
+
+
+iris flower.
+Has different types.
+Detect types of iris plants.
+
+from sklearn.datasets import load_iris
+
+iris = load_iris()
+Now we have the data loaded.
+We can assume that the data is clean.
+
+X is  the inputs
+y is the targets
+
+This the image of the data.
+X = iris.data
+y = iris.target
+
+There are three types of iris.
+Each list represents the parameters for the iris-flower.
+We want to the get the feature names.
+
+feature_names = iris.feature_names
+target_names = iris.target_names
+
+feature_name
+
+Once we understand the data we can splitting the data.
+We have the data that we needs.
+
+type(x) is a numpy.ndarray
+Is more feauture ful than a regular array.
+
+Splits the arrays randomly in test,train.
+from sklearn.model_selection import train_test_split
+X_train, X_test , y_train, y_test = train_test_split(X, y, test_size=0.4)
+
+This gives us a dimensionality.
+
+Returns the dimesionality of the test-data.
+print(X_train.shape)
+print(X_test.shape)
+
+Machine Learning 2
+Exiting step to create an model.
+Scikit-learn comes with.
+We have a tons of different types.
+We are to use the nearest-neighbour.
+One of the jobs of Machine Learning Engineer is to choose a algorithm to use.
+
+from sklearn.neighbors import KNeighborsClasifier
+knn = KNeighborsClasifier(n_neighbors=3)
+knn.fit(X_train, y_train)
+
+We need to check the input.
+How good are our function.
+y_pred = knn.predict(X_test)
+
+from sklearn import metrics
+
+print(metrics.accuracy_score(y_test, y_pred))
+Tells us that is 96% accurate.
+
+Optional: K Nearest Neighbour
+Do it later!
+
+Machine Learning 3
+How can we improve our model.
+How much data we can train.
+
+If we give it less data to test is this the best option?
+Our test-size is super small.
+Because of our test-data is true we cannot be sure.
+The more data we have more we can test the data.
+What other things can we do?
+The more features the machine has to look at?
+Maybe a better model we can build?
+We can choose any type of algorithm that we wants.
+
+from sklearn.tree import DecisionTreeClassifier
+We get's more bad accuracy.
+We can test our model over again.
+
+from sklearn.model_selection import train_test_split
+X_train, X_test , y_train, y_test = train_test_split(X, y, test_size=0.1)
+
+from sklearn.neighbors import KNeighborsClasifier
+knn = KNeighborsClasifier(n_neighbors=3)
+knn.fit(X_train, y_train)
+
+y_pred = knn.predict(X_test)
+
+from sklearn import metrics
+
+print(metrics.accuracy_score(y_test, y_pred))
+
+
+Machine Learning 4
+
+Let's say we have created our model now.
+If the user input a new iris-flower.
+And we want to predict what kind of flower it is.
+How can we predict it.
+
+
+from sklearn.model_selection import train_test_split
+X_train, X_test , y_train, y_test = train_test_split(X, y, test_size=0.1)
+
+from sklearn.neighbors import KNeighborsClasifier
+knn = KNeighborsClasifier(n_neighbors=3)
+knn.fit(X_train, y_train)
+
+y_pred = knn.predict(X_test)
+
+from sklearn import metrics
+
+print(metrics.accuracy_score(y_test, y_pred))
+
+sample = [[3,5,4,2] ,[2,3,5,4]]
+#We can now give this sample to the knn.predict() function
+
+predictions = knn.predict(sample)
+pred_species = [iris.target_names[p] for p in predictions]
+print("predictions: " pred_species)
+predictions: ['versicolor', 'virginica']
+
+It is hard to say what is right or wrong?
+
+Machine Learning 5
+Now we can predict images.
+Maybe the model can predict.
+Right now we don't have so much data.
+
+To train a data in real life you have millions of code.
+
+We have GPU for this.
+Next time we want to make a prediction it is not going to run and train the model.
+
+To train the data it takes to long time.
+You wouldn't want every user.
+Model-persistanc and we want to save the file.
+The idea of model-persistance.
+
+from sklearn.model_selection import train_test_split
+X_train, X_test , y_train, y_test = train_test_split(X, y, test_size=0.1)
+
+from sklearn.neighbors import KNeighborsClasifier
+knn = KNeighborsClasifier(n_neighbors=3)
+knn.fit(X_train, y_train)
+
+y_pred = knn.predict(X_test)
+
+from sklearn import metrics
+
+print(metrics.accuracy_score(y_test, y_pred))
+
+sample = [[3,5,4,2] ,[2,3,5,4]]
+#We can now give this sample to the knn.predict() function
+
+predictions = knn.predict(sample)
+pred_species = [iris.target_names[p] for p in predictions]
+print("predictions: " pred_species)
+predictions: ['versicolor', 'virginica']
+
+from skelearn.extrernels import joblib
+model = joblib.dump(knn, 'mlbrain.joblib')
+This stores the model in a binary file
+Instead of me reatraining the model.
+
+model = joblib.load('mlbrain.joblib')
+model.predict(X_test)
+
+Now we can skip retrain the model.
+We just dump the models.
+Only the bussiniess owners can train the models.
+
+Machine Learning 6
+Machine Learning is a big essence.
+It could be a course in itself.
+I created the notebook.
+As you start to learn the data you test the data.
+Using these basic principles to detect all sort of images.
+All we are doing is function writers to aggregrators.
+The key thing is that there are lot of tools.
+You need big datasets to it well.
+These big companies has created pretrained models.
+You get's all the benefit of the data.
+
+Exercise: ReallySmartBrain
+Our final project in the course.
+The most of Machine Learning and moving forward.
+Ability to use existing modules to solve bussniess problem.
+
+Create an image-recognition app.
+
+Tensorflow and Keras are very popular libraries.
+
+pip3 install -U tensorflow keras opencv-python
+
+And we need to install some other library
+pip3 install imageai --upgrade
+
+My Favourite Machine Learning Resource

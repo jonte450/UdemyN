@@ -162,46 +162,327 @@ def hello_world():
 Flask is checking a Folder named the template folder.
 Flask uses templates to allow us to add multiple files.
 
-
 Flask Static Files
+Static files means files that's never going to change.
+We need to create an Static folder.
+Move the JavaScript and CSS-file to the static folder.
+You must change the path to the files.
+favicon.error.
 
 Favicon
+Lighting bolt.
+Download the image.
+Link-way.
+   <link rel = "shortcut icon" href="{{url_for('static', filename='favicon.ico')}}">
+
+We have a syntax we haven't seen before.
+The picture should be in the static folder.
+We now have a bolt right now.
+Favicon makes things easier.
+What is this url_for thing?  
 
 Templating Engine
+What is the weird syntax.
+url_for('static', filename='bolt.ico')}}">
+The power of flask we can build it dynamically.
+{{4 + 5}} gives nine in the browser.
+Flask looks at this curly expressions.
+Underneath the Flask is using something called jinja.
+I want you to evaluate this as Python.
+Grab the faviico from the static folder.
+We are now dynamically able to update things from the page.
 
 URL Parameters
+Flask has another called Variable Rules.
+Allows us to do dynamic things.
+@app.route(./<username>)
+def hello_world(username=None):
+	return render_template('index.html',name=username)
+
+{{name}}
+
+And the site information can change
+127.0.0.1:5000/sally
+
+And we gets Sally back.
+It is able to recieve the url-data and.
+
+@app.route('./<username>/<int:post_id>')
+def hello_world(username=None):
+	return render_template('index.html',name=username, post_id=post_id)
+
+ {{name}}
+ {{post_id}}
+
+ We can only post numbers into the website.
+ We are now able to use url to communicate with the data.
+ We are able to send information and process.
 
 MIME Types
+Data-transfer from the server to the browser.
+We can go to the network-page and see the files.
+xkcd.com
+And scroll down to Content-Type: text/html
+This is something quite important.
+MIME stands for Multiple-Purpose Internet Mail Extensions.
+Uses MIME to process the URL.
+Which type of files.
+These are just texts.
+We have different types of Mime.
+Do certain things when it see the files.
+End of the day is just text.
+There are different ways how we can use servers.
+All the things the server does is to send data.
+Try to grab information to display something useful.
+Options are limitless.
 
 Building A Portfolio
+We have learned the basic of flask.
+Let's build a nice portfolio.
+Google-something to find free templates.
+Everything is really prebuilt for us.
+Download the Univers-one.
+Oh-boy whole lotta of folders.
+Different assets.
+HTML-pages.
+We have some js and css files.
+We have something in compressed forms.
+Let's move all the HTML-files to the templates.
+Now we need to adjust the links.
+Find where we are using the assets.
+We are not completely done yet.
 
-FREE HTML Templates
+@app.route(/)
+def my_home():
+	return render_template('index.html')
+
+We has to update the files in index.html.
 
 Building A Portfolio 2
+Create different routes.
+Work routes.
+Once again css is not being applied.
+We have to update the folders to static in the other html-files.
+We are missing things.
+And JavaScripts files at the bottom.
+We have add the static to the images.
+Add all the instances.
+Make the routes more dynamic.
 
 Building A Portfolio 3
 
-Building A Portfolio 4
+We are making the web-page more dynamic by avoiding DRY
+This let's Flask to dynamically switch pages.
+Dynamically accepts routes.
+We give the page_name as the input.
+And render_template(page_name)
 
-HTML Forms
+@app.route('/<string:page_name>')
+def html_page(page_name):
+	return render_template(page_name)
+
+So let's fix a few bugs.
+Remove the components.html.
+Fix the numbers on the others page.
+Change the text.
+
+Building A Portfolio 4
+Create an Real-Contact page.
+Access data.
+Copy some code.
+
+Let's add another route.
+Wanna create a new route called submit-form.
+POST means that we wanna save information.
+GET means that we wanna get some information.
+How can we get this to work?.
+
+@app.route('/submit_form', methods=['POST', 'GET'])
+def submit_form():
+    return 'form submitted hooorayyyy!'
+
+We search for the send-message and we find the send button with the form-html.
+
+We are using the action attribute to do this.
+We want to use with the end-point /submit_form with the method post to save information.
+
+
+<form action="/submit_form" method="post" class="reveal-content">
+
+Open up the developers tools.
+And we see the submit_form and the post.
+Next we are gonna capture the submit-forms data.
 
 Building A Portfolio 5
 
+There is one thing we have to fix.
+We gotta add an name attribute.
+We are sending our name attributions now.
+We can now access this with this code below and importing 
+request.
+
+Down below we transforming our input-data to a dictionary.
+
+
+@app.route('/submit_form', methods=['POST', 'GET'])
+def submit_form():
+	if request.method == 'POST':
+		data = request.form.to_dict()
+		print(data)
+		return 'form_submitted'
+	else:
+		return 'something went wrong. Try again!'
+
+And add a cool favicon to your web-page.
+When a user enter a message we can write a thank you html file.
+Now you are able to submit on that contact-form.
+Now we have our website setup to recieve information.
+Ideally we store somewhere.
+
 Building A Portfolio 6
+We have our free HTML/JavaScript/CSS files.
+We implemented the browser also.
+Our webpage is now more dynamic.
+As soon the server stops running the information stops.
+So how can save the data.
+We simply write to a file.
+We create a file called database.txt.
+We can create a new function.
+
+def write_to_file(data):
+	with open('database.txt', mode='a') as database:
+		email = data["email"]
+		subject = data["subject"]
+		message = data["message"]
+		file = database.write(f'\n{email},{subject},{message}')
+
+This will open the database file and store the information.
+This data will persist.
+This is just a text-file.
 
 Building A Portfolio 7
+This time we are going to learn about CSV.
+We are going to write to a CSV-file.
+We are going to import csv.
+It comes built-in with Python.
+Let's just code and find out how it works.
+We create a write to csv.
+import csv comes built in with Python.
+We are going to append to the files.
+Instead of a file we now have csv.writer().
+We have , as separates the coloumns.
+This writer file and the second is options.
+delimiter each item should be separated by a comma.
+quoting if we wants any Quotes around the elements.
+Don't wrap quotes if we really needs it.
+Now we have csv writer.
 
-Quick Fix: newline
+def write_to_csv(data):
+	with open('database.csv', mode='a') as database2:
+		email = data["email"]
+		subject = data["subject"]
+		message = data["message"]
+		csv_writer = csv.writer(database2, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+		csv_writer.writerow([email,subject,message])
+
+Change the function to write_to_csv.
+
+TypeError: quotechar must be set if quoting enabled
+
+We need a quote-character not to be empty.
+
+Right now we are just using an excel-file.
+Server and the Database is in the same location.
+What happens if our computer breaks.
 
 Quick Note About Databases
-
-Upcomming Video
+Databases exist for data to persist.
+We can analyze the data.
+Front-End that focuses on the browser-side.
+We have the database-side that communicates with the server.
 
 Optional: How Databases Work
+Two massives companies every company needs an Database.
+It is hard for the server to remeber the User.
+What's is a database.
+Database is a collection of data.
+Databases make data organized.
+DBMS allows control to database users.
+Piece of software that allows us to communicate with us.
+Two types of databases PostgreSQL and NoSQL.
+
+We have relational databases.
+Each row represents a entry.
+Relational between databases it's called schema.
+How do they communicate with a server.
+All relational databases communicates with SQL.
+Modify whatever we wants.
+
+NonSQL
+Let's build a application without a schema.
+Schema needs to be predefined.
+With NOSql we can define it as we goes.
+MongoDB is document-oriented.
+You can think relational-database as a several files.
+MongoDB will have it as just one document.
+It really depends on your situation.
 
 Building A Portfolio 8
+It's working really nicely.
+We are running the browser and files.
+If we provide it to a real friend they are not able to see it.
+So how can we do it.
+We are going to use PythonAnyWhere.
+Onto a server.
+We copy the files into portfo git folder.
+database.csv,server.py,static and templates folder.
+We can skip venv folders.
+pip freeze > requirements.txt
+We have the requirements for the files to make it work in future computers.
+We copy the requirements.txt to the portfo page.
+git add .
+git commit -m "Master"
+I have all my files.
+Now thanks to github we can upload.
+We hit the bash on PythonAnyWhere.
+git clone git-repo.
+If we go into the files we can see all the files for the app.
+Click on web-tab.
+Add a new web-app.
+Manual configuration with Python 3.6.
+Enter the source-code.
+portfo folder path.
+Setting up the  venv.
+http://help.pythonanywhere.com/pages/Flask
+pip install flask in the venv.
+workon my-env
+pip install -r requirements.txt
+Install the depencies in the portfo folder.
+Go to the web-tab.
+And add the virtual-enviroment.
 
 Building A Portfolio 9
+To deploy our website we need to go to the configuration site.
+Remove almost everything except the Flask config code.
+We are exporting the file as App.
+
+import sys
+
+path = '/home/jonte45/portfo'
+if path not in sys.path:
+    sys.path.append(path)
+
+from server import app as application  # noqa
+
+We can look at the logs.
+No module named server.
+Click on the website.
+Contact form also works.
+Cool part next all you have to do is go to PythonAnyWhere and check the files.
+You now have a new entry in the csv-files.
+Continue update the files to our liking.
+PythonAnyWhere has a server for us.
 
 Bonus Exercise: Customize Your Portfolio
+Do it later!
 

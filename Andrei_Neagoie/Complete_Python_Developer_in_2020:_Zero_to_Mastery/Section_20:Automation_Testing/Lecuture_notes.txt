@@ -1,0 +1,115 @@
+Section Overview
+Possibly career path in Python.
+Testing and Automation.
+Companies needs testing with some APPs.
+We need to test and automate this.
+Through programming to mimic human interactions.
+Instead of hiring mimic millions of users.
+
+Selenium Introduction
+Works with lots of programming languages.
+Just with code we can interact.
+pip3 install selenium.
+Once you have it installed.
+
+from selenium import webdriver
+
+We have something called drivers.
+Different browsers has different drivers.
+Latest stable release.
+You get exeutable driver.
+This is going to allow it to manipulate the chrome-browser.
+
+Now that we have the chrome-driver we must create an instation of the driver.
+
+from selenium import webdriver
+
+chrome_browser = webdriver.Chrome('./chromedive')
+
+If we had multiple drivers we put in
+/user/local/bin Chrome driver will check this path for the driver.
+chrome_browser.maximize_window().
+You must install the driver version that are compatible with the browser.
+
+Selenium Basics
+from selenium import webdriver
+
+chrome_browser = webdriver.Chrome('./chromediver')
+chrome_browser.maximize_window().
+
+We are going to use selenium easy.
+Test typing things in.
+
+Select Input Forms.
+chrome_browser.get('https://www.seleniumeasy.com/test/basic-first-form-demo.html')
+It took me to the url i specified.
+chrome_browser.maximize_window().
+Check that we are on the right page.
+Click inspect to see the elements-page.
+Html allows to display text.
+With Selenium it allows us to test and modify.
+
+print('Selenium Easy Demo' in chrome_browser.title)
+True
+
+We can use assert keyword.
+
+assert 'Selenium Easy Demo' in chrome_browser.title
+'Selenium Easy Demo' in chrome_browser.body 
+We are not able to grab the body.
+We are gonna use selectors to grab items from the page.
+button = chrome_browser.find_element_by_class_name("btn-default")
+print(button.get_attribute('innerHTML')).
+Grab whatever that is between the HTML.
+
+https://selenium-python.readthedocs.io
+http://allselenium.info/python-selenium-commands-cheat-sheet-frequently-used/
+
+Selenium Basics 2
+
+from selenium import webdriver
+
+chrome_browser = webdriver.Chrome('./chromediver')
+chrome_browser.maximize_window().
+
+
+chrome_browser.get('https://www.seleniumeasy.com/test/basic-first-form-demo.html')
+
+assert 'Selenium Easy Demo' in chrome_browser.title
+
+show_message_button = chrome_browser.find_element_by_class_name("btn-default")
+print(show_message_button.get_attribute('innerHTML')).
+
+assert 'Show Message' in chrome_browser.page_source
+user_message = chrome_browser.find_element_by_id('user-message')
+user_message.clear()
+#This below is going to mimic a user.
+user_message.send_keys('I AM EXTRA COOL').
+#Simulate a click
+show_message_button.click()
+#We want to get the information by.
+output_message = chrome_browser.find_element_by_id('display')
+
+assert 'I AM EXTRA COOOL' in output_message.text
+
+user_button = chrome_browser.find_element_by_css_select('#get-input > .btn')
+print(user_button)
+This happens much faster than a human make this.
+You can test millions of times.
+Any thing a human can do the selenium can also do.
+
+Page source is the entire HTML we are seeing.
+
+Selenium Basics 3
+How do we close all the browsers.
+chrome_browser.close().
+
+You may call this twice.
+
+chrome_browser.quit().
+Depends of the version you are using.
+Heavley debated things.
+Some of you might be asking.
+Most of websites will detect if it is a bot.
+Waits allows us to wait and simulate an action.
+People often use wait.
