@@ -1,0 +1,24 @@
+Course Outline
+Learn why React exist.
+Build a fun project in React.
+Learn React Basics.
+
+Introduce 
+-React Basics
+-React Router
+-Redux
+-Firebase
+-Payments-stripe
+-CCS in JS
+-Redux-Saga
+-Hooks
+-Context API
+-GraphQL
+-Performance
+-PWA(Progressive Web Apps)
+-Testing
+
+Talks about complex topics.
+By the end of it all you can implement these things.
+This course is for everybody.
+Work through problem togheter.

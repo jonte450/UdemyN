@@ -462,5 +462,10 @@ pip3 install -U tensorflow keras opencv-python
 
 And we need to install some other library
 pip3 install imageai --upgrade
+It didn't get things rights.
+The code says when we loop we loop through predictions.
+So i wanna see if the module improved.
+Idea it this is not going to be perfect.
 
 My Favourite Machine Learning Resource
+

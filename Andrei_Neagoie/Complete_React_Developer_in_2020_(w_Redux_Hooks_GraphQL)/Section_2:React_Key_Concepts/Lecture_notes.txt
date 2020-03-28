@@ -1,0 +1,111 @@
+React Concepts
+Diving into some fun topics.
+This course try to build on.
+Understand why does React exist.
+What priniciples exist.
+Core principles.
+Why does it makes front-end development easier.
+We will have a foundation.
+If you are a new to React.
+
+The Birth of React.js
+React came out 2013.
+The Front-End landscape was entirely different.
+JS allows us to have interactivity.
+We send files back to the server to store the information.
+All these websites run on different browsers.
+What happenend was that browsers worked differently.
+We had JQuery.
+JavaScript all it does is to modify the DOM.
+JQuery made developers happy.
+Developers started building bigger and bigger applications.
+But more advancement we had different system.
+We stay at the same page all the time.
+You are able to sign out without speaking to the server any more.
+Angular JS was created on Google.
+It had a lot of power.
+We had large JavaScript files.
+Container MVC.
+JS-files was different.
+But there was a problem.
+Harder and harder to find bugs in the files.
+The growing number of people working on the APP gave difficults.
+Engineer could not to keep up.
+We have to we organize our code.
+Facebook came up with an solution.
+Used by large companies.
+What made React so great.
+
+Declartive vs Imperative
+
+1.Don't touch the DOM. I'll do it.
+Many exisitning frameworks was manipulating the DOM.
+Document-Object-Model.
+JavaScript is manipulating the DOM.
+DOM is a tree reprensentation of the page.
+Websites was build to use things like this.
+This API allowed us to manipulate the DOM.
+Was called Imperative where you change individual parts of the APP.
+This imperative makes it difficult to see the changes and relationships interacting things.
+DOM-operations are one the biggest bottlenecks.
+Hey this is a JavaScript object massive blueprint React says i change everything.
+You never be able to touch the DOM.
+Less complexity and faster development times.
+Based of the state i will going to react to it.
+
+Component Architecture
+
+2. Build websites like lego blocks.
+React is designed about usable legoblocks.
+React had this small idea you have nav-components.
+Components containing components.
+All these small components can be used in different locations.
+Reuse them.
+You had different components-libraries.
+People can share components with others.
+It's just plain JavaScript functions.
+Components is just JavaScript functions.
+These components can build like an class.
+You have the element's tabs and a new tab called React.
+We build these components ourselves.
+Each of these Components working togheter to build up the site.
+
+One Way Data Flow
+
+3.Unidirectional data flow
+We have the idea of a state.
+All the data is within the state.
+Weird looking html-thing.
+JSX html-syntax.
+It is going to create virtual DOM.
+Describes our APP.
+VirtualDOM is a tree-like thing.
+React's takes all of this.
+Anytime we want to change anything on the website React is going to intercept that.
+That is the virtual-dom.
+
+React is a function that takes as input the state and the component and builds an virtual-DOM for us.
+
+How are we going to change the state.
+Combine the new state and update the DOM.
+Let everybody to know.
+Data can never move up.
+Key-take away data always moving down.
+We goes back to the state.
+Makes it easier to debug the code.
+Know where the bug is happening.
+I don't have to look outside the component.
+
+UI Library
+
+4. UI, The rest is up to you.
+Angular was a framework with all the tools.
+It's very opionionated.
+React said hey i am just going to work with the view.
+You can customize whatever you wanna do React is like a stove.
+Key-idea it is so small you can learn once
+
+
+How To Be A Great React Developer
+
+

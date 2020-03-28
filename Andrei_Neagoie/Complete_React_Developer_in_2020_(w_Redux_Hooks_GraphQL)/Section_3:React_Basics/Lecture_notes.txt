@@ -1,0 +1,823 @@
+Section Overview
+Our goal is to build these basics so we can build the ecommerce APP.
+We are going to assume that you can use the terminal.
+Have your code-edition ready.
+We are going to install Node.
+As long you have the version 10 or higher you are all fine.
+We are going to install create-react-app.
+The one thing is npx is new.
+NPX runs a command of a package instead of install it explicity.
+We look at the installation.
+We would to install a package globally.
+If some reason you can use this code-sandbox.
+We are going to get started with frameworks.
+If you ever have questions documentation.
+The way learn you learn a library.
+How to build a bigger and bigger applications.
+
+Create React App
+We are going to start build the monster rolodex.
+When building this app we are going to use something called create-react-app.
+Two tools babel and webpack and converts it into older version.
+It should be a quick way to write an React-App.
+Some of the babel and webpack.
+
+Use npx create-react-app monsters-rolodex
+
+Create React App 2
+Check what the React-App has given us.
+React and React-Dom.
+React-scripts helps us to not worry about webpack and babel.
+
+"scripts"{
+   Starts the project and samples it.
+
+	"start": "react-scripts start",
+   Turns our code so the browser understand it from the src folder and put it 
+   into the public folder.
+
+	"build": "react-scripts build",
+   Test our code.
+	"test" : "react-scripts test",
+
+ 	Take out the babel and webpack if we want to handle it itself.
+	"eject": "react-scripts eject"
+}
+
+src is where our application lives.
+import logo and import react.
+Import the CSS.
+
+This below will look at the DOM and replace the root id by app.
+There is the ReactDOM.render(<App /> , document.getElementById('root'))
+If we make any changes to our folder it will update it automatically.
+
+React Project Setup
+Make sure that we are inside the folder.
+NPM is a package manager.
+It is installing packages.
+Yarn was created of Facebook.
+Go to the localhost-3000.
+npm run build src-folder is our workspace.
+If we give this to our folder.
+It optimizes the code for us.
+It has been minized.
+We have our JavaScript files minified.
+Take the build folder an put it on the server.
+It uses Webpack and Babel.
+All these bowsers.
+Babel gonna make sure that for us that every JS files is gonna be understood.
+Webpack is a module bundler.
+It is going to take all the JavaScript files to bundle all the thing togheter.
+Has all these configurations build for us.
+package.json it allows us to have the package manager.
+Package.json to install other components for us.
+React-App is part React and part Html.
+React-library allows us to write HTML syntax in JavaScript file.
+React-Dom this little guy can be replaced with different robots.
+Helps to build virtual-DOM.
+
+Don't Eject
+What happens if we use eject.
+No how matter time you are never going to compete with developers to make it better.
+If we eject the APP the best optimizations is going to be losed.
+99.9% of the time we know that we are never going to use eject.
+
+Class Components
+We can also write classes that's return HTML.
+Given us the ability to write a lot more functionality.
+import component from react
+
+class App extends Component{
+	
+}
+Pretty same as our function.
+What if i wanted instead of a-tag to have a button that changes.
+Using the class-component we get's access to something called a state.
+
+constructor(){
+	super();
+
+	this.state = {
+	 string: 'Hello Yihua'
+	};
+}
+
+<p>{this.state.string}</p>
+And now i can use this in multiple places.
+<button onclick = {} => this.set.State{string: 'Hello Andrei'}> </button>
+Now we can change the text each time we click the button.
+
+Thinking In JSX
+The syntax of JSX.
+Because of it is JavaScript.
+className is JSX attribute.
+JSX uses this class name to distinguish.
+Brackets {} they mean is a JavaScript expressions.
+We don't modify the state like this.state.string = ''.
+Unidirectional dataflow without calling this method this.setState.
+React is going to intercept.
+Onclick i want to update the state.
+As soon as state changes we rerender the component.
+onClick is JSX attribute.
+In JSX we can use different html-tags.
+JSX trying to mimick.
+
+Dynamic Content
+We know that we need to display the monsters.
+The reason we want a unique key is because React needs to know which update will have to update.
+
+this.state = {
+	monsters = [{
+	 name: 'Frankenstein',
+	 id: 'asc1'
+	},
+	{
+	 name: 'Dracula',
+	 id: 'asr2'
+	},
+	{
+	 name: 'Zombie',
+	 id: 'as1w'
+	}
+	]
+}
+
+This will call each element in the monsters array.
+
+Make things dynamically.
+
+{
+this.set.monsters.map(monster => <h1>{monsters.name}</h1>)	
+}
+
+Single Page Application
+
+Something called lifecycle methods and API.
+I want ever which functionality to the React Component.
+It gives us battery and attack on functionality.
+We have some methods extra.
+
+class App extends React.Component{
+	
+}
+
+We visited the link we got a whole.
+We clicked on a link an we got several files.
+We have this massive JavaScript file.
+So instead to communicate with the server just rerender the dom with something else.
+I can just have the JavaScript.
+It turned more to request some data.
+In our big project we are going to communicate back and forth.
+This JSON data can be converted.
+Instead of render a page it allows to sign-in and sign-out.
+When you start to build bigger and bigger applications.
+You will find to talking with different applications.
+We build things really dynamic right now.
+
+Fetching Content
+In the reality we need some back-end servers.
+So how do we make a call to the back-end.
+So our render function knows how to do it.
+Methods that get called on different stages when the component get's rendered.
+componentDidMount() is essentially when React puts a component on the page.
+We want to use fetch().
+fetch is going to return a promise.
+
+componentDidMount() {
+	fetch('https://jsonplaceholder.typicode.com/users')
+	.then(response => response.json())
+	.then(users => this.setState({monsters:users}))
+}
+
+And we want to the monsters be empty [].
+
+Architecting Our App
+
+ReactDOM.render(<App />, document.getElementById('root'));
+We can customize our own tags like <App/>.
+And we can combine this into other components and html.
+There are two ways to create components.
+Class and arrow-functions.
+Both of this always returns some JSX for us.
+A good folder project is very important.
+We are going to structure our App.
+Yihua likes to be very explicit.
+card.component.jsx
+This is just personal proffesional preference.
+Create-react-app combines everything togheter.
+
+Card List Component
+Our only components is the App-components.
+In React we want to break into reusable things.
+Searchbar is own components.
+There is gotta be something that contain the other components.
+create a components folder.
+card-list.component.jsx
+
+import React from 'react';
+import {CardList} from './components/card-list/card-list.component'
+
+export const CardList = (props) => {
+	console.log(props)
+	return (<div>Hello</div>)
+}
+
+We pass a props to an components.
+We have a props that will always to exist.
+It is called children.
+Anything that is between the card-list component is children.
+
+<CardList name='Yihua'>
+<h1>Yihua</h1>
+</CardList>
+
+import React from 'react';
+import './card-list.styles.css'
+
+export const CardList = (props) => {
+	console.log(props)
+	return <div className='CardList'>{props.children}</div>
+}
+
+Then we can use props.children to get access to everything between.
+
+.card-list {
+	width: 85vw,
+	margin: 0 auto,
+	display: grid,
+	Make everything to four columns with equal size.
+	grid-template-columns: 1fr 1fr 1fr 1fr,
+	Between each column it is 20 px.
+	grid-gap: 20 px
+}
+
+And we put all our monsters into Cardlist Component.
+Next thing is taking this step further.
+<CardList name='Yihua'>
+<h1>Yihua</h1>
+{this.state.monsters.map(monster => (<h1> key={monster.id}> {monster.name}</h1>))}
+</CardList>
+
+
+Card Component
+Now we know what to do with the card-component.
+The App-component is responsible.
+We want the Card-List to be responsible to display our card-components.
+
+<CardList monsters={this.state.monsters} />
+
+
+import React from 'react';
+import './card-list.styles.css'
+
+export const CardList = (props) => {
+	<div className='cardlist'>{this.state.monsters.map(monster => (<h1> key={monster.id}> {monster.name}</h1>))}
+	</div>
+}
+
+Now our App doesn't have to worry about to creating our components.
+CardList shouldn't think about how to create the cards.
+
+So we create an new component called card.component.jsx.
+
+import React from 'react'
+
+export const Card = (props) => (
+	<div>
+	<h1 > {props.monster.name}</h1>
+	</div> 
+)
+
+import React from 'react';
+import './card-list.styles.css'
+import {Card} from '../card/card.component';
+
+export const CardList = (props) => {
+	<div className='cardlist'>{this.state.monsters.map(monster => ( 
+	<Card key={monster.id} monster={monster}/>
+	))}
+	</div>
+};
+
+We use this card-component as a information to create our card-information.
+
+We are going to use robot-hash to get funny looking monsters.
+
+import React from 'react'
+
+export const Card = (props) => (
+	<div className='card-container'>
+	<img alt="monster" src={'https://robohash.org/7{props.monster.id}?set=set2&size=180x180'}
+	<h1> {props.monster.name}</h1>
+	<p> {props.monster.email}</p>
+	</div> 
+)
+
+Exercise: Breaking Into Components
+
+Why are we breaking things into components.
+And we broke it into Card components.
+
+When do we break things down into components?
+
+1. Decide on Components
+2. Decide the State and where it lives
+3. What changes when state changes
+
+Benefits we can use it in multiple locations.
+Cardlist can be used on a different App.
+Maybe we have a fairy-tail.
+Breaking things do we can use it in several places.
+Making it easier to test and performance options.
+
+State vs Props
+We has the Parent components.
+
+This state we put into the CardList component.
+
+this.state = {
+	monsters: []
+};
+
+<CardList monsters={this.state.monsters} />
+
+As soon we put down the state the component recieves it as a prop.
+We updates the monsters array.
+One-way Data Flow.
+Whenever something changes in the state.
+This states gets turned into a state.
+States only lives in just one location.
+This state get's passed down to Cardlist.
+Monsters get's turned into props.
+
+We have all these Card-Components.
+React has all these Key-attributes.
+
+2. Decide the State and where it lives.
+Simple tree-like structure.
+Think it is app.
+If the state changes.
+A state is going to change and we are going to annonce it to other components.
+Whoever needs it.
+We are going to have performance implications when every components needs to rerender.
+
+SearchField State
+
+We want to add our search-feature.
+How do we build this.
+<input type='search' placeholder='Search Monsters' onChange={e => this.setState({SearchField: e.target.value}, () => console.log(e.target.value))}/>
+
+Take control whenever the user takes control.
+How to store that on our state.
+
+this.state = {
+	monsters: []
+	searchfield: ''
+}
+
+Whenever we type into something into our input it will fire onChange event.
+The main thing we want to look into is the e.target.
+It will give back the HTML element.
+Html is firing the events.
+We want to capture the value and we does this onChange events.
+We will see this as we type.
+this.setState is asynchronous action is something that can happen immediately.
+JavaScript is running everything after.
+If we wanna to more with the data we can give an second argument as function in the setState.
+
+React Events
+
+Quick note about onChange.
+onChange is actually JSX.
+React has something called Synthetic Events.
+When a DOM-events happen onChange.
+React intercepts that.
+Synchtetic is a fake event.
+SynthecticEvents to detect when the events happens.
+States is something that changes when someone has entered something.
+We are defining a function within the Synthetic Event.
+React is actually smart.
+Hey React-bot there is something.
+React-bot is scheduling multiple updates.
+
+Filtering State
+
+Now that we have the searchfield we want to filter.
+We are creating an new array,
+
+We are gonna desctrutring.
+
+const {monsters, searchField } = this.state.
+This is the same as below
+
+const monsters = this.state.monsters
+const searchField = this.state.searchField
+
+const filteredMonsters = monsters.filter(monster => monster.name.toLowerCase().includes(searchField.toLowerCase()))
+
+And pass in the filteredmonsters.
+Everytime the set is set it will rerender.
+This is great because we have triggered the setState.
+This is great with React because we don't have to care about what is rendering.
+
+Search Box Component
+
+Now we have the searchcomponent.
+Maybe we want to use it multiple-times.
+Maybe we want to have rerusable component.
+
+create a file.
+
+search-box.component.jsx
+
+Helps transpile down to older functions of JavaScript.
+Babel knows that you should run your own JSX.
+We want to be more explicit.
+
+
+Copy the file input.
+
+import React from 'react';
+
+import './search-box.styles.css';
+
+const SearchBox
+
+Functional-components doesn't have access to states and not to life-cycle methods.
+
+Sometimes we just want to render html-tags.
+Functional-components are easier to read and to test.
+
+import React from 'react';
+import './search-box.styles.css'
+
+export const SearchBox = ({ placeholder, handleChange }) => (
+ <input 
+ className='search'
+ type='search'
+ placeholder={placeholder}
+ onChange={handleChange}
+ />	
+
+);
+
+Components driven-style.
+Takes any functionality.
+And we export the searchBox out.
+Now we have a reusable component.
+It takes any functionality.
+ 
+Exercise: Where To Put State
+Why don't we add state to searchBox.
+It goes up a level.
+3.What changes when state changes
+The reason we don't changes.
+There no way to for the searchfield-state to flow down to the card-component.
+Event need to go up to the component.
+How far up we go to change the state.
+Want to pass up the states higher up to let other components know.
+
+Class Methods and Arrow Functions
+Writing methods on classes.
+Explore one fundamental thing.
+Writing our own methods on the class-components.
+This is special reference the state on our class-component.
+When we write this method actually get bound diffrently when we write the class-method.
+
+When we call super().
+We are extend the functionality.
+We might want to use a method more than once.
+
+handleChange(e) {
+	this.setState({searchField: e.target.value});
+}
+
+handleChange={e => this.handleChange}
+
+When we start typing we get an error.
+Cannot read property 'setState' of undefined.
+
+JavaScript dosen't set the scope.
+We could define it in the constructor.
+
+this.handleChange = this.handleChange.bind(this);
+This is set to whatever we passes it to.
+
+Every new function we write we want to bind it.
+Arrowfunctions allow us to set it when we run it.
+I will automatically bind this when we run it.
+
+handleChange = (e) => {
+	this.setState({ searchField: e.target.value });
+}
+
+
+const newFunc = () => console.log(this)
+When we call it newFunc() it is lexically scoped.
+When we write the class-methods we write it with arrow-functions.
+
+Exercise: Event Binding
+
+handleClick1() {
+	console.log('button 1 clicked')
+}
+
+We will run this just once when we click on 1.
+<button onClick={this.handleClick1()}> click 1 </button>
+<button onClick={this.handleClick2()}> click 2 </button>
+Button click on 1
+<button onClick={this.handleClick3()}> click 3 </button>
+Button 1 was clicked clicked
+
+<button onClick={this.handleClick1()}> click 1 </button>
+button 3 was clicked.
+
+this.handleClick2 = this.handleClick1.bind(this);
+
+Deploying Our App
+
+Add the Monsters Rolodex as h1-tag.
+Inside the head add link to Bigalow rule.
+We are going to put an linear gradient.
+We are going to use Github to deploy our App.
+Connect to the reposotoriy.
+git remote add origin git@github.com:ZhangMYihua/monsters-rolodex.git
+yarn add gh-pages.
+"homepage": "https://zhangmyihua.github.io/monsters-rolodex"
+predeploy: "yarn build"
+"deploy": "gh-pages -d build"
+yarn deploy.
+It runs our predploy.
+
+React ReactDOM
+create-react-app.
+When we were writing our code.
+The first thing mkdir pure-react.
+cd src 
+touch index.html.
+We were replace our content.
+<div id="root">
+
+Include the two packages react and react-dom.
+With two scripts-tags.
+React it's just the API.
+React-Dom is what renders out to the web.
+React-Native it uses a different package to render for Android and IOS.
+If open our deb-tools we get access to both React and React-Dom.
+It gives us access to these two things.
+
+<script>
+
+	const Person = () => {
+	  return React.createElement("div", {}, [
+	   React.createElement("h1", {} , "Yihua"),
+	   	   React.createElement("p", {} , "Developer"),
+	  ])
+	}
+
+	const App = () => {
+	 return React.createElement("div", {}, React.createElement("h1",{},"REACT IS RENDERED!!!"),
+	 React.createElement(Person),
+	 React.createElement(Person),
+   	 React.createElement(Person)
+	 );
+	}
+
+We rendered this.
+Three times.
+
+Calling ReactDOM.render(React.createElement(App),document.getElementById("root"))
+
+We are doing this by vanilla JavaScript.
+Now when we looking on our Applications we can pass in the props.
+With JSX we simply don't have to write React.createElement.
+React simply helps us with the views.
+
+Latest React Package Updates
+How you can update the React Packages.
+Check out the version of yarn.
+yarn list react react-dom react-scripts
+So if you have 
+"react": "^16.8.6" tells whatever package manager to update to the latest version.
+Whenever i ran yarn.
+lockfile that locks the package with some rules.
+Add it to the lockfile.
+Why do we need a lock file.
+They are using dependcies that everybody uses a consitence of packages.
+
+In the npm update to force the updates.
+npm list react react-dom react0scripts.
+We can go to the packages.json and add the ^ to update the packages. 
+
+Revisiting VirtualDOM + Undirectional Data Flow
+Now we have started we are going to build eecommerce.
+So let's take a look what we are gonna build.
+We are going to check every items.
+Increase and decrease remove items.
+Intergrate with stripe-API.
+Intergrate with Firebase.
+Autorize users.
+Sign-in and Sign-out feature.
+Go to our original monsters-rolodex application.
+If we look at this as basic application.
+Actual Dom.
+It takes Dom a lot of energy.
+React will completely copy the Actual-DOM and create a virtual Dom.
+React will not rerender the DOM.
+So it will make the changes and compare the changes to the actual DOM.
+That is why React it so fast.
+
+We are going to add an new state to our data.
+
+this.state = {
+	monsters: [],
+	searchField: '',
+	titel: ''
+}
+
+onSearchChange = event => {
+	this.setState({ searchField: event.target.value, title: event.target.value})
+}
+
+And now we are just going to display the monsters.
+
+<CardList monsters={monsters} />
+Effciency with React.
+What is React doing when it Renders out these components.
+Updates the filtered.
+
+State -> Views -> Actions -> Back to state.
+Keeps unidirectional data-flow easy to find errors.
+
+Asynchronous setState
+The topic of state.
+Update the State.
+
+We will create some kinda of state.
+
+constructor(){
+	super()
+	this.state = {
+	  meaningOfLife: 47
+	}
+}
+
+<p>
+{this.state.meaningOfLife}
+</p>
+
+If we saves this and updates.
+
+handleClick = () => {
+	this.setState({ meaningOfLife: this.state.meaningOfLife + 1})
+}
+
+I meantioned before React helps to manipulate the DOM.
+Sometimes we can have multiple places where actions takes places.
+React dosen't gurantee that this will always work because setState is Asynchronous.
+
+Asynchronous happens sometime in the future.
+We can give a call-back function to the setState.
+
+this.setState({ meaningOfLife: this.state.meaningOfLife + 1}, () =>
+console.log(this.state.meaningOfLife))
+
+}
+
+So because it is not a gurantee because something that modifies the meaningOfLife.
+
+handleClick()
+this.setState((prevState, prevProps) => { 
+return {meaningOfLife: prevState.meaningOfLife + prevProps.increament},)
+}, () => console.log.(this.state.meaningOfLife))
+
+I can now use prevState.
+State can live anywhere.
+We can mix and match.
+
+Usually it is good practice to put in the props in the constructor.
+
+Alternate class-syntax.
+state = {
+	meaningOfLife: 47
+}
+
+You don't need the constructor.
+State-updates asynchronous.
+
+Introducing Lifecycle Methods
+Better understand class-components.
+So we can leverage our code.
+
+We have these two buttons.
+
+Toggle Lifecycle
+Update Text
+
+Lifecycle method that we import to the.
+
+this.state = {
+	showChild: true,
+	text: ''
+}
+
+We have oneClick={() => 
+	this.setState(state => ({showChild: !state.showChild}))}
+
+We use this ! bang-operator to set something to the opposite value.
+Just toggle between values.
+
+<button>
+onClick={() => this.setState(state => ({text: state.text + '_hello'}))}
+</button>
+
+Whenever we click the button we append the text _hello
+
+<button>
+{this.state.showChild ? <Lifecycles text={this.state.text} /> : null}
+</button> 
+
+Ternary expressions instead if-else statements.
+We will see the order of the LifeCycle methods being fired.
+
+React Lifecycle Methods-Mounting
+
+It starts look at the component and calls the constructor.
+Pulls in the constructor.
+
+Mountingphase()
+Lifecycle-component and calls the constructor(){
+	super();
+	console.log('constructor')
+}
+
+After the constructor call it then calls the render-method.
+I am going to evaluate the values.
+
+React updates the and mounts it.
+Component did Mount gets called.
+
+So in the review the React-method starts with this
+
+constructor -> render-method -> componentDidMount()
+
+React Lifecycle Methods-Updating
+After our Component has been mounted to the DOM.
+Will cause the component to go to the updating phase.
+Everytime we updates the phases.
+setState() causes the rerenders the page.
+It will been something in the component that we rerender something on the stage.
+this.forceUpdate().
+What in the components has changed.
+We are only effecting small pieces of the component.
+
+Determines if things should happened.
+Something needs to be rerendred.
+
+If the it returns true the component will be updated.
+If we return false i don't want the component to be rerendered.
+We can decide when the component should update.
+This for performance.
+It is very fundanmental is very based for us.
+Because it can improve the performance for us.
+
+
+shouldComponentUpdate(nextProps, nextState){
+console.log('shouldComponentUpdate!', nextProps);
+return nextProps.text != this.props.text;
+}
+
+
+React Lifecycle Methods-Unmounting
+Check things it needs to do before it will remove the Component from the DOM.
+Some leftover code that uses up memory.
+We wont explore this part until firebase.
+
+componentWillUnmount(){
+	
+}
+
+Quiz 1: When should we use a functional component vs a class component
+
+Question 1:
+We want to create a new component in React that doesn't need any local state management or access to lifecycle methods in the component. What kind of component should we make?
+
+Functiontional Component!
+
+Section Review
+
+There is much more to learn.
+There is still few things we want to.
+We want to start working on eecomerce project.
+We are going use React to learn new concepts.
+We want to mimic a real life scenario.
+These four fundanmentals.
+More importantly we want to have these three points in mind.
+
+1. Decide on Components
+2. Decide the State and where it lives
+3. What changes when state changes
+
+Senior Developer has the things to think for them selves.
+We have a lot more to cover.

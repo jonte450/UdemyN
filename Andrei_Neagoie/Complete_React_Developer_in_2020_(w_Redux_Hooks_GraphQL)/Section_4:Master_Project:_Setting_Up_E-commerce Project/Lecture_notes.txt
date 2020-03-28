@@ -1,0 +1,19 @@
+The Long Road Ahead
+
+Project Overview
+
+Github + Project Repositories
+
+Course Guideline + Github Links
+
+E-commerce Homepage + SASS setup
+
+Project Files + Modules
+
+Project Component Architecture
+
+CSS and SCSS files
+
+Homepage and Directory Components
+
+Styling Menu Items
