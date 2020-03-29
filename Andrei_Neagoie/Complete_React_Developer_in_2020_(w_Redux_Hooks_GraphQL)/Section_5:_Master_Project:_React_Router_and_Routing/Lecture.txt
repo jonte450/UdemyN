@@ -1,7 +1,116 @@
 Routing In React
+Routing in a single-page application.
+When we initially send a file we send it just once.
+This time around things are different.
+The React Library allows us to manipulate the DOM.
+Get JSON-data back.
+That JSON data can be send.
+It makes it faster.
+The idea of server-side rendering.
+I wanna focus on here is routing.
+Unlike Angular that comes with Routing.
+React don't care about the Routing.
+We are going to use React-Router.
+We don't have the default navigation.
+Browser i built in about click.
+
+React-Router helps us to do intresting things.
+Initially when single-page applications started to take off.
+So when the browser said back.
+Browser provide history-api.
+Hijack and mimic URL's.
 
 Routing In Our Project
+We just now have one page component.
+Routing library is called React-Router-Dom
+Is most supported and used.
+yarn add react-router-dom
+
+"resolution": "24.7.1"
+We are forcing JEST.
+
+import {BroswerRouter} from 'react-router-dom';
+
+BrowserRouter is a component we are going to wrap around.
+
+import {Switch, Route} from 'react-router-dom';
+
+Route takes couple of arguments.
+
+The first one is the component we want to render.
+When the Url is at the base i just want to render the HomePage component.
+exact takes away the homepage when we go to /hats for example.
+
+Inside the switch it dosen't render anything other then the routes in the Switch-Tag. As fast it sees a match of the page it just render just that component.
+
+
+<Switch>
+<Route exact path='/' component={HomePage} />
+<Route path='/hats' component={HatsPage} />
+</Switch>
 
 React Router Dom
+Built a three pages.
+HomePage, Topics Page, Topic Detail Page.
+
+Three functional components.
+
+function App(){
+return (
+<div>
+The first thing i wanna look at the homepage.
+Get's passed three arguments.
+
+<Route exact path='/' component={HomePage} />
+<Route exact path='/topic' component={TopicsList} />
+<Route path='/:topicId' component={TopicDetail} />
+</div>
+);
+}
+
+What is these props.
+
+-history prop
+ -push
+  There two ways to navigate in the react-dom.
+  Link-component to.
+  React is a single-side application.
+  What components do we want to take.
+  Button onClick= {() => props.history.push('/topics')}
+
+-location prop
+ -Pathname We navigates to different position it gives us the full-url.
+  Allows our routes to build nested routes.
+  
+
+-match prop
+ Four things we get from match
+ -URL only display up until it matchs.
+ -path pattern we are looking to match.
+ -isExact is only true if the entire url matching the pattern perferct match.
+ -params is an object of the url-params.
+  Match anything up until /topics/:topicId 
+  We can get access to some of the urlid.
 
 withRouter()
+We just learned the history property.
+How would we setup to navigate to different routes.
+We only get access.
+Only the HomePage component get's access to history.
+We could the history as props to the components.
+
+This bad and is called props-tunneling.
+Children in between dosen't need the history props.
+
+We are going to use import { withRouter } from 'react-router-dom';
+
+This is a higher-order-compoment.
+Takes a component and modifies the compoment and return it for you.
+
+export default( withRouter(MenuItem))
+
+history.push()
+We add linkurl: 'hats'
+And to every element in the directory-component.
+
+

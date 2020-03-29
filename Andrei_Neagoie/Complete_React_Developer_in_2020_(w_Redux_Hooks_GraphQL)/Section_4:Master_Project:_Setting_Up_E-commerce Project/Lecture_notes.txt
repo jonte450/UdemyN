@@ -1,19 +1,366 @@
 The Long Road Ahead
+Small little tricks and every single thing.
+It is sometimes nice to show you things.
+We are going try our build e-commerce website.
+Allows us to do a ton of things.
+Working with a senior developer.
+Encounter different problems in the project.
+What impressives employers is to build large projects.
+I maybe only need the 40% of knowledge how to build projects.
+How to decide on good projects.
 
 Project Overview
+We are going to have navigation and routing.
+And add it to our cart.
+Increase and decrease it.
+And intergrate with an stripe-api.
+Matter of switching it.
+Learn what to build the stripe API.
+With Firebase we are going to authorize the users.
+And sign-in and sign-out feature.
 
 Github + Project Repositories
-
-Course Guideline + Github Links
+Code along with us.
+Set-up the course.
+In each of these repository we have the lesson 1 and lesson 3.
+Hit the button clone or download.
+git clone.
+git will clone the repo.
+create a new repository.
+Takes this ssh-key and put in your ssh-key.
 
 E-commerce Homepage + SASS setup
+This has given us some files we don't need.
+Including className.
+Evaluate what we need to build.
+We have a header-component.
+We have to build a menu-item component.
+This menu-item component.
+Directory-menu component.
+Out-side containers div within a div.
+
+create a new component homepage.component.jsx.
+
+import React from 'react';
+
+const HomePage = () => (
+
+<div className='homepage'>
+<div className='directory-menu'>
+<div className='menu-item'>
+<div className='content'>
+<h1 className='title'> HAT</h1>
+<span className='subtitle'>SHOP NOW</span>
+</div>
+</div>
+</div>
+</div>
+)
+
+
+Let's us copy this five times.
+And export this as a default.
+And styling for this project we are going to use SASS.
+yarn add node-sass to our project.
+React comes with configuration.
+Babel just got installed.
+And we are deleting yarn-lock.
+Remove babel-jest.
+run yarn start.
+And convert ccs-files.
+
+And create the homepage.css.
+& menu-item gets first child get this style.
+Let's just write a css-selector that are nested within each other.
 
 Project Files + Modules
+When we start a project we always have node module folder.
+We have a tons of packages.
+Yihua uses Yarn.
+The key-thing is that the node modules have testing.
+React-App allows us to do testing.
+Some packages we dosen't need don't get's included in the build.
+The issue we.
+As you work with React you encounter problems with dependcies.
+How to better to understand the issue.
+You wanna get good to see the issue.
+Why does the issue happens.
+Start when you encounter an issues you must getting get good at google things.
+Must likely we are going to send over to a server.
+package.lock file has the exact version number.
 
 Project Component Architecture
-
-CSS and SCSS files
+Architecting our projects.
+One of the key-things we wanna to do is to decide on Components.
+What you wanna do is to open up developers tools.
+We have our App component.
+We have our HomePage.
+And within the directory we have the menu-items.
+We can see the props.
+It is easy to look for our App.
+And we are going to start the collection items.
+Collection preview.
+So start at looking at folder structure.
+It's easy to get lost.
+As we move along to keep each component small.
 
 Homepage and Directory Components
+We are going to create two folders.
+One called components and the other called pages.
+Any Page is component we are to use it more than once.
+So let's make an menu-item-component and menu-item.styles.scss
+
+So in the menu-item-component.jsx
+
+We can destruct our item right now with title.
+
+import React from 'react';
+
+const MenuItem = ({ title }) => (
+<div className='menu-item'>
+ <div className='content'>
+ 	<h1 className='title'>{title} </h1>
+ 	<span className='subtitle'> SHOP NOW</span>
+ 	</div>
+ 	</div>
+);
+
+export default MenuItem;
+
+Create a directory folder and make a 
+directory.component.jsx
+directory.stylesheet.scss.
+
+And in the directory component.
+
+We need this as a class-component.
+
+import React from 'react';
+
+class Directory extends React.Component {
+	
+  constructor() {
+    super();
+
+    this.state = {
+      sections: [
+        {
+          title: 'hats',
+          imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
+          id: 1
+        },
+        {
+          title: 'jackets',
+          imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
+          id: 2
+        },
+        {
+          title: 'sneakers',
+          imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
+          id: 3
+        },
+        {
+          title: 'womens',
+          imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
+          size: 'large',
+          id: 4
+        },
+        {
+          title: 'mens',
+          imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
+          size: 'large',
+          id: 5
+        }
+      ]
+    };
+  }
+
+  render() {
+    return (
+      <div className='directory-menu'>
+      We want to pass these menu-items to.
+      And what we wanna render is the menu-items.
+      We wanna destruct the items.
+      And import the style-sheet.
+        {this.state.sections.map(({ title, imageUrl, id, size }) => (
+          <MenuItem key={id} title={title} imageUrl={imageUrl} size={size} />
+        ))}
+      </div>
+    );
+  }
+}
+
+export default Directory;
+
+And import our directory to our homepage.js
+And replace all this with the Directory component.
+
+import React from 'react';
+
+import Directory from '../../components/directory/directory.component';
+
+import './homepage.styles.scss';
+
+const HomePage = () => (
+  <div className='homepage'>
+    <Directory />
+  </div>
+);
+
+export default HomePage;
+
+
+
+import React from 'react';
+
+import './menu-item.styles.scss';
+
+We have to import the image.url to the menu-item.
+We always to import to the menu.
+We want the background size to be cover.
+In the directory we can pass a size value.
+
+
+const MenuItem = ({ title, imageUrl, size }) => (
+  <div className={`${size} menu-item`}>
+    <div
+      className='background-image'
+      style={{
+        backgroundImage: `url(${imageUrl})`
+      }}
+    />
+    <div className='content'>
+      <h1 className='title'>{title.toUpperCase()}</h1>
+      <span className='subtitle'>SHOP NOW</span>
+    </div>
+  </div>
+);
+
+export default MenuItem;
+JavaScript gives us more flexibility.
+
+
 
 Styling Menu Items
+
+We want to give a white background and some opacity.
+
+.menu-item {
+  min-width: 30%;
+  height: 240px;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  margin: 0 7.5px 15px;
+  overflow: hidden;
+
+  &:hover {
+    cursor: pointer;
+
+    & .background-image {
+      transform: scale(1.1);
+      transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+    }
+
+    & .content {
+      opacity: 0.9;
+    }
+  }
+
+  &.large {
+    height: 380px;
+  }
+
+  &:first-child {
+    margin-right: 7.5px;
+  }
+
+  &:last-child {
+    margin-left: 7.5px;
+  }
+
+  .background-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .content {
+  We are going to add some opacity to our background.
+    height: 90px;
+    padding: 0 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    background-color: white;
+    opacity: 0.7;
+    position: absolute;
+
+    .title {
+      font-weight: bold;
+      margin: 0 6px 0;
+      font-size: 22px;
+      color: #4a4a4a;
+    }
+
+    .subtitle {
+      font-weight: lighter;
+      font-size: 16px;
+    }
+  }
+}
+
+For the fonts we are going to Google and copy it as link.
+Inside the App.css.
+We wanna use 
+
+body {
+	font-family: 'Open Sans Condensed'
+}
+
+How do we captilize touppercase().
+We are going to add a new component.
+We don't want the image to get bigger.
+Why don't we don't wrap it.
+
+No matter we want ensure that the background-image is always the same.
+
+.background-image {
+	width: 100%,
+	height: 100%
+}
+
+We want the content to be in the center.
+
+We add position-abosolute.
+
+.content {
+  We are going to add some opacity to our background.
+    height: 90px;
+    padding: 0 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    background-color: white;
+    opacity: 0.7;
+    position: absolute;
+
+
+So we are saying that using this hover-selector we want it to be a pointer.
+We want to scale the background-image.
+So whatever it scales.
+cubic-bezier it's speed smoother transistion.
+
+  &:hover {
+    cursor: pointer;
+        & .background-image {
+      transform: scale(1.1);
+      transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+    }
