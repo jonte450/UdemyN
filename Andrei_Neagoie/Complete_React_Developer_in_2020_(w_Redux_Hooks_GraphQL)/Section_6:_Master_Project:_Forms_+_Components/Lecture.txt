@@ -1,17 +1,1000 @@
 Shopping Data
 
+const SHOP_DATA = [
+  {
+    id: 1,
+    title: 'Hats',
+    routeName: 'hats',
+    items: [
+      {
+        id: 1,
+        name: 'Brown Brim',
+        imageUrl: 'https://i.ibb.co/ZYW3VTp/brown-brim.png',
+        price: 25
+      },
+      {
+        id: 2,
+        name: 'Blue Beanie',
+        imageUrl: 'https://i.ibb.co/ypkgK0X/blue-beanie.png',
+        price: 18
+      },
+      {
+        id: 3,
+        name: 'Brown Cowboy',
+        imageUrl: 'https://i.ibb.co/QdJwgmp/brown-cowboy.png',
+        price: 35
+      },
+      {
+        id: 4,
+        name: 'Grey Brim',
+        imageUrl: 'https://i.ibb.co/RjBLWxB/grey-brim.png',
+        price: 25
+      },
+      {
+        id: 5,
+        name: 'Green Beanie',
+        imageUrl: 'https://i.ibb.co/YTjW3vF/green-beanie.png',
+        price: 18
+      },
+      {
+        id: 6,
+        name: 'Palm Tree Cap',
+        imageUrl: 'https://i.ibb.co/rKBDvJX/palm-tree-cap.png',
+        price: 14
+      },
+      {
+        id: 7,
+        name: 'Red Beanie',
+        imageUrl: 'https://i.ibb.co/bLB646Z/red-beanie.png',
+        price: 18
+      },
+      {
+        id: 8,
+        name: 'Wolf Cap',
+        imageUrl: 'https://i.ibb.co/1f2nWMM/wolf-cap.png',
+        price: 14
+      },
+      {
+        id: 9,
+        name: 'Blue Snapback',
+        imageUrl: 'https://i.ibb.co/X2VJP2W/blue-snapback.png',
+        price: 16
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: 'Sneakers',
+    routeName: 'sneakers',
+    items: [
+      {
+        id: 1,
+        name: 'Adidas NMD',
+        imageUrl: 'https://i.ibb.co/0s3pdnc/adidas-nmd.png',
+        price: 220
+      },
+      {
+        id: 2,
+        name: 'Adidas Yeezy',
+        imageUrl: 'https://i.ibb.co/dJbG1cT/yeezy.png',
+        price: 280
+      },
+      {
+        id: 3,
+        name: 'Black Converse',
+        imageUrl: 'https://i.ibb.co/bPmVXyP/black-converse.png',
+        price: 110
+      },
+      {
+        id: 4,
+        name: 'Nike White AirForce',
+        imageUrl: 'https://i.ibb.co/1RcFPk0/white-nike-high-tops.png',
+        price: 160
+      },
+      {
+        id: 5,
+        name: 'Nike Red High Tops',
+        imageUrl: 'https://i.ibb.co/QcvzydB/nikes-red.png',
+        price: 160
+      },
+      {
+        id: 6,
+        name: 'Nike Brown High Tops',
+        imageUrl: 'https://i.ibb.co/fMTV342/nike-brown.png',
+        price: 160
+      },
+      {
+        id: 7,
+        name: 'Air Jordan Limited',
+        imageUrl: 'https://i.ibb.co/w4k6Ws9/nike-funky.png',
+        price: 190
+      },
+      {
+        id: 8,
+        name: 'Timberlands',
+        imageUrl: 'https://i.ibb.co/Mhh6wBg/timberlands.png',
+        price: 200
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: 'Jackets',
+    routeName: 'jackets',
+    items: [
+      {
+        id: 1,
+        name: 'Black Jean Shearling',
+        imageUrl: 'https://i.ibb.co/XzcwL5s/black-shearling.png',
+        price: 125
+      },
+      {
+        id: 2,
+        name: 'Blue Jean Jacket',
+        imageUrl: 'https://i.ibb.co/mJS6vz0/blue-jean-jacket.png',
+        price: 90
+      },
+      {
+        id: 3,
+        name: 'Grey Jean Jacket',
+        imageUrl: 'https://i.ibb.co/N71k1ML/grey-jean-jacket.png',
+        price: 90
+      },
+      {
+        id: 4,
+        name: 'Brown Shearling',
+        imageUrl: 'https://i.ibb.co/s96FpdP/brown-shearling.png',
+        price: 165
+      },
+      {
+        id: 5,
+        name: 'Tan Trench',
+        imageUrl: 'https://i.ibb.co/M6hHc3F/brown-trench.png',
+        price: 185
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: 'Womens',
+    routeName: 'womens',
+    items: [
+      {
+        id: 1,
+        name: 'Blue Tanktop',
+        imageUrl: 'https://i.ibb.co/7CQVJNm/blue-tank.png',
+        price: 25
+      },
+      {
+        id: 2,
+        name: 'Floral Blouse',
+        imageUrl: 'https://i.ibb.co/4W2DGKm/floral-blouse.png',
+        price: 20
+      },
+      {
+        id: 3,
+        name: 'Floral Dress',
+        imageUrl: 'https://i.ibb.co/KV18Ysr/floral-skirt.png',
+        price: 80
+      },
+      {
+        id: 4,
+        name: 'Red Dots Dress',
+        imageUrl: 'https://i.ibb.co/N3BN1bh/red-polka-dot-dress.png',
+        price: 80
+      },
+      {
+        id: 5,
+        name: 'Striped Sweater',
+        imageUrl: 'https://i.ibb.co/KmSkMbH/striped-sweater.png',
+        price: 45
+      },
+      {
+        id: 6,
+        name: 'Yellow Track Suit',
+        imageUrl: 'https://i.ibb.co/v1cvwNf/yellow-track-suit.png',
+        price: 135
+      },
+      {
+        id: 7,
+        name: 'White Blouse',
+        imageUrl: 'https://i.ibb.co/qBcrsJg/white-vest.png',
+        price: 20
+      }
+    ]
+  },
+  {
+    id: 5,
+    title: 'Mens',
+    routeName: 'mens',
+    items: [
+      {
+        id: 1,
+        name: 'Camo Down Vest',
+        imageUrl: 'https://i.ibb.co/xJS0T3Y/camo-vest.png',
+        price: 325
+      },
+      {
+        id: 2,
+        name: 'Floral T-shirt',
+        imageUrl: 'https://i.ibb.co/qMQ75QZ/floral-shirt.png',
+        price: 20
+      },
+      {
+        id: 3,
+        name: 'Black & White Longsleeve',
+        imageUrl: 'https://i.ibb.co/55z32tw/long-sleeve.png',
+        price: 25
+      },
+      {
+        id: 4,
+        name: 'Pink T-shirt',
+        imageUrl: 'https://i.ibb.co/RvwnBL8/pink-shirt.png',
+        price: 25
+      },
+      {
+        id: 5,
+        name: 'Jean Long Sleeve',
+        imageUrl: 'https://i.ibb.co/VpW4x5t/roll-up-jean-shirt.png',
+        price: 40
+      },
+      {
+        id: 6,
+        name: 'Burgundy T-shirt',
+        imageUrl: 'https://i.ibb.co/mh3VM1f/polka-dot-shirt.png',
+        price: 25
+      }
+    ]
+  }
+]
+
+
 Shop Page
+
+You notice they are using the same item.
+Create a new shop-page.
+We are gonna make the shop.component.jsx
+
+We have a file that we are creating called shopdata.
+const SHOP_DATA = [
+  {
+    id: 1,
+    title: 'Hats',
+    routeName: 'hats',
+    items: [
+      {
+        id: 1,
+        name: 'Brown Brim',
+        imageUrl: 'https://i.ibb.co/ZYW3VTp/brown-brim.png',
+        price: 25
+      },
+      {
+        id: 2,
+        name: 'Blue Beanie',
+        imageUrl: 'https://i.ibb.co/ypkgK0X/blue-beanie.png',
+        price: 18
+      },
+      {
+        id: 3,
+        name: 'Brown Cowboy',
+        imageUrl: 'https://i.ibb.co/QdJwgmp/brown-cowboy.png',
+        price: 35
+      },
+      {
+        id: 4,
+        name: 'Grey Brim',
+        imageUrl: 'https://i.ibb.co/RjBLWxB/grey-brim.png',
+        price: 25
+      },
+      {
+        id: 5,
+        name: 'Green Beanie',
+        imageUrl: 'https://i.ibb.co/YTjW3vF/green-beanie.png',
+        price: 18
+      },
+      {
+        id: 6,
+        name: 'Palm Tree Cap',
+        imageUrl: 'https://i.ibb.co/rKBDvJX/palm-tree-cap.png',
+        price: 14
+      },
+      {
+        id: 7,
+        name: 'Red Beanie',
+        imageUrl: 'https://i.ibb.co/bLB646Z/red-beanie.png',
+        price: 18
+      },
+      {
+        id: 8,
+        name: 'Wolf Cap',
+        imageUrl: 'https://i.ibb.co/1f2nWMM/wolf-cap.png',
+        price: 14
+      },
+      {
+        id: 9,
+        name: 'Blue Snapback',
+        imageUrl: 'https://i.ibb.co/X2VJP2W/blue-snapback.png',
+        price: 16
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: 'Sneakers',
+    routeName: 'sneakers',
+    items: [
+      {
+        id: 1,
+        name: 'Adidas NMD',
+        imageUrl: 'https://i.ibb.co/0s3pdnc/adidas-nmd.png',
+        price: 220
+      },
+      {
+        id: 2,
+        name: 'Adidas Yeezy',
+        imageUrl: 'https://i.ibb.co/dJbG1cT/yeezy.png',
+        price: 280
+      },
+      {
+        id: 3,
+        name: 'Black Converse',
+        imageUrl: 'https://i.ibb.co/bPmVXyP/black-converse.png',
+        price: 110
+      },
+      {
+        id: 4,
+        name: 'Nike White AirForce',
+        imageUrl: 'https://i.ibb.co/1RcFPk0/white-nike-high-tops.png',
+        price: 160
+      },
+      {
+        id: 5,
+        name: 'Nike Red High Tops',
+        imageUrl: 'https://i.ibb.co/QcvzydB/nikes-red.png',
+        price: 160
+      },
+      {
+        id: 6,
+        name: 'Nike Brown High Tops',
+        imageUrl: 'https://i.ibb.co/fMTV342/nike-brown.png',
+        price: 160
+      },
+      {
+        id: 7,
+        name: 'Air Jordan Limited',
+        imageUrl: 'https://i.ibb.co/w4k6Ws9/nike-funky.png',
+        price: 190
+      },
+      {
+        id: 8,
+        name: 'Timberlands',
+        imageUrl: 'https://i.ibb.co/Mhh6wBg/timberlands.png',
+        price: 200
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: 'Jackets',
+    routeName: 'jackets',
+    items: [
+      {
+        id: 1,
+        name: 'Black Jean Shearling',
+        imageUrl: 'https://i.ibb.co/XzcwL5s/black-shearling.png',
+        price: 125
+      },
+      {
+        id: 2,
+        name: 'Blue Jean Jacket',
+        imageUrl: 'https://i.ibb.co/mJS6vz0/blue-jean-jacket.png',
+        price: 90
+      },
+      {
+        id: 3,
+        name: 'Grey Jean Jacket',
+        imageUrl: 'https://i.ibb.co/N71k1ML/grey-jean-jacket.png',
+        price: 90
+      },
+      {
+        id: 4,
+        name: 'Brown Shearling',
+        imageUrl: 'https://i.ibb.co/s96FpdP/brown-shearling.png',
+        price: 165
+      },
+      {
+        id: 5,
+        name: 'Tan Trench',
+        imageUrl: 'https://i.ibb.co/M6hHc3F/brown-trench.png',
+        price: 185
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: 'Womens',
+    routeName: 'womens',
+    items: [
+      {
+        id: 1,
+        name: 'Blue Tanktop',
+        imageUrl: 'https://i.ibb.co/7CQVJNm/blue-tank.png',
+        price: 25
+      },
+      {
+        id: 2,
+        name: 'Floral Blouse',
+        imageUrl: 'https://i.ibb.co/4W2DGKm/floral-blouse.png',
+        price: 20
+      },
+      {
+        id: 3,
+        name: 'Floral Dress',
+        imageUrl: 'https://i.ibb.co/KV18Ysr/floral-skirt.png',
+        price: 80
+      },
+      {
+        id: 4,
+        name: 'Red Dots Dress',
+        imageUrl: 'https://i.ibb.co/N3BN1bh/red-polka-dot-dress.png',
+        price: 80
+      },
+      {
+        id: 5,
+        name: 'Striped Sweater',
+        imageUrl: 'https://i.ibb.co/KmSkMbH/striped-sweater.png',
+        price: 45
+      },
+      {
+        id: 6,
+        name: 'Yellow Track Suit',
+        imageUrl: 'https://i.ibb.co/v1cvwNf/yellow-track-suit.png',
+        price: 135
+      },
+      {
+        id: 7,
+        name: 'White Blouse',
+        imageUrl: 'https://i.ibb.co/qBcrsJg/white-vest.png',
+        price: 20
+      }
+    ]
+  },
+  {
+    id: 5,
+    title: 'Mens',
+    routeName: 'mens',
+    items: [
+      {
+        id: 1,
+        name: 'Camo Down Vest',
+        imageUrl: 'https://i.ibb.co/xJS0T3Y/camo-vest.png',
+        price: 325
+      },
+      {
+        id: 2,
+        name: 'Floral T-shirt',
+        imageUrl: 'https://i.ibb.co/qMQ75QZ/floral-shirt.png',
+        price: 20
+      },
+      {
+        id: 3,
+        name: 'Black & White Longsleeve',
+        imageUrl: 'https://i.ibb.co/55z32tw/long-sleeve.png',
+        price: 25
+      },
+      {
+        id: 4,
+        name: 'Pink T-shirt',
+        imageUrl: 'https://i.ibb.co/RvwnBL8/pink-shirt.png',
+        price: 25
+      },
+      {
+        id: 5,
+        name: 'Jean Long Sleeve',
+        imageUrl: 'https://i.ibb.co/VpW4x5t/roll-up-jean-shirt.png',
+        price: 40
+      },
+      {
+        id: 6,
+        name: 'Burgundy T-shirt',
+        imageUrl: 'https://i.ibb.co/mh3VM1f/polka-dot-shirt.png',
+        price: 25
+      }
+    ]
+  }
+]
+
+export default SHOP_PAGE
+
+
+export shop_data
+
+import React from 'react';
+import SHOP_DATA from './shop.data.js';
+
+class ShopPage extends React.Component {
+	consturctor(props){
+		super(props)
+	}
+
+	this.state = {
+	 collections: SHOP_DATA
+	}
+}
+
+render() {
+	return <div> SHOP PAGE </div>
+}
+
+import HomePage from './pages/homepage/homepage.component'
+import shopPage from './pages./shop/shop.component.jsx'
+
+function App() {
+	return (
+		<div>
+		<Switch>
+		   <Route exact path='/' component={HomePage} />
+		   <Route path='/shop' component={ShopPage} />
+		</Switch>
+		</div>
+		);
+		}
+	export default App;	   
+
+	)
+}
+
+And after that we can create preview-collection Page.
+We need preview-collection.component.jsx file and the styling 
+preview-collection.styles.scss.
+
+import React from 'react';
+import './preview-collection.styles.scss'
+
+And then declare a functional-component.
+
+const CollectionPreview = ({title, items }) => (
+  <div className='collection-preview'>
+   <h1 className='title'>{title.toUpperCase()} </h1>
+   <div className='preview'>
+   {
+   items.map((item) => (
+   <div key={item.id}>item.name</div>
+    ))}
+   </div>
+  </div>
+)
+
+export default CollectionPreview;
+
+And in our shopPage component
+
+import React from 'react';
+import SHOP_DATA from './shop.data.js';
+import CollectionPreview '../../components/collections-preview/collection-preview';
+
+class ShopPage extends React.Component {
+	consturctor(props){
+		super(props)
+	}
+
+	this.state = {
+	 collections: SHOP_DATA
+	}
+}
+
+render() {
+	const {collections} = this.state;
+	return <div className="shop-page">
+	{
+	this.collections.map({id, ...otherCollectionProps} => (
+	<CollectionPreview key={id} {...otherCollectionProps} />
+	))
+	}
+We are going to spread in the title, routeName, items.
+	 </div>
+}
+
+import React from 'react';
+import './preview-collection.styles.scss'
+
+And then declare a functional-component.
+
+const CollectionPreview = ({title, items }) => (
+  <div className='collection-preview'>
+   <h1 className='title'>{title.toUpperCase()} </h1>
+   <div className='preview'>
+   {
+   items.filter((item, idx) => idx < 4).map(item => ( 
+   <div key={item.id}>item.name</div>
+    ))}
+   </div>
+  </div>
+)
+
+The beautiful with this functionality it is easy to change.
+The thing is that when CollectionPreview component get's called and rerender can lead to performance issues.
 
 Collection Item
 
+Let's add an new folder called collection-item
+Create an new file called collection-item.component.jsx
+and collection-item.style.scss
+
+import React from 'react';
+
+import './collection-item.styles.scss'
+
+We don need any state so we make a functional-component.
+
+const collectionItem = ({id, name, price, imageUrl }) =>  {
+	<div className='collection-item'>
+	<div className='image'
+	style= {{
+	  backgroundImage: 'url(${imageUrl})'
+	}}
+	>
+	<div className='collection-footer'>
+	<span className='name'>{name} </span>
+	<span className='price'>{price} </span>
+	</div>
+	</div>
+}
+
+export default CollectionItem;
+
+Styled the images that it is 95%.
+Have our name taking up the majority of the space.
+We import the collectionItem to the collectionsPreview component.
+
+import React from 'react';
+import './preview-collection.styles.scss';
+
+import CollectionItem from '../collection-item/collection-item.component';
+
+const CollectionPreview = ({title, items }) => (
+  <div className='collection-preview'>
+   <h1 className='title'>{title.toUpperCase()} </h1>
+   <div className='preview'>
+   {
+   items.filter((item, idx) => idx < 4).map( {id, ...otherItemProps} => ( 
+   <CollectionItem key={id} {...otherItemProps} />
+    ))}
+   </div>
+  </div>
+)
+
+If everything is not being loaded.
+Then it is something that is wrong.
+And most of the time you are baning your head on to the wall.
+
 Header Component
 
-Resources: Importing SVG In React
+We are going to build our header.
+So it always present.
+
+So let's create a header folder.
+We are creating the usual.
+
+header.component.jsx and header.style.scss
+
+In our header.component.jsx
+
+import React from 'react';
+import {Link} from 'react-router-dom';
+import './header.styles.scss';
+import {ReactComponent as Logo} from '../../assets/crown.svg';
+
+const Header = () => (
+
+<div className='header'> 
+ <Link className='logo-container' to='/'> 
+  <Logo className='logo' />
+ </Link>
+
+ <div className='options'>
+ <Link className='options' to='/shop'>
+ SHOP
+</Link>
+
+ <div className='options'>
+ <Link className='options' to='/shop'>
+ CONTACT
+</Link>
+
+
+</div>
+</div>
+)
+
+export default Header;
+
+And we bring this into our App.js
+And we import the Header and place it before the Switch-tag.
+And there is why we can skip the header being render without being dependent on the path the user is at.
+
+import React from 'react';
+import {Switch, Route} from 'react-router-dom';
+import HomePage from './pages/homepage/homepage.component'
+import shopPage from './pages./shop/shop.component.jsx'
+import Header from './components/header/header.component.jsx';
+
+function App() {
+	return (
+		<div>
+		<Header />
+		<Switch>
+		   <Route exact path='/' component={HomePage} />
+		   <Route path='/shop' component={ShopPage} />
+		</Switch>
+		</div>
+		);
+		}
+	export default App;	   
+
+	)
+}
 
 Introducing Forms In React
+I wanna talk about the upcommon videos.
+Sign-In is very common.
+Using User authentication.
+Over the next couple of the videos we are going to show the problem.
+We assume that you are used to html and preventDefault().
+
+Is used to stop some default behaviour.
+These three points is going to be very important when we continue to build our application.
+
+1. Decide on Components.
+
+
+When on decicding on Componets we have things that are similar.
+When we work on the sign-in form.
+We are going to something more flexible.
+
+We also have a Custom button.
+
+2. Decide the State and where it lives.
+We have handleOnchange and handlesubmit methods.
+One method is going to happen when we updates the state.
+Where does the states for the form-component lives.
+Only lift the state where it is needed.
+Register dosen't care about sign-in is needed.
+And Sign-In dosen't care about register.
+We should keep the states in sign-in just for sign-in.
+
+
+3. What changes when state changes.
+If we place some states unnecassry rerenderings can happen.
 
 Sign In Component
 
+Let's take a look at the functionality first.
+Using sign-in with google.
+Authenticate with application.
+How do we build this.
+
+Create a folder sign-in-and-sign-up.
+
+sign-in-and-sign-up.jsx and  sign-in-and-sign-up.styles.scss.
+
+import React from 'react';
+
+import './sign-in-and-sign-up.styles.scss'
+
+const  SignInAndSignUpPage = () => (
+
+<div className='sign-in-and-sign-up'> SIGN IN </div>
+
+);
+
+export default SignInAndSignUpPage;
+
+And now import this into our App.jsx file.
+
+import React from 'react';
+import {Switch, Route} from 'react-router-dom';
+import HomePage from './pages/homepage/homepage.component'
+import shopPage from './pages./shop/shop.component.jsx'
+import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up';
+
+import Header from './components/header/header.component.jsx';
+
+function App() {
+	return (
+		<div>
+		<Header />
+		<Switch>
+		   <Route exact path='/' component={HomePage} />
+		   <Route path='/shop' component={ShopPage} />
+		   <Route path='/signin' component={SignInAndSignUpPage} />
+		</Switch>
+		</div>
+		);
+		}
+	export default App;	   
+
+	)
+}
+
+Let's first build our sign-in component first because of firebase.
+Let's create our files sign-in.component.jsx and sign-in.styles.scss.
+And we need this to be just a class-componet because we need to store information.
+
+import React from 'react';
+import './sign-in.styles.scss';
+
+class SignIn extends React.component{
+	constructor(props){
+	 super(props);
+
+	this.state = {
+	email: '',
+	password: ''
+
+	}	 
+
+	}
+
+	handleSubmit= event => {
+	event.preventDefault();
+
+	this.setState({email: '', password: ''})
+
+	}
+
+	handleChange = event => {
+		const { value, name} = event.target;
+		this.setState({[name]: value})
+ 	}
+
+	render() {
+		return (
+		<div className='sign-in'>
+		<h2>I already have an account</h2>
+		<span>Sign in with your email and password </span>
+
+		<form onSubmit={}>
+		<input name="email" type="email" onChange={handleChange} value={this.state.email} required />
+		<label>Email</label>
+		<input name="password" 
+		 type="password" 
+		 value={this.state.email}
+		 onChange = {handleChange} 
+		 required />
+
+		<input type="submit" value="Submit Form/>
+		<label>Email</label>
+		</form>
+		</div>
+		)
+	}
+}
+
+
+export default SignIn;
+
 Form Input Component
+We want to make an input-form component.
+We make an new folder called form-input.
+With the label props we are going to selectively render a component-
+
+Create an file called form-input.jsx and form-input.style.scss.
+
+import React from 'react';
+
+import './form-input.styles.scss';
+
+const FormInput = ({ handleChange, label, ...otherProps }) => (
+<div className="group">
+ <input className='form-input' onChange={handleChange} {...otherProps} />
+ {
+   label ?
+   <label className={props.value.length} ? 'shrink': ''} form-input-label'} >
+   </label>
+   : null 
+ }
+</div>
+)
+
+export form-input;
+
+We addin the form-change.
+We also add in labels email and password.
+
+import React from 'react';
+
+import FormInput from '../form-input/form-input.component';
+import CustomButton from '../custom-button/custom-button.component';
+
+import './sign-in.styles.scss';
+
+class SignIn extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: '',
+      password: ''
+    };
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    this.setState({ email: '', password: '' });
+  };
+
+  handleChange = event => {
+    const { value, name } = event.target;
+
+    this.setState({ [name]: value });
+  };
+
+  render() {
+    return (
+      <div className='sign-in'>
+        <h2>I already have an account</h2>
+        <span>Sign in with your email and password</span>
+
+        <form onSubmit={this.handleSubmit}>
+          <FormInput
+            name='email'
+            type='email'
+            handleChange={this.handleChange}
+            value={this.state.email}
+            label='email'
+            required
+          />
+          <FormInput
+            name='password'
+            type='password'
+            value={this.state.password}
+            handleChange={this.handleChange}
+            label='password'
+            required
+          />
+          <CustomButton type='submit'> Sign in </CustomButton>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default SignIn;
 
 Custom Button Component
+
+We are building as own components.
+We have limited our styles in their own respected styles.
+We don't want to repeat code.
+We know that is going to be used inside.
+
+Let's build the sign-in button.
+
+custom-buttom
+
+custom-buttom.component.jsx 
+
+import React from 'react':
+import './custom-buttom.styles.scss';
+
+const CustomButton = ({ children, ...otherProps }) => (
+<button className='custom-buttom' {...otherProps}>
+{children}
+</button>
+);
+
+export default CustomButton;
+
+and custom-buttom.styles.scss
+
+And after that we are going to remove the input and write CustomButton in the app js.
+
+          <CustomButton type='submit'> Sign in </CustomButton>
+        </form>
+      </div>
+    );
+  }
+}
+

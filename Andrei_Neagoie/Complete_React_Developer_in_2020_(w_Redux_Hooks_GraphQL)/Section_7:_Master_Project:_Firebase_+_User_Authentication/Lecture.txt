@@ -1,0 +1,27 @@
+Section Overview
+
+Firebase Introduction
+
+Adding a Project to Firebase
+
+Google Sign In Authentication
+
+Cloning From This Point On
+
+Google Sign In Authentication 2
+
+Optional: How to fix 403 restricted_client error
+
+Google Sign In Authentication 3
+
+Note: Firestore update regarding permissions
+
+Storing User Data In Our App
+
+Sign Up Component
+
+Sign Up With Email and Password
+
+Quiz 2: Firebase unsubscribe method
+
+Section Review
