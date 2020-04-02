@@ -1,27 +1,826 @@
 Section Overview
+We are starting to build our sign-in.
+This Firebase section is very important.
+We aren't going to memorize all the firebase documentation.
+Get started for the web.
+You are going to through the documentation.
+Proffesional developers understand to go through the documentation.
+If things get's overwhelming.
+No developers know all the things about Firebase.
+Documentation is your friend.
 
 Firebase Introduction
+We are going to intergrate the firebase.
+In order to understand what Firebase and why we want to use Firebase.
+
+It is divided between two things.
+-Front-End
+This is involving HTML,JS,CSS.
+Comprieses the pages,styles.
+
+You can see Front-End development as what the users sees.
+
+-Back-End
+Has 
+-Database
+Store any data that is important for our Application.
+Shop-data has catergory items.
+Application loads quickly.
+
+-Server
+Makes it most the effcient way to request the data.
+And queries the database.
+What are the latest hat.
+
+-Authentication
+Determines the way user trying to access the database.
+Query the database.
+We only want the right users.
+
+Firebase has these thing generated for us.
+We need to understand where the application ends.
+Effiecently query the data.
+And what the user don't sees.
 
 Adding a Project to Firebase
+We need to go the Firebase-page.
+Click at add project.
+crwn-db.
+Is is setting up all the backend.
+Spark Free 0 is all enough for us.
+Essentially going to see by.
+The main ones we want to focus on is the authentication and databases.
+Databases is going to have all the images, videos ,hosting.
+ML-kit we don't have to worry aboout.
+crwn-db.
+yarn add firebase.
+When this package is loaded let's start configuring firebase.
 
 Google Sign In Authentication
+Now that we have the firebase in our library.
+We are creating a new folder called firebase in the src folder.
+We wanna go from the dashboard to the project overview.
 
-Cloning From This Point On
+Create an firebase.utils.js
+We need off and storage.
+
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
+
+const config = {
+  apiKey: 'AIzaSyCdHT-AYHXjF7wOrfAchX4PIm3cSj5tn14',
+  authDomain: 'crwn-db.firebaseapp.com',
+  databaseURL: 'https://crwn-db.firebaseio.com',
+  projectId: 'crwn-db',
+  storageBucket: 'crwn-db.appspot.com',
+  messagingSenderId: '850995411664',
+  appId: '1:850995411664:web:7ddc01d597846f65'
+};
+
+firebase.initilizeApp(config);
+
+export const auth = firebase.auth();
+export const firestore = firebase.firestore()
+
+const provider = new firebase.auth.GoogleAuthProvider();
+provider.setCustomParameters({ prompt: 'select_account'});
+export const signInWithGoogle = () => auth.signInWithPopup(provider)
+
+export default firebase;
+
+signInWithPopup takes in the provider class we made it could be a twitter one.
+Let's us to configure for google.
+
+We go back to the firebase-project.
+We hit the authentication.
+Project support.
+Now we can enable Google.
+
+import { signInWithGoogle } from '../../firebase/firebase.utils'
+ 
+And we use a CustomButton.
+
+<CustomButton onClick={signInWithGoogle}>
+
+We are manunally configurate things.
 
 Google Sign In Authentication 2
+No way of knowing if our sign-in was successful.
+We know that it is working.
+We want to store the state when the user login.
+We convert the App component to a class instead to have a state.
+We just to always state has changed and we want to know the change.
+We actually sees our user.
+It already stored the user.
+We got a really cool feature called 
+user authenticate authenticated session persistance.
 
-Optional: How to fix 403 restricted_client error
+We can change in Firebase.
+This feature is awesome.
+We don't want the user to sign-in again.
+We get this user-object from firebase.
+Because of the subscriober here they are going to send user-object until it it 
+is signed out.
+
+Now we have Authenticated out of the gate.
+Because it is an open subsription we want to close when the component unmounts.
+
+
+import HomePage from './pages/homepage/homepage.component';
+import ShopPage from './pages./shop/shop.component.jsx';
+import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import Header from './components/header/header.component';
+import { auth } from './firebase/firebase.utils';
+
+
+class App extends React.Component {
+
+	constructor() {
+	super();
+
+	this.state = {
+	currentUser: null
+	}
+	}
+
+	unsubscribeFromAuth = null;
+
+	componentDidMount(){
+	this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+	 this.setState({ currentUser: user });
+
+	 console.log(user);
+
+	})
+	}
+
+	componentWillUnmount(){
+		this.unsubscribeFromAuth();
+	}
+
+	render(){
+
+	return (
+		<div>
+		<Switch>
+		   <Route exact path='/' component={HomePage} />
+		   <Route path='/shop' component={ShopPage} />		   
+		   <Route exact path='/' component={SignInAndSignUpPage} />
+		</Switch>
+		</div>
+		);
+	}
+
+	
+		}
+	export default App;	   
+
+	)
+}
+
+Optional: How to fix 403: restricted_client error
+
+It's possible you may encounter a google Authorization error that says 403:restricted_client. If you do, here are the instructions to fix it!
+
+There should be a Learn More link in the popup, clicking that should take you to the Google APIs console that has three tabs under the header named Credentials, OAuth Consent Screen, and Domain Verification. Go to the OAuth Consent Screen tab and update the Application Name to "crwn-clothing" or any other name you're comfortable with (i.e. the name of your project). Click on save at the bottom, then try logging into your verified Google account thereafter.
+
+
+Thanks to Dylan Flohrschutz for the instructions and solution!
 
 Google Sign In Authentication 3
+What we need to is to sign-out.
+Firebase makes it very easy it has an application for that.
+Header must know when a user has logged in.
+
+import HomePage from './pages/homepage/homepage.component';
+import ShopPage from './pages./shop/shop.component.jsx';
+import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import Header from './components/header/header.component';
+import { auth } from './firebase/firebase.utils';
+
+
+class App extends React.Component {
+
+	constructor() {
+	super();
+
+	this.state = {
+	currentUser: null
+	}
+	}
+
+	unsubscribeFromAuth = null;
+
+	componentDidMount(){
+	this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+	 this.setState({ currentUser: user });
+
+	 console.log(user);
+
+	})
+	}
+
+	componentWillUnmount(){
+		this.unsubscribeFromAuth();
+	}
+
+	render(){
+
+	return (
+		<div>
+		<Header currentUser={this.state.currentUser} />
+		<Switch>
+		   <Route exact path='/' component={HomePage} />
+		   <Route path='/shop' component={ShopPage} />		   
+		   <Route exact path='/' component={SignInAndSignUpPage} />
+		</Switch>
+		</div>
+		);
+	}
+	
+		}
+	export default App;	   
+
+	)
+}
+
+And in the Header component we are going to import the auth from firebase.utils.
+And we destruct the the currentUser.
+And use an ternary operator for that.
+If it was null evaluates to false.
+
+
+ {currentUser ? (
+        <div className='option' onClick={() => auth.signOut()}>
+          SIGN OUT
+        </div>
+      ) : (
+        <Link className='option' to='/signin'>
+          SIGN IN
+        </Link>
+      )}
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+import { auth } from '../../firebase/firebase.utils';
+
+import { ReactComponent as Logo } from '../../assets/crown.svg';
+
+import './header.styles.scss';
+
+const Header = ({ currentUser }) => (
+  <div className='header'>
+    <Link className='logo-container' to='/'>
+      <Logo className='logo' />
+    </Link>
+    <div className='options'>
+      <Link className='option' to='/shop'>
+        SHOP
+      </Link>
+      <Link className='option' to='/shop'>
+        CONTACT
+      </Link>
+      {currentUser ? (
+        <div className='option' onClick={() => auth.signOut()}>
+          SIGN OUT
+        </div>
+      ) : (
+        <Link className='option' to='/signin'>
+          SIGN IN
+        </Link>
+      )}
+    </div>
+  </div>
+);
+
+export default Header;
+
+Now we go to the custom-button.component.jsx
+Conditionally render ${isGoogleSignIn ? 'google-sign-in' : ''}
+if we are logged in else we will render empty string.
+
+import React from 'react';
+
+import './custom-button.styles.scss';
+
+const CustomButton = ({ children, isGoogleSignIn, ...otherProps }) => (
+  <button
+    className={`${isGoogleSignIn ? 'google-sign-in' : ''} custom-button`}
+    {...otherProps}
+  >
+    {children}
+  </button>
+);
+
+export default CustomButton;
+
+We add this to styles.scss and add below for the class name.
+
+  &.google-sign-in {
+    background-color: #4285f4;
+    color: white;
+
+  &:hover {
+      background-color: #357ae8;
+      border: none;
 
 Note: Firestore update regarding permissions
+Box-sizezing effects all the other thing in the browser.
+
+Firebase Firestore
+It will helps us understand what it will do.
+Click the Database-tag
+We have locked mode and Test mode.
+Locked mode prevents anybody write and read our database.
+Test-mode anyone.
+List of all the userers.
+Using the code making what rules to enforce security in our App.
+
+We have the Rules-tab.
+Called NSq-Database.
+
+There are two types of data in our database.
+Collection is a group of object.
+Each of these things can point to other things.
+We generate a special id.
+
+Add cartitem.
+It just consist of documents and collections.
+
+We test this with test.js
+
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+
+const firestore = firebase.firestore();
+
+firestore.collection('users').doc('wpeopoweope').collection('cartitems').doc('pwpowooefwo');
+
+We are asking the firestore the collection of users and from users we want the cartitem from the users.
+
+
+Storing User Data In Firebase
+We have to figure out how to store something in our database.
+We got back many properties from the API.
+We have many unrelated things. 
+Most important thing is the Uid.
+Dynamically id-string.
+Whenever we will get user-id.
+Take off the users and put in the users-collection.
+There are certain things we must to do.
+
+So we go to firebase.utils.
+
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
+
+const config = {
+  apiKey: 'AIzaSyCdHT-AYHXjF7wOrfAchX4PIm3cSj5tn14',
+  authDomain: 'crwn-db.firebaseapp.com',
+  databaseURL: 'https://crwn-db.firebaseio.com',
+  projectId: 'crwn-db',
+  storageBucket: 'crwn-db.appspot.com',
+  messagingSenderId: '850995411664',
+  appId: '1:850995411664:web:7ddc01d597846f65'
+};
+
+firebase.initializeApp(config);
+
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
+
+#This will be a asynchronous function
+#We we maybe some addtional data 
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+	if (!userAuth) return;
+
+
+	
+}
+
+const provider = new firebase.auth.GoogleAuthProvider();
+provider.setCustomParameters({ prompt: 'select_account' });
+export const signInWithGoogle = () => auth.signInWithPopup(provider);
+
+export default firebase;
+
+QueryReference and QuerySnapshot
+
+A query is a request we make to firestore to give us something from the database.
+
+Firestore returns us two types of objects: references and snapshots. Of these objects, they can be either Document or Collection versions.
+
+Firestore will always return us these objects, even if nothing exists at from that query.
+
+A query is something we asks from the database.
+
+QueryReference
+
+A QueryReference object is an object that represents the "current" place in the database that we are querying.
+
+We get them by calling either:
+firestore.doc('/users/:userid');
+firestore.collections('/users');
+
+The QueryReference object does not have the actual data of the collection or document. It instead has properties that tell us details about it, or the method to get the Snapshot object which gives us the data we are looking for.
+
+
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
+
+const config = {
+  apiKey: 'AIzaSyCdHT-AYHXjF7wOrfAchX4PIm3cSj5tn14',
+  authDomain: 'crwn-db.firebaseapp.com',
+  databaseURL: 'https://crwn-db.firebaseio.com',
+  projectId: 'crwn-db',
+  storageBucket: 'crwn-db.appspot.com',
+  messagingSenderId: '850995411664',
+  appId: '1:850995411664:web:7ddc01d597846f65'
+};
+
+firebase.initializeApp(config);
+
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
+
+#This will be a asynchronous function
+#We we maybe some addtional data 
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+	if (!userAuth) return;
+
+console.log(firestore.doc('users/128fdashadu'))
+	
+}
+
+const provider = new firebase.auth.GoogleAuthProvider();
+provider.setCustomParameters({ prompt: 'select_account' });
+export const signInWithGoogle = () => auth.signInWithPopup(provider); 
+
+In our App.js 
+
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+
+componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
+    createUserProfileDocument(user);
+    });
+  }
+
+We get the id and the path we passed in.
+We get back the object even if it doesen't exist in our database.
+Representing the collection.
+
+DocumentReference vs CollectionReference
+
+We use documentRef objects to perform our CRUD methods(create,retrieve,update,delete). The documentRef methods are .set(), .get() ,.update() and .delete() respectively.
+
+We can also add documents to collections using the collectionRef object using the .add() method.//collectionRef.add({//value: prop})
+
+We get the snapshotObject from the referenceObject using the .get() method. i.e.
+documentRef.get() or collectionRef.get()
+
+documentRef returns documentSnapshot object.
+collectionRef returns a querySnapShot object.
+
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+	if (!userAuth) return;
+
+const userRef = firestore.doc(´users/${userAuth.uid}´);
+
+const snapShot = await userRef.get()
+
+With the snap shop we can determine if there are any data there.
+
+if(!snapShot.exists){
+	const {displayName, email} = userAuth;
+	const createAt = new Date();
+
+	try {
+	await userRef.set ({
+		displayName,
+		email,
+		createdAt
+		 })
+
+	}catch(error)
+	console.log('error creating user', error.message);
+}
+return userRef;
+}
+
+exists tells us if the there are any data.
 
 Storing User Data In Our App
 
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+
+import './App.css';
+
+import HomePage from './pages/homepage/homepage.component';
+import ShopPage from './pages/shop/shop.component';
+import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import Header from './components/header/header.component';
+import { auth } from './firebase/firebase.utils';
+
+class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      currentUser: null
+    };
+  }
+
+  unsubscribeFromAuth = null;
+
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    	if (userAuth){
+    	 const userRef = await createUserProfileDocument(userAuth);
+
+    	 userRef.onSnapshot(snapShot => {
+    	 #We must call snapShot.data() to get the properties.
+    		this.setState({
+    			currentUser: {
+    			 id: snapShot,
+    			 ...snapShot.data()
+    			}
+    		})
+    	 });
+    	 console.log(this.state)
+    	}
+    	this.setState({currentUser: userAuth});
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
+  }
+
+  render() {
+    return (
+      <div>
+        <Header currentUser={this.state.currentUser} />
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+          <Route path='/shop' component={ShopPage} />
+          <Route path='/signin' component={SignInAndSignUpPage} />
+        </Switch>
+      </div>
+    );
+  }
+}
+
+export default App;
+
+DocumentSnapshot
+
+We get a documentSnapshot object from our DocumentReference 
+object.
+
+The documentSnapshot object allows us to check if a document exists at this query
+using the .exists property which returns a boolean.
+
+We can also get the actual properties on the object by calling the .data() method, which returns us a JSON object of the document.
+
 Sign Up Component
+We are going to import React and Form input and auth.
+And bring in our stylesheet.
+We are going to make it a class because we need to store the states.
+
+
+import React from 'react';
+
+import FormInput from '../form-input/form-input.component';
+import CustomButton from '../custom-button/custom-button.component';
+
+import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+
+import './sign-up.styles.scss';
+
+class SignUp extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      displayName: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    };
+  }
+
+Will be async-function.
+auth.createUserWithEmailAndPassword creates a user with email and password.
+
+
+  handleSubmit = async event => {
+    event.preventDefault();
+
+    const { displayName, email, password, confirmPassword } = this.state;
+
+    if (password !== confirmPassword) {
+      alert("passwords don't match");
+      return;
+    }
+
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+
+      await createUserProfileDocument(user, { displayName });
+
+      this.setState({
+        displayName: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+Destructing the events.
+
+  handleChange = event => {
+    const { name, value } = event.target;
+
+    this.setState({ [name]: value });
+  };
+
+Form is going to be very similar.
+We need formInputs.
+Destructure  from our state.
+We will hide password using type=password.
+
+  render() {
+    const { displayName, email, password, confirmPassword } = this.state;
+    return (
+      <div className='sign-up'>
+        <h2 className='title'>I do not have a account</h2>
+        <span>Sign up with your email and password</span>
+        <form className='sign-up-form' onSubmit={this.handleSubmit}>
+          <FormInput
+            type='text'
+            name='displayName'
+            value={displayName}
+            onChange={this.handleChange}
+            label='Display Name'
+            required
+          />
+          <FormInput
+            type='email'
+            name='email'
+            value={email}
+            onChange={this.handleChange}
+            label='Email'
+            required
+          />
+          <FormInput
+            type='password'
+            name='password'
+            value={password}
+            onChange={this.handleChange}
+            label='Password'
+            required
+          />
+          <FormInput
+            type='password'
+            name='confirmPassword'
+            value={confirmPassword}
+            onChange={this.handleChange}
+            label='Confirm Password'
+            required
+          />
+          <CustomButton type='submit'>SIGN UP</CustomButton>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default SignUp;
 
 Sign Up With Email and Password
 
+Let's import the signup component.
+Making  it flex in the styles.
+30 px auto.
+
+import React from 'react';
+
+import SignIn from '../../components/sign-in/sign-in.component';
+import SignUp from '../../components/sign-up/sign-up.component';
+
+import './sign-in-and-sign-up.styles.scss';
+
+const SignInAndSignUpPage = () => (
+  <div className='sign-in-and-sign-up'>
+    <SignIn />
+    <SignUp />
+  </div>
+);
+
+export default SignInAndSignUpPage;
+
+Sign In With Email and Password
+import React from 'react';
+
+import FormInput from '../form-input/form-input.component';
+import CustomButton from '../custom-button/custom-button.component';
+
+import {auth, signInWithGoogle } from '../../firebase/firebase.utils';
+
+import './sign-in.styles.scss';
+
+class SignIn extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: '',
+      password: ''
+    };
+  }
+
+  handleSubmit = async event => {
+    event.preventDefault();
+
+    const {email, password} = this.state;
+
+    try {
+    await auth.signInWithEmailAndPassword(email, password);
+    this.setState({ email: '', password: '' });
+
+    }catch(error)
+    console.log(error);
+
+  };
+
+  handleChange = event => {
+    const { value, name } = event.target;
+
+    this.setState({ [name]: value });
+  };
+
+  render() {
+    return (
+      <div className='sign-in'>
+        <h2>I already have an account</h2>
+        <span>Sign in with your email and password</span>
+
+        <form onSubmit={this.handleSubmit}>
+          <FormInput
+            name='email'
+            type='email'
+            handleChange={this.handleChange}
+            value={this.state.email}
+            label='email'
+            required
+          />
+          <FormInput
+            name='password'
+            type='password'
+            value={this.state.password}
+            handleChange={this.handleChange}
+            label='password'
+            required
+          />
+          <div className='buttons'>
+            <CustomButton type='submit'> Sign in </CustomButton>
+            <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+              Sign in with Google
+            </CustomButton>
+          </div>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default SignIn;
+
 Quiz 2: Firebase unsubscribe method
 
+Whenever we call the onAuthStateChanged() or onSnapshot() methods from our auth  library or referenceObject, we get back a function that lets us unsubscribe from the listener we just instantiated. Which lifecycle method should we use to call that unsubscribe method in?
+
+Answer:
+componentWillUnmount
+
+Calling the unsubscribe function when the component is about to unmount is the best way to make sure we don't get any memory leaks in our application related to listeners still being open even if the component that cares about the listener is no longer on the page.
+
 Section Review
+In this section Authentiatating we also had the sign-up page.
+Firebase remeber a user.
+We have their information.
+A back-end firebase is to remeber the information.
+We are going to store the information.
+We check the firebase data.

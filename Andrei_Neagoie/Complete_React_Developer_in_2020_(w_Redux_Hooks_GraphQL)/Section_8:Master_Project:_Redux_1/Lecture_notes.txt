@@ -1,0 +1,755 @@
+Section Overview
+We have built our to have sign-in and sign-up functionality.
+Make our React more scalable.
+New terms take away.
+Our app becomes more and more har.
+The key to become a React developer is to understand where to put the state.
+Stick with us.
+State management 
+
+Redux Introduction
+React states.
+Sign-in as admin.
+Update to the component.
+Have nice views.
+As our React becomes bigger more and more states.
+Confusing how to get.
+We need some state management.
+What if we removed all these components.
+We keep the states in one massive object called store.
+Pass down the state.
+No one of the components dosen't need any states anymore.
+Redux got it's inspiration from databases.
+
+Redux Concepts
+Why do we want to use Redux.
+Redux is a library we wanna use.
+Redux solves the problem with the React App get really complicated.
+
+Useful for storing data.
+-Good for managing large state
+-Useful for sharing data between components.
+-Predictable state management using the 3 priniciples.
+
+1.Single source of truth
+2.State is read only
+3.Changes using pure functions
+
+Action -> Root Reducer -> Store -> DOM changes.
+
+User click a button and reducer functions and the store get's updated.
+If you have tons of actions happens.
+The more and more actions we can be really complicated.
+Goes through just one reducer and updates the store.
+Funnel it down to make it more predictable.
+
+Uses Flux-Pattern
+-Action
+-Dispatcher
+-Store
+-View
+
+Crazieness about the actions.
+We wanna archtecht the app to make it sense.
+Is pretty much like redux === this.state.
+We can still keep a state in the component.
+
+Redux In Our Application
+
+We are about to cover Redux.
+Extensively.
+How apps are build today.
+Before we start to write Redux code.
+Trying to understand the App component.
+In this explain the problem comes from.
+Stored in our database in our top-level component.
+We had to drilling props to the other components and that's is a bad habit.
+Further they goes down it becomes more nested.
+What if we had some cart-component being nested and used in two places.
+It makes the code way less reusable.
+The local state may reused on another component.
+We want one state to be single source of truth.
+Redux is the single state of truth.
+Components fires actions.
+We set a single set of state.
+Somewhere the single states can get accessed to.
+Pass states to the props.
+All of our states is placed in one state.
+We still get unidirectional data-flow.
+
+Redux Actions And Reducers
+It is gotta be a lot of code we are unfamiliar with.
+Look at the reducers.
+Home-reducers hold properties that are related to the home-reducers.
+They all compose the root-reducers.
+We are using actions.
+Actions is a type of object.
+Whenever we wanna update the values.
+If we wanna update the actions.
+We are doing things with actions that have a payload what we want it to be.
+Go into the reducers.
+Go to see if the payload is applicable.
+Reducers is going to check against the type.
+Reducers is going pass it to the components.
+Every reducer is a action.
+With the function it will return an new object.
+We are using a switch-statement.
+If none of the currentState dosen't match we just return the currentState.
+
+Setting Up Redux 1
+We are going to setup our code.
+We are going to write lot of code.
+We have some action that propagetes some changes to the store.
+It can hit something in the middle called middleware.
+Redux logger middleware.
+logger shows every state of the states.
+Redux can be used in multiple frameworks not just React.
+yarn add redux redux-logger react-redux
+We will import a provider that we will wrap around the whole function.
+The Provider is the parent of all the application.
+It allows us to get access everything to the store.
+
+ 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import './index.css';
+import App from './App';
+
+ReactDOM.render(
+<Provider>
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+  </Provider>,
+  document.getElementById('root')
+);
+
+Make a new Folder redux
+Create an file Root-reducer.js
+Combines all of our states togheter.
+
+All of the reducers we are going to write.
+
+New folder called users.
+
+users.reducers.jsx
+
+const INITIAL_STATE = {
+	currentUser: null
+}
+
+const userReducer = (state = INITIAL_STATE, action) => {
+	switch(action.type) {
+	case 'SET_CURRENT_USER':
+		return {
+		   ...state,
+		   currentUser: action.payload
+		}
+
+	default:
+		return state;
+
+	}
+}
+
+export default userReducer;
+
+in the root-reducer.js
+
+import { combineReducers } from 'redux';
+import userReducer from './user/user.reducer';
+
+export default combineReducers({
+	user: userReducer
+});
+
+Setting Up Redux 2
+Now that we have our Reducers.
+We need to create the store.
+We create a new file called store.js
+We are going to add middleware to our store.
+Catches the action.
+
+import { createStore, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
+
+import rootReducer from './root-reducer';
+
+const middlewares = [logger];
+
+const store = createStore(rootReducer, applyMiddlewares(...middlewares))
+
+export default store;
+
+App.jsx
+We import in the store to our App.js file.
+And give as a input to the Provider component.
+
+import store from './redux/store';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import './index.css';
+import App from './App';
+
+ReactDOM.render(
+<Provider store={store}>
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+  </Provider>,
+  document.getElementById('root')
+);
+
+Now we can write some actions.
+We now have to write some actions.
+
+We create user.actions.js
+
+export const setCurrentUser = user => ({
+	type: 'SET_CURRENT_USER',
+	payload: user
+})
+
+We always make sure we align and give a payload.
+With this we have created our user action.
+
+connect() and mapStateToProps
+We need to bring in Redux to the Header component.
+Connect is an higher-order component.
+
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { auth } from '../../firebase/firebase.utils';
+
+import { ReactComponent as Logo } from '../../assets/crown.svg';
+
+import './header.styles.scss';
+
+const Header = ({ currentUser }) => (
+  <div className='header'>
+    <Link className='logo-container' to='/'>
+      <Logo className='logo' />
+    </Link>
+    <div className='options'>
+      <Link className='option' to='/shop'>
+        SHOP
+      </Link>
+      <Link className='option' to='/shop'>
+        CONTACT
+      </Link>
+      {currentUser ? (
+        <div className='option' onClick={() => auth.signOut()}>
+          SIGN OUT
+        </div>
+      ) : (
+        <Link className='option' to='/signin'>
+          SIGN IN
+        </Link>
+      )}
+    </div>
+  </div>
+);
+
+const mapStateToProps = state => ({
+   	currentUser: state.user.currentUser,
+})
+
+export default connect(mapStateToProps)(Header);
+
+mapDispatchToProps
+Now that we have made the Header component recieve from the Redux-Store we have to update the App component.
+We remove the constructor and the setState.
+And we connect the App with the store.
+And we uses mapDispatchToProps to our connect in the App.js.
+Now our components are isolated this time.
+
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import './App.css';
+
+import HomePage from './pages/homepage/homepage.component';
+import ShopPage from './pages/shop/shop.component';
+import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import Header from './components/header/header.component';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import { setCurrentUser } from './redux/user/user.actions';
+
+class App extends React.Component {
+	const {setCurrentUser} = this.props;
+
+  unsubscribeFromAuth = null;
+
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot(snapShot => {
+         setCurrentUser({
+              id: snapShot.id,
+              ...snapShot.data()
+            }
+          });
+        });
+      }
+
+      setCurrentUser(userAuth);
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
+  }
+
+  render() {
+    return (
+      <div>
+        <Header currentUser={this.state.currentUser} />
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+          <Route path='/shop' component={ShopPage} />
+          <Route path='/signin' component={SignInAndSignUpPage} />
+        </Switch>
+      </div>
+    );
+  }
+}
+
+const mapDispatchToProps = dispatch =>  ({
+	setCurrentUser: user => dispatch(setCurrentUser(user))
+})
+
+export default connect(null, mapDispatchToProps )(App);
+
+User Redirect and User Action Type
+
+If a user is sign in right they can mess with sign-in page.
+And that we don't it to do.
+Let's make a small modification.
+We use the render-method with an function with ternary expression that redirects the page if the user is a currentUser.
+
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import './App.css';
+
+import HomePage from './pages/homepage/homepage.component';
+import ShopPage from './pages/shop/shop.component';
+import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import Header from './components/header/header.component';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import { setCurrentUser } from './redux/user/user.actions';
+
+class App extends React.Component {
+	const {setCurrentUser} = this.props;
+
+  unsubscribeFromAuth = null;
+
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot(snapShot => {
+         setCurrentUser({
+              id: snapShot.id,
+              ...snapShot.data()
+            }
+          });
+        });
+      }
+
+      setCurrentUser(userAuth);
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
+  }
+
+  render() {
+    return (
+      <div>
+        <Header currentUser={this.state.currentUser} />
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+          <Route path='/shop' component={ShopPage} />
+          <Route exact path='/signin' render={() => this.props.currentUser ? (<Redirect to='/' />) : (<SignInAndSignUpPage />)} />
+        </Switch>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = ({ user}) => ({
+	currentUser: user.currentUser
+});
+
+const mapDispatchToProps = dispatch =>  ({
+	setCurrentUser: user => dispatch(setCurrentUser(user))
+})
+
+export default connect(null, mapDispatchToProps )(App);
+
+user.types.js
+
+export const UserActionTypes = {
+	SET_CURRENT_USER: 'SET_CURRENT_USER'
+}
+
+And we don't have any typos error.
+
+Cart Component
+Feature is our cart.
+Representing of a shopping-bag.
+That shows you the current items.
+Two components is going to share the same state.
+
+We need to bring in the svg file.
+Let's make cart-item-componet.jsx file.
+
+import React from 'react';
+import './cart-icon.styles.css';
+import { ReactComponet as ShoppingIcon } from '../../assets/shopping-bag.svg';
+
+const CartIcon = () => (
+<div className='cart-icon'>
+  <ShoppingIcon className='shopping-icon' />
+  <span className='item-count'>0</span>
+  </div>
+)
+
+export default CartIcon;
+
+Let's bring it into the header.component.jsx
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { auth } from '../../firebase/firebase.utils';
+import CartIcon from '../cart-icon/cart-icon.component';
+import { ReactComponent as Logo } from '../../assets/crown.svg';
+
+import './header.styles.scss';
+
+const Header = ({ currentUser }) => (
+  <div className='header'>
+    <Link className='logo-container' to='/'>
+      <Logo className='logo' />
+    </Link>
+    <div className='options'>
+      <Link className='option' to='/shop'>
+        SHOP
+      </Link>
+      <Link className='option' to='/shop'>
+        CONTACT
+      </Link>
+      {currentUser ? (
+        <div className='option' onClick={() => auth.signOut()}>
+          SIGN OUT
+        </div>
+      ) : (
+        <Link className='option' to='/signin'>
+          SIGN IN
+        </Link>
+      )}
+      <CartIcon />
+    </div>
+  </div>
+);
+
+const mapStateToProps = state => ({
+   	currentUser: state.user.currentUser,
+})
+
+export default connect(mapStateToProps)(Header);
+
+Card Dropdown Component
+We have a scrollable section.
+Let's start building the component.
+
+Let's create cart-dropdown.component.jsx
+
+import React from 'react';
+import CustomButton from '../custom-button/custom-button.component';
+import './cart-dropdown.styles.scss';
+
+const CartDropdown = () => (
+<div className='cart-dropdown'>
+<div className='cart-items' />
+<CustomButton> GO TO CHECKOUT </CustomButton>
+</div>
+)
+
+export default CartDropdown;
+
+And now we have to bring in the CartDropdown to our Header component.
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { auth } from '../../firebase/firebase.utils';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+import { ReactComponent as Logo } from '../../assets/crown.svg';
+
+import './header.styles.scss';
+
+const Header = ({ currentUser }) => (
+  <div className='header'>
+    <Link className='logo-container' to='/'>
+      <Logo className='logo' />
+    </Link>
+    <div className='options'>
+      <Link className='option' to='/shop'>
+        SHOP
+      </Link>
+      <Link className='option' to='/shop'>
+        CONTACT
+      </Link>
+      {currentUser ? (
+        <div className='option' onClick={() => auth.signOut()}>
+          SIGN OUT
+        </div>
+      ) : (
+        <Link className='option' to='/signin'>
+          SIGN IN
+        </Link>
+      )}
+      <CartIcon />
+    </div>
+    <CartDropdown />
+  </div>
+);
+
+const mapStateToProps = state => ({
+   	currentUser: state.user.currentUser,
+})
+
+export default connect(mapStateToProps)(Header);
+
+We are going to hide the CartDropdown when some no one is clicking on it.
+
+Implementing Redux In Cart
+We have to trigger the cart-drop-down.
+We could add on click value.
+Move it outside the Header component.
+And we import the cart.types.js
+
+import CartActionTypes from './cart.types'
+
+cart.reducer.js
+
+const INITIAL_STATE = {
+	hidden: true
+};
+
+const cartReducer = (state = INITIAL_STATE, action) => {
+	switch(action.type) {
+	case CartActionTypes.TOOGLE_CART_HIDDEN:
+	 return {
+	  ...state,
+	  hidden: !state.hidden
+	 }
+	 default:
+	 	return state;
+	}
+}
+
+export default cartReducer;
+
+So now let's go to cart.types.js
+
+export default const CartActionTypes = {
+	TOOGLE_CART_HIDDEN: 'TOOGLE_CART_HIDDEN'
+}
+
+And we go to the cart.actions.js.
+
+import CartActionTypes from './cart.types';
+
+export const toggleCartHidden = () => ({
+	type: CartActionTypes.TOOGLE_CART_HIDDEN
+});
+
+And we go into the cart-item-componet.jsx and bring in cartActions.
+And we need mapDispatchToProps and dispatch the toggleCartHidden and dispatch it.
+
+
+import React from 'react';
+import { connect } from 'react-redux';
+
+import { toggleCartHidden } from '../../redux/cart/cart.actions';
+
+import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
+
+import './cart-icon.styles.scss';
+
+const CartIcon = ({ toggleCartHidden }) => (
+  <div className='cart-icon' onClick={toggleCartHidden}>
+    <ShoppingIcon className='shopping-icon' />
+    <span className='item-count'>0</span>
+  </div>
+);
+
+const mapDispatchToProps = dispatch => ({
+  toggleCartHidden: () => dispatch(toggleCartHidden())
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(CartIcon);
+
+And now we have to hide and show the cart-dropdown.jsx component let's go to the header.
+
+And what we need to destruct the hidden values.
+I want you to give this value {user: {currentUser} ,cart: {hidden}}
+
+And we can hidden the value with ? a tenary operator.
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { auth } from '../../firebase/firebase.utils';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+
+import { ReactComponent as Logo } from '../../assets/crown.svg';
+
+import './header.styles.scss';
+
+const Header = ({ currentUser, hidden }) => (
+  <div className='header'>
+    <Link className='logo-container' to='/'>
+      <Logo className='logo' />
+    </Link>
+    <div className='options'>
+      <Link className='option' to='/shop'>
+        SHOP
+      </Link>
+      <Link className='option' to='/shop'>
+        CONTACT
+      </Link>
+      {currentUser ? (
+        <div className='option' onClick={() => auth.signOut()}>
+          SIGN OUT
+        </div>
+      ) : (
+        <Link className='option' to='/signin'>
+          SIGN IN
+        </Link>
+      )}
+      <CartIcon />
+    </div>
+    {hidden ? null : <CartDropdown />}
+  </div>
+);
+
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+  currentUser,
+  hidden
+});
+
+export default connect(mapStateToProps)(Header);
+
+Add To Cart Styling
+
+First we know that each item has a hover effect.
+Almost the same data is being displayed.
+Thinking how we can reuse the items.
+How to convert the items to having the hover effect.
+
+import React from 'react';
+
+import './custom-buttom.styles.scss';
+
+const CustomButton = ({ children, isGoogleSignIn, inverted ,...otherProps }) => (
+  <button
+    className={`${inverted ? 'inverted' : ''} custom-button`}
+    {...otherProps}
+  >
+    {children}
+  </button>
+);
+
+export default CustomButton;
+
+And in the custombutton we want to add in
+
+&.inverted {
+ background-color: white;
+ color: black;
+ border: 1px solid black;
+}
+
+And if we hover we want it to have just the same color.
+
+&:hover {
+	background-color: black;
+	color: white;
+	border: none;
+}
+
+And now we add the CustomButton to the collectionItem.component
+
+import React from 'react';
+import CustomButton from '../custom-button/custom-button.component';
+import './collection-item.styles.scss';
+
+const CollectionItem = ({ id, name, price, imageUrl }) => (
+  <div className='collection-item'>
+    <div
+      className='image'
+      style={{
+        backgroundImage: `url(${imageUrl})`
+      }}
+    />
+    <div className='collection-footer'>
+      <span className='name'>{name}</span>
+      <span className='price'>{price}</span>
+    </div>
+    <CustomButton inverted>Add to cart </CustomButton>
+  </div>
+);
+
+export default CollectionItem;
+
+.custom-button {
+	width: 80%;
+	opacity: 0.7;
+	position: absolute
+}
+
+Cart Item Reducer
+
+Adding Multiple Items To Cart
+
+Cart Item Component
+
+Selectors In Redux
+
+Reselect Library
+
+User Selectors
+
+Checkout Page
+
+Checkout Page 2
+
+Extensible Code
+
+Dispatch Action Shorthand
