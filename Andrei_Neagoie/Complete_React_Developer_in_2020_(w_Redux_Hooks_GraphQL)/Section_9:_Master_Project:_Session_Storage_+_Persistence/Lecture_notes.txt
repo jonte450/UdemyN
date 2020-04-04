@@ -1,0 +1,96 @@
+Local Storage and Session Storage
+Right now in the Application there is a issue.
+If the user refresh we lose things that are in the store.
+Our user application is not losed when we refresh.
+For everything else we lose that.
+Ecommerce user should persist.
+One way we can accomplish this is to use firebase.
+What if we just wanted to store the cartItem.
+
+There is a easy library called Redux persist,
+
+Local Storage
+We have access on the local storage in the window object.
+Access with any window.
+Never expires.
+Has get and set methods and we use stringify to convert it into a string.
+
+Session Storage
+Persist the data when we refresh.
+Experies when we close the tab.
+Persist even if we close the window.
+
+Redux Persist
+
+We need to go to the store.js file and make some modifications.
+We are gonna import the persistStore from redux-persist.
+We are gonna export our persister.
+
+
+import { createStore, applyMiddleware } from 'redux';
+import { persistStore } from 'redux-persist';
+import logger from 'redux-logger';
+
+import rootReducer from './root-reducer';
+
+const middlewares = [logger];
+
+export const store = createStore(rootReducer, applyMiddleware(...middlewares));
+
+export const persistor = persistStore(store);
+
+Then we go to the root-reducer.js file.
+We import the persistorReducer here.
+And we import the storage also.
+Local storage is default.
+It also have sessionStorage.
+
+And then we have the persistConfig we passes in the storage and whitelist of what we wanna to store.
+
+And we are gonna export persistReducer instead.
+
+import { combineReducers } from 'redux';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
+import userReducer from './user/user.reducer';
+import cartReducer from './cart/cart.reducer';
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['cart']
+};
+
+const rootReducer = combineReducers({
+  user: userReducer,
+  cart: cartReducer
+});
+
+export default persistReducer(persistConfig, rootReducer);
+
+And in index.js we import this import { PersistGate } from 'redux-persist/integration/react';
+
+And we wrap the App in the PersistGate and give it the persistor.
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+
+import { store, persistor } from './redux/store';
+
+import './index.css';
+import App from './App';
+
+ReactDOM.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <PersistGate persistor={persistor}>
+        <App />
+      </PersistGate>
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById('root')
+);
