@@ -1,0 +1,90 @@
+Introduction To Stripe
+Stripe is a platform that allows us to handle online payments
+Logistics to handle payments.
+How to properly handle payments.
+Hides is it for us and makes it easy to use things.
+
+In purpose of our project is to show how to intergrate it with the server.
+Best platform to handle internet bussniesses.
+Stripes is a massive.
+
+Stripes provides for us all the elements.
+But to just walk through.
+Build out the form for us.
+
+We are going to use the dropdown.
+
+Stripe Intergration
+You need some activation.
+Due to legal reasons so that they can confirm your payments.
+Intergrate the stripe to your page.
+Play around with stripe.
+
+Go to developers-section.
+We want the API-keys.
+Tell the stripe we want use the account.
+You can only make charges with an backend server.
+We want the publisher key.
+
+yarn add react-stripe-checkout.
+What it gives us the React.
+We are going to create an new component.
+
+We make an new file called stripe-button.component.jsx
+
+import React from 'react';
+import StripeCheckout from 'react-stripe-checkout';
+
+const StripeCheckoutButton = ({ price }) => {
+	const priceForStripe = price * 100;
+	const publishableKey = 'Publishable Key';
+
+	const onToken = token => {
+	console.log(token);
+	alert('Payment Successful')
+	}
+
+
+	return (
+	<StripeCheckout
+	label='Pay Now'
+	name='CRWN Clothing Ltd.'
+	billingAddress
+	shippingAddress
+	image='https://svgshare.com/i/CUz.svg'
+	description={'Your total is $${price}'}
+	amount={priceForStripe}
+	panelLabel='Pay Now'
+	token={}
+	/>
+	);
+};
+
+export default StripeCheckoutButton;
+
+Import into the checkout button.
+And place last.
+
+Note about Test credit cards for Stripes
+As of January 2020, our test credit card date is now past 01/20 so you'll see an error using this date. Just change the test date to any date in the future from your current date! You can find more details about this at the link here for documentation on stripe's testing cards.
+
+Cloning From This Point On
+
+From this point on, if you fork and clone any GitHub links for this course, you must remember to set the publishableKey  in stripe-button.component.jsx to your own publishable_key value in your stripe dashboard. This key allows stripe to know that requests from any stripe checkout components are connected to your stripe account! You can find the key under the Developers Tab, and then the API keys tab in the menu that opens!
+
+Finishing Touches + Look Ahead
+You can technically upload your project.
+Congratulations for you that you finished your first React Project.
+
+You can just change the title from in file index.html.
+And you can replace your favicon.
+With an favicon.
+
+Format we are going to learn in the upcomming section.
+But the ecosystem has optimizations and improvements.
+Putting our css in js.
+
+How to tackle GraphQl and using Apollo.
+Hooks is going to be intresant optimizations.
+Advance things we can do with Redux.
+

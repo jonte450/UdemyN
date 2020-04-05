@@ -1,8 +1,121 @@
 Nested Routing in Shop Page
+Now that we have the CollectionOverview let's put it in a route.
+
+import React from 'react';
+import { Route } from 'react-router-dom';
+
+import CollectionOverview from '../../components/collection-overview/collection-overview';
+
+const ShopPage  =({ match }) => (
+	console.log(match);
+      <div className='shop-page'>
+      <Route exact path={'${'match.path'}''} component={CollectionOverview} />
+      </div>
+    );
+
+export default ShopPage;
+
+We want to match the current match.
+
+In our Pages we want folder named Catergory.
+
+And in our catergory.component.jsx
+
+import React from 'react';
+import './category.styles.scss';
+import CollectionItem from '../../components/collection-item';
+
+const CategoryPage = () => (
+<div className='category'> 
+<h2>CATEGORY PAGE </h2>
+</div>
+
+);
+
+export default CategoryPage;
+
+Let's import this to our shop.component.jsx
+We need to nest our route.
+We need to access to our url-string.
+
+import React from 'react';
+import { Route } from 'react-router-dom';
+import CollectionOverview from '../../components/collection-overview/collection-overview';
+
+import CatergoryPage from '../category/category.component';
+
+const ShopPage  =({ match }) => (
+
+      <div className='shop-page'>
+      <Route exact path={'${match.path}' component={CollectionOverview}}/>
+      <Route path={'${match.path}/:catergoryId' component={CatergoryPage}} />
+      </div>
+    );
+
+
+export default ShopPage;
+
+And when we get the catergory Page.
+We are telling React Dom.
+We can pull out the catergorId by match.params.categoryId.
 
 Improving Naming Of Component
+Previsouly it should not be catergory above it should have been called collectionPage.
 
 Collection Routing and Selector
+The id's are numbers.
+In our shop.selectors.js
 
-Optional Currying
+import { createSelector } from 'reselect';
+
+const COLLECTION_ID_MAP = {
+	hats : 1,
+	sneakers: 2,
+	jackets: 3 ,
+	womens: 4 ,
+	mens: 5
+}
+
+const selectShop = state => state.shop;
+
+export const selectCollections = createSelector(
+[selectShop],
+shop => shop.collections
+);
+
+export const selectCollection = collectionUrlParam => 
+createSelector(
+[selectCollections],
+collections => collections.find(collection => collection.id == COLLECTION_ID_MAP[collectionUrlParam])
+)
+
+And let's go to our collection.component.jsx
+
+import React from 'react';
+import { connect } from 'react-redux';
+import CollectionItem from '../../components/collection-item/collection-item.component';
+
+import { selectCollection } from '../../redux/shop/shop.selectors.js';
+
+import './collection.styles.scss';
+
+const CollectionPage = ({ collection }) = > {
+	console.log(collection);
+	return (
+	<div className='collection-page'>
+	<h2>collection PAGE </h2>
+	</div>
+	);
+};
+
+const mapStateToProps = (state, ownProps) => ({
+	collection: selectCollection(ownProps.match.params.collectionId)(state)
+})
+
+export default connect(mapStateToProps)(CollectionPage);
+
+Because we are using a object.
+We write a map object.
+And pass it into the createSelector function.
+And now we are able to change this dynamic.
 
