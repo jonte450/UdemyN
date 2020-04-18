@@ -1,0 +1,287 @@
+Section Overview
+To get any jobs you have to get interviews.
+Getting the actual interview.
+The more Interviews you get the more chances to get a job.
+While you start going through the course you can apply to a job.
+How can i increase the chance to get the interview.
+It's dosen't matter.
+Applying to hundred jobs.
+Doing a couple things.
+A person that has failed 100 interviews also get a acceptance.
+Really one good offer.
+A person how got rejected for 100 rejectance from google finally landed the job there.
+Most people updates the resume and never going to search jobs.
+1.Resume
+2.LinkedIn
+3.Portfolio
+4.Email
+
+Resume
+It is a required part of jobsearch.
+To maximize to get an interview is to make an resume.
+No one likes to writing them.
+Treat them accordaly.
+Spend a little time on your resume.
+Make it personal to write the company name.
+
+resumemaker.online
+
+Gives you 100% free.
+You should spend your time coding.
+You use a template.
+Resume only get viewed most 10 seconds.
+Some companies doesn't have a human that looks on a resume.
+
+It should have these points.
+-One Page
+-Relevant Skills
+-Personalized
+-Online Link
+
+Highlight somethings.
+
+Exercise: Resume Walkthrough
+What part the interviewer cares about.
+A recruiter just checks the main points.
+Keep that in mind.
+
+-Use a pre-designed resume template
+-Make the resume fit on 1 page
+-Include words from job description
+-Include Jobs from the job description
+-Include company name you are applying to
+-Does your first item on your resume reflect what they are looking for?
+-Expericence titles demonstrate value
+-Do you have an online link
+-Remove the word "I"
+-No buzzwords describing how great you are
+-Are you using Action words?
+-Measure everything in terms of impact, don't just describe your responsibilities
+-Technical Knowledge/Skills should include what they are looking for. Only show years if it is impressive.
+
+-Include only sections/items that are impressive: Experience , Projects, Education, Technical Skills.
+
+-No typos or bad grammar
+
+Resume Review
+-One Page
+-Relevant Skills
+-Personalized 
+-Online Link
+
+Try focusing on a few companies.
+This Person is smart and keep helping the company.
+Your Projects, you have been working on.
+
+www.jobscan.co is a website where you can post your resume.
+It will tell how well your resume does.
+What if you don't have an job experience.
+What if i am self-taught.
+
+Resources: Resume Templates
+If you are looking for more inspiration on what successful resumes look like for engineers, you can use this https://www.cakeresume.com/
+
+Engineering-resume-samples to see some samples.
+
+Finally, here is a new one I have discovered that will really help you with your resume: https://thisresumedoesnotexist.com
+
+What If I Don't Have Enough Experience?
+First of you should apply to a job that your are underqualified.
+Getting better position.
+Keep in mind that job posters to take out the weakers applicants.
+Apply for a job that it is harder to get.
+How can you have good experience when you just are a beginner.
+There is the regular way or.
+-Github
+-Website
+-1~2 Big Projects
+-Blog
+
+Github is a great way to demonstraize it.
+Contributing to Open Source projects.
+Recrutiters loves that.
+Website you should have your own website.
+A good way to talk about past projects.
+You don't have to build your website from scratch.
+Kevin Kelly is simple website for example.
+We want your hardest and the most difficult projects.
+We build a smart-brain.
+We store user-information.
+Deployed it with docker.
+Have one to two big projects.
+Build a big Project and getting the interviews.
+BlogPost to include to your resume.
+I have here medium profile to post a Jobpost.
+All you need to do is to start to build things.
+Participate on a hackatown.
+Benefits to talk about on the interview.
+But simply building something as fun it is going to show how motivated you are.
+
+Resources:
+https://github.com/zero-to-mastery/start-here-guidelines
+https://github.com/zero-to-mastery/ZtM-Job-Board
+
+LinkedIn
+Is one of the best things happen to the Job Market.
+Is a good location.
+It's worth your time.
+You can do all sorts of filters.
+You can look for job based on your location.
+A great way to apply for jobs.
+LinkedIn is 100% better than a resume.
+If crafthing a lot.
+Extra weighs to get an interview.
+Look for jobs and apply for jobs.
+Is like your resume.
+The recruiters does keywords searches.
+Google Python Developers.
+Endorsement skills.
+If the person looks.
+Include keywords.
+Did this stratigically like React/Redux, Firebase.
+Try to get recommendations.
+When your profile shows up in searches.
+LinkedIn allows us to have mutual friends.
+
+Portfolio
+And actually spoked about this already.
+What should the portfolio should be.
+Shows off your projects.
+Check out free templates.
+Create a online-link.
+Your goal is just to be seen.
+Looks nice and loads up fast.
+
+
+Resources: Free Portfolio Templates
+
+A great place to share your portfolio and see other people's portfolio is in our Discord community. Have a look at the Job Hunting category for all related conversation regarding portfolios, job interviews, etc... Finally, you can add your own profile including your portfolio to our student led Job Board right here: https://github.com/zero-to-mastery/ZtM-Job-Board
+
+If you are looking for a quick and efficient way of building a portfolio page, I recommend these free templates:
+
+Finally, for extra inspiration, you can see a list of some really great portfolios 
+https://www.freecodecamp.org/news/15-web-developer-portfolios-to-inspire-you-137fb1743cae/
+
+Email
+Did some statistics close refers to was the number one way to get a hire.
+Find their jobs thorugh the refers.
+The best way to get an interview is through refers.
+There a ways for you to connect on LinkedIn.
+Send a polite email.
+But how can to solve the way to get connected.
+See if you have some connections.
+There are some great tools.
+Others tools.
+Target some people.
+Refer.
+Nothing beats to get some refers.
+They might get somebody to help you.
+Improve the company.
+Send a personal website and ask them for an interview.
+Buy a some coffee and make them to talk to themselves.
+Direct you to someone else.
+Message them directly.
+
+Resources: Email
+
+Chrome Extensions:
+Hunter
+Contact Out
+Email Extractor
+
+Here is the sample email from the previous video:
+
+Hey $BOB,
+I saw your presentation at $CONFERENCE last year on Youtube (rr point to some work they have done).
+Great stuff; loved what you did with $FOO, in particular
+$COMMENT_PROVING_YOU_KNOW_WHAT_YOU'RE_TALKING_ABOUT.
+I'm also a $FOO developer. I noticed that your company is hiring
+or $ROLE. I’d love to be a part of your team. Do you have a
+few minutes to chat on Thursday about what you guys are doing?
+ 
+Thanks,
+Yourname
+Your website or any public profile link
+
+Where To Find Jobs?
+As an engineer.
+We have the skills that are in demand.
+It won't be difficult to find a job.
+Better you become on Programming easier it will be to find a Job.
+1.LinkedIn
+2.Hackernews
+3.AngelList
+4.weworkremotely.com
+5.Hired
+6.TripleBYTE
+7.meetup
+8.site:linkedin.com facebook recruiter
+Find specific people.
+Great way to target the recruiter.
+Numbers game.
+
+Resources: Where To Find Jobs?
+
+Here is a list of my recommended resources for finding that dream job:
+
+My Favourites:
+
+LinkedIn Jobs
+
+HackerNews Who is Hiring (You will need to search for most recent month)
+
+AngelList
+
+Seen: One company that I think is doing something interesting and may help you get a job is Seen by Indeed.
+
+Seen is a platform that helps software engineers find jobs at top tech companies. It's 100% free for all candidates (students) and gives you Career Coaching, Resume Review, Interview Prep and Salary Negotiation.. they charge the recruiter, so if you are a good candidate, they get you hired and they make money through the company and not you... (it's free to you).  Seen tries to find a job from their list of 10,000 companies.
+
+Evaluate if this is something you might want to attempt but I know a few people who have had a good experience with this... keep in mind this is an affiliate link but I think they are doing something great: click here to check it out
+
+
+
+Remote Jobs:
+https://designmodo.com/jobs/
+https://www.remotelist.pw/
+https://remoteonly.io/
+https://weworkremotely.com/
+https://remoteok.io/
+
+Others:
+
+Hired (FYI, this is my personal referral link)
+
+TripleByte
+
+Whitetruffle
+
+Zip Recruiter
+
+Meetup.com
+
+When Should You Start Applying?
+Imposter syndrome.
+Prentending to be engineers.
+You should see this as a skill to make you better.
+There is a cache.
+Readiness.
+See on the page.
+Filter out the weak.
+You need to change your job.
+You need some fundamentals knowledge.
+Have you build some projects.
+One or two big projects.
+Hiring engineers is more than technical interviews.
+If you never ask the answer is always no.
+
+Section Summary
+Let's review.
+Pick five to ten companies and applying to them.
+One week will work.
+As i said in the beginning of this section.
+Overcome the lack of experience.
+
+Monthly Industry Updates
+Every month, I accumulate all of the best resources and articles, as well as free resources around the web for programmers. If you want to stay up to date with the industry and make sure you don't miss any important news, you can check out the monthly newsletters here https://zerotomastery.io/blog/.
+
+

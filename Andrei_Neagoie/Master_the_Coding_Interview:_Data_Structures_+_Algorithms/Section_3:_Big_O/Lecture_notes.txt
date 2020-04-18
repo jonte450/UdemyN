@@ -1,0 +1,366 @@
+Setting Up Your Enviroment
+Don't limit you to just one language.
+Going to use JavaScript.
+You can use whatever language you want.
+How are we going to run all these languages.
+repl.io
+All you need to do sign-up.
+glot.io
+
+Section Overview
+This section is one of the most important.
+This a concept that will be around a long time.
+It's so important and have made me a better developer.
+Without encountering this concept.
+Any coder can solve a problem.
+How well can the problem be solved.
+How we use it and how we define.
+Good code from great code.
+
+Python, C/C++, Golang, and JavaScript Solutions!
+
+Good news everyone! On top of the JavaScript solutions to all of the coding examples in the videos, we now have Python version of these as well! Thank to one of our fellow students, you can find it here: https://github.com/theja-m/Data-Structures-and-Algorithms
+
+And now we also have C/C++ solutions as well! Thanks to another fellow student: https://github.com/shree1999/Data-Structures-and-Algorithms
+
+....AND also Golang now thanks to another fellow student: https://github.com/punitpandey/DS-Algo
+
+
+If you would like to contribute to this course with other languages please send me a message and I will feature you in this section :)
+
+
+What Is Good Code?
+There are two main things when we say good code.
+You see good code can be described in two thing.
+1.Readable
+2.Scalable (Big O)
+
+What does that mean.
+We have big cake.
+There a good way to bake a cake.
+Need to work to produce something for us.
+Produces some input.
+A coder is someone that gives us some instructions.
+There are many ways to solve a problem.
+
+const nemo = ['nemo'];
+
+function findNemo(array){
+	for(let i = 0; i < array.length; i++){
+	 if(array[i] === 'nemo'){
+	  console.log('Found NEMO!');
+	 }
+
+	}
+}
+
+findNemo(nemo);
+
+Why did i show you this example?
+We call this runtime.
+We are going to measure this performance.
+
+Big O and Scalability
+const nemo = [nemo'];
+
+const everyone = ['dory', 'bruce', 'marlin', 'nemo', 'gill', 'bloat', 'nigel', 'squirt', 'darla', 'hank'];
+
+const large = new Array(100).fill('nemo');
+function findNemo(array){
+	let t0 = performance.now();
+	for(let i = 0; i < array.length; i++){
+	 if(array[i] === 'nemo'){
+	  console.log('Found NEMO!');
+	 }
+
+	}
+	let t1 = performance.now();
+	console.log('Call to find Nemo took ' + (t1-t0) +' milliseconds!');
+}
+
+findNemo(nemo);
+findNemo(large);
+Perfmance.now to run this to check the performance.
+What if we have a bigger Array.
+We have a lot more characters.
+What happens if we have 100 found nemos.
+We sees that or input function get's slower and slower with growth on the input.
+Depends on the CPU and programming languages you run on.
+We may run code on a different computer.
+Effciency.
+Big O is how long a algorithm runs.
+When we talk about Big O how much does the algorithm slows down.
+
+O(n)
+What is the Big O for finding Nemo.
+How does this function runtime grows.
+How does the efficieny grows.
+If we have five items we are going to five operations.
+This is a linear input.
+We have learned our first Big O notation.
+This have O(n) is n linear time to finding Nemo.
+O(n) is in the yellow region and sees as fair.
+Scalability how the code grows on inputs.
+
+//#1 -- For loop in Javascript.
+const fish = ['dory', 'bruce', 'marlin', 'nemo'];
+const nemo = ['nemo'];
+const everyone = ['dory', 'bruce', 'marlin', 'nemo', 'gill', 'bloat', 'nigel', 'squirt', 'darla', 'hank'];
+const large = new Array(10).fill('nemo');
+
+function findNemo2(fish) {
+  let t0 = performance.now();
+  for (let i = 0; i < fish.length; i++) {
+    if (fish[i] === 'nemo') {
+      console.log('Found NEMO!');
+    }
+  }
+  let t1 = performance.now();
+  console.log("Call to find Nemo took " + (t1 - t0) + " milliseconds.");
+}
+
+findNemo2(everyone)
+
+O(1)
+What happens if we a simple function like this below.
+
+function compressFirstBox(boxes){
+	console.log(boxes[0]);
+}
+
+It's just logging out on box.
+Which time.
+O(1) called constant time.
+No matter of how big the boxes is it's just constant time.
+Dosen't matter how big the array is.
+
+const boxes = [1,2,3,4,5];
+
+function logFirstTwoBoxes(boxes){
+	console.log(boxes[0]); //O(1)
+	console.log(boxes[1]);//O(1)
+}
+
+This function is running O(2).
+O(1) is excellent.
+
+Exercise: Big O Calculation
+// What is the Big O of the below function? (Hint, you may want to go line by line)
+function funChallenge(input) {
+  let a = 10;
+  a = 50 + 3;
+
+  for (let i = 0; i < input.length; i++) {
+    anotherFunction();
+    let stranger = true;
+    a++;
+  }
+  return a;
+}
+
+//O(2) + 3*O(n)
+
+Solution: Big O Calculation
+
+// What is the Big O of the below function? (Hint, you may want to go line by line)
+function funChallenge(input) {
+  let a = 10;
+  a = 50 + 3;
+
+  for (let i = 0; i < input.length; i++) {
+    anotherFunction();
+    let stranger = true;
+    a++;
+  }
+  return a;
+}
+
+//O(2) + 3*O(n)
+
+Let's look at the function.
+First thing we are going to do is to sign in let a = 10 is O(1).
+And a = 50 + 3 is O(1).
+And for (let i = 0; i < input.length; i++)  is going to be O(n).
+n is the input.
+anotherFunction() is O(n).
+let stranger = true; is O(n).
+a++ is O(n).
+return a; is O(1).
+
+And now we are going to think how fast a function runs.
+So our Big O notation is Big O(3 +4n)
+
+Exercise: Big O Calculation 2
+// What is the Big O of the below function? (Hint, you may want to go line by line)
+function anotherFunChallenge(input) {
+  let a = 5;
+  let b = 10;
+  let c = 50;
+  for (let i = 0; i < input; i++) {
+    let x = i + 1;
+    let y = i + 2;
+    let z = i + 3;
+
+  }
+  for (let j = 0; j < input; j++) {
+    let p = j * 2;
+    let q = j * 2;
+  }
+  let whoAmI = "I don't know";
+}
+//Answer
+//Big(4 + 7n)
+
+Solution: Big O Calculation 2
+
+// What is the Big O of the below function? (Hint, you may want to go line by line)
+function anotherFunChallenge(input) {
+  let a = 5;
+  let b = 10;
+  let c = 50;
+  for (let i = 0; i < input; i++) {
+    let x = i + 1;
+    let y = i + 2;
+    let z = i + 3;
+
+  }
+  for (let j = 0; j < input; j++) {
+    let p = j * 2;
+    let q = j * 2;
+  }
+  let whoAmI = "I don't know";
+}
+//Answer
+//Big(4 + 7n)
+
+If we go line by line let a = 5; O(1)
+let b = 10; O(1)
+let c = 50; O(1)
+for-loop.
+  for (let i = 0; i < input; i++) {
+    let x = i + 1; //O(n)
+    let y = i + 2;//O(n)
+    let z = i + 3;//O(n)
+  }
+
+  for (let j = 0; j < input; j++) {
+    let p = j * 2; //O(n)
+    let q = j * 2; //O(n)
+  }
+
+let whoAmI = "I don't know"; //O(1)
+
+So the Big O(3 + 7n) also.
+
+Simplifyinf Big O
+In the previous we had to do some calculations.
+In interviews we are never going to do this.
+You translate this exercise functions to just O(n).
+Following 4 rules.
+Big O rules.
+Rule 1: Worst Cast
+   Rule 2: Remove Constants
+   	 Rule 3: Different terms for inputs.
+   	 	Rule 4: Drop Non Dominants
+
+Big O Rule 1
+When calculate the Big O always think of the worst case.
+When we had finding nemo function.
+
+const fish = ['dory', 'bruce', 'marlin', 'nemo'];
+const nemo = ['nemo'];
+
+When we are running const everyone we are running this 10 times.
+const everyone = ['dory', 'bruce', 'marlin', 'nemo', 'gill', 'bloat', 'nigel', 'squirt', 'darla', 'hank'];
+const large = new Array(10).fill('nemo');
+
+function findNemo2(fish) {
+  let t0 = performance.now();
+  for (let i = 0; i < fish.length; i++) {
+    if (fish[i] === 'nemo') {
+    We can optimize this to add a break statement when we are finding Nemo.
+      console.log('Found NEMO!');
+      break;
+    }
+  }
+  let t1 = performance.now();
+  console.log("Call to find Nemo took " + (t1 - t0) + " milliseconds.");
+}
+
+findNemo2(everyone)
+
+When it comes to Big O it only cares about the worst case if Nemo is at the end of the Array.
+
+We always cares about the worst case scenario.
+
+Big O Rule 2
+Rule 2: Remove Constants.
+
+Not the best function ever.
+Finding the middle index of the item.
+Using a while-to loop half the array.
+And then we are looping 100 times.
+What is the Big O of the function.
+We have O(1 + n/2 + 100)
+So we have O(n/2 + 101)
+We only cares about when it scales we don't care about n/2 and 101.
+When n get's bigger and bigger.
+We only cares about when n scales up with input.
+n/2 has decreased effect.
+So this becomes O(n).
+
+
+function printFirstItemThenFirstHalfThenSayHi100Times(items) {
+    console.log(items[0]);
+
+    var middleIndex = Math.floor(items.length / 2);
+    var index = 0;
+
+    while (index < middleIndex) {
+        console.log(items[index]);
+        index++;
+    }
+
+    for (var i = 0; i < 100; i++) {
+        console.log('hi');
+    }
+}
+
+function compressBoxesTwice(boxes) {
+	boxes.forEach(function(boxes) {
+	console.log(boxes)
+	});
+
+	boxes.forEach(function(boxes){
+	console.log(boxes)
+	});
+}
+
+This function compressBoxesTwice becomes O(2n) because of two loops.
+But it dosen't matter of n so we drops 2.
+So it's just becomes O(n).
+
+Big O Rule 3
+Different terms for inputs.
+
+O(n^(2))
+
+Big O Rule 4
+
+Big O Cheat Sheet
+
+What Does This All Mean?
+
+O(n!)
+
+Pillars Of Programming
+
+Space Complexity
+
+Exercise: Space Complexity
+
+Exercise: Twitter
+
+Optional: JavaScript Loops
+
+Section Summary
