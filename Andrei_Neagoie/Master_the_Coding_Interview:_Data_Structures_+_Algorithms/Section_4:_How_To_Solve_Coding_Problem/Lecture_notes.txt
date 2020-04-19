@@ -1,0 +1,128 @@
+Section Overview
+At the end of the day the company wonders if you can solve problems.
+That's a technical interview is all about.
+You got an interview.
+And we are now getting very technical.
+How to solve problems.
+If we know all the algorithms,data-structures,best-programmers.
+It's not a gurantee.
+It's about the thought process.
+You don't memorize things.
+We are trying to build the fundamentals.
+Big O.
+Learning how to solve problems.
+We are going to look at coding interview sample from Google.
+The interview it's not about to memorize things.
+How can you ace a the interview.
+
+Data Structures
+Algoritms
+
+What Are Companies Looking For?
+So what are companies looking after?
+
+1.Analytic Skills
+How can you think through a problem?
+Knowing the thought process?
+
+2.Coding Skills
+
+3.Technical Skills
+Do you know the pro's and con's of your solution.
+
+4.Communication Skills
+Can you communicate well with the others companies employers.
+
+When a problem present itself we are going to google for.
+Companies want's persons that know how to look for answers.
+Solve problem that you independtitly.
+You are going to know the why's?
+
+What We Need For Coding Interviews
+Here is big secret there are a lot more data structures.
+You are most focus on things that are used the most of the time.
+These are this are used the most.
+Not much people are training for the interview questions.
+When we learning the right data-structures.
+
+Data Structures 
+-Arrays
+-Stacks
+-Queues
+-Linked Lists
+-Trees
+-Tries
+-Graphs
+-Hash Tables
+
+Algorithms
+-Sorting
+-Dynamic Programming
+-BFS + DFS (Searching)
+-Recursion
+
+Technical Interview Map: 
+
+https://coggle.it/diagram/W5E5tqYlrXvFJPsq/t/master-the-interview-click-here-for-course-link/c25f98c73a03f5b1107cd0e2f4bce29c9d78e31655e55cb0b785d56f0036c9d1
+
+Exercise: Google Interview
+15 steps guide to solve a problem.
+Because if you haven't solved a data-structure.
+The point is to watch this video.
+
+https://www.youtube.com/watch?v=XKu_SEDAykw
+
+Exercise: Interview Question
+Given 2 arrays, create a function that let's a user know (true/false) whether 
+these two arrays contain any common items.
+
+For Example:
+const array1 = ['a','b','c','x'];
+const array2 = ['z','y','i'];
+should return false.
+
+const array1 = ['a','b','c','x'];
+const array2 = ['z','y','x'];
+Should return true.
+
+2 parameters -- arrays -- no size limit
+return true or false
+
+Show that you have all the details.
+Make sure you should return true and false.
+Explain your Approach.
+If there is a problem with your approach.
+What is the main goal with the problem.
+
+Start with naive brute force approach.
+
+This is a nested loop.
+Comparing two differents array and we know that is O(n^(2)).
+You don't have to code this part.
+
+Tell the interviewer why this code it's not the best.
+
+For example brute force solution.
+
+function containsCommonItem(arr1,arr2){
+	for(let i=0; i < arr1.length; i++){
+	  for(let j = 0; j < arr2.length; j++){
+	    if(arr1[i] === arr2[j]){
+	     return true;
+	    }
+	  }
+	}
+	return false;
+}
+This has O(a*b).
+Is it possible to make this faster.
+
+
+
+Exercise: Interview Question 2
+
+Review Google Interview
+
+Optional Exercise: Google Interview On Your Own
+
+Section Summary
