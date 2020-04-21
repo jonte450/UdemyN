@@ -1,0 +1,438 @@
+Hash Tables Introduction
+There are many ways to call it a data structure.
+Object in JavaScript are hash tables.
+You are going to use it any interview.
+Every language has hash dictionaries in Python.
+So what are they?.
+Where does the name comes from.
+basket.grapes = 10000.
+More diffcult with arrays.
+Hash-tables we have a key and a value.
+We have key which is grapes.
+We use grapes to find the value.
+It both stores the key grapes and the 1000 value.
+Where to put data in our memory.
+
+Hash Function
+What is a hash function.
+Is a function that generates value fixed length.
+md5 is a type of hash function.
+Right away it turns a value to some random pattern.
+It's one-way.
+Impossible to have a clue what's the input is.
+As soon we change something it changes the out put.
+The one thing if i give it the same input.
+idempotent is fancy a way always output the same output.
+We get's really fast data accesses with it.
+Technically it's gonna to take grapes and convert it into same value.
+Does it slow things down.
+We need the hash-function to take really fast.
+SHA-256 hash generator takes a very long time to generate.
+To recap we have key grapes we give it to a hash-function to generate a value to store in the memory.
+
+Hash Collisions
+
+Hash Tables
+insert O(1)
+lookup O(1)
+delete O(1)
+search O(1)
+
+We access the property to find the value.
+We simple use the key to delete a value.
+Searching is simple to.
+
+let user = {
+	age: 54,
+	name: 'Kylie',
+	magic: true,
+	scream: function(){
+	      console.log('ahhhhhh');
+	}
+}
+
+user.age /// O(1)
+user.spell = 'abra kadabra';//O(1)
+user.scream(); // O(1)
+
+Hash-tables are amazing we should use it all the times.
+Main problemes with Hash-tables.
+Computers has limited space.
+Seeing we have limited spaces.
+Hash-functions randomly put a value in the memory.
+Collision may happen.
+It stores something in buckets.
+Slows down to access information when add data.
+O(n/k) => O(n).
+Collisions happens.
+There two common ways to handle collisions.
+-Linked Lists.
+-Separate chaining.
+
+Hash Tables In Different Languages 
+Implemented differently in different languages.
+We can a function,array as values.
+We can keys that are diffents.
+But with the new version of JavaScripts we have map and sets.
+map allows us to save any data-type as a key.
+map have an order.
+There are some versions that maintains some order.
+Sets are similar it only stores the keys.
+
+Exercise: Implement A Hash Table
+Let's create an hash-table.
+We want 50 shelves of memory.
+Using a new method we can store the values.
+
+My solution down here:
+
+class HashTable {
+ constructor(size){
+   this.data = new Array(size);
+ }
+  add_hash_element(key,value){
+ const hash_key = this._hash(key);
+ var hash_element = new Array();
+ hash_element[0] = key;
+ hash_element[1] = value;
+ this.data[hash_key].push(hash_element);
+ }
+ 
+ get(key){
+ const hash_key = this._hash(key);
+ if(this.data[hash_key] != undefined){
+   var hash_element = this.data[hash_key];
+   for(let index = 0; index < hash_element.length; index++){
+     if(hash_element[index][0] === key){
+       return hash_element[index][1];
+     }
+   }
+ }
+  return "Key doesn't exist!";    
+ }
+ 
+ set(key,value){
+ const check_key = this._hash(key);
+ if(this.data[check_key] === undefined) {
+   this.data[check_key] = new Array();
+   this.add_hash_element(key,value);
+ }else{
+   let get_elem = this.data[check_key];
+   var chained_elem = new Array(2);
+   chained_elem[0] = key;
+   chained_elem[1] = value;
+   get_elem.push(chained_elem);
+ }
+ 
+ }
+ 
+  _hash(key) {
+   let hash = 0;
+   for (let i =0; i < key.length; i++){
+       hash = (hash + key.charCodeAt(i) * i) % this.data.length
+   }
+   return hash;
+ }
+}
+ 
+const myHashTable = new HashTable(50);
+myHashTable.set('grapes', 10000)
+console.log(myHashTable.get('grapes'));
+myHashTable.set('apples', 9)
+console.log(myHashTable.get('apples'));
+console.log(myHashTable.get('Boohyaa'));
+
+Solution: Implement A Hash Table
+When you have __ you can have private properties.
+Common standard to put __ standard to let other developers to know you should't access this.
+
+We first create keyCharacterAt just simply returns a number that are representing a character.
+
+We multiplying that with the index-number.
+An easy way to see what's happening here is to loop.
+Because the Hash is going looped over
+Let's create the set-method.
+This set-method is going to have a key and a value.
+Calling the _hash(key) function to get the key.
+If this !this.data[adress] nothing there just simply add the data.
+The adress is going to have an array.
+But what happens if this already exists.
+The entry is going to be deleted.
+Simply just add to the array.
+Implement the get-method.
+Just saying grapes.
+We need to loop over to get the keys because it can collisions.
+Else we are going to return undefined.
+
+
+
+class HashTable {
+  constructor(size){
+    this.data = new Array(size);
+    // this.data = [];
+  }
+
+  _hash(key) {
+    let hash = 0;
+    for (let i =0; i < key.length; i++){
+        hash = (hash + key.charCodeAt(i) * i) % this.data.length
+    }
+    return hash;
+  }
+
+  set(key, value) {
+    let address = this._hash(key);
+    if (!this.data[address]) {
+      this.data[address] = [];
+    }
+    this.data[address].push([key, value]);
+    return this.data;
+  }
+
+  get(key){
+    const address = this._hash(key);
+    const currentBucket = this.data[address]
+    if (currentBucket) {
+      for(let i = 0; i < currentBucket.length; i++){
+        if(currentBucket[i][0] === key) {
+          return currentBucket[i][1]
+        }
+      }
+    }
+    return undefined;
+  }
+}
+
+const myHashTable = new HashTable(50);
+myHashTable.set('grapes', 10000)
+myHashTable.get('grapes')
+myHashTable.set('apples', 9)
+myHashTable.get('apples')
+
+
+
+keys()
+I want to create something called keys.
+keys-method will have some keysArray.
+And it will loop over all the keys.
+And if the this.data[i] is not undefined.
+We wanna grab the keys.
+After that we will return the keys-array.
+Downside of hash-tables we have to loop for over to many things.
+Drawback.
+Everytime we are adding something to the adress.
+We putting things in a shelf.
+And that it is unordered.
+
+  keys(){
+    const keysArray = [];
+    console.log(this.data.length);
+    for (let i = 0; i < this.data.length; i++){
+      if(this.data[i]){
+        keysArray.push(this.data[i][0][0])
+      }
+    }
+    return keysArray;
+  }
+
+
+Bonus: keys() Without Collision
+
+One of our ZTM students with a great Discord username, mightypickachu, decided to enhance the previous keys() method to also include hash collision prevention. Here is how to do it (or you can try it yourself):
+
+ keys() {
+    if (!this.data.length) {
+      return undefined
+    }
+    let result = []
+    // loop through all the elements
+    for (let i = 0; i < this.data.length; i++) {
+        // if it's not an empty memory cell
+        if (this.data[i] && this.data[i].length) {
+          // but also loop through all the potential collisions
+          if (this.data.length > 1) {
+            for (let j = 0; j < this.data[i].length; j++) {
+              result.push(this.data[i][j][0])
+            }
+          } else {
+            result.push(this.data[i][0])
+          } 
+        }
+    }
+    return result; 
+  }
+
+Hash Tables vs Arrays
+
+Hash-tables are great when we quickly want's to access values very fast.
+Although we have collisions.
+Arrays allows to look up values.
+Hash-tables i like a hack on array.
+The problem of hash-table is the concept of no order.
+
+
+Arrays
+search O(n)
+lookup O(1)
+push O(1)
+insert O(n)
+delete O(n)
+
+Hash Tables
+search O(1)
+insert O(1)
+lookup O(1)
+delete O(1)
+
+Exercise: First Recurring Character
+My solution:
+
+function check_undefined(input){
+  for(let [key,value] of Object.entries(input)){
+  if(value > 1){
+    return false;
+  }
+}
+return true;
+} 
+
+function firstRecurringCharacter(input){
+  let check_occ = {};
+  for(num of input){
+    if((num in check_occ) === false){
+      check_occ[num] = 1;
+    }else{
+      check_occ[num]++;
+    }
+  }
+  if(check_undefined(check_occ) === false){
+  let max_occurences = 0;
+  let number = 0;
+  let occured = {};
+  for(let check of input){
+    let value = check_occ[check];
+     if(value >= max_occurences && !occured[check]){
+       occured[check] = true;
+       max_occurences = value;
+       number = check;    
+     }
+  }
+  return number;
+}
+return undefined;
+}
+
+//Google Question
+//Given an array = [2,5,1,2,3,5,1,2,4]:
+//It should return 2
+a = [2,5,1,2,3,5,1,2,4];
+
+//Given an array = [2,1,1,2,3,5,1,2,4]:
+//It should return 1
+b = [2,1,1,2,3,5,1,2,4];
+
+//Given an array = [2,3,4,5]:
+//It should return undefined
+c = [2,3,4,5];
+
+//Bonus... What if we had this:
+// [2,5,5,2,3,5,1,2,4]
+// return 5 because the pairs are before 2,2
+//Doesn't work!
+d = [2,5,5,2,3,5,1,2,4];
+
+firstRecurringCharacter(d);
+
+Solution: First Recurring Character
+
+
+//Google Question
+//Given an array = [2,5,1,2,3,5,1,2,4]:
+//It should return 2
+
+//Given an array = [2,1,1,2,3,5,1,2,4]:
+//It should return 1
+
+//Given an array = [2,3,4,5]:
+//It should return undefined
+
+//First we have the naive approach with nested for-loops.
+//And grab the first item.
+//And we are gonna compare 2 to 5 and then compare each element.
+//So a little trick is to make i + 1.
+//Compare each element.
+//And we just make an input[i] === input[j].
+//This solution is not simple.
+
+function firstRecurringCharacter(input) {
+  for (let i = 0; i < input.length; i++) {
+    for (let j = i + 1; j < input.length; j++) {
+      if(input[i] === input[j]) {
+        return input[i];
+      }
+    }
+  }
+  return undefined
+}
+
+//We have here a much simpler function.
+//We add this to a hash-table.
+//If we add this to an hash-table we can look after each value if it has been //seen before.
+//And if we have seen that before we just return the value.
+//As soon it checks again ohh i already have it.
+
+
+function firstRecurringCharacter2(input) {
+  let map = {};
+  for (let i = 0; i < input.length; i++) {
+    if (map[input[i]] !== undefined) {
+      return input[i]
+    } else {
+      map[input[i]] = i;
+    }
+  }
+  return undefined
+}
+
+firstRecurringCharacter2([1,5,5,1,3,4,6])
+
+
+//Bonus... What if we had this:
+// [2,5,5,2,3,5,1,2,4]
+// return 5 because the pairs are before 2,2
+
+One downside is that we have increased the space complexity.
+It works diffrently for the Bonus and givers us different answers.
+
+Interesting Tidbit: Python Dictionaries
+
+Recently, the Python programming language has made Dictionaries (their Hash Tables) ordered by default! So in that language, the difference between and Array (List in Python) and Hash Table (Dict in Python) are less. You can read more about it here:
+
+https://softwaremaniacs.org/blog/2020/02/05/dicts-ordered/en/
+
+
+Hash Tables Review
+Another Data Structure down.
+They are very useful.
+You use an Hash tabel to optimize things.
+From O(n^(2)) to O(n).
+In this section we learned it has very fast lookups.
+It allows us to do fast inserts.
+
+Downsize it is hard to go through everything.
+Looking down.
+But because of collision it can be O(n).
+Hash tables has fast access but more memory.
+However doing hashmap you are just doing just one for-loop.
+
+
+Pros
+-Fast lookups*
+-Fast inserts
+-Flexible Keys
+
+Cons
+-Unordered
+-Slow key iteration
+
+

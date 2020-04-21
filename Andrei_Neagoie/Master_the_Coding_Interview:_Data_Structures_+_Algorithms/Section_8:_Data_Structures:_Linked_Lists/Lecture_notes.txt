@@ -1,0 +1,148 @@
+Linked Lists Introduction
+We are going to talk about two types of linked lists.
+Both static and dynamic arrays can double up the memory.
+Addtionaly arrays has bad performance.
+And then came hash tables.
+Hash-tables solved it.
+Hash-tables was not ordered.
+Linked-Lists to the rescue.
+In the next common video let's learn more about them.
+head->element -> tail-> null.
+
+What Is A Linked List?
+As the name suggest.
+Well i have a little diagram here.
+Contains a lists of nodes.
+Nodes has two types of values.
+-Value
+-Pointer
+
+The first node is called the head and the last for the tail.
+Null signifies it is the end of the list.
+Very simple data-structure.
+
+const basket = ['apples','grapes','pears'];
+linked list: apples --> grapes --> pears --> null.
+
+Why doesn't you code this in JavaScript.
+
+Exercise: Why Linked Lists?
+Why do you think why Linked Lists may be better than hash tables or arrays?
+Head and values to check the elements.
+
+You can grow that on runtime.
+
+Insertion and deletion is more effectively than arrays.
+
+No memory wastage we can grow because of a linked list you can grow this at any time.
+
+Solution: Why Linked Lists?
+Key thing of linked list has some lose data-structure.
+I can insert anything i want.
+Shift the data down.
+The main thing about linked list you start at the head until you get to 5.
+Except we like to call this traversal.
+Array items are located are next each other.
+Linked list are scattering everywhere in the memory.
+Insertion are better than array.
+We don't have to do the unshifting.
+There are some order to the linked list.
+
+prepend O(1)
+append O(1)
+lookup O(n)
+insert O(n)
+delete O(n)
+
+Prepend is O(1).
+lookup is O(n).
+
+What Is A Pointer?
+Let's talk about a pointer.
+It's just a reference to another object in the memory.
+
+const obj1 = {a: true};
+const obj2 = obj1;
+
+Both obj1 and obj2 points to the same place in memory.
+ob1.a = 'booyaa';
+
+It's simple where we are in the memory.
+Reference error if we delete obj1.
+Garbage collection obj2 = 'hello';
+Because it is unused it get deleted.
+
+Our First Linked List
+How would we go about to visually this.
+Think the node as an object.
+A value property.
+And a next property that is a pointer.
+The value of the node can change.
+We can change the value.
+Null means the end of the list.
+Using this as our structure.
+We are going to create an class Linked List.
+Going to instansiate the class.
+Constructor to start the linked list.
+And it should have the next.
+Constructor is all about to create the linked list.
+And we have a length to keep track of the linked list.
+
+// Create the below linked list:
+// myLinkedList = {
+//   head: {
+//     value: 10
+//     next: {
+//       value: 5
+//       next: {
+//         value: 16
+//         next: null
+//       }
+//     }
+//   }
+// };
+
+class LinkedList {
+  constructor(value) {
+    this.head = {
+      value: value,
+      next: null
+    };
+    this.tail = this.head;
+    this.length = 1;
+  }
+  append(value) {
+    //Code here
+  }
+}
+
+let myLinkedList = new LinkedList(10);
+myLinkedList.append(5);
+myLinkedList.append(16);
+
+Create an append method.
+Create an prepend method.
+
+Solution: append()
+
+Solution: prepend()
+
+Node Class
+
+insert()
+
+Quick Note: Upcoming Video
+
+Solution: insert()
+
+Solution: remove()
+
+Exercise: Doubly Linked Lists
+
+Solution: Doubly Lists Lists
+
+Exercise: reverse()
+
+Solution: reverse()
+
+Linked Lists Review

@@ -421,4 +421,21 @@ Longest Word
 https://coderbyte.com/information/Longest Word
 
 Arrays Review
+You just finished your first data-structure.
+We finished a small part of it.
+Dynamic arrays vs static arrays.
+Strings can be treated as an arrays.
+By now you should be able to look into the cheat-sheet.
+They are very good at sorting data.
+
+Pros.
+Fast lookups
+Fast push/pop
+Ordered
+
+Cons.
+Slow inserts
+Slow deletes
+Fixed size*
+
 
