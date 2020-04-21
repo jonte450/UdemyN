@@ -116,13 +116,138 @@ function containsCommonItem(arr1,arr2){
 }
 This has O(a*b).
 Is it possible to make this faster.
+array1 ==> obj {
+	a: true,
+	b: true,
+	c: true,
+	x: true
+} 
 
+array2[index] === obj.properties
+
+Walk through your code and write down the steps you are going to do.
+We are going to have two loops that are separeated.
+Big O(a + b) and that is big savings.
+
+
+function containsCommonItem2(arr1,arr2){
+	//loop through first array and create object
+	/where properties === items in the array
+	//loop through second array and check if item in second
+	//array exists on created object
+
+}
 
 
 Exercise: Interview Question 2
+We wanna be sure to start to code and have an plan in mind.
+We wanna loop through the first array.
+
+function containsCommonItem2(array1,array2){
+	//loop through first array and create object
+	//where properties === items in the array
+	let map = {};
+	for(let i=0; i < arr.length; i++){
+	 if(!map.[array1[i]]){
+	  const item = array1[i];
+	  map[item] = true;
+	 }
+	}
+
+	//loop through second array and check if item in second
+	//array exists on created object
+	for( let j = 0; j < arr2.length; j++){
+	 if(map[array[2]]){
+	  return true;
+	 }
+	}
+  return false;
+}
+
+Now this is better because we have two separate for-loops.
+When it comes to time complexity this is better.
+Always check for the false inputs.
+How are we able to break the code.
+Think of how errors may arrives.
+Can we always assume on two parameters.
+Discussing with the interviewer.
+Don't use i and j.
+Use more approiate names on the variables.
+Like the user instead for array1 for example.
+Think about how we could test this function.
+Runs some units test.
+Speak with the interviwer how to improve the code.
+Make the code more readable.
+When it comes to JavaSript it haves a more readable.
+I would google things on how to make it more readable.
+
+function containsCommonItem3(arr1,arr2){
+	return arr1.some(item => arr2.includes(item))
+}
+
+containsCommonItem3(array1, array2)
+
+Different solutions for the problem.
+More readable and more concise.
+Maybe readability is more important.
+How to handle space-complexity O(1) for the first solution.
+And for the space-complexity O(a) for the second solution.
+The second solution is more memory heavy with map object.
+And maybe split the solutions into a another function for read-ability.
+It is good to talk to modularize it.
 
 Review Google Interview
+Point is to solving a problem.
+Here to play around it.
+
+// Naive
+function hasPairWithSum(arr, sum){
+  var len = arr.length;
+  for(var i =0; i<len-1; i++){
+     for(var j = i+1;j<len; j++){
+        if (arr[i] + arr[j] === sum)
+            return true;
+     }
+  }
+
+  return false;
+}
+
+// Better
+function hasPairWithSum2(arr, sum){
+  const mySet = new Set();
+  const len = arr.length;
+  for (let i = 0; i < len; i++){
+    if (mySet.has(arr[i])) {
+      return true;
+    }
+    mySet.add(sum - arr[i]);
+  }
+  return false;
+}
+
+hasPairWithSum2([6,4,3,2,1,7], 9)
 
 Optional Exercise: Google Interview On Your Own
 
+Now that you have a better idea of the steps you need to follow to succeed in a coding interview, I recommend you do the below exercise:
+
+1. Try and go through the 15 steps on your own and answer the same question as in the Google Interview in your own language by yourself or in front of a friend (or a fellow student on Discord). Share your code with everyone in our private Discord community in the #interview-questions channel.
+
+2. Rewatch the Google interview video and notice how you understand the steps a lot better now. Don't worry though, by the end of this course, I am going to show you this video one last time and you will see how it will all make sense and become second nature to you even more!
+
+Once done, keep going to the next video :)
+
 Section Summary
+Another section done.
+How to solve problem effciently.
+It is a muscle you can train.
+Solve problems better.
+We looked how a Google Interview looks like.
+Communicating.
+We should also get the idea to not memorizing it.
+Building the fundamentals.
+Talked about the others skills of what the interviewer is looking at.
+Certain type of patterns will arrive.
+Can be narrowed down.
+ 

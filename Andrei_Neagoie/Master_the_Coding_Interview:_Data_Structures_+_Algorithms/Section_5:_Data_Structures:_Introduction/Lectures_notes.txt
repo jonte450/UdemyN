@@ -1,0 +1,87 @@
+Section Overview
+Data Structure is collection of values.
+A person know how Data Structures work can write great programs.
+Data Structures + Algorithms = Programs.
+If you know these you can tackle different types of problems.
+If you know the fundamentals they can throw into any problems.
+
+What Is A Data Structure?
+A data structure is a collections of values.
+Each one is different.
+Data Structure back-pack, drawers, fridge, packing box.
+Each one of these containers are good for different things.
+Each one of the containers is good for each own thing.
+We can put things into data structures.
+There are tons of data-structures.
+Looks overwhelming.
+You only have 5 types data-structures to go over.
+So in our programming worlds we can push booleans,numbers.
+Allows us to store information.
+We take the chaos and make order of things.
+We package the food.
+The more experience you have to talk about data-structures.
+Trade-off.
+1.How to Build One.
+2.How to Use it.
+
+How Computers Store Data
+Keep track of things like variables and is stored in RAM.
+We also have Storage were we store Music and is permenanent.
+In RAM you lose the memory.
+Persistent Storage is slow.
+CPU is does the actual work inside our computer.
+It can access information faster in the RAM.
+var a = 1. We could imagine if we had more like google chrome.
+When we run something in Chrome we have it in RAM.
+Think RAM as a massive storage.
+It is a big shelf.
+It allows us to run programs.
+Each of these numbers is a bit.
+1 or 0.
+Each shelves has one byte of storage.
+Memory controller is writing and reading the memory.
+The CPU asks to the memory controller after som shelves.
+RAM we can access memory.
+Can access it right away.
+Access memory nearby.
+Computers are tuned to reading the memary as fast possible.
+CPU has an cache with the most recent cache.
+LRU-cache for example.
+Why is that important for data structures?
+Why 32-bits.
+These bit are stored in the memory.
+Doing this we can think how much informations.
+
+There is something called integer overflow.
+
+Math.pow() the first is the base.
+As the number becomes to large we can only store some amount of information.
+Each data-type has a number associate to it.
+
+Resources:
+https://www.youtube.com/watch?v=fpnE6UAfbtU
+http://statmath.wu.ac.at/courses/data-analysis/itdtHTML/node55.html
+
+Data Structures In Different Languages
+Luckliy for you the list is not overwhelming.
+As long you learn these data structures you are going to be ahead.
+Each language has data-structurers to organize the information.
+Comes with datastructures built-in.
+If JavaScript doesn't have a stack we can build in.
+
+Resources:
+
+https://coggle.it/diagram/W5E5tqYlrXvFJPsq/t/master-the-interview-click-here-for-course-link/c25f98c73a03f5b1107cd0e2f4bce29c9d78e31655e55cb0b785d56f0036c9d1
+
+Operations On Data Structures
+Data structuers is just some way to organize data.
+Each data structure has it's trade-off.
+Insertion add a new data-item.
+Deletion remove a item from the list.
+Traversal going through the data-structure.
+Searching for an element.
+Sorting sorts the element.
+Acess the item.
+Half of them is variations of trees.
+Build the foundations on which data-structure you should use.
+

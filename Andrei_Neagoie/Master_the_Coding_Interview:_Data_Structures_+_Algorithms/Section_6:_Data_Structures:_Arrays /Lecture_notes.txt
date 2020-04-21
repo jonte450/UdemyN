@@ -1,0 +1,424 @@
+Arrays Introduction
+Organizes the Items seqentially.
+Some sort of data at different indexes.
+In our computers memory.
+The simplest of all the data-structures.
+Smallest foot-print.
+Arrays are the best choice.
+Access is constant time.
+Push is constant time.
+
+const strings = ['a','b','c','d'];
+Look on this we make some assumptions.
+//4*4
+Each item takes up 16 bytes.
+With 32 bit system.
+We are simple storing this is in memory.
+
+strings[2] Go to the strings and get the third item where the item is stored.
+The computer is going to grab that for me.
+
+//Push
+strings.push('e');
+Just adds at the end of the array.
+
+//Pop
+strings.pop();
+Removes the last item of the array.
+Time-complexity O(1)
+
+If we wanna add an item in the beginning of the array
+
+strings.unshift('x');
+And the x has been added to the array.
+We just iterated and reassigned the indexs.
+With the arrays it's not the best to add thing in the beginning.
+
+//splice
+strings.splice(2,0,'alien');
+
+Splice tolds us to go to index 2.
+What we have done here is added and shifted the arrays.
+The Big O is O(n/2) and simplified to O(n),
+
+lookup O(1)
+push O(1)
+insert O(n)
+delete O(n)
+
+const strings= ['a', 'b', 'c', 'd'];
+const numbers = [1,2,3,4,5];
+// Variable array is somewhere in memory and the computer knows it.
+// When I do array[2], i'm telling the computer, hey go to the array and grab the 3rd item from where the array is stored.
+
+
+//push
+strings.push('e');
+
+//pop
+strings.pop();
+strings.pop();
+
+//unshift
+strings.unshift('x')
+
+//splice
+strings.splice(2, 0, 'alien');
+
+console.log(strings)
+
+Static vs Dynamic Arrays
+There are two types of arrays.
+One called static and the other is called dynamic arrays.
+Create an array with 7 items.
+There are no gurantee we can't add things in order.
+Dynamic arrays allows us to copy our array to an new location.
+
+//C++
+
+int a[20];
+int b[5] {1,2,3,4,5};
+Copy b and begin to build this.
+Dynmaic arrays is a trade-off.
+There is time when you want to managing memory.
+You don't have to care about how to add.
+You will be talking about dynamics arrays.
+
+Quick Note Upcomming Video
+
+When we build data structures from scratch in this course, we will be using the Javascript's Class keyword to create these data structures. I have picked this way of doing things since it would be most familiar with most languages. If you would like to be a little bit more familiar with classes and how to create them, I have added an extra video from one of my other courses: The Complete Web Developer: Zero to Mastery which goes over this topic in the next lecture.
+
+If you are already familiar with this topic you can skip over to the Implementing An Array video.
+
+Ps, throughout the course I use var, let, and const to declare variables. It is not important that you understand the differences between them for this course, but if you are curious, I recommend reading this: https://dev.to/sethusenthil/var-vs-let-vs-const-1cgc
+
+Optional: Classes In JavaScript
+In this video i am going to talk about three things that are important.
+
+//Reference Type
+[] === []
+[1] === [1]
+
+var object1 = {value 10};
+var object2 = object1;
+var object3 = {value: 10};
+
+What happens if we have
+object1 === object2
+
+object1 === object3
+We get false here.
+
+Why does this happens.
+
+And if does this 
+
+object1.value = 15
+object2.value
+Returns 15.
+
+object3.value
+Returns 10.
+
+Objects are reference types includes numbers,nulls.
+They are all define by programming languages.
+They are primitive types.
+Primitive types is all the same types.
+Objectes are reference types and in it put the the types.
+When Object 3 get's created is saying we are just storing addresses.
+object1 and object2 points references to the same adress in the memory.
+Arrays are just the same thing.
+
+//context
+Get's confused with scope.
+function b(){
+	let a = 4;
+}
+
+Context tells where we are within the object.
+this is like pointing to the window.
+this.alert("hello");
+this means where the enviroment we are in just now.
+
+function a(){
+	console.log(this);
+}
+
+We get's the window object.
+
+const object4 = {
+	a: function(){
+	  console.log(this)
+	}
+}
+
+Now this is the object.
+
+//Instansition
+If you had to create an object for every thing.
+You can use instanstion.
+
+class Player  {
+	constructor(name, type){
+		this.name = name;
+		this.type = type;
+	}
+	introduce(){
+	 console.log('Hi I am ${this.name}, I'm a ${this.type})
+	}
+}
+
+Whenever i create a new Player the constructor is going to run.
+We are going to create a new class on top of the wizard.
+
+class Wizard extends Player {
+	constructor(name, type){
+	  super(name,type)
+	}
+	play(){
+	 console.log("WEEEEEEE I'm a ${this.type}");
+	}
+}
+
+const wizard1 = new Wizard('Shelly', 'Healer');
+const wizard2 = new Wizard('Shawn', 'Dark Magic');
+And then we log the player.
+And we run the rest of the class.
+It was part of ES6.
+
+
+Implementing An Array
+1.How to Build One
+We are going to use a class.
+Datastructures is just something we can create on our own.
+You are able to build your own.
+
+JavaScript is something intresting thing.
+Different Languages use this diffrently.
+
+We have the length property.
+Then we will have the data within the array.
+
+The most common is to access the data.
+And we implement a get-method.
+And we will return the data with in the data object.
+And now we console.log so we get's back the array.
+Let's add the push method.
+This method will have item.
+Because we have zero items.
+And when we adds item we will increment the length.
+And we return the this.length.
+Now we add the pop command.
+We will delete the last item in the array.
+We use the delete keyword.
+And we need to decrease the length of the data.
+Let's add one last one.
+We are going to add the delete method.
+The delete method will take an index with the item we wanna delete.
+And we have to shift the items.
+And we add a new method called shift-method.
+Method simply means a function within a class.
+shift-method will have a for-loop.
+Index of zero.
+this.data[i] = this.data[i+1].
+And iterate over it and take each item that are next right to it.
+But the last data-item is still left so we want to delete it.
+And we decrement the length--.
+
+
+class MyArray {
+  constructor() {
+    this.length = 0;
+    this.data = {};
+  }
+  get(index) {
+    return this.data[index];
+  }
+  push(item) {
+    this.data[this.length] = item;
+    this.length++;
+    return this.data;
+  }
+  pop() {
+    const lastItem = this.data[this.length - 1];
+    delete this.data[this.length - 1];
+    this.length--;
+    return lastItem;
+  }
+  deleteAtIndex(index) {
+    const item = this.data[index];
+    this.shiftItems(index);
+    return item;
+  }
+  shiftItems(index) {
+    for (let i = index; i < this.length - 1; i++) {
+      this.data[i] = this.data[i + 1];
+    }
+    console.log(this.data[this.length - 1]);
+    delete this.data[this.length - 1];
+    this.length--;
+  }
+}
+
+
+JavaScript gives us undefined.
+
+2.How to Use it
+
+const myArray = new MyArray();
+myArray.push('hi');
+myArray.push('you');
+myArray.push('!');
+myArray.pop();
+myArray.deleteAtIndex(0);
+myArray.push('are');
+myArray.push('nice');
+myArray.shiftItems(0);
+console.log(myArray);
+
+Strings And Arrays
+A common interview trick.
+Treat any string questions as an array question.
+Convert a string into a array.
+That is very common interview question.
+
+Exercise: Reverse A String
+We should start a common.
+Can you create an function that reverses an string.
+
+My Answer:
+
+function reverse(str){
+  //Check input
+  if(!str || str.length < 2 type || typeof str !== 'string'){
+  	return 'hmm that is not good'
+  }
+  arr = str.split('');
+  revarr = "";
+  revarr_index = 0;
+  for(let char = arr.length-1; char >= 0; char--){
+   revarr = revarr.concat(arr[char]);
+  }
+  console.log(revarr);
+  
+}
+
+reverse("Hello!");
+
+Solution: Reverse A String
+function reverse(str){
+  //Check input
+  if(!str || str.length < 2 type || typeof str !== 'string'){
+  	return 'hmm that is not good'
+  }
+  const backwards = [];
+  const totalItems = str.length - 1;
+  for(let i = totalItems; i = 0; i--){
+  backwards.push(str[i]);
+  }
+  console.log(backwards);
+  return backwards.join('');
+}
+
+reverse('Hi My name is Andrei')
+
+We can use built in methods!.
+
+function reverse2(str){
+	return str.split('').reverse().join('');
+}
+
+const reverse3 = str => str.split('').reverse().join('');
+
+Depends how you solves the problems.
+Understands the pros and cons of problem.
+
+Exercise: Merge Sorted Arrays
+My solution:
+
+var array1 = [0,3,4,31];
+var array2 = [4,6,30];
+
+function mergeSortedArrays(arr1, arr2){
+  const mergedarr = arr1.concat(arr2);
+  return mergedarr.sort((a,b) => a-b);
+}
+
+console.log(mergeSortedArrays(array1,array2));
+
+Solution: Merge Sorted Arrays
+Create 2 arrayItems vars.
+Check the inputs.
+If the first or the second array is empty return each of them.
+Use an while-loop.
+These variables.
+const means we can'change the array.
+
+
+function mergeSortedArrays(array1, array2){
+  const mergedArray = [];
+  let array1Item = array1[0];
+  let array2Item = array2[0];
+  let i = 1;
+  let j = 1;
+  
+  //We should actually move these 2 if statements to line 2 so that we do the checks before we do assignments in line 3 and 4!
+  if(array1.length === 0) {
+    return array2;
+  }
+  if(array2.length === 0) {
+    return array1;
+  }
+//If the arrayItem is smaller we want to push to the array.
+//If the arrayItem2 is smaller than the we are going to add to the array.
+
+  while (array1Item || array2Item){
+   if(array2Item === undefined || array1Item < array2Item){
+     mergedArray.push(array1Item);
+     array1Item = array1[i];
+     i++;
+   }   
+   else {
+     mergedArray.push(array2Item);
+     array2Item = array2[j];
+     j++;
+   }
+  }
+  return mergedArray;
+}
+
+mergeSortedArrays([0,3,4,31], [3,4,6,30]);
+
+
+Interview Questions: Arrays
+
+These exercises are completely optional if you want to practice more interview questions related to Arrays. You can also come back to these once you have finished the course. I recommend you watch the video titled How To Use Leetcode in the Bonus section of the course at the very end to see how you can do these problems and see solutions in any language that you chose.
+
+
+
+Arrays:
+
+1. Two Sum
+https://leetcode.com/problems/two-sum/description/
+
+2. Maximum Subarray
+https://leetcode.com/problems/maximum-subarray/description/
+
+3. Move Zeroes
+https://leetcode.com/problems/move-zeroes/description/
+
+4. Contains Duplicate
+https://leetcode.com/problems/contains-duplicate/description/
+
+5. Rotate Array
+https://leetcode.com/problems/rotate-array/description/
+
+Bonus:
+This question is the type of problems that can be done using what we know about arrays, or even regular expressions.
+
+
+Longest Word
+https://coderbyte.com/information/Longest Word
+
+Arrays Review
+
