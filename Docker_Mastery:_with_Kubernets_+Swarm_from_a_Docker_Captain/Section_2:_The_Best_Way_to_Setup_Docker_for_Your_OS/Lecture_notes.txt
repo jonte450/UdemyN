@@ -1,0 +1,70 @@
+Docker Editions: Which Do I Use?
+And to install it you need to install it.
+
+Learn Docker CE vs EE.
+Learn Stable vs Edge Releases.
+
+They have added whole lot of features.
+It also moves really fast.
+
+Docker CE (Community Edition)
+Three major of types of installs: Direct, Mac/Win, Cloud.
+Linux (different per distro) (don't use default package).
+Docker for Windows (or legacy Docker Toolbox).
+Docker for AWS/Azure/Google.
+
+In the end we will create swarm for the cloud.
+
+CE vs EE, Stable vs Edge
+-Docker CE (free) vs Docker EE (paid)
+EE = Enterprise Edition
+EE = Support + extra products
+EE = Certified on specific platforms
+
+-Edge (beta) released monthly, Stable quarterly
+-Edge gets new feature first, but only supported for a month.
+-Stable rolls in three months of Edge features, EE suppoerted longer.
+
+Windows Docker Options
+You are Windows Users.
+Today we are going to manually specify.
+Use Docker for Windows, from store.docker.com
+More features then just a Linux VM.
+Hyperbox and VM doesn't work togheter.
+Docker Toolbox.
+Docker machine.
+Docker on Windows Server 2016.
+
+Docker for Windows 10 Pro/Ent: Setup and Tips
+Checking some few options.
+storedocker.com
+Docker Community Edition for Windows.
+HyperV and enable it.
+Local Admin.
+Home editions.
+Important you keep your machine to update.
+Run the powershell
+docker version.
+MobyLinuxV,
+
+Docker Toolbox for Win 7,8,10 
+Home: Setup and tips
+
+Getting the toolbox installed.
+The toolbox needs toolbox.
+Download it for windows.
+The git for win.
+Do a shutdown.
+Docker Machine creates VM on the cloud.
+cmder.net
+
+Docker for Linux Setup and Tips
+
+
+Quiz 1: Quiz on Proper Docker Install
+
+Code or Text Editor for Docker and Compose files
+
+Terminal Shell and Tab Completion for Docker CLI
+
+Docker Version Format Change

@@ -1,0 +1,225 @@
+Course Roadmap (overview)
+Tell about each key-requirements.
+Docker desktop works on.
+
+-Getting Requirements
+-Docker Install
+-Container Basics
+-Image Basics
+-Docker Networking
+
+Docker compose.
+All the basics we speak about Orchestration.
+Docker Swarm.
+You want to jump into Kubernetes.
+Swarm vs K8s
+Finish the course with the most of the most common things.
+Through the course we are giving documentation.
+
+November 2019 Update!
+Course Update.
+Just passed 120000 students.
+Thanks for all the feedbacks.
+We have dropped major updates.
+We have launched a lot about answers.
+Fill the gaps.
+Major updates about kubernets.
+Docker Security.
+More information on Docker 19.03.
+
+Why Docker? Why now?
+What is docker.
+Which problem does docker solves.
+DockClouder.
+Let's talk what's this are about.
+If you are in any IT-field you should learn Docker.
+It's a huge shift.
+
+-Mainframe to PC.
+-Baremetal to Virtual.
+-Datacenter to Cloud.
+-Host to Container (Serverless).
+
+Makes things harder to keep.
+Migrations is the hard part.
+
+Containers are the fastest growing cloud enabling technology.
+Docker moby dock.
+Mascot is the turtle gordon.
+Real-life twitter account.
+
+Docker is all about speed.
+The speed of doing things.
+
+Matrix From Hell.
+Front-end to Back-end.
+May running on different cloud.
+It allows you distribute the software anywhere you are running it.
+Everything is needing maintence.
+Docker frees maintence.
+
+-Pay
+-Metlife
+
+Huge saveing a lot of money on infrastructure.
+Docker is the core essence you have to learn.
+There are
+landscape.cncf.io
+One of the foundational supporters.
+
+
+Getting Course Resources(Github Repo)
+
+All examples and assignment files are in a single code repository on GitHub. Each folder represents a single lecture video (but not all lectures have a folder, as not all need code). You should clone this repo into your user profile somewhere on your host. (c:/Users/username/  on Windows and /Users/username  on Mac). Having inside your user profile will ensure Docker works correctly on Mac and Windows. The location doesn't matter for Linux hosts. git clone https://github.com/BretFisher/udemy-docker-mastery.git 
+
+If you're rather new to GitHub, you can download the GUI to make it very easy to push/pull code at https://desktop.github.com/ for Mac and Windows. A great alternative Git client is https://www.gitkraken.com/.
+
+We won't use git much in this course but knowing the basics of pulling code, committing code, and pushing updates could be helpful at times in the course.
+
+https://github.com/bretfisher/udemy-docker-mastery
+
+Course Slack Chat: 21k Students Learning
+
+Get more out of this course by getting live help from myself and other students. I've setup a Slack Chat Team that you can join at chat.bretfisher.com
+
+Slack is a fantastic private, persistent chat product that I use in so many of the communities I'm in and thought it would be a great way for extending this course and adding more value to your learning. It comes with clients for all desktop and mobile OS's and also works in the browser.
+
+General Steps:
+
+Go to chat.bretfisher.com and give it your email address.
+
+You will be sent an email from Slack, with an invite link inside it.
+
+Click that link.
+
+Fill out the form to create your Slack account.
+
+Use that Slack account to access dockermastery.slack.com
+
+(I know that's a lot of steps, but since Udemy doesn't give me your email address, I have no way to pre-create you an account on Slack, and Slack is an invite-only system... so the first step is a way for it to auto-generate an invite for you. :)
+
+Sign up and join the Docker and Kubernetes community!
+
+Youtube Live Q&A with Bret
+
+Yep I'm this excited about doing YouTube Live with you.
+If you're just starting the course, or even already finished with the courses and have questions, I invite you to join me for an "Ask Me Anything" style of hangout. Every week (usually Thursday's) I spend an hour answering your questions about this course, containers, and general DevOps topics. It's scheduled and announced on my YouTube Channel, so be sure to subscribe and then click the bell to get alerts.
+
+The Big FAQ
+
+This course has over 5,000 a month taking it! That's amazing to me. It also means we get lots of the same questions. Some are just things I didn't explain clearly. Some are minor issues people hit along the way. Here's the most common Q&A in order of frequency.
+
+NOTE: Don't read all these now, but remember to come back when you hit a issue, This list is the FASTEST way to solve your issues for common course troubles.
+
+I'm using Docker Toolbox, and http://localhost isn't working. What's wrong?
+Docker Toolbox uses a default IP of http://192.168.99.100 and doesn't support the localhost feature of Docker for Windows/Mac.
+
+$(pwd) in Windows Is getting an error for bind-mounts: C:\Program Files\Docker Toolbox\docker.exe: invalid reference format.
+PowerShell has a few minor differences in command format. This is a PowerShell thing, not a docker thing. When using the shell path shortcut "pwd":
+
+For PowerShell use: ${pwd} 
+
+For cmd.exe "Command Prompt use: %cd%
+
+bash, sh, zsh, and Docker Toolbox Quickstart Terminal use: $(pwd) 
+
+Note, if you have spaces in your path, you'll usually need to quote the whole path in the docker command.
+
+There's another issue sometimes seen, where other apps can mess up your path: https://stackoverflow.com/questions/50608301/docker-mounted-volume-adds-c-to-end-of-windows-path-when-translating-from-linux
+
+I hit Ctrl-C in Windows and The Container is Still Running
+In Windows, there's a quirk with the built-in Powershell and Command Prompt terminals. They don't interpret ctrl-c the same way as Linux, Unix, and macOS. They won't shutdown the container, and you'll need to use docker stop commands. Sorry for the confusion.
+
+PowerShell Tab Completion Isn't Working Or I Can't Find the Page in Docs
+The posh-docker repo is no longer being maintained, but a new better one now exists at https://github.com/matt9ucci/DockerCompletion so give that a shot. Then please thank the author if it works for you so they keep it updated. Yay open source!
+
+I'm using Docker Toolbox and bind-mounts aren't working (sharing files between Windows and docker with -v  )
+Docker Toolbox requires your files be in your profile under c:\users\<username>\   before file sharing will work in Toolbox.
+
+Bind for 0.0.0.0:80 failed: port is already allocated. -OR- port already in use -OR- permission denied.
+This will happen if you are attempting to start a new container with a port that is already in-use on your machine. Remember in TCP/UDP, only one application/service can use a single IP+PORT at a time. This doesn’t change with containers when you use -p  to bind to the host IP+PORT.
+
+First run docker container ls  to check if there are any containers using this port - if there are not; you likely have a non-Docker related application running on your machine that is using this port. Maybe IIS, maybe Apache, etc.
+
+If you are on a Mac, you can check what is using port 80 with the command: lsof -i :80  
+
+If you are on Windows, you can check what is using port 80 with: netstat  
+
+Of course - if you don’t have a reason to specifically use the port that is throwing this error, simply run your container on another port. Remember, the syntax is <host port>:<container port>  , so binding to port 8888 on your host machine with a container that uses port 80, would look like: docker container run -p 8888:80 your_image  
+
+How do I cleanup space (images etc.)?
+Run prune commands https://www.udemy.com/docker-mastery/learn/v4/t/lecture/7407918?start=0
+
+Bind Mount Won't Show Up In Container
+This is usually a Docker for Windows issue, where you need to go into Docker Settings GUI (lower right icon) and uncheck the drive where your code is, then save, and then re-check that drive to re-apply the SMB file sharing permissions between the Linux VM and the Windows OS.
+
+Starting container process caused "exec: \"ping\": executable file not found in $PATH": unknown
+That error is telling you that ping is not available in the image you’re trying to run it from. Official images have changed over time and the official nginx default image (nginx:latest) no longer has ping in it by default.  Image nginx:alpine should still have ping installed (a few of my videos show utilities like ping that are no longer in those images).
+
+If it's a debian-based image (the default nginx) then you can also use apt-get update && apt-get install -y iputils-ping   inside the container to install it.
+
+Lastly, I keep a “bunch of troubleshooting and handy admin utilities” in an image here that you can run ping from: bretfisher/netshoot  
+
+https://www.udemy.com/docker-mastery/learn/v4/questions/3751216
+
+Starting mysql container and running ps causes "ps: command not found"
+Like above, this is the container shell telling you the binary "ps" isn't in your path, and not installed in the container. Docker changed the mysql image after the video was recorded and removed the ps utility. You can add it back in using the apt package manager.
+
+apt-get update && apt-get install procps
+
+For more info: https://stackoverflow.com/questions/26982274/ps-command-doesnt-work-in-docker-container
+
+How to run two container websites on a single port in Docker or Swarm services
+This is a bit more advanced, but common for production Swarms. You'll need a "reverse proxy"
+
+https://www.udemy.com/docker-mastery/learn/v4/questions/3931678
+
+Error response from daemon: pull access denied.
+Double and triple-check the spelling of the image you are pulling; if you are attempting to pull a publicly hosted image - this error will not occur, but if there is a typo and Docker can’t find the image - it will expect that it is a private image and ask you to login.
+
+Also, there are times when the config.json file gets messed up, so try docker logout && docker login. If all that still causes the same issue, try removing ~/.docker/config.json  and then pull again.
+
+Kubernetes vs. Swarm.
+https://www.udemy.com/docker-mastery/learn/v4/questions/3446126
+
+Does this help with Docker Certified Associate?
+Yes, but it’s not a study guide. Here’s the Lecture with info: https://www.udemy.com/docker-mastery/learn/v4/t/lecture/9485678?start=0
+
+Ubuntu Container vs. Ubuntu OS, What's the Difference?
+https://www.udemy.com/docker-mastery/learn/v4/questions/5390204
+
+How to use volumes in Swarm for databases.
+https://www.udemy.com/docker-mastery/learn/v4/questions/2675184
+
+How do we do backups in docker?
+https://www.udemy.com/docker-mastery/learn/v4/questions/2756448
+
+Getting a shell in VM’s that run Docker
+Workaround: https://www.udemy.com/docker-mastery/learn/v4/questions/3860412
+
+docker run -it --rm --privileged --pid=host justincormack/nsenter1  
+
+macOS https://www.bretfisher.com/docker-for-mac-commands-for-getting-into-local-docker-vm/
+
+Docker for Windows https://www.bretfisher.com/getting-a-shell-in-the-docker-for-windows-vm/
+
+Docker Toolbox docker-machine ssh default  
+
+Windows firewalls preventing networking or bind mounts in containers
+https://www.udemy.com/docker-mastery/learn/v4/questions/3258290
+
+Anti-Virus Blocking file sharing in Windows
+https://www.udemy.com/docker-mastery/learn/v4/questions/3442460
+
+Are containers more secure than VM’s?
+https://www.udemy.com/docker-mastery/learn/v4/questions/4020880
+
+I have a network proxy and images won’t build
+https://stackoverflow.com/questions/23111631/cannot-download-docker-images-behind-a-proxy/
+
+Public vs. Private IP for Swarm advertise-addr and data-path-addr
+https://www.udemy.com/docker-mastery/learn/v4/questions/3710518
+
+Custom Docker Networks, macvlan and IP setting hardcoding
+https://www.udemy.com/docker-mastery/learn/v4/questions/3706540
+

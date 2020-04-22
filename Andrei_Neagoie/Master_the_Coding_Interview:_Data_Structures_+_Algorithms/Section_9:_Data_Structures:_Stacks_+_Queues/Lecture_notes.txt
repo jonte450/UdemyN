@@ -1,0 +1,192 @@
+Stacks + Queues Introduction
+We are going to learn stacks and queues.
+They are both linear data structure.
+Only one data element can be directly reached.
+They both can be implemented on similar ways.
+There are no random access.
+Why would we use something like this.
+Less methods.
+Limit the opertions can be benefit.
+You can control the one that use the data structure it can be more easiy to contol the use limitation.
+
+Stacks
+lookup O(n)
+pop O(1)
+push O(1)
+peek O(1)
+
+You can think them as plates one piece of data comes.
+Plates that are stacked over each other.
+Keep going until you goes through the stack.
+LIFO.
+Why are they useful.
+Stacks are very important in engines.
+Most programming languages are modeled with stacks.
+Functions within functions.
+Browser history hit the front bottom.
+Write a piece of text and undo.
+You store the previous states.
+
+pop 
+remove the last item.
+
+pop 
+add an item.
+
+
+Queues
+
+lookup O(n)
+enqueue O(1)
+dequeue O(1)
+peek O(1)
+
+Best way to think on them is to think them as a roller coaster.
+It is the opposite of stacks.
+FIFO get's accessed first first out.
+Resturant app using queues.
+Uber are using queues.
+Printers press print.
+The person that clicks prints first should print first.
+
+enqueue to add an person in line.
+dequeue to remove a person in line.
+peek tells what's the first item in the list.
+lookup you usally not does.
+
+It is very effcient to build an queue with an array.
+
+Exercise: Stacks VS Queues
+There two ways to build stacks and queues.
+
+//Stacks
+
+//google
+//udemy.com
+//youtube
+
+twiter
+youtube
+udemy.com
+google 
+
+Stacks has an top and a bottom.
+
+//Arrays
+
+//Linked List
+
+
+//Queues
+
+Matt -- Joy -- Samir -- Pavel 
+
+We want Matt to be first.
+
+Which one should be better.
+
+//Arrays
+//Linked Lists
+
+Solution: Stacks VS Queues
+Stacks they can be implemented with arrays and linked lists.
+Arrays allows cache-locality.
+Linked Lists have more dynamic memory.
+
+Queues you would never want to build with an array.
+Arrays has indexes associated with them.
+When we remove Matt then we have to shift all the others elements.
+O(n^(2)) operations.
+Linked Lists all have a pointer to the head and the tail.
+
+Quick Note: Upcomming Video
+
+Javascript as a language gives a great demonstration of how Stacks and Queues work. If you would like to be a little bit more familiar with how they work or how things like "Stackoverflow" happen, I have added an extra video from one of my other courses: The Complete Web Developer: Zero to Mastery which goes over this topic in the next lecture.
+
+If you are already familiar with this topic you can skip over to the Exercise: Stack Implementation video.
+
+Optional: How JavaScript Works
+We don't need to know how JavaScript works.
+Let's start.
+What is a program.
+We have to allocate memory.
+From our previous section.
+We have the V8 engine.
+The engine consists of two parts.
+-Memory Heap
+-Call Stack
+
+We aslo know that the JavaScript Engine reads the JavaScript.
+The memory heap where the memory allocation.
+
+const a = 1;
+const b = 10;
+const c = 100;
+JavaScript Engine is going to remeber the variables.
+Increasing the number of variables is going to cause memory leak.
+That's why global variables are bad.
+
+Call Stack.
+console.log('1');
+console.log('2');
+console.log('3');
+
+What's the call stack reads the first line.
+Let's pop it up.
+Run 1 and console.log(1) and so on.
+
+We have two functions.
+
+//Call Stack
+console.log(4);
+two();
+one();
+
+Run console.log 4 and remove it from the call stack.
+
+JavaScript is a single-threaded language.
+It can only do one thing at the time.
+Others language can have multithreaded call stacks.
+You can have things like deadlocks.
+You may have heard of the site of stackOverflow.
+When a stack is over-flown.
+When the call-stack becomes bigger and bigger.
+We can reach a stackoverflow if we have recursions without any base-cases.
+
+We need something non-blocking.
+Ideally we don't wait around.
+Think Asynchronous as a behaviour.
+Image-processing we need something like asycnhronous task.
+Set-timeout.
+In order of JavaScript to run we have JavaScript enviroment.
+-Web-Api
+-Call Stack
+-Callback Queue
+-Event-Loop
+
+It triggers the web-api.
+Web-Api starts a timer.
+
+Event-loop keeps checking the Callback-Queue.
+Console.log(2) it's going run the function.
+
+
+Exercise: Stack Implementation (Linked List)
+It is time to code our own first stack.
+this.top, this.bottom,this.length.
+
+I have created the template.
+
+Implement peek(),push(),pop().
+
+Solution: Stack Implementation (Linked List)
+
+Exercise: Stack Implementation (Array)
+
+Solution: Stack Implementation (Array)
+
+Exercise: Queue Implementation
+
+Solution: Queue Implementation
+
+Stacks + Queues Review

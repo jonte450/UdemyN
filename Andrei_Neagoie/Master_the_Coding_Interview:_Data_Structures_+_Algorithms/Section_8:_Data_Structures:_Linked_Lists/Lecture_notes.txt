@@ -124,25 +124,495 @@ Create an append method.
 Create an prepend method.
 
 Solution: append()
+Not my solution:
+My solution is in a separate repsository:
+We create an new_node.
+The new node has the value we are going to create.
+Using this.tail.next last item.
+Instead of pointing to null point it to the last.
+We can now update the new node to be the last.
+
+class LinkedList {
+  constructor(value) {
+    this.head = {
+      value: value,
+      next: null
+    };
+    this.tail = this.head;
+    this.length = 1;
+  }
+  append(value) {
+    const newNode = {
+      value: value,
+      next: null
+    }
+    console.log(newNode)
+    this.tail.next = newNode;
+    this.tail = newNode;
+    this.length++;
+    return this;
+  }
+  prepend(value) {
+    //Code here
+  }
+}
+
+let myLinkedList = new LinkedList(10);
+myLinkedList.append(5);
+myLinkedList.append(16);myLinkedList.prepend(1)
+
 
 Solution: prepend()
 
+Not my solution:
+My solution is in a separate repsository:
+The very first thing we do are to create the new node.
+Leave it as null.
+Next we wanna say our new node.next is going to equal this.head.
+We wanna update this.head = newNode.
+And increment the head. 
+
+class LinkedList {
+  constructor(value) {
+    this.head = {
+      value: value,
+      next: null
+    };
+    this.tail = this.head;
+    this.length = 1;
+  }
+  append(value) {
+    const newNode = {
+      value: value,
+      next: null
+    }
+    console.log(newNode)
+    this.tail.next = newNode;
+    this.tail = newNode;
+    this.length++;
+    return this;
+  }
+  prepend(value) {
+    const newNode = {
+      value: value,
+      next: null
+    }
+    newNode.next = this.head;
+    this.head = newNode;
+    this.length++;
+    return this;
+  }
+}
+
+let myLinkedList = new LinkedList(10);
+myLinkedList.append(5);
+myLinkedList.append(16);myLinkedList.prepend(1)
+
 Node Class
+In the previous video new node get's repeated.
+We have to say new_node.
+We wanna keep it DRY.
+We are going to create an new class of node
+We have an class called new node.
+With an value property and a next property.
+
+
 
 insert()
+There should be clear why append and prepend takes O(1).
+But how about lookup,search.
+insert at this location.
+insert(index,value){
+	
+}
+
+There are going to be some traversal and some looping.
+Giving to add some printlist function
+
 
 Quick Note: Upcoming Video
 
+A quick heads up! In the next lecture we will create the insert() method. For those astute programmers, you may notice that the solution has a bug if index === 0. In this case, all you need to do is to insert into the code a condition:
+
+if (index === 0) {
+  this.prepend(value);
+  return this.printList();
+}
+
 Solution: insert()
+Not my solution:
+My solution is in a separate repository!
+Maybe you got this.
+First you wanna check your parameters.
+When it comes to insert you wanna check this.
+If index > this.length.
+I wanna be able to handle it properly.
+Then we just wanna add it to the end of the list.
+Then we add it to the end of the list.
+We have two nodes that are connected.
+We need to figure out what the nodes are.
+We gonna have an leader node.
+That are going to get the index. 
+Point to the leader.
+We are going to create the traversal.
+While we reach the point.
+We are going to increment the counter to reach the node.
+We wanna grab the next node.
+holding pointer.
+Next because we have 5 we can update.
+What are going to do next.
+newNode.next = holdingPointer.
+insert() may be the toughest
+
+
+// add a method remove() to the linked list that deletes a node to the specified index.
+
+class LinkedList {
+  constructor(value) {
+    this.head = {
+      value: value,
+      next: null
+    };
+    this.tail = this.head;
+    this.length = 1;
+  }
+  append(value) {
+    const newNode = {
+      value: value,
+      next: null
+    }
+    this.tail.next = newNode;
+    this.tail = newNode;
+    this.length++;
+    return this;
+  }
+  prepend(value) {
+    const newNode = {
+      value: value,
+      next: null
+    }
+    newNode.next = this.head;
+    this.head = newNode;
+    this.length++;
+    return this;
+  }
+  printList() {
+    const array = [];
+    let currentNode = this.head;
+    while(currentNode !== null){
+        array.push(currentNode.value)
+        currentNode = currentNode.next
+    }
+    return array;
+  }
+  insert(index, value){
+    //Check for proper parameters;
+    if(index >= this.length) {
+      console.log('yes')
+      return this.append(value);
+    }
+    
+    const newNode = {
+      value: value,
+      next: null
+    }
+    const leader = this.traverseToIndex(index-1);
+    const holdingPointer = leader.next;
+    leader.next = newNode;
+    newNode.next = holdingPointer;
+    this.length++;
+    return this.printList();
+  }
+  traverseToIndex(index) {
+    //Check parameters
+    let counter = 0;
+    let currentNode = this.head;
+    while(counter !== index){
+      currentNode = currentNode.next;
+      counter++;
+    }
+    return currentNode;
+  }
+}
+
+let myLinkedList = new LinkedList(10);
+myLinkedList.append(5);
+myLinkedList.append(16);myLinkedList.prepend(1);
+myLinkedList.insert(2, 99);
+myLinkedList.insert(20, 88);
+myLinkedList.printList();
+
 
 Solution: remove()
+Not my solution:
+My solution is in a different repository.
+
+Check the parameters
+Meat and potatoes.
+We wanna make sure that we remove the reference 99 is going to be deleted.
+We take the leader.
+leader.next = unwantedNode.next;
+And we just return this.printList.
+
+
+// add a method remove() to the linked list that deletes a node to the specified index.
+
+class LinkedList {
+  constructor(value) {
+    this.head = {
+      value: value,
+      next: null
+    };
+    this.tail = this.head;
+    this.length = 1;
+  }
+  append(value) {
+    const newNode = {
+      value: value,
+      next: null
+    }
+    this.tail.next = newNode;
+    this.tail = newNode;
+    this.length++;
+    return this;
+  }
+  prepend(value) {
+    const newNode = {
+      value: value,
+      next: null
+    }
+    newNode.next = this.head;
+    this.head = newNode;
+    this.length++;
+    return this;
+  }
+  printList() {
+    const array = [];
+    let currentNode = this.head;
+    while(currentNode !== null){
+        array.push(currentNode.value)
+        currentNode = currentNode.next
+    }
+    return array;
+  }
+  insert(index, value){
+    //Check for proper parameters;
+    if(index >= this.length) {
+      console.log('yes')
+      return this.append(value);
+    }
+    
+    const newNode = {
+      value: value,
+      next: null
+    }
+    const leader = this.traverseToIndex(index-1);
+    const holdingPointer = leader.next;
+    leader.next = newNode;
+    newNode.next = holdingPointer;
+    this.length++;
+    return this.printList();
+  }
+  traverseToIndex(index) {
+    //Check parameters
+    let counter = 0;
+    let currentNode = this.head;
+    while(counter !== index){
+      currentNode = currentNode.next;
+      counter++;
+    }
+    return currentNode;
+  }
+  remove(index) {
+    // Check Parameters      
+    const leader = this.traverseToIndex(index-1);
+    const unwantedNode = leader.next;
+    leader.next = unwantedNode.next;
+    this.length--;
+    return this.printList();
+  }
+}
+
+let myLinkedList = new LinkedList(10);
+myLinkedList.append(5);
+myLinkedList.append(16);myLinkedList.prepend(1);
+myLinkedList.insert(2, 99);
+myLinkedList.insert(20, 88);
+myLinkedList.remove(2);
+
 
 Exercise: Doubly Linked Lists
+Up until this point we has talked about linked list.
+Double Linked List we should have two pointers one to the previous and one to the next.
+
+It has an extra piece of data that points to the next node.
+Can be O(n/2) in doubly linked lists.
+
 
 Solution: Doubly Lists Lists
 
+// add a method remove() to the linked list that deletes a node to the specified index.
+
+class DoublyLinkedList {
+  constructor(value) {
+    this.head = {
+      value: value,
+      next: null,
+      previous: null 
+    };
+
+    this.tail = this.head;
+    this.length = 1;
+  }
+
+  append(value) {
+    const newNode = {
+      value: value,
+      next: null,
+      previous: null
+    }
+
+    newNode.previous = this.tail;
+    this.tail.next = newNode;
+    this.tail = newNode;
+    this.length++;
+    return this;
+  }
+
+  prepend(value) {
+    const newNode = {
+      value: value,
+      next: null,
+      previous: null
+    }
+  
+    newNode.next = this.head;
+    this.head.prev = newNode;
+    this.head = newNode;
+    this.length++;
+    return this;
+  }
+
+  printList() {
+    const array = [];
+    let currentNode = this.head;
+    while(currentNode !== null){
+        array.push(currentNode.value)
+        currentNode = currentNode.next
+    }
+    return array;
+  }
+  insert(index, value){
+    //Check for proper parameters;
+    if(index >= this.length) {
+      console.log('yes')
+      return this.append(value);
+    }
+    
+    const newNode = {
+      value: value,
+      next: null,
+      previous: null
+    }
+
+    const leader = this.traverseToIndex(index-1);
+    const follower = leader.next;
+    leader.next = newNode;
+    newNode.next = follower;
+    newNode.previous = leader;
+    follower.previous = newNode;
+    this.length++;
+    return this.printList();
+  }
+  
+  traverseToIndex(index) {
+    //Check parameters
+    let counter = 0;
+    let currentNode = this.head;
+    while(counter !== index){
+      currentNode = currentNode.next;
+      counter++;
+    }
+    return currentNode;
+  }
+  remove(index) {
+    // Check Parameters      
+    const leader = this.traverseToIndex(index-1);
+    const unwantedNode = leader.next;
+    leader.next = unwantedNode.next;
+    this.length--;
+    return this.printList();
+  }
+}
+
+let myLinkedList = new LinkedList(10);
+myLinkedList.append(5);
+myLinkedList.append(16);myLinkedList.prepend(1);
+myLinkedList.insert(2, 99);
+myLinkedList.insert(20, 88);
+myLinkedList.remove(2);
+
+Single vs Double
+
+We have learned about single linked list.
+Is fairly simple implemeantation.
+We are doing insert it's a bit faster.
+It can't reverse from back.
+When you has insertion backwards.
+Double you can traverse backwards.
+Doubly linked List is good when you have not have any limitation on memory.
+
 Exercise: reverse()
 
+How can you make the Linked-List to reverse it.
+
+
 Solution: reverse()
+You use three pointers.
+
+ reverse(){
+   if(this.length === 1){
+     return this.head;
+   }
+
+   let first = this.head;
+   this.tail = this.head;
+   let second = first.next;
+   while(second != null){
+     const third = second.next;
+     second.next = first;
+     first = second;
+     second = third;
+   }
+   this.head.next = null;
+   this.head = first;
+ }
+}
+ 
 
 Linked Lists Review
+
+In this section we learned about Linked List.
+Linked List are low-level data structurers.
+It is a fundamental datastructure.
+We learned that when it comes to the linked list.
+
+Pros
+-Fast Insertion
+-Fast Deletion
+-Ordered
+-Flexible Size
+
+Cons
+-Slow Lookup
+-More Memory
+
+When it comes to Linked List there is no random access.
+We have slow lookup.
+They are ordered.
+It becomes very fast when we are at the beginning of the list or the end.
+Primary reason to choose Linked List is because we can shrink or add memory when it is needed.
+Implementing history on the browser.
+Or File systems.
+
+You should have good sense when you should using these datastructures.
