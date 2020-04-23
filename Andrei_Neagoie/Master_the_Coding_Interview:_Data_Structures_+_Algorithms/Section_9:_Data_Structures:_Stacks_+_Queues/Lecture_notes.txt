@@ -180,13 +180,245 @@ I have created the template.
 Implement peek(),push(),pop().
 
 Solution: Stack Implementation (Linked List)
+Not my solution:
+My Solution is in a separate file:
+
+Peek should be very easy to implement.
+Just return return this.top.
+Push value we wanna check if this is the very first item.
+this.length === 0.
+We reference the top and the bottom to the new node.
+Peek testing.
+Next is null becasuse we only have one item.
+With a Stack push discord.
+
+Let's continue with pop.
+If we have null we just return null.
+What's we just did was to pop.
+We just to add one conditional just.
+
+
+class Node {
+  constructor(value){
+    this.value = value;
+    this.next = null;
+  }
+}
+
+class Stack {
+  constructor(){
+    this.top = null;
+    this.bottom = null;
+    this.length = 0;
+  }
+  peek() {
+    return this.top;
+  }
+  push(value){
+    const newNode = new Node(value);
+    if (this.length === 0) {
+      this.top = newNode;
+      this.bottom = newNode;
+    } else {
+      const holdingPointer = this.top;
+      this.top = newNode;
+      this.top.next = holdingPointer;
+    }
+    this.length++;
+    return this;
+  }
+  pop(){
+    if (!this.top) {
+      return null;
+    }
+    if (this.top === this.bottom) {
+      this.bottom = null;
+    }
+    const holdingPointer = this.top;
+    this.top = this.top.next;
+    this.length--;
+    return this;
+  }
+  //isEmpty
+}
+
+const myStack = new Stack();
+myStack.peek();
+myStack.push('google');
+myStack.push('udemy');
+myStack.push('discord');
+myStack.peek();
+myStack.pop();
+myStack.pop();
+myStack.pop();
+
+
+//Discord
+//Udemy
+//google
 
 Exercise: Stack Implementation (Array)
+Convert the previous to use a Array instead.
 
 Solution: Stack Implementation (Array)
+When we do a peek we just wanna see the latest thing.
+
+
+class Stack {
+  constructor(){
+    this.array = [];
+  }
+
+  peek() {
+    return this.array[this.array.length-1];
+  }
+  push(value){
+    this.array.push(value);
+    return this;
+  }
+  pop(){
+    this.array.pop();
+    return this;
+  }
+}
+
+const myStack = new Stack();
+myStack.peek();
+myStack.push('google');
+myStack.push('udemy');
+myStack.push('discord');
+myStack.peek();
+myStack.pop();
+myStack.pop();
+myStack.pop();
+
+
+//Discord
+//Udemy
+//google
 
 Exercise: Queue Implementation
+Implementing peek(), enqueue(), dequeue().
 
 Solution: Queue Implementation
+Not my solution!
+My solution in a different repository:
+
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+class Queue {
+  constructor(){
+    this.first = null;
+    this.last = null;
+    this.length = 0;
+  }
+  peek() {
+    return this.first;
+  }
+  enqueue(value){
+    const newNode = new Node(value);
+    if (this.length === 0) {
+      this.first = newNode;
+      this.last = newNode;
+    } else {
+      this.last.next = newNode;
+      this.last = newNode;
+    }
+    this.length++;
+    return this;
+  }
+  dequeue(){
+    if (!this.first) {
+      return null;
+    }
+    if (this.first === this.last) {
+      this.last = null;
+    }
+    const holdingPointer = this.first;
+    this.first = this.first.next;
+    this.length--;
+    return this;
+  }
+  //isEmpty;
+}
+
+const myQueue = new Queue();
+myQueue.peek();
+myQueue.enqueue('Joy');
+myQueue.enqueue('Matt');
+myQueue.enqueue('Pavel');
+myQueue.peek();
+myQueue.dequeue();
+myQueue.dequeue();
+myQueue.dequeue();
+myQueue.peek();
+
+
+Queues Using Stacks
+Implement a Queue using a stack interview question.
+Able to see the solution.
+Very easy.
+Go to Stacks.
+
+class CrazyQueue {
+  constructor() {
+    this.first = [];
+    this.last = [];
+  }
+
+  enqueue(value) {
+    const length = this.first.length;
+    for (let i = 0; i < length; i++) {
+      this.last.push(this.first.pop());
+    }
+    this.last.push(value);
+    return this;
+  }
+
+  dequeue() {
+    const length = this.last.length;
+    for (let i = 0; i < length; i++) {
+      this.first.push(this.last.pop());
+    }
+    this.first.pop();
+    return this;
+  }
+  peek() {
+    if (this.last.length > 0) {
+      return this.last[0];
+    }
+    return this.first[this.first.length - 1];
+  }
+}
+
+const myQueue = new CrazyQueue();
+myQueue.peek();
+myQueue.enqueue('Joy');
+myQueue.enqueue('Matt');
+myQueue.enqueue('Pavel');
+myQueue.peek();
+myQueue.dequeue();
+myQueue.dequeue();
+myQueue.dequeue();
+myQueue.peek();
+
+https://leetcode.com/problems/implement-queue-using-stacks/solution/
+
 
 Stacks + Queues Review
+Simply think on them as plates or queues.
+Access the very first item.
+We are only interested in the end-points of the data-structures.
+
+Pros
+Fast Operations
+Fast Peek
+Ordered
+
+Cons
+Slow LookUP
