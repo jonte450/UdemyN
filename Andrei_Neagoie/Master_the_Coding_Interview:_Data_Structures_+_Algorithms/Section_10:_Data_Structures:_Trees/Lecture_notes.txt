@@ -115,19 +115,281 @@ Cons
 -No O(1) operations
 
 Exercise: Binary Search Tree
+One is insert() and the other is lookup.
+Implement the both.
+Function to traverse the tree.
+JSON.stringify(traverse(tree.root)).
+In the solution video i am going to demonstrate this.
 
 Solution: insert()
+In the real life you are not going to build this from scratch.
+But it is important that you understand the concept.
+
+Not my solution:
+My solution is in a different repository.
+
+class Node {
+  constructor(value){
+    this.left = null;
+    this.right = null;
+    this.value = value;
+  }
+}
+
+class BinarySearchTree {
+  constructor(){
+    this.root = null;
+  }
+  insert(value){
+    const newNode = new Node(value);
+    if (this.root === null) {
+      this.root = newNode;
+    } else {
+      let currentNode = this.root;
+      while(true){
+        if(value < currentNode.value){
+          //Left
+          if(!currentNode.left){
+            currentNode.left = newNode;
+            return this;
+          }
+          currentNode = currentNode.left;
+        } else {
+          //Right
+          if(!currentNode.right){
+            currentNode.right = newNode;
+            return this;
+          } 
+          currentNode = currentNode.right;
+        }
+      }
+    }
+  }
+  lookup(value){
+    //Code here
+  }
+  // remove
+}
+
+const tree = new BinarySearchTree();
+tree.insert(9)
+tree.insert(4)
+tree.insert(6)
+tree.insert(20)
+tree.insert(170)
+tree.insert(15)
+tree.insert(1)
+JSON.stringify(traverse(tree.root))
+
+//     9
+//  4     20
+//1  6  15  170
+
+function traverse(node) {
+  const tree = { value: node.value };
+  tree.left = node.left === null ? null : traverse(node.left);
+  tree.right = node.right === null ? null : traverse(node.right);
+  return tree;
 
 Solution: lookup
+If the root doesn't exist we are not going to find the node.
+If the currentNode is going to equal lesser then the value 
+we are going to left.
+
+And if it is higher than the current.node.vaue we are going to the right.
+If we don't find any thing return false.
+
+
+ lookup(value){
+    if (!this.root) {
+      return false;
+    }
+    let currentNode = this.root;
+    while(currentNode){
+      if(value < currentNode.value){
+        currentNode = currentNode.left;
+      } else if(value > currentNode.value){
+        currentNode = currentNode.right;
+      } else if (currentNode.value === value) {
+        return currentNode;
+      }
+    }
+    return null
+  }
+
+}
+
+We are using divide and conquer.
+
+Bonus Exercise remove().
+How to implement the remove-method.
+If you are trying to implement this.
+We need a reference to the parent node.
+Check if the node is lesser than the current node.
+If it only had one right or left node then you are linking to the parent node.
+
+
+Solution: remove()
+ remove(value) {
+    if (!this.root) {
+      return false;
+    }
+    let currentNode = this.root;
+    let parentNode = null;
+    while(currentNode){
+      if(value < currentNode.value){
+        parentNode = currentNode;
+        currentNode = currentNode.left;
+      } else if(value > currentNode.value){
+        parentNode = currentNode;
+        currentNode = currentNode.right;
+      } else if (currentNode.value === value) {
+        //We have a match, get to work!
+        
+        //Option 1: No right child: 
+        if (currentNode.right === null) {
+          if (parentNode === null) {
+            this.root = currentNode.left;
+          } else {
+            
+            //if parent > current value, make current left child a child of parent
+            if(currentNode.value < parentNode.value) {
+              parentNode.left = currentNode.left;
+            
+            //if parent < current value, make left child a right child of parent
+            } else if(currentNode.value > parentNode.value) {
+              parentNode.right = currentNode.left;
+            }
+          }
+        
+        //Option 2: Right child which doesnt have a left child
+        } else if (currentNode.right.left === null) {
+          currentNode.right.left = currentNode.left;
+          if(parentNode === null) {
+            this.root = currentNode.right;
+          } else {
+            
+            //if parent > current, make right child of the left the parent
+            if(currentNode.value < parentNode.value) {
+              parentNode.left = currentNode.right;
+            
+            //if parent < current, make right child a right child of the parent
+            } else if (currentNode.value > parentNode.value) {
+              parentNode.right = currentNode.right;
+            }
+          }
+        
+        //Option 3: Right child that has a left child
+        } else {
+
+          //find the Right child's left most child
+          let leftmost = currentNode.right.left;
+          let leftmostParent = currentNode.right;
+          while(leftmost.left !== null) {
+            leftmostParent = leftmost;
+            leftmost = leftmost.left;
+          }
+          
+          //Parent's left subtree is now leftmost's right subtree
+          leftmostParent.left = leftmost.right;
+          leftmost.left = currentNode.left;
+          leftmost.right = currentNode.right;
+
+          if(parentNode === null) {
+            this.root = leftmost;
+          } else {
+            if(currentNode.value < parentNode.value) {
+              parentNode.left = leftmost;
+            } else if(currentNode.value > parentNode.value) {
+              parentNode.right = leftmost;
+            }
+          }
+        }
+      return true;
+      }
 
 AVL Trees + Red Black Trees
+Now we have implemented the trees.
+There are two types of trees that automatic balances themselves.
+But if you add 80 you make the tree balanced.
+It will go back and make some switch.
+Red Black Tree balanced the tree after each insert.
+
+
+Resources: AVL Trees + Red Black Trees
+If you would like to learn more about these types of trees where the complexity comes from the auto-balancing of trees upon insertion, these are the resources that I recommend but keep in mind that they are not SUPER important for an interview. Just to scratch your curiosity :)
+
+Animation AVL-trees
+
+https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
+
+How it works!
+
+medium.com/basecs/the-little-avl-tree-that-could-86a3cae410c7
+
+Animation Red Black Trees!
+
+https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
+
+How it works!
+https://medium.com/basecs/painting-nodes-black-with-red-black-trees-60eacb2be9a5
 
 Binary Heaps
+Two other common of trees.
+One is the Heap.
+When it comes to Heapes we are mostly talk about Binary Heapes.
+Every value is lower than the root value max-heap.
+Min-Heap is the opposite.
+Commonly used with pirority queues.
+
+lookup O(N)
+insert O(log N)
+delete O(log N)
+
+Why to use a binary heap?
+It turns out that binary heap is very good to make comparisions.
+Heaps are used most in sorting algorithms.
+Heaps add values in order from left to right.
+Insertes Bubbles up.
 
 Quick Note on Heaps
+Memory it's not a like JavaScript heap.
+Memory Heap != Heap Data Structure
 
 Priority Queue
 
+The beauty of binary heap left to right insertions.
+Preserves insertion.
+The parent is always greater than the children.
+Priority Queue is like a club where VIP goes first.
+Even if some come later you decide to let the VIP in.
+Everything get's balanced.
+We know the priority easily.
+
+Binary Heaps
+Pros
+-Better than O(n)
+-Priority
+-Flexible Size
+-Fast insert 
+
+Cons
+-Slow lookup
+
 Trie
+One last tree.
+Trie is specialised tree using when you are searching for example letters.
+
+Tries let you know if something exists.
+The power of Trie if you are searching for N.
+When you search for something on google.
+Provding search-results.
+What do you think Big O is.
+
+O(length of the word).
+Space complexity it is very effiecent also.
 
 Tree Review
+As long you understand to build a Tree.
+It is also to pick up another.
+Easily be able to do with

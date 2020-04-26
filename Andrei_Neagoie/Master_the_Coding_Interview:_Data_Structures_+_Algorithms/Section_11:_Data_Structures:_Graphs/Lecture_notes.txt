@@ -1,0 +1,149 @@
+Graphs Introduction
+It is one of the most useful data structure.
+It looks like a little network.
+Each item is called a vertex.
+Nodes is connected with edges.
+
+Modeling real-world relationship.
+Networks in world-wide-web.
+Google maps using this as decideing the shortest path.
+Linked list can also be a graph.
+
+Types Of Graphs
+-Directed
+Describing trafic-flow.
+
+-Undirected
+Think as a high-way.
+
+Facebook has an Undirected graph.
+Twitter is like a more directed because you can follow them.
+
+-Weighted Graphs.
+Deciede the smallest path.
+-Unweighted Graphs.
+
+-Cyclic
+You can go around.
+
+-Acyclic
+You can't go around.
+
+
+Exercise: Guess The Graph
+Decide the graph.
+This is a undirected Graph and Ascyclic.
+
+https://internet-map.net
+
+Graph Data
+How to build the Graphs.
+Graphs are build on top of other Data-structers.
+Using trees and linked lists.
+
+How to start thinking about building graphs!.
+-Edge Lists.
+const graph = [[0,2], [2,3], [2,1],[1,3]];
+The array simply implies the connection.
+An edge list only shows the connections.
+
+//Adjacency List
+const graph = [[2],[2,3],[0,1,3],[1,2]];
+
+//Adjacent Matrix
+1 for a connection 0 for no connections.
+
+const graph = [
+   [0,0,1,0],
+   [0,0,1,1],
+   [1,1,0,1],
+   [0,1,1,0]]
+
+Exercise: Graph Implementation
+Create an graph.
+We are going to usa an Adjancey list.
+Creating adjacent list.
+Why we want to use an object.
+Implement addVertex(node),addEdge(node1,node2).
+Have a helper function to print out the answers.
+
+
+Solution: Graph Implementation
+Adding the Graph implementation.
+Not my solution;
+
+class Graph { 
+  constructor() { 
+    this.numberOfNodes = 0; 
+    this.adjacentList = {}; 
+  } 
+  addVertex(node)  { 
+    this.adjacentList[node] = []; 
+    this.numberOfNodes++;
+  } 
+  addEdge(node1, node2) { 
+    //uniderected Graph 
+    this.adjacentList[node1].push(node2); 
+    this.adjacentList[node2].push(node1); 
+  } 
+  showConnections() { 
+    const allNodes = Object.keys(this.adjacentList); 
+    for (let node of allNodes) { 
+      let nodeConnections = this.adjacentList[node]; 
+      let connections = ""; 
+      let vertex;
+      for (vertex of nodeConnections) {
+        connections += vertex + " ";
+      } 
+      console.log(node + "-->" + connections); 
+    } 
+} 
+} 
+
+var myGraph = new Graph();
+myGraph.addVertex('0');
+myGraph.addVertex('1');
+myGraph.addVertex('2');
+myGraph.addVertex('3');
+myGraph.addVertex('4');
+myGraph.addVertex('5');
+myGraph.addVertex('6');
+myGraph.addEdge('3', '1'); 
+myGraph.addEdge('3', '4'); 
+myGraph.addEdge('4', '2'); 
+myGraph.addEdge('4', '5'); 
+myGraph.addEdge('1', '2'); 
+myGraph.addEdge('1', '0'); 
+myGraph.addEdge('0', '2'); 
+myGraph.addEdge('6', '5');
+
+myGraph.showConnections(); 
+
+Graphs Review
+It get's a little complicated with Graphs.
+Algorithm's around graphs.
+Finding the shortest path.
+Because it can become very complex.
+It needs big companies that use graphs.
+
+Pros
+-Relationship
+
+Cons
+-Scaling is hard
+
+
+Data Structures Review
+Was it scary as you intially thought.
+You can use these tools to be a better engineer.
+Data Structures are our friends.
+
+
+What Else Is Comming Up?
+We went through all our data structures.
+We have talked about linked list,graphs,hashtables.
+Left are sorting.
+-Dynamic programming
+-BFS + DFS (Searching)
+-Reucrsion
+ 

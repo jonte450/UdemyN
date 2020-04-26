@@ -1,0 +1,251 @@
+Introduction to Algorithms
+Everybody has a secret algorithm.
+Underneath the hood this is only algorithms
+It is impossible to know all the algorrithms.
+Algorithms allows us to use language data structures like booleans.
+Algorithms allows us to perform actions.
+
+-Sorting
+-Dynamic Programming
+-BFS + DFS (Searching)
+-Recursion
+
+Certain algorithms allows us to take the right complexity.
+For O(log n).
+This topic is really important to them.
+
+Recursion Introduction
+It is more of an concept.
+When we get into sorting.
+We are going to use Recursion a lot.
+If you are searching for files on your computer then you wanna do that recursively.
+How can you see the other folders.
+You can do ls -R.
+Some docker files.
+
+So what is Recursion?
+It is a function that defines as itself.
+
+function inception(){
+	inception();
+}
+
+Problem with Recursion is intimidiating topic.
+Focus on recursion when we have repeated subtasks.
+
+Stack Overflow
+Think recursion a this scenario.
+We have water that is tapping.
+They are kind of difficult to understand.
+Keeps calling the until everything is drowned.
+
+This is like Stack Overflow.
+
+function inception(){
+	debugger;
+	inception();
+}
+
+We add a keyword debugger.
+We have called the inception function.
+
+The call stack is going to be overflowed.
+With inception() calls.
+This can be very dangerous.
+Because of limitation of memory.
+
+Anatomy Of Recursion
+
+let counter = 0;
+
+function inception(){
+	if(counter > 3){
+		return 'done';
+	}
+	counter++;
+	inception();
+
+	return inception;
+}
+
+inception();
+
+On is the recursive case and the base case.
+1. Indentify the base case
+2. Indentify the recursive case
+3. Get closer and closer and return when needed. Usually yo have 2 returns.
+
+The function simply get's closer and closer to the base case.
+
+Exercise: Factorial
+Write two functions that implements factorial.
+5! = 5 * 4 *3 * 2 *1
+Remeber the defintion of recursion.
+
+Solution: Factorial
+
+We can simply return 2 as a factorial to avoid a extra loop as a basecase.
+
+
+function findFactorialIterative(number) {
+  let answer = 1;
+  // you actually no longer need the if statement because of the for loop
+  // if (number === 2) {
+  //   answer = 2;
+  // }
+  for (let i = 2; i <= number; i++) {
+    answer = answer * i;
+  }
+  return answer;
+}
+
+function findFactorialRecursive(number) {
+  if(number === 2) {
+    return 2;
+  }
+  return number * findFactorialRecursive(number - 1)
+}
+
+findFactorialIterative(5);
+findFactorialRecursive(5);
+
+//If you want, try to add a base case condition for the recursive solution if the parameter given is less than 2
+
+What is the timecomplexity for this.
+
+
+Exercise: Fibonacci
+You can't talk about recursive without talking about fibonacci sequence.
+Given an number n return the index value of the fibbnacci sequence.
+Recursive approach is easier than the
+
+
+Solution: Fibonacci
+Instead the base cases [0,1] in the array iterative method.
+All we do is building a tree.
+Everybody is building down.
+Start filling the array.
+All we are going to say array.push().
+
+
+// Given a number N return the index value of the Fibonacci sequence, where the sequence is:
+
+// 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144 ...
+// the pattern of the sequence is that each value is the sum of the 2 previous values, that means that for N=5 → 2+3
+
+//For example: fibonacciRecursive(6) should return 8
+
+
+function fibonacciIterative(n){
+  let arr = [0, 1];
+  for (let i = 2; i < n + 1; i++){
+    arr.push(arr[i - 2] + arr[i -1]);
+  }
+ return arr[n];
+}
+fibonacciIterative(3);
+
+function fibonacciRecursive(n) {
+  if (n < 2){
+    return n;
+  }
+  return fibonacciRecursive(n - 1) + fibonacciRecursive (n - 2)
+}
+
+fibonacciRecursive(6)
+
+Why do ever need to write something recursive.
+What's the Big O.
+Big O is linear time.
+O(2^(N)) the recursive approach is exponetial time.
+And that is a bad timecomplexity.
+
+
+Recursive VS Iterative
+Theorem:
+Anything you can do with a recursion CAN be done iteratively (loop).
+
+Depends on the situation.
+A good engineer is who can select when to use what and when.
+Recursion let's your code be more readable.
+
+Recursion
+Pros
+-Readability
+
+Cons
+-Large Stack
+
+Everytime we add things to the stack it becomes more expensive to the memory.
+
+Iterative approach is faster.
+
+Using recursion when you are working with datastructures when you don't know how deep the data structure is.
+
+Tail Call Optimization:
+It allows the recursion without increasing the call-stack.
+
+When To Use Recursion
+When it becomes complicated problems like Trees,Graphs.
+When we don't know how deep the datastructure is.
+
+New Rule:
+
+Every time you are using a tree or converting
+Something into a tree, consider recursion.
+
+1.Divide into a number of subproblems that are smaller instances of the same problem.
+
+2.Each instance of the subproblem is identical in nature.
+
+3.The solutions of each subproblem can be combined to solve the problem at hand.
+
+Divide and Conquer using Recursion.
+
+Exercise: Reverse String With Recursion
+
+function reverseString(str) {
+  let arrayStr = str.split("");
+  let reversedArray = [];
+  //We are using closure here so that we don't add the above variables to the global scope.
+  function addToArray(array) {
+    
+    if(array.length > 0) {
+      reversedArray.push(array.pop());
+      addToArray(array);
+    }
+    return;
+  }
+  addToArray(arrayStr);
+  return reversedArray.join("");
+}
+
+reverseString('yoyo master');
+
+function reverseStringRecursive (str) {
+  if (str === "") {
+    return "";
+  } else {
+    return reverseStringRecursive(str.substr(1)) + str.charAt(0);
+  }
+}
+
+reverseStringRecursive('yoyo master');
+
+Recursion Review
+We are talking about a function that solves itself.
+Recursion can be think of a glass that are being filled.
+Problem we can get a Stack Overflow.
+Sometimes it can be better solve it iteratively.
+
+Theorem:
+   Anything you do with a recursion CAN be done iteratively (loop).
+
+Recursion and Space Complexity are not friends.
+
+Recursion:
+Merge Sort
+Quick Sort
+Tree Traversal
+Graph Traversal
+

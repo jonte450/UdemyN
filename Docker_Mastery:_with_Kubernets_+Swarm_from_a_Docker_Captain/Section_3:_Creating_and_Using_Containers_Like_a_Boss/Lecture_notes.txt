@@ -1,0 +1,105 @@
+Check Our Docker Install and Config
+Containers are the fundamental building block.
+How they are different
+
+-Check versions of our docker cli and engine
+-Create a Nginx (web server) container
+-Learn common container management commands
+-Learn Docker networking basics
+-Requirements: Have latest Docker installed from last Section
+
+You are in the proper terminal.
+
+First command docker version.
+This simply returns the engine.
+Our Docker Command line returning the value.
+The fact is you get a server means that you can talk with the docker server.
+
+docker info tells about configuration about info image,containers.
+
+And command docker is returning all the commands you can do.
+We have this on the top called management commands.
+There are so much commands we have the management commands to organize it.
+
+-command: docker versions
+  -verified cli can talk to engine
+-command: docker info
+  -most config values of engine
+-docker command line structure
+  -old (still works): docker <command> (options)
+  -new: docker <command> <sub-command> (options)
+
+
+The engine is called is daemon.
+
+
+Starting a Nginx Web Server
+-image vs. container
+-run/stop/remove containes
+-check container logs and processes
+
+Difference between Image vs. Container
+-An Image is the application we want to run
+-A Container is an instance of that image running as a process
+-You can have many containers running off the same image
+-In this lecture our image will be the Nginx web server
+-Docker's default image "registry" is called Docker Hub (hub.docker.com)
+
+docker container run --publish 80:80 nginx
+
+Docker looked for an image called nginx.
+1.Downloaded image 'nginx' from Docker Hub.
+2.Started a new container from that image.
+3.Opened port 80 on the host IP
+4.Routes that traffic to the container IP, port 80
+
+This command below will make the container to run in the background.
+
+sudo docker container run --publish 80:80 --detach nginx
+
+docker container ls
+
+run vs. start
+Each time we run we started a new container.
+If we don't specify we get's funny names.
+
+docker container run --publish 80:80 --deatch --name webhost nginx.
+
+docker container log webhost
+Gives all the logs from the webserver.
+
+docker cointainer --help.
+docker container ls -a
+docker container -rm three first id of a container.
+
+
+Debrief: What Happens When We Run a Container
+
+
+Conatiner vs VM: It's Just a Process
+
+Windows Containers: Docker Is No Longer Just Linux
+
+Assignment: Manage Multiple Containers
+
+Quiz 2: Container Quiz 1
+
+What's Going On In Containers: CLI Processing Monitoring
+
+Getting a Shell Inside Containers: No Need for SSH
+
+Docker Networks: Concepts for Private and Public Comms in Containers
+
+Docker Networks: DNS and How Containers Find Each Other
+
+Quiz 3: Container Quiz 2
+
+Assignment: Using Containers for CLI Testing
+
+Assignment Answers: Using Containers for CLI Testing
+
+FIXME: Bug in alpine affects nslookup
+
+Assignment: DNS Round Robin Test
+
+Assignment Answers: DNS Round Robin Test
