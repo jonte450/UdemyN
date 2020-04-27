@@ -74,21 +74,148 @@ docker container -rm three first id of a container.
 
 
 Debrief: What Happens When We Run a Container
+There are so much more happenings in the background.
+1.Looks for that image locallyh in the image cache, dosen't find anything
+2.Then looks in remote image repository(defaults to Docker Hub)
+3.Downloas the latest version (nginx: latest by default).
+4.Creates new container based on that image and prepares to start
+5. Gives it a virtual IP on a private network inside docker engine
+6.Opens up port 80 on host and forwards to port 80 in container
+7.Starts container by using the CMD in the image Dockerfile
+
+
+Customize the networking.
+Opening up the port that we specified.
 
 
 Conatiner vs VM: It's Just a Process
+Containers aren't Mini-VM's
+-They are just processes
+-Limited to what resources they can access
+-Exit when process stops
 
-Windows Containers: Docker Is No Longer Just Linux
+We are going to call Mongo in the background.
+docker top mongo
+
+ps aux "Show me all running processes".
 
 Assignment: Manage Multiple Containers
+-docs.docker.com and --help are your friend
+-Run a nginx, a mysql, and a httpd(apache) server
+-Run all of them --detach (or -d), name them with --name
+-nginx should listen on 80:80, httpd on 8080:80, mysql on 3306:3306
+-When running mysql, use the --env option (or -e) to pass in 
+MYSQL_RANDOM_ROOT_PASSWORD=yes
+-Use docker container logs on mysql to find the random password it created on startup
+-Clean it all up with docker container stop and docker container rm
+(both can accept multiple names or ID's)
+-Use docker container ls to ensure everything is correct before
+ and after cleanup
+
+Assignment Answers: Manage Multiple Containers
+-This lecture is Answers to previous assignment
+-Try the previous lecture(Assignment details) first on your own before watching this video
+-Forcing yourself to figure this assignment out by studying doc.docker.com,etc. will help this stuff stick in your brain better then just watching me do it.
+
+docker container run -d -p 3306:3306 --name db --e MYSQL_RANDOM_ROOT_PASSWORD=yes mysql
+
+docker container logs db
+
+Generated Root Password
+
+docker container run -d --name webserver -p 8080:80 httpd
+docker ps
+
+docker container run -d --name proxy -p 80:80 nginx
+
+docker ps
+
+curl localhost
+
+curl localhost:8080
+
+docker container stop container-id
+
+docker ps -a
+
+docker container rm container-id
+
+docker ps -a
+docker image ls
+
+Question 1:
+If you wanted to view running containers as well as containers that you have stopped and not removed, what command would you use?
+
+sudo docker container ls -a
 
 Quiz 2: Container Quiz 1
 
+What does the -d flag do in a docker run command?
+Answer:
+Correct, it's the short version of --detach. By running in detached mode, we are able to have access to our command line when the container spins up and runs. Without it, we would have logs constantly fed onto the screen.
+
+
+Question 3:
+Would the following two commands create a port conflict error with each other?
+Answer:
+
+docker container run -p 80:80 -d nginx
+docker container run -p 8080:80 -d nginx
+Answer: No
+Correct, just because the containers are both listening on port 80 inside (the right number), there is no conflict because on the host they are published on 80, and 8080 separately (the left number).
+
+
+Question 4:
+I ran 'docker container run -p 80:80 nginx' and my command line is gone and everything looks frozen. Why?
+
+Correct, everything is normal. You didn't specify the -d flag to detach it in the background, and there aren't any logs coming across the screen because you haven't connected to the published port yet, so Nginx has nothing to log about
+
 What's Going On In Containers: CLI Processing Monitoring
+-docker container top -process list in one container
+-docker container inspect - details of one container config
+-docker container stats - performance stats for all containers
+
+docker container run -d --name nginx nginx
+docker container run -d --name mysql -e MYSQL_RANDOM_ROOT_PASSWORD=true mysql
+
+docker container ls
+docker container top
+
+Top lists all processes in the container.
+
+docker container stats
+
+We are getting back the streaming performance of the containers.
+
+We used docker container to list all proc
 
 Getting a Shell Inside Containers: No Need for SSH
+-docker container run -it : Start new container interactively
+-docker container exec -it: Run additional command in existing container
+-Different Linux distros in container
+
+How do i get into the container?
+docker container run -it
+-t psuedo-tty: simulates a real terminal, like what SSH does
+-i interactive: Keep session open to receive terminal input
+
+docker container run -it --name proxy nginx bash
+This will give you bash shell if run with it, it will give you a terminal inside the running container
+
+You can download a Ubuntu image to.
+But the Ubuntu is very minimal.
+When i exit the container will stop running.
+docker container exec -it mysql bash
+Now you are in the container mysql.
+Jumping into containers to check for errors.
+Alpine is a linux distribution and is very small.
+
+-docker container run -it : start new container interactively
+-docker container exec -it: run addtional command in existing container
+
 
 Docker Networks: Concepts for Private and Public Comms in Containers
+
 
 Docker Networks: DNS and How Containers Find Each Other
 

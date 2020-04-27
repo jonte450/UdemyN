@@ -1,54 +1,423 @@
 Sorting Introduction
+Involved much of math.
+Why do we need sorting?
+There is nothing to learn here.
+In a interview sorting is really important?
+Why do they tells us that?
+
+const letters = ['a','b','z','e','r','b'];
+letters.sort();
+
+What's all the fuss with sorting?
+Problem when inputs get's larger and larger!
+
+Because we are talking about google articles!
+We have millions of data in the biggest companies.
+What about microsoft?
+What about Netflix?
+They need custom sorting algorithms that are effcient!
+We sort data and preprocess it.
+Doing that in a effcient way costs money!
+Talk about the diffirent alogirithms.
+
+There are so many sorting algorithms!
+
+-Bubble Sort
+-Insertion Sort
+-Selection Sort
+-Merge Sort
+-Quick Sort
+
+As more and more data is being handled sorting and searching is one of
+the biggest computer science problems in the software world.
+
 
 The Issue With sort()
+Showing different sorting algorithms.
+Why you should be careful with sorting.
+
+const basket = [2, 65, 34, 2, 1,7,8];
+basket.sort().
+JavaScript converts the array into a string when you do sort() method.
+console.log('2'.charCodeAt(0)) gives us the unicode.
+Chrome can make a another sort method than firefox for example.
+
 
 Sorting Algorithms
+O(n log n).
+Looking at all the sorting algorithms.
+You do however to know how they works.
+
+Most of the time you have to talk about it.
+It will help your learning to implement them.
+Understand the trade-offs in sorting.
+It is important to know when to use a algorithm.
+
 
 Bubble Sort
+Basic sorting algorithms!
+-Bubble Sort
+-Insertion Sort
+-Selection Sort
+
+Complex Algorithms
+-Merge Sort
+-Quick Sort
+
+How would you tell the computer to move the elements around!
+We compare the elements with each other and moves up the largest elements.
+
+The largest numbers is bubbling up at the end of each loop.
+
+It is not the most effcient algotihm.
+Bubble Sort is one the simplest sorting algorithm.
+Timecomplexity and SpaceComplexity is O(n^(2)).
+
 
 Exercise: Bubble Sort
+Just implementing it.
 
 Solution: Bubble Sort
+Not my solution:
+Function a bubbleSort that will take an array.
+Start from the beginning and swap every element.
+We will do a for-loop.
+
+const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+
+function bubbleSort(array) {
+  const length = array.length;
+  for (let i = 0; i < length; i++) {
+    for (let j = 0; j < length; j++) { 
+      if(array[j] > array[j+1]) {
+        //Swap the numbers
+        let temp = array[j]
+        array[j] = array[j+1];
+        array[j+1] = temp;
+      }
+    }        
+  }
+}
+
+bubbleSort(numbers);
+console.log(numbers);
+console.log([ 0, 1, 2, 4, 5, 6, 44, 63, 87, 99, 283 ]);
 
 Selection Sort
+Let's talk about the sorting algorithm.
+It is a simpler sorting algorithm.
+It is not so fast.
+We are scanning the array for the smallest item.
+And after we are finished of scanning the list we put it back to first index.
+
+
 
 Exercise: Selection Sort
+Just implementing the Insertion Sort Algorithm.
 
 Solution: Selection Sort
+Not my code:
+It takes a lot of time.
+The very first item becomes the minimum.
+It is a very documented thing on the iternet.
+Depending on your language you can see how it is implemented.
+
+const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+
+function selectionSort(array) {
+  const length = array.length;
+  for(let i = 0; i < length; i++){
+    // set current index as minimum
+    let min = i;
+    let temp = array[i];
+    for(let j = i+1; j < length; j++){
+      if (array[j] < array[min]){
+        //update minimum if current is lower that what we had previously
+        min = j;
+      }
+    }
+    array[i] = array[min];
+    array[min] = temp;
+  }
+  return array;
+}
+
+selectionSort(numbers);
+console.log(numbers);
 
 Dancing Algorithms
 
+I wanna show you the greatest thing in the agorithms.
+Somebody created a dance algorithm called dance.
+To traditional music.
+To help you to understand the algorithms.
+https://www.youtube.com/user/AlgoRythmics/videos
+
 Insertion Sort
+We have talked about not so effcient algorithms.
+Inserted sort can be very fast if the list is almost sorted.
+Or it already sorted.
+In a best case you can get O(n) if the list is almost sorted.
+We look at the first item and if we check the next item and we shift things over and shift them over.
+
+And place the algorithms in the the beginning of the index started.
 
 Exercise: Insertion Sort
+Just implement Insertion_Sort.
 
 Solution: Insertion Sort
+Not my solution:
+
+If the item is bigger than the previous then we will shift place.
+Else we will loop over the array and trying to figure out the place in the index.
+
+const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+
+function insertionSort(array) {
+  const length = array.length;
+	for (let i = 0; i < length; i++) {
+		if (array[i] < array[0]) {
+      //move number to the first position
+      array.unshift(array.splice(i,1)[0]);
+    } else {
+      // only sort number smaller than number on the left of it. This is the part of insertion sort that makes it fast if the array is almost sorted.
+      if (array[i] < array[i-1]) {
+        //find where number should go
+        for (var j = 1; j < i; j++) {
+          if (array[i] >= array[j-1] && array[i] < array[j]) {
+            //move number to the right spot
+            array.splice(j,0,array.splice(i,1)[0]);
+          }
+        }
+      }
+    }
+	}
+}
+
+insertionSort(numbers);
+console.log(numbers);
 
 Merge Sort and O(n log n)
 
+O(n log n).
+
+Next sorting algorithm.
+Unlike the other sorting algorithms we use divide and conquer.
+Merge Sort and Quick Sort use this technique.
+We are going to how it sorts.
+This is the last piece of the puzzle.
+Let's how it works.
+We are going to take each list into half and again.
+We are going to take each item and trying to compare them and put them in order.
+
+Merge Sort is one of the sorting algortihms.
+We are using divide and conquer.
+Unlike Bubble Sort we is going to compare the local list.
+Merge Sort is helpful.
+Merge Sort does have more Space Complexity.
+
+
 Exercise: Merge Sort
+Just implement Merge Sort
 
 Solution: Merge Sort
+Not my solution:
+Typing it in 30 min it is not going for you to understand it.
+We are doing recursion.
+Merge function is being a little hard to read.
+Just check the right array so they not going to their boundaries.
+
+
+const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+
+function mergeSort (array) {
+  if (array.length === 1) {
+    return array
+  }
+  // Split Array in into right and left
+  const length = array.length;
+  const middle = Math.floor(length / 2)
+  const left = array.slice(0, middle) 
+  const right = array.slice(middle)
+  // console.log('left:', left);
+  // console.log('right:', right);
+
+  
+  return merge(
+    mergeSort(left),
+    mergeSort(right)
+  )
+}
+
+function merge(left, right){
+  const result = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
+  while(leftIndex < left.length && 
+        rightIndex < right.length){
+     if(left[leftIndex] < right[rightIndex]){
+       result.push(left[leftIndex]);
+       leftIndex++;
+     } else{
+       result.push(right[rightIndex]);
+       rightIndex++
+    }
+  }  
+  // console.log(left, right)
+  return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+}
+
+
+const answer = mergeSort(numbers);
+console.log(answer);
 
 Stable VS Unstable Algorithms
 
+In the previous video, I mentioned the idea of Stable Algorithm, and how Merge Sort is a stable sort. What does that mean? Have a read through this stack overflow answer which is excellent. Sometimes, stable is a desired property when sorting:
+
+https://stackoverflow.com/questions/1517793/what-is-stability-in-sorting-algorithms-and-why-is-it-important
+
 Quick Sort
+This is going to be quick!.
+It's like an divide and conquer.
+We pick an random pivot item.
+For example i want the numbers that are greater than four come to the right and then the numbers that are lesser than four goes to the left.
+
+And we keep breaking them down.
+How to pick the pivot code.
+
+The best to understand Quick Sort is by a hungarian dance.
+O(log (n)) is fast but the worst is O(n^(2)).
+The catch is to pick a good pivot.
+
 
 Optional Exercise: Quick Sort
+Solution:
+const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+
+function quickSort(array, left, right){
+  const len = array.length; 
+  let pivot;
+  let partitionIndex;
+
+  if(left < right) {
+    pivot = right;
+    partitionIndex = partition(array, pivot, left, right);
+    
+    //sort left and right
+    quickSort(array, left, partitionIndex - 1);
+    quickSort(array, partitionIndex + 1, right);
+  }
+  return array;
+}
+   
+function partition(array, pivot, left, right){
+  let pivotValue = array[pivot];
+  let partitionIndex = left;
+
+  for(let i = left; i < right; i++) {
+    if(array[i] < pivotValue){
+      swap(array, i, partitionIndex);
+      partitionIndex++;
+    }
+  }
+  swap(array, right, partitionIndex);
+  return partitionIndex;
+}
+
+function swap(array, firstIndex, secondIndex){
+    var temp = array[firstIndex];
+    array[firstIndex] = array[secondIndex];
+    array[secondIndex] = temp;
+}
+
+//Select first and last index as 2nd and 3rd parameters
+quickSort(numbers, 0, numbers.length - 1);
+console.log(numbers);
 
 Which Sort Is Best?
+Which sorting algorithm is the best?
+Insertion Sort should be used with small items or it is almost sorted!
+Bubble you are never going to use only for education purposes!.
+Selection sort you wont be using it.
+Merge Sort is really good because of divide and conquer!.
+If it is at worst case scenarios it will be expensive.
+QuickSort is better than Merge Sort but it has downsize because of the pivot value.
+
 
 Resources: Heap Sort
+If you would like to learn about Heap Sort, this is my favourite resource https://brilliant.org/wiki/heap-sort/
+
+Quick Sort and Heap Sort are also commonly compared. You can read about why quick sort wins out most of the times https://stackoverflow.com/questions/2467751/quicksort-vs-heapsort
 
 Radix Sort + Counting Sort
+We have talked about these five sorting algorithms.
+But can we beat O(n log n).
+If they come up on a algorithm that's is faster will become very rich.
+You can improve this if you don't use any comparisions.
+
+Non-Comparison Sort
+-Counting Sort
+-Radix Sort
+
+NonComparsion Sorter makes it a little better.
+Only works with numbers in a stricted range.
+
 
 Resources: Radix Sort + Counting Sort
 
-Exercise: Sorting Interview
+Radix Sort: https://brilliant.org/wiki/radix-sort/
+
+Radix Sort Animation: https://www.cs.usfca.edu/~galles/visualization/RadixSort.html
+
+
+Counting Sort: https://brilliant.org/wiki/counting-sort/
+
+Counting Sort Animation: https://www.cs.usfca.edu/~galles/visualization/CountingSort.html
 
 Solution: Sorting Interview
 
+//#1 - Sort 10 schools around your house by distance:
+Insertion sort because the input is small! (Correct)
+
+
+//#2 - eBay sorts listings by the current Bid amount:
+Radix or counting sort because a Bid is usually a range of number
+(You should check this)
+
+//#3 - Sport scores on ESPN
+Quick Sort because of the random data because of the space complexity.
+(You should check this).
+
+//#4 - Massive database (can't fit all into memory) needs to sort through past year's user data
+Merge Sort because of the data and we always want to be quick!
+(You should check this!)
+
+//#5 - Almost sorted Udemy review data needs to update and add 2 new reviews
+Insertion Sort i am assuming that the previous reveiws are sorted!
+(You should check this!)
+
+//#6 - Temperature Records for the past 50 years in Canada
+Radix counting sort because the data can be in range like 40-60 c.and
+(You should check this!)
+
+
+//#7 - Large user name database needs to be sorted. Data is very random.
+QuickSort if it worried on about memory space!
+
+//#8 - You want to teach sorting for the first time
+Bubble Sort, Selection Sort
+
+
 Sorting In Your Language
+When it's comes to JavaScript it is not required what kind of sorting it uses.
+Mozilla uses merge sort.
+Chrome has QuickSort and Insertion Sort.
 
 Sorting Review
+Most of the time when we are talking about sorting.
+QuickSort average case in O(n log n).
+Merge Sort is always O(n log n).
+
+
 
