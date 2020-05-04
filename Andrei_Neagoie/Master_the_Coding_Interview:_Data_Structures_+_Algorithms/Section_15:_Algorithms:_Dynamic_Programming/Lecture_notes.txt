@@ -1,0 +1,145 @@
+Dynamic Programming Introduction
+This is the last piece.
+The very last piece.
+
+It is an optimization technique.
+Do you have something you can cache?
+Dynamic Programming.
+
+Dynamic Programming dosen't mean nothing.
+Solve a problem by breaking them down and sovling the subproblem.
+
+Memoization 1
+Understand what caching means.
+Backpack you take to school.
+When you go to school you reuse them over and over.
+
+function addTo80(n){
+	return n + 80;
+}
+
+But if this operation took a lot of time.
+
+let cache = {};
+function memoizedAddTo80(){
+	if(n in cache){
+	 return cache[n];
+	}else {
+	  console.log('long time');
+	  cache[n] = n + 80;
+	  return cache[n]
+	}
+}
+
+We through the if-statement and return the value we have cached.
+
+
+Memoization 2
+We want the cache to not live in the global space.
+Because of something called closure we can avoid the global scope.
+
+// let's make that better with no global scope. This is closure in javascript so.
+function memoizeAddTo80(n) { 
+  let cache = {};
+  return function(n) {
+    if (n in cache) {
+      return cache[n];
+    } else {
+      console.log('long time');
+      const answer = n + 80;
+      cache[n] = answer;
+      return answer;
+    }
+  }
+}
+
+This is using a hash-table.
+It let's us to be effcient of our code.
+
+Fibonacci and Dynamic Programming
+Think on caching.
+We learned about this in our recursive section.
+
+We make so many calculations.
+And we can make the browser to crash.
+How can we make it more effcient.
+I you know Dynamic Programming we can do O(n).
+Each solution to our subproblem.
+
+Dynamic Programming
+If looking at the fibonacci calculation we are doing same calculation over and over again.
+This doesn't looking very efficient.
+We can actually return a memozized calculation.
+We can use the cache-version.
+
+Set of rules.
+
+Dynamic Programming
+
+Divide & Conquer + Memoization
+
+1.Can be divided into subproblem
+2.Recursive Solution
+3.Are there repetive subproblems?
+4.Memoize subproblems
+5.Demand a raise from your boss
+
+
+Implementing Dynamic Programming
+Now we can save this in a cache.
+Now we do much lesser calculations now.
+Remeber the pattern.
+The downside with this is we increased the space complexity.
+
+
+function fibonacciMaster(){//O(n)
+	let cache = {};
+	return function fib(n){
+    if(n in cache){
+     return cache[n];
+    }else{
+     if(n < 2){
+       return n;
+     }else{
+       cache[n] = fib(n-1) + fib(n-2);
+       return cache[n];
+     }
+    }
+  }
+}
+
+Interview Questions: Dynamic Programming
+
+Here are some popular Dynamic Programming Questions (see if you can notice the pattern):
+
+1. House Robber
+https://leetcode.com/problems/house-robber/
+
+2. Best Time to Buy and Sell Stock
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+
+3. Climbing Stairs
+https://leetcode.com/problems/climbing-stairs/    
+
+Dynamic Programming Review
+We have completed all of that.
+We have done the dynamic programming part.
+
+1.Can be divided into subproblem.
+2.Recursive Solution
+3.Are there repetive subproblems?
+4.Memoize subproblems.
+5.Demand a raise from your boss.
+
+This is the patteren above if you can use dynamic programming.
+Below is a another solution to fibonacci numbers.
+Called bottom up.
+Because you are starting with the lowest and works it up.
+
+function fibonacciMaster2(n){
+  let answer = [0 , 1];
+  for( let i = 2; i <= n; i++){
+    answer.push(answer[i-2] + answer[i-1]);
+  }
+  return answer.pop();
+}

@@ -1,0 +1,207 @@
+Section Overview
+The hard part is over.
+Coding is just the heart of the interview.
+Non-Technical Questions.
+You have to be good to work with others.
+Questions tell me about yourself.
+What to do after the interview.
+
+
+During The Interview
+Mindset thinking that is your only chance.
+It's not live or die.
+Treat it like an learning experince.
+Go and learn.
+You wanna see how good you are.
+
+Another day at the office.
+Sometimes it can just be coders.
+It's not all about you and it's all about them.
+You should be exited.
+This is the trick you are going to feel like you are going to meet a best friend.
+
+Can you do the job?
+Can I work with you?
+Are you going to improve?
+
+You have the these 4 hero qualities!
+
+1.Technical
+2.Success
+3.Leadership
+4.Challenge
+
+
+Exercise: Hero Stories
+Take 30 minutes of your time to write down 2~3 hero stories with the points mentioned from the previous video. Use these hero stories as your base when interviewing at any company. Good luck!
+
+If you want feedback, or you want to see other examples from other students, reach out in our private Discord chat community in the #job-hunting channel! (Link can be found in Lecture 3 on your Udemy course dashboard)!
+
+Technical
+I found that i had to use React-Router-Dom to make my App functioning
+
+Success
+Was when i was succesful to implementing my RobotFriends App with React-Router
+
+Leadership
+I searched and i worked alone to get the app functioning with the help of google no one told me about that.
+
+Challenge
+When is trying to implement my mini-blocket site i had no clue about how the style was going to be so tried to fix that.
+
+Tell Me About Yourself
+If get to long the interviewer is going to be bored.
+You wanna talk about your triggers of your success.
+Get's asked about your success.
+Make sure the heroes is relevant to the job.
+They wonder why you are here?
+
+I got really intrested in coding about years ago when i wanted to know how the black-box works.
+
+I started consuming the infos.
+
+
+-You triggers of success
+-Mention things you want to get asked
+-Skills should be relevant to job
+
+Exercise: Your Pitch
+
+Spend the next 30 minutes writing your own 1 minute "pitch" for when you get asked "Tell Me About Yourself" types of questions. Make sure you cover the points mentioned in the previous video. Have fun :)
+
+If you want feedback, or you want to see other examples from other students, reach out in our private Discord chat community in the #job-hunting channel (Link can be found in Lecture 3 on your Udemy course dashboard)!
+
+I got intrested in coding years ago when a friend to another friend told about amazing stuff you can make with coding.
+
+And i got intrested in how things works in the web-pages how the Android Apps is build and what you can to with Scripting.
+
+Nowadays i am more intrested in how programming languages works if they have a interpreter or a compiler.
+
+
+Why Us?
+
+Make the interviewer feel special.
+They don't want to hire anyone that is just going to be there a year.
+Interviewing is all by standing out.
+I have been researching your company and i have done some projects in the past.
+
+Why did you leave your job?
+No negativity!
+Tell them that you wanna grow!
+Tell them you wanna work with the best!.
+
+Tell Me About A Problem You Have Solved
+
+Starts of the situation.
+What did you do to solve the situation.
+The result is what happens after you took the action.
+
+-Have this prepared
+-Have metrics and numbers
+-Scaling, performance, security
+
+Talk about a big project instead of a todo-list.
+All companies has the big problems.
+If you improved caching in your app the recruiter is going to ask more about that.
+
+Don't blame you coworkers.
+Solve problems and go on.
+
+You are going to have variations of the problem.
+You worked with programming languages.
+Bring back of what the company is looking for.
+
+
+Exercise: Past Projects
+
+Spend the next 30 minutes writing your own answer to when you get asked "Tell Me About A Problem You Have Solved" type of questions. Think of the 1~2 big projects you have worked on such as the SmartBrain image recognition app in my other courses.  Make sure you cover the points mentioned in the previous video. Have fun :)
+
+If you want feedback, or you want to see other examples from other students, reach out in our private Discord chat community in the #job-hunting channel (Link can be found in Lecture 3 on your Udemy course dashboard)!
+
+I wanted to make a small commerce website where i used React as the Front-End and i used Docker to deploy it with MySQL and Redis.
+
+The problem is that i'didn't know how to design the website?
+
+What Is Your Biggest Weakness
+These the questions to give some silly questions.
+Some people can see through them.
+People can really see through what you says.
+How can you twist this around.
+Be honest a real weakness and how to overcome it.
+Sometimes i get straight into coding and without any thoughts and maybe 
+to write some pseudo codes.
+
+Exercise: What Is Your Biggest Weakness
+
+Spend the next 30 minutes writing your own weakness. Make sure you cover the points mentioned in the previous video. Have fun :)
+
+If you want feedback, or you want to see other examples from other students, reach out in our private Discord chat community in the #job-hunting channel (Link can be found in Lecture 3 on your Udemy course dashboard)!
+
+Sometimes i get stuck with a problem and i can sit with hours and look at the same thing. Maybe i should come up with others solutions and try to get a rest and come back with different ways to look at a problem.
+
+Any Questions For Us?
+Do you have any questions for the company.
+How you thought!
+-Focus on them, not company (YOU)
+-Mention something they mentioned
+
+And ideally mention what they have mention during the interview.
+What is the good questions to ask.
+-Where do you see the company going through the next years!
+-Ask them why they are there?
+-What they wish when they started the job at the company.
+
+Resources: Questions To Ask A Company
+
+Here is a great resource with a list of questions that may be good to ask a company!
+
+https://github.com/viraptor/reverse-interview
+
+Secret Weapon
+Never give up at first!
+You are competing against others canditates.
+Problems noticed a lot in programmers.
+Common for managers and CEO.
+
+-Simplicity over complexity
+
+-Premature optimization is the root of all evil
+(Based on your time is it worth it!)
+
+-Overall goal, not myopic
+(You just narrowly focusing on a small problem)
+
+-No complaining about client/code/etc
+(Your are comfortable to working with coworkers and don't want to complain)
+
+-No ego 
+(We might feel hurt by other comments. 
+Like feedback from others developers.)
+
+
+After The Interview
+Ask for feedback performance.
+Ask for a timeline.
+
+-Don't overuse "I"
+-Talk about the interviewer.
+-Express how you are the ideal candidate
+-Don't brag
+
+However there is a shortage of good talented ego less developers with ambition to learn.
+
+A developer wanted it more than any other.
+
+Thank the interviewer!
+
+Section Summary
+This not the most intresting pattern.
+Once you become good at them.
+You wanna have good mindset.
+Don't make them a boring meeting!.
+Be a human don't be a Robot.
+www.glassdoor.ca and you can check the interview questions.
+On top of working on the interview.
+Priortize a task.
+One question if i hire you can you make things easily.
+

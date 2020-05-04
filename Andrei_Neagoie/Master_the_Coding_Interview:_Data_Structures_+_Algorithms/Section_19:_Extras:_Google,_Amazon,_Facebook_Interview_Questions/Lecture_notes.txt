@@ -1,0 +1,297 @@
+Coding Problems
+Favourite coding challenge.
+Advent of code.
+You can do the previous versions.
+Engourage it.
+Every December the community is doing this.
+
+
+Top Interview Questions
+
+Want some extra practice? Here are a list of some of the top interview questions focusing on data structures and algorithms:
+
+#344 Reverse String   
+
+#412 Fizz Buzz    
+
+#136 Single Number    
+
+#104 Maximum Depth of Binary Tree    
+
+#283 Move Zeroes    
+
+#371 Sum of Two Integers    
+
+#206 Reverse Linked List    
+
+#171 Excel Sheet Column Number    
+
+#169 Majority Element    
+
+#13 Roman to Integer    
+
+#237 Delete Node in a Linked List    
+
+#122 Best Time to Buy and Sell Stock II    
+
+#242 Valid Anagram    
+
+#217 Contains Duplicate    
+
+#387 First Unique Character in a String    
+
+#108 Convert Sorted Array to Binary Search Tree    
+
+#268 Missing Number    
+
+#350 Intersection of Two Arrays II    
+
+#121 Best Time to Buy and Sell Stock    
+
+#21 Merge Two Sorted Lists    
+
+#202 Happy Number    
+
+#118 Pascal's Triangle    
+
+#70 Climbing Stairs    
+
+#101 Symmetric Tree    
+
+#53 Maximum Subarray    
+
+#326 Power of Three    
+
+#191 Number of 1 Bits    
+
+#198 House Robber    
+
+#66 Plus One    
+
+#1 Two Sum    
+
+#38 Count and Say    
+
+#26 Remove Duplicates from Sorted Array    
+
+#172 Factorial Trailing Zeroes    
+
+#20 Valid Parentheses    
+
+#141 Linked List Cycle    
+
+#234 Palindrome Linked List    
+
+#88 Merge Sorted Array    
+
+#155 Min Stack    
+
+#14 Longest Common Prefix    
+
+#160 Intersection of Two Linked Lists    
+
+#28 Implement strStr()    
+
+#69 Sqrt(x)    
+
+#190 Reverse Bits    
+
+#125 Valid Palindrome    
+
+#189 Rotate Array    
+
+#204 Count Primes    
+
+#7 Reverse Integer    
+
+#94 Binary Tree Inorder Traversal    
+
+
+Amazon Interview Questions
+
+If you would like to practice real life interview questions asked by Amazon, then here they are below. Keep in mind that it will be hard to just get everything right from the beginning. With enough practice you will become better and better, but there is an entire community of us learning, so I recommend you tackle these questions together with our online Discord community (see lesson #3 in this course for the link) and join the conversation and tackle problems in the #interview-questions channel:
+
+1. Past Interview Questions
+
+2. From Leetcode:
+
+#1 Two Sum    
+
+#2 Add Two Numbers    
+
+#3 Longest Substring Without Repeating Characters      
+
+#200 Number of Islands    
+
+#20 Valid Parentheses    
+
+#5 Longest Palindromic Substring    
+
+#138 Copy List with Random Pointer    
+
+#121 Best Time to Buy and Sell Stock    
+
+#21 Merge Two Sorted Lists    
+
+
+3. Bonus Question asked by Amazon:
+
+From: https://www.dailycodingproblem.com/
+
+There's a staircase with N steps, and you can climb 1 or 2 steps at a time. Given N, write a function that returns the number of unique ways you can climb the staircase. The order of the steps matters.
+
+For example, if N is 4, then there are 5 unique ways:
+
+1, 1, 1, 1
+
+2, 1, 1
+
+1, 2, 1
+
+1, 1, 2
+
+2, 2
+
+What if, instead of being able to climb 1 or 2 steps at a time, you could climb any number from a set of positive integers X? For example, if X = {1, 3, 5}, you could climb 1, 3, or 5 steps at a time. Generalize your function to take in X.
+
+
+Solution
+
+It's always good to start off with some test cases. Let's start with small cases and see if we can find some sort of pattern.
+
+N = 1: [1]
+
+N = 2: [1, 1], [2]
+
+N = 3: [1, 2], [1, 1, 1], [2, 1]
+
+N = 4: [1, 1, 2], [2, 2], [1, 2, 1], [1, 1, 1, 1], [2, 1, 1]
+
+What's the relationship?
+
+The only ways to get to N = 3, is to first get to N = 1, and then go up by 2 steps, or get to N = 2 and go up by 1 step. So f(3) = f(2) + f(1).
+
+Does this hold for N = 4? Yes, it does. Since we can only get to the 4th step by getting to the 3rd step and going up by one, or by getting to the 2nd step and going up by two. So f(4) = f(3) + f(2).
+
+To generalize, f(n) = f(n - 1) + f(n - 2). That's just the Fibonacci sequence!
+
+def staircase(n):
+    if n <= 1:
+        return 1
+    return staircase(n - 1) + staircase(n - 2)
+
+Of course, this is really slow (O(2N)) — we are doing a lot of repeated computations! We can do it a lot faster by just computing iteratively:
+
+def staircase(n):
+    a, b = 1, 2
+    for _ in range(n - 1):
+        a, b = b, a + b
+    return a
+
+Now, let's try to generalize what we've learned so that it works if you can take a number of steps from the set X. Similar reasoning tells us that if X = {1, 3, 5}, then our algorithm should be f(n) = f(n - 1) + f(n - 3) + f(n - 5). If n < 0, then we should return 0 since we can't start from a negative number of steps.
+
+def staircase(n, X):
+    if n < 0:
+        return 0
+    elif n == 0:
+        return 1
+    else:
+        return sum(staircase(n - x, X) for x in X)
+
+This is again, very slow (O(|X|N)) since we are repeating computations again. We can use dynamic programming to speed it up.
+
+Each entry cache[i] will contain the number of ways we can get to step i with the set X. Then, we'll build up the array from zero using the same recurrence as before:
+
+def staircase(n, X):
+    cache = [0 for _ in range(n + 1)]
+    cache[0] = 1
+    for i in range(1, n + 1):
+        cache[i] += sum(cache[i - x] for x in X if i - x >= 0)
+    return cache[n]
+
+This now takes O(N * |X|) time and O(N) space.
+
+Facebook Interview Questions
+
+If you would like to practice real life interview questions asked by Facebook, then here they are below. Keep in mind that it will be hard to just get everything right from the beginning. With enough practice you will become better and better, but there is an entire community of us learning, so I recommend you tackle these questions together with our online Discord community (see lesson #3 in this course for the link) and join the conversation and tackle problems in the #interview-questions channel:
+
+1. Past Facebook Interview Questions
+
+2. From Leetcode:
+
+
+#1 Two Sum    
+
+#200 Number of Islands    
+
+#20 Valid Parentheses    
+
+#121 Best Time to Buy and Sell Stock    
+
+#56 Merge Intervals    
+
+#206 Reverse Linked List     
+
+
+
+3. Bonus Interview Question asked by Facebook:
+
+Determine the 10 most frequent words given a terabyte of strings. (solution)
+
+
+Google Interview Questions
+
+If you would like to practice real life interview questions asked by Google, then here they are below. Keep in mind that it will be hard to just get everything right from the beginning. With enough practice you will become better and better, but there is an entire community of us learning, so I recommend you tackle these questions together with our online Discord community (see lesson #3 in this course for the link) and join the conversation and tackle problems in the #interview-questions channel:
+
+1. Past Google Interview Questions
+
+2. From Leetcode:
+
+#155 Min Stack   
+
+#200 Number of Islands    
+
+#20 Valid Parentheses    
+
+#42 Trapping Rain Water    
+
+#56 Merge Intervals    
+
+#681 Next Closest Time    
+
+#139 Word Break    
+
+#31 Next Permutation    
+
+
+
+3. Bonus Interview Question asked by Google:
+
+Write a function which will remove any given character from a String (solution in Java)
+
+
+
+Domain Specific Questions
+With smaller companies, you may encounter more domain specific questions when it comes to coding interviews. What does this mean? It means that the questions focus less on computer science fundamentals like Data Structures and Algorithms, and instead they focus on the technology stack that the company is actively working with. To practice these questions, I have listed a great list for you to go through based on what type of job you are applying to (React developer, Mobile developer, etc...):
+
+https://github.com/MaximAbramchuck/awesome-interview-questions
+
+Also:
+
+
+Front End Developer: https://github.com/h5bp/Front-end-Developer-Interview-Questions
+
+Javascript Interview Questions:
+
+1:
+https://www.codementor.io/@nihantanu/21-essential-javascript-tech-interview-practice-questions-answers-du107p62z
+
+2:
+https://www.toptal.com/javascript/interview-questions
+
+3:
+http://www.thatjsdude.com/interview/js2.html
+
+
+
+PS, keep in mind that it will be hard to just get everything right from the beginning. With enough practice you will become better and better, but there is an entire community of us learning, so I recommend you tackle these questions together with our online Discord community (see lesson #3 in this course for the link) and join the conversation and tackle problems in the #interview-questions channel.

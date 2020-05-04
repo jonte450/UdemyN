@@ -1,0 +1,343 @@
+Searching + Traversal Introduction
+Searching is something we are doing a lot on our computers.
+Searching is something we do every day.
+How is the computers able to search so fast.
+How is Google able to do this so fast.
+
+-Linear Search 
+-Binary Search
+-Depth First Search
+-Breadth First Search
+
+
+Linear Search
+-Linear Search is a method of finding a target value in a list.
+We have items that can be O(n) time.
+There are many ways of searching for things in a list.
+
+var beast = ['Centaur', 'Godzilla', 'Mosura', 'Minotaur', 'Hydra', 'Nessie'];
+
+beasts.indexOf(Godzilla);
+
+beasts.findIndex(function(item){
+	return item === 'Godzilla';
+});
+
+beasts.find(function(item){
+	return item === 'Godzilla';
+})
+
+beasts.includes('Godzilla');
+
+Find function is going to the actual item.
+The includes method is going to give me true or false.
+It seuquentially searches through the list until a target is found.
+We are going one by one and checking the item.
+
+Worst-case we have to check every single item.
+All of these searches is Linear searches.
+And Linear Time O(n) is okay.
+
+Binary Search
+Is it any better way to finding a number.
+What's a better way to search for items.
+We can half the list.
+
+If it's sorted we can do better than O(n).
+We are essentially searching for half of the items.
+Storing data in a Tree it gives us a better performance.
+Should we go left or right.
+That's is Divide and Conquer algortihm.
+Comparing things.
+If you are teacher you have to go one by one.
+We learn that Merge Sort and Quick Sort are doing things better.
+We check the Left Node and Right Node.
+Sometimes we have to do things like traversals.
+Perhaps we wanna add a color attribute.
+
+
+Graphs + Tree Traversals
+And the name traversals.
+We knew what we were looking for.
+We might wanna add a color property to the tree.
+We have a graph that have no order.
+You can think traversals as visiting every node.
+We have Breadth First Search and Depth First Search.
+The main benefits we don't put complex data into lists.
+When we search for things.
+We have better performance.
+Trees and Graphs are used a lot.
+
+BFS Introduction
+Let's look the first algorithm.
+You start with the root node and keep going from left to right.
+Keep going until you find the node you are looking for.
+Going one by one.
+We need to track every node in order.
+Using Breadth First Search.
+
+DFS Introduction
+Is a little a bit different.
+Continues to the nearest ancestor.
+We reached a leaf node.
+We go up to the ancestor.
+And after that going down to the second child.
+Like to think the depth-first-search as a maze.
+Until you come to the end.
+List are little more different than BFS.
+
+
+BFS vs DFS
+Like water flooding down.
+Going deep as they can.
+What's the difference between each other.
+The time complexity is O(n^(2)).
+BFS
+
+Pros
+-Shortest Path
+-Closer Node
+
+Cons
+-More memory
+
+All visits the node once.
+The one downside with BFS is it require more memory.
+But a good rule of thumb if you have the location of the target node.
+And the node is in the upper level.
+
+If you know if the node is the lower node DFS is better.
+
+DFS
+Pros
+
+-Less Memory
+-Does Path Exist?
+
+Cons 
+-Can Get Slow
+
+Resources: BFS vs DFS
+
+I wanted to add a quick note: You still have a lot to learn about these two traversal algorithms. I introduced some new topics that weren't fully explained (like space complexity and memory usage) in the previous video which we will get to when we start coding things. However, I have structured it this way so that you understand why these two algorithms are used as we go through the next couple of videos. I will intrude the bottom link later on as well when you have more of an understanding of how these algorithms work, but if you're extra curious, you can see this resource for an explanation of the difference in memory usage. If you skip this, I will still provide it in the later parts of this section:
+
+https://stackoverflow.com/questions/9844193/what-is-the-time-and-space-complexity-of-a-breadth-first-and-depth-first-tree-tr
+
+
+Solution: BFS vs DFS
+
+//If you know a solution is not far from the root of the tree:
+Breadth-First-Search because it visits the first nodes. (Correct)
+
+//If the tree is very deep and solutions are rare: 
+Breadth-First-Search (DFS will take too long) (You should check this!)
+
+//If the tree is very wide:
+Depth First Search because you visits every near node
+(BFS will need too much memory).
+
+
+//If solutions are frequent but located deep in the tree:
+Depth-First-Search because you go down very deep in the tree.
+(Correct)
+
+//Determining whether a path exists between two nodes:
+Depth-First-Search (You Should Check This!) 
+
+//Finding the shortest path:
+Breadth-First-Search 
+(Correct) 
+
+
+breadthFirstSearch()
+We will need to keep a reference to the memory.
+As it goes through this level.
+Also notice the path it takes.
+We will use a queue data-structure.
+We need three things.
+
+breadthFirstSearch(){
+	let currentNode = this.root;
+	let list = [];
+	let queue = [];
+	queue.push(currentNode);
+
+	while(queue.length > 0){
+	 currentNode = queue.shift();
+	 list.push(currentNode.value);
+	 if(currentNode.left){
+	   queue.push(currentNode.left);
+	 }
+
+	 if(currentNode.right){
+	  queue.push(currentNode.right);
+	 }
+	 return list;
+
+	}
+}
+
+We see from the code that is quite simple.
+The Queue can get very large.
+Downsides of the breadthfirstsearch().
+
+
+breadthFirstSearchRecursive()
+
+breadthFirstSearchR(queue,list){
+	if(!queue.length){
+	   return list;
+	}
+	const currentNode = this.queue.shift();
+	if(currentNode.left){
+	   queue.push(currentNode.left);
+	 }
+
+	 if(currentNode.right){
+	  queue.push(currentNode.right);
+	 }
+	 return breadthFirstSearch(queue, list);
+
+}
+
+PreOrder,Inorder, PostOrder
+But what about Depth First Searc.
+
+There are three ways we can implement this.
+-inorder- 33 , 101, 105
+It gives the tree in order.
+
+-preorder- 101, 33 ,105
+Grabs the child node from left to right.
+
+-postorder- 33 , 105 , 101
+We goes to all the lasts nodes down and grabs them and then going up.
+The children comes before the parent.
+
+
+depthFirstSearch()
+We are gonna use recursion.
+With Recursion we are going to call things.
+Start with the this.root and the an empty list.
+
+-Inorder
+
+Inorder it's going to give us a list of node in order.
+if node.left and if it does it will traverse the left-side.
+Push the node and after that check if it is any node to the right.
+
+-Preorder
+The only difference is that we only wanna push at the beginning.
+
+-PostOrder
+Will have to push at the very end of the function.
+
+
+
+DFTPreOrder(currentNode, list) {
+    return traversePreOrder(this.root, []);
+  }
+  DFTPostOrder(){
+    return traversePostOrder(this.root, []); 
+  }
+  DFTInOrder(){
+    return traverseInOrder(this.root, []);
+  } 
+}
+
+function traversePreOrder(node, list){
+  list.push(node.value);
+  if(node.left) {
+    traversePreOrder(node.left, list);
+  }
+  if(node.right) {
+    traversePreOrder(node.right, list);
+  }
+  return list;
+}
+
+function traverseInOrder(node, list){
+  if(node.left) {
+    traverseInOrder(node.left, list);
+  }
+  list.push(node.value);
+  if(node.right) {
+    traverseInOrder(node.right, list);
+  }
+  return list;
+}
+
+function traversePostOrder(node, list){
+  if(node.left) {
+    traversePostOrder(node.left, list);
+  }
+  if(node.right) {
+    traversePostOrder(node.right, list);
+  }
+  list.push(node.value);
+  return list;
+}
+
+We are using a stack-datastructure.
+
+Optional Exercise: Validate A BST
+A very common question you will get asked in an interview is how to validate a binary search tree! Give it a go (hint, you want to use BFS for this)!
+
+Graph Traversals
+Tree is just a type of a graph.
+We can now see which types of items that are related.
+See kind of friends-request to send.
+How Google Maps works.
+
+Breadth First Search - Shortest Path
+Depth First Search - Check to see if it exists a path
+
+
+BFS in Graphs
+Play with visual algo.
+Determine the shortest path.
+Allows us to create tree.
+
+Pros
+-Shortest Path
+-Closer Nodes
+
+Cons
+-More Memory
+
+DFS in Graphs
+Is like solving a maze.
+Look at program.
+Go as deep you can.
+Idea of backtracking.
+
+Pros
+-Less Memory
+-Does Path Exist?
+
+Cons
+-Can Get Slow.
+
+Djikstra + Bellman-Ford Algorithms
+To use Djikstra and Bellman-Ford Algorithms.
+BFS assumes that each jump has the same weight.
+We don't care about the weight.
+Some Graphs has weights between each node.
+The answer is 
+-Djikstra
+-Bellman
+
+Djikstra if there are no negative weight's on the graph.
+ Richard Bellman.
+https://medium.com/basecs/finding-the-shortest-path-with-a-little-help-from-dijkstra-613149fbdc8e
+
+Searching + Traversal Review 
+-Linear Search
+-Binary Search
+Able to search through things in log n time.
+-Depth First Search
+Goes as deep as possible.
+-Breadth First Search
+Vistis the neighbour nodes.
+
+
