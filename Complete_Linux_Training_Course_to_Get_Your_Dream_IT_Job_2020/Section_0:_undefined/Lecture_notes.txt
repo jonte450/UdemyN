@@ -1,0 +1,61 @@
+Good News
+All these the students followed my modules got the job.
+
+Syllabus Overview 
+Best course out there.
+Broken down into 10 sections.
+
+Module 1 - Understanding Linux Concepts
+-What is Linux
+-Everyday use of Linux
+-Unix vs. Linux
+-Quizzes, Homework and Handouts
+
+Module 2 - Download,Install And Configure
+-What is Oracle Virtual Box?
+-Downloading and Installing Oracle Virtual Box
+-Creating virtual machine
+-Different way to install Linux
+-Downloading and Installing Linux (CentOS) 
+
+-Redhat Linux Installation (Optional)
+-Linux Desktop
+-VM Management
+-Linux vs. Windows
+-Quizzes, Homework and Handouts
+
+Module 3 - System Access And File System
+-Command Prompts and Getting Prompts Back
+-Accessing Linux System (ssh, terminal console)
+-Download and install Putty and connect via Putty
+-Important Things to Remeber In Linux
+-Introduction to File System and description
+-File System navigation commands
+
+-File System Paths(Absolute and Relative)
+-Directory listing overview
+-Creating files and directories (touch,cp, vi,mkdir,etc)
+-Finding files and directories (find, locate, updatelb)
+-Wildcards 
+-Soft and hard links
+-Quizzes, Homework and Handouts.
+
+Module 4 - Linux Fundamentals.
+
+Module 5 - System Adminstration
+
+Module 6 - Shell Scripting
+
+Module 7 - Networking, Servers and System Updates
+
+Module 8 - Disk Management and Run Levels
+
+Module 9 - All About Resume
+
+Module 10 - All about Interview
+
+
+
+Download Syllabus
+
+Thank You

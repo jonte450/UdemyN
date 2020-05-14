@@ -1,0 +1,88 @@
+Welcome To Module 1
+
+Understanding Linux Concepts
+
+Everyday Linux
+-Airplane
+-Internet Access
+-TV
+-Websites
+-Smartphones
+-Tablets
+-Windows Data Recovery Disc
+-Appliances 
+-Self Driving Cars
+
+What is Linux?
+Operating System.
+
+Linux is an Operating System which sits in the middle of your hardware and users.
+
+Bridge takes commands from the users.
+
+We have the tray inserts the cd.
+cd has the operating system.
+
+Attach external devices to it.
+You use these mouse and keyboards.
+Operating systems takes the commands and sends it to the printers.
+
+
+Unix vs. Linux
+
+-Unix was first developed for multi-user and multi-tasking in mid-1970 in Bell Labs by ATT, GE and Massachuttes institute of Technology.
+
+-Then born Linux in 1991 by Linux Torwalds
+
+-Linux is mostly free
+
+-Linux is open source
+
+-Unix is mostly used by Sun as Solaris, HP-UX, AIX etc.
+
+-Linux is used by many developers community or companies (Redhat, CentOS, Debian) etc
+
+-Unix comparatively supports very fewer File systems.
+
+-Linux can be installed on a wide variety of computer hardware, ranging from mobile phones, tablets, video game consoles, to mainframes and supercomputers.
+
+
+Quiz 1: Module 1 Quiz
+Question 1:
+What is Linux?
+
+It is an operating system.
+
+Question 2:
+Which one of the following is correct?
+
+Hardware -> Operating System -> Applications -> Users
+
+Question 3:
+Which of the following is incorrect?
+
+Commands used in Linux are exactly same as Windows DOS commands
+
+Question 4:
+Unix was first developed in which decade?
+1970-1980
+
+Question 5:
+Who came up with Linux?
+Linus Torwalds
+
+Question 6:
+Which of the following is correct?
+
+
+Question 7:
+Unix is mostly used by?
+Oracle/Sun
+HP-UX
+AIX
+
+
+
+Module 1 Homework
+
+Module 1 Handouts

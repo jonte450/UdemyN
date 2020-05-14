@@ -1,0 +1,6 @@
+Introduction and Course Overview
+Resulting practices.
+You see downloades in the resoucrces downloadable.
+unzip -d shellclass shellclass.zip
+In the shellclass contains exercises and demonstration.
+

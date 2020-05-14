@@ -1,0 +1,81 @@
+Creating a Local Lab Enviroment Using Vagrant and Virtualbox-Background
+Linux image design.
+-Run Linux inside virtual machines.
+-VirtualBox (http://virtualbox.org)
+-Free to download and easy to install
+-Perfect
+
+
+VirtualBox
+-Provides full virtualization
+-Creates virtual machines
+-Physical computer = host
+-Virtual computer = guest
+-Guest OS thinks it's using real hardware
+
+-Allows the guest to access shared folders on the(if you configure them)
+-Allows for shared clipboards (if you enable them).
+-Better video performance
+-More...
+
+Download a ISO-file.
+Install CentOS 7.
+
+-It's time consuming
+-Let's automate it!
+
+Vagrant.
+
+-Easy to configure, reproducible enviroments
+-Provisions VirtualBox Virtual Machines.
+
+Vagrant Boxes
+-Box=Operating System Image
+-vagrant box add USER/BOX
+-vagrant box add jasonc/centos7
+
+You only need to download an image once.
+
+Vagrant Projects
+-Vagrant Project = Folder with a Vagrantfile
+-mkdir vm1
+-cd vm1
+-Now initialize the Vagrant project:
+-vagrant init jasonc/centos7
+
+Vagrant Up
+-vagrant up
+-Vagrant will import the box into VirtualBox and start it.
+-The VM is started in headless mode.
+
+Vagrant Up/Multi-Machine
+-vagrant up [VM_NAME]
+-vagrant up master
+-vagrant up server1
+
+SSH-Secure Shell
+-vagrant ssh [VM_NAME]
+-exit
+
+Vagrant
+-vagrant halt [VM] Stops the VM
+-vagrant up [VM] Starts the VM
+-vagrant suspend [VM] Suspends the VM
+-vagrant resume [VM] Resumes the VM
+-vagrant destroy [VM] Removes the VM
+-vagrant List options
+
+Vagrantfile
+vgrant.configure(2) do |config|
+-config.vm.box = "jasonc/centos7" end
+-config.vm.hostname = "linuxsvr1"
+-config.vm.network "private_network", ip: "10.2.3.4"
+-config.vm.provision "shell", path: "setup.sh"
+-config.vm.provider "virtualbox" do |vb| 
+  vb.gui = true
+  vb.memory = "1024"
+  end
+end
+
+
+
