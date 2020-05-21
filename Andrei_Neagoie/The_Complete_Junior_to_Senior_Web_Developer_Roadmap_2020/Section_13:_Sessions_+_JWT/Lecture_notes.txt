@@ -1,10 +1,56 @@
 Section Overview
+Any time you users and registration.
+Make so that users can sign-in.
+Build session management over and over again.
+You can do this incorrectly.
+Learn about JWT + Sessions.
+By the end of this you are going to manage it.
+
 
 Coockies vs Tokens
+POST request and send the username and password.
+Send back a response.
+Send back a coockie.
+Next time the user log-in.
+It sends a coockie.
+Yes i have this coockie.
+Coockie based is something we can check.
+Once the users logged out the session is destoryed.
+Both on the client and server side.
+
+The most common JWT-token.
+A user logsin.
+The server checks the password.
+Instead of a coockie it's going to send a token back.
+Stored in the browser.
+When the JWT token is sent.
+The user doesn't need to store it.
+It can simply verified the token.
+Token is stateless.
+When the token is destoryed on the client-side.
+
+Pros
+-Stateless
+-Have things like userid
+-Makes easy to work with API's
+
+Cons
+-Are a lot bigger
+-Token can be decrypted very easy
 
 What are we building
+We are sign-in.
+And then we are generate a JWT token.
+The browser is running the token.
+The browser is remebering the coockie.
+You have something like Redis.
+Check the Redis Database.
+The Redis is going to hold the JWT token.
+We are combining the JWT token and coockie.
+
 
 JWT
+
 
 Project Goals
 

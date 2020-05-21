@@ -1,0 +1,508 @@
+Linux Command Syntax
+You run a command.
+
+-Command options
+
+Commands typically have the syntax:
+		command option(s) argument(s)
+
+Options:
+	Modify the way that a command works
+	Usually consist of a hyphen or dash followed by a single letter
+	Some commands accept multiple options which can usually be grouped togheter after a single hyphen
+
+
+Arguments:
+Most commands are used togehter with one or more arguments.
+Some commands assume a default argument if none is supplied.
+Arguments are optional for some commands and require by others.
+
+Which directory you are in!.
+
+
+Files and Directory Permissions(chmod)
+How you can change the permissions for your files.
+
+-Unix is a multi-user system. Every file and directory in your account
+ can be protected from or made accessible to other users by changing its acces permissions. Every user has responsibility for controlling access to their files.
+
+-Permissions for a file or directory may be restricted to by types.
+ 
+-There are 3 type of permissions
+ -r - read
+ -w - write
+ -x - execute = running a program
+
+-Each permission (rwx) can be controlled at three levels
+ -u - user = yourself
+ -g - group = can be people in the same project
+ -o - other = everyone on the system
+
+-File or Directory permission can be displayed by running ls -l command
+ -rwxrwxrwx
+
+-Command to change permission
+ -chmod
+
+
+
+File Permissions Using Numeric Mode
+-Permission to a file and directory can also be assigned numerically
+ - chmod ugo+r FILE
+ or
+ - chmod 444 FILE
+
+We can have different permissons.
+That is represented by numbers.
+
+
+File Ownership Commands (chown, chgrp)
+-There are 2 owners of a file or a directory
+ -User and group
+
+-Command to change file ownership
+ -chown and chgrp
+  -chown changes the ownership of a file
+  -chgrp changes the group ownership of a file
+
+
+
+-Recursive ownership change option (Cascade)
+ -R
+
+
+Access Control List (ACL)
+Look into Access Control List.
+Addtional layer.
+
+What is ACL?
+-Access control list (ACL) provides an additional, more flexible 
+ permission mechanism for file systems It is designed to assist with UNIX file permissions. ACL allows you to give permissions for any user or group to any disc resource.
+
+Use of ACL:
+-Think of a scenario in which a particular user is not a member of group 
+ created by you but still you want to give some read or write access, how can you do it without making user a member of group, here comes in picture Access Control Lists, ACL helps us to do this trick.
+
+-Basically ACLs are used to make a flexible permission mechanism in 
+ Linux.
+
+-From Linux man pages, ACLs are used to define more fine-grained 
+ discretionary access rights for files and directories.
+
+-Commans to assign and remove ACL permissions are:
+	setfac1 and getfac1.
+
+Allow a file by file created by root.
+You want the user to read the file.
+We only one user to read that.
+And you give the user a permissions via ACL.
+
+
+List of commands for setting up ACL:
+
+1)To add permission for user.
+  setfac1 -m u:user:rwx /path/to/file
+
+2)To add permissions for a group
+  setfac1 -m g:group:rw /path/to/file
+
+3) To allow all files or directories to inherit ACL entries from the 
+   directory it is within
+   setfac1 -dm "entry" /path/to/dir
+
+4) setfac1 -x u:user /path/to/dir
+
+
+5) To remove all entries
+   setfac1 -b path/to/file
+
+getfcl tx
+To get information about the user access.
+
+setfcl -m u:iafazal:rw /tmp/tx
+
+
+Help Commands
+-There are 3 types of help commands
+ -whatis
+ -command --help
+ -man command
+
+
+TAB Completion and Up Arrow Keys
+-Hitting TAB completes the available commands, files or directories
+ -chm TAB
+ -ls j<TAB>
+ -cd Des<TAB>
+
+-Hitting up arrow key on the keyboard returns the last command ran.
+
+ch tab tab 
+List all commands.
+
+
+Adding Text to Files
+-3 Simple ways to add text to a file
+ -vi
+ -Redirect command output > or >>
+ -echo > or >>
+
+echo "my name is Imran".
+
+We add with > redirect and the file name.
+
+
+Standard Output to a File (tee command)
+
+-"tee" command is used to store and view (both at the same time) the 
+  output of any command.
+
+-The comman is named after the T-splitter used in plumbing. It basically 
+ breaks the output of a program so that it can be both displayed and saved in a file. It does both the tasks simultaneously, copies the result into the specified files or variables and also display the result.
+
+command -> tee -> stdout
+            |
+            V
+           file
+
+echo "David Putty is Elaine's boy friend!" | tee eliane-david
+echo "David Putty is Elaine's boy friend!" | tee -a eliane-david
+
+
+
+Pipes (|)
+-A pipe is used by the shell to connect the output of one command 
+ directly to the input of another command.
+
+The symbol for a pipe is the vertical bar (|). The command syntax is:
+
+command1 [arguments] | command2 [arguments].
+
+ls -l | more 
+
+Shows one page at the time.
+ls -ltr | more
+
+
+File Maintenance Commands (cp, rm, mv, mkdir, rmdir)
+-cp (Copies a file).
+-rm (Removes a file).
+-mv (Moves a file or renames a file).
+-mkdir (Create a directory).
+-rmdir or rm -r (Removes a directory)
+-chgrp
+-chown
+
+cp george david
+cp david /tmp
+
+touch apu
+
+
+File Display Commands (cat, less, more, head, tail)
+-cat (Views the entire content of file).
+-more (Views one page at a time)
+-less (Views one row at a time)
+-head (Views the beginning)
+-tail (Views the end of a page)
+
+
+
+Filters / Text Processing Commands
+-cut (It takes the input and cuts to a desired output)
+-awk (List by coloumns)
+-grep and egrep
+-sort (Sorts out the output)
+-uniq (Will not show any duplicates)
+-wc (Word count)
+
+
+
+cut - Text Processors Commands
+-Cut is a command line utility that allows you to cut parts of lines 
+ from specified files or piped data and print the result to standard output. It can be used to cut parts of a line by delimeter, byte position, and character
+
+-cut filename = Does not work
+
+-cut --version = Check version
+
+-cut -cl filename = List one character
+
+-cut -cl1,2,4 = Pick and choose characters
+
+-cut -cl-3 filename = List range of characters
+
+-cut -cl 3, 6-8 filename = List specific range of characters
+
+-cut -b1-3 filename = List by bytes size   
+
+
+awk - Text Processors  Commands
+-awk is a utility/language designed for data extraction. Most of the time it is used to extract fields from file or from an output.
+
+-awk version (Check version)
+-awk '(print $1)' file (List 1 field from a file)
+-ls -l | awk '{print $1, $3}' (List 1 and 3d field of ls -l output)
+-ls -l | awk '{print $NF} ' (Last coloumn)
+-awk '/Jerry/ (print)' file (Search for a name)
+-awk -F '(print $1' etc/password (Output only password)
+-echo "Hello Tom" | awk '{$2="Adam"; print $0}' (Replace words fields)
+
+
+grep/egrep - Text Processors Commands
+-What is grep?
+ -The grep command which stands for "global regular expression print", 
+  processes text line by line and prints any line which match a specified pattern.
+
+Search feature in Linux.
+
+-grep --version OR grep --help (Check version or help)
+-grep keyword file        (Search for a keyword from a file)
+-grep -c keyword file     (Search for a keyword and count)
+-grep -i KEYword file     (Search for a keyword ignore case-sensitive)
+-grep -n keyword file (Display the matched lines and their line numbers)
+-grep -v keyword file (Display everything but keyword)
+-grep keyword file | awk '{print $1}' 
+(Search for a keyword and then only give the 1st field)
+
+egrep -vi "keyword|keyword2" file
+
+Get's two keywords instead for one.
+
+
+
+sort/uniq - Text Processors Commands
+  -What are sort and uniq commans
+    -Sort command sorts in alphabetical order
+    -Uniq command filters out the repeated or uplicate lines
+
+  -sort --version OR sort --help (Check version or help)
+  -sort file (Sorts file in alphabetical order)
+  -sort -r file (Sorts file in reverse order)
+  -sort -k2 file (Sorts file by k2 number)
+  -uniq file 
+  -sort file | uniq -c (Count how many times it occurred)
+  -sort file | uniq -d (Only show the repeated lines)
+
+
+
+  Always use sort file | uniq
+
+
+wc - Text Processors Commands
+-The command reads either standar input or a list of files and generates:
+ newline count, word count, and byte count.
+
+-wc --version OR wc --help (Check version)
+-wc file (Check file line count, words, bytes)
+-wc -l file (Only number of lines)
+-wc -w file (Only number of words)
+-wc -c file (Only number of bytes)
+-wc DIRECTORY (Not Allowed)
+-ls -l | wc -l (Number of files)
+Always number of files - 1.
+
+
+Compare Files (diff and cmp)
+-diff (Line by line)
+-cmp (Byte by byte)
+
+
+Compress and Uncompress (tar, gzip, gunzip)
+-tar
+-gzip
+-gzip -d OR gunzip
+
+
+Truncate File Size(truncate)
+-The Linux truncate command is often used to shrink or extend the size 
+ of a file to the specified size.
+
+-Command
+ - truncate -s 10 filename
+
+
+Combining and Splitting Files
+-Multiple Files can be combined into one and
+-One file can be split into multiple files
+split
+
+
+Linux vs. Windows Commands
+Certain time you have to work with Windows.
+But mostly it is going.
+Does Windows have a command line.
+
+They have some commands that does the same thing.
+
+
+Quiz 4: Module 4 Quiz
+
+
+Question 1:
+Which command syntax is correct if you want to assign read only permission to everyone and write permission to the owner of the file?
+
+chmod a+r filename
+chmod u+w filename
+
+Question 2:
+Which command is used to change file ownership?
+chown
+
+Question 3:
+Why do we need pipes?
+
+To further process the output of the preceding command
+
+Question 4:
+List 3 basic commands of file navigation?
+ls, pwd , cd
+
+Question 5:
+Which command is used to remove a directory?
+rm -r DIRECTORYNAME
+
+Question 6:
+Which command is used to change group ownership of a file?
+chgrp
+
+Question 7:
+What are the different ways to view a file?
+-cat
+-vi
+-more
+-less
+
+
+Question 8:
+How to rename a file?
+mv
+
+Question 9:
+Which command is used to search for a key word or pattern in a file?
+grep
+
+Question 10:
+What is the purpose of sort command?
+-It sorts the output of a command.
+-It sorts the output of a file.
+
+Question 11:
+Why do we need to use help or man commands?
+It helps us to remeber the purpose of a command and options.
+
+Question 12:
+What happens when you run the following command:
+
+echo "Today is Sunday" >> testfile
+
+It appends testfile with "Today is Sunday"
+
+Question 13:
+Which of the following is used to add read and write permission to the owner and group of the source.txt file?
+
+chmod ug+rw source.txt
+
+Question 14:
+What is the output of command wc -l file.txt if the file contents are:
+
+firstline
+
+secondline
+
+thirdline
+
+fourthline
+
+4 file.txt
+
+
+
+Question 15:
+There are 10 lines in a file, how do yo print lines between 6 and 9 (all Inclusive)
+
+
+cat someonefile.txt | tail -5 | head -4
+
+
+
+
+Module 4 Homework
+
+-Practice Linux command syntax with command, options and arguments
+
+-List files in your home directory by the last time they were modified
+
+-Move jerry, george, kramer and puddy files into seinfeld directory
+
+-Move homer, bart, marge, lisa files in simpsons directory
+
+-Move clark, luther and lois files in superman directory
+
+-List the content of seinfeld directory by the last time they were 
+ modified
+
+-Create 2 new files in seinfeld directory, eliane and newman
+
+-change file permission of eliane to remove read access from everyone
+
+-change file permission of newman to add write permissions to only group
+
+-Become root and cd into your home directory (e.g. /home/iafzal). Then 
+ create 2 new files superman and zad in superman directory
+
+-Change ownership of zad file from root to your username
+
+-Change group ownership of zad from root to your username
+
+-Then move superman file to /tmp directory
+
+-Remove superman file from /tmp directory
+
+-Exit out of root account
+
+-Go back to superman directory in your home directory and add this line
+ to zad file "zad is a bad character in superman movie"
+
+-Then go seinfeld directory and create a new file seinfeld.  
+
+-Add 5 seinfeld characters name in seinfeld file. Jerry Seinfeld, George 
+ Costanza, Eliane Benis, Cosmo Kramer, and David Puddy
+
+-Become root user again
+
+-Do cat /var/log/messages and output to a file called mesg-new in your 
+ home directory (e.g. /home/iafzal)
+
+-Read the mesg-new file with cat, more and less commands and practice
+
+-View the first 10 lines of mesg-new file and output to a file name 
+ mesg-h10
+
+-View the last 20 lines of mesg-new file and output to a file name
+ mesg-t20
+
+-Exit out of root user
+
+-Go to seinfeld directory in your home director and create a new 
+ directory "seinfeld-characters"
+
+-Add text to seinfeld-character file using echo command.  Each 
+ character  should be in one line, "Jerry Seinfeld, Cosmo Kramer, Eliane Benes,  George Costanza, Newman Mailman, Frank Costanza, Estelle Costanza, Morty  Seinfeld, Helen Seinfeld, Babes Kramer, Alton Benes, J Peterman, George  Steinbrenner, Uncle Leo, David Puddy, Justin Pit and Kenny Bania"
+
+-Use cut command to cut the first 4 letters of each line from 
+ seinfeld-characters file and output to a different file name (name = filters-files)
+
+-Use awk command to get only the 2nd column of seinfeld-characters and 
+ output to the filters-files without removing any other text from it
+
+-Use grep command to only grep seinfeld and output to a new file call it 
+ seinfeld-family
+
+-Use sort command, uniq and wc command to practice whichever way you 
+ like by creating new files or working with existing files
+
+Module 4 Handouts
+
+
+
