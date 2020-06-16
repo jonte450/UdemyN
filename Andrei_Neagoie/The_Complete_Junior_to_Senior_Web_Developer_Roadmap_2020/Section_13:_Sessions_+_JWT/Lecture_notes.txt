@@ -50,59 +50,702 @@ We are combining the JWT token and coockie.
 
 
 JWT
+Finialize our knowledge.
+Applicaton storage section.
+There we have coockies.
+These Coockies doesn't mean anything.
+JWT tokens are decoded.
+So evertime you decode the token you can verify it.
+On jwt.io
 
 
 Project Goals
+Adding some feature to our API.
+Implement sessions.
+Free access to sign-in.
+We don't really asking anything from sign-in.
+We are going to use Redis and look like real-world application.
+
 
 Profile Icon
+Have a profile picture.
+React-Strap library.
+We can use a ton of things.
+It is going to conflict with our other libraries.
+
+npm install reactstrap
+
+We also need bootstrap.
+
+We place it like this to avoid to make it overwritten.
+
+
+import bootstrap/dist/css/bootstrap.min.css;
+import 'tachyons';
+import ./index.css;
+
+Make our route = 'home';
+
+Build the circular icon.
+
+Create a File.
+
+Profileicon.js
+
+import React from 'react';
+
+class ProfileIcon extens React.Component {
+	constructor(props){
+	 super(props);
+	 this.state = {
+	  dropdown: false;
+	 }
+	}
+
+	render(){
+	 return (
+	 <div class="pa4 tc">
+	  <img 
+	    src="http://tachyons.io/img/logo.jpg"
+	    class="br-100 ba h3 w3 dib" alt="avatar"/>
+
+	  </div>  
+	 )
+
+	}
+
+}
+
+export default ProfileIcon;
+
+We add the profileIcon as a component in the App.js file.
+
 
 Profile Dropdown
 
+Profileicon.js
+
+import React from 'react';
+import {Dropdown,
+        DropdownToogle,
+        DropdownMenu,
+        DropdownItem
+    } from 'reactstrap';
+
+
+
+class ProfileIcon extens React.Component {
+	constructor(props){
+	 super(props);
+
+	 this.toogle = this.toogle.bind(this);
+
+	 this.state = {
+	  dropdown: false;
+	 }
+	}
+    //Any time your update the state
+    //Act upon it
+
+	toogle = () => {
+	 this.setState(prevState => ({
+	   dropdownOpen: !prevState.dropdownOpen
+	 }));
+	}
+
+	render(){
+
+	 return (
+	 <div className="pa4 tc">
+	 <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+      <DropdownToogle 
+       tag="span"
+       data-toogle="dropdown"
+       aria-expaned={this.state.dropdownOpen}
+       >
+        <div class="pa4 tc">
+	  <img 
+	    src="http://tachyons.io/img/logo.jpg"
+
+	    class="br-100 ba h3 w3 dib" alt="avatar"/>
+
+       </DropdownToogle>
+      <DropdownMenu className='b--transparent shadow-5' style={{marginTop: '20px', backgroundColor: 'rgba(255,255,255,0.5)'}}>
+        <DropdownItem header>View Profile</DropdownItem>
+        <DropdownItem>Signout</DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+
+
+	
+	 )
+
+	}
+
+}
+
+export default ProfileIcon; 
+
+The first thing we want to check out isOpen.
+We can have a dropdown with view-profile and sign-out.
+Remove Onclick function.
+
+
+
 Profile Styling
+
+Profileicon.js
+
+import React from 'react';
+import {Dropdown,
+        DropdownToogle,
+        DropdownMenu,
+        DropdownItem
+    } from 'reactstrap';
+
+
+
+class ProfileIcon extens React.Component {
+	constructor(props){
+	 super(props);
+
+	 this.toogle = this.toogle.bind(this);
+
+	 this.state = {
+	  dropdown: false;
+	 }
+	}
+    //Any time your update the state
+    //Act upon it
+
+	toogle = () => {
+	 this.setState(prevState => ({
+	   dropdownOpen: !prevState.dropdownOpen
+	 }));
+	}
+
+	render(){
+
+	 return (
+	 <div className="pa4 tc">
+	 <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+      <DropdownToogle 
+       tag="span"
+       data-toogle="dropdown"
+       aria-expaned={this.state.dropdownOpen}
+       >
+        <div class="pa4 tc">
+	  <img 
+	    src="http://tachyons.io/img/logo.jpg"
+
+	    class="br-100 ba h3 w3 dib" alt="avatar"/>
+
+       </DropdownToogle>
+      <DropdownMenu className='b--transparent shadow-5' style={{marginTop: '20px', backgroundColor: 'rgba(255,255,255,0.5)'}}>
+        <DropdownItem header>View Profile</DropdownItem>
+        <DropdownItem onClick={this.props.onRouteChange('signout')}>Sign Out</DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+
+
+	
+	 )
+
+	}
+
+}
+
+export default ProfileIcon;
+
+We got to the navigation-tab and remove the p-tag with sign-out.
+We pass down the onRouteChange to the profileIcon.js file.
+
+We go back to app.js.
+We have the route sign-in.
+
+We have things like strange css-baviour.
+Somebody is calling the important element.
+
+We create a new class css.
+Override the class-
+
+.hover-black:hover {
+	background-color: #000 !important;
+}
+
+
 
 Profile Modal 1
 
+Nice to have an modal.
+Update it accordingly.
+Big problem to setup portals.
+We wanna make sure we have another portals.
+We can transfer props between components.
+
+<div id="modal-root"><div>
+
+import Modal from './components/Modal/Modal';
+
+We create a new component called Modal.js
+
+
 Profile Modal 2
 
+import React from 'react';
+import ReactDom from 'react-dom';
+import './Modal.css';
+
+const modalRoot = document.getElementById('modal-root');
+
+class Modal extends React.Component {
+	constructor(props){
+	 super(props);
+	 this.el = document.createElement('div');
+	}
+
+    componentDidMount(){
+      modalRoot.appendChild(el);
+    }
+
+    componentWillUnmount(){
+      modalRoot.removeChild(el);
+    }	
+
+	render(){
+	  return ReactDOM.createPortal(this.props.children, this.el);
+	}
+}
+
+export deafult Modal;
+
+Add css file.
+
+#modal-root {
+	position: relative;
+	z-index: 999;
+}
+
+Inside the modal component create an new component called Profile.
+
+Add a new method called:
+
+toogleModal = () => {
+	this.setState({
+	isProfileOpen: !this.state.isProfileOpen
+	})
+
+}
+
+Create a new file called profile.js.
+
+import React from 'react';
+import './Profile.js';
+
+const Profile = ({ isProfileOpen, toogleModal}) => {
+	return <div className="br4 ba
+	  b-black">
+	  <button onClick={toogelModal}> Click </button>
+	  </div>;
+}
+
 Profile Modal 3
+import React from 'react';
+import './Profile.css';
+
+const Profile = ({ isProfileOpen, toogleModal }) => {
+	
+	return(
+	 <div className="profile-modal">
+
+     Adding registration page.
+
+     Adding user information.
+
+	 </div>
+
+	)
+
+}
+
+Keep adding events and options.
+
 
 Profile Modal 4
 
+In order to use sessions.
+And up until now.
+We wanna update profiles.
+Using sessions to access the profile.
+Nothing is protected on the end-point.
+We create a view-profile experience.
+Make the profile dynamic.
+We have an user Profile that's get's filled in.
+After sign-in happens we loads the user.
+Create a template string where we can add values.
+Add user.age, user.name.
+
+
+
 Updating Profile 1
+We are creating a 
+app.post('/profile/:id', (req, res) => {profile.handleProfileUpdate(req , res, db)});
+
+Now let's build the handleProfileUpdate.
+
+
+const handleProfileUpdate = (req, res, db) => {
+	const {id } = req.params;
+	const {name , age, pet} = req.body.formInput;
+	db('users')
+	  .where({id })
+	  .update({ name })
+	  .then( resp => {
+	    if(resp){
+	     res.json("success")
+	    } else {
+	      res.status(400).json('Unable to update');
+	    }
+	  })
+	  .catch(err => res.status(400).json('error updating user'))
+}
+
+Using Postman.
+Building your own API.
+You must use Postman.
+
+{
+	"formInput": {
+	  "name": "Johnny",
+	  "age" : 54,
+	  "pet" : "cat"
+	}
+} 
+
+Success 
 
 Updating Profile 2
+Whenever we are updating the information.
+
+const Profile extends React.Component = ({
+		constructor(props){
+		 super(props);
+		 this.state = {
+		  name: this.props.user.name,
+		  age: this.props.user.age,
+		  pet: this.props.user.pet
+		 }
+		}
+
+ })
+
+Avoiding rerender the components.
+Solve it with a submit button.
+
+onFormChange = (event) => {
+	switch(event.target.name){
+	  case 'user-name':
+	    this.setState({name: event.target.value})
+	    break;
+	  case 'user-age':
+	    this.setState({age: event.target.value})
+	    break;
+	  case 'user-pet':
+	    this.setState({pet: event.target.value})
+	    break;
+	  default:
+	    returns;
+
+	}
+}
 
 Updating Profile 3
+Creating a new method.
+
+onProfileUpdate = (data) => {
+	fetch(`http://localhost:3000/profile/:id${this.props.user.id}`,{
+	method: 'post',
+	headers: {'Content-Type': 'application/json'},
+	body: JSON.stringify({ formInput: data})
+	}).then(resp => {
+	 this.props.toggleModal();
+	 this.props.loadUser({...this.props.user, ...data});  
+	}).catch(console.log);
+
+}
+
+We are creating a onClick event to updateTheProfile.
+
 
 User Authentication
+We are going to sign-in to our app.
+Next time accessing the JWT token.
+We are going to generate the JWS token.
+We need to generate a token.
+
+app.post('/signin', sign.signinAuthentication(db, bcrypt));
+
+const getAuthTokenId = () => {
+  console.log('auth ok');
+}
+
+const signinAuthentication = (db, bcrypt) => (req, res) => {
+
+ const { authorization } = req.headers;
+ return authorization ? getAuthTokenId() : 
+ handleSignin(db, bcrypt, req, res)
+ .then(data => res.json(data))
+ .catch(err => res.status(400).json(err));
+  
+}
+
+Make sure that we are returning the promise.
+
 
 Sending The JWT Token
 
+const signinAuthentication = (db, bcrypt) => (req, res) => {
+
+ const { authorization } = req.headers;
+ return authorization ? getAuthTokenId() : 
+ handleSignin(db, bcrypt, req, res)
+ .then(data => {
+   data.id && data.email ? createSessions(data) : Promise.reject(data))
+ .then(session => res.json(session))  
+ .catch(err => res.status(400).json(err)
+ });
+  
+}
+
+
+const signToken = (email) => {
+	const jwtPayload = {email}
+	return jwt.sign(jwtPayload , 'JWT_SECRET', {expiresIn: '2 days'});
+}
+
+const createSessions = (user) => {
+	//JWT token return user data
+	const  {email , id} = user;
+	const token = signToken(email);
+	return { success: 'true' , userId: id, token}
+}
+
 Adding Redis
+There another step.
+We are going actually storing it in a Redis-database.
+Revoke the token by deleting them from the database.
+This gives us a lot of power.
+
+npm install redis.
+
+docker-compose up.
+
+const redis = require('redis');
+
+//setup Redis
+const redisClient = redis.createClient({host: '127.0.0.1'});
+
 
 Exercise: #3 Adding Redis to Docker Compose
 
+As you saw in the previous video, we need to add the Redis service to our Docker Compose file. See if you can get this set up on your own by using what you have learned in previous videos. If you get stuck, you can either go ask for help in the #juniortosenior channel on Discord, or you can watch the next video for the solution.
+
+Have fun!
+
+
 Solution: #3 Adding Redis to Docker Compose
 
+#Backend API
+
+smart-brain-api:
+  container_name: backend
+  build: ./
+  command: npm start
+  working_dir: /usr/src/smart-brain-api
+  enviroment:
+    POSTGRES_URI:postgres://sally:secret@postgres:5432/smart-brain-docker
+    REDIS_URI: redis://redis:6379
+  links:
+     - postgres
+     - redis
+  ports:
+     - "3000:3000"
+  volumes:
+     - ./:/usr/src/smart-brain-api
+
+
+# Redis
+ redis:
+   image: redis
+   ports:
+      - "6379:6379"
+
+
+In SignIn.js
+
+const redisClient = redis.createClient(process.env.REDIS_URI);
+
+
+ 
 Storing JWT Tokens
+We created our JWT-Token.
+We can now store this token into the Redis-database.
+
+const createSessions = (user) => {
+	//JWT token return user data
+
+   const {email, id} = user;
+   const token = signToken(email);
+   return setToken(token, id)
+   .then(() => {success: 'true', userId: id , token})
+   .catch(console.log);
+}
+
+const setToken = (key, value) => {
+	return Promise.resolve(redisClient.set(key, value));
+}
 
 Retreiving Auth Token
+We wanna check the Token.
+
+const getAuthTokenId = (req, res) => {
+	const { authorization } = req.headers;
+	return redis.Client.get(authorization, (err, reply) => {
+	 if(err || !reply) {
+	   return res.status(400).json('Unauthorized');
+	 }
+	 return res.json({ id: reply });
+	} );
+}
+
 
 Client Session Management
+We created an JWT token and stored in a database.
+We need to send this token in the autorization header.
+
+Create an method.
+
+saveAuthTokenInSession = (token) = {
+	window.sessionStorage.setItem('token', token);
+
+}
+
+session.storage has the token we saves in the browser.
+or localStorage.
+
+Depending on your needs.
+
+componentDidMount(){
+	const token = window.sessionStorage.getItem('token');
+	if(token){
+	 fetch('http://localhost:3000/signin', {
+	 method: 'post',
+	 headers: {
+	  'Content-Type': 'application/json',
+	  'Authorization': 'Bearer ' + token 
+	 }
+	 }).then(data => {
+	   if(data && data.id){
+	    console.log('success we need to get user profile');
+	   }
+	 })
+	}
+}
 
 Session Sign In
+We implement when we get's the Profile from the Back-End.
+
+componentDidMount(){
+	const token = window.sessionStorage.getItem('token');
+	if(token){
+	 fetch('http://localhost:3000/signin',
+	 method: 'post',
+	 headers: {
+	  'Content-Type': 'application/json',
+	  'Authorization': token
+	  }
+	 })
+	  .then(resp => resp.json())
+	  .then(data => {
+	   if(data.userId && data.success === 'true'){
+	    fetch('http://localhost:3000/profile/${data.userId}', 
+	    method: 'get',
+	    headers: {
+	      'Content-Type': 'application/json',
+	      'Authorization': data.token
+	  })
+	   }
+	  }).then(resp => resp.json())
+	    .then(user => {
+	     if(user && user.email){
+	      this.props.loadUser(user)
+	      this.props.onRouteChange('home');
+	     } 
+	    })
+	}
+}
 
 Authorization Middleware
+We want to use a MiddleWare.
+We can handle cases with the server.
+A Middleware that protects the end-points.
 
-Fixing A Bug 
+Adding auth.requireAuth to some end-points.
+
+Create another file called authoriation.js
+
+const redisClient = require('./signin').redisClient();
+
+const requireAuth = (req, res, next) => {
+    const { authorization } = req.headers;
+    if(!authoriation) {
+      return res.status(401).json('Unauthorized');
+    }
+    return redisClient.get(authorization, (err, reply) => {
+     if(err || !reply){
+       return res.status(401).json('Unauthoried');
+     }
+        console.log('You shall pass');
+     	return next();
+    } )
+}
+
+module.exports = {
+	requireAuth: requireAuth
+}
+
+Fixing A Bug
+Go to app.js.
+We need to add headers.
+
 
 Reviewing Our Code
+We have managed to add session to our app.
+Make sure everytime we refresh we have our session.
+
 
 Updating Our App
+We have learned how to use docker and docker-compose.
+We might go into the Docker-file.
+We might want to use a newer versions of Docker or Redis.
+We keep an eye on updates.
+
 
 Optional: Why bcrypt-nodejs?
+Talk about the package bcrypt.js.
+You should use bcrypt.js.
+
 
 Section Summary
+The users doesn't need to log-in every time to login.
+We managed to improve.
+You want to make some sections.
+You know have a good understanding of to use controls.
+Redis is a extremly fast data-base.
+You can keep adding machines to it.
+Client then stores it.
+
 
 Exercise: #4-Improving SmartBrain
+//TODO Later when implementing your own website.
 

@@ -1,0 +1,226 @@
+Bruno's Request
+CEO needs your help.
+Help to prepare a plan how to scale up the company.
+Priniciples for how to scale.
+End of it we have a big picture.
+
+Section Overview
+-CDNs
+-Caching
+-Load Balancing
+-DB Scaling
+-GZIP
+
+
+CDNs
+Content-Delivery-Networks.
+Content is automatic is served.
+Setup is extermly easy.
+All you need to do is to update your DNS-nameserver
+Initial request makes a request to the origin server.
+Origin Server response.
+The request get's cached.
+Block spammers.
+Problem is called latency.
+
+
+GZIP
+The biggest and best to optimize performane.
+The files are going to be smaller.
+
+const compression = require('compression');
+const express = require('express');
+const app = express();
+app.use(compression());
+
+All the content is going to being to be G-Zipped.
+What if dosen't have any GZIP.
+Most places GZIP is very important.
+Check encoding on the network-tab.
+brotli has better compression than GZIP.
+
+
+Database Scaling
+Doesn't work as much on databases.
+Sturcture our application.
+Highly overview what we can do with databases:
+
+1.Indentify Inefficient Queries
+Only request what you need.
+Uses Indexes.
+CREATE INDEX idx_name ON table_name (column_name);
+
+2.Inrease Memory
+If you have a bottle neck.
+Give it additional memory.
+
+
+3.Vertical Scaling (Redis, Memchaced)
+Adding another service like Redis.
+We can actually cash the responses.
+Check Redis.
+
+
+4.Sharding
+Bring the website into pieces.
+Users that may younger than 30 or over.
+
+5.More Databases
+More options giving different databases to different usages.
+
+
+6.Database type
+What types of databases do you want to use.
+You can have different types of databases to different things.
+
+Before your are looking on databases.
+Making the request in efficient way.
+
+
+Caching 1
+Cache is a temporary storage.
+Think it like a little box.
+A package that is lot closer to us.
+
+-CPU
+ Built with some fast memory.
+ Closest and fastest memory storage.
+
+-RAM
+ Closer to the CPU large enough to hold inforation.
+ Power goes off this memory gets empty.
+
+-Hard Drive
+ Performance aproximity.
+ Travel a longer time.
+ This disk will remeber the information.
+
+We use CDN's to cache websites.
+We can cache API like Robot-information.
+We can use caching on the database also.
+Caching databases request in Redis.
+
+
+Caching 2
+The Caching comes from service workers.
+Do i already have the Script and HTML files.
+
+We also have a Application Cache.
+We Session Storage.
+We can also use Index DB.
+
+
+Caching 3
+We know how to do Caching.
+With the browser it is a nice standard to do.
+What if have a express server.
+JSON-response.
+You send headers that have cache-controls.
+We can tell what to cache.
+
+const express = require('express')
+const cors = require('cors')
+const path = require('path')
+
+const app = express()
+app.use(cors())
+app.use('/static', express.static(path.join(__dirname, 'public'), {'maxage': '2h'}))
+
+app.get('/hi', (req, res) => {
+	res.header('Cache-Control', 'public' , 'max-age=86400')
+	res.header('Content-Type', 'text/html');
+	res.send(new Buffer('<h2>Test String</h2>'));
+})
+
+app.listen(3000, () => console.log('Example app listening on port 3000!'))
+
+We have an static file to serve in the public folder.
+Cache control to save 2 hours.
+
+The browser compare the E-Tag with the server.
+
+
+Resources: Caching
+
+https://www.freecodecamp.org/news/the-hidden-components-of-web-caching-970854fe2c49/
+
+https://web.dev/http-cache/
+
+https://devcenter.heroku.com/articles/increasing-application-performance-with-http-cache-headers
+
+
+Load Balancing
+Balance multiple requests.
+Distribute to different services.
+Load Balancer distributes the Services.
+The most basic way Client-Server works.
+They have a Server created for you.
+All uses APACHE http-server or NGINX.
+They have a Static content.
+Really good to use as Load Balancers.
+It hits a NGINX server that balances the load.
+It then can recieve the files and Cache the files.
+A lot of Applications.
+When you have more and more users you are going to need a load-balancer.
+
+
+Nginx
+We are going to create our own load-balancer.
+Digital-Ocean have some load-servers.
+Build a load-balancer.
+Docker-Compose file.
+We have web1, web2, web3 with different ports.
+We have everything under one conatianer.
+We have to create a Docker-File.
+
+FROM nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+
+We create an new file called nginx.conf below:
+
+
+Exercise: Load Testing Your Load Balancer
+https://github.com/aneagoie/load-balancer-exercise
+
+
+Nginx 2
+
+nginx.conf file:
+
+worker_processes 1;
+
+events { worker_connections 1024; }
+
+http {
+  upstream myapp1 {
+  server web1: 3000
+  server web2: 3000
+  server web3: 3000
+}
+ server{
+ listen 80;
+ location / {
+   proxy_pass http://myapp1
+ }
+ location ~* \.(css|js|gif|jpeg|png)$ {
+   expires 168h;
+ }
+ }
+}
+
+loadtest -t -c 100 --rps 100 http://localhost:80
+
+
+Resources: Nginx
+
+To learn more about the NGINX config file have a look at:
+
+  https://nginx.org/en/docs/ and https://www.linode.com/docs/web-servers/nginx/how-to-configure-nginx/
+
+Section Summary
+Where are very confident to grow the company.
+Anytime to optimize performance.
+You learn about how to make the project better.
+We used a node API server.
+We used Postgres to manage users.
+Now you have a better picture how to grow the project.

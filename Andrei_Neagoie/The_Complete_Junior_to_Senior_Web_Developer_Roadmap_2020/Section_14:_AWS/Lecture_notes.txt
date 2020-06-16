@@ -1,0 +1,228 @@
+Bruno's Request
+We are starting to grow very much on and we want
+to skip managing databases.
+We wanna go to AWS to manage this database.
+
+
+Section Overview
+Amazon Web Services is something provided by Amazon.
+So they created the AWS to rent servers to rent the Servers.
+And pay for everything to use.
+Connect the pieces togheter.
+A lot less money to setting things up.
+The cloud allows to shrink or grow.
+They take care of databases if it grows.
+
+-Amazon Web Services
+-Microsoft Azure
+-Google Cloud Platform
+
+
+Amazon Web  Services
+They have different services.
+There is no shortage of services.
+
+The most common services!
+-S3
+ Object storage server.
+ Each Object is stored as an file.
+
+
+-DynamoDB
+ NoSQL database.
+ Uses Key-values storages.
+
+
+-CloudFront
+ Speeds up distribution.
+ Amazon delvivers.
+ Serv up the static file.
+
+-ECT2
+ As basic server to run.
+ You can run Backend-API.
+
+-Lambda
+ With lambda you can run any code for a application.
+
+Important to understand the flow is important.
+
+Monolitihic vs Micro Services
+Micro-Services has becomming more and more popular.
+It's has it own functions.
+Small chunks that can be tested on their own and be released.
+
+Monolothic everything must work.
+
+
+Amazon Lambda 
+Traditionaly we deployed everything independently.
+A more and more users use the servers we have to make it to adapt it.
+At larger companies we have infrastructure teams.
+Serverless allows to build applications.
+We give away our code to Lambda.
+When a server dies down we can remove the server.
+As soon we are doing a fetch-call.
+It is going to create more and more containers.
+Cold Start problem: Grab thing from the database.
+Only occasionaly runs.
+
+Amazon Lambda Dashboard
+AWS has a free tier.
+Less than 1 Million requests.
+Built a bot that sends a textmessage
+You have a dashboard.
+We maybe want to add a ranking systems.
+We wanna update it!.
+We need a tool called SERVERLESS.
+
+
+Quick Note: AWS Lambda
+
+
+Serverless
+Let's start to install serverless
+sudo npm install -g serverless.
+And it is going to install serverless for us.
+sls create -t aws-nodejs
+mkdir rankly
+cd rankly
+
+Files
+-gitignore
+-handler.js
+-serverless.yml
+
+
+Serverless 2
+You can use Serverless for a lot of things.
+IBM's webserver and Azure.
+Serverless works with all these providers.
+
+We 
+-region
+-enviroment
+-functions
+-schedule
+
+We need to connect the files to the AWS account.
+
+
+IAM
+Add a user called rankly-lambda.
+Attach existing policies.
+AdminstratorAccess.
+sls config credentials --provider aws --secretkey --secret.
+
+Resources: IAM
+
+
+Deploying A Function
+Name functions:
+		handler: rankly.
+
+
+stage: dev.
+
+Change the server name.
+
+service: rankly-lambda.
+
+Three things we wanna focus on.
+
+Whatever that triggers the event.
+
+module.exports.rank = (event, context, callback) => {
+	const response = {
+	   statusCode: 200,
+	   body: JSON.stringify({
+	    message: 'Go Serverless v1.0! Your function executed',
+	    input: event,
+	   }),
+
+	}
+}
+
+callback(null, response);
+
+sls deploy.
+
+It going to be put into a container and being run.
+sls invoke --function rank
+sls invoke local --function rank.
+http trigger event.
+http endpoint.
+
+functions:
+    rank:
+      handler: handler.rank
+      events:
+         -http
+            path: rank
+            method: get
+
+
+sls deploy
+
+
+
+Deploying A Function 2
+Declare enojis outside the function.
+
+module.exports.rank = (event, context, callback) => {
+const rank = event.queryStringParameters.rank;
+const rankEmoji = 
+emojis[rank > emojis.length ? emojis.length - 1 : rank];
+
+const response = {
+	statusCode: 200,
+	body: JSON.stringify({
+	    message: 'Go Serverless v1.0! Your function executed successfully!',
+	    input: rankEmoji
+	})
+};
+
+callback(null, response);
+
+}
+
+stage: prod.
+
+sls deploy.
+
+
+Deploying A Function 3
+
+Change Rank to a Stateful component.
+Make the Rank Component to a Statefull class.
+
+class Rank extends React.Component {
+	constructor(){
+	super();
+	this.state = {
+	emoji: ''
+	}
+
+	}
+}
+
+Create a generateEoji = (entries) => {
+	fetch('http...');
+	.then(response => response.json())
+	.then(data => this.setState({emoji: data.input}))
+	.catch(console.log)
+}
+
+Fetching a emoji from the HTTP-request in fetch.
+
+
+
+Quick Bug Fix
+
+
+Section Summary
+Implemented the ranking system.
+Incorparate AWS in our project.
+
+
+Exercise: Your Own  Lambda Function

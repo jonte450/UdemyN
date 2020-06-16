@@ -1,0 +1,74 @@
+
+Bruno's Request
+One last thing to ask.
+Our Team is Growing.
+We haven't implemented Continous Integration.
+
+
+Section Overview
+Keep hearing Continous Integration and Continous delerivery.
+Working with is notorious difficult.
+Different coding styles.
+Senior Developer understands this.
+CI/CD.
+
+
+Continous Integration, Delivery Deplployment
+Continous Integration were developers adding code.
+And this code can be accepted with some tools.
+Shared repository are being used everyday.
+We make sure that the code is deployable.
+We make sure that we can detect errors quickly.
+Make sure that the software has little bugs as possible.
+Great empathisis on automate testing.
+
+Continous Delivery 
+Making your code deployable at every point.
+We always keep the product deployable.
+You have to automate the deployable.
+
+Continous Deployment
+Goes stright into the deployment.
+If the test is accepted then you can deploy it.
+
+
+Building Great Software
+Faced these problems.
+Each project starts with a setup.
+Setup like creating ReactApp.
+Continous Integration should start at the beginning.
+Setup the right way.
+Making using pull requests daily.
+By integrating your code daily.
+We need a little bit of help.
+We have
+-Prettier
+-circleci
+
+circleci check the codes after errors.
+circleci runs the tests for you.
+
+
+Reosources: CI Tools
+
+There are a lot of good options for tools out there. You can have a look at this article for a run down of all of them: https://code-maze.com/top-8-continuous-integration-tools/
+
+As I stated in the video, most companies use one of these tools and my personal recommendations are:
+
+TravisCI or CircleCI for hosted CI servers. 
+
+Jenkins for your own managed CI servers.
+
+
+CircleCI
+
+
+Continous Integration 1
+
+Continous Integration 2
+
+Exercise: Your Own CI Flow
+
+Building Great Software 2
+
+Section Summary
