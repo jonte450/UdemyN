@@ -61,14 +61,115 @@ Jenkins for your own managed CI servers.
 
 
 CircleCI
+We have our RobotFriends App.
+Using these repository Circle CI.
+Uses an YAML-File.
+Create an new folder.
+By default we have to name it .circleci
+We created an new file called config.yml.
+
+version: 2
+jobs:
+  bobby:
+
+   build:
+    docker:
+      -image: circleci/ruby:2.4.1
+    steps:
+      sally:
+      -checkout
+      -run: echo "A first hello"
+    steps:
+      -checkout
+      -run echo "Double trouble"
+
+  workflows:
+      version: 2
+      bobby_sally:
+         jobs:
+           - bobby
+           - sally
+
+We have to sign-up with Github on their website.
+Click start building.
+Setup the enviroment.
+Enable ssh.
+We can now ssh in to the container.
+checkout runs.
+Runs the tests.
 
 
 Continous Integration 1
+version: 2
+jobs:
+  build:
+    docker:
+       -image: circleci/node:8.9
+    steps:
+       -checkout
+       -run: echo "npm installing"
+       -run: npm install
+       -run: CI=true npm run build
+  test:
+    docker:
+       - image: circleci/node:8.9
+
+    steps:
+      - checkout
+      - run: echo "testing stuff"
+      - run: npm install
+      - run: npm test
+    hithere: 
+    	- checkout
+    	- run: echo "hellooooo"
+
+   workflows:
+      version: 2
+      build_test_and_lint:
+         jobs:
+           - build
+           - hithere
+           - test:
+              requires:
+                -hithere
+
+ 
 
 Continous Integration 2
 
+Precommit hook.
+We have a code formatter called prettier.
+We have a standard format where we follows.
+We have a Counterbutton components that.
+We add precommit: 
+
+"scripts":{
+	"precommit": "pretty-quick --staged"
+}
+
+
 Exercise: Your Own CI Flow
 
+
+Using what you have learned in the previous videos, pick any of your current Github project and implement a CircleCI pipeline for each pull request! Good luck, and remember: If you ever get stuck, we have a large community on Discord who you can reach out to for help. You can also use this repository which has the files used from the videos you just watched.
+
+https://github.com/aneagoie/robofriends-ci
+
+
 Building Great Software 2
+Let's see what's we have learned so far.
+What tools to use.
+You know some of the biggest companies does.
+Have an good PR-System.
+We then use code reviews.
+Deploy to staging.
+Smoke test.
+CPU memory consumption.
+Real-time monitoring that shows when something is not going right.
+
 
 Section Summary
+Keiko Corp have seem improvements.
+It is to share code regulary.
+Codebase to minimize errors.
+If you follow this process you are going to have an successful process.

@@ -1,0 +1,226 @@
+EBS Intro
+What's an EBS Volume?
+-An EC2 machine loses its root volume (main drive) when it is manually
+ terminated.
+
+-Unexpected terminantions might happen from time to time 
+ (AWS would email you)
+
+-Sometimes, you need a way to store your instance data somewhere
+
+-An EBS (Elastic Block Store) Volume is a network drive you can attach to
+ your instances while they run
+
+-It allows your instances to persist data
+
+EBS Volume
+-It's a network drive (i.e not a physical drive)
+ -It uses the network to communicate the instance, which means there
+  might be a bit of latency
+ -It can be detached from an EC2 instance and attached to another quickly
+
+-It's locked to an Availability Zone (AZ)
+ -An EBS Volume in us-east-la cannot be attached to us-east-lb
+ -To move a volume across, you first need to snapshot it
+
+-Hava a provisioned capacity (size in GBs, and IOPS)
+ -You get billed for all the provisioned capacity
+
+
+EBS Intro Hands On
+Go to instances.
+Add an new volume.
+It has two instances volumes attached two it.
+sudo file -s /dev/xvdb
+sudo mkdir /data
+sudo mount filename
+
+
+EBS Volume Types Deep Dive
+
+EBS Volume Types Use cases GP2 (from AWS doc)
+-Recommended for most workloads
+-System boot volumes
+-Virtual desktops
+-Low-latency interactive apps
+-Development and test enviroments
+
+-1GiB - 16TiB
+-Small gp2 volumes can burst IOPS to 3000
+-Max IOPS is 16.000...
+-3 IOPS per GB, means at 5,334GB we are at the max IOPS
+
+IOPS increases with GB.
+
+EBS Volume Types Use cases
+IOI (from AWS doc)
+
+-Critical business applications that require sustained IOPS performance,
+ or more than 16.000 IOPS per volume (gp2 limit)
+
+-Large database workloads, such as
+
+-MongoDB, Cassandra, Mircrosoft SQL Server, MySQL, PostgreSQL Oracle
+
+-4 GiB - 16 TiB
+
+-IOPS is provisioned (PIOSP) - MIN 100 - MAX 64.000 (Nitro instances) else
+ MAX 32.000 (other instances)
+
+ -The maximum ratio of provisioned IOPS to requested volume size (in GiB) 
+  is 50:1
+
+EBS Volume Types Use cases STI (from AWS doc)
+-Streaming workloads requiring consistent, fast throughput at a low price
+-Big data, Data warehouses, Log processing
+-Apache Kafka
+-Cannot be a boot volume
+
+-500 GiB - 16 GiB
+-Max IOPS is 500
+-Max throughput of 500 MiB/s - can burst
+
+EBS Volume Types Use cases SCI (from AWS doc)
+-Throughput-oriented storage for large volumes of data that is 
+ infrequently accessed
+
+-Scenarios where the lowest storage cost is important
+
+-Cannot be a boot volume
+
+-500 GiB - 16 TiB
+-Max IOPS is 250
+-Max throughput of 250 MiB/s - can burst
+
+
+EBS vs Instance Store
+-Some instance do not come with Root EBS volumes
+-Instead, they come with "Instance Store" (= ephemeral storage)
+-Instance store is physically attached to the machine 
+ (EBS is a network drive)
+-Pros
+ -Better I/O performance
+ -Good for buffer / cache / scratch data / temporary content
+ -Data survives reboots
+-Cons
+ -On stop or termination, the instance is lost
+ -You can't resize the instance store
+ -Backups must be operated by the user
+
+Local EC2 Instance Store
+-Physical disk attached to the physical server where your EC2 is
+-Very High IOPS (because physical)
+-Disks up to 7.5 TiB (can change over time), stripped to reach 
+ 30 TiB(can change over tim...)
+-Block Storage (just like EBS)
+-Cannot be increased in size
+-Risk of data loss if hardware fails
+
+
+EFS Overview
+EFS - Elastic File System
+-Managed NFS (network file system) that can be mounted on many EC2
+-EFS works with EC2 instances in multi-AZ
+-High available, scalable, expensive (3x gp2), pay per use
+
+Security Group.
+
+EFS - Elastic File System
+-Use cases: content management, web serving, data sharing, Wordpress
+-Uses NFSv4.I protocol
+-Uses security group to control access to EFS
+-Compatible with Linux based AMI (not Windows)
+-Encryption at rest using KMS
+
+-POSIX file system (~Linux) that has a standard file API
+-File system scales automatically, pay-per-use, no capacity planning!
+
+EFS - Performance & Storage Classes
+-EFS Scale
+ -1000s of concurrent NFS clients, 10 GB+ /s throughput
+ -Grow to Petabyte-scale network file system, automatically
+
+ Performance mode (set at EFS creation time)
+  -General purpose (default): latency-sensitive use cases 
+   (web server, CMS, etc...)
+  -Max I/O - higher latency, throughput, highly parralel 
+   (big data, media processing)
+
+ Storage Tiers (lifecycle management feature - move file after N days)
+  -Standard: for frequently accessed files
+  -Infrequent access (EFS-IA): cost to retrieve files, lower price to 
+   store
+
+EFS Hands On
+First create a security group.
+Lifecycle method.
+General Purpose.
+Set up mount instructions.
+Add tags.
+sudo yum install amazon utils.
+sudo mount -t efs -o tls fs-5c2b4bad:/efs
+
+
+EBS & EFS - Section Cleanup
+Delete File System
+Delete volumes.
+Delete security Groups.
+
+EFS vs EBS
+-EBS volumes
+ -can be attached to only one instance at a time
+ -are locked at the Availability Zone (AZ) level
+ -gp2:IO increases if the disk size increases
+ -ioI: can increases IO independently
+
+-To migrate EBS volume across AZ
+ -Take a snapshot
+ -Restore the snapshot to another AZ
+ -EBS backups use IO and you shouldn't run them 
+  while your application is handling a lot of traffic
+
+-Root EBS Volumes of instances get terminated by
+ default if the EC2 instance gets terminated.
+ (you can disable that)
+
+
+Quiz 4: EC2 Data Management - EBS & EFS Quiz
+
+Question 1:
+Your instance in us-east-1a just got terminated, and the attached EBS volume is now available. Your colleague tells you he can't seem to attach it to your instance in us-east-1b.
+
+Answer:
+EBS volumes are AZ locked
+
+Good job!
+EBS Volumes are created for a specific AZ. It is possible to migrate them between different AZ through backup and restore
+
+
+Question 2:
+You would like to have the same data being accessible as an NFS drive cross AZ on all your EC2 instances. What do you recommend?
+
+Answer:
+ Mount an EFS
+
+EFS is a network file system (NFS) and allows to mount the same file system on EC2 instances that are in different AZ
+
+
+Question 3:
+You would like to have a high-performance cache for your application that mustn't be shared. You don't mind losing the cache upon termination of your instance. Which storage mechanism do you recommend as a Solution Architect?
+
+Answer:
+ Instance store
+
+ Good job!
+Instance Store provide the best disk performance
+
+Question 4:
+You are running a high-performance database that requires an IOPS of 210,000 for its underlying filesystem. What do you recommend?
+
+
+Answer:
+   Instance Store
+
+ Is running a DB on EC2 instance store possible? It is possible to run a database on EC2. It is also possible to use instance store, but there are some considerations to have. The data will be lost if the instance is stopped, but it can be restarted without problems. One can also set up a replication mechanism on another EC2 instance with instance store to have a standby copy. One can also have back-up mechanisms. It's all up to how you want to set up your architecture to validate your requirements. In this case, it's around IOPS, and we build an architecture of replication and back up around i
+
+

@@ -1,0 +1,435 @@
+High Availability and Scalability
+-Scalability means that an application / system can handle greater loads
+ by adapting
+
+-The are two kinds of scalability
+ -Vertical Scalability
+ -Horizontal Scalability (= elasticity)
+
+-Scalability is linked but different to High Availability
+
+Vertical Scalability
+-Vertical scalability means increasing the size of the instance.
+-For example, your application runs on a t2.micro
+-Scaling that application vertically means running it on a t2.large
+-Vertical scalability is very common for non distributed systems, such as 
+ a database.
+-RDS, ElsasticCache are services that can scale vertically.
+-There's usually a limit to how much you can vertically scale
+ (hardware limit)
+
+Horizontal Scalability
+-Horizontal Scalability means increasing 
+ the number of instances / systems for your application
+-Horizontal scaling implies distributed systems
+-This is very common for web applications / modern applications
+-It's easy to horizontally scale thanks to the cloud offerings such as 
+ Amazon EC2.
+
+High Availability
+-High Availability usually goes hand in hand with horizontal scaling.
+-High Availability means running your application / system in at least 2
+ data centers (==Availability Zones)
+-The goal of high availability is to survive a data center loss
+-The high availability can be passive (for RDS Multi AZ for example)
+-The high availability can be active (for horizontal scaling)
+
+
+Elastic Load Balancing(ELB) Overview
+-Load balancers are servers that forward internet traffic to multiple
+ servers (EC2 Instances) downstream
+
+Why us a load balancer?
+-Spread load across multiple downstream instances.
+-Expose a single point of access (DNS) to your application
+-Seamlessly handle failures of downstream instances
+-Do regular health checks to your instances
+-Provide SSL termination (HTTPS) for your websites
+-Enforce stickiness with coockies
+-High availability across zones
+-Separate public traffic from private traffic
+
+Why use an EC2 Load Balancer
+-An ELB (EC2 Load Balancer) is a managed load balancer
+ -AWS guarantees that it will be working
+ -AWS takes care of upgrades, maintenance, high availbility
+ -AWS provides only a few configuration knobs
+
+-It costs less to setup your own load balancer but it will be a lot more 
+ effort on your end
+
+-It is integrated with many AWS offerings / services
+
+Health Checks
+-Health Checks are crucial for Load Balancers
+-They enable the load balancer to know if instances it forwards traffic 
+ to are available to reply to requests
+-The health check is done on a port and a route (/health is common)
+-If the response is not 200(OK), then the instance is unhealty
+
+Types of load balancer on AWS
+-AWS has 3 kinds of managed Load Balancers
+-Classic Load Balancer(v1 - old generation) -- 2009
+ -HTTP, HTTPS, TCP
+-Application Load Balancer(v2 - new generation) -- 2016
+ -HTTP, HTTPS, WebSocket
+-Network Load Balancer (v2 - new generation) -- 2017
+ -TCP, TLS (secure TCP) & UDP
+-Overall, it is recommended to use the newer / v2 generation 
+ load balancers as they provide more features
+
+
+
+Classic Load Balancer(CLB) with Hands
+-Supports TCP (Layer 4), HTTP & HTTPS (Layer 7)
+-Health checks are TCP or HTTP based
+-Fixed hostname
+ XXX.region.elb.amazonaws.com
+
+Classic Load Balancer
+New security group.
+Ping on the specific path.
+
+
+Application Load Balancer(ALB) with Hands On
+-Application load balancers is Layer 7 (HTTP)
+-Load balancing to multiple applications on the same machine
+ (ex: containers)
+-Support for HTTP/2 and WebSocket
+-Support redirects (from HTTP to HTTPS for example)
+
+
+Application Load Balancer (v2)
+-Routing tables to different target groups:
+ -Routing based on path in URL (example.com/users & example.com/posts)
+ -Routing based on hostname in URL (one.example.com & other.example.com)
+ -Routing based on Query String, Headers
+  (example.com/users?id=123&order=false)
+
+-ALB are a great fit for micro services & container-based application
+ (example: Docker & Amazon ECS)
+
+-Has a port mapping feature to redirect to a dynamic port in ECS
+-In comparison, we'd need multiple Classic Load Balancer per application
+
+Application Load Balancer (v2) Target Groups
+-EC2 instances (can be managed by an Auto Scaling Group) -- HTTP
+-ECS tasks (managed by ECS itself) -- HTTP
+-Lambda functions -- HTTP request is translated into a JSON event
+-IP Addresses -- must be private IPs
+
+-ALB can route to multiple target groups
+-Health checks are at the target group level
+
+Application Load Balancer (v2)
+-Fixed hostname (XXX.region.elb.amazonaws.com)
+-The application servers don't see the IP of the client directly
+ -The true IP of the client is inserted in the header X-Forwarded-For
+ -We can also get Port(X-Forwarded-Port) and proto (X-Forwarded-Proto)
+
+ We create an application load-balancer.
+
+
+
+Network Load Balancer-Stickiness
+Network Load Balancer (v2)
+-Network load balancers (Layer 4) allow to:
+ -Forward TCP & UDP traffic to your instances
+ -Handle millions of request per seconds
+ -Less latency ~100 ms (vs 400 ms for ALB)
+
+-NLB has one static IP per AZ, and supports assigning Elastic IP
+ (helpful for whitelisting specific IP)
+
+-NLB are used for extreme performance, TCP or UDP traffic
+-Not included in the AWS free tier
+
+
+Elastic Load Balancer - Stickiness
+-It is possible to implement stickiness so that the same
+ client is always redirected to the same instance behind
+ a load balancer.
+
+-This works for Classic Load Balancers & Application Load Balancers
+
+-The "coockie" used for stickiness has an expiration date you control
+
+-Use case: make sure the user dosen't lose his session data
+
+-Enabling stickiness may bring balance to the load over the backend EC2
+ instances
+
+
+
+
+Elastic Load Balancer - Cross Zone Load Balancing
+-With Cross Zone Load Balancing: each load balancer instance 
+ distributes evenly across all registred instances in all AZ
+
+-Otherwise, each load balancer node distributes requests evenly across
+ the registred instances in its Availability Zone only.
+
+
+-Classic Load Balancer
+ -Disabled by default
+ -No charges for inter AZ data if enabled
+
+-Application Load Balancer
+ -Always on (can't be disabled)
+ -No charges for inter AZ data
+
+-Network Load Balancer
+ -Disabled by default
+ -You pay charges ($) for inter AZ data if enabled
+
+Elastic Load Balancer - SSL Certificate
+SSL/TLS - Basics
+-An SSL Certificate allows traffic between your clients and your load 
+ balancer to be encrypted in transit (in-flight encryption)
+
+-SSL refers to Secure Socket Layer, used to encrypt connections
+-TLS refers to Transport Layer Security, which is a newer version
+-Nowadays, TLS certificates are mainly used, but people still refer as 
+ SSL
+
+-Public SSL certificates are issued by Certificate Authorities (CA)
+-Comodo ,Symantec, GoDaddy , GlobalSign, Digicert, Letsencrypt, etc...
+-SSL certificates have an expiration date (you set) and must be renewed
+
+Load Balancer - SSL Certificates
+-The load balancer uses an X.509 certificate (SSL/TLS server certificate)
+-You can manage certificates using ACM (AWS Certificate Manager)
+-You can create upload your own certificates alternatively
+-HTTPS listener:
+ -You must specify a default certificate 
+ -You can add an optional list of certs to support multiple domains
+ -Clients can use SNI (Server Name Indication) to specify the hostname
+  they reach
+
+
+SSL - Server Name Indication
+-SNI solves the problem of loading multiple SSL certificates
+ onto one web server (to serve multiple websites)
+
+-It's a "newer" protocol and requires the client to indicate the 
+ hostname of the target server in the initial SSL handshake
+
+-The server will then find the correct certificate, or return the
+ default one
+
+
+
+
+Elastic Load Balancer - Connection Draining
+ELB- Connection Draining
+-Featur naming:
+ -CLB: Connection Draining
+ -Target Group: Deregistration Delay (for ALB & NLB)
+
+-Time to complete "in-flight requests" while the instance is
+ de-registering or unhealthy
+
+-Stops sending new requests to the instance which is de-registering
+
+-Can be disabled (set value to 0)
+
+-Set to a low value if your requests are short
+
+
+Auto Scaling Groups (ASG) Overview
+What's an Auto Scaling Group?
+-In real-life the load on your websites and application can change
+-In the cloud, you can create and get rid of servers very quickly
+
+The goal of an Auto Scaling Group (ASG) is to:
+ -Scale out (add EC2 instances) to match an increased load
+ -Scale in (remove EC2 instances) to match a decreased load
+ -Ensure we have a minimum and a maximum number of machines running
+ -Automatically Register new instances to a load balancer
+
+ ASGs have the following attributes
+
+-A launch configuration
+ -AMI + Instance Type
+ -EC2 User Data
+ -EBS volumes
+ -Security Groups
+ -SSH Key Pair
+
+-Min Size / Max Size / Initial Capacity
+-Network + Subnets Information
+-Load Balancer Information
+-Scaling Policies
+
+Auto Scaling Alarms
+-It is possible to scale an ASG based on CloudWatch alarms
+-An Alarm monitors a metric (such as Average CPU)
+-Metrics are computed for the overall ASG instances
+-Based on the alarm:
+ -We can create scale-out policies (increase the number of instances)
+ -We can create scale-in policies (decrease the number of instances)
+
+
+
+Auto Scaling Groups Hands On
+Choose a launch template or configuration.
+They are very similar.
+create a launch template.
+Use user data.
+We can have a on-demand or spoot instances.
+Two health checks ECT or ELB.
+
+
+
+Auto Scaling Groups - Scaling Policies
+-Target Tracking Scaling
+ -Most simple and easy to set-up
+ -Example: I want the average ASG CPU to stay around 40%
+
+Simple / Step Scaling
+ -When  a CloudWatch alarm is triggered (example CPU > 70%),
+  then add 2 units 
+ -When a CloudWatch alarm is triggered (example CPU < 30%), 
+  then remove 1
+
+-Scheduled Actions
+ -Anticipate a scaling based on known usuage patterns
+ -Example: increase the min capacity to 10 at 5pm on Fridays
+
+
+Cooldown dosen't launch instances before the previous takes effects.
+
+We can click on add Policying.
+
+
+
+Quiz 3: Fundamentals 2 Quiz
+
+Load Balancers provide a
+Answer:
+  static DNS name we can use in our application
+
+  Question 2:
+
+You are running a website with a load balancer and 10 EC2 instances. Your users are complaining about the fact that your website always asks them to re-authenticate when they switch pages. You are puzzled, because it's working just fine on your machine and in the dev environment with 1 server. What could be the reason?
+
+Answer:
+The Load Balancer does not have stickiness enabled
+
+Question 3:
+Your application is using an Application Load Balancer. It turns out your application only sees traffic coming from private IP which are in fact your load balancer's. What should you do to find the true IP of the clients connected to your website?
+
+Answer:
+  Look into the X-Forwarded-For header in the backend
+
+
+ Question 4:
+You quickly created an ELB and it turns out your users are complaining about the fact that sometimes, the servers just don't work. You realise that indeed, your servers do crash from time to time. How to protect your users from seeing these crashes?
+
+Answer:
+    Enable Health Checks
+
+
+Question 5:
+You are designing a high performance application that will require millions of connections to be handled, as well as low latency. The best Load Balancer for this is
+
+Answer:
+  	Network Load Balancer
+
+
+Question 6:
+Application Load Balancers handle all these protocols except
+Answer:
+     TCP
+
+Question 7:
+The application load balancer can redirect to different target groups based on all these except...
+Answer:
+   Client IP
+
+
+Question 8:
+You are running at desired capacity of 3 and the maximum capacity of 3. You have alarms set at 60% CPU to scale out your application. Your application is now running at 80% capacity. What will happen?
+
+Answer:
+   Nothing
+
+Question 9:
+I have an ASG and an ALB, and I setup my ASG to get health status of instances thanks to my ALB. One instance has just been reported unhealthy. What will happen?
+
+Answer:
+   The ASG will terminate the EC2 instance.
+
+Question 10:
+Your boss wants to scale your ASG based on the number of requests per minute your application makes to your database.
+
+Answer:
+   You create a CloudWatch custom metric and build an alarm on this to scale up your ASG
+
+Question 11:
+Scaling an instance from an r4.large to an r4.4xlarge is called
+Answer: 
+   Vertical Scaling
+
+
+Question 12:
+Running an application on an auto scaling group that scales the number of instances in and out is called
+ 
+ Answer:
+     Horizontal Scaling
+
+
+Question 13:
+You would like to expose a fixed static IP to your end-users for compliance purposes, so they can write firewall rules that will be stable and approved by regulators. Which Load Balancer should you use?
+
+Answer:
+    Network Load Balancers expose a public static IP, whereas an Application or Classic Load Balancer exposes a static DNS (URL)
+
+ Question 14:
+
+A web application hosted in EC2 is managed by an ASG. You are exposing this application through an Application Load Balancer. The ALB is deployed on the VPC with the following CIDR: 192.168.0.0/18. How do you configure the EC2 instance security group to ensure only the ALB can access the port 80?
+
+Answer:
+   Open up the EC2 security on port 80 to the ALB's security group.
+
+   This is the most secure way of ensuring only the ALB can access the EC2 instances. Referencing by security groups in rules is an extremely powerful rule and many questions at the exam rely on it. Make sure you fully master the concepts behind it!
+
+
+Question 15:
+
+Your application load balancer is hosting 3 target groups with hostnames being users.example.com, api.external.example.com, and checkout.example.com. You would like to expose HTTPS traffic for each of these hostnames. How do you configure your ALB SSL certificates to make this work?
+
+Answer:
+SNI (Server Name Indication) is a feature allowing you to expose multiple SSL certs if the client supports it. Read more here: https://aws.amazon.com/blogs/aws/new-application-load-balancer-sni/
+
+
+Question 16:
+The Application Load Balancers target groups can be all of these EXCEPT...
+
+Answer:
+   Network Work Load Balancer
+
+
+Question 17:
+
+You are running an application in 3 AZ, with an Auto Scaling Group and a Classic Load Balancer. It seems that the traffic is not evenly distributed amongst all the backend EC2 instances, with some AZ being overloaded. Which feature should help distribute the traffic across all the available EC2 instances?
+
+Answer:
+   Cross Zone Load Balancing
+
+Question 18:
+
+Your Application Load Balancer (ALB) currently is routing to two target groups, each of them is routed to based on hostname rules. You have been tasked with enabling HTTPS traffic for each hostname and have loaded the certificates onto the ALB. Which ALB feature will help it choose the right certificate for your clients?
+
+Answer:
+   Server Name Indication (SNI)
+
+
+Question 19:
+
+An application is deployed with an Application Load Balancer and an Auto Scaling Group. Currently, the scaling of the Auto Scaling Group is done manually and you would like to define a scaling policy that will ensure the average number of connections to your EC2 instances is averaging at around 1000. Which scaling policy should you use?
+
+Answer:
+   Target Tracking
+
+
