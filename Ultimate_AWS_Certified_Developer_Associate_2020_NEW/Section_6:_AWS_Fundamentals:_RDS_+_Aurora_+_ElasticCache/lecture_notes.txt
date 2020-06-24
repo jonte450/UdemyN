@@ -1,0 +1,347 @@
+AWS RDS Overview
+-RDS stands for Relational Database Service
+-It's a managed DB service for DB use SQL as a query language
+-It allows you to create databases in the cloud that are managed by AWS
+ -Postgres
+ -MySQL
+ -MariaDB
+ -Oracle
+ -Microsoft SQL Server
+ -Aurora (AWS Proprietary database)
+
+Advantage over using RDS versus deploying DB on EC2
+-RDS is a managed service
+ -Automated provisioning, OS patching
+ -Continous backups and restore to specific timestamp
+  (Point in Time Restore)
+ -Monitoring dashboards
+ -Read replicas for improved read performance
+ -Multi AZ setup for DR (Disaster Recovery)
+ -Maintenance windows for upgrades
+ -Scaling capability (vertical and horizontal)
+ -Storage backed by EBS (gp2 or iol)
+-BUT you can't SSH into your instances
+
+RDS Backups
+-Backups are automatically enabled in RDS
+-Automated backups:
+ -Daily full backup of the database (during the maintenance window)
+ -Transaction logs are backed-up by RDS every 5 minutes
+ -=> ability to restore to any point in time
+  (from oldest backup to 5 minutes ago)
+ -7 days retention (can be increased to 35 days)
+
+-DB Snapshots
+ -Manually triggered by the user
+ -Retention of backup for as long as you want
+
+
+RDS Read Replicas vs Multi AZ
+Helps to scale your reads.
+-Up to 5 read replicas
+-Within AZ, Cross AZ or Cross Region
+-Replication is ASYNC so reads are eventually consistent
+-Replicas can be promoted to their own DB
+-Applications must update the connection string to leverage read replicas
+
+RDS Read Replicas - Use Cases
+
+-You have a production database 
+ that is taking on normal load
+
+-You want to run a reporting application
+ to run some analytics
+
+-You create a Read Replica to run 
+ the new workload there
+
+-The production application is unaffected
+
+-Read replicas are used for SELECT 
+ (=read) only kind of statements
+ (not INSERT, UPDATE, DELETE)
+
+It costs when data goes from another AZ to another AZ it costs money.
+It is free when it goes in the same AZ zone.
+
+
+
+AWS RDS Hands On
+Create Database.
+Templates Free Tier.
+sqlelectron a db-client.
+End-point and Port.
+
+
+RDS Encryption + Security
+-At rest encryption
+ -Possibility to encrypt the master & read replicas with 
+  AWS KMS - AES-256 encryption
+
+ -Encryption has to be defined at launch time
+
+ -If the master is not encrypted, the read replicas cannot be encrypted
+
+ -Transparent Data Encryption (TDE) available for Oracle and SQL Server
+
+
+-In-flight encryption
+ -SSL certificates to encrypt data RDS in flight
+ -Provide SSL options with trust certificate when connecting to database
+ -To enforce SSL:
+  -PostgreSQL: rds.force_ssl = l in the AWS RDS Console 
+   (Parameter Groups) 
+  -MySQL: Within the DB:
+   GRANT USAGE ON *.* TO 'mysqluser'@'%' REQUIRE SSL;
+
+RDS Encryption Operation
+-Encrypting RDS backups
+ -Snapshots of un-encrypted RDS databases are un-encrypted
+ -Snapshots of encrypted RDS databases are encrypted
+ -Can copy a snapshot into an encrypted one
+
+-To encrypt an un-encrypted RDS Database:
+ -Create a snapshot of the un-encrypted database
+ -Copy the snapshot and enable encryption for the snapshot
+ -Restore the database from the encrypted snapshot
+ -Migrate applications to the new database, and delete the old database
+
+RDS Security - Network & IAM
+-Network Security
+ -RDS databases are usually deployed within a private subnet, not in a
+  public one
+
+ -RDS Security works by leveraging security groups 
+ (the same concept as for EC2 instances)- it controls which 
+  IP / security group can communicate with RDS
+
+-Access Management 
+ -IAM policies help control who can manage AWS RDS (through the RDS API)
+ -Traditional Username and Password can be used to login into the 
+  database
+ -IAM-based authentication can be used to login into 
+  RDS MySQL & PostgreSQL
+
+
+Aurora Overview
+-Aurora is a propierty technology fro AWS (not open sourced)
+
+-Postgres and MySQL are both supported as Aurora DB 
+ (that means your drivers will work as if Aurora was a Postgres or MySQL database)
+
+-Aurora is "AWS cloud optimized" and claims 5x performance improvement
+ over MySQL on RDS, over 3x the performance of Postgres on RDS
+
+-Aurora storage automatically grows in increments of 10GB, up to 64 TB
+
+-Aurora can have 15 replicas while MySQL has 5, and the replication 
+ process is faster (sub 10 ms replica lag)
+
+-Failover in Aurora is instaneous. It's HA native
+
+
+Aurora High Availability and Read Scaling
+-6 copies of your data across 3 AZ
+ -4 copies out of 6 needed for writes
+ -3 copies out of 6 need for reads
+ -Self healing with peer-to-peer replication
+ -Storage is striped across 100s of volumes
+
+-One Aurora Instance takes writes(master)
+
+-Automated failover for master in less than 30 seconds
+
+-Master + up to 15 Aurora Read Replicas serve reads
+
+-Support for Cross Region Replication
+
+Aurora DB Cluster
+Master is the only thing that is going to write to the database.
+You also have Read Replicas.
+
+Reader Endpoint
+Connection Load Balancing
+Connects to all read replicas.
+
+Featurs of Aurora
+-Automatic fail-over
+-Backup and Recovery
+-Isolation and security
+-Industry compliance
+-Push-button scaling
+-Automated Patching with Zero Downtime
+-Advanced Monitoring
+-Routine Maintenance
+-Backtrack: restore data at any point of time without using backups
+
+
+Aurora Serverless
+-Automated database instantiation and auto-scaling based on actual usage
+
+-Good for infrequent, intermittent or unpredictable workloads
+
+-No capacity planning needed
+
+-Pay per second, can be more cost-effective
+
+Global Aurora
+-Aurora Cross Region Read Replicas:
+ -Useful for disaster recovery
+ -Simple to put in place
+
+
+
+Aurora Hands On
+MySQL has the most features
+Additional configurations.
+Parameters groups.
+Backtrack.
+Monitoring.
+Writer and Reader endonpoints.
+
+
+ElasticCache Overview
+-The same way RDS is to get managed Relational Databases...
+-ElasticCache is to get managed Redis or Memcached
+-Caches are in-memory databases with really high performane, low latency
+-Helps reduce load off of databases for read intensive workloads
+-Helps make your application stateless
+-Write Scaling using sharding
+-Read Scaling using Read Replicas
+-Multi AZ with Failover Capability  
+
+ElastiCache 
+Solution Architrchture - DB Cache
+-Applications queries ElasticCache, if not available, get from RDS
+ and store in ElasticCache
+
+-Helps relieve load in RDs
+
+-Cache must have an invalidation strategy to make sure only the most
+ current data is used in there. 
+
+
+ElasticCache Hands On
+Go to ElasticCache server.
+Use Redis.
+Create a subnet group.
+
+
+ElasticCache Strategies 
+It is not for every data-set.
+Is caching effective for that data.
+Is the data structured for the caching.
+
+
+Quiz 5: RDS / Aurora / ElasticCache Quiz 
+
+Question 1:
+My company would like to have a MySQL database internally that is going to be available even in case of a disaster in the AWS Cloud. I should setup
+
+Answer:
+    Multi-AZ
+
+
+Question 2:
+Our RDS database struggles to keep up with the demand of the users from our website. Our million users mostly read news, and we don't post news very often. Which solution will NOT help fix this problem?
+
+Answer:
+  RDS Multi AZ 
+
+
+
+Question 3:
+We have setup read replicas on our RDS database, but our users are complaining that upon updating their social media posts, they do not see the update right away
+
+Answer:
+ Read Replicas have asynchronos replication and therefore it's likely our users will only observe eventual consistency
+
+Question 4:
+Which RDS Classic (not Aurora) feature does not require us to change our SQL connection string?
+
+Answer:
+    Multi AZ
+
+ Good job!
+Multi AZ keeps the same connection string regardless of which database is up. Read Replicas imply we need to reference them individually in our application as each read replica will have its own DNS name
+
+Question 5:
+You want to ensure your Redis cluster will always be available
+
+Answer:
+ Enable Multi AZ
+
+
+ Question 6:
+Your application functions on an ASG behind an ALB. Users have to constantly log back in and you'd rather not enable stickiness on your ALB as you fear it will overload some servers. What should you do?
+
+Answer: 
+   Store session data in ElasticCache
+
+
+Question 7:
+One analytics application is currently performing its queries against your main production database. These queries slow down the database which impacts the main user experience. What should you do to improve the situation?
+
+Answer: 
+   Setup a Read Replica
+
+Good job!
+Read Replicas will help as our analytics application can now perform queries against it, and these queries won't impact the main production database.
+
+
+Question 8:
+You have a requirement to use TDE (Transparent Data Encryption) on top of KMS. Which database technology does NOT support TDE on RDS?
+
+Answer:
+  PostgreSQL
+
+Question 9:
+Which RDS database technology does NOT support IAM authentication?
+
+Answer: 
+    Oracle
+
+
+Question 10:
+You would like to ensure you have a database available in another region if a disaster happens to your main region. Which database do you recommend?
+
+Answer: 
+   Aurora Global Database
+
+Good job!
+Global Databases allow you to have cross region replication
+
+
+Question 11:
+You are managing a PostgreSQL database and for security reasons, you would like to ensure users are authenticated using short-lived credentials. What do you suggest doing?
+
+Answer: 
+    Use PostgreSQL for RDS and authenticate using a token obtained through the RDS service
+
+In this case, IAM is leveraged to obtain the RDS service token, so this is the IAM authentication use case.
+
+Question 12:
+Your organisation wants to enforce SSL connections on your MySQL database
+
+Answer:
+   Apply a 'REQUIRE SSL' statement to all your users in your SQL database
+
+
+Question 13:
+You are implementing a caching strategy with ElastiCache and would like to ensure that only the data that is often requested will be loaded in ElastiCache, as your cache size is small. Which caching strategy should you implement?
+
+Answer: 
+   Lazy Loading
+
+  Lazy Loading would only cache data that is actively requested from the database
+
+
+Question 14:
+You are serving web pages for a very dynamic website and you have a requirement to keep latency to a minimum for every single user when they do a read request. Writes can take longer to happen. Which caching strategy do you recommend?
+
+Answer:
+ write-through
+ 
+ this has longer writes, but the reads are quick and the data is always updated in the cache
+
+
