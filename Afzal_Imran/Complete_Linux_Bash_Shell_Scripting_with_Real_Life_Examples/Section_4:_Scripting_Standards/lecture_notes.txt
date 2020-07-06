@@ -1,0 +1,57 @@
+Welcome to Scripting Standards 
+-Script Naming Convention
+-Script File Permissions
+-Shell Script Format
+-Sequence of Script Execution
+-What are Variables and How to Create them?
+
+
+
+Scripting Naming Convention
+-Scripts directory
+ Call it my scripts
+
+-Script name should indentify function
+ My date for example
+
+-Script should end with .shell (if multiple shells are used).
+
+
+
+Script File Permissions
+You need to have the right permissions to execute the right script
+
+-All scripts to be executed should have proper 
+ executable file permissions
+
+e.g. rwxr-xr-x
+
+
+-To change permissions
+ chmod a+x script-name
+
+
+
+
+Shell Script Format
+You create a script or trouble-shoot something.
+
+-Define Shell (#!/bin/bash)
+-Comments (# comments)
+-Define Variables (e.g name=Imran)
+-Commands (echo, cp, grep etc)
+-Statements (if, while, for etc.)
+
+
+Sequence of Script Execution
+-Command 1
+-Command 2
+-Command 3
+
+e.g.
+ls
+date
+cal.
+
+Every scripts run from up to down.
+

@@ -1,0 +1,315 @@
+Welcome to Basic Shell Scripting
+-First Script
+-Run Basic Tasks
+-Run Basic Administration Tasks
+-Defining Variables
+-Input=Output
+-Conditions/If else statements
+-Case Statements
+-For loop script
+-do-while
+-Getting online help
+
+
+
+Create your first script - Hello World
+Hello World.
+-Create our first script
+
+Cannot delete the scripts.
+#!/bin/bash
+#Author: Imran Afzal
+#Date Created: 08/20/2020
+#Desription: This script will output "Hello World" on the screen
+#Date Modified: 08/20/2020
+
+echo Hello World
+
+chmod a+x helloworld
+
+To run:/home/iafzal/scripts/helloworld
+
+
+
+Run Basic Tasks - Script
+-Crete second script to run basic tasks
+
+pwd
+ls
+whoami
+date
+cal
+touch a b c
+
+#!bin/bash
+#Author: Imran Afzal
+#Date Created: 08/20/2020
+#Description: Run basic linux tasks
+#Date Modified: 08/20/2020
+
+echo
+echo This script will run a few basic tasks
+echo
+pwd
+ls
+whoami
+date
+cal
+touch a b c
+
+
+
+Run Basic Administration Tasks
+
+Basic Administration Tasks
+
+-Create a script to run basic administration tasks
+
+top
+df -h
+free -m
+uptime
+iostat
+
+
+#!/bin/bash
+#Author: Imran Afzal
+# Date: 08/22/2020
+#Description: This script will run basic admin commands
+#Date Modified: 08/22/2020
+
+echo
+echo This script will run basic adminstrative commands
+echo
+top | head -10
+echo
+df -h
+echo
+free -m
+echo
+uptime
+echo
+iostat
+echo
+echo
+echo End of Script
+
+top command will keep your session open and the status of your processes.
+
+
+Defining Variables
+-Create script to run basic tasks
+
+p=pwd
+l=ls
+w=whoami
+d=date
+c='cal 2018'
+
+#!/bin/bash
+
+#Define Variables
+p=pwd
+l=ls
+wi=whoami
+d=date
+c='cal 2018'
+
+echo Run Variables tasks
+echo 
+$p
+$l
+$wi
+$d
+$c
+
+
+
+Input/Output Script
+Create script to take input from the user
+ -read
+ -echo
+
+vi input-script
+
+#!/bin/bash
+#Authot
+#Date
+#Desc
+#
+a=`hostname`
+echo Hello, my server name is $a
+echo 
+echo What is your name?
+read b
+echo
+echo What is your profession?
+read c
+echo
+echo What is your favorite show?
+read d
+echo 
+echo Hello $b
+echo Your proffession $c is awesome
+echo $d is a good show
+echo
+
+chmod a+x input-script
+
+
+
+Conditions/If else statements Scripts
+if-then Scripts
+-If then statement
+ 
+ If this happens  = do this
+ Otherwise        = do that
+
+#!/bin/bash
+
+count=100
+if[ $count -eq 100]
+then 
+ echo Count is 100
+else
+ echo Count is not 100
+fi
+
+#! /bin/bash
+
+clear
+if [-e /home/iafzal/error.txt ]
+   
+    then
+    echo "File exist"
+    else
+    echo "File does not exist"
+fi
+
+
+Case Statements Script
+A more interactive way.
+
+-Case
+  
+  If option a is selected = do this
+  If option b is selected = do this
+  If option c is selected = do this
+
+
+e.g. run "df -h" command
+
+#! /bin/bash
+
+echo
+echo Please chose one of the options below
+echo
+echo 'a = Display Date and Time'
+echo 'b = List file and directories'
+echo 'c = List users logged in'
+echo 'd = Check System uptime'
+echo
+
+        read choices
+        case $choices in
+a) date;;
+b) ls;;
+c) who;;
+d) uptime;;
+*) echo Invalid choice - Bye.
+
+		esac
+
+
+For loop Script
+
+-For loops
+  
+  Keeps running until specified number of variable
+  e.g: variable = 10 then run the script 10 times
+  OR
+
+     variable = green, blue, red(then run the script 3 times for each color)
+
+/!/bin/bash
+
+Simple for loop output
+
+for i in 1 2 3 4 5
+do
+echo "Welcome $i times"
+done
+
+
+#!/bin/bash
+
+for i in eat run jump delay
+do
+echo See Imran $i
+done
+
+We have define done to make the for-loop done 
+
+
+do-while Scripts
+-do while 
+  
+  The while statement continually executes a block of statements
+  while a particular condition is true or not
+
+  e.g: Run a script until 3 pm
+
+
+  while [ condition ]
+  do 
+
+     command1
+     command2
+     command3
+
+   done
+
+
+#! /bin/bash
+#This script is created by Imran Afzal on 2018
+
+count=1
+num=10
+while [ $count -lt 10 ]
+do  
+	echo
+	echo $num seconds left to stop this process $1
+	echo
+	sleep 1
+num='expr $num - 1'
+count='expr: $count + 1'
+done
+echo
+echo $1 process is stopped!!!
+echo
+
+
+Exit Status
+- 0 = OK or Successful
+- 1 = Minor problem
+- 2 = Serious trouble
+- 3-255 = Everything else
+
+echo $?
+pwd
+
+Anything above 0 is error code.
+
+#! /bin/bash
+
+ls -l /home/iafzal/check
+
+if[ $? -eq 0]
+then
+ echo File exist
+else
+echo File does not exist
+fi
+
+
+Handouts

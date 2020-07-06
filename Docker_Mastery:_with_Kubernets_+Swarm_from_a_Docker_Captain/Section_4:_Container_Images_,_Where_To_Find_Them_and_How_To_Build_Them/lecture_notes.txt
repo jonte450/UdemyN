@@ -1,0 +1,269 @@
+What's In An Image (and What Isn't)
+This Section:
+ -All about images, the building blocks of containers
+ -What's in an image (and what isn't)
+ -Using Docker Hub registry
+ -Managing our local image cache
+ -Building our own images
+
+ -App binaries and dependencies
+
+ -Metadata about the image data and how to run the image
+
+ -Official definition: "An Image is an ordered collection of root
+  filesystem changes and the corresponding execution parameters for use within a container runtime."
+ 
+ -Not a complete OS. No kernel, kernel modules (e.g. drivers)
+
+ -Small as one file (your app binary) like a golang static binary
+
+ -Big as a Ubuntu distro with apt, and Apache, PHP and more installed
+
+
+The Mighty Hub: Using Docker Hub Registry Images
+-Basics of Docker Hub (hub.docker.com)
+-Find Offical Offical and other good public images
+-Download images and basics of image tags
+
+We always start with the official
+Account names for creating images
+Images are tagged.
+
+docker pull nginx
+You always want to specify the latest version.
+When you are developing you can use the official images.
+
+This Lecture: Review
+
+-Docker Hub, "the apt package system for Containers"
+
+-Official images and how to use them
+
+-How to discern "good" public images
+
+-Using different base images like Debian or Alpine
+
+
+Images and Their Layers: Discover the Image Cache
+
+This Lecture
+-Image layers
+-union file system
+-history and inspect commands
+-copy on write
+
+sudo docker history nginx:latest
+
+Data changes in the images.
+
+docker image inspect
+
+docker inspect
+ (old way)
+
+returns JSON metadata about the image
+
+Inspect of the image data.
+
+Image and Their Layers: Review
+
+-Images are made up of file system changes and metadata
+
+-Each layer is uniquely indentified and only stored once on a host
+
+-This saves storage space on host and transfer time on push/pull
+
+-A container is just a single read/write layer on top of image
+
+-docker image history and inspect commands can tech us
+
+
+Image Tagging and Pushing to Docker Hub
+
+-Knows what container and images are
+-Understand image layer basics
+-Understand Docker Hub basics
+
+This Lecture
+
+-All about image tags
+-How to upload to Docker Hub
+-Image ID vs. Tag
+
+docker image tag
+docker tag (old way)
+
+assign one or more tags to an image
+
+docker image tag --help
+
+Official Repositories
+They live at the "root namespace" of the registry, so they don't
+need account name in front of repo name
+
+Tags are a pointer to a specfic commit.
+
+To create an new tag docker image tag nginx bretfisher/nginx
+
+"latest" tag
+
+It's just the default tag, but image owners should assign it to the newest stable version
+
+docker image push
+
+docker login <server>
+Defaults to logging in Hub, but you can override by adding server url
+
+
+docker logout
+always logout from shared machines or servers when done, to
+protect your acccount
+
+This Lecture: Review
+
+-Properly tagging images
+-Tagging images for upload to Docker Hub
+-How tagging is related to image ID
+-The Latest Tag
+-Logging into Docker Hub from docker cli
+-How to create private Docker Hub images
+
+
+
+
+Building Images: The Dockerfile Basics
+FROM Command
+
+package manager
+PM's like apt and yum are one of the reasons to build containers
+FROM Debian, Ubuntu, Fedora or CentOS
+
+ENV is for setting Enviroment Variables
+One reason they were chosen as preferred way to inject
+key/value is they work everywhere, on every OS and config
+
+RUN executing shell commands when you are 
+
+EXPOSE ports to a virtual network
+
+CMD will be run every time we launch a new container from the Image
+
+
+
+Building Images: Running Docker Builds
+docker image build -t customnginx . 
+Step every command and hash-
+It caches every building step.
+
+
+Building Images: Extending Official
+We are using  nginx:latest
+
+WORKDIR where you are changing directories.
+
+COPY to copy your source code to the container image.
+
+
+
+Quiz 4: Image Quiz
+
+Question 1:
+Which of the following is an example of a container image?
+
+Answer:
+    Nginx
+
+Correct, this is the container image we have been using often in the course.
+
+
+Question 2:
+Which flag would you pass to specify a docker build referencing a file other than the default 'Dockerfile'?
+
+
+Answer:
+   The -f command is used to specify a dockerfile, with an alias of --file
+
+
+Question 3:
+Which Dockerfile stanza (Command) is best to use for changing the directory in a Dockerfile?
+
+Answer: 
+    WORKDIR
+
+Yep, this is the best way to change the current working directory in Dockerfiles.
+
+
+
+Assignment: Build Your Own Dockerfile and Run Containers From It
+-Dockerfiles are part process workflow and part art
+-Take existing Node.js app and Dockerize it
+-Make Dockerfile. Build it. Test it. Push it. (rm it). Run it.
+-Expect this to be iterative. Rarely do I get it right the first time.
+-Details in dockerfile-assignment-1/Dockerfile
+-Use the Alpine version of the official 'node' 6x image
+-Expected result is web site at http://localhost
+
+
+# use this empty Dockerfile to build your assignment
+
+# This dir contains a Node.js app, you need to get it running in a container
+# No modifications to the app should be necessary, only edit this Dockerfile
+
+# Overview of this assignment
+# use the instructions from developer below to create a working Dockerfile
+# feel free to add command inline below or use a new file, up to you (but must be named Dockerfile)
+# once Dockerfile builds correctly, start container locally to make sure it works on http://localhost
+# then ensure image is named properly for your Docker Hub account with a new repo name
+# push to Docker Hub, then go to https://hub.docker.com and verify
+# then remove local image from cache
+# then start a new container from your Hub image, and watch how it auto downloads and runs
+# test again that it works at http://localhost
+
+
+# Instructions from the app developer
+# - you should use the 'node' official image, with the alpine 6.x branch
+FROM node:6-alpine
+
+# - this app listens on port 3000, but the container should launch on port 80
+EXPOSE 3000
+
+  #  so it will respond to http://localhost:80 on your computer
+# - then it should use alpine package manager to install tini: 'apk add --update tini'
+RUN apk add --update tini
+
+# - then it should create directory /usr/src/app for app files with 'mkdir -p /usr/src/app'
+RUN mkdir -p /usr/src/app
+
+
+# - Node uses a "package manager", so it needs to copy in package.json file
+WORKDIR /usr/src/app
+COPY package.json package.json
+
+
+# - then it needs to run 'npm install' to install dependencies from that file
+RUN npm install && npm cache clean
+
+# - to keep it clean and small, run 'npm cache clean --force' after above
+# - then it needs to copy in all files from current directory
+COPY . .
+# - then it needs to start container with command '/sbin/tini -- node ./bin/www'
+CMD ["tini","--","node","./bin/www"]
+# - in the end you should be using FROM, RUN, WORKDIR, COPY, EXPOSE, and CMD commands
+
+# Bonus Extra Credit
+# this will not have you setting up a complete image useful for local development, test, and prod
+# it's just meant to get you started with basic Dockerfile concepts and not focus too much on
+# proper Node.js use in a container. **If you happen to be a Node.js Developer**, then 
+# after you get through more of this course, you should come back and use my 
+# Node Docker Good Defaults sample project on GitHub to change this Dockerfile for 
+# better local development with more advanced topics
+# https://github.com/BretFisher/node-docker-good-defaults
+
+sudo docker build -t testnode .
+
+sudo docker container run --rm -p 80:3000 testnode
+
+
+
+
+Using Prune to Keep Your Docker System Clean

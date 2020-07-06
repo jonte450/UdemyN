@@ -216,17 +216,209 @@ Alpine is a linux distribution and is very small.
 
 Docker Networks: Concepts for Private and Public Comms in Containers
 
+Docker Networks: Concepts
+-Review of docker container run -p
+-For local dev/testing, networks usually "just work"
+-Quick port check with docker container port <container>
+-Learn concepts of Docker Networking
+-Understand how network packets move around Docker
+
+Docker Networks Defaults
+-Each container connected to a private virtual network "bridge"
+-Each virtual network routes through NAT firewall on host IP
+-All containers on a virtual network can talk to each other without -p
+-Best practice is to create a new virtual network for each app:
+ -network "my_web_app" for mysql and php/apache containers
+ -network "my_api" for mongo and nodejs containers
+
+
+Docker Networks Cont.
+
+-Batteries included, But removable
+ -Default work well in many cases, but easy to swap out parts to
+  customize it
+
+-Make new virtual networks
+
+-Attach containers to more then one virutal network (or none)
+
+-Skip virtual networks and use host IP (--net=host)
+
+-Use different Docker Network drivers to gain new abilities
+
+-and much more
+
+docker container inspect --format '{{ .NetworkSettings.IPAdress}}' webhost
+
+Docker Networks: Concepts
+ -Review of docker container run -p
+ -For local dev/testing, networks usually "just work"
+ -Quick port check with docker container port <container>
+ -Learn concepts of Docker Networking
+ -Understand how network packets move around Docker
+
+
+
+Docker Networks: CLI Management Of Virtual Networks
+-Show networks docker network ls
+-Inspect a network docker network inspect
+-Create a network docker network create --driver
+-Attach a network to container docker network connect
+-Detach a network from container docker network disconnect
+
+docker network ls shows all listed networks-
+
+--network host 
+It gains performance by skipping virtual network but sacrifies security 
+of container model
+
+--network none
+removes eth0 and only leaves you with localhost interface in container
+
+docker network create
+Spawns a new virtual network for you to attach containers to
+
+network driver
+Built-in or 3rd party extensions that give you virtual network features
+
+docker network connect 
+Dynamically creates a NIC in a container on an existing virtual network
+
+docker network disconnect
+Dynamically removes a NIC from a container on a specific virtual network
+
+Docker Networks: Default Security
+-Create your apps so frontend/backen sit on same Docker network
+-Their inter-communication never leaves host
+-All externally exposed ports closed by default
+-You must manually exposr via -p, which is better default security!
+-This gets even better later with Swarm and Overlay networks
+
+Docker Networks: CLI Management
+-Show networks docker network ls
+-Inspect a network docker network inspect
+-Create a network docker network create --driver
+-Attach a network to container docker network connect
+-Detach a network from container docker network disconnect
+
+
+
+
+
 
 Docker Networks: DNS and How Containers Find Each Other
 
+Docker Networks: DNS
+-Understand how DNS is the key to easy inter-container comms
+-See how it works by default with custom networks
+-Learn how to use --link to enable DNS on default bridge network
+
+Forget IP'S
+Static IP's and using IP's for talking to containers is an anti-pattern.
+Do your best to avoid it.
+
+Docker DNS
+Docker daemon has a built-in DNS server that containers use by default
+
+DNS Default Names
+Docker defaults the hostname to the container's name but you can also set
+aliases
+
+Docker Networks: DNS
+-Containers shouldn't rely on IP's for inter-communication
+-DNS for friendly names is built-in if you can use custom networks
+-You're using custom networks right?
+-This gets way easier with Docker Compose in future Section
+
+
 Quiz 3: Container Quiz 2
+
+Question 1:
+Which command would we use to get an overview look of information about a specific container like Networks, IP address, mounts, and current status?
+
+Answer:
+  docker container inspect
+
+This shows you the container configuration. It can also be modified to only return a specific piece of data using the —format flag.
+
+Question 2:
+In order to connect to a shell inside of a container, you should use docker ssh to get inside.
+
+Answer:
+   False
+
+Correct! By using the 'docker exec -it <container> sh' (or bash) command on a container, we can connect to a shell from inside it.
+
+
+Question 3:
+If you wanted multiple containers to be able to communicate with each other on the same docker host, which network driver would you use?
+
+Answer:
+  bridge
+
+Right, the default bridge network driver allow containers to communicate with each other when running on the same docker host.
+
+
 
 Assignment: Using Containers for CLI Testing
 
+-Know how to use -it to get shell in container
+-Understand basics of what a Linux distribution is like Ubuntu and CentOs
+-Know how to run a container
+
+Assignment: CLI App Testing
+
+-Use different Linux distro containers to check curl cli tool version
+-Use two different terminal windows to start bash in both centos:7 and 
+ ubuntu:14:04, using -it
+-Learn the docker container --rm option so you can save cleanup
+
+-Ensure curl is installed and on latest version for that distro
+ -ubuntu: apt-get update && apt-get install curl
+ -centos:yum update curl
+-Check curl --version
+
 Assignment Answers: Using Containers for CLI Testing
+
+sudo docker container run --rm -it centos:7 bash
+yum update curl
+
+sudo docker container run --rm -it ubuntu:14.04 bash
+apt-get update && apt-get install -y curl
+
 
 FIXME: Bug in alpine affects nslookup
 
 Assignment: DNS Round Robin Test
+-Know how to use -it to get shell in container
+-Understand basics of what a Linux distribution is like Ubuntu and CentOS
+-Know how to run a container
+-Understand basics of DNS records
+
+
+Assignment: DNS Round Robin Test
+-Ever since Docker Engine 1.11, we can have multiple containers
+ on a created network respond to the same DNS address
+
+-Create a new virtual network (default bridge driver)
+
+-Create two containers from elasticsearch:2 image
+
+-Research and use -network-alias search when creating them to give them
+ an addtional DNS name to respond to
+
+-Run alpine nslookup search with --net to see the two containers list for
+ the same DNS name
+
+-Run centos curl -s search:9200 with --net multiple times until
+ you see both "name" fields show
+ 
 
 Assignment Answers: DNS Round Robin Test
+docker network create dude
+docker container run -d --net dude  --net-alias search elasticsearch:2
+docker container ls
+
+docker container run --rm --net dude alpine nslookup search
+docker container run --rm --net dude centos curl -s search:9200
+

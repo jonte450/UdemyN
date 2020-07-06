@@ -1,0 +1,86 @@
+Welcome to Schell Scripting Basics
+-What is Kernel?
+-What is a Shell?
+-What is Shell Scripting?
+-Types of Shells?
+-Starting a Shell
+-How to run a Shell Script
+
+
+What is a Kernel?
+-What is a Kernel?
+ -Interface between hardware and Software
+
+
+What is a Shell?
+-What is a Shell?
+ -Its like a container
+ -Interface between users and Kernel/OS
+ -CLI is a Shell
+
+Find your Shell
+ -echo $0
+ -Available Shells "cat etc/shells"
+ -Your Shell? /etc/passwd
+
+
+-Windows GUI is a shell
+-Linux KDE GUI is a shell
+-Linux sh, bash, etc, is a shell
+
+
+
+
+What is Shell Scripting
+-Put instructions in a Shell and RUN it
+
+
+Types of Shells
+-Gnome
+ Graphical enviroment that is in Linux.
+
+-KDE
+
+-sh
+ Given a platform to work in.
+ Bourne-Shell.
+
+-bash
+ Bourne again shell.
+
+-csh and tcsh
+ 
+-ksh
+ Corn-Shell
+ He developed the CornShell.
+
+cat/etc/shells
+
+
+Starting a Shell
+-Simply type the shell name
+
+Tells with shell!.
+
+echo $0
+
+GNOME is the graphical shell.
+
+exit: To quit a shell.
+
+
+How to Run a Shell Script
+
+
+You are in the first step
+
+-Absolute path
+ e.g /home/iafzal/scripts/xyz-script
+
+
+You walk to the path
+-Relative path
+ -cd /home/iafzal/scripts
+    ./xyz-script
+
+

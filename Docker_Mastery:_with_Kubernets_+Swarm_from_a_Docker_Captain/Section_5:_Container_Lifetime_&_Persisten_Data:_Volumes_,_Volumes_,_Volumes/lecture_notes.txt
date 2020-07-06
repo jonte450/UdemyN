@@ -1,0 +1,164 @@
+Container Lifetime & Persistent Data
+-Defining the problem of persistent data
+-Key concepts with containers: immutable, ephemeral
+-Learning and using Data Volumes
+-Learning and using Bind Mounts
+-Assignments
+
+Container Lifetime & Persistent Data
+-Containers are usally immutable and ephemeral
+-"immutable infrastructure": only re-deploy containers, never change
+-This is the real scenario, but what about databases, or unique data?
+-Docker gives us features to ensure these "separation of concerns"
+-This is known as "persistent data"
+-Two ways: Volumes and Bind Mounts
+-Volumes: make special location outside of container UFS
+-Bind Mounts: link container path to host path
+
+
+
+Persistent Data: Data Volumes
+-VOLUME command in Dockerfile
+
+Volume needs manual delection
+sudo docker container run -d --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=True mysql
+sudo docker container inspect
+
+Mounts gives the location where the container lives
+
+docker volume ls
+docker volume instpect volume name
+
+We can see from the volume propesctive where the volume is connected to.
+Even if you remove the container the volumes continues to live on
+
+named volumes
+Friendly way to assign vols to containers
+-v mysql-db:/var/lib/mysql
+
+docker volume create
+required to do this before "docker run" 
+to use custom drivers and labels
+
+Shell Differences for Path Expansion
+
+In the next lecture, you'll learn how to share files and directories between a host and a Docker container. One of the parts of the command line you'll need to type is the host file path you want to share.
+
+With Docker CLI, you can always use a full file path on any OS, but often you'll see me and others use a "parameter expansion" like $(pwd) which means "print working directory".
+
+Here's the important part. Each shell may do this differently, so here's a cheat sheet for which OS and Shell your using. I'll be using $(pwd) on a Mac, but yours may be different!
+
+This isn't a Docker thing, it's a Shell thing.
+
+For PowerShell use: ${pwd} 
+
+For cmd.exe "Command Prompt use: %cd%
+
+Linux/macOS bash, sh, zsh, and Windows Docker Toolbox Quickstart Terminal use: $(pwd) 
+
+Note, if you have spaces in your path, you'll usually need to quote the whole path in the docker command.
+
+
+Persistent Data: Bind Mounting
+-Maps a host file or directory to a container file or directory
+-Basically just two locations pointing to the same file(s)
+-Again, skips UFS, and host files overwrite any in container
+-Can't use in Dockerfile, must be at container run
+-... run -v /Users/bret/stuff:/path/container (mac/linux)
+-... run -v //c/Users/bret/stuff:/path/container (windows)
+
+pcat Dockerfile
+
+docker container run -d --name nginx -p 80:80 -v $(pwd):/usr/share/nginx/html nginx
+
+
+Quiz 5: Quiz on Persistent Data
+
+Question 1:
+Which type of persistent data allows you to attach an existing directory on your host to a directory inside of a container?
+
+Answer:
+    Bind Mount
+
+
+Good job!
+This is what is used when you are trying to map the files from a directory on the host into a directory in the container.
+
+Question 2:
+When adding a bind mount to a docker run command, you can use the shortcut $(pwd), (or ${pwd} depending on your shell). What does that do?
+
+Answer: 
+  It runs the shell command to print the current working directory,
+  to avoid having to type out the entirety of your directory location
+
+This command stand for "print working directory", and shortens your keystrokes, and reduces errors from mistyping your path or forgetting to escape spaces in the path.
+
+Question 3:
+When making a new volume for a mysql container, where could you look to see where the data path should be located in the container?
+
+Answer:
+   Docker Hub
+
+Good job!
+Looking through the README.md or Dockerfile of the mysql official image, you could find the database path documented or the VOLUME stanza.
+
+
+
+
+Assignment: Database Upgrades with named Volumes.
+
+-Database upgrade with containers
+-Create a postgres container with named volume psql-data using version
+ 9.6.1
+-Use Docker Hub to learn VOLUME path and versions needed to run it
+-Check logs, stop container
+-Create a new postgres container with same named volume using 9.6.2
+-Check logs to validate
+
+
+Assignment: Answer Upgrades with Named Volumes
+sudo docker container run -d --name psql -v psql:/var/lib/postgresql/data postgres:9.6.1
+
+sudo docker container logs -f psql
+
+sudo docker container id
+
+sudo docker container run -d --name psql2 -v psql:/var/lib/postgresql/data postgres:9.6.2
+
+sudo docker container logs id
+
+
+Assignment: Edit Code Running In Containers With Bind Mounts
+-Use a Jekyll "Static Site Generator" to start a local web server
+-Don't have to be web developer: this is example of bridging the gap
+ between local files access and apps running in containers
+-source code s in the course repo under bindmount-sample-1
+-We edit files with editor on our host using native tools
+-Container detects changes with host files and updates web server
+-start container with docker run -p 80:4000 -v $(pwd):/site bretfisher/jekyll-serve
+-Refresh our browser to see changes
+-Change the file in posts\ and refresh browser to see changes
+
+Assignment: Answer Edit Containers Running In Containers With Bind Mounts
+sudo docker run -p 80:4000 -v $(pwd):/site bretfisher/jekyll-serve
+
+Database Passwords in Containers   
+
+
+We all know databases usually need passwords, but since the dawn of Docker, the postgres image (and a few others like redis) has allowed you to do a simple docker run on it and it starts without a password. Sure you could set a password but it didn't require one.
+
+In Feburary 2020 that changed, and will affect using postgres in this course (and my others). When running postgres now, you'll need to either set a password, or tell it to allow any connection (which was the default before this change).
+
+For docker run, and the forthcoming Docker Compose sections, you need to either set a password with the environment variable:
+
+POSTGRES_PASSWORD=mypasswd
+
+Or tell it to ignore passwords with the environment variable:
+
+POSTGRES_HOST_AUTH_METHOD=trust
+
+Note this change was in the Docker Hub image, and not a change in postgres itself.
+
+Also note if I or you were pinning versions, as we should, this wouldn't have surprised us. I tend to only pin to the minor version in this course (9.6) rather than the patch version (9.6.16) to keep you a bit more secure in the course. In the real world, I always pin my production apps to the patch version. It's the only safe way to operate. By pinning to the minor version in the courses, I prevent any major changes from breaking the course (in theory ha ha), yet also ensure you're running the latest patches (which would fix any bugs or security problems). In this, *very rare case*, the maintainer of the official postgres decided to introduce a breaking change in the *image* to a patch release of the app. The two aren't related, and it kinda shows off a weakness of the Docker Hub model... that there is no version of the Docker Hub image really, it's just tracking the upstream postgres versions... so then if any Docker Hub change would break something, it can't easily be tracked as a separate version from the app itself. Oh well, just remember to always pin the whole image version for things you care about.
+
+I've updated the course repo files to indicate this change, but if you've cloned the repo before February 18th, 2020, you will need to update or replace your clone.

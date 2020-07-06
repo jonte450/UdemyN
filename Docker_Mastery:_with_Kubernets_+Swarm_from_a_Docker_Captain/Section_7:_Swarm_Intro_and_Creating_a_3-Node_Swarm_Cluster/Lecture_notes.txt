@@ -1,0 +1,151 @@
+Swarm Mode: Built-In Orchestration
+
+Containers Everywhere = New Problems
+
+-How do we automate container lifecycle?
+-How can we easily scale out/in/up/down?
+-How can we ensure our containers are re-created if they fail?
+-How can we replace containers without downtime(blue/green deploy)?
+-How can we control/track where containers get started?
+-How can we create cross-node virtual networks?
+-How can we ensure only trusted servers run our containers?
+-How can we store secrets, keys, passwords and get them to the 
+ right container (and only that container)?
+
+
+Swarm Mode: Built-In Orchestration
+-Swarm Mode is a clustering solution built inside Docker
+-Not related to Swarm "classic" for pre-1.12 versions
+-Added in 1.12 (Summer 2016) via SwarmKit toolkit
+-Enhanced in 1.13 (January 2017) via Stacks and Secrets  	
+-Not enabled by default, new commands once enabled
+ -docker swarm
+ -docker node
+ -docker service
+ -docker stack
+ -docker secret
+
+
+
+Create Your First Service and Scale It
+docker info
+docker swarm init
+
+docker swarm init: What Just Happened
+
+-Lots of PKI and  security automation
+ -Root Signing Certificate created for our Swarm
+ -Certificate is issued for first Manager node
+ -Join tokens are created
+
+-Raft database created to store root CA, configs and secrets
+ -Encrypted by default on disk(1.13+)
+ -No need for another key/value system to hold 
+  orchestration/secrets 
+ -Replicates logs amongst Managers via mutual TLS in 
+  "control plane"
+
+docker node ls
+
+Show the workers
+
+docker node --help
+
+docker service --help 
+
+docker service create alpine ping 8.8.8.8
+
+docker service ls
+
+docker sevice ps <name>
+
+docker service update <ID> --replicas 3
+
+
+UI Change For Service Create/Update
+
+You may notice that when using docker service create  and update , that the CLI acts differently for some Lectures then your own Docker. This is due to a change in the way Docker CLI shows the service commands in 2017.
+
+--detach is a new option that changes the CLI response after you run a command.
+This is a good thing, and doesn't affect the functionality of Swarm. It's just a UI difference. I use various 2017 versions of Docker in this course, so you may see different output for your own service create/update commands vs. mine, which is fine.
+
+History of changes to CLI output for service create/update:
+
+Before 17.05, the service commands would immediately return to your shell prompt and the containers would be scheduled in the background (asynchronously). To check if they deployed properly you would need to use docker service ls and docker service ps.
+Starting in 17.05 the service commands were given a --detach  option, which defaulted to true , but warned you each time about a future change to false . The create/update commands were still asynchronous.
+Starting in 17.10 the --detach  default changes to false , so you'll always see the UI wait synchronously while service tasks are deployed/updated, unless you set --detach true  in each command.
+For all stable versions after 17.12, just remember:
+
+Use the defaults if you're interactive at the CLI, typing commands yourself.
+Use --detach true  if you're using automation or shell scripts to get things done.
+
+
+
+Docker Machine Bug With Swarm
+
+If you're planning to use docker-machine to create local VM's for Swarm, note there is a bug in 18.09.0 that prevents Swarm network ports from listening. This is fixed in 18.09.1 so make sure you have the latest Docker Desktop or Docker Toolbox and your VM's are up to date.
+
+Current versions (October 2019) include:
+
+docker version 19.03.2
+
+docker-machine version 0.16.2
+
+To ensure you have the latest Docker Toolbox, download it from the GitHub release page.
+
+You'll know you're up to date when you do a docker-machine ls and the VM's have 18.09.1 or later.
+
+To update existing docker-machine VM's, you can use docker-machine upgrade <name of vm>.
+
+
+
+Creating a 3-Node Swarm Cluster
+
+Creating 3-Node Swarm: Host Options
+-A. play-with-docker.com
+ -Only needs a browser, but resets after 4 hours
+-B. docker-machine + VirtualBox
+ -Free and runs locally, but requires a machine with 8GB memory
+-C. Digital Ocean + Docker install
+ -Most like a production setup, 
+  but costs $5-10/node/month while learning
+ -Use my referal code in section resources to get $10 free
+-D.Roll your own
+ -docker-machine can provision machines for Amazon, Azure, DO,
+  Google, etc-
+ -Install docker anywhere with get.docker.com
+
+
+
+Quiz 7: Quiz on Swarm Mode Basics
+
+Question 1:
+How do we initially begin a Swarm, activating Swarm Mode on a single node?
+
+Answer: 
+   docker swarm init
+
+Good job!
+This is how a single node initializes a swarm, and is automatically joined as a manager.
+
+
+Question 2:
+
+To scale up a service to multiple containers, which of the following commands would you use?
+
+Answer:
+   
+   docker service update <service-name> --replicas #
+
+   We can use this command to update the service and "scale up" the service to a desired amount. Bonus: a shorter way to do it is with a "docker service scale" command. 
+
+
+Question 3:
+
+Once a node joins a swarm as a worker, it would have to leave the swarm and re-join to become a manager.
+
+Answer:
+  False
+
+We can update a role of another node from a manager node using the "docker node update --role" command.
+

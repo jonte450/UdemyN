@@ -1,0 +1,172 @@
+Route 53 Overview
+-Route53 is a Managed DNS (Domain Name System)
+-DNS is a collcection of rules and records which helps clients understand
+ how to reach a server through its domain name.
+
+-In AWS the most common records are:
+ -A: hostname to IPV4
+ -AAAA: hostname to IPV6
+ -CNAME: hostname to hostname
+ -Alias: hostname to AWS resource
+
+Route53 can use:
+ -public domain names you own (or buy)
+  applicationl.mypublicdomain.com
+ -private domain names that can be resolved by your instances in your 
+  VPCs.
+  applicationl.company.internal
+
+ 
+ Route53 has advanced features such as:
+  -Load balancing (through DNS - also called client load balancing)
+  -Health checks(although limited...)
+  -Routing policy: simple, failover, geolocation, latency, weighted,
+   multi value
+
+-You pay $0.50 per month per hosted zone
+
+Route 53 Hands On
+Register domain name.
+Put in all your information.
+Enable privacy.
+Pending requests.
+Create a record set.
+
+
+Route 53 - EC2 Setup
+Put appache installement to Apache data.
+Three instances in Tokyo and Ireland.
+We have created 3 EC2 instances and a load balancer in Ireland.
+
+Route 53 - TTL
+Cache the DNS request.
+TTL is something we can configure.
+It is going to be cached 300s.
+Soon as you operate a change it.
+Route53 will have less trafic.
+Low TTL will make it more traffic to Route53.
+
+
+Route 53 CNAME vs Alias
+-AWS Resources (Load Balancer, CloudFront...) expose an AWS hostname:
+ lbl-1234.us-east-2.elb.amazonaws.com and you want myapp.mydomain.com
+
+-CNAME:
+  -Points a hostname to any other hostname. 
+   (app.mydomain.com => blabla.anything.com)
+  -ONLY FOR NON ROOT DOMAIN (ex: something.mydomain.com)
+
+-Alias:
+  -Points a hostname to an AWS Resource 
+   (app.mydomain.com => blabla.amazonaws.com)
+  -Works for ROOT DOMAIN and NON ROOT DOMAIN (aka mydomain.com) 
+  -Free of charge
+  -Native health check
+
+
+Create a Record Set and make a CNAME.
+
+
+Routing Policy - Simple
+-Use when you need to redirect to a single source
+-You can't attach health checks to simple routing policy
+-If multiple values are returned, a random one is chosen by the client
+
+
+Routing Policy - Weighted
+Weighted Routing Policy
+-Control the % of the requests that go to specific endpoints.
+-Helpful to test 1% of traffic on new app version for example
+-Helpful to split traffic between two regions
+-Can be associated with Health Checks 
+
+Routing Policy - Latency
+-Redirect to the server that has the least close to us
+-Super helpful when latency of users is a priority
+-Latency is evaluated in terms of user to designated AWS Region
+-Germany may be directed to the US (if that's the lowest latency)
+
+
+Route 53 Health Checks
+-Have X health checks failed => unhealthy (default 3)
+-After X health checks passed => health (default 3)
+-Default Health Check Interval: 30s (can set to 10s - higher cost)
+-About 15 health checkers will check the endpoint healt
+-=> one request every 2 seconds on average
+-Can have HTTP, TPC and HTTPS health checks (no SSL verification)
+-Possibility of integrating the health check with CloudWatch
+-Health checks can be linked to Route53 DNS queries
+
+
+
+
+Routing Policy - Failover
+Health check(mandatory)
+Failover -> Secondary (disaster recovery)
+
+
+Routing Policy - Geolocation
+-Different from Latency based!
+-This is routing based on user location
+-Here we specify: traffic from the UK should go to
+ this specific IP
+
+-Should create a "default" policy
+ (in case there's no match on location)
+
+
+Routing Policy - Multi Value
+-Use when routing traffic to multiple resources
+-Want to associate a Route 53 health checks with records
+-Up ro 8 healthy records are returned for each Multi Value query
+-Multi Value is not a substitute for having an ELB
+
+
+Quiz 6: Route 53 Quiz
+
+You have purchased "mycoolcompany.com" on the AWS registrar and would like for it to point to lb1-1234.us-east-2.elb.amazonaws.com . What sort of Route 53 record is NOT POSSIBLE to set up for this?
+
+Answer:
+   CNAME
+
+
+The DNS protocol does not allow you to create a CNAME record for the top node of a DNS namespace (mycoolcompany.com), also known as the zone apex
+
+
+Question 2:
+You have deployed a new Elastic Beanstalk environment and would like to direct 5% of your production traffic to this new environment, in order to monitor for CloudWatch metrics and ensuring no bugs exist. What type of Route 53 records allows you to do so?
+
+Answer:
+    Weighted
+
+Good job!
+Weighted allows you to redirect a part of the traffic based on a weight (hence a percentage). It's common to use to send a part of a traffic to a new application you're deploying
+
+
+Question 3:
+After updating a Route 53 record to point "myapp.mydomain.com" from an old Load Balancer to a new load balancer, it looks like the users are still not redirected to your new load balancer. You are wondering why...
+
+Answer: 
+
+It's because of the TTL.
+
+
+DNS records have a TTL (Time to Live) in order for clients to know for how long to caches these values and not overload the DNS with DNS requests. TTL should be set to strike a balance between how long the value should be cached vs how much pressure should go on the DNS.
+
+
+Question 4:
+You want your users to get the best possible user experience and that means minimizing the response time from your servers to your users. Which routing policy will help?
+
+Answer:
+   Latency
+
+Latency will evaluate the latency results and help your users get a DNS response that will minimize their latency (e.g. response time)
+
+
+Question 5:
+You have a legal requirement that people in any country but France should not be able to access your website. Which Route 53 record helps you in achieving this?
+
+Answer: 
+    Geolocation
+
+ 

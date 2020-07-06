@@ -1,0 +1,183 @@
+Docker Compose and The docker-compose.yml File
+-Why: configure relationships between containers
+-Why: save our docker container run settings in easy-to-read file
+-Why: create one-liner developer enviroment startups
+-Comprised of 2 separate but related things
+-1. YAML-formatted file that describes our solution options for:
+ -containers
+ -networks
+ -volumes
+
+-2. A CLI tool docker-compose used for local dev/test automation
+    with those YAML files
+
+
+docker-compose.yml
+-Compose YAML format has it's own versions: 1,2,2.1,3,3.1
+-YAML file can be used with docker-compose command for local docker 
+ automation or...
+-With docker directly in production with Swarm (as of v1.13)
+-docker-compose --help
+-docker-compose.yml is default filename, but any can be used with
+ docker-compose -f
+
+ services:
+ Here are the containers.
+
+ servicename:
+ Gives name to the DNS server
+
+
+ volumes:
+ Same as docker volumers
+
+ network:
+ Same as docker networks
+
+
+
+Trying Out Basic Compose Commands
+docker-compose CLI
+
+-CLI tool comes with Docker for Windows/Mac, but separate
+ download for Linux
+
+-Not a production-grade tool but ideal for local development and test
+
+-Two most common commands are
+ -docker-compose up #setup volumes/ networks and start all containers
+ -docker-compose down # stop all containers and remove cont/vol/net
+
+-If all your projects had a Dockerfile and docker-compose.yml
+ then "new developer onboarding" would be:
+ -git clone github.com/some/software
+ -docker-compose up
+
+pcat docker-compose.yml
+
+nginx.conf
+
+Assignment: Build a Compose File For a Multi-Container Service
+
+Assignment: Writing A Compose File
+-Build a basic compose file for a Drupal content management system website
+ Docker Hub is your friend
+
+-Use the drupal image along with the postgres image
+
+-Use ports to expose Drupal on 8080 so you can localhost:8080
+
+-Be sure to set POSTGRES_PASSWORD for postgres
+
+-Walk though Drupal setup via browser
+
+-Tip: Drupal assumes DB is localhost, but it's a service name
+
+
+
+Assignmen Answer: Build a Compose File For a Multi-Container Service
+# create your drupal and postgres config here, based off the last assignment
+version: '2'
+
+
+services:
+  drupal:
+    image: drupal
+    ports:
+      - "8080:80"
+    volumes:
+      - drupal-modules:/var/www/html/modules 
+      - drupal-profiles:/var/www/html/profiles 
+      - drupal-sites:/var/www/html/sites 
+      - drupal-themes:/var/www/html/themes 
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=mypasswd
+
+volumes:
+  drupal-modules:
+  drupal-profiles:
+  drupal-sites:
+  drupal-themes:
+
+sudo docker-compose up
+sudo docker-compose down
+sudo docker-compose down -v
+
+
+Adding Image Building to Compose Files
+-Compose can also build your custom images
+-Will build them with docker-compose up if not found in cache
+-Also rebuild with docker-compose build
+-Great for complex builds that have lots of vars or build args
+
+
+Assignment: Compose For Run-Time Image Building and Multi-Container Dev
+-"Building custom drupal image for local testing"
+-Compose isn't just for developers. Testing apps is easy/fun!
+-Maybe your learning Drupal admin, or are a software tester
+-Start with Compose file from previous assignment
+-Make your Dockerfile and docker-compose.yml in dir
+ compose-assignment-2 
+-Use the drupal image along with the postgres image as before
+-Use README.md in that dir for details
+
+
+
+Assignment Answer: Compose For Run-Time Image Building and Multi-Container Dev
+
+
+Quiz 6: Quiz on Docker Compose
+
+Question 1:
+Which is the minimum recommended version for a docker-compose.yml file?
+
+Answer:
+    2
+
+Version 2 and above provide significantly more features then the old default version 1, and what we will be using as a default base for this course. Bonus Note: v2.x is actually better for local docker-compose use, and v3.x is better for use in server clusters (Swarm and Kubernetes)
+
+
+Question 2:
+Which of the following does "docker-compose up" automatically create, even if not manually specified in the compose file?
+
+Answer:
+   Network
+
+
+Question 3:
+What is the 'build context' in a compose file supposed to do?
+
+Answer:
+   It is meant to specify where the Dockerfile of the image is supposed to build from
+
+The "." indicates the dockerfile exists in the same directory as the compose file.
+
+
+Question 4:
+The "ports:" key in a compose file does the same thing as the EXPOSE stanza in a Dockerfile.
+
+Answer: False
+
+The "ports:" key publishes the particular service on whatever port you specify, and is the docker run equivalent to the -p flag.
+
+
+
+Question 5:
+Usernames for a database, when placed in a compose file of a specific service, would best fit placed under which of the following keys?
+
+Answer:
+   Enviroment
+
+Usernames are typically an environment-specific setting, that can change often, so they are often set in environment variables.
+
+
+Question 6:
+Where does compose derive a DNS name from?
+
+Answer: 
+   Service
+
+DNS names (set as aliases) for containers in a compose file come from the service name declared in the .yml
+
