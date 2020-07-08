@@ -146,27 +146,539 @@ If you want to ping multiple address.
 
 
 Script Scheduling and Notification
+-Schedule script through cron job
+-Notification through email/sendmail
+
+ls -l /home/iafzal/ps/ping-script-all
+
+34 20 * * * /home/iafzal/ps/ping-script-all > ping-output
+
+34 20 * * * /home/iafzal/ps/ping-script-all | mail -s "Connectivity Status" imran_ny@hotmail.com
+
+
 
 
 Script to Delete Old Files
 
+-Create script to delete files s specified
+
+-Create files with older timestamp
+-Find and delete files older than 90 days
+-Find and rename old files
+
+Create files with older timestamp
+
+
+touch -d "Thu, 1 March 2018 12:30:00" a
+
+ls -ltr
+
+Find and delete files older than 90 days
+
+
+Found four files.
+
+find /path-to-dir -mtime +90 -exec ls -l {} \;
+
+
+Find and rename old files
+
+find . -mtime +90 -exec mv {} {}.old \;
+
+
+#!/bin/bash
+# Author: Imran Afzal
+# Date: 08/08/2020
+# Description: This script will delete files older than 90 days
+# Modified 08/08/2030
+
+find /path-to-dir -mtime +90 -exec rm -l {} \;
+
+
+
 Backup Filesystem
+-Create backup of /etc and /var directories using tar command
+-Compress the backup .tar file using gzip command
+-Write a script to automate backups
+
+tar cvf /tmp/backup.tar /etc /var
+
+Compress it 
+gzip /tmp/backup.tar
+
+vi backupfs
+
+#! /bin/bash
+# Author: Imran Afzal
+# Date: 08/08/2020
+# Description: Backup /etc and /var filesystem
+# Modified: 08/08/2020
+
+tar cvf /tmp/backup.tar /etc /var
+
+gzip /tmp/backup.tar
+
+find /tmp/backup.tar.gz -mtime -1 -type f -print &> /dev/null
+
+
+if [ $? -eq 0 ]
+		then
+		echo Backup was created
+		echo
+		echo Archiving Backup
+		#scp /tmp/backup.tar.gz root@192.168.1.x:/path
+		else
+		echo Backup failed
+fi
+
+
 
 For loops Scripts for File System - 1
+-Multiple Scripts 
+-Simple Counting
+-Create multiple files with different names
+-Create multiple files with user input
+-Assign write permissons to files
+-Assign write permissons to files with total time it will take
+
+#!/bin/bash
+# Author:
+# Date:
+# Description:
+# Modified:
+
+for i in {1..10}
+do
+	 echo $i
+	 sleep 1
+done
+
+chmod a+x simplecount
+
+#!/bin/bash
+# Author:
+# Date:
+# Description:
+# Modified:
+
+for i in {1..10}
+do
+
+	touch imran.$i
+
+done
+
+
+
+#!/bin/bash
+# Author:
+# Date:
+# Description:
+# Modified:
+
+echo How many files do you want?
+
+read t
+
+echo
+
+echo Files names should start with?
+
+read n
+
+for i in $(seq 1 $t)
+
+do
+
+	touch $n.$i
+
+done
+
+#!/bin/bash
+# Author:
+# Date:
+# Description:
+# Modified:
+
+
+for i in imran.*
+do
+	echo Assigning write permissions to $i
+	chmod a+x $i
+	sleep 1
+done
+
+
+
+
 
 For loops Scripts for File System - 2
+-Multiple scripts...
+-Rename all*.tt files extension to none
+-Check to see if files exist
+
+#!/bin/bash
+# Author: Imran Afzal
+# Date: 08/08/2020
+# Description: This script will rename files ending with .txt
+# Modified: 08/08/2020
+
+for filename in *.txt
+do
+ 		mv $filename ${filename%.txt}.none
+done
+
+#!/bin/bash
+# Author: Imran Afzal
+# Date: 08/08/2020
+# Description: This script will check for files
+# Modified: 08/08/2020
+
+FILES="/etc/passwd
+/etc/group
+/etc/shadow
+/etc/nsswitch.conf
+/etc/sshd_ssh_config
+/etc/fake"
+
+
+echo
+for file in $FILES
+do
+	if[! -e $file]
+	then
+	echo $file do no exist
+	echo
+	fi
+done
+
+
+
+
 
 Copy Files to Remote Hosts
 
+Copying a file to a list of remote hosts
+==============================================
+
+
+#!/bin/bash
+#Author: Imran Afzal
+# Date: 08/08/2020
+# Description: This script will copy files to remote hosts
+# Modified: 08/08/2020
+
+
+for HOST in redhat1 redhat2 redhat3 redhat4
+
+
+do
+
+	scp somefile $HOST:/var/tmp/
+
+done
+
+
+
 User Directory Assignment
 
+-Directories in /home
+-Users in /etc/passwd file
+-Match users from /etc/passwd to /home/DIR
+
+#!/bin/bash
+# Author: Imran Afzal
+# Date: 08/08/2020
+# Description: This script will find directories without users
+# Modified: 08/08/2020
+
+cd /home
+for DIR in *
+do
+	CHK=$(grep -c "/home/$DIR" /etc/passwd)
+        if [ $CHK -ge 1 ]
+	then
+	echo "$DIR is assigned to a user"
+	else
+	echo "$DIR is NOT assigned to a user"
+	fi
+done
+
+
 List of Users Logged in by Date
+-Script to look for users logged in today
+-Script to ask for user input to pull user
+
+#!/bin/bash
+# Author: Imran Afzal
+# Date
+# Description: This script will list users logged in by date
+# Modified:
+
+today=`date | awk '{print $1,$2,$3}'`
+
+#last | grep $today | awk '{print $1}'
+
+last | grep "$today"
+
+
+#!/bin/bash
+# Author: Imran Afzal
+# Date
+# Description: This script will list users logged in by user 
+#input
+# Modified:
+
+echo "please enter day (e.g. Mon)"
+read d
+echo "please enter month (e.g. Aug)"
+read m
+echo "please enter date (e.g. 28)"
+read da
+
+last | grep "$d $m $da"
+
 
 Script for Central Logging(rsylog)
+-Script to trace /var/log/messages file
+-Run the script in the background
+-User/admin notification
+-Schedule the script through cronjob
+
+
+Keep outputting error logs.
+Go and read the files.
+
+
+su -
+
+Must be root
+
+#!/bin/bash
+# Author: Imran Afzael
+# Date:
+# Description: This script wil log only defined keywords
+# Modified: 
+
+tail -fn0 /var/log/messages | while read line
+
+do
+
+echo $line | egrep -i "refused|invalid|error|fail|lost|shut|down|offline"
+
+        if [ $? = 0 ]
+        then
+        echo $line >> /tmp/filtered-messages
+        fi
+done
+
+
+#!/bin/bash
+# Author: Imran Afzael
+# Date:
+# Description: This script will send an email to adminstrators
+# Modified: 
+
+systems="imran_ny@hotmail.com,charles.gorden@email.com"
+
+if [ -s /tmp/filtered-messages ]
+        then
+cat /tmp/filtered-messages | sort | uniq | mail -s "syslog message" $systems
+        rm /tmp/filtered-messages
+        else
+        fi
+
 
 Script for User Account Management
+-Create a user account
+-Error out if user exist
+-Add user description
+-Add user ID option
+-Error out if user ID exist
+
+1 - Create User Account
+
+#!/bin/bash
+
+echo "Please provide a username?"
+read u
+echo
+
+useradd $u
+echo $u account has been created
+
+====================================================
+
+====================================================
+
+2 - Error out if user exist
+ #!/bin/bash
+
+echo "Please provide a username?"
+read u
+echo
+
+grep -q $u /etc/passwd
+        if [ $? -eq 0 ]
+        then
+        echo ERROR -- User $u already exist
+        echo Please choose another username
+        echo
+        exit 0
+        fi
+
+useradd $u
+echo $u account has been created
+
+====================================================
+
+====================================================
+
+3 - Add user description
+#!/bin/bash
+
+echo "Please provide a username?"
+read u
+echo
+
+grep -q $u /etc/passwd
+        if [ $? -eq 0 ]
+        then
+        echo ERROR -- User $u already exist
+        echo Please choose another username
+        echo
+        exit 0
+        fi
+
+
+echo "Please provide user description?"
+read d
+echo
+
+useradd $u -c "$d"
+echo $u account has been created
+
+====================================================
+
+====================================================
+
+4 - Add User ID
+#!/bin/bash
+
+echo "Please provide a username?"
+read u
+echo
+
+grep -q $u /etc/passwd
+        if [ $? -eq 0 ]
+        then
+        echo ERROR -- User $u already exist
+        echo Please choose another username
+        echo
+        exit 0
+        fi
+
+
+echo "Please provide user description?"
+read d
+echo
+
+echo "Do you want to specify user ID (y/n)?"
+read ynu
+echo
+        if [ $ynu == y ]
+        then
+        echo "Please enter UID?"
+        read uid
+
+        useradd $u -c "$d" -u $uid
+        echo
+        echo $u account has been created
+
+        elif [ $ynu == n ]
+        then
+        echo No worries we will assign a UID
+        useradd $u -c "$d"
+        echo
+        echo $u account has been created
+        fi
+
+====================================================
+
+====================================================
+
+5 - Add User ID check
+#!/bin/bash
+
+echo "Please provide a username?"
+read u
+echo
+
+grep -q $u /etc/passwd
+        if [ $? -eq 0 ]
+        then
+        echo ERROR -- User $u already exist
+        echo Please choose another username
+        echo
+        exit 0
+        fi
+
+
+echo "Please provide user description?"
+read d
+echo
+
+echo "Do you want to specify user ID (y/n)?"
+read ynu
+echo
+        if [ $ynu == y ]
+        then
+        echo "Please enter UID?"
+        read uid
+                grep -q $uid /etc/passwd
+                if [ $? -eq 0 ]
+                then
+                echo ERROR -- UserID $uid already exist
+                echo
+                exit 0
+                else
+                useradd $u -c "$d" -u $uid
+                echo
+                echo $u account has been created
+                fi
+        elif [ $ynu == n ]
+        then
+        echo No worries we will assign a UID
+        useradd $u -c "$d"
+        echo
+        echo $u account has been created
+        fi
+
 
 Disable Inactive Users
+- Run commands to inentify users
+- Create a script in For loop to disable inactive accounts
+- Create a script with xargs to disable inactive accounts
+
+Disable account with For loop
+
+#!/bin/bash
+
+a=`lastlog | tail -n+2 | grep 'test' | awk '{print $1}'`
+
+for i in $a
+do
+usermod -L $i
+done
+
+Disable using xargs
+
+lastlog | tail -n+2 | grep 'test' | awk '{print $1}' |
+  xargs -I{} echo {}
+
+
+lastlog | tail -n+2 | grep 'test' | awk '{print $1}' |
+  xargs -I{} usermod -L {}
 
 Check Process Status and Killing it
 
