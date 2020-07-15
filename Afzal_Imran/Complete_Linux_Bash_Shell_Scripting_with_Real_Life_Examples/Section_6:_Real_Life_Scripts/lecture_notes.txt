@@ -681,17 +681,266 @@ lastlog | tail -n+2 | grep 'test' | awk '{print $1}' |
   xargs -I{} usermod -L {}
 
 Check Process Status and Killing it
+-Create a dummy process
+-Run commands to find the process ID
+-Create a script to kill process
+
+Run commands
+ps -ef | grep "sleep 600"
+
+ps -ef | grep "sleep 600" | grep -v grep 
+
+ps -ef | grep "sleep 600" | grep -v grep | awk '{print $2}' 
+
+ps -ef | grep "sleep 600" | grep -v grep | awk '{print $2}' | xargs -I{} echo {}
+
+ps -ef | grep "sleep 600" | grep -v grep | awk '{print $2}' | xargs -I{} kill {}
+
+#!/bin/bash
+# Author: Imran Afzal
+# Date: 08/08/2020
+# Description: This script will find dead or zombie processes 
+#and kill it
+#Modified: 08/08/2020
+
+ps -ef | grep "sleep 600" | grep -v grep | awk '{print $2}' | xargs -I{} kill {}
+
+echo All sleeping processes are killed
+
 
 Disk Space Status
+-Find disk space using df command
+-Different scripts that will filter the output and compare
+ (long)
+-Simple script
+
+df -h 
+
+df -h | egrep -v "tmpfs|devtmpfs" | tail -n+2
+
+df -h | egrep -v "Filesystem|tmpfs" | awk '{print $5, $6}'
+
+df -h | egrep -v "Filesystem|tmpfs" | awk '{print $5}' | cut -d'%' -f1`
+
+#!/bin/bash
+# Author: Imran Afzal
+# Date: 08/08/2020
+# Description: This script will check for disk space
+# Modified: 08/08/2020
+
+
+a=`df -h | egrep -v "tmpfs|devtmpfs" | tail -n+2 | awk '{print $5}' | cut -d'%' -f1`
+
+for i in $a
+do
+        if [ $i -ge 50 ]
+        then
+        echo Check disk space $i `df -h | grep $i`
+        fi
+done
+
+
+#!/bin/sh
+# Author: Imran Afzal
+# Date: 08/08/2020
+# Description: This 2nd script will check for disk space
+# Modified: 08/08/2020
+
+df -H | grep -vE '^Filesystem|tmpfs|cdrom' | awk '{print $5,$1}' | while read output
+do
+        usep=$(echo $output | awk '{print $1}' | cut -d'%' -f1  )
+        partition=$(echo $output | awk '{print $2}' )
+        
+	if [ $usep -ge 90 ]
+	then
+        echo "Running out of space \"$partition ($usep%)\" on $(hostname) as on $(date)"
+        fi
+done
+
+
+--------------------------------------------
+
+--------------------------------------------
+
+Or Simply
+
+Write a script to awk only those rows with the value
+
+
+df -h | awk '0+$5 >= 10 {print}'
+
+
+To make it presentable
+
+echo
+echo Following is the disk space status
+echo
+df -h | awk '0+$5 >= 10 {print}' | awk '{print $5, $6}'
+
 
 Status on Total Number of Files
+- Run the command "ls -l" with different option
+- Create a script to perform comparison
+- Schedule and notify
+
+# First create 20 files
+
+touch file{1..20}.txt
+
+#!/bin/bash
+# Author: Imran Afzal
+# Date: 08/08/2020
+# Description: This script will verified total number of files
+# Modified: 08/08/2020
+
+a=`ls -l file* | wc -l`
+
+	if [ $a -eq 20 ]
+	then
+	echo Yes there are $a files
+	else
+	echo Files are less than 20
+	fi
 
 Create System Inventory
+-1:st script to add a record
+-2:st script to delete
+-3:st script is to combine and provide options
+
+#!/bin/bash
+# Author: Imran Afzal
+# Date: 08/08/2020
+# Description: This script will add system inventory to 
+#database file
+# Modified: 08/08/2020
+
+echo Please enter hostname?
+read hostname
+echo
+
+        grep -q $hostname /home/iafzal/ps/database
+        if [ $? -eq 0 ]
+        then
+        echo ERROR -- Hostname $hostname already exist
+        echo
+        exit 0
+        fi
+
+echo Please enter IP address?
+read IP
+echo
+
+        grep -q $IP /home/iafzal/ps/database
+        if [ $? -eq 0 ]
+        then
+        echo ERROR -- IP $IP already exist
+        echo
+        exit 0
+        fi
+
+
+echo Please enter Description?
+read description
+echo
+
+echo $hostname $IP $description >> database
+
+-------------------------------------------------------------
+
+
+# Create 2nd script to delete record
+
+vi del-record
+
+#!/bin/bash
+# Author: Imran Afzal
+# Date: 08/08/2020
+# Description: This script will delete system from inventory
+# database
+
+echo Please enter hostname or IP address?
+read host
+echo
+
+        grep -q $host /home/iafzal/ps/database
+        if [ $? -eq 0 ]
+        then
+        echo
+        sed -i '/'$host'/d' /home/iafzal/ps/database
+        echo $host has been deleted
+        else
+        echo Record does not exist
+        fi
+
+-------------------------------------------------------------
+
+
+-------------------------------------------------------------
+
+Create a 3rd script to give option of adding or deleting a record
+
+
+vi inv-management
+
+#!/bin/bash
+# Description: This script will add or delete a record
+
+echo
+echo Please select one of the following options:
+echo
+echo 'a = Add a record'
+echo 'd = Delete a record'
+echo
+        read choice
+
+                case $choice in
+a) /home/iafzal/ps/add-record;;
+d) /home/iafzal/ps/del-record;;
+*) echo Invalid choice - Bye.
+
+                esac
 
 Scripts with Pre-defined Information
+-Automating of pre-defined information
+ -#!/bin/bash
+ -####################################
+ -#Author:		Imran Afzal
+ -#Date:		Wed Nov 23 17:47:47 EST 2019
+ -#Description It will delete old file
+ -#Modified:  Wed Nov 23 17:47:47 EST 2019
+ -####################################
+
+ -#chmod a+x script name
+
+Script for Pre-Defined Information
+#!/bin/bash
+read -r -p "Enter name of script: " script
+read -r -p "Whats your fullname: " fname
+read -r -p "Whats the description of this script: " description
+echo "#!/bin/bash" > /home/iafzal/ps/${script}
+echo
+echo "###########################################" >>
+/home/iafzal/ps/${script}
+echo
+echo "#Author: " $fname >> /home/iafzal/ps/${script}
+echo
+echo "#Date: " $(date) >> /home/iafzal/ps/${script}
+echo
+echo "#Description: " $description >> /home/iafzal/ps/${script}
+echo
+echo "#Modified: " $(date) >> /home/iafzal/ps/${script}
+echo
+echo "###########################################" >>
+/home/iafzal/ps/${script}
+echo
+chmod a+x ${script}
+vim ${script}
 
 Getting Online Help
+ 
 
 Congratulations
 
 Homework
+
+ 

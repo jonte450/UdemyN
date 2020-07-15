@@ -1,0 +1,603 @@
+Welcome to Additional Resources
+
+Troubleshoot Putty Connectivity Issues
+
+- NIC setting on oracle virtual box
+- Advance NIC setting on oracle virtual box
+- Network interface is down at OS level
+- SSH daemon is not running
+
+
+Important Things To Remember
+
+- Linux has a super adminstrator account "root"
+
+-"root" is the most powerful account that can create, modify
+  ,delete accounts and make changes to system configuration files
+
+- Linux is a case-sensitive system
+
+- Avoiding using file names with spaces
+
+Linux File Types
+
+File Symbol		Meaning
+-				   Regular file
+d 				   Directory
+l 				   Link
+c 				   Special file or device file
+s 				   socket
+p  				   Named pipe
+b 				   Block device
+
+
+WILDCARDS
+
+-A wildcard is a character that can be used as a substitute for 
+ any of a class of characters in a search
+
+ - * - represents zero or more characters
+ - ? - represents a single character
+ - [] - represents a range of characters
+
+
+ Soft Links and Hard Links
+
+- inode = Pointer or number of a file on the hard disk
+- Soft Link = Link will be removed if file is removed or renamed
+- Hard Link = Deleting renaming or moving the original file will 
+  not affect the hard link
+
+
+FILE OWNERSHIP
+
+- There are 2 owners of a file or directory
+  -User and group
+
+
+Command to change file ownership
+ -chown and chgrp
+  - chown changes the ownership of a file
+  - chgrp changes the group ownership of a file
+
+
+Recursive ownership change option (Cascade)
+ -R
+
+
+TAB Completetion and Up Arrow
+-Hitting TAB key completes the available commands, files or
+ directories
+ -chm TAB
+ -ls j<TAB>
+ -cd Des<TAB>
+
+
+-Hitting up arrow key on the keyboard returns the last command
+ ran.
+
+
+COMBINING AND SPLITTING FILES
+- Multiple files can be combined into one and
+- One file can be split into multiple files
+
+-cat file1 file2 file3 > file4
+-split file4
+
+
+-e.g. split -1 300 file.txt childfile
+
+
+Split file.txt into 300 lines per line and output to 
+childfileaa, childfileab
+and childfilac
+
+
+Linux File Editor
+
+- A text editor is a program which enables you to create and
+  manipulate data (text) in a Linux file
+
+- There are several standard text editors available on most 
+  Linux systems
+
+- vi     -  Visual editor
+- ed     -  Standard line editor
+- ex	 -	Extended line editor
+- emacs	 -	A full screen editor
+- pico	 -  Beginner's editor
+- vim	 -  Advance versions of vi
+
+
+- Our editor = vi (available in almost every Linux distribution)
+
+
+
+
+vi supplies commands for
+ - Inserting and deleting text
+ - Replacing text
+ - Moving around the file
+ - Finding and subtituting strings
+ - Cutting and pasting text
+
+
+
+Most common keys
+- i - insert
+- Esc - Escape out of any mode
+- r - replace
+- d - delete
+- :q! - quit without saving
+- :wq! - quit and save
+
+"sed" Command
+
+-Replace a string in a file with a newstring
+-Find and delete a line
+-Remove empty lines
+-Remove the first or n lines in a file
+-To replace tabs with spaces
+-Show defined lines from a file
+-Substitute within vi editor
+-And much more
+
+sed 's/Kenny/Lenny/g' seinfeld
+
+sed '/Seinfeld/d' seinfeld-characters
+
+System Utility Commands
+-date
+-uptime
+-hostname
+-uname
+-which
+-cal
+-bc
+
+
+Log Monitoring
+
+Another and most important way of system adminstration is log monitor
+
+
+Log Directory = /var/log
+ -boot
+ -chronyd = NTP
+ -cron
+ -maillog
+ -secure
+ -messages
+ -httpd
+
+
+
+Terminal Commands
+-clear
+ Clears your screen
+
+-exit
+ Exit out of the shell, terminal or a user session
+
+
+-script
+ The script command stores terminal activities in a log file that can be named by a user, when a name is not provided by a user, the default, the file name, typescript is used
+
+
+
+
+
+
+Aliases
+
+50 cents (American rapper) = Curtis James Jackson III
+
+Pitbull (American rapper) = Armando Christian Perez
+
+Alises is a very popular command that is used to cut down on
+lengthy and repetitive commands
+
+ -alias ls="ls -al"
+ -alias pl="pwd; ls"
+ -alias tell="whoami; hostname; pwd"
+ -alias dir="ls -l | grep ^d"
+ -alias lmar="ls -l | grep Mar"
+ -alias wpa= "chmod a+w"
+ -alias d ="df -h | awk '{print \$6}' | cut -cl-4"
+
+
+
+NIC Bonding
+NIC= Network Interface Card (PC or laptop)
+
+NIC(Network Interface Card) bonding is also known 
+as Network bonding. It can be defined as the aggregation
+or combination of multiple NIC into a single bond interface.
+
+It's main purpose is to provide high availability and redundancy.
+
+NIC Bonding Procedure
+
+- modprobe bonding
+- modinfo bonding
+- Create /etc/sysconfig/network-scripts/ifcfg-bond0
+- Edit /etc/sysconfig/network-scripts/ethernet1
+- Edit /etc/sysconfig/network-scripts/ethernet2
+
+- Restart network = systemctl restart network
+
+
+
+File Transfer
+-ftp
+-scp
+-rsync
+
+For Example:
+
+# ftp ftp.server.com
+Enter Username:
+Enter Password:
+
+At the ftp prompt
+ftp>put filename
+
+
+To exit
+ftp>bye
+
+
+
+
+RAID
+
+-RAID (Redundant Array of Independent Disks)
+
+Type RAID
+	-RAID0
+	-RAID1
+	-RAID5
+
+
+
+FACTS ABOUT IT
+- IT role in our life(TV, Cars, Shopping, Phones etc.)
+- IT jobs are expected to grow by 22% till 2020
+- 68% of companies are struggling to find qualified IT 
+  candidates
+- Many IT professionals are now making more than medical 
+  proffesionals
+
+- 64% of companies are investiong in IT initiatives
+
+- You don't need high level of education to start in IT
+
+- IT job salary ranges from $40k to $400
+  (depending on the experience and skills)
+
+- As per Bureau of Labor statistics in 2016 median income of a 
+  Bachelors degree holder having an entry level in IT making
+  $101.210
+
+- A U.S. tech industry worker averages an annual wage of 
+  $105.400 compared to 51.600 for the average other sector wage
+
+- Total number of U.S. jobs outsources in 2015 2.382.000
+
+
+
+DIFFERENCE BETWEEN LINUX 5,6, AND 7 
+-CentOS and RHEL difference
+-Total versions
+-Versions 5,6, and 7
+
+Different system-config files.
+
+
+
+
+LINUX OS HARDENING
+
+-User Account
+cat /etc/password: To get all the passwords
+
+chage -l iafzal
+
+chage --help
+
+cd /etc/pam.d
+
+
+
+-Remove un-wanted packages
+rpm -qa
+
+rpm -qa | wc -l
+
+rpm -e
+
+
+-Stop un-used Services
+systemctl -a
+
+
+
+-Check on Listening Ports
+netstat -tunlp
+
+
+-Secure SSH Configuration'
+cd /etc/ssh/
+more sshd_config
+
+
+-Enable Firewall (iptables/firewalld)
+firewall -config
+firewall -cmd
+iptables
+iptables -list
+
+
+-Enable SELinux
+sesstatus 
+
+cd /etc/sysconfig/
+more seslinux
+
+man chcon
+man checkpolicy
+
+
+-Change Listening Services Port Numbers
+
+
+
+
+-Keep your OS up to date (security patching)
+
+
+
+SELinux (Security Enhanced Linux)
+
+What is SELinux?
+ -Security-Enhanced Linux is a Linux Kernel security module 
+  that provides a mechanism for supporting access control
+  security policies inclucding mandatory access control
+  (Wikipedia)
+
+ -It is a project of the United States National Security Agency
+  (NSA) and the SELinux community
+
+
+SELinux options?
+ - Enforcing = Enabled 
+ (enabled by default in Redhat, CentOS and Fedora)
+ - Permissive = Disabled but logs the activity
+ - Disable = Disabled and not activity logs
+
+To check SELinux status
+- # setstatus OR getenforce
+
+
+SELinux setting
+- # setenforce 0 =  Permissive/Disable
+- # setenforce 1 =	Enable
+
+
+Modify SELinux config for permanent setting
+ - /etc/setlinux/config
+ - SELinux=enforcing
+ - SELinux=disabled
+
+Before modyfying selinux config file
+ - Create a snapshot of your VM
+
+
+ Before reebooting create a file
+  - /.autorelabel
+
+
+ setstatus
+
+ getenforce
+
+ Two main concepts of SELinux
+  -Labeling
+    -User:role:
+    -type:level
+
+
+  -Type enforcement
+
+
+To list the labek of a directory
+ - ls -lZ /usr/sbin/httpd
+
+
+To list the label of a directory
+ - ls -lZ /etc/httpd
+
+
+-As the webserver runs its process is labeled in memory as 
+ httpd_t:
+  - ps axZ | grep httpd
+
+
+
+The SELinux assigns the label at the socket level
+ - netstat -tnlpz | grep http
+
+
+
+ Command to manage SELinux setting:
+ -semange -> to Label
+  - login
+  - user
+  - port
+  - interface
+  - module
+  - node
+  - file context
+  - boolean
+    - ON/OFF Switch
+    - There are pre-defined out of box Booleans that come with
+      SELinux
+      - e.g. do we allow ftp server to access home directories
+      - can httpd talk to Idap
+      - Etc.
+
+    -To get a list of all booleans
+      - getsebool -a
+      - OR semange boolean -l
+
+    -To enable or turn on a booleans
+      - setsebool -P boolean_name on
+
+    -Check error messages related to selinux
+      - journalctl
+
+    -To change the type in a label
+     - chcon -t httpd_sys_content_t FILENAME
+     - semange -t httpd_sys_content_t FILENAME
+
+
+
+
+  - permissive state
+  - dontaudit
+
+
+
+
+NFS Install and Configuration
+- NFS stands for Network File System, a file system developed
+  by Sun Microsystems, Inc.
+
+- It is a client/server system that allows users to access files
+  across a network and threat them as if they resided in a local file directory
+
+
+- For example, if you were using a computer linked to a second 
+  computer via NFS, you could access files on the second computer as if they resided in a directory on the first computer. This is acomplished through the processes of exporting (the process by which an NFS server provides remote
+  clients with access to its files) and mounting (the process by which client map NFS shared filesystem)
+
+
+Steps for NFS Server Configuration
+
+-Install NFS packages
+ # yum install nfs-utils libnfsidmap 
+ (most likely they are installed) 
+
+-Once the packages are installed, enable and start NFS services
+ # systemctl enable rpcbind
+ # systemctl enable nfs-server
+ # systemctl start rpcbind, nfs-server, rpc-statd, nfs-idmapd
+
+-Create NFS share directory and assign permissions
+ # mkdir /mypretzels
+ # chmod a+rwx /mypretzels
+
+-Modify /etc/exports file to add new shared filesystem
+ #	/mypretzels 192.168.12.7 (rw, sync,no_root_squash) 
+    = for only 1 host
+
+
+Steps for NFS Client Configuration
+
+- Install NFS packages
+  # yum install nfs-utils rpcbind
+
+- Once the packages are installed enable and start rpcbind service
+   # service rpcbind start
+
+- Make sure firewalld or iptables stopped (if running)
+   # ps -ef | egrep "firewall|iptable"
+
+- Show mount from the NFS server
+  # showmount -e 192.168.1.5 (NFS Server IP)
+
+- Create a mount point
+  # mkdir /mnt/app
+
+
+-Mount the NFS filesystem
+ # mount 192.168.1.5:/mypretzels /mnt/kramer
+
+- Verify mounted filesystem
+ # df -h
+
+- To unmount
+ # unmount /mnt/kramer
+
+
+ Linux System Performance Issues
+ Understanding the problem
+  - Processing
+  - Disk writing
+  - Networking (file transfer etc.)
+  - Hardware
+
+
+ Troubleshooting Steps:
+
+  - Check if the right system is reported or you are on the
+    right system
+
+  - Check disk space(df -h du)
+
+  - Check processing
+    (top, free, lsmem, /proc/meminfo, vmstat, 
+     pmap <PID>, dmidecode, lscpu or /proc/cpuinf)
+
+  - Check disk issues (iostat -y 5, lsof)
+
+  - Check networking (tcpdump -i enps03, 
+    lsof -i -P -n | grep -i listen, netstat -plnt or ss -plnt, iftop)
+
+  - Check system uptime(uptime)
+  - Check logs
+  - Check hardware status by logging into system console
+  - Other tools (ptop, iotop ,iptraf, psacct)
+
+
+
+Check the diskspace df -h
+What are used or free.
+
+Shows all the filesystems: df -a
+
+Check processing: 
+top: How many users are logged tasks, memory status.
+
+free: Tell how memory you have on the computer.
+
+lsmem: Tells about the memory blocksize.
+
+proc/meminfo: What's going inside the systems inside right now.
+
+vmstat: Tells about your swap-space.
+
+pmap: Gives information about the process that are running
+
+dmidecode: Gives information about your hardware call the vendor
+
+lscpu: Gives information about the CPU
+
+proc/cpuinfo: Similar to lscpu
+
+
+iostat: Gives the statitics every 5 seconds
+
+tcpdump: Check the network traffic
+
+lsof: This will give info about what it is open and what is
+      listening 
+
+netstat: Gives the same information as lsof but now you use ss
+
+iftop: Telling about the transfer to any other place.
+
+uptime: Check if your system has been reebooted
+
+
+
