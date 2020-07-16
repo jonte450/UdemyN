@@ -1,0 +1,108 @@
+Docker Hub: Digging Deeper
+Container Registries
+- An image registry needs to be part of your container plan
+- More Docker Hub details including auto-build
+- How Docker Store (store.docker.com) is different then Hub
+- How Docker Cloud (cloud.docker.com) os different then Hub
+- Use new Swarms feature in Cloud to connect Mac/Win to Swarm
+- Install and use Docker Registry as private image store
+- 3rd Party registry options
+
+-The most popular public image registry
+-It's really Docker Registry plus lightweight image building
+-Let's explore more of the features Docker Hub
+-Link Github/BitBucket to Hub and auto-build images on commit
+-Chain image building together
+
+Webhooks to Jenkins to Traversy.
+Automate the processes!
+
+Don't immediately click on create repsository!
+Click on Create Automated Build!
+Sync with Github repsository!
+
+Add Repository name if you have your image depending another image.
+
+Activate triggers.
+
+
+
+Understanding Docker Registry
+Running Docker Registry
+-A private registry for your network
+-Part of the docker/distribution Github repo
+-The de facto om private container registries
+-Not as full featured as Hub or others, no we UI, basic auth only
+-At its core: a web API and storage system, written in Go
+-Storage supports local, S3/Azure/Alibaba/Google Cloud, and
+ OpenStack Swift
+
+
+-Look in section resources for links to:
+-Secure your Registry with TLS
+-Storage cleanup via Garbage Collection
+-Enable Hub caching via "--registry mirror"
+
+
+
+Run a Private Docker Registry
+-Run the registry image on default port 5000
+-Re-tag an existing image and push it to your new registry
+-Remove that image from local cache and pull it from new registry
+-Re-create registry using a bind mount and see how it stores data
+
+Registry and Proper TLS
+-"Secure by default": Docker won't talk to registry without HTTPS
+- Except, localhost (127.0.0.0/8)
+- For remote self-signed TLS enable "insecure-registry" in engine
+
+docker container run -d -p 5000:5000 --name registry registry
+docker container ls
+docker pull hello-world
+docker tag hello-world 127.0.0.1:5000/hello-world
+docker push 127.0.0.1:5000/hello-world
+Will push to the local registry
+docker pull 127.0.0.1:5000/hello-world
+
+Run a Private Docker Registry Recap
+
+Run the registry image
+ - docker container run -d -p 5000:5000 --name registry registry
+
+Re-tag an existing image and push it to your new registry
+ - docker tag hello-world 127.0.0.1:5000/hello-world
+ - docker push 127.0.0.1:5000/hello-world
+
+Remove that image from local cache and pull it from new registry
+ - docker image remove hello-world
+ - docker image remove 127.0.0.1:5000/hello-world
+ - docker pull 127.0.0.1:5000/hello-world
+
+Re-create registry using a bind mount and see how it stores data
+ - docker container run -d -p 5000:5000 --name registry -v
+   $(pwd)/registry-data:/var/lib/registry registry
+
+
+Assignment: Secure Docker Registry With TLS Authentication
+
+
+The default registry install is rather bare bones, and is open by default, meaning anyone can push and pull images.  You'll likely want to at least add TLS to it so you can work with it easily via HTTPS, and then also add some basic authentication.  
+
+These aren't actually that hard to setup, but do require some commands.  You can learn the basics by creating a self-signed certificate for HTTPS, and then enabling htpasswd  auth, which you'll add users too with basic cli commands.
+
+For this assignment you'll use Play With Docker, a great resource for web-based docker testing and also has a library of labs built by Docker Captains and others, and supported by Docker Inc. 
+
+I'd like you to do the Part 2 and 3 of "Docker Registry for Linux" for this assignment. You can use their text to do this assignment on your own machine, or jump back to their Part 1 and run the container on their infrastructure  using their web-based interface to a real docker engine and learn how "PWD" works!
+
+For more extra credit labs, look through their growing list: http://training.play-with-docker.com/
+https://training.play-with-docker.com/linux-registry-part2/
+https://training.play-with-docker.com/linux-registry-part1/
+
+
+
+Using Docker Registry With Swarm
+
+Third Party Image Registries
+
+Quiz 10: Quiz on Container Registries
+

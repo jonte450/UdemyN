@@ -1,0 +1,204 @@
+Using Secrets With Local Docker
+docker-compose exec psql cat /run/secrets/psql_user
+It's away we can develop locally.
+We want to match our development.
+
+
+
+Full App Lifecycle: Dev, Build and Deploy With a Single Compose Design
+
+Full App Lifecycle With Compose
+-Live The Dream!
+
+-Single set of Compose files for:
+
+-Local docker-compose up develpment enviroment
+
+-Remote docker-compose up CI enviroment
+
+-Remote docker stack deploy production enviroment
+
+- Note: docker-compose -f a.yml -f b.yml config mostly works
+- Note: Compose extends: doesn't work yet in Stacks
+
+docker-compose -f docker-compose.yml -f docker-compose.test.yml up -d
+
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml config > output.yml
+
+
+
+
+Service Updates: Changing Things In Flight
+-Provides rolling replacement of tasks/containers in a service
+-Limits downtime (be careful with "prevents" downtime)
+-Will replace containers for most changes
+-Has many, many cli options to control the update
+-Create options will usually change, adding -add or -rm to them
+-Includes rollback and healthChecks options
+-Also has scale & rollback subcommand for quicker access
+-A stack deploy, when pre-existing, will issue service updates
+
+
+Swarm Update Examples
+-Just update the image used to a newer version
+ - docker service update --image:1.2.1 <servicename>
+
+-Adding an enviroment variable and remove a port
+ - docker service update --env-add NODE_ENV=production --publish-rm 8080
+
+-Change number of replicas of two services
+ - docker service scale web=8 api=6
+
+Swarm Updates in Stack Files
+Same command. Just edit the YAML file, then
+docker stack deploy -c file.yml <stackname>
+
+docker service create -p 8088:80 --name web nginx:1.13.7
+docker service ls
+docker service scale web=5
+docker service update --image nginx:1.13.6 web
+docker service update --publish-rm 8088 --publish-add 9090:80
+docker service update --force web
+
+
+
+HealthChecks In Dockerfiles
+-HEALTHCHECK was added in 1.12
+-Supported in Dockerfile, Compose YAML, docker run, and
+ Swarm Services
+-Docker engine will exec's the command in the container
+ -(e.g. curl localhost)
+-It expects exit 0 (OK) or exit 1 (Error)
+-Three container states: starting, healthy, unhealthy
+-Much better then "is binary still running"
+-Not a external monitoring replacement
+
+
+Docker Healthchecks Cont.
+
+-Healthcheck status shows up in docker container ls
+-Check last 5 healthchecks with docker container inspect
+-Docker run does nothing with healthchecks
+-Services will replace tasks if they fail healthcheck
+-Services updates wait for them before continuing
+
+Healthcheck Docker Run Example
+docker run \
+ --health-cmd="curl -f localhost:9200/_cluster/health || false"\
+ --health-interval=5s\
+ --health-retries=3\
+ --health-timeout=2s\
+ --health-start-period=15s\
+ elasticsearch:2
+
+
+Options for healthcheck command
+- --interval=DURATION (default: 30s)
+- --interval=DURATION (default: 30s)
+- --start-period=DURATION(default: 0s) (17.09)
+- --retries=N (default: 3)
+
+Basic command using default options
+ -HEALTHCHECK curtl -f http://localhost/ || false
+
+Custom options with the command
+ -HEALTHCHECK --timeout=2s --interval=3s --retries=3\
+ - CMD curl -f http://localhost/ || exit 1
+
+Healthcheck in Nginx Dockerfile
+
+Static website running in Nginx, just test default URL
+
+FROM nginx:1.13
+
+HEALTHCHECK --interval=30s --timeout=3s\
+CMD curl -f http://localhost/ || exit 1
+
+
+Healthcheck in PHP Nginx Dockerfile
+
+PHP-FPM running behind Nginx, test the Nginx and FPM status URLs
+
+FROM your-nginx-php-fpm-combo-image
+
+#don't do this if php-fpm is another container
+#must enable php-fpm ping/status in pool.ini
+#must forward /ping and /status urls from nginx to php-fpm
+
+HEALTHCHECK --interval=5s --timeout=3s \
+CMD curl -f http://localhost/ping || exit 1
+
+Healthcheck in postres Dockerfile
+
+Use a PostgreSQL utility to test for ready state
+
+FROM postgres
+
+#specify real user with -U to prevent errors in log
+
+HEALTHCHECK --interval=5s --timeout=3s\
+CMD pg_isreade -U postgres || exit 1
+
+
+Healthcheck in Compose/Stack Files
+
+version: "2.1" (mininum for healthchecks)
+services:
+web:
+image: nginx
+healthcheck:
+test: ["CMD","curl","-f","http://localhost"]
+interval: 1m30s
+timeout: 10s
+retries: 3
+start_period; 1m #version 3.4 mininum
+
+docker container run  --name p1 -d postgres
+docker container ls
+
+docker container run --name p2 -d
+--health-cmd="pg_isready -U postgres || exit 1" postgres
+
+docker service create --name p1 postgres
+
+docker service create --name p2 
+--health-cmd="pg_isready -U postgres || exit 1" postgres
+
+
+
+
+
+
+Quiz 9: Quiz on Swarm App Lifecycle
+
+Question 1:
+In order to spin up multiple services in a Swarm, we can just use 'docker-compose up' and Docker will be able to tell this is a Swarm and will deploy services across all nodes.
+
+Answer: 
+     False
+
+We use the 'docker stack deploy' command
+
+Question 2:
+In order to update a service that was initially deployed in a stack command, we would need to do a "docker stack rm", make our changes, then re-deploy.
+
+Answer:
+    False
+
+When we do a "docker stack deploy" on an existing stack, it will deploy the changes as service updates.
+
+
+
+Question 3:
+What does the "--start-period" option of the healthcheck do?
+
+Answer:
+    Adds a buffer of time to allow a service to start up before
+    alarming on a failed healthcheck
+
+It allows you to give a specified amount of time to give your service to successfully start up before throwing a bad healthcheck result.
+
+
+
+
+Info on Swarm Mystery
