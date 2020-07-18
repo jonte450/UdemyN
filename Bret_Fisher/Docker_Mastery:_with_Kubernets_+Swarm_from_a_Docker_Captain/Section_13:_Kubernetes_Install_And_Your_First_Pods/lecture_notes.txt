@@ -1,0 +1,160 @@
+Section Intro
+-K8s Local Install
+-K8s Container Abstractions
+-Kubectl Run, Create, Apply
+-Our First Pod
+-Scaling ReplicaSets
+-Inspecting Objects
+
+
+
+Kubernetes Architechture Terminology
+Basic Terms: System Parts
+-Kubernetes: The whole orchestration system
+ -K8s "k-egihts" or Kube for short
+-Kubectl: CLI to configure Kubernetes and manage apps
+ -Using "cube control" official pronunciation
+-Node: Single server in the Kubernetes cluster
+-Kubelet: Kubernetes agent running on nodes
+-Control Plane: Set of containers that manage the cluster
+ -Includes API server, scheduler, controller manager,
+  etcd, and more
+ - Sometimes called the "master"
+
+
+
+Kubernetes Local Install
+-Kubernetes is a series of containers, CLI's and configurations
+-Many ways to install, let's focus on easiest for learning
+-Docker Desktop: Enable in settings
+ -Sets up everything inside Docker existing Linux VM
+-Docker Toolbox on Windows: Minikube
+ -Uses Virtualbox to make Linux VM
+-Your Own Linux Host or VM: MicroK8s
+
+
+Docker Desktop: 
+ It's automatically install configurations
+
+MiniKube similar to Docker Desktop.
+
+
+Install Tips for minikube and MicroK8s
+
+Here are some tips for using minikube or MicroK8s in this course:
+Note that in March 2020, Kubernetes 1.18 came out, and kubectl run syntax and functionality changed. This course is designed for 1.14-1.17 which are the prevalent versions used in cloud hosters, Docker Desktop, and enterprise solutions. minikube and MicroK8s now default to 1.18 installs, so it's up to you if you want to force installing version 1.17 (which I would recommend for now) or skip some of the first lectures about kubectl run because they no longer create deployments/jobs/cronjobs/services, etc. They only create pods.
+
+minikube
+minikube defaults to installing the latest Kubernetes release, but you likely don't want that, since it's 6-12 months before many clouds and enterprise solutions update to recent versions. You can look up versions on GitHub, and install a specific version like this minikube start --kubernetes-version='1.17.4'
+
+Unlike Docker Desktop, which lets you use localhost for your Kubernetes services, minikube runs in VirtualBox (by default) and has its own IP. Find that with minikube ip
+
+Remember top stop minikube when you're not using it to save resources minikube stop
+
+Check the status of what is running in minikube with minikube status
+
+MicroK8s
+MicroK8s defaults to installing the latest Kubernetes release, but you likely don't want that, since it's 6-12 months before many clouds and enterprise solutions update to recent versions. You can look up versions on GitHub, and install a specific version like this sudo snap install microk8s --classic --channel=1.17/stable
+
+Before using it, you'll need to enable the CoreDNS pod so it'll resolve service DNS names later: microk8s.enable dns
+
+Check the status of what is running in MicroK8s with microk8s.status
+
+
+
+
+
+
+Kubernetes Container Abstractions
+-Pod: one or more containers running togheter on one Node
+ - Basic unit of deployment. Containers are always in pods
+-Controller: For creating/updating pods and other objects
+ -Many types of Controllers inc. Deployment, ReplicaSet,
+  StatefulSet, DaemonSet, Job, CronJob, etc.
+-Service: network endpoint to connect to a pod
+-Namespace: Filtered group of objects in cluster
+-Secrets, ConfigMaps, and More
+
+
+
+Kubectl run, create, and apply
+-Kubernetes is evolving, and so is te CLI
+-We get three ways to create pods from the kubectl CLI
+ - kubectl run (chaning to be only for pod creation)
+ - kubectl create (create some resources via CLI or YAML)
+ - kubectl apply (create/update anything via YAML)
+-For now we'll just use run or create CLI
+-Later we'll learn YAML and pros/cons of each
+
+
+
+Our First Pod with kubectl run
+Are we working
+ -kubectl version
+-Two ways to deploy Pods (containers): Via commands, or via YAML
+- Let's run a pod of the nginx --image nginx
+ > kubectl run my-nginx --image nginx
+ -Ignore the warning for now
+-Let's list the pod
+ > kubectl get pods
+
+kubectl get pods
+kubectl get all
+
+
+1.18 Changes to Kubectl run
+
+Starting in version 1.18 (released March 2020), the kubectl run command only does one thing: create single pods. There were many reasons for this, but the big ones were to reduce the complexity of how the run command worked and to move other resource creation to the kubectl create command. The idea is that kubectl run is now similar to docker run. It creates a single pod, where docker run creates a single container.
+
+A majority of us won't be able to use 1.18 for months if not a year or longer, many clouds and production Kubernetes products don't even support 1.17 (or 1.16) yet. I feel it's still important to know the old way that run has always worked, for at least the rest of 2020.
+
+I've decided not to replace all the videos just yet, and to keep the "old" way of doing things intact, while giving you info on the differences in these text lectures.
+
+Depending on which version of Kubernetes you have installed, you'll need to decide how you'll create objects. Here's a cheat sheet for how old commands should be used with the 1.18 changes.
+
+kubectl run nginx --image nginx created a Deployment named nginx before 1.18 (which creates a ReplicaSet, which creates a Pod)
+
+kubectl run nginx --image nginx creates a Pod named nginx in 1.18+
+
+Creating a Deployment in 1.18: kubectl create deployment nginx --image nginx
+
+
+
+Scaling ReplicaSets
+- Start a new deployment for one replica/pod
+  > kubectl run my-apache --image httpd
+
+- Let's scale it up with another pod
+  > kubectl scale deploy/my-apache --replicas 2
+
+
+
+kubectl run my-apache --image httpd
+kubectl scale deploy/my-apache --replicas 2
+
+- those are the same command
+- deploy = deployment = deployments
+
+
+
+Inspecting Kubernetes Objects
+> kubectl get pods
+- Get container logs
+> kubectl logs deployment/my-apache --follow --tail1
+-Get a bunch of details about an object, including events!
+ > kubectl describe pod/my-apache-xxxx-yyyy
+
+- Watch a command (without needing watch)
+ > kubectl get pods -w
+
+- In a separate tab/window
+ > kubectl delete pod/my-apache-xxxx-yyyy
+ 
+- Watch the pod get re-created
+ 
+
+kubectl logs -l run=my-apache
+
+
+kubectl logs deployment/my-apache
+

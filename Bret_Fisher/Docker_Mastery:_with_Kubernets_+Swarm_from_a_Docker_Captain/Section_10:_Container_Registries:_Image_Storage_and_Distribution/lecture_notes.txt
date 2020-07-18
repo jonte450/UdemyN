@@ -101,8 +101,76 @@ https://training.play-with-docker.com/linux-registry-part1/
 
 
 Using Docker Registry With Swarm
+- Works the same way as localhost
+- Because Routing Mesh, all nodes can see 127.0.0.1:5000
+- Remember to decide how to store images (volume driver)
+- NOTE: All nodes must be able to access images
+- ProTip: Use a hosted SaaS registry if possible
+
+ 
+docker node ls
+docker service create --name registry --publish 5000:5000 registry
+
+docker pull hello-world
+docker tag hello-world 127.0.0.1:5000/hello-world
+docker push 127.0.0.1:5000 hello-world
+docker pull nginx
+docker tag nginx 127.0.0.1:5000/nginx
+docker push 127.0.0.1:5000/nginx
+docker service create --name nginx -p 80:80 --replicas 5 --detach=false 127.0.0.1:5000/nginx
+
+
+
 
 Third Party Image Registries
 
+I've mentioned Docker Hub, Docker Enterprise Edition DTR (Docker Trusted Registry), and Docker Registry as three options for storing your images, but there are many 3rd party options out there.
+
+Quay.io is a popular choice, and is very comparable to Docker Hub as a cloud-based image registry.  Sysdig did a Docker Usage Report in April 2017 based off their users that shows Quay as the most popular cloud-based choice.
+
+If you're on AWS, Azure, or Google Cloud, they all have their own registry options that are well integrated with their toolset.
+
+If you want a self-hosted option, there's Docker EE, Quay Enterprise, and also GitLab, which comes with GitLab Container Registry, among others.
+
+There's a much larger list of registries over at the Awesome Docker list.
+
+https://quay.io/
+https://sysdig.com/blog/sysdig-docker-usage-report-2017/
+https://www.docker.com/products#/container_management
+https://quay.io/plans/?tab=enterprise
+https://about.gitlab.com/blog/2016/05/23/gitlab-container-registry/
+https://github.com/veggiemonk/awesome-docker#hosting-images-registries
+
+
+
+
 Quiz 10: Quiz on Container Registries
 
+Question 1:
+Docker hub can configure a ______ to trigger automatic building for other services like Jenkins, TravisCI and more.
+
+Answer:
+    webhook
+
+Right, this is a API URL that can trigger an event, often used in automation to trigger the building of an image on any changes.
+
+
+
+Question 2:
+What does docker prevent by default when communicating with remote registries?
+
+Answer:
+  It prevents talking to any registries without HTTPS, except localhost
+
+   Docker won't trust a non secure registry by default. (except localhost)
+
+
+
+Question 3:
+In order to run a container from an image from a different registry than Docker Hub, you would need to specify that registry in the settings of the Docker daemon.
+
+Answer:
+    False
+
+
+We don't have to change any settings to do this, we just specify an image with our custom registry, like we did with the image in the lecture 127.0.0.1:5000/hello-world

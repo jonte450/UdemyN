@@ -1,0 +1,64 @@
+Kuberenetes Intro
+The next orchester after swarm.
+How to choose between Swarm and Kuberenetes.
+
+
+
+What is Kuberenetes
+-Kuberenetes = popular container orchestrator
+-Container Orchestrator = Make many servers act like one
+-Released by Google in 2015 maintained by large community
+-Runs on top of Docker (usually) as a set of APIs in containers
+-Provides API/CLI to manage containers across servers
+-Many clouds provide it for you
+-Many vendors make a "distribution" of it
+
+
+Why Kuberenetes
+-Review "Swarm Mode: Built-In Orchestration"
+-Orchestration: Next logical step in journey to faster DevOps
+-First, understand why you *may* need orchestration
+-Not every solution needs orchestration
+-Servers + Change Rate = Benefit of orchestration
+-Then, decide which orchestration
+-If Kuberenetes, decide which distribution
+ -cloud or self-managed
+ (Docker Enterprise, Rancher, OpenShift, Canonical, VMWare PKS)
+ -Don't usually need pure upstream
+
+
+
+
+
+Kuberenetes vs Swarm
+- Review "Swarm Mode": Built-In Orchestration
+- Kuberenetes and Swarm are both container orchestrators
+- Both are solid platforms with vendor backing
+- Swarm: Easier to deploy/manage
+- Kuberenetes: More features and flexibility
+- What's right for you? Understand both and know your
+  requirements
+
+
+Advantages of Swarm
+- Comes with Docker, single vendor container platform
+- Easiest orchestrator to deploy/manage yourself
+- Follows 80/20 rule, 20% of featues for 80% of use cases
+- Runs anywhere Docker does:
+ -local, cloud, datacenter
+ - ARM ,Windows, 32-bit
+- Secure by default
+- Easier to troubleshoot
+
+
+Advantages of Kuberenetes
+- Clouds will deploy/manage Kuberenetes for you
+- Infrastructure vendors are making their own distributions
+- Widest adoption and community
+- Flexible: Covers widest set of use cases
+- "Kuberenetes first" vendor support
+- "No one ever got fired buying IBM"
+  -Picking solutions isn't 100% rational
+  -Trendy, will benefit your careet
+  -CIO/CTO Checkbox
+   

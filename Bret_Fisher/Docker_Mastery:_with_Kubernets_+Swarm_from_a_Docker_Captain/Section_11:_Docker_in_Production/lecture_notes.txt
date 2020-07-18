@@ -1,0 +1,170 @@
+My DockerCon Talk on Docker and Swarm in Production
+
+Limit yourself.
+Come it to the point.
+Building up your VM.
+Don't need CI/CD, Dynamic performance scaling. Containerzing all or nothing.
+Starting with persistent data.
+
+Microservice conversion isn't required
+12 Factor is a horizon we're always chasing
+Don't let these ideals delay Containerzinen
+
+What To Focus On First: Dockerfiles
+-More important than fancy orchestration
+-It's your new build aand enviroment documentation
+-Study Dockerfile/ENTRYPOINT of Hub Officials
+-FROM Official distros that are most familiar
+
+Dockerfile Maurity Model
+-Make it start
+-Make it log all things to stdout/stderr
+-Make it documented in file
+-Make it work for others
+-Make it lean
+-Make it scale
+
+Dockerfile Anti-pattern: Trapping Data
+-Problem: Storing unique data in container
+-Solution: Define VOLUME for each location
+
+Dockerfile Anti-pattern: Usinf Latest
+
+- Latest = Image builds will be OK
+- Problem: Image builds pull FROM latest
+- Solution: Use specific FROM tags
+- Problem: Image builds install latest packages
+- Solution: Specify version for critical
+  apt/yum/apk packages
+
+Dockerfile Anti-pattern: Leaving Default Config
+
+-Problem: Not changing app defaults, or blindly copying VM conf
+ -e.g. php.ini, mysql.conf.d, java memory
+
+- Solution: Update default configs via ENV, RUN, and ENTRYPOINT
+
+Containers-on-VM or Containers-on-Bare-Metal
+- Do either, or both. Lots of pros/cons to either
+- Stick with what you know at first
+- Do some basic performance testing. You will learn lots!
+- 2017 Docker Inc. and HPE whitepaper on MySQL benchmark
+ -(authored by yours truly, and others)
+ -bretfisher.com/dockercon17eu
+
+
+OS Linux Distribution/Kernel Matters
+- Docker is very kernel and storage driver dependent
+- Innovations/fixes are still happening here
+- "Minimum" version != "best" version
+- No pre-existing opinion? Ubuntu 16.04 LTS
+  - Popular, well-tested with Docker
+  - 4.x Kernel and wide storage driver support
+-Or infraKit and LinuxKit
+- Get correct Docker for your distro from store.docker.com
+
+
+Container Base Distribution: Which One?
+- Which FROM image should you use?
+- Don't make decision based on image size 
+  (remeber it's Single Instance Storage)
+- At first: match your existing deployment process
+- Consider changing to Alpine later, maybe much later
+
+
+Good Defaults: Swarm Architectures
+- Simple sizing guidelines based off:
+ -Docker internal testing
+ -Docker reference architectures
+ -Real world deployments
+ -Swarm3k lessons learned
+
+
+
+Baby Swarm: 1-Node
+-"docker swarm init" done
+-Solo VM's do it, so can Swarm
+-Gives you more features then docker run
+
+HA Swarm: 3-Node
+-Minimum for HA
+-All managers
+-One node can fail
+-Use when very small budget
+-Pet projects or Test/CI
+
+
+Biz Swarm: 5-Node
+-Better high-availability
+-All Managers
+-Two nodes can fail
+-My minimum for uptime that affects $$$
+
+Flexy Swarm: 10+ Nodes
+-5 dedicated Managers
+-Workers in DMZ
+-Anything beyond 5 nodes, stick with 5 Managers and rest
+ Workers
+-Control container placement with labels + constraints
+
+Swole Swarm: 100+ Nodes
+-5 dedicated managers
+-Resize Managers as you grow
+-Multiple Worker subnets on Private/DMZ
+-Control container placement with labels + constraints
+
+
+
+Don't Turn Cattle into Pets
+-Assume nodes will be replaced
+-Assume containers will be recreated
+-Docker for (AWS/Azure) does this
+-LinuxKit and InfraKit expect it
+
+
+Reasons for Multiple Swarms
+
+Bad Reasons
+-Different hardware Configurations (or OS)
+-Different subnets or security groups
+-Different availability zones
+-Security boundaries for compliance
+
+
+Good Reasons
+-Learning: Run Stuff on Test Swarm
+-Geographical boundaries
+-Management boundaries using Docker API
+ (or Docker EE RBAC, or other auth plugin)
+
+Outsource Well-Defined Plumbing
+- Beware the "not" implemented here "syndrome"
+- If challenge to implement and maintain
+- +SaaS/commercial market is mature
+- =Opportunities for outsourcing
+
+
+Outsourcing: For Your Consideration
+-Image registry
+-Logs
+-Monitoring and alerting
+-Tools/Projects: https://github.com/cncf/landscape
+
+
+The Future of Swarm
+
+With all the media excitement about the never-ending new Kubernetes projects, Swarm news can get drowned out.  I've written two articles on Swarm in 2018, and updated in 2019, and now there's more news in 2020, so I made a YouTube Live about everything going on.
+
+Basically, Mirantis is pledging public support in 2020 and beyond by growing the Swarm/SwarmKit team and telling us about planned new features.
+
+https://www.youtube.com/watch?v=L5N43aQQArw&feature=youtu.be&t=223
+
+
+Swarm Raft Quorum and Recovery
+(Laura Frank from DockerCon 2017)
+
+Also from DockerCon 2017, fellow Docker Captain and friend Laura Frank had a great session on the internals of Swarm Managers and how quorum of their Raft log works, called "Everything You Thought You Already Knew About Orchestration". She goes into the math of how you always need an odd number of Managers, and what happens when one or more fail.
+
+She then shows various recovery options in case you "loose quorum" in your Swarm cluster. This video is demo heavy, so it's worth watching the whole thing!
+
+Watch on YouTube: https://www.youtube.com/watch?v=Qsv-q8WbIZY

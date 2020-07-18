@@ -1,0 +1,46 @@
+Section Intro
+- Learning Service Types 
+
+- Creating Service Types
+ 
+- Service DNS
+
+
+Service Types
+Exposing Containers
+
+- kubectl expose creates a service for existing pods
+- A service is a stable address for pod(s)
+- If we want to connect to pod(s), we need a service
+- CoreDNS allows us to resolve services by name
+- There are different types of services
+  -ClusterIP
+  -NodePort
+  -LoadBalancer
+  -ExternalName
+
+Basic Service Types
+-ClusterIP (default)
+ -Single, internal virtual IP allocated
+ -Only reachable from within cluster (nodes and pods)
+ -Pods can reach service on apps port number
+
+
+ -NodePort
+  -High port allocated on each node
+  -Port is open on every node's OP
+  -Anyone can connect (if they can reach node)
+  -Other pods need to be updated to this port
+
+ -These services are always available in Kubernetes
+
+
+-LoadBalancer
+ -Controls a LB endpoint external 
+Creating a ClusterIP Service
+
+
+Creating a NodePort and LoadBalancer Service
+
+
+Kubernetes Services DNS
