@@ -1,0 +1,21 @@
+Section Intro
+-Kubectl Generators
+-The Future of Kubectl Run
+-Imperative vs. Declarative
+-Three Management Approaches
+
+
+
+Run,Expose, and Create Generators
+-These commands use helper templates called "generators"
+-Every resource in Kubernetes has a specification or "spec"
+ >Kubectl
+
+The Future of Kubectl Run
+
+
+Imperative vs Declarative
+
+
+Three Management Approaches
+
