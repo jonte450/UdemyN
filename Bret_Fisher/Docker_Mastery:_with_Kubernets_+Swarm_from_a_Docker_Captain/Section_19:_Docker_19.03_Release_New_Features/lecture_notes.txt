@@ -1,0 +1,115 @@
+Section Intro
+
+
+In the Summer of 2019 I hosted an online event where Docker employees and Captains showed off their favorite features of the new 19.03 release. I've broken that event into shorter topic-focused videos, including Q&A, and added them here as Lectures.
+
+I'm very excited about the 19.03 release and think it's the biggest Docker update in years. I hope you enjoy!
+
+
+
+
+Buildkit and the new Docker buildx CLI
+Extended support for ARM architechture.
+Extends the docker build command.
+So it carry it out on multi-nodes.
+Cache mechanism.
+Basically going out through.
+go build releaseparty.go
+docker build -t #In a usually way.
+Helps build the images for multi-platform.
+
+docker buildx.
+
+ls ~/.docker/
+
+docker buildx create --driver  docker-container --name dckbuilder dckbuilder
+
+Runs itseld as backend docker container
+docker buildx use dckbuilder
+
+Build across different architectures.
+
+
+
+
+Docker Context and SSH Connections
+docker context
+docker context ls
+Kubernetes ctl
+docker ps
+
+I want to connect to another daemon.
+kubectl config get-contexts -o name
+DOCKER_HOST="Ip-address"
+
+You can copy context to another context.
+Import kubernetes from another location.
+
+docker context create --docker "host=tcp://play-with-docker.com"
+ pwd
+
+docker context use pwd.
+
+
+
+
+Docker App and Image Packaging of Compose YAML
+curl -L http//github.docker
+You get two binaries.
+
+docker context ls
+
+We were good to use docker-compose files and deploy it on git.
+It must better way to share applications.
+docker app install --help
+
+docker app install mikeir87/swarm-viz.dockerapp --target-context=pwd
+
+You can change the ports with app command.
+You parametrize except the image.
+
+docker app.
+
+You have to go into the config file and enable the expremental mode.
+
+
+
+
+Rootless Mode in Docker Engine
+
+Isolate the containers into a specific space.
+Runs some containers without as a root.
+
+curl -sSL https://get.docker.com/rootless | sh
+export DOCKER_HOST=unix://run/user/1000/docker.sock
+
+If you don't belong to the docker group you must do sudo docker.
+Can't share the docker socket.
+
+Scoped to your user account.
+Doing balancing between.
+Deamon is another thing.
+
+
+
+
+
+Docker Desktop Enterprise
+You can change your memory.
+You might to know the configuration.
+Application designer getting started with compose.
+Help people bootstrap docker.
+Design templates.
+
+
+
+
+Docker Desktop Enterprise Clusters
+docker
+create a cluster
+backup a cluster
+High-level concept of values.
+Fill out values.
+Basic configuration to talk to AWS.
+We can do AWS instances and load balancers
+docker cluster create --file DnDShow.yml --name bret

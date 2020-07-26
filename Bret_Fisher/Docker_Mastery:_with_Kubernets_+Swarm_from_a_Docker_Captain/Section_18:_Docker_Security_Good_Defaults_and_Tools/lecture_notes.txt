@@ -1,0 +1,98 @@
+Section Intro: Top 10 Security Steps for Docker
+Everything from code scanning to a bunch of stuff.
+
+
+Docker Cgroups and Namespaces
+How does Docker protects your container.
+Two main namespaces.
+Kernel namespaces limits the scope per program.
+The namespaces isn't new to docker.
+Control Groups limited resources.
+For example CPU.
+
+
+
+Docker Engine's Out-Of-The-Box Security Features
+Create an argument.
+Security team.
+There are images right now.
+People are creating images with security right now.
+Don't download random images.
+You know the vender.
+You don't need to scan the images.
+Just use Docker.
+Only what is the container.
+
+
+
+Docker Bench, The Host Configuration Scanner
+This tool will scan your host.
+It will give you blue, green, red.
+Did Docker get installed properly.
+
+
+
+Using USER in Dockerfiles to Avoid Running as Root
+docker run -d nginx
+You have a master process.
+And a worker process does all the work.
+Make sure that when you use a docker container that it runs as a user.
+Dirty Cow.
+
+
+
+Docker User Namespaces for Extra Host Security
+Enable user namespaces.
+It tells docker anytime you create Docker Containers.
+Make them run as one user.
+Per host setting.
+Enable it on some servers.
+Implement the namespace support the program.
+Containers runs.
+Your Containers are locked down.
+
+Problem when to write to Volumes.
+
+
+
+
+Code Repo and Image Scanning for CVE's
+Snyk will scan your code dependcies.
+Github does this for free.
+You can paste snyk to do stuff.
+Scan your repos early.
+Shifting earlier with the scan.
+Image scanning.
+
+
+
+
+Sysidig Falco, Content Trust, and Custom Seccomp and AppArmor Profiles
+Sysidig looks for unfamiliar behaviour.
+Running Falco agents on every server.
+Having these logs to trace your steps.
+Pipeline of trust.
+You can customize.
+Docker doesn't know what the container are running.
+
+
+
+Docker Rootless Mode
+You can set up rootless if you only need the CLI.
+
+
+What are Distroless Images?
+Not very common.
+They need ap package dependecies.
+Golang C can build single binaries.
+You have to have a team.
+You can't shell into the distros.
+Dealing with troubleshooting.
+Messing around the tools.
+They have to break through the App.
+
+
+Are Swarm and Kubernetes Secrets Really Secure?
+Don't run your application as root in the container.
+The most the secure is one-time password.
+The next best thing is to avoid to have it on disk.
