@@ -1,0 +1,38 @@
+Section Intro - My Reviews Of Your Dockerfiles
+Gives feedback on the Dockerfiles.
+On the way on production.
+
+
+Real World PHP Dockerfile Review
+Change the fonts.
+RUN export LANG=en_US.UTF-8
+Building with caching.
+Cache busting.
+It is going to install old packages.
+One way to get away with this problem is to do multi-stage.
+Put all the apt-get update and install above.
+
+
+
+Real World PHP, Apache, Alpine Dockerfile Review
+Have all the app-gets in one file.
+Hardcode.
+You got the Drupal at the end.
+
+
+
+Real World PHP and FPM Dockerfile Review
+True production PHP.
+Pin versions.
+Alpine is less secure.
+
+
+
+Real World Elasticsearch Compose Stack File
+image and healthcheck.
+Ports and routing mesh.
+deploy endpoint mode.
+Replicas with 4G.
+Master 1 and Master 2.
+That we have a way to tell how to run it.
+Make sure it has a copy in a availability zone.

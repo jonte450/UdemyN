@@ -1,0 +1,238 @@
+DevOps and Docker Talk Intro
+This is more question and answers.
+Some questions are getting turned to really good questions.
+
+
+
+Alpine Base Images. Are they Really More Secure?
+Great space to search for vulnerabilities in the images.
+
+With container scanning with known vulnerabilities.
+Figuring about the problems.
+
+There are some scanners that are out there.
+
+These scanners have each pros and cons.
+
+Depend on the operating system.
+Like Linux distirbutions.
+Open SSL libraries.
+Base image matters for you to completly scan.
+Alpine is very small compared to other Linux distributions.
+
+Alpine has risen to popularity.
+Alpine is small and have less vulnerbilities.
+Stick with you know.
+Alpine is really different.
+You have to change much things with Alpine.
+Do we need the extra work for implementing Alpine.
+It is really impossible to scan for vulnerabilities.
+Sneaky problems with Alpine.
+
+
+
+
+Dealing With Non-root Users In Containers and File Permissions
+
+Permissions in docker can be frustating.
+Like Bind-mount.
+Use go-su.
+Largely what happens with permission.
+Let's say you have a node app.
+chmod is not supported but you can copy in chown.
+
+
+
+
+Apache Web Server Design. Many Sites In One Container, or Many Containers?
+
+Apache have the ability can run many websites that are unrelated.
+
+If you have 1000 websites you can run Apache.
+Scale the container independtly.
+
+If one had one the same container you would restart 
+everything if only one website was just to be updated.
+
+
+
+Docker Network Ip Subnet Conflicts with Outside Networks
+There come some Docker Networks out of the box.
+You can't have the same subnets.
+You can't have a subnet clashing.
+Try to use a ping or a traceroute.
+Using AWS.
+
+
+
+Raspberry Pi Development in Docker
+IOT projects on Docker.
+You run the ARM.
+In ARM 64 containers.
+You can build them locally.
+docker qemu is built in to docker with Desktop Edition.
+
+
+
+Window 10 Containers Get Process Isolation
+Microsoft come up with Windows Containers.
+When you start Containers.
+You have to spin up containers.
+When you turn a couple of things.
+
+
+Should You Move Postgres to Containers
+You are going to ask yourself if you are containerizing for it's cool.
+The best option run on Cloud like RDS.
+Prize should not be on of them.
+Managing yourself.
+It will not make any difference in performance.
+It is none layer of simulation.
+HPE performance.
+One database as an VM.
+Or having a few VM.
+
+
+
+
+Using Supervisor To Run Multiple Apps In A Container
+Never one more App in one container.
+You need to start with something else.
+Combine php and nginx in same container.
+It have worked well.
+It is used in heavy scenarios.
+Using supervisor D to do that.
+
+
+
+
+
+Should You Use Docker Compose or Swarm For A Single Server?
+Always use Swarm in a production machine.
+You can't do rollup updates
+
+
+
+
+Docker Enviroment Configs, Variables, and Entrypoints
+12 Factor App.
+From a company that learned how to do with a distributed app.
+Config storing. 
+You don't want to have hard-code setting.
+Different Passwords.
+Some flags to set where yo are.
+Strict separation.
+You are doing everything through enviroment variables.
+Settings it needs.
+Every operating system support it.
+Prefer default to the production file.
+You want to create consist ones.
+You can overwrite it in the shell.
+Be used on the container start-up.
+Familiar with swarm we can overwrite entire files.
+Providing an entry-point script.
+You can see this stuff in official images.
+A script that the variables and makes it into enviroment variables.
+A good stuff is not to put secrets into the enviroment variables.
+
+
+
+
+Java and JBoss in Containers. One war File Per Container?
+Do what you are comfortable with.
+Get that containerizing it.
+If you update one maybe you must also bring down the others to.
+In general we are splitting up more and more.
+We had several Tomcat servers.
+It was lot overhead in the past.
+
+
+
+
+TLS in Dev and Prod with Docker
+Locally you need to create your own certs.
+Bind mount into the certificates.
+
+
+
+Multiple Docker Images From One Git Repo
+Is there a way to run from a single git repo.
+You basically can clone it down.
+With Dockerfiles the content you are in.
+Building from the directory that you want.
+
+
+
+Docker + ARM, Using Raspberry Pi or AWS A1 Instances with Docker
+Smart home hackers we touch ARM.
+ARM processors is in many devices.
+Every piece of hardware.
+Gaining advantage in.
+Opens up hardware.
+Work doing the develop on hardware and testing.
+Having dedicated hardware.
+Supported for building containers.
+We can start talking at the IoT Constances.
+Distributed applications.
+There are other worlds out there.
+On every stages.
+Opens up to new ways to doing things.
+ARM focused on efficiency.
+Largely due to the smartphones.
+ARM doesn't make processors.
+Custom hardware.
+Making their own hardware.
+The first babysteps.
+Across the board.
+Let me test on a different architecture.
+Really intresting discussion.
+Play locally and test locally.
+Use cases of server side.
+We want to go away from the server.
+It get's a little bit harder.
+For every x86 chipz how many arms is running.
+
+
+
+Docker and Swarm RBAC Options
+I there any way to limit something.
+Can i limit people to certain stacks.
+You get's that with Docker Enterprise
+Authorization plugins to create own models.
+
+
+
+ENTRYPOINT vs CMD, what's the difference in Dockerfiles
+I need to import a database schema.
+The Entrypoint and CMD
+CMD.
+Entrypoint and CMD are two part when docker starts.
+Run a script to pass an execution.
+If i click on any of the releases.
+The Entrypoint doesn't exist running it online.
+
+
+
+How to Use External Storage in Docker
+Containers dosen't change any of the feature storage.
+Containers dosen't change that.
+
+
+
+Can I Turn a VM into a Container?
+Docker provide some tools.
+You can't conterize the whole VM.
+It is not hard to containersize the app.
+Sell things with the Docker Enterprise
+Look at the operating system and suck it dosen't exist.
+
+
+
+Startup Order With Multi-Container Apps
+Recover for some fashion.
+Look up 12 factor app.
+Got a bunch of servers to orchstreate everything.
+They need to have a retry.
+Some has a buffer protocol.
+Let the apps crash and retry them.
+

@@ -1,61 +1,237 @@
 Section Overview
+The brain can change on different inputs.
+Will try to lay the foundations.
+To make you relize some truths about the world.
+
 
 
 Course Roadmap + Worksheets
 
+Moving forward, we will be taking notes by using a worksheet. This is not mandatory, but as you will discover, if you really want to get the most out of this course, and you want the topics to stick so you can use them throughout your life, you should be taking notes to retain the information and to also form your own framework.
+
+In order to accomplish this, here is what you will need to do:
+
+
+1. Keep the course roadmap open. Click here to get access to it
+2. Download the attached worksheets. You can either print these, or type them on your computer (handwriting is better for learning as you will find out soon).
+3. Optional: If you want to use your own methods for note taking and you would rather not use the worksheets, you can do so, but try to have similar structure as the worksheets in point 2. (Evernote is a great choice)
+4. See the example filled in worksheet to see how you should use it.
+
+Now we are ready. Let's get started!
+
+Ps at the end you will have the option to share these notes with your fellow classmates if you would like. Here is one that a recent graduate of this course created as a blog post.
+
+Resources for this lecture
+
+https://www.rockyourcode.com/learning-to-learn-ztm-course-review-and-notes/
+
+
 
 What Do You Want To Learn?
 
+Along with the worksheets and videos, this course will help you formulate a plan for the next topic you want to learn. Although this isn't mandatory, if you have something you want to learn, or a goal you want to accomplish that involves learning, try to write it down right now. You can even go announce it in our #learning-to-learn channel on our Discord community. This way you can tailor this framework and learning guideline we will learn in this course to the specific skills that you want to acquire.
+
+
 
 Learning vs Winning The System
+Did you care about you grades and improve it?
+It is really very rare to focus how to learn.
+You work from the standpoint to learning.
+It is really rare that we focus on how to learn.
+The focus must shift to long-term learning.
+Keep this in your mind to focus on long-term learning.
+
 
 
 Exercise: The Lesson to Unlearn
 
+To expand on the topic I discussed in the previous video, please go ahead and read this: http://paulgraham.com/lesson.html
+
+Paul Graham is one of the most respected thinkers of our time and he discusses this idea of Learning vs Winning the System very well. We won't have too many articles like this that I share with you throughout the course, so please take the time to read this, or bookmark it for future reference :)
+
+
+
+See you in the next one!
+
 
 What is Success?
+Success can be meaning different things.
+You need Drive and Persistence.
+Simply being smart is not the obvious to become successful!
+To succedd you need to take risks.
+
 
 
 The Obstacle
+It doesn't feels good to suck!
+No matter what we are going to encounter some obstacles.
+You can feel obstacles of where you are now.
+It is so far away.
+To shift the focus on obstacles.
+You won't to change it some worthwhile!
+I'm a going to keep going.
+All these people we look upon were beginners.
+You won't learn the route.
+
 
 
 The Dip
+Another truth there is possibility you are cut out for the path forward.
+
+Sometimes the path can be wrong for you.
+
 
 
 Didn't You Say We Can Learn Anything?
 
+Yes! I said that Anyone, Anywhere can learn Anything. But that doesn't mean that we don't have things we are better suited to than others. With our limited time, our job is to figure out what to pursue based on our existing skills, and the skills we can develop. Sometimes we have to know when to turn around and pick the right path in order to use our resources efficiently.
+
+
+I'm 33 now. I probably don't have a shot at becoming a gold medallist in gymnastics unfortunately :(
+
+
+We will learn more about this as we progress through the course.
+
+
+
 
 Compound Learning
+If we have an initial intrest.
+Putting 100$ to putting your money there.
+Learning occurs everyday in our life.
+We want to have small chunks instead.
+Working out to have the physical fitness.
+You don't have to dedicate everything to learn a subject.
+If you improve 1% twice as good.
+Be persistent.
+Spending 20 minutes.
+
 
 
 Failures Don't Count
+Often we are afraid of people counting your failures.
+You can be successful-
+And you can apply 100 times.
+Your misstakes doesn't account on you.
+Super smart people.
+Years of failures and of drive.
+Everytime you make a misstake you get feedback on how to doing things.
+
+
+
 
 Choice vs Chore
+We want to thinking learning as a choice.
+I making a choice to learn everyday.
+Someting that i will do.
+Choice will beat out the chore
+
+
 
 It's All In The Frame
+A bird be beautiful to some and something other.
+Reframing things we look at things.
+Feels like you suck notice i am growing as an individual.
+A beginner mindset i will learn from others.
+I can get to the point that i respect.
+Removing this dark ideas and look it on a other perspective.
+Shift your perspective.
+
+
 
 
 Pareto Priniciple
+Vital of few.
+The 80% comes from 20% of the inputs.
+The 80% comes from 20% of the programmer.
+What's the 20% that are going to give 80% of the resulats.
+Taking a lifetime.
+Being top 5% of the world.
+You must figure out what are the most sought skills.
+Getting the habit and asking is this the 20% i seek after.
+
 
 
 Skill Stacking
+What is skill stacking.
+There are 3 priniciples.
+-Curosity
+-Value Learning
+-Combining
+
+
 
 
 
 Happiness Factors
+Find all your key happiness factors.
+You need to be happy.
+You wanna hit targets to become happy.
+You are okay with the obstacles.
+
+- Work
+- Friends and Family
+- Learning and Growth
+- Health and Fitness
 
 
 
 Exercise: Happiness Factors
 
 
+What are your 5~7 happiness factors? Write them down, and try to monitor and check up on them every few months. I usually use a score from 1 to 5 to grade how each of my happiness factors are doing. It's very rare to have all of them at optimum 5, but it is good to monitor and be aware of their levels.
+
+If you want, please do share your happiness factors in our #learning-to-learn channel on Discord!
+
+
+
+
+
+
+
+- Languages and different cultures
+- Learning how of things are connected
+- Walking
+- Friends
+- Growing as a person
+
+
+
+
+
+
 
 Your Productivity Time
+Some people are morning people.
+Some people are night-walks.
+There is no one better than the other.
+What area are making it better.
+
 
 
 
 Self Learning Paradigm
+There is a lot of concepts.
+What we have learned can be combined to become a self-learner.
+Your job is to decide that if you wanna go this path.
+You are going to have external factors.
+
 
 
 
 Section Review
+
+Adjust our brain to look on some way.
+Learning VS Winning The System.
+What will help you learn in the longtime.
+You need to have the drive and the passion.
+The Obstacle.
+The Dip turnaround to try a different path.
+Compund Learning do small stuff.
+Failures Don't Count.
+Framing 
+Pareto Principle all about the vital things
+Skill Stacking 
+Happiness Factors What makes us happy
+Your Productiv Time
+Self Learning Paradigm
