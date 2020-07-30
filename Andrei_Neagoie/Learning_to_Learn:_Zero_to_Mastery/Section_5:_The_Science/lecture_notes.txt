@@ -138,6 +138,20 @@ https://www.inmotion.app/
 
 
 Short And Long Term Memory
+Long term memory is in different locations in the brain.
+We learn by riding a bike practicing it and repeating.
+Long term is important when it comes to learning.
+You use the long term memory to learn.
+As long we grow older we can connect to concepts.
+
+Working-memory is to remember current things like going to the
+store to buy things.
+You wanna move the short-term memory to the longterm-memory.
+You can do this by spacememory.
+We wanna do small things over time.
+We need to connect things.
+We can also connect to different things.
+
 
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4683174/
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2864034/
@@ -145,8 +159,29 @@ https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2657600/
 https://uwaterloo.ca/campus-wellness/curve-forgetting
 
 
+Optional: Working Memory vs Short Term Memory
+
+In this course, we can think of Short Term Memory and Working Memory as the same thing. However for those interested in the details you can read about the specific differences here:
+
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2657600/
+
 
 Active vs Passive Learning
+
+You learn more by active angement.
+Watch other people doing things is passive learning.
+Passive learning feels good.
+Just watch a bunch things.
+Active learners is they start to make practicing.
+Practice or recalling is better.
+Retrievel information from the brain.
+Constantly recall the information.
+Recalling information.
+Keeps the important steps.
+Activetly taking notes.
+Note taking.
+
+
 https://mcgrawect.princeton.edu/what-is-passive-learning-and-how-to-avoid/
 
 http://learninglab.psych.purdue.edu/downloads/inpress_Karpicke_Retrieval_Based_Learning_Review.pdf
@@ -155,6 +190,22 @@ https://makeitstick.net/
 
 
 The Science Of Motivation
+
+Hard to focus on topic if you don't have a motivation.
+Motivation that comes from inside or from outside.
+Extrinsic motivation.
+Intrinsinic motivation.
+We want to work of things that gives us control.
+Mastery.
+Purpose.
+What is our purpose!
+Without internal motivation no trick is going to help you.
+Extrensic motivation decreaces your motivation.
+Extrensic motivation are sometimes important.
+If i do 5 min of this.
+
+
+
 https://en.wikipedia.org/wiki/Drive:_The_Surprising_Truth_About_What_Motivates_Us
 
 https://www.verywellmind.com/what-is-the-overjustification-effect-2795386
@@ -163,18 +214,72 @@ https://www.verywellmind.com/what-is-the-overjustification-effect-2795386
 
 
 Goals
+
+Without goals we don't know where we are going.
+The larger moment we take.
+Something triggers our response and flight.
+Take small steps to reach a goal.
+By taking these small steps to our goals the easier
+it becomes.
+By making the small habits to take to reach your goal.
+Small goals each day and it is going to compound.
+The idea is not to make the goal too big.
+Set a goal.
+By making a goal and making small habits it's going to help us 
+to accomplish our goals.
+We learned these goals.
+One takeaway goals don't have to be so big.
+
+
+
 https://www.goodreads.com/book/show/266621.One_Small_Step_Can_Change_Your_Life
 
 
 Exercise: Smart Goals
 
 
+Let's do a fun exercise! Although we haven't gotten to the Techniques section of the course where the real fun begins and you start learning practical tips, I want us to get started on defining some goals that we may have. Pick any goal that you want that involves learning and growing. It can be something you have thought about while taking this course, or something you will think about now. From there, you have 2 options:
+
+1. Watch this short introduction on SMART goals and set your own goals according to the rules
+https://www.youtube.com/watch?v=PCRSVRD2EAk
+
+-Learn a topic of AWS each day!
+-Learn about React.js each day!
+-Begin to make a project in React.js!
+
+2. Read this detailed guide on setting SMART goals and set your own goals according to the rules.
+
+The second option will take you longer to go through but it is more detailed. Pick one option, and then define your goals. We are going to use these goals in the techniques section to apply the strategies to get to the end goal.
+
+https://www.ucop.edu/local-human-resources/_files/performance-appraisal/How%20to%20write%20SMART%20Goals%20v2.pdf
+
+
+
+
 
 Exercise: Specific Goals + Purposeful
 
 
+One of the names we will constantly hear in this course, and especially when we start learning about Deliberate Practice, is Anders Ericsson.
+
+Before moving on, read this story of one of his students who was able to remember 82 digit number after 200 hours of practice. The way he was able to do it was Purposeful Practice (which we will talk about later), and setting Specific Goals. Read through the story and notice some of the things we have talked about already pop up: 
+
+http://nautil.us/issue/35/boundaries/not-all-practice-makes-perfect
+
+For the things that may be new in that article. Don't worry, we will cover them shortly :)
+
 
 It Pays To Not Be Busy
+
+Means that you are productive!
+But it's not a good thing.
+We learned that we have a brain that is a hippocampus.
+We need to train our brain.
+Helps if you are surronded by other people that are stimulating you.
+
+When you are constanly doing things you don't having any paus.
+
+
 
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3191246/
 
@@ -183,28 +288,108 @@ https://www.calnewport.com/blog/2011/11/11/if-youre-busy-youre-doing-something-w
 
 Chunking
 
+Focus mode of thinking.
+We combine it with.
+We are creating memory pattern.
+We don't have random things that pops up in our head.
+Understanding a topic.
+You are going to break down how a car works.
+You need to chunk down different parts.
+And understand how it relates to each other.
+How does it apply to our relate to our life like math for example.
+Bottom up learning.
+
+
 https://barbaraoakley.com/books/
 
 
 How To Solve Problems
 
+Work and job is to help to solve problems.
+That becomes valuable to others.
+You want to get focus on the problem.
+There is another step to solve the problem.
+You want to get to the diffuse mode.
+
+
 
 Deliberate Practice
+Anders Ericsson get's mention often.
+All these masters can visualize things in their mind.
+What is delibirate practice.
+You learning things at the beginning.
+We start getting frustration.
+We want push through to get over the edge.
+In order to have deliberate practice we need intense focus.
+We need to be at the edge of our limits.
+Regular practice helps us to get to the limits.
+Deliberate practice get's us outside of our comfort zone.
+Practice.
+
 https://en.wikipedia.org/wiki/Peak:_Secrets_from_the_New_Science_of_Expertise
 
 
+Exercise: Deliberate Practice
+
+Remember the article we read a few lectures back? http://nautil.us/issue/35/boundaries/not-all-practice-makes-perfect
+
+Well, go ahead and read it again, but now realize that combined with the Goals that we talked about, and now purposeful practice, it creates this idea of "deliberate practice". Read through the story and notice some of the things we have talked about pop up that you may have missed the first time around.
+
+Once done, move on to this story of Kendo and see if you can notice Deliberate Practice being practiced (ha!) here: https://www.tofugu.com/japan/kendo/
+
+
 Spaced Repetition
+
+Revisting what you have learned.
+Repeating things after a few days is the best way.
+Spacing it over a long time.
+We do spaced repetition at some time passes we recalling it again. 
+
+It improves with each repetition.
+Your time learning a topic can be spread over time.
+
+You can use Feynman technique.
+But repeating things.
+Once a week repeating things.
+
+
 https://www.dartmouth.edu/~cogedlab/pubs/Kang(2016,PIBBS).pdf
 
 
 Habits As Energy Savers
+
+By having Habits we can focus.
+We can daydream.
+It is a energy saver.
+But soons as you change your hand brooshing your teeth
+it becomes harder.
+Writing your evening list in the night before.
+It saves our brain.
+Putting your workload clothes.
+Everything is done for you.
+Allows your brain to focus and helps things easier.
+
+
 https://pubmed.ncbi.nlm.nih.gov/29058942/
 
 
 Exercise: Spaced Repetition Habit
 
+Although I am giving you a sneak peak into the techniques here, have a walk through this interactive exercise to form the Habit of Spaced Repetition: https://ncase.me/remember/
+
 
 Be Adventurous
+
+When your gain new adventures your path is strengthen in your 
+brain.
+Greater changes by doing new things.
+Explore new topics also grows your brain.
+Every day you wake up doing same things.
+The world is a playground.
+When you are a kid you are allowed to be creative.
+Our experience becomes anomyous.
+Take a different path.
+
 
 https://news.mit.edu/2015/brain-strengthen-connections-between-neurons-1118
 
@@ -213,22 +398,72 @@ https://www.edutopia.org/neuroscience-brain-based-learning-neuroplasticity
 
 
 Have An Endpoint
+
+When it comes to performing tasks.
+When you are planning working on something i am gonna tell our
+brain that i need a rest.
+Establish a rest for your brain.
+No matter what he know when his productive was.
+Stop working when you know when you can't accomplish more.
+
+
 https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow
+
+
+
 
 Exercise: Your Productive Time
 
+Now that we learned that having an endpoint is important to learning, decide for yourself when your daily end time is. For example, I am a morning person and my most productive hours are between 7am and 12pm. I also sometimes like to work in the afternoon, but I have a cutoff of 5pm. No matter how much work I need to do, how many deadlines I have, at 5pm I have an endpoint that I always follow.
+
+Combining your productivity time, with your endpoint time, you now give your brain a rest for worrying and planning. Your productivity time may change day to day. Maybe you have small endpoints throughout the day for small tasks. But no matter what, you have an absolute work/learning endpoint at 5pm (or whatever time you decide).
+
 
 Be Bored
+
+When was the last time you were bored?
+We living a time we are becomming less bored.
+Recent studies has showed us that being bored is good.
+Strengthen our neuro-connections.
+Always browsing the internet.
+We are going to learn the science of boring.
+
+
 https://www.youtube.com/watch?v=LKPwKFigF8U
 
 
 
 Exercise: Being Bored
 
+If you didn't get a chance to see the resource attached to the previous lesson, well, now is your chance. Grab a cup of tea and watch this video to realize how important being bored can be: https://www.youtube.com/watch?v=LKPwKFigF8U
+
+Once you finish watching it, try to not do anything for 1 hour. No screens, no internet, no talking. Just be bored.
+
 
 Section Overview
+
+Importance of sleep.
+Feedback is crucial to learning.
+Proscratination.
+Motivation is important.
+Goals.
+Have speific goals.
+Learned about chunking.
+Learned how to solve problems.
+The ability to solve problems is going to make you succesfull.
+
+
 
 
 
 Exercise: How to Set New Year's Resolutions
 
+Phew! That was a lot. But by now, you should understand the way our brain works. So let me ask you this... knowing what you have learned, how will you set your New Year's Resolution for next year?
+
+Once you have written what you think is a good goal based on what you have learned, have a watch at these 2 videos:
+
+1. https://www.youtube.com/watch?v=Pm9CQn07OjU
+
+2. https://www.youtube.com/watch?v=NVGuFdX5guE
+
+Did you set a good goal?

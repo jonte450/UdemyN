@@ -1,0 +1,577 @@
+Developing on AWS Introduction
+How can we programming access the AWS.
+
+-So far, we've interacts with services manually and they exposed
+ standard information for clients:
+  -EC2 exposes a standard Linux machine we can use any way we
+   want
+  -RDS exposes a standard database we can connect to using a URL
+  -ElasticCache exposes a cache URL we can connect to using a 
+   URL
+  -ASG / ELB are automated and we don't have to program against
+   them
+  -Route53 was setup manual
+
+
+Developing against AWS has two components:
+ -How to perform interactions with AWS without using the Online
+  Console?
+ -How to interact with AWS Proprietary services? 
+ (S3, DynamoDB,etc...) 
+
+
+Developing and performing AWS tasks against AWS can be done in 
+several ways:
+ -Using the AWS CLI on our local computer
+ -Using the AWS CLI on our EC2 machines
+ -Using the SDK CLI on our local computer
+ -Using the AWS SDK on our EC2 machines
+ -Using the AWS Instance Metadata Service for EC2
+
+In this section, we'll learn
+ -How to do all of those
+
+
+
+AWS CLI Setup on Windows
+We want to install the AWS CLI on windows.
+MSI installer.
+Run the installer.
+command line on windows
+
+
+
+AWS CLI Setup on Mac OS X
+terminal
+
+
+AWS CLI Setup on Linux
+Installing version 2.
+curl command.
+unzip it.
+Run the installer as root.
+
+
+
+AWS CLI Installtion Troubleshooting
+If after installing the AWS CLI, you use it and you get the error 
+
+
+		aws: command not found
+
+Then, on Linux, Mac and Windows
+
+ the aws executable is not in the PATH enviroment variable
+
+
+PATH allows your system to know where to find the "aws" executable
+
+
+
+AWS CLI Configuration
+
+-Let's learn how to properly configure the CLI
+
+Computer -> CLI access over www -> AWS NETWORK
+								   AWS Account
+
+								   (checks credentials and permissions)
+
+
+-We'll learn how to get our access credentials and protect them
+-Do not share your AWS Access Key and Secret key with anyone!
+
+We need to get IAM credentials from the IAM server.
+Create an Access Key.
+
+aws configure
+
+
+
+
+
+AWS CLI on EC2
+
+AWS CLI ON EC2... The BAD WAY
+
+-We could run ' aws configure ' on EC2 just like we did
+ (and it'll work)
+
+-But... it's SUPER INSECURE
+
+-NEVER EVER EVER PUT YOUR PERSONAL CREDENTIALS ON AN EC2
+
+-Your PERSONAL credentials are PERSONAL and only belong on your
+ PERSONAL computer
+
+
+-If the EC2 is compromised, so is your personal account
+
+-If the EC2 is shared, other people may perform AWS actions 
+ while impersonating you
+
+
+-For EC2, there's a better way... it's called AWS IAM Roles
+
+
+-IAM Roles can be attached to EC2 instances
+-IAM Roles can come with a policy authorizing exactly what the 
+ EC2 instance should be able to do
+
+
+EC2 Instance -> AWS NETWORK  ->  	AWS Account
+            						(checks credentials and 
+            						 permissions of the ROLE)
+					CLI    
+IAM ROLE 
+
+-EC2 Instances can then use these profiles automatically 
+ without any additional configurations
+
+-This is the best practice on AWS and you should 100% do this.
+
+
+
+There are going to be some magic happens.
+
+Go to EC2 
+Go to instances.
+
+aws --version
+
+aws s3 ls
+And in the IAM i will touch Roles.
+Managing Policies.
+
+
+
+
+AWS CLI Practice with S3
+-ls is to list all objects
+-cp allows you to copy a file
+-mb is to create a bucket
+-rb is to remova a bucket
+
+
+
+IAM Roles and Policies Hands On
+There are different policies that can be attached.
+You can create your own policy.
+Inline policy.
+Places on top of whatever you have chosen.
+How do we create policies.
+
+Perform policies.
+
+There are something we can do.
+How do we know how to create this buckets.
+Actions and Resources. 
+Aws policy generators.
+
+
+
+
+
+AWS Policy Simulator
+It's a tool to test your policies.
+You can look for a user and roles.
+
+
+
+AWS CLI Dry Run
+
+-Sometimes, we'd just like to make sure we have the
+ permissions...
+
+-But not actually run the commands
+
+-Some AWS CLI commands (such as EC2) can become expensive if
+ they succeed, say if we wanted to try to create an EC2 Instance
+
+-Some AWS CLI commands (not all) contain a --dry-run option to
+ simulate API calls
+
+aws ec2 run-instances --dry-run -- image-id ami-id --instance-type t2.micro
+
+dry-run helps you to test to if you have the authorization.
+
+
+
+
+AWS CLI STS Decode
+
+-When you run API calls and they fail, you can get a long
+ error message
+
+-This error message can be decoded using the STS command line:
+
+-sts decode-authorization-message
+aws decode-authorization-message --encode-message error message
+
+
+
+
+
+
+
+AWS EC2 Instance Metadata
+-AWS EC2 Instance Metadata is powerful but one of the least
+ known features to developers
+
+-It allows AWS EC2 instances to "learn about themselves" 
+ without using an IAM Role for that purpose.
+
+-The URL is http://169.254.169.254/latest/meta-data
+
+-You can retrieve the IAM Role name from the metadata,
+ but you CANNOT retrieve the IAM Policy.
+
+-Metadata = Info about the EC2 instance
+
+-Userdata = lanch script of the EC2 instance
+
+curl http://169.254.169.254/latest/meta-data/
+Anytime it ends with an / it's more to it.
+
+
+
+
+AWS CLI Profiles
+profile is special to use.
+aws configure --profile my-other-aws-account
+cat credentials
+We now we have another profile.
+We can now switch between profiles.
+
+
+
+AWS CLI with MFA 
+-To use MFA with the CLI, you must create a temporary session
+-To do so, you must run the STS GetSession Token API call
+
+- aws sts get-session-token --serial-number arn-of-the-mfa-device --token-code-from-token --duration-seconds 3600
+
+
+{
+	"Credentials":{
+	"SecretAccessKey": "secret-access-key",
+	"SessionToken": "temporary-session-token",
+	"Exipiration": "expiration-date-time",
+	"AccessKeyId": "access-key-id"
+	}
+}
+
+Go to the users.
+Assign Virtual MFA device.
+Scan QR-code and add the two codes.
+
+
+Copy the credentials.
+
+aws configure --profile mfa
+cat ~/.aws/credentials
+
+And add aws_session_token = Session_token you got
+
+
+
+
+AWS SDK Overview
+-What if you want to perform actions on AWS directly from your
+ applications code? (without using the CLI)
+
+-You can use an SDK (software development kit)!
+
+-Official SDKs are...
+ -Java
+ -.NET
+ -Node.js
+ -PHP
+ -Python (named boto3 / botocore)
+ -Go
+ -Ruby
+ -C++
+
+
+-We have to use the AWS SDK when coding agianst AWS Services 
+ such as DynamoDB
+
+-Fun fact... the AWS CLI uses the Python SDK (boto3)
+
+-The exam expect you to know when you should use an SDK
+
+-We'll practice the AWS SDK when we get to the Lambda functions
+
+
+-Good to know: if you don't specify or configure a default 
+ region, the us-east-l will be chosen by default
+
+
+
+ 
+Exponential Backoff & Service Limit Increase
+-API Rate Limits
+ -Describelnstances API for EC2 has a limit of 100 calls per 
+  seconds
+
+ -GetObject on S3 has a limit of 5500 GET per second per prefix
+
+ -For Intermittent  Errors: implement Exponetial Backoff
+
+ -For Consistent Errors: request API throttling limit increase
+ 
+ 
+-Service Quotas (Service Limits)
+ -Running On-Demand Standard Instances: 1152 vCPU
+ -You can request a service limit increase by opening a ticket
+ -You can request a service quota increase by using the
+  Service Quotas API
+
+
+Exponential Backoff (any AWS service)
+-If you get ThrottlingException intermittenly, use exponential
+ backoff
+
+-Retry mechanism included in SDK API calls
+
+-Must implement yourself if using the API as is or in specific
+ cases
+
+
+
+
+AWS Credentials Provider & Chain
+- The CLI will look for credentials in this order
+
+1. Command line options --region, --output, and --profile
+2. Enviroment variable --AWS_ACCESS_KEY_ID,
+   AWS_SECRET_ACCESS_KEY and AWS_SESSION_TOKEN
+
+3. CLI credentials file -aws configure
+   ~/.aws/credentials on Linux / Mac & C:\Users\user\.aws\
+   credentials on Windows
+
+4. CLI configuration file -aws configure
+   ~/aws/config on Linux / macOS & C:\Users\USERNAME\.aws\config on Windows
+
+5. Container credentials -- for ECS tasks
+
+6. Instance profile credentials -- for EC2 Instance Profiles
+
+
+AWS SDK Default Credentials Provider Chain
+
+-The Java SDK (example) will look for credentials in this order
+
+
+1. Enviroment variables --
+   AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+
+
+2. Java system properties -- aws.accessKEYID and aws.secretKey
+
+3. The default credential profiles file -- ex 
+   at:~/.aws/credentials, shared by many SDK
+
+4. Amazon ECS container credentials -- for ECS containers
+
+5. Instance profile credentials-- used on EC2 instances
+
+
+AWS Credentials Scenario
+
+-An application devployed on an EC2 instance is using 
+ enviroment variables with credentials from an IAM user to call
+ the Amazon S3 API.
+
+-The IAM user has S3FullAccess permissions
+
+-The application only uses one S3 bucket, so according to best
+ practices:
+ -An IAM Role & EC2 Instance Profile was created for the EC2 
+  instance
+ 
+ -The Role was assigned the minimum permissions to access that 
+  one S3 bucket
+
+-The IAM Instance Profile was assigned to the EC2 instance, 
+ but it still had access to all S3 buckets. Why?
+
+ the credentials chain is still giving priorties to the
+ enviroment variables
+
+
+AWS Credentials Best Practices
+
+-Overall, NEVER EVER STORE AWS CREDENTIALS IN YOUR CODE
+-Best practice is for credentials to be inherited from the
+ credentials chain
+
+
+-If using working within AWS, use IAM Roles
+ -=> EC2 Instances Roles for EC2 Instances
+ -=> ECS Roles for ECS tasks
+ -=> Lambda Roles for Lambda functions 
+
+-If working outside of AWS, use enviroment 
+ variables / named profiles
+
+
+
+AWS Signature v4 Signing
+Signing AWS API requests
+
+-When you call the AWS HTTP API, you sign the requests so that
+ AWS can indentify you, using your AWS credentials
+ (access key & secret key)
+
+-Note: some requests to Amazon S3 don't need to be assigned
+
+-If you use the SDK or CLI, the HTTP requests are signed for 
+ you
+
+-You should sign an AWS HTTP request using Signature v4 (SigV4)
+
+
+SigV4 Request examples
+-HTTP Header option
+-Query String option (ex: S3 pre-signed URLs)
+
+
+
+
+Quiz 9: CLI & SDK Quiz
+
+
+Question 1:
+I have an on-premise personal server that I'd like to use to perform AWS API calls
+
+This was discussed in Lecture 95: AWS CLI Configuration
+
+Answer: I should run 'aws configure' and put my credentials
+        there. Invalidate them when I'm done
+
+
+
+Question 2:
+My EC2 Instance does not have the permissions to perform an API call PutObject on S3. What should I do?
+
+
+Answer:
+
+I should ask an adminstrator to attach a Policy to the IAM Role on my Instance that authorises it to do the API call
+
+
+
+Question 3:
+I need my colleagues help to debug my code. When he runs the application on his machine, it's working fine, whereas I get API authorisation exceptions. What should I do?
+
+Answer:
+	Compare his IAM policy and my IAM policy in the policy simulator to understand the differences
+
+
+
+Question 4:
+To get the instance id of my EC2 machine from the EC2 machine, the best thing is to...
+
+
+Answer:
+
+  Query the meta data at http://169.254.169.254/latest/meta-data  
+
+
+  Question 5:
+The AWS CLI depends on which language?
+
+Answer:
+Python
+
+
+Question 6:
+I'd like to deploy an application to an on-premise server. The server needs to perform API calls to Amazon S3. Amongst the following options, the best security I can achieve is...
+
+
+Answer: 
+create an IAM user for the application and put the
+credentials into enviroment variables.
+Here, it's about creating a dedicated
+user for that application, as using your
+own personal credentials would blur the lines
+between actual users and applications.
+
+
+
+
+Question 7:
+When I run the CLI on my EC2 Instances, the CLI uses the ______ service to get _____ credentials thanks to the IAM Role that's attached.
+
+
+
+Answer:
+
+meta data | temporary
+
+
+
+Question 8:
+I want to test whether my EC2 machine is able to perform the termination of EC2 instances. There is an IAM role attached to my EC2 Instance. I should
+
+
+Answer:
+Use the IAM Policy Simulator OR the dry run CLI option
+
+
+Question 9:
+Can EC2 Instances retrieve the IAM Role policy JSON document that's attached to them using the CLI without any role attached?
+
+
+Answer:
+No
+
+you can retrieve the role name attached to your EC2 instance using the metadata service but not the policy itself
+
+
+
+
+Question 10:
+I have received an authorisation exception from my EC2 instance while performing an EC2 API call.
+
+vbguZQlpz4e1h4rtSaXnEfDAFZPii8XvCNW7dLIE4Xy-zE8VcNIeh8tf4DAn1APFw__Nr55bUE0hrS02bg50EimidVBPHH1rtWmhQOtmv5tdUY5VelEAhc5O9OC8h4fYRlegBxfUNrGSCqlH83h_HMyaqC1fQy2G7rNjmFEPcN-pue2NZc9MMZMRdfWbYszMlbkAYlrAmSMmr4F0FE6BWOUxFOCdRnuwwb8OEM9c8RXBK8F91YqgdbW_XvxYBi2_BEI2P-8gFz4LmBkba1UdEylh-WUS95XInC3OU8i3wZZ-xKExGWu1HwoqS9QAqIqm6jmn7wbTK_v9EVv0jMnCzmNxuMHpqmw2Ys3Bu3WdqvAwHxmT5W_XCbGBdtstckPXkeSyNS5hLSNLBjjRgd_I8JfPKTmB79sB_mUBSTlc28z5wjv1UBtxKBLT5GHdHQM8s2dP30cJCObRITmNvJo6Q8zaya1XYpwvCGIQrWF6-xaYQeXFCmMgyfsosIS8bVfpNyzzz2usC1mFJMlwIciissbz10YslH-PQF7Wwvn_6ypipoQVh0z80XglLVYnfbXGFv330ZyviBQnttklCecIK56OMcAxPJfTIWru57RoKedhJaHiKVEdLtILvVJgJ71wn-6wd4QA9aMh38jTpI_-cOPWLsvNq5NbtfqxQZ5BJOUs0rQpTmYRF_FtlY1k
+
+I want the decode the cryptic error message. How do I do it?
+
+
+
+Answer:
+Use the STS decode-authorization-message API
+
+
+
+Question 11:
+My KMS API call just failed against AWS. It's seems I've reached the rate limit of the KMS API. I should retry
+
+Answer: 
+Using an exponential backoff strategy
+
+
+Question 12:
+Which API call should be used to get credentials before issuing API calls against an MFA-protected API?
+
+Answer:
+
+STS GetSessionToken
+
+
+Question 13:
+What is the priority in the CLI credentials chain?
+
+Answer:
+Command Line Options > Enviroment Variables > EC2 Instance Profile
+
+
+https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html#config-settings-and-precedence
+
+
+
+
+
