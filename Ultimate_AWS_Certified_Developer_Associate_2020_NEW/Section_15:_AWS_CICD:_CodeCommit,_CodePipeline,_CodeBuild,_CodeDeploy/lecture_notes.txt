@@ -1,0 +1,832 @@
+AWS CICD - Section Introduction
+Magically deploy your code.
+Learn how to do CICD.
+
+
+
+Introduction to CICD in AWS
+
+CICD Section Introduction
+-We now know hot to create resources in AWS manually
+ (Fundamentals)
+
+-We know how to interact with AWS programmatically (CLI)
+
+-We've seen how to deploy code to AWS using Elastic Beanstalk
+
+-All these manual steps make it very likely for us to do 
+ mistakes!
+
+
+-What we'd like is to push our code "in a reposistory" and have 
+ it deployed onto the AWS
+ -Automatically
+ -The right way
+ -Making sure it's tested before deploying
+ -With possibility to go into different stages 
+  (dev,test,pre-prod,prod)
+ -With manual approval where needed
+
+-To be a proper AWS developer... we need to learn AWS CICD
+
+-This section is all about automating the deployment we've done
+ so far while adding increased safety
+
+-It correspond to a whole part of the AWS Certification
+
+
+-We'll learn about
+ -AWS CodeCommit: storing our code
+ -AWS CodePipeline: automating our pipeline from code to 
+  ElasticBeanstalk
+ 
+ -AWS CodeBuild: building and testing our code
+ -AWS CodeDeploy: deploying the code to EC2 fleets 
+  (not Beanstalk) 
+ 
+
+Continous Integration
+-Developers push the code to a code reposistory
+ often (Github / CodeCommit / Bitbucket / etc...)
+
+-A testing / build server checks the code as soon as it's pushed
+ (CodeBuild / Jenkins CI / etc...)
+
+-The developer gets feedback about the tests and checks that
+ have passed / failed
+
+-Find bugs early, fix bugs
+
+-Deliver faster as the code is tested
+-Deploy often
+-Happier developers, as they're unblocked
+
+
+Continous Delivery
+-Ensure that the software can be released reliable whenever
+ needed
+
+-Ensure deployments happen often and are quick
+
+-Shift away from "one release every 3 months" to
+ "5 releases a day"
+
+-That usually means automated deployment
+ -CodeDeploy
+ -Jenkins CD
+ -Spinnmaker
+ -Etc...
+
+
+Technology Stack for CICD
+Code > Build > Test > Deploy > Provision
+
+
+
+
+CodeCommit Overview
+CodeCommit
+
+- Version control is the ability to understand the various
+  changes that happened to the code over time
+  (and possibly roll back)
+
+- All these are enabled by using a version control system such
+  as Git
+
+
+- A Git reposistory can live on one's machine, but it usually 
+  lives on a central online repository
+
+
+Benefits are:
+ - Collaborate with others developers
+ - Make sure the code is backed-up somewhere
+ - Make sure it's fully viewable and auditable
+
+
+-Git repository can be expensive
+
+-The industry include:
+ - Github: free public repositories, paid private ones
+ - Bitbucket
+ - Etc...
+
+-And AWS CodeCommit
+ - private Git repositories
+ - No size limit on repositories (scale seamlessly)
+ - Fully managed, highly available
+ - Code only in AWS Cloud account 
+   => increased security and compliance
+ - Secure (encrypted, access control, etc...)
+ - Integrated with Jenkins / CodeBuild / other CI tools
+
+
+CodeCommit Security
+
+-Interactions are done using Git (standard)
+-Authentication in Git:
+
+ -SSH Keys: AWS Users can configure SSH keys in their IAM
+  Console
+
+ -HTTPS: Done through the AWS CLI Authentication helper
+  or Generating HTTPS credentials
+
+ -MFA (multi factor authentication) can be enabled for
+  extra safety
+
+-Authenthorization in Git:
+ -IAM Policies manage user / roles rights to repositories
+
+-Encryption
+ -Repositories are automatically encrypted at rest using KMS
+ -Encrypted in transit (can only use HTTPS or SSH - both secure)
+
+-Cross Account access
+ -Do not share your SSH keys
+ -Do not share your AWS credentials
+ -Use IAM Role in your AWS Account and use AWS STS
+  (with AssumeRole API)
+
+
+CodeCommit vs Github
+
+Similarities
+-Both are git repositories
+
+-Both support code review
+ (pull requests)
+
+-Github and CodeCommit can be integrated
+ with AWS CodeBuild
+
+-Both support HTTPS and SSH method of
+ authentication
+
+Differences:
+-Security:
+ -Github: Github Users
+ -CodeCommit: AWS IAM users & roles
+
+-Hosted:
+ -Github: hosted by Github
+ -Github Enterprise: self hosted on your servers
+ -CodeCommit: managed & hosted by AWS
+ 
+-UI:
+ -Github UI is fully featured
+ -CodeCommit UI is minimal
+
+
+CodeCommit Notifications
+
+-You can trigger notifications in CodeCommit using
+ AWS SNS (Simple Notification Service)
+ or AWS Lambda or AWS CloudWatch Event Rules
+
+-Use cases for notifications SNS / AWS Lambda notifications
+ -Delete of branches
+ -Trigger for pushes that happens in master branche
+ -Notify external Build System
+ -Trigger AWS Lambda function to perform codebase analysis
+  (maybe credentials got committed in the code)
+
+-Use cases for CloudWatch Event Rules:
+ -Trigger for pull request updates
+  (created/update/deleted/commented)
+ -Commit comment events
+ -CloudWatch Event Rules goes into an SNS topic
+
+
+
+
+CodeCommit Hands On Part 1
+my-nodejs-app
+Connection steps.
+Create a file.
+Upload a file.
+
+index.html
+Commit visulizer and Compare Commit
+Create a trigger on specific code events.
+
+
+
+
+CodeCommit Hands On Part 2
+Go to IAM.
+Created access keys.
+Clone URL.
+Copy the clone.
+git clone repository.
+git status
+
+
+
+
+CodePipeline Overview
+
+CodePipeline
+-Continous Delivery
+-Visual Workflow
+-Source: Github / CodeCommit / Amazon S3
+-Build: CodeBuild / Jenkins / etc...
+-Load Testing: 3rd party tools
+-Deploy: AWS CodeDeploy / Beanstalk / CloudFormation / ECS...
+-Made of stages:
+ -Each stage can have seqential actions and / or parallel
+  actions
+ -Stages examples: Build / Test / Deploy / Load Test / etc..
+ -Manual approval can be defined at any stage
+
+
+AWS CodePipeline Artifacts
+
+-Each pipeline can create "artifacts"
+-Artifacts are passed stored in Amazon S3 and passed on to
+ the next stage
+
+ 					Output Artifacts  Input Artifacts
+trigger => Source     =>                 => CodeBuild
+		 (CodeCommit)
+
+	Output artifacts 	Input artifacts
+		 =>              => Deploy (CodeDeploy)
+
+
+=> deploy
+
+
+
+CodePipeline Troubleshooting
+
+-CodePipeline state changes happen in AWS CloudWatch Events
+ which can in return create SNS notifications.
+  -Ex: you can create events for failed pipelines
+  -Ex: you can create events for cancelled stages
+
+-If CodePipeline fails a stage, your pipeline stops and you
+ can get information in the console
+
+-AWS CloudTrail can be used to audit AWS API calls
+
+-If Pipeline can't perform an action, make sure the
+ "IAM Service Role" attached does have enough
+ permissions (IAM Policy)
+
+
+
+
+
+CodePipeline Hands On
+First simple pipeline
+Service Role talk to other services
+Choose a source provider
+Repository name
+Branch name that is master
+Hoocked the CodeCommit and deployed
+Edit stage.
+DeploytoProd.
+Add a action group.
+
+
+
+
+CodeBuild Overview
+-Fully managed build service
+-Alternative to other build tools such as Jenkins
+
+-Continous scaling 
+ (no servers to manage or provision - no build queue)
+
+-Pay for usage: the time it takes to complete the builds
+
+-Leverages Docker under the hood for reproducible builds
+
+-Possibility tp extend capabilities leveraging our own 
+ base Docker images
+
+-Secure: Integration with KMS for encryption of build
+ artifacts, IAM for build permissions, and VPC for
+ network security, CloudTrail for API calls logging
+
+
+-Source Code from Github / CodeCommit / CodePipeline / S3
+
+-Build instructions can be defined in code (buildspec.yml file)
+
+-Output logs to Amazon S3 & AWS CloudWatch Logs
+
+-Metrics to monitor CodeBuild statics
+
+-Use CloudWatch Alarms to detect failed builds and trigger
+ notifications
+
+-CloudWatch Events / AWS Lambda as a Glue
+
+-SNS notifications
+
+-Ability to reproduce CodeBuild locally to troubleshoot in case
+ of errors
+
+-Builds can be defined within CodePipeline or CodeBuild itself
+
+
+CodeBuild Support enviroments
+-Java
+-Ruby
+-Python
+-Go
+-Node.js
+-Android
+-.NET Core
+-PHP
+-Docker: extend any enviroment you like
+
+
+
+How CodeBuild works
+We have the source code
+You need a buildspec.yml
+And use a AWS managed or Custom.
+Running on Build Docker Image
+Running instructions from buildspec.yml
+
+AWS S3 Cache Build
+(optional)
+
+
+Send the Output to a AWS S3 Bucket Artifacts
+Save logs: AWS CloudWatch AWS S3
+
+
+CodeBuild BuildSpec
+-buildspec.yml file must be at the root of your code
+-Define enviroment variables:
+ -Plaintext variables
+ -Secure secrets: use SSM Parameter store
+-Phases(specify commands to run):
+  -Install: install dependencies you may need for your build
+  -Pre build: final commands to execute before build
+  -Build: actual build commands
+  -Post build: finishing touches (zip output for example)
+
+-Artifacts: What to upload to S3 (encrypted with KMS)
+-Cache: Files to cache (usually dependencies) to S3
+ for future build speedup
+
+
+CodeBuild Local Build
+-In case of need of deep troubleshooting beyond logs..
+-You can run CodeBuild locally on your desktop
+ (after installing Docker)
+-For this, leverage the CodeBuild Agent
+
+
+
+CodeBuild Hands On Part 1
+Test ever for leaving the screen.
+MyBuildProject
+AWS CodeCommit.
+CodeBuild runs a docker image.
+You can have a managed image.
+You can have a custom image.
+
+Running a RunTime standard.
+
+Buildspec stands for Build specifications.
+Use a buildspec.yml in the root source directory.
+S3 push on the logs.
+Provides.
+
+
+
+
+CodeBuild Hands On Part 2
+We need to fix the error.
+We need to a add a file content.
+From the reference.
+-Install
+-Pre-Build
+-Post-Build
+-Build
+
+Builds logs.
+View the logs.
+How do we integrate this with CodeDeploy.
+Add an pipeline.
+Add a action group.
+index.html file.
+
+
+
+CodeBuild in VPC
+-By default, your CodeBuild containers are launched
+ outside your VPC
+
+-Therefore, by default it cannot access resources in a VPC
+
+-You can specify a VPC configuration:
+ -VPC ID
+ -Subnet IDs
+ -Security Group IDs
+
+-Then your build can access resources in your
+ VPC (RDS, ElasticCache, EC2, ALB)
+
+-Use cases: integration tests, data query,
+ internal load balancers
+
+
+
+
+
+CodeDeploy Overview
+
+AWS CodeDeploy
+-We want to deploy our application automatically
+ to many EC2 instances
+
+-These instances are not managed by Elastic Beanstalk
+
+-There are several ways to handle deployments using open
+ source tools (Ansible, Terraform, Chef, Puppet, etc...)
+
+-We can use the managed Service AWS CodeDeploy
+
+
+AWS CodeDeploy - Steps to make it work
+-Each EC2 Machine (or On Premise machine) must be running
+ the CodeDeploy Agent
+
+-The agent is continously polling AWS CodeDeploy for work
+ to do
+
+-CodeDeploy sends appspec.yml file
+
+-Application is pulled from Github or S3
+
+-EC2 will run the deployment
+ instructions
+
+-CodeDeploy Agent will report of success / failure
+ of deployment on the instance
+
+
+AWS CodeDeploy - Other
+-EC2 instances are grouped by deployment group 
+ (dev / test / prod)
+
+-Lot of flexibility to define any kind of deployments
+
+-CodeDeploy can be chained into CodePipeline and use artifacts
+ from there
+
+-CodeDeploy can re-use existing setup tools, works with any 
+ application auto scaling integration
+
+-Note: Blue / Green only works with EC2 instances
+ (not on premise)
+
+-Support for AWS Lambda deployments (we'll see this later)
+
+-CodeDeploy does not provision resources
+
+
+AWS CodeDeploy Primary Components
+
+-Application: unique name
+-Compute platform: EC2/On-Premise or Lambda
+-Deployment configuration: Deployment rules for 
+ success / failures
+
+ -EC2/On-Premise: you can specify the minimum number of
+  healthy instances for the deployment
+
+ -AWS Lambda: specify how traffic is routed to your updated
+  Lambda function versions
+
+-Deployment group: group of tagged instances
+ (allows to deploy gradually)
+
+-Deployment type: In-place deployment or Blue/Green deployment
+
+-IAM instance profile: need to give EC2 the permissions
+                       to pull from S3 / Github
+
+-Application Revision: application + appspec.yml file
+
+-Service role: Role for CodeDeploy to perform what it needs
+
+-Target Revision: Target deployment application version
+
+
+AWS CodeDeploy AppSpec
+
+-File section: how to source and copy from S3 / Github to
+			   filesystem
+
+-Hooks: set of instructions to do to deploy the new version
+		(hooks can have timeouts).The order is
+
+	-ApplicationStop
+	-DownloadBundle
+	-BeforeInstall
+	-AfterInstall
+	-ApplicationStart
+	-ValidateService: really important
+
+
+AWS CodeDeploy Deployment Config
+-Configs:
+ -One a time: one instance at a time, 
+  one instance fails => deployment stops
+ -Half at a time
+ -All at once: quick but no healthy host, downtime.
+               Good for dev
+ -Custom: min healthy host = 75%
+
+-Failures:
+ -Instances stay in "failed state"
+ -New deployments will first be deployed to "failed state"
+  instances
+ -To rollback: redeploy old deployment or enable automated
+ 			   rollback for failures
+
+
+-Deployment Targets:
+ -Set of EC2 instances with tags
+ -Directly to an ASG
+ -Mix of ASG / Tags so you can build deployment segments
+ -Customization in scripts with DEPLOYMENT_GROUP_NAME
+  enviroment variables
+
+
+
+
+
+
+
+CodeDeploy Hands On
+We have to create some new roles.
+We have to create a codedeploy role.
+We need to create a EC2 service role.
+Call mydemoapplication
+Need to install the CodeDeploy Agent.
+And then install Ruby.
+chmod +x install
+
+sudo ./install auto
+sudo service codedeploy
+
+Create an deployment group.
+We need to tag the enviroment.
+There are two kinds of deployments groups-
+In-place.
+
+Select an key enviroment.
+All the instances that match the deployment group.
+You can have different strategies to the deployment groups.
+
+We have three scripts
+start_server
+stop_server
+install_dependcies
+
+
+
+
+
+CodeDeploy for EC2 and ASG
+
+CodeDeploy to EC2
+-Define how to deploy the application using 
+ appspec.yml + deployment strategy
+
+-Will do in-place update to your fleet of EC2 instances
+
+-Can use hooks to verify the deployment after each deployment
+ phase
+
+
+CodeDeploy to ASG
+-In-place updates
+ -Updates current existing EC2 instances
+ -Instances newly created by an ASG will also
+  get automated deployments
+-Blue / green deployment:
+ -A new auto-scaling group is created (settings are copied) 
+ -Choose how long to keep the old instances
+ -Must be using an ELB
+
+
+CodeDeploy - rollbacks
+
+-You can specify automated rollback options
+-Roll back when a deployment fails
+-Roll back when alarm thresholds are met
+-Disable rollbacks -- Do not perform rollbacks for this
+					  deployment
+
+-If a roll back happens, CodeDeploy redeploys the last known
+ good revision as a new deployment
+
+
+
+
+AWS Codestar
+
+-Codestar is an integrated solution that regroups:
+ Github, CodeCommit, CodeBuild, CodeDeploy, CloudFormation,
+ CodePipeline, CloudWatch
+
+-Helps quickly create "CICD-ready" projects for EC2,
+ Lambda, Beanstalk
+
+-Supported languages: C#, Go, HTML 5, Java, Node.js, PHP,Python
+ 					  ,Ruby
+
+-Issue tracking integrations with: JIRA / Github Issues
+
+-Ability to intergrate with Cloud9 to obtain a web IDE
+ (not all regions)
+
+-One dashboard to view all your components
+
+-Free service, pay only for the underlying usage of other
+ services
+
+-Limited Customization
+
+Need to create a service role
+Use Node.js.
+
+
+
+Quiz 14: CICD Quiz
+
+Question 1:
+CICD stands for...
+
+Answer:
+   Continous Integration & Continous Delivery
+
+
+
+Question 2:
+Which AWS Service helps you run automated test in your CICD?
+
+
+Answer:
+	CodeBuild
+
+
+
+Question 3:
+You are looking to automatically trigger a code analysis at each commit in CodeCommit to ensure your developers haven't committed secret credentials. How can you achieve this
+
+Answer:
+	Setup AWS SNS / Lambda intergration in CodeCommit
+
+
+
+
+
+Question 4:
+You want to send email alerts anytime pull requests are open or comments are added to commits in CodeCommit. You should use
+
+
+Answer:
+  AWS CloudWatch Events
+
+
+
+Question 5:
+CodeCommit doesn't support the following authentication
+
+
+Answer:
+    HTTP public access
+
+
+
+Question 6:
+You want to give a colleague that has an IAM User in another AWS Account access to your CodeCommit repository. How should you achieve that?
+
+
+Answer:
+	Setup an IAM Role in your account and tell him to use
+	STS cross-account access to assume that role
+
+
+Question 7:
+Your CodePipeline hasn't deployed code to Elastic Beanstalk even though you've pushed code to your CodeCommit repository. It used to work 10 minutes ago. What reason is the most likely to explain that situation?
+
+Answer:
+   Your CodeBuild stage probaly failed some tests
+
+
+
+
+Question 8:
+Your manager wants to receive emails when your CodePipeline fails in order to take action. How do you do it?
+
+Answer:
+	Setup an AWS CloudWatch Event Rule
+
+
+
+
+Question 9:
+Which AWS Services allow you to track and audit API calls made to and from CodePipeline?
+
+Answer:
+  AWS CloudTrail
+
+
+
+
+
+
+Question 10:
+Where should the buildspec.yml file be placed in your code for CodeBuild to work properly?
+
+
+Answer:
+	at the root of your code
+
+
+
+
+Question 11:
+Your CodeBuild has failed. What isn't a solution to troubleshoot what happened?
+
+Answer:
+  SSH into the CodeBuild container to debug from there
+
+ CodeBuild containers are deleted at the end of their execution (success or failed). You can't SSH into them, even while they're running
+
+
+
+Question 12:
+
+You would like to improve the performance of your CodeBuild build. You realize that 15 minutes at each build is spent on pulling dependencies from remote repositories and that takes a while. What should you do to drastically speed up the build time?
+
+Answer:
+   Change buildspec.yml to enable dependencies caching in
+   Amazon S3
+
+
+
+
+Question 13:
+(hard question - think outside the box)
+
+You would like to deploy static web files to Amazon S3 automatically, after generating the static websites from markdown files. Which services should you use for this?
+
+Answer:
+  CodePipeline + CodeBuild
+
+ CodeBuild can run any commands, so you can use it to run commands including generating a static website and copy your static web files to Amazon S3.
+
+
+Question 14:
+What's the proper order of events in CodeDeploy?
+
+Answer:
+Stop Application, Before Install, After Install
+,Start Application
+
+
+
+Question 15:
+Which hook step should be used in appspec.yml file to ensure the application is properly running after being deployed?
+
+Answer:
+   ValidateService
+
+
+
+Question 16:
+You've created a fleet of EC2 & on-premise instances and you're trying to run your first CodeDeploy. It doesn't work, why?
+
+Answer:
+   You've probably forgotten to install and start the
+   CodeDeploy agent
+
+
+Question 17:
+You would like to have a one-stop dashboard for all the CICD needs of one of your projects. You don't need heavy control of the individual configuration of each components in your CICD, but need to be able to get a holistic view of your projects. Which service do you recommend?
+
+
+Answer:
+  Codestar
+
+ 
+
+
+   
+  
+   
+

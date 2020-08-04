@@ -1,0 +1,671 @@
+AWS Elastic Beanstalk-Section
+In this section we will learn Elastic Beanstalk.
+How to automate.
+
+
+
+Elastic Beanstalk Overview (High level)
+We have three-tier.
+
+Developrt problems on AWS
+
+-Managing infrstructure
+-Deploying Code
+-Configuring all the databases, load balancers, etc
+-Scaling concerns
+
+-Most web apps have the same architechture (ALB + ASG)
+-All the developers want is for their code to run!
+-Possibly, consistenly across different applications and 
+ enviroments
+
+
+AWS Elastic Beanstalk Overview
+
+-Elastic Beanstalk is a developer centric view of deploying 
+ an application on AWS
+
+-It uses all the component's we've seen before:
+ EC2,ASG,ELB,RDS, etc...
+
+-But it's all in one view that's easy to make sense of!
+-We still have full control over the configuration
+
+
+-Beanstalk is free but you pay for the underlying instances
+
+Elastic Beanstalk
+
+-Managed service
+ -Instance configuration / OS is handled by Beanstalk
+ -Deployment strategy is configurable bu performed by
+  Elastic Beanstalk
+
+-Just the application code is the responsibility of the
+ developer
+
+-Three architecture models
+ -Single Instance deployment: good for dev
+ -LB + ASG: great for production or pre-production web
+  applications
+ -ASG only: great for non-web apps in production 
+ (workers, etc...)
+
+
+Elastic Beanstalk has three components
+ - Application
+ - Application version: each deployment gets assigned a version
+ - Enviroment name (dev,test,prod...): free naming
+
+
+-You deploy application versions to enviroments and can promote
+ application versions to the next enviroment
+
+-Rollback feature to previous application version
+-Full control over lifecycle of enviroments
+
+Create Application
+Create Enviroments => Upload Version => Release to enviroments
+						(+ alias) 
+
+
+Elastic Beanstalk
+-Support for many platforms:
+ -Go
+ -Java SE
+ -Java with Tomcat
+ -.Net on Windows Server with IIS
+ -Node.js
+ -PHP
+ -Python
+ -Ruby
+ -Packer Builder
+ -Single Container Docker
+ -Multicontainer Docker
+ -Preconfigured Docker
+
+-If not supported, you can write
+ your custom platform(advanced)
+
+
+
+
+
+Beanstalk First Enviroment
+To run end to end management.
+my-first-webapp
+Choose a platform Node.js
+
+Application Code
+Sample Application
+
+Health is green
+Click on events:
+Created a security group.
+Configured this correctly.
+
+Logs showing the logs.
+Health shows the enviroment.
+Monitoring CPU utilization.
+Tags.
+
+
+
+
+Beanstalk Second Enviroment
+Create a second enviroment.
+Web Server enviroment
+myFirstWebappBeanstalk-prod
+
+Configure more options
+
+High availability
+
+Stream the logs to CloudWatch.
+
+You can only choose one load balancer.
+
+
+
+Elastic Beanstalk Deployment Modes
+
+Single Instance
+Everything is one load balancer database, ...
+
+High Availability with Load Balancer Great for prod
+We have an ASG.
+Several EC2 instances.
+DNS-Name.
+
+
+
+-All at once (deploy all in one go)
+ -Fatest, but instances aren't available to
+  serve traffic for a bit (downtime)
+
+-Rolling: update a few instances at a time (bucket)
+  and then move onto the next bucket once the first
+  bucket is healthy
+
+
+-Rolling with additional batches: like rolling, but spins up
+ new instances to move the batch
+ (so that the old application is still available)
+
+-Immutable: spins up new instances in a new ASG, deploys 
+ version to these instances, and then swaps all the instances
+ when everything is healthy
+
+
+Elastic Beanstalk Deployment
+All at once
+
+Elastic Beanstalk will stop all the instances.
+
+-Fastest deployment
+-Application has downtime
+-Great for quick iterations in
+ development enviroment
+-No additional cost
+
+
+Rolling
+-Application is running below capacity
+-Can set the bucket size
+-Application is running both versions simultaneously
+-No additional cost
+-Long deployment
+
+
+
+Rolling with additional batches
+
+-Application is running at capacity
+-Can set the bucket size
+-Application is running both versions simultaneously
+-Small additional cost
+-Additional batch is removed at the end of the deployment
+-Longer deployment
+-Good for prod
+
+
+Immutable
+-Zero downtime
+-New Code is deployed to new instances
+ on a temporary ASG
+-High cost, double capacity
+-Longest deployment
+-Quick rollback in case of failures
+ (just terminate new ASG)
+-Great for prod
+
+
+Blue / Green
+
+-Not a "direct feature" of Elastic Beanstalk
+
+-Zero downtime and release facility
+
+-Create a new "stage" enviroment and deploy v2 there
+
+-The new enviroment (green) can be validated
+ indenpendently and roll back if issues
+
+-Route 53 can be setup using weighted policies to
+ redirect a little bit of traffic to the stage
+ enviroment
+
+-Using Beanstalk "swap URLs" when done with enviroment
+ test
+
+
+-https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.deploy-existing-version.html
+
+
+
+
+
+Beanstalk Deployment Modes Hands On
+
+Go to the configuration
+View the different configurations.
+Rolling with additional batch.
+Deployment preference.
+Launch a new auto-scaling group.
+Start and load an new instance to the health instance.
+
+
+
+
+Beanstalk CLI and Deployment Process
+Elastic Beanstalk CLI
+-We can install an additional CLI called the "EB cli" which
+ makes working with Beanstalk from the CLI easier
+
+-Basic commands are:
+ -eb create
+ -eb status
+ -eb health
+ -eb events
+ -eb logs
+ -eb open
+ -eb deploy
+ -eb config
+ -eb terminate
+
+-It's helpful for your automated deployment pipelines!
+
+
+
+Elastic Beanstalk Deployment Process
+
+-Describe dependencies
+ (requirements.txt for Python, package.json for Node.js)
+
+-Package code as zip, and describe dependencies
+ -Python requirements.txt
+ -Node.js: package.json
+
+-Console: upload zip file (creates new app version), and then
+          deploy
+
+-CLI: create new app version using CLI (uploads zip),
+      and then deploy
+
+
+-Elastic Beanstalk will deploy the zip on each EC2 instance,
+ resolve dependencies and start the application
+
+
+
+
+
+
+Beanstalk Lifecycle Policy Overview + Hands On
+
+Beanstalk Lifecycle Policy
+-Elastic Beanstalk can store at most 1000 applications versions
+-If you don't remove old versions, you won't be able to deploy
+ anymore
+
+-To phase out old applications versions, use a lifecycle policy
+ -Based on time(old versions are removed)
+ -Based on space(when you have too many versions)
+
+-Versions that are currently used won't be deleted
+
+-Option not to delete the source bundle in S3 to prevent
+ data loss
+
+Create settings.
+Want to have 180 days or 200.
+
+
+
+
+Elastic Beanstalk Extensions
+-A zip file containing our code must be deployed to
+ Elastic Beanstalk
+
+-All the parameters set in the UI can be configured with code
+ using files
+
+-Requirements
+ - in the .ebexetensions/ directory in the root of source code
+ - YAML / JSON format
+ - .config extensions(exampl: logging.config)
+ - Able to modify some default settings  using: option_settings
+ - Ability to add resources such as RDS, ElasticCache,
+   DynamoDB, etc...
+
+
+Resources managed by .ebexetensions get deleted if the
+enviroment goes away
+
+
+
+
+Beanstalk & CloudFormation
+-Under the hood, Elastic Beanstalk relies on CloudFormation
+-CloudFormation is used to provision other AWS services
+ (we'll see later)
+
+-Use case: you can define CloudFormation resources in your
+ .ebexetensions to provision ElasticCache, an S3 bucket,
+ anything you want!
+
+
+-Let's have a sneak peak to it!
+
+Click on the templet.
+If you go to the resources you can see what it has created.
+
+
+
+Elastic Beanstalk Cloning
+-Clone an enviroment with the exact same configurtion
+-Useful for deploying a "test" version of your application
+
+-All resources and configurtion are preserved
+ -Load Balancer type and configurtion
+ -RDS database type (but the data is not preserved)
+ -Enviroment variables
+
+-After cloning an enviroment, you can change settings
+
+
+
+Elastic Beanstalk Migration
+
+Migration: Load Balancer
+-After creating an Elastic Beanstalk
+ enviroment, you cannot change
+ the Elastic Load Balancer type
+ (only the configurtion)
+
+-To migrate:
+ 1. create a new enviroment with the
+    same configurtion except LB
+    (can't clone)
+
+
+ 2. Deploy your application onto the new enviroment
+
+
+ 3. Perform a CNAME swap or Route 53 update
+
+
+RDS with Elastic Beanstalk
+-RDS can be provisioned with Beanstalk, which is great for
+ dev / test
+
+-This is not great for prod as the database lifecycle is
+ tied to the Beanstalk enviroment lifecycle
+
+-The best for prod is to separately create an RDS database
+ and provide our EB application with the connection string
+
+
+
+Migration: Decouple RDS
+
+1. Create a snapshot of RDS DB (as a safeguard)
+
+2. Go to the RDS console and protect the RDS database
+   from deletion
+
+3. Create a new Elastic Beanstalk enviroment, without
+   RDS, point your application to existing RDS
+
+4. perform a CNAME swap (blue/green) or
+   Route 53 update, confirm working
+
+5. Terminate the old enviroment (RDS won't be deleted)
+
+6. Delete CloudFormation stack (in DELETE_FAILED state)
+
+
+
+
+Beanstalk with Docker
+
+Elastic Beanstalk - Single Docker
+
+-Run your application as a single docker container
+
+-Either provide:
+ -Dockerfile Elastic Beanstalk will build and run the
+  Docker container
+
+ -Dockerrun.aws.json (v1): Describe where *already built*
+  Docker image is
+   -Image
+   -Ports
+   -Volumes
+   -Logging
+   -Etc...
+
+ -Beanstalk in Single Docker Container does not us ECS
+
+
+
+
+Elastic Beanstalk - Multi Docker Container
+
+-Multi Docker helps run multiple containers per EC2
+ instance in EB
+
+-This will create for you
+ -ECS Cluster
+ -ECS instances, configured to use the ECS Cluster
+ -Load Balancer (in high availability mode)
+ -Task definitions and execution
+
+-Requires a config Dockerrun.aws.json (v2) at the root of
+ source code
+
+-Dockerrun.aws.json is used to generate the ECS task definition
+
+-Your Docker images must be pre-built and stored in ECR for
+ example
+
+
+
+
+
+
+Beanstalk with Advanced Concepts
+
+Elastic Beanstalk and HTTPS
+
+-Beanstalk with HTTPS
+ -Idea: Load the SSL certificate onto the Load Balancer
+ -Can be done from the Console 
+  (EB console, load balancer configuration)
+ -Can be done from the 
+  code:.ebexetensions/securelistener-alb.config
+ -SSL Certificate can be provisioned using ACM
+  (AWS Certificate Manager) or CLI
+ -Must configure a security group rule to allow
+  incoming port 443 (HTTPS port)
+
+
+Beanstalk redirect HTTP to HTTPS
+-Configure your instances to redirect HTTP to HTTPS
+-Or configure the Application Load Balancer (ALB) with a rule
+-Make sure health checks are not redirected
+ (so they keep giving 200 ok)  
+
+
+Web Server vs Worker Enviroment
+-If your application performs tasks that are long to complete,
+ offload these tasks to a dedicated worker enviroment
+
+-Decoupling your application in two tiers is common
+
+-Example: processing a video, generating a zip file, etc
+
+-You can define periodic tasks in a file cron.yaml
+
+
+Elastic Beanstalk - Custom Platform (Advanced)
+-Custom Platforms are very advanced, they allow to define from
+ scratch:
+  -The Operating System (OS)
+  -Additional Software
+  -Scripts that Beanstalk runs on these platforms
+
+-Use case: app language is incompatible with 
+ Beanstalk & dosen't use Docker
+
+
+-To create your own platform:
+ -Define an AMI using Platform.yaml file
+ -Build that platform using the Packer software
+  (open source tool to create AMIs)
+
+-Custom Platform vs Custom Image(AMI):
+ -Custom Image is to tweak an existing Beanstalk Platform
+  (Python, Node.js, Java...)
+ -Custom Platform is to create an entirely new Beanstalk 
+  Platform
+
+
+Beanstalk Cleanup
+
+
+Quiz 13: EB Quiz
+
+
+Question 1:
+
+I am creating an application and would like for it to be running with minimal cost in a development environment. I should run it in
+
+Answer:
+   Single-Instance-Mode
+
+
+Question 2:
+Application versions can be deployed to
+
+Answer:
+  many environments
+
+
+Question 3:
+I would like to customize the runtime of Elastic Beanstalk and include some of my company wide security software. I should
+
+
+Answer:
+   Provide a custom platform
+
+
+
+
+Question 4:
+Environments in Elastic Beanstalk
+
+
+Answer:
+    Can be named freely
+
+
+
+
+Question 5:
+I would like to update my development environment as soon as a new version is available. Because my Elastic Beanstalk environment is internal and only used by me, I don't mind downtime. Which deployment options is the best fit?
+
+
+Answer:
+   All at once
+
+
+
+
+
+Question 6:
+I would like to update my Elastic Beanstalk application so that we are able to roll back very quickly in case of issues with the new application version. Which deployment mode is the best fit?
+
+
+Answer:
+	Immutable
+
+
+to roll back quickly, this deployment mode terminates the temporary ASG that has the new version, while the current one is untouched and already running at capacity
+
+
+
+Question 7:
+
+I want to update my Elastic Beanstalk application gradually without incurring new costs on update. My application has been over provisioned and can temporarily decrease in size for the number of serving instances, but I still want to serve my users without downtime. I do not want to incur extra costs over updates. Which deployment mode is the best fit?
+  
+Answer:
+   Rolling
+
+
+
+Question 8:
+
+We would like to update our EB application with minimal added cost, while maintaining the full capacity to serve our current users in production. Which deployment is the best fit?
+
+Answer:
+  Rolling with additional batches
+
+
+
+Question 9:
+I would like to create an ElastiCache with my Elastic Beanstalk environment. I should
+
+Answer:
+	Create an elasticache.config file in the
+	.ebexetensions folder which is at the root of the
+	code zip file and  provide approriate configurtion
+
+
+
+
+
+Question 10:
+My deployments on Elastic Beanstalk have been painfully slow, and after looking at the logs, I realize this is due to the fact that my dependencies are resolved on each EC2 machine at deployment time. How can I speed up my deployment with the minimal impact?
+
+
+Answer:
+	Resolve the dependencies beforehand and package them
+	in the zip file uploaded to Elastic Beanstalk
+
+
+
+Question 11:
+What service does Elastic Beanstalk use under the hood?
+
+Answer:
+ AWS CloudFormation
+
+
+
+
+Question 12:
+You would like your Elastic Beanstalk environment to expose an HTTPS endpoint instead of an HTTP endpoint in order to get in-flight encryption between your clients and your web servers. What must be done to setup HTTPS on Beanstalk?
+
+
+Answer:
+  Create an .ebexetensions/elb.config file to configure the
+  Load Balancer
+
+
+
+
+Question 13:
+How can you remove older versions that are not used by Elastic Beanstalk so that new versions can be created for your applications?
+
+
+
+Answer:
+  Use a Lifecycle Policy
+
+
+
+Question 14:
+You are looking to perform a set of repetitive and scheduled tasks asynchronously. Which Elastic Beanstalk environment should you setup?
+
+
+Answer:
+   Setup a Worker environment and a cron.yml file
+
+https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features-managing-env-tiers.html
+
+
+
+Question 15:
+You have created a test environment in Elastic Beanstalk and as part of that environment, you have created an RDS database. How can you make sure the database can be explored after the environment is destroyed?
+
+
+Answer:
+   Make a snapshot of the database before it gets deleted
+
+
+
+   
+
+
+   
