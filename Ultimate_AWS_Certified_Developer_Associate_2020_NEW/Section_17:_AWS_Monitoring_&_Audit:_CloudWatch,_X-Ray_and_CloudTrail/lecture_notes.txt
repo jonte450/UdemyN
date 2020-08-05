@@ -1,0 +1,111 @@
+AWS Monitoring - Section Introduction
+And your manager calls you and says it's not running
+anymore
+
+
+
+Monitoring Overview in AWS
+
+Why Monitoring is Important
+
+-We know how to deploy applications
+ -Safely
+ -Automatically
+ -Using Infrastructure as Code
+ -Leveraging the best AWS components!
+
+-Our applications are deployed, and our users don't care how we
+ did it...
+
+-Our users only care that the application is working!
+ -Application latency: will it increase over time?
+ -Application outages: customer experience should not be
+  delegated
+ -Users contacting the IT department or complaining is not
+  a good outcome
+ -Troubleshooting and remediation
+
+-Internal monitoring:
+ -Can we prevent issues before they happen?
+ -Performance and Cost
+ -Trends (scaling patterns)
+ -Learning and Improvement
+
+
+Monitoring in AWS
+
+-AWS CloudWatch
+ -Metrics: Collect and track key metrics
+ -Logs: Collect, monitor, analyze and store log files
+ -Events: Send notifications when certain events happen in your
+  		  AWS
+ 
+ -Alarms: React in real-time to metrics / events
+
+-AWS X-Ray
+ -Troubleshooting application performance and errors
+ -Distributed tracing of microservices
+
+-AWS CloudTrail
+ -Internal monitoring of API calls being made
+ -Audit changes to AWS Resources by your users
+
+ 
+
+
+
+
+
+
+AWS CloudWatch Metrics
+
+
+AWS CloudWatch Alarms
+
+
+AWS CloudWatch Logs
+
+
+
+CloudWatch Agent & CloudWatch Logs Agent
+
+
+
+CloudWatch Logs Metric Filters
+
+
+AWS CloudWatch Events
+
+
+
+EventBridge Hands On
+
+
+X-Ray Hands On
+
+
+X-Ray: Instrumentation and Concepts
+
+
+X-Ray: Sampling Rules
+
+
+X-Ray Apis
+
+
+X-Ray with Beanstalk
+
+
+X-Ray & ECS
+
+
+AWS CloudTrail
+
+
+CloudTrail vs CloudWatch vs X-Ray
+
+
+Quiz 16: Monitoring Quiz
+
+
+AWS Quick Clean Up
