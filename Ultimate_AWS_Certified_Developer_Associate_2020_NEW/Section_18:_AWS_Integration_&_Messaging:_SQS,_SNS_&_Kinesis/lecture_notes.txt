@@ -1,0 +1,62 @@
+AWS Integration & Messaging - Section Introduction
+
+
+
+
+Introduction to Messaging
+
+
+
+Amazon SQS - Standard Queues
+
+
+SQS - Standard Queue Hands On
+
+
+
+SQS - Message Visibility Timeout
+
+
+SQS- Dead Letter Queues
+
+
+SQS - Delay Queues
+
+
+SQS - Certified Developer concepts
+
+
+SQS - FIFO Queues
+
+SQS - FIFO Queues Advanced
+
+
+Amazon SNS - Overview
+
+SNS - Hands On
+
+
+SNS and SQS - Fan Out Pattern
+
+
+AWS Kinesis Overview
+
+
+AWS Kinesis Hands On
+
+
+AWS Kinesis KCL
+
+
+Kinesis Security, Firehose and Analytics
+
+
+SQS vs SNS vs Kinesis
+
+
+Data Ordering for Kinesis vs SQS FIFO
+
+
+Quiz 17: Messaging and Integration Quiz
+
+
