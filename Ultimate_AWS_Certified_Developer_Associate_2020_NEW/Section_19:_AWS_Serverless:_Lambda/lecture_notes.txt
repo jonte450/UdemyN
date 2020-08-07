@@ -1,0 +1,101 @@
+AWS Lambda - Section Introduction
+
+
+
+Serverless Introduction
+
+
+AWS Lambda Overview
+
+
+AWS Lambda - First Hands On
+
+
+
+Lambda Synchronous Invocations
+
+Lambda Synchronous Invocations Hands On
+
+
+
+Lambda & Application Load Balancer
+
+
+Lambda & Application Load Balancer
+
+
+AWS Lambda@Edge Overview
+
+
+Lambda Asynchronous Invocations & DLQ
+
+
+Lambda Asynchronous Invocations Hands On
+
+
+
+Lambda & CloudWatch Events / EventBridge
+
+
+
+Lambda & S3 Event Notifications
+
+
+Lambda Event Source Mapping
+
+
+Lambda Event Source Mapping Hands On (SQS)
+
+
+Lambda Destinations
+
+
+Lambda Destinations Hands On
+
+
+Lambda Permissions - IAM Roles & Resource Policies
+
+
+Lambda Enviroment Variables & Hands On
+
+
+
+Lambda Monitoring & X-Ray Tracing
+
+
+Lambda in VPC
+
+
+
+Lambda Function Performance
+
+
+Lambda Concurrency 
+
+
+Lambda Concurrency Hands On
+
+
+Lambda External Dependencies
+
+
+Lambda and CloudFormation
+
+
+Lambda Layers
+
+
+Lambda Versions and Aliases
+
+
+Lambda and CodeDeploy
+
+
+Lambda Limits
+
+
+Lambda Best Practices
+
+
+Quiz 18: Lambda Quiz
+
