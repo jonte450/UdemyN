@@ -1,0 +1,190 @@
+AWS SAM - Section Introduction
+How do we manage everything.
+AWS came up with SAM.
+Very natural to deal with.
+
+
+
+
+SAM Overview
+
+AWS SAM
+-SAM = Serverless Application Model
+-Framework for developing and deploying serverless applications
+-All the configurations is YAML code
+-Generate complex CloudFormation from simple SAM YAML file
+-Supports anything from CloudFormation: Outpus, Mappings, 
+ Parameters, Resources...
+-Only two commands to deploy to AWS
+-SAM can use CodeDeploy to deploy Lambda functions
+-SAM can help you to run Lambda, API Gateway, DynamoDB locally...
+
+
+AWS SAM - Recipe
+-Transform Header indicates it's SAM template:
+ -Transform: 'AWS::Serverless-2016-10-31'
+
+-Write Code
+ -AWS::Serverless::Function
+ -AWS::Serverless::API
+ -AWS::Serverless::SimpleTable
+
+-Package & Deploy:
+ -aws cloudformation package / sam package
+ -aws cloudformation deploy / sam deploy
+
+
+Deep dive into SAM deployment
+
+aws cloudformation package
+SAM Template Yaml file Transform the template to 
+Cloudformation YAML.
+
+Create and exchange set.
+
+
+Application Code + Swagger file will upload the files
+to Code S3 bucket.
+
+
+
+
+Installing the SAM CLI
+Install Homebrew.
+brew install aws-sam-cli.
+
+
+
+Creating first SAM Project
+sam init --help
+sam init creates a lot of files.
+template.yml 
+
+
+
+Deploying SAM Project
+Go to commands and create an s3 bucket.
+aws cloudformation package
+
+
+
+SAM API Gateway
+Modify the yaml file.
+Respond function.
+Print to the log.
+Modify the template.
+Take a look on the Lambda function.
+Whenever we go to get we invoke the handler.
+Cloudformation deploy.
+
+
+SAM DynamoDB
+Put the client outside of your table.
+Set them in the template.yaml.
+Properties.
+simpletable serverless.
+We get the different Parameters.
+Set a primary key.
+
+
+
+SAM - Cloudformation Designer and Application Repository
+A lot things created with SAM.
+Everything was generated for you.
+The one way to deploy and automate things for you.
+
+
+
+
+SAM Policy Templates
+-List of templates to apply permissions to your 
+ Lambda Functions
+
+-Full list available here:
+ https://docs.aws.amazon.com/serverless-application-model-
+ model/latest/developerguide/serverless-policy-templates.html#
+ serverless-policy-template-table
+
+-Important examples:
+ -S3ReadPolicy: Gives read only permissions to objects
+ 				in S3
+
+ -SQSPollerPolicy: Allows to poll an SQS queue
+
+ -DynamoDBCrudPolicy: Crud = create read update delete
+
+
+
+SAM with CodeDeploy
+
+SAM and CodeDeploy
+-SAM framework natively uses
+ CodeDeploy to update Lambda
+ functions
+
+-Traffic Shifting feature
+-Pre and Post traffic hooks
+ features to validate deployment
+ (before the traffic shift starts and after it ends)
+
+-Easy & automated rollback using CloudWatch Alarms
+
+
+
+SAM Section Summary
+-SAM is built on CloudFormation
+-SAM requires the Transform and Resources sections
+-Commands to know:
+ -sam build: fetch dependencies and create local deployments
+  artifacts
+
+ -sam package: package and upload to Amazon S3, generate CF
+               template
+
+ -sam deploy: deploy to CloudFormation
+
+-SAM Policy templates for easy IAM policy definition
+
+-SAM is integrated with CodeDeploy to deploy to Lambda aliases 
+
+
+Quiz 21: SAM Quiz
+
+Question 1:
+What are the two commands to run to upload Lambda functions and CloudFormation templates to AWS?
+
+
+Answer:
+ cloudformation package and cloudformation deploy
+
+
+
+
+Question 2:
+You have a CloudFormation template and it starts with:
+
+Transform: 'AWS::Serverless-2016-10-31'
+
+What does the Transform represent?
+
+Answer:
+
+It's a SAM template
+
+
+
+Question 3:
+Which of the following is NOT an added resource type by Serverless Application Model?
+
+
+Answer:
+  AWS::Serverless::UserPool
+
+
+Question 4:
+Which Policy should you insert in your serverless model template to give buckets access for read access?
+
+
+Answer:
+   S3ReadPolicy
+
