@@ -1,0 +1,102 @@
+AWS Other Services - Section Introduction
+Basic questions.
+Overview of a few services.
+
+
+AWS SES
+
+AWS SES - Simple Email Service
+-Send emails to people using:
+ -SMTP interface
+ -Or AWS SDK
+
+-Ability to receive email. Integrates with:
+ -S3
+ -SNS
+ -Lambda
+
+-Integrated with IAM for allowing to send emails
+
+
+
+
+Summary of Databases
+(OLTP, OLAP, NOSQL, Cache)
+
+AWS Databases Summary
+-RDS: Relational databases, OLTP
+ -PostgreSQL, MySQL, Oracle...
+ -Aurora + Aurora Serverless
+ -Provisioned database
+
+-DynamoDB: NoSQL DB
+ -Managed, Key Value, Document
+ -Serverless
+
+-ElastiCache: In memory DB
+ -Redis / Memcached
+ -Cache capability
+
+-Redshift: OLAP - Analytic Processing
+ -Data Warehousing / Data Lake
+ -Analytics queries
+
+-Neptune: Graph Database
+
+-DMS: Database Migration Service
+
+-DocumentDB: managed MongoDB for AWS
+
+
+
+
+Amazon Certificate Manager(ACM)
+
+AWS Certificate Manager (ACM)
+
+-To host public SSL certificates in AWS you can:
+ -Buy your own and upload them using CLI
+ -Have ACM provision and renew public SSL
+  certificates for you (free of cost)
+
+-ACM loads SSL certificates on the following
+ integrations:
+ -Load Balancers (including the ones created by EB)
+ -CloudFront Distributions
+ -APIs on API Gateways
+
+-SSL certificates is overall a pain to manually
+ manage, to ACM is great to leverage in your
+ AWS infrastructure!
+
+
+Quiz 26: Other Services Quiz
+
+Question 1:
+You are looking to perform some analytics in your database. You should use
+
+
+Answer:
+	Redshift
+
+
+Question 2:
+You want to send emails using the AWS SDK. You should use
+
+Answer:
+   SES
+
+
+Question 3:
+You need to load SSL certificates onto your Load Balancers and also have EC2 instances dynamically retrieve them when needed for service to service two way TLS communication. What service should you use to centrally manage these SSL certificates?
+
+
+Answer:
+    ACM
+
+
+
+
+
+
+   
