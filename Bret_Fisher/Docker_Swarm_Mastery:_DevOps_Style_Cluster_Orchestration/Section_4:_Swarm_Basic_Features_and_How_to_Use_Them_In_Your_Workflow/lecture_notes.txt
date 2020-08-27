@@ -1,0 +1,28 @@
+Scaling Out with Overlay Networking
+
+
+
+Scaling Out with Routing Mesh
+
+
+
+Database Passwords in Containers
+
+
+
+Assignment 1: Create A Multi-Service Multi-Node Web App
+
+
+Swarm Stacks and Production Grade Compose
+
+
+Secrets Storage for Swarm: Protecting Your Enviroment Variables
+
+
+Using Secrets in Swarm Services
+
+
+Using Secrets with Swarm Stacks
+
+
+Assignment 2: Create A Stack with Secrets and Deploy

@@ -1,0 +1,11 @@
+Using Secrets With Local Docker
+
+
+Full App Lifecycle: Dev, Buil and Deploy With a Single Compose Design
+
+
+
+Services Updates: Changing Things In Flight
+
+
+Healthchecks in Dockerfiles

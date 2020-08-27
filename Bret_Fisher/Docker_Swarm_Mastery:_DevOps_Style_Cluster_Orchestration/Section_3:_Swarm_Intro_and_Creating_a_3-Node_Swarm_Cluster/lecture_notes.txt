@@ -1,0 +1,94 @@
+Swarm Mode: Built-In Orcherstration
+But we can deploy everything on any hardware.
+How do we maintain this service.
+How do you scale your containers.
+How can we replace conatainers without downtime.
+Which node are our containers on.
+How can we sure in the security.
+
+Swarm Mode.
+Need for containers and run them live in production.
+Docker annonced SwarmKit.
+
+Basic concept.
+Manager Nodes.
+Three different managers and keeping manageing swarm locally.
+Add extra features to docker.
+
+
+
+Create Your First Service and Scale It Locally
+sudo docker swarm init.
+We typed one command and magic.
+Creates a root certificate for our first manager node.
+Creates the Raft database.
+Creates the database on the disk and encryptes it.
+Concept about Config DB.
+Swarm has built-in.
+There are no special services to start-up.
+
+docker node ls.
+docker service --help.
+When we start about talking about clusters.
+docker service ps <name>
+docker service update <ID> --replicas 3
+
+
+
+UI Change For Service Create/Update
+
+You may notice that when using docker service create  and update , that the CLI acts differently for some Lectures then your own Docker. This is due to a change in the way Docker CLI shows the service commands in 2017.
+
+--detach is a new option that changes the CLI response after you run a command.
+This is a good thing, and doesn't affect the functionality of Swarm. It's just a UI difference. I use various 2017 versions of Docker in this course, so you may see different output for your own service create/update commands vs. mine, which is fine.
+
+History of changes to CLI output for service create/update:
+
+1.
+Before 17.05, the service commands would immediately return to your shell prompt and the containers would be scheduled in the background (asynchronously). To check if they deployed properly you would need to use docker service ls and docker service ps.
+Starting in 17.05 the service commands were given a --detach  option, which defaulted to true , but warned you each time about a future change to false . The create/update commands were still asynchronous.
+
+2.
+Starting in 17.10 the --detach  default changes to false , so you'll always see the UI wait synchronously while service tasks are deployed/updated, unless you set --detach true  in each command.
+For all stable versions after 17.12, just remember:
+
+Use the defaults if you're interactive at the CLI, typing commands yourself.
+Use --detach true  if you're using automation or shell scripts to get things done.
+
+
+
+Docker Machine Bug With Swarm
+
+If you're planning to use docker-machine to create local VM's for Swarm, note there is a bug in 18.09.0 that prevents Swarm network ports from listening. This is fixed in 18.09.1 so make sure you have the latest Docker Desktop or Docker Toolbox and your VM's are up to date.
+
+Current versions (March 2019) include:
+
+docker version 18.09.3
+
+docker-machine version 0.16.1
+
+To ensure you have the latest Docker Toolbox, download it from the GitHub release page.
+
+You'll know you're up to date when you do a docker-machine ls and the VM's have 18.09.1 or later.
+
+To update existing docker-machine VM's, you can use docker-machine upgrade <name of vm>.
+
+
+
+Creating a 3-Node Swarm Cluster
+First option you have play-with-docker.com.
+Every four hours it will delete.
+
+You can use Docker Machine.
+
+
+Using the Swarm Visualizer
+
+The Swarm Visualizer is a sample app that is useful as a teaching aid. It gives us a web GUI to see our Swarm nodes and where services are running in the Swarm.  It talks to the Docker API securely through the "Linux socket" and auto-updates a web UI of what's happening. I'll be using it throughout the course, and it's also just fun to see things happening in real time graphically.
+
+I recommend you use the service create  command below to run the visualizer, and there's also this same command and a stack file (if you prefer that) in the course GitHub repo under /visualizer 
+
+You can just copy and paste this service create command into your Swarm:
+
+docker service create --name=viz --publish=8080:8080/tcp --constraint=node.role==manager --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock bretfisher/visualizer
+
