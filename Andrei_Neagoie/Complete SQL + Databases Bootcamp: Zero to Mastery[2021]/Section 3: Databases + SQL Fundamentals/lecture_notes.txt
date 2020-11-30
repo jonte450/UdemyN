@@ -1,0 +1,275 @@
+SQL Playground
+Tools to test queries.
+db-fiddle.
+Helps us quickly to create a database.
+Switch between different versions in SQL.
+Learning small concepts.
+
+
+
+What is SQL
+Programming language to talk to a system.
+Mainly talking to databases.
+You determine what to use.
+We are looking on big companies.
+You need a larger system to store data.
+Talk about different models.
+
+
+What Is A Query
+A query is nothing more than a question.
+Get a answer from the database.
+
+SELECT * FROM USERS
+
+Query Breakdown
+
+SELECT NAME
+FROM USERS
+WHERE ROLE = "MANAGER";
+
+
+
+Exercise Setting Up Your First Database
+Get the Students id and name here
+
+Select id, firstName, lastName 
+From Student;
+
+Get every student info.
+
+Select *
+FROM Student;
+
+
+Imperative vs Declarative
+What Will Happen
+Declarative
+
+make a sandwich with ham
+
+How it Will Happen.
+Imperative
+
+-slice bread
+-slice hame
+-make sandwich
+
+
+History of SQL
+SQL?
+SEQUEL?
+
+Structure Query Language.
+Invented in the early 80.
+Edgar Chod sat the standard.
+Two other developers implemented his idea:
+Donald Chamberlain and Raymond Boyce.
+
+
+Optional: History of SQL Deep Dive
+Channel History Museum: History of Databases.
+
+Exercise: The Select Statement
+Select *FŔOM Customers;
+Select City FROM Customers;
+
+
+SQL Standards
+There are some rules that everybody must follow.
+To put togheter some rules.
+SQL is a widely adopted language.
+You have concistency.
+
+
+
+What Is A Database? Revistied
+What is actually a database.
+A data that is structure a special way.
+
+FILE PROCESSING SYSTEMS
+Was a massive leap ahead.
+Saving data on individual files.
+There was non relationship between the files.
+Copying in customer information.
+The user need to learn every particular system.
+
+
+Database Oriented Approach
+Migrate to a database approach.
+Database management.
+The only task is to manage your data.
+Every concept will become managed.
+Enforcing a structure.
+Following the same principle.
+DMBS helped you to manage the data with SQL.
+
+
+
+Exercise; SQL Starter Quiz
+What is the SELECT statement used for?
+To SELECT data from a table
+
+
+
+Which of the following SELECT statements are correct?
+SELECT * FROM student;
+
+
+Which of the following SELECT statement are incorrect? (multiple)
+
+
+
+What is SQL?
+Declarative
+
+What does SQL stand for?
+Structured Query Language
+
+
+
+Database Models
+-Hierchical
+-Networking
+-Entity-Relationship
+-Relational
+-Object Oriented
+-Flat
+-Semi-Structured
+
+
+Hierchical And Networking Model
+
+Hierchical Model
+Haven't seen today anymore.
+It deceide to store the data in a tree-structure.
+Every child can only have a single root.
+When you delete a parent every other get's deleted.
+Tight-coupled.
+One-To many relationships.
+
+Network Model.
+Allowed many-to-many relationships.
+Become a bit complicated.
+
+
+Relational Model
+There wasn't any rules set for the Hierchical and Networking model.
+Relational Model.
+Table structure.
+What is a table?
+You can give a sheet a name.
+We specify some id to indentify the data.
+Same for books.
+Id's must be unique.
+
+
+DBMS Revisited
+A piece of software that is supervisor of the data.
+Kinda of a refree.
+You take a excel-sheet and make it more smarter.
+C-Create
+R-Read
+U-Update
+D-Delete
+Always staying safe and accessable and atomic transactions.
+Some companies makes a database that is better in someway.
+13 Rules Of Codd
+Rules that's have to be followed when you are building a DBMS.
+
+
+
+Relational Model Revisited
+-Relation Schema
+-Attribute
+-Degree
+-Cardinality
+-Tuple
+-Column
+-Relation Key
+-Domain
+-Tables
+-Relation Instance
+
+
+
+Tables
+Is a representation of a object.
+Column specify some type of a data.
+Rows is a single piece of data.
+
+
+
+Columns
+Degree is the sum of all columns.
+The degree is a collection of columns.
+Domain is a constraint saying in one column you only put one sorts of data-type.
+Columns have these attributes.
+
+
+Rows
+Tuples is another way to name rows.
+Cardinality is the collection of rows.
+
+
+
+Primary And Foreign Keys
+Link relationships between the data.
+Primary key is that uniquely indentifies the data.
+
+Foreign Key is to reference to a different table.
+
+
+OLTP vs OLAP
+Support Day to Day
+OLTP store and catergorize the data.
+
+
+Support Analysis
+OLAP
+Takes the data and puts that in a data warehouse.
+
+Exercise OLAP vs OLTP
+1.A Database is being used to log orders and customers
+  OLTP
+
+2.A Database is being used to figure out what new products we should
+  offer
+  OLAP
+
+
+3.A Database is being used to derive statics for reporting
+  to the executives
+  OLAP
+
+4.A Database is being used to keep track of logged in users
+  OLTP
+
+
+
+Exercise: Relational Model Quiz
+Is a DBMS vital to the relational model?
+Yes
+
+
+What did the relational model replace? (multiple)
+The Networking Model
+The Hierchical Model
+
+
+What identifier is used to uniquely identify a record
+Primary Key
+
+What is a tuple?
+A row of data
+
+What identifies the relationship between two pieces of data?
+A Foreign Key
+
+How do we lock down what can be filled into a column? (multiple)
+Datatypes
+Constraints
+
+
+Endorsment On LinkedIN
+

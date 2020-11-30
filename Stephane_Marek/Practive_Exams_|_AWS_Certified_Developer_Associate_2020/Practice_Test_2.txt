@@ -1,0 +1,751 @@
+Question 1:
+
+A new recruit is trying to configure what an Amazon EC2 should do when it interrupts a Spot Instance.
+
+Which of the below CANNOT be configured as an interruption behavior?
+
+
+Answer:
+Reboot the Spot Instance
+
+
+
+Question 2:
+A diagnostic lab stores its data on DynamoDB. The lab wants to backup a particular DynamoDB table data on Amazon S3, so it can download the S3 backup locally for some operational use.
+
+Which of the following options is not feasible?
+
+
+Answer:
+Use the DynamoDB on-demand back-up capability to write to
+Amazon S3 and download locally 
+
+
+
+Question 3:
+The development team at a multi-national retail company wants to support trusted third-party authenticated users from the supplier organizations to create and update records in specific DynamoDB tables in the company's AWS account.
+
+As a Developer Associate, which of the following solutions would you suggest for the given use-cas 
+
+Answer:
+Use Cognito Identity pools to enable trusted third-party
+authenticated users to access DynamoDB
+
+
+
+Question 4:
+The development team at an analytics company is using SQS queues for decoupling the various components of application architecture. As the consumers need additional time to process SQS messages, the development team wants to postpone the delivery of new messages to the queue for a few seconds.
+
+As a Developer Associate, which of the following solutions would you recommend to the development team?
+
+Answer:
+Use delay queues to postpone the delivery of new messages
+to the queue for a few seconds
+
+
+
+Question 5:
+You are a developer handling a deployment service that automates application deployments to Amazon EC2 instances. Most of the deployments consist of code, but sometimes web and configuration files. One of your deployments failed and was rolled back by AWS CodeDeploy to the last known good application revision.
+
+During rollback which of the following instances did AWS CodeDeploy deploy first to?
+
+Answer:
+To the failed instances
+
+
+Question 6:
+
+A pharmaceutical company runs their database workloads on Provisioned IOPS SSD (io1) volumes.
+
+As a Developer Associate, which of the following options would you identify as an INCORRECT configuration for io1 EBS volume types?
+
+Answer:
+200 GiB size volume with 15000 IOPS
+
+
+
+Question 7:
+
+The development team at a HealthCare company has deployed EC2 instances in AWS Account A. These instances need to access patient data with Personally Identifiable Information (PII) on multiple S3 buckets in another AWS Account B.
+
+As a Developer Associate, which of the following solutions would you recommend for the given use-case?
+
+Answer:
+Create an IAM role with S3 access in Account B and set
+Account A as a trusted enitity. Create another role
+(instance profile) in Account A and attach it to the EC2
+instances in Account A and add an inline policy to this
+role to assume the role from Account B
+
+
+
+
+Question 8:
+
+As a senior architect, you are responsible for the development, support, maintenance, and implementation of all database applications written using NoSQL technology. A new project demands a throughput requirement of 10 strongly consistent reads per second of 6KB in size each.
+
+How many read capacity units will you need when configuring your DynamoDB table?
+
+
+
+Answer:
+20
+
+
+Question 9:
+
+A developer working with EC2 Windows instance has installed Kinesis Agent for Windows to stream JSON-formatted log files to Amazon Simple Storage Service (S3) via Amazon Kinesis Data Firehose. The developer wants to understand the sink type capabilities of Kinesis Firehose.
+
+Which of the following sink types is NOT supported by Kinesis Firehose.
+
+Answer:
+Amazon ElasticCache with Amazon S3 as backup
+
+
+
+
+Question 10:
+You are a cloud architect in Silicon Valley. Many companies in this area have mobile apps that capture and send data to Amazon Kinesis Data Streams. They have been getting a ProvisionedThroughputExceededException exception. You have been contacted to help and upon careful analysis, you are seeing that messages are being sent one by one while being sent at a high rate.
+
+Which of the following options will help with the exception while keeping costs at a minimum?
+
+
+Answer:
+Batch messages
+
+
+Question 11:
+
+Recently in your organization, the AWS X-Ray SDK was bundled into each Lambda function to record outgoing calls for tracing purposes. When your team leader goes to the X-Ray service in the AWS Management Console to get an overview of the information collected, they discover that no data is available.
+
+What is the most likely reason for this issue?
+
+
+Answer:
+Fix the IAM Role  
+
+
+Question 12:
+A business has purchased one m4.xlarge Reserved Instance but it has used three m4.xlarge instances concurrently for an hour.
+
+
+As a Developer, explain how the instances are charged?
+
+Answer:
+One instance is charged at one hour of Reserved Instance
+usage and the other two instances are charged at two hours
+of On-Demand usage
+
+
+Question 13:
+
+A business has their test environment built on Amazon EC2 configured on General purpose SSD volume.
+
+At which gp2 volume size will their test environment hit the max IOPS?
+
+Answer:
+5.3 TiB
+
+
+
+Question 14:
+Other than the Resources section, which of the following sections in a Serverless Application Model (SAM) Template is mandatory?
+
+
+Answer:
+Transform
+
+
+Question 15:
+
+You are a developer working at a cloud company that embraces serverless. You have performed your initial deployment and would like to work towards adding API Gateway stages and associate them with existing deployments. Your stages will include prod, test, and dev and will need to match a Lambda function variant that can be updated over time.
+
+Which of the following features must you add to achieve this? (select two)
+
+Answer:
+Stage Variables
+Lambda Aliases
+
+
+Question 16:
+A cyber forensics application, running behind an ALB, wants to analyze patterns for the client IPs.
+
+Which of the following headers can be used for this requirement?
+
+Answer:
+X-Forwarded-For
+
+
+Question 17:
+A team lead has asked you to create an AWS CloudFormation template that creates EC2 instances and RDS databases. The template should be reusable by allowing the user to input a parameter value for an Amazon EC2 AMI ID.
+
+Which of the following intrinsic function should you choose to reference the parameter?
+
+
+Answer:
+!Ref
+
+
+Question 18:
+The development team at a retail company is gearing up for the upcoming Thanksgiving sale and wants to make sure that the application's serverless backend running via Lambda functions do not hit concurrency limits as a result of the surge in traffic.
+
+As a Developer Associate, which of the following solutions would you recommend to address this use-case?
+
+Answer:
+Configure Application Auto Scaling to manage Lambda
+provisioned concurrency on a schedule
+
+
+
+Question 19:
+
+As an AWS Certified Developer Associate, you have been hired to consult with a company that uses the NoSQL database for mobile applications. The developers are using DynamoDB to perform operations such as GetItem but are limited in knowledge. They would like to be more efficient with retrieving some attributes rather than all.
+
+Which of the following recommendations would you provide?
+
+Answer:    
+Specify a ProjectionExpression
+
+
+
+Question 20:
+The Development team at a media company is working on securing their databases.
+
+Which of the following AWS database engines can be configured with IAM Database Authentication?
+
+Answer:
+RDS MySQL
+RDS PostGreSQL
+
+
+
+Question 21:
+As an AWS Certified Developer Associate, you are writing a CloudFormation template in YAML. The template consists of an EC2 instance creation and one RDS resource. Once your resources are created you would like to output the connection endpoint for the RDS database.
+
+Which intrinsic function returns the value needed?
+
+
+Answer:
+!GetAtt
+
+
+
+
+Question 22:
+Your company has embraced cloud-native microservices architectures. New applications must be dockerized and stored in a registry service offered by AWS. The architecture should support dynamic port mapping and support multiple tasks from a single service on the same container instance. All services should run on the same EC2 instance.
+
+Which of the following options offers the best-fit solution for the given use-case?
+
+
+Answer:
+Application Load Balancer + ECS
+
+
+
+
+Question 23:
+A developer needs to automate software package deployment to both Amazon EC2 instances and virtual servers running on-premises, as part of continuous integration and delivery that the business has adopted.
+
+Which AWS service should he use to accomplish this task?
+
+
+Answer:
+AWS CodeDeploy
+
+
+
+Question 24:
+You are an administrator for a video-on-demand web application where content creators upload videos directly into S3. Recent support requests from customers state that uploading video files near 500GB size causes the website to break. After doing some investigation you find the following error: 'Your proposed upload exceeds the maximum allowed size'.
+
+What must you do to solve this error?
+
+
+Answer:
+You need to use multi-part upload for large files
+
+
+
+
+Question 25:
+A company that specializes in cloud communications platform as a service allows software developers to programmatically use their services to send and receive text messages. The initial platform did not have a scalable architecture as all components were hosted on one server and should be redesigned for high availability and scalability.
+
+Which of the following options can be used to implement the new architecture? (select two)
+
+Answer:
+ALB + ECS
+API Gateway + Lambda
+
+ 
+
+
+Question 26:
+As a Senior Developer, you are tasked with creating several API Gateway powered APIs along with your team of developers. The developers are working on the API in the development environment, but they find the changes made to the APIs are not reflected when the API is called.
+
+As a Developer Associate, which of the following solutions would you recommend for this use-case?
+
+
+Answer:
+Redeploy the API to an existing stage or to a new stage
+
+
+
+
+Question 27:
+
+While troubleshooting, a developer realized that the Amazon EC2 instance is unable to connect to the Internet using the Internet Gateway.
+
+Which conditions should be met for Internet connectivity to be established? (Select two)
+
+Answer:
+The network ACLs associated with the subnet must have rules to
+allow inbound and outbound traffic
+
+The route table in the instance's subnet should have a route
+to an Internet Gateway
+
+
+
+
+Question 28:
+
+A company has created an Amazon S3 bucket that holds customer data. The team lead has just enabled access logging to this bucket. The bucket size has grown substantially after starting access logging. Since no new files have been added to the bucket, the perplexed team lead is looking for an answer.
+
+Which of the following reasons explains this behavior?
+
+Answer:
+S3 access logging is pointing to the same bucket and is
+responsible for the substantial growth of bucket size
+
+ 
+
+Question 29:
+As a Developer Associate, you are responsible for the data management of the AWS Kinesis streams at your company. The security team has mandated stricter security requirements by leveraging mechanisms available with the Kinesis Data Streams service that won't require code changes on your end.
+
+Which of the following features meet the given requirements? 
+(Select two)
+
+Answer:
+Encryption in flight with HTTPS endpoint
+KMS encryption for data at rest
+
+
+
+Question 30:
+
+A social gaming application supports the transfer of gift vouchers between users. When a user hits a certain milestone on the leaderboard, they earn a gift voucher that can be redeemed or transferred to another user. The development team wants to ensure that this transfer is captured in the database such that the records for both users are either written successfully with the new gift vouchers or the status quo is maintained.
+
+Which of the following solutions represent the best-fit options to meet the requirements for the given use-case? (Select two)
+
+Answer:
+Complete both operations on RDS MySQL in a single transaction
+block
+
+Use the DynamoDB transactional read and write APIs on the table
+items as a single, all-or-nothing operation
+
+
+
+
+
+Question 31:
+
+A developer while working on Amazon EC2 instances, realized that an instance was not needed and had shut it down. But another instance of the same type automatically got launched in the account.
+
+Which of the following options can attribute the given sequence of actions?
+
+Answer:
+Instance might be part of Auto Scaling Group and hence
+re-launched similar instance
+
+
+
+Question 32:
+
+A company runs its flagship application on a fleet of Amazon EC2 instances. After misplacing a couple of private keys from the SSH key pairs, they have decided to re-use their SSH key pairs for the different instances across AWS Regions.
+
+As a Developer Associate, which of the following would you recommend to address this use-case?
+
+Answer:
+Generate a public SSH key from a private SSH-key.
+Then, import the key into each of your AWS regions
+
+
+Question 33:
+A developer at a university is encrypting a large XML payload transferred over the network using AWS KMS and wants to test the application before going to production.
+
+What is the maximum data size supported by AWS KMS?
+
+Answer:
+4KB
+
+
+Question 34:
+You are a developer working on a web application written in Java and would like to use AWS Elastic Beanstalk for deployment because it would handle deployment, capacity provisioning, load balancing, auto-scaling, and application health monitoring. In the past, you connected to your provisioned instances through SSH to issue configuration commands. Now, you would like a configuration mechanism that automatically applies settings for you.
+
+Which of the following options would help do this?
+
+Answer:
+Include config files in .ebextensions/ at the root of your
+source code
+
+
+
+
+Question 35:
+A company needs a version control system for their fast development lifecycle with incremental changes, version control, and support to existing Git tools.
+
+Which AWS service will meet these requirements?
+
+Answer:
+AWS CodeCommit
+
+
+Question 36:
+
+As a Team Lead, you are expected to generate a report of the code builds for every week to report internally and to the client. This report consists of the number of code builds performed for a week, the percentage success and failure, and overall time spent on these builds by the team members. You also need to retrieve the CodeBuild logs for failed builds and analyze them in Athena.
+
+Which of the following options will help achieve this?
+
+Answer:
+Enable S3 and CloudWatch Logs integration
+
+
+
+Question 37:
+
+As an AWS Certified Developer Associate, you have been hired to work with the development team at a company to create a REST API using the serverless architecture.
+
+Which of the following solutions will you choose to move the company to the serverless architecture paradigm?
+
+Answer:
+API Gateway exposing Lambda Functionality
+
+
+
+
+Question 38:
+
+A data analytics company is processing real-time Internet-of-Things (IoT) data via Kinesis Producer Library (KPL) and sending the data to a Kinesis Data Streams driven application. The application has halted data processing because of a ProvisionedThroughputExceeded exception.
+
+Which of the following actions would help in addressing this issue? (Select two)
+
+Answer:
+Configure the data producer to retry with an exponential backoff
+
+Increase the number of shards within your data streams to 
+provide enough capacity
+
+
+
+Question 39:
+An Auto Scaling group has a maximum capacity of 3, a current capacity of 2, and a scaling policy that adds 3 instances.
+
+When executing this scaling policy, what is the expected outcome?
+
+Answer:
+Amazon EC2 Auto Scaling adds only 1 instance to the group
+
+
+Question 40:
+
+A startup has been experimenting with DynamoDB in its new test environment. The development team has discovered that some of the write operations have been overwriting existing items that have the specified primary key. This has messed up their data, leading to data discrepancies.
+
+Which DynamoDB write option should be selected to prevent this kind of overwriting?
+
+Answer:
+Conditional writes
+
+
+
+
+Question 41:
+
+Your team lead has asked you to learn AWS CloudFormation to create a collection of related AWS resources and provision them in an orderly fashion. You decide to provide AWS-specific parameter types to catch invalid values.
+
+When specifying parameters which of the following is not a valid Parameter type?
+
+Answer:
+DependentParameter
+
+
+
+Question 42:
+
+A company wants to automate the creation of ECS clusters using CloudFormation. The process has worked for a while, but after creating task definitions and assigning roles, the development team discovers that the tasks for containers are not using the permissions assigned to them.
+
+Which ECS config must be set in /etc/ecs/ecs.config to allow ECS tasks to use IAM roles?
+
+Answer:
+ECS_ENABLE_TASK_IAM_ROLE
+
+
+
+
+Question 43:
+
+The app development team at a social gaming mobile app wants to simplify the user sign up process for the app. The team is looking for a fully managed scalable solution for user management in anticipation of the rapid growth that the app foresees.
+
+As a Developer Associate, which of the following solutions would you suggest so that it requires the LEAST amount of development effort?
+
+Answer:    
+Use Cognito User pools to faciliate sign up and user
+management for the mobile app
+
+
+Question 44:
+
+The development team at an e-commerce company completed the last deployment for their application at a reduced capacity because of the deployment policy. The application took a performance hit because of the traffic spike due to an on-going sale.
+
+Which of the following represents the BEST deployment option for the upcoming application version such that it maintains at least the FULL capacity of the application and MINIMAL impact of failed deployment?
+
+Answer:
+Deploy the new application version using 'Immutable' deployment
+policy
+
+
+
+Question 45:
+
+A university has created a student portal that is accessible through a smartphone app and web application. The smartphone app is available in both Android and IOS and the web application works on most major browsers. Students will be able to do group study online and create forum questions. All changes made via smartphone devices should be available even when offline and should synchronize with other devices.
+
+Which of the following AWS services will meet these requirements?
+
+Answer:
+Cognito Sync
+
+
+Question 46:
+
+A development team has configured their Amazon EC2 instances for Auto Scaling. A Developer during routine checks has realized that only basic monitoring is active, as opposed to detailed monitoring.
+
+Which of the following represents the best root-cause behind the issue?
+
+Answer:
+AWS Management Console might have been used to create the
+launch configuration
+
+
+
+
+Question 47:
+
+A company uses AWS CodeDeploy to deploy applications from GitHub to EC2 instances running Amazon Linux. The deployment process uses a file called appspec.yml for specifying deployment hooks. A final lifecycle event should be specified to verify the deployment success.
+
+Which of the following hook events should be used to verify the success of the deployment?
+
+
+Answer:
+ValidateService
+
+
+
+
+Question 48:
+A developer in your company was just promoted to Team Lead and will be in charge of code deployment on EC2 instances via AWS CodeCommit and AWS CodeDeploy. Per the new requirements, the deployment process should be able to change permissions for deployed files as well as verify the deployment success.
+
+Which of the following actions should the new Developer take?
+
+Answer:
+Define an appspec.yml file in the root directory
+
+
+
+
+
+Question 49:
+You're a developer for 'Movie Gallery', a company that just migrated to the cloud. A database must be created using NoSQL technology to hold movies that are listed for public viewing. You are taking an important step in designing the database with DynamoDB and need to choose the appropriate partition key.
+
+Which of the following unique attributes satisfies this requirement?
+
+Answer:
+movie_id
+
+
+
+Question 50:
+As a Developer, you are given a document written in YAML that represents the architecture of a serverless application. The first line of the document contains Transform: 'AWS::Serverless-2016-10-31'.
+
+What does the Transform section in the document represent?
+
+
+Answer:
+Presence of Transform section indicates it is a Serverless
+Application Model (SAM) template
+
+
+
+Question 51:
+
+
+You have created a continuous delivery service model with automated steps using AWS CodePipeline. Your pipeline uses your code, maintained in a CodeCommit repository, AWS CodeBuild, and AWS Elastic Beanstalk to automatically deploy your code every time there is a code change. However, the deployment part to Elastic Beanstalk is taking a very long time due to resolving dependencies on all of your 100 target EC2 instances.
+
+Which of the following actions should you take to improve performance with limited code changes?
+
+Answer:
+Bundle the dependencies in the source code during the last
+stage of CodeBuild
+
+
+
+Question 52:
+
+The technology team at an investment bank uses DynamoDB to facilitate high-frequency trading where multiple trades can try and update an item at the same time.
+
+Which of the following actions would make sure that only the last updated value of any item is used in the application?
+
+Answer:
+Use ConsistentRead = true while doing GetItem operation
+for any item
+
+
+
+Question 53:
+
+A media publishing company is using Amazon EC2 instances for running their business-critical applications. Their IT team is looking at reserving capacity apart from savings plans for the critical instances.
+
+As a Developer Associate, which of the following reserved instance types you would select to provide capacity reservations?
+
+Answer:
+Zonal Reserved Instances
+
+
+
+
+Question 54:
+
+You create an Auto Scaling group to work with an Application Load Balancer. The scaling group is configured with a minimum size value of 5, a maximum value of 20, and the desired capacity value of 10. One of the 10 EC2 instances has been reported as unhealthy.
+
+Which of the following actions will take place?  
+
+Answer:
+The ASG will terminate the EC2 Instance
+
+
+Question 55:
+
+
+A company has AWS Lambda functions where each is invoked by other AWS services such as Amazon Kinesis Data Firehose, Amazon API Gateway, Amazon Simple Storage Service, or Amazon CloudWatch Events. What these Lambda functions have in common is that they process heavy workloads such as big data analysis, large file processing, and statistical computations.
+
+What should you do to improve the performance of your AWS Lambda functions without changing your code?
+
+Answer:
+Increase the RAM assigned to your Lambda function
+
+
+
+
+Question 56:
+
+A developer with access to the AWS Management Console terminated an instance in the us-east-1a availability zone. The attached EBS volume remained and is now available for attachment to other instances. Your colleague launches a new Linux EC2 instance in the us-east-1e availability zone and is attempting to attach the EBS volume. Your colleague informs you that it is not possible and need your help.
+
+Which of the following explanations would you provide to them?
+
+Answer:
+EBS volumes are AZ locked
+
+
+
+Question 57:
+
+As an AWS certified developer associate, you are working on an AWS CloudFormation template that will create resources for a company's cloud infrastructure. Your template is composed of three stacks which are Stack-A, Stack-B, and Stack-C. Stack-A will provision a VPC, a security group, and subnets for public web applications that will be referenced in Stack-B and Stack-C.
+
+After running the stacks you decide to delete them, in which order should you do it?
+
+Answer:
+Stack B, then Stack C, then Stack A
+
+
+
+Question 58:
+
+You are a development team lead setting permissions for other IAM users with limited permissions. On the AWS Management Console, you created a dev group where new developers will be added, and on your workstation, you configured a developer profile. You would like to test that this user cannot terminate instances.
+
+Which of the following options would you execute?
+
+Answer:
+Use the AWS CLI --dry-run option
+
+
+
+
+Question 59:
+
+A Developer is configuring Amazon EC2 Auto Scaling group to scale dynamically.
+
+Which metric below is NOT part of Target Tracking Scaling Policy?
+
+
+Answer:
+ApproximateNumberOfMessagesVisible
+
+
+
+Question 60:
+A developer is looking at establishing access control for an API that connects to a Lambda function downstream.
+
+Which of the following represents a mechanism that CANNOT be used for authenticating with the API Gateway?
+
+Answer:
+AWS Security Token Service (STS)
+
+
+
+Question 61:
+A new recruit is trying to understand the nuances of EC2 Auto Scaling. As an AWS Certified Developer Associate, you have been asked to mentor the new recruit.
+
+Can you identify and explain the correct statements about Auto Scaling to the new recruit? (Select two).
+
+Answer:
+Amazon EC2 Auto Scaling works with both Application Load
+Balancers and Network Load Balancers
+
+Amazon EC2 Auto Scaling cannot add a volume to an existing
+instance if the existing volume is approaching capacity
+
+
+
+
+Question 62:
+
+After a code review, a developer has been asked to make his publicly accessible S3 buckets private, and enable access to objects with a time-bound constraint.
+
+Which of the following options will address the given use-case?
+
+Answer:
+Share pre-signed URLs with resources that need access
+
+
+Question 63:
+
+
+You have launched several AWS Lambda functions written in Java. A new requirement was given that over 1MB of data should be passed to the functions and should be encrypted and decrypted at runtime.
+
+Which of the following methods is suitable to address the given use-case?
+
+Answer:
+Use Envolpe Encryption and reference the data as file within the
+code
+
+
+
+Question 64:
+
+An application running on EC2 instances processes messages from an SQS queue. However, sometimes the messages are not processed and they end up in errors. These messages need to be isolated for further processing and troubleshooting.
+
+Which of the following options will help achieve this?
+
+Answer:
+Implement a Dead-Letter Queue
+
+
+
+Question 65:
+
+
+A company has a cloud system in AWS with components that send and receive messages using SQS queues. While reviewing the system you see that it processes a lot of information and would like to be aware of any limits of the system.
+
+Which of the following represents the maximum number of messages that can be stored in an SQS queue?
+
+
+Answer:
+no limit

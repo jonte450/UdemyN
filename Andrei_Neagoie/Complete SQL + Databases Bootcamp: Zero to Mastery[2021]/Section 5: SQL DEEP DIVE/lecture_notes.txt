@@ -1,0 +1,129 @@
+Query Along
+
+
+Starting With Query
+
+
+Exercise: Simple Queries
+
+
+Renaming Columns
+
+
+Concat Function
+
+
+What IS A Function in SQL?
+
+
+Aggregate Functions
+
+
+Exercise: Aggregate Functions
+
+
+Commenting Your Queries
+
+
+Common SELECT Mistakes
+
+
+Filtering Data
+
+Exercise: Filtering Data
+
+AND and OR
+
+The NOT Keyword
+
+
+Exercise: The Where	Clause
+
+Comparision Operators
+
+
+Exercise: Comparision Operators
+
+Logical Operators
+
+Operator Precedence
+
+Operators Precedence 2
+
+Operators Precedence Extra
+
+Exercise: Operator Precendence
+
+Checking For NULL Values
+
+IS Keyword
+
+NULL Coalescing
+
+Exercise: Null Value Coalescing
+
+Valued Logic
+
+Exercise: 3 Valued
+
+BETWEEN + AND
+
+Exercise: BETWEEN + AND
+
+IN Keyword
+
+Exercise: IN Keyword
+
+LIKE
+
+Exercise: Like Keyword
+
+Dates And Timezones
+
+
+Setting Up Timezones
+
+How Do We Format Date And Time?
+
+Timestamps
+
+Date Functions
+
+Date Difference And Casting
+
+Age Calculation
+
+
+Extracting Information
+
+Intervals
+
+
+Exercise: Date and TimeStamps
+
+
+DISTINCT
+
+Exercise: Distinct Keyword
+
+Sorting Data
+
+
+Exercise Sorting Data
+
+
+Multi Table SELECT
+
+Inner Join
+
+Self Join
+
+Outer Join
+
+Less Common Joins
+
+Inner-Join Exercises
+
+USING Keyword
+
+
