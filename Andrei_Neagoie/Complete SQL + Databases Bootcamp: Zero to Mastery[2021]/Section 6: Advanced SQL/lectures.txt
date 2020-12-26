@@ -1,0 +1,208 @@
+Group By
+Group the data by groups.
+SUMMARRIZING OR AGGREGATING DATA BY GROUPS
+
+To get in-depth information by group
+
+Group By 
+Group by splits data into groups or chunks so we can apply functions
+against the group rather than the entire table.
+
+We use Group By Almost Exclusively with Aggregate Functions.
+
+When We "Group By" We apply the function per group, not on the entire Data set
+
+Group By is stricter than it looks.
+
+To Reduce All Records Found For The Matching "Group"
+To A Single Record
+
+Group By Utilizes A Split-Apply-Combine Strategy
+
+
+
+Group By Exercises
+/*
+*  How many people were hired on any given hire date?
+*  Database: Employees
+*  Table: Employees
+*/
+
+SELECT hire_date,COUNT('hire_date') as "sum"
+FROM employees
+GROUP by hire_date
+Order by "sum" DESC
+
+
+/*
+*   Show me all the employees, hired after 1991 and count the amount of positions they've had
+*  Database: Employees
+*/
+
+SELECT e.emp_no,count(t.title) as "amount of titles"
+FROM employees as e
+join titles as t using(emp_no)
+where Extract (year from e.hire_date) > 1991
+GROUP by emp_no
+order by emp_no;
+
+
+/*
+*  Show me all the employees that work in the department development
+*  Database: Employees
+*/
+
+
+SELECT e.emp_no
+FROM employees as e
+join salaries as s using(emp_no)
+join dept_emp as de using(emp_no)
+where de.dept_no = 'd005'
+GROUP by e.emp_no
+order by e.emp_no;
+
+
+Having Keyword
+Having is used after Grouped by.
+
+SELECT col1, count(col2)
+FROM <table>
+WHERE col2 > X
+GROUP By col1
+HAVING col1 === Y;
+
+"Having" Applies Filters To A Group As A Whole.
+ 
+
+Having Exercises
+
+/*
+*  Show me all the employees, hired after 1991, that have had more than 2 titles
+*  Database: Employees
+*/
+
+SELECT e.emp_no, count(t.title) as "amount of titles"
+FROM employees as e
+JOIN titles as t USING(emp_no)
+WHERE EXTRACT (YEAR FROM e.hire_date) > 1991
+GROUP BY e.emp_no
+HAVING count(t.title) > 2
+ORDER BY e.emp_no;
+
+
+/*
+*  Show me all the employees that have had more than 15 salary changes that work in the department development
+*  Database: Employees
+*/
+select e.emp_no, count(s.from_date) as "amount of raises"
+from employees as e
+join salaries as s using(emp_no)
+join dept_emp as de USING(emp_no)
+where de.dept_no = 'd005'
+GROUP by e.emp_no
+having count(s.from_date) > 15
+order by e.emp_no;
+
+
+/*
+*  Show me all the employees that have worked for multiple departments
+*  Database: Employees
+*/
+select e.emp_no, count(de.dept_no) as "Amount of Departments"
+from employees as e
+join dept_emp as de using(emp_no)
+GROUP by e.emp_no
+having count(de.dept_no) > 1
+order by e.emp_no;
+
+
+
+Ordering Grouped Data
+Order by should come after Group by.
+
+
+Group By Mental Model
+We want to find answers to questions.
+
+
+Grouping Sets
+
+
+Rollup
+
+
+Window What
+
+
+Looking Through The Window
+
+
+PARTITION BY
+
+Order By Acting Strange
+
+
+Using Framin In Window Function
+
+
+Solving For Current Salaray
+
+
+FIRST_VALUE
+
+
+LAST_VALUE
+
+
+SUM
+
+ROW_NUMBER
+
+
+Window Function Exercises
+
+Conditional Statements
+
+Conditional Statements Exercise
+
+NULLIF
+
+
+NULLIF Exercise
+
+
+Views...What Are They Good For?
+
+
+View Syntax
+
+Using Syntax
+
+Views Exercises
+
+Indexes 
+
+Indexe Types
+
+
+Index Algorithms
+
+
+Subqueries vs Joins
+
+
+Subqueries Guidelines As Types
+
+
+Using Subqueries
+
+
+Quick Note: Titles For Employees
+
+
+Getting The Latest Salaries
+
+Subquery Operators
+
+
+Subquery Exercises
