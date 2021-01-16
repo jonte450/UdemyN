@@ -123,60 +123,643 @@ Order by should come after Group by.
 
 Group By Mental Model
 We want to find answers to questions.
+We want to find answerd to questions.
+
+Select emp_no, salaray, MAX(from_date)
+FROM salaries
+GROUP BY emp_no, salary
+
+We shouldn't group by salary
+
+Select emp_no, MAX(from_date)
+FROM salaries
+GROUP BY emp_no
+
+Groupings need to be unique.
+
+SELECT emp_no, max(from_date)
+FROM salaries
+GROUP BY emp_no
+HAVING MAX(from_date)
+
+We can't relate the outcome of the date to the salary.
 
 
 Grouping Sets
 
+Question 
+What If We Want To Combine The Results Of Multiple
+Groupings?
+
+How can we combine answers of multiple groups.
+
+Union
+Select col1, SUM(col2)
+FROM table
+GROUP BY col1
+
+
+UNION
+
+
+SELECT SUM(col2)
+FROM table
+
+If you want to run and combine multiple Select-Statements.
+
+The Difference 
+Union All Does Not Remove Duplicate Records
+
+Select col1, SUM(col2)
+FROM table
+GROUP BY col1
+
+Union All
+
+Select SUM(col2)
+FROM table
+
+
+SELECT NULL AS "prod_id", sum(ol.quantity)
+FROM orderlines AS ol
+
+
+Union
+
+Select prod_id, AS "prod_id", sum(ol.quantity)
+FROM orderlines As ol
+Group By prod_id
+Order By prod_id DESC;
+
+
+Select prod_id AS "prod_id" , sum(ol.quantity)
+FROM orderlines AS ol
+Group By
+   Grouping Sets(
+   ()
+   (prod_id)
+   )
+ORDER BY prod_id DESC;
+
+We can group sets in the same into several sets.
+
+
+Grouping Sets
+A Subclause of GROUP BY
+That Allows You To Define
+Multiple Groupings
+
+
 
 Rollup
+Groupings sets help very much if you want to know what was sold
+by day,month,year.
+
+Select Extract (YEAR FROM orderdate) AS "year",
+	   Extract (MONTH FROM orderdate) AS "month",
+	   Extract (DAY FROM orderdate) AS "day",
+	   sum(ol.quantity)
+FROM orderlines AS ol
+GROUP BY
+      ROLLUP(
+      Extract (YEAR FROM orderdate)
+      Extract (MONTH FROM orderdate)
+      Extract (DAY FROM orderdate)
+      )
+Order BY
+   Extract (YEAR FROM orderdate)
+   Extract (MONTH FROM orderdate)
+   Extract (DAY FROM orderdate)
+
+It dymnically creates all the groupes for you.
+Useful when you need all sorts of combinations.
 
 
 Window What
 
+What We Learned So Far
+1. Grouping Data Is Useful
+2. Grouping Happens After FROM/WHERE
+3. Having Is A Special Filter For Groups
+4. Grouping Sets And Rollups Are Useful
+   For Multiple Groupings In A Single Query
+5. Grouping Data Is Not A Silver Bullet
+
+
+What Are We Missing
+How Do We Apply Functions
+Against A Set Of Rows Related To
+The Current Row?
+
+Let's Take A Example
+What If You Wanted To Know
+The Average Salary Per
+Department?
+
+Easy Peasy
+Add The Average To Every Salary So We
+Could Visually See How Much Each Employee
+Is From The Average
+
+Window Functions!
+
 
 Looking Through The Window
+What Now?
+Window Functions Create A New Column
+Based On Functions Performed On A Subset
+Or "Window" Of The Data
+
+What Now?
+
+window_function(arg1,arg2,...)OVER(
+[PARTITION BY partition_expression]
+[ORDER BY sort_expression [ASC| DESC] [NULLS {FIRST | LAST}]]
+)
+
+You need this OVER keyword.
+
+Select
+      *,
+      MAX(salary) OVER()
+FROM salaries;
 
 
 PARTITION BY
 
+PARTITION By:
+DIVIDE ROWS INTO GROUPS TO APPLY THE
+FUNCTION AGAINST (OPTIONAL)
+
+Select
+	  *,
+	  d.dept_name,
+	  AVG(salary) OVER(
+	  				PARTITION BY d.dept_name
+	  )
+FROM salaries
+JOIN dept_emp AS de USING (emp_no)
+JOIN departments AS d USING (dept_no)
+
+Count each department salary.
+
+
 Order By Acting Strange
+Order By can be used within a Window function.
+ORDER BY:
+ORDER THE RESULTS
+
+SELECT emp_no,
+	   COUNT(salary) OVER(
+	   ORDER BY emp_no
+	   )
+
+FROM salaries
+
+ORDER has a special property like framing.
+We are chaning the lense.
+Taking the sum and anything before it.
+
 
 
 Using Framin In Window Function
 
+FRAME CLAUSE
+When using a frame clause
+in a window function we can
+create a sub-range or frame
+
+Key 			Meaning
+Rows Or Range   Whether You Want To Use A Range OR Rows As A Frame
+Preceding 		Rows Before The Current One
+Following		Rows After The Current One
+Unbounded Prec  Returns All Before Or After
+or Foll
+
+Current Row 	Your Current Row
+
+PARTITION BY category ORDER BY price Range Between Unbounded Preceding
+AND Current Row
+
+Without Order By
+By Default The Framing Is Usually
+All Partition Rows
+
+With Order By
+By Default The Framing Is Usually
+Everything Before The Current Row
+And The Current Row
+
+Adding Partition By is only looking at the case itself.
+The order and partition influence each other.
+
+
 
 Solving For Current Salaray
 
+Select e.emp_no,
+	   e.first_name,
+	   d.depth_name,
+	   MAX(s.salary)
+
+
+FROM salaries as s
+
+join employees as e USING(emp_no)
+join dept_emp as de USING(emp_no)
+JOIN departments as d USING(dept_no)
+
+GROUP BY e.emp_no,  e.first_name, d.dept_name
+order by e.emp_no;
+
+
+Current Salary
+
+We Know When Your Last Salary
+Was Appointed But Not What It Was
+
+Select DISTINCT e.emp_no,
+	   e.first_name,
+	   d.dept_name,
+	   LAST_VALUE(s.salary) OVER(
+	   PARTITION BY e.emp_no,
+	   ORDER BY s.from_date
+	   RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+	   ) as "Current Salary"
+
+FROM salaries as s
+
+JOIN employees as e USING(emp_no)
+JOIN dept_emp as de USING(emp_no)
+JOIN departments as d USING(dept_no)	   
+
+ORDER BY e.emp_no;
+
+So now we successfully answered the question to find the current salary.
+
 
 FIRST_VALUE
+Return A Value Evaluated Against The First
+Row Within Its Partition
+
+I Want To Know How My Price Compares
+To The Item With The Lowest Price In
+The Same Category
+
+Select
+	prod_id,
+	price,
+	category,
+	first_value(price) OVER(
+	PARTITION BY category ORDER BY RANGE BETWEEN UNBOUNDED PRECEDING
+	AND UNBOUNDED FOLLOWING
+	)
+FROM products
+
 
 
 LAST_VALUE
+Return A Value Evaluated Against The Last Row Within
+Its Partition
+
+I Want To Know How My Price Compares
+To The Item With The Highest Price In
+The Same Category.
+
+Select
+	prod_id,
+	price,
+	category,
+	last_value(price) OVER(
+	PARTITION BY category ORDER BY price RANGE BETWEEN UNBOUNDED
+	PRECEDING
+		AND UNBOUNDED FOLLOWING
+	)
+FROM products
 
 
 SUM
+SUM The Values Within A Group
+Depending On The Framing
+
+
+I Want To See How Much Cumulatively
+A Customer Has Ordered At Our Store
+
+Select
+	o.orderid,
+	o.customerid,
+	o.netamount,
+	SUM(o.netamount) OVER(
+	PARTITION BY o.customerid
+	ORDER BY o.orderid
+	) as "cum sum"
+FROM orders as o
+ORDER BY o.customerid
+
+Take the previous and current and sum.
+
 
 ROW_NUMBER
+Number The Current Row Within
+The Partition Starting From 1
+Regardless Of Framing
+
+I Want To Know Where My Product
+Is Positioned In the Category
+By Price
+
+Select
+ 	prod_id,
+ 	price,
+ 	category,
+ 	row_number() OVER(PARTITION BY category ORDER BY price) as "position in
+ 	category by price"
+    FROM products
 
 
 Window Function Exercises
 
+
+
+/*
+*  Show the population per continent
+*  Database: World
+*  Table: Country
+*/
+
+SELECT distinct continent,
+SUM(population) over w1 as "contintent population"
+FROM country
+WINDOW w1 AS(PARTITION BY continent);
+
+/*
+*  To the previous query add on the ability to calculate the percentage of the world population
+*  What that means is that you will divide the population of that continent by the total population and multiply by 100 to get a percentage.
+*  Make sure you convert the population numbers to float using `population::float` otherwise you may see zero pop up
+*  Try to use CONCAT AND ROUND to make the data look pretty
+*
+*  Database: World
+*  Table: Country
+*/
+
+SELECT
+  DISTINCT continent,
+  SUM(population) OVER w1 as"continent population",
+  CONCAT( 
+      ROUND( 
+          ( 
+            SUM( population::float4 ) OVER w1 / 
+            SUM( population::float4 ) OVER() 
+          ) * 100    
+      ),'%' ) as "percentage of population"
+FROM country 
+WINDOW w1 AS( PARTITION BY continent );
+
+
+
+
+/*
+*  Count the number of towns per region
+*
+*  Database: France
+*  Table: Regions (Join + Window function)
+*/
+
+/*
+*  Count the number of towns per region
+*
+*  Database: France
+*  Table: Regions (Join + Window function)
+*/
+
+SELECT 
+DISTINCT r.id, 
+r."name", 
+COUNT(t.id) OVER (
+    PARTITION BY r.id
+    ORDER BY r."name"
+) AS "# of towns"
+FROM regions AS r
+JOIN departments AS d ON r.code = d.region 
+JOIN towns AS t ON d.code = t.department
+ORDER BY r.id;
+
+
 Conditional Statements
+What If You Only Want To
+Select Something When A Certain
+Criteria Is Met?
+
+Select a,
+	   CASE WHEN a=1 THEN 'one'
+	        WHEN a=2 THEN 'two'
+	        ELSE 'other'
+	    END
+    FROM test
+
+
+Case Statements Can Be Used
+In Multiple Places In A Query
+
+Each Return Must Be A
+Single OutPut
+
+Select
+	o.orderid,
+	o.customerid,
+	CASE
+	   WHEN o.customerid = 1
+	   THEN 'my first customer'
+	   ELSE 'not my first customer'
+	END
+FROM orders as o
+ORDER BY o.customerid
+
+Filtering In A Where
+
+Select
+	o.orderid,
+	o.customerid,
+	o.netamount
+FROM orders as o
+WHERE CASE WHEN o.customerid > 10 THEN o.netamount < 100 
+ELSE o.netamount > 100 END
+ORDER BY o.customerid
+
+
+IN AN AGGREGATE FUNCTION
+Select
+	SUM(
+	 CASE
+	    WHEN o.netamount < 100
+	    THEN -100
+	    else o.netamount
+	 end
+	 ) as "returns",
+	 SUM(o.netamount) as "normal total"
+FROM orders as o
+
 
 Conditional Statements Exercise
 
+/**
+* Database: Store
+* Table: products
+* Create a case statement that's named "price class" where if a product is over 20 dollars you show 'expensive'
+* if it's between 10 and 20 you show 'average' 
+* and of is lower than or equal to 10 you show 'cheap'.
+*/
+
+SELECT prod_id, title, price,
+    case
+       when price > 20 THEN 'Expensive'
+       when price <= 10 then 'cheap'
+       when price BETWEEN 10 and 20 then 'average'
+    END as "price class"
+from products
+
+
+
 NULLIF
+What If You Want To Return
+Null If A Condition Is Met
+
+NULLIF(val_1, val_2)
+
+If Value Equals Value 2 Return Null
 
 
 NULLIF Exercise
+/*
+* DB: Store
+* Table: products
+* Question: Show NULL when the product is not on special (0)
+*/
+
+
+Select prod_id, title, price, NULLIF(special,0) as "special"
+From products
 
 
 Views...What Are They Good For?
+What If I Want To Store The
+Results Of A Query?
+
+
+What If I Want To Query
+The Results Of A Query?
+
+
+Views Allow You To Store And Query
+Previously Run Queries
+
+There Are 2 Types Of Views
+Materialized And Non-Materialized
+
+Non-Materialized Views
+Query Gets Re-Run Each Time
+The View Is Called On
+
+
+Materialized Views
+Stores The Data Physically And
+Periodically updates it When Tables Change
+
 
 
 View Syntax
+CREATE VIEW view_name AS query;
+
+Views Are The Output
+Of The Query We Ran
+
+Views Act Like Tables
+You Can Query Them
+
+Views Take Very Little Space To Store
+We Only Store The Definition Of A View
+Not All Of The Data That it Returns
+
+
+Updating A View
+
+Create OR Replace <view name>
+AS query
+
+
+Rename A View
+
+Alter View <view name> Rename To <view name>;
+
+Deleting A View
+
+DROP VIEW [IF EXISTS] <view name>
+
 
 Using Syntax
+Getting The Most Recent
+Salary Of An Employee
+
+Current Salary
+Group By Didn't Really Give Us
+A Correct Outcome
+
+Select e.emp_no,
+	   e.first_name,
+	   d.dept_name,
+	   MAX(s.salary)
+
+
+FROM salaries as s
+
+join employees as e USING(emp_no)
+join dept_emp as de USING(emp_no)
+JOIN departments as d USING(dept_no)
+
+GROUP BY e.emp_no, e.first_name, d.dept_name
+order by e.emp_no;
+
+Using Window Functions We
+Could Pull Off Some Voodoo Magic
+
+Select distinct e.emp_no,
+				e.first_name,
+				d.dept_name,
+				LAST_VALUE(s.salart) OVER(
+				PARTITION BY e.emp_no
+				ORDER BY s.from_date
+				RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+				) as "Current Salary"
+
+FROM salaries as s
+
+JOIN employees as e USING(emp_no)
+JOIN dept_emp as de USING(emp_no)
+JOIN departments as d USING(dept_no)
+
+ORDER BY e.emp_no;
+
+But this isn't really intuitive,
+so how about we try views!
+
+Current Salary
+Create View last_salary_change AS
+Select e.emp_no,
+	   Max(s.from_date)
+
+FROM salaries as s
+
+join employess as e USING(emp_no)
+join dept_emp as de USING(emp_no)
+join departments as d USING(dept_no)
+
+Group By e.emp_no;
+Order By e.emp_no;
+
+We can query views as normal table.
+It becomes more and more eaiser to create complex queries.
+
 
 Views Exercises
 
