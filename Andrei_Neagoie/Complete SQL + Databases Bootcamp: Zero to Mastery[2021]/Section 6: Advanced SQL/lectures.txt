@@ -762,30 +762,528 @@ It becomes more and more eaiser to create complex queries.
 
 
 Views Exercises
+/*
+*  Create a view "90-95" that:
+*  Shows me all the employees, hired between 1990 and 1995
+*  Database: Employees
+*/
 
-Indexes 
+CREATE VIEW "90-95" AS
+Select *
+from employees as e
+Where EXTRACT(year from e.hire_date) BETWEEN 1990 and 1995
+order by e.emp_no;
 
-Indexe Types
+
+/*
+*  Create a view "bigbucks" that:
+*  Shows me all employees that have ever had a salary over 80000
+*  Database: Employees
+*/
+
+CREATE VIEW "bigbucks" AS
+Select *
+from employees as e
+join salaries as s using(emp_no)
+where s.salary > 80000
+order by s.salary;
+
+
+Indexes
+
+What's Is An Index
+An Index Is A Construct
+To Improve Querying Performance
+
+Think Of It Like A Table Of Contents
+It Helps You Find Where A Piece Of Data Is
+
+Speed Up Queries
+
+Slows Down Data Insertion And Updates
+
+Types Of Indexes
+-Single-Column
+-Multi-Column
+-Unique
+-Partial
+-Implicit Indexes
+
+Creating A Index
+Create Unique Index <name>
+on <table> (column1,column2, ...);
+
+Delete A Index
+Drop Index <name>;
+
+When To Use
+-Index Foreign Keys
+-Index Primary Keys And Unique Columns
+-Index On Columns That End Up In The Order By/Where Clause often
+
+
+When Not To Use
+-Don't Add An Index Just To Add An Index
+-Don't Use Indexes On Small Tables
+-Don't Use On Tables That Are Updated Frequently
+-Don't Use On Columns That Can Contain Null Values
+-Don't Use On Columns That Have Large Values
+
+
+
+Index Types
+Single-Column
+Most Frequently Used
+Column In A Query
+
+Multi-Column
+Most Frequently Used
+Columns In A Query
+
+When To Use
+Single-Column:
+Retrieving Data That Satisfies One Condition
+
+Multi-Column:
+Retrieving Data That Satisfies Multiple Conditions
+
+Unique
+For Speed And Integrity 
+Create Unique Index <name>
+on <table> (column1);
+
+Partial
+Index Over A Subset Of A Table 
+Create Index <name>
+on <table> (<expression>);
+
+Implicit
+Automatically Created By The
+Database
+-Primary Key
+-Unique Key
+
 
 
 Index Algorithms
+Any type of data may need a type of lookup.
+
+Postgresql Provides Several Types Of Indexes
+-B-Tree
+-Hash
+-Gin
+-Gist
+Each Index Type Uses A Different Algorithm
+
+Create [Unique] Index <name>
+ON <table> Using <method> (column1, ...)
+
+Each of these algorithm have special use case.
+
+B-Tree
+Default Algorithm!
+Best Used For Comparisions With
+-<
+-<=
+-=
+->=
+-Between
+-IN
+-IS NULL
+-IS NOT NULL
+
+HASH
+Can Only Handle Equality (=)
+Operations
+
+
+GIN
+Generalized Inverted Index
+
+Best Used When Multiple Values
+Are Stored In A Single Field
+
+
+GIST 
+Generalized Search Tree
+Useful In Indexing Geometric Data
+And Full-Text Search
+
+
+What Are Subqueries?
+A Construct That Allows You
+To Build Extremly Complex
+Queries
+
+Also Called An Inner Query
+Or Inner Select
+
+It's A Query Within Another SQL
+Query Most Often Found In The
+Where Clause
+
+Select *
+From <table>
+Where <column> <condition>(
+  Select <column>, <column>, ...
+  From <table>
+  [Where | Group By | Order By | ...]
+)
+
+
+We want filter against the resultat
+
+You Can Also Use It In The 
+Select,From And Having Clause
+
+Select(
+	Select <column>, <column>, ...
+	From <table>
+	[Where | Group By | Order By | ...]
+)-- must return a single record
+From <table> AS <name>
+
+
+
+Select *
+From <table> AS <name>
+Group By <column>
+Having(
+ --must return a single record
+ Select <column>, <column>, ...
+ From <table>
+ [Where | Group By | Order By | ...]
+
+) > X
+
+You will proably use one column only.
+
 
 
 Subqueries vs Joins
 
+Both Subqueries And Joins
+Combine Data From Different
+Tables
+
+Subqueries Are Queries
+That Could Stand Alone
+
+
+Joins Combine Rows From One Or
+More Tables Based On A Match
+Condition
+
+Subqueries can return one result or multiple results
+
+Subquery VS Join
+Subqueries Can Return
+A Single Result Or A Row Set
+
+Joins Can Only Return A Row Set
+
+A Subquery's Results
+Are Immediately used
+
+A Joined Table Can Be Used In
+The Outer Query
+
 
 Subqueries Guidelines As Types
+Select (
+	Select <column> , <column>, ...
+	FROM <table>
+	[Where | Group By | Order By | ...]
+)
+FROM <table> AS <name>
+
+A Subquery Must Be Enclosed In Parentheses
+
+Select *
+FROM <table> AS <name>
+Where X >= (
+		Select MAX(<column>)
+		From <table>
+		[Where | Group By | Order By]
+		)
+
+Must Be Placed On The Right Side Of
+The Comparison Operator
+
+
+Cannot Manipulate Their Results Internally
+(Order By Ignored)
+
+
+Select *
+From <table> AS <name>
+Where X >= | <= | = | != (
+	Select MAX(<column>)
+	From <table>
+	[Where | Group By | Order By | ...]
+)
+
+Use Single-Row Operators With Single-Row Subqueries
+
+Subqueries That Return Null May
+Not Return Results
+
+Types Of Subqueries
+-Single Row
+-Multiple Row
+-Multiple Column
+-Correlated
+-Nested
+
+Single Row
+Select name,salary
+From salaries
+Where salary =
+	(Select AVG(salary) From salaries)
+
+Return Zero Or One Row
+Adding as extra column
+
+Multiple Row
+
+
+Select title, price, category
+From products
+Where category IN(
+	Select category FROM categories
+	Where categoryname IN ('Comedy', 'Family', 'Classics')
+)
+
+Returns One Or More Rows
+
+Multiple Column
+
+Select emp_no, salary, dev.avg AS "Department average salary"
+From salaries AS s
+Join dept_emp AS de USING(emp_no)
+Join(
+	Select dept_no, AVG(salary), FROM salaries AS s2
+	JOIN dept_emp AS e USING(emp_no)
+	Group By dept_no
+)AS dea USING(dept_no)
+Where salary > dea.avg
+
+Returns One or More Columns
+
+Correlated
+
+Select emp_no, salary, from_date
+From salaries AS s
+Where from_date = (
+	Select max(s2.from_date) AS max
+	FROM salaries AS s2
+	Where s2.emp_no = s.emp_no
+)
+Order By emp_no
+
+Reference One Or More Columns In The
+Outer Statement - Against Each Row
+
+Nested
+
+Select orderlineid, prod_id, quantity
+From orderlines
+Join(
+	Select prod_id
+	From products
+	Where category IN(
+	Select category FROM categories
+	Where category_name IN ('Comedy', 'Family', 'Classics')
+	)
+) as limited USING (prod_id)
+
+Subquery In A Subquery
 
 
 Using Subqueries
+Show All Employees Older
+Than The Average Age
+
+Select
+	first_name,
+	LAST_name,
+	AGE(birth_date)
+FROM employees
+Where AGE(birth_date) > (Select AVG(age(birth_date)) From
+employees)
+
+Show The Title By Salary
+For Each Employee
+
+Select
+	emp_no,
+	salary,
+	from_date,
+	(Select title From titles AS t
+	--Referencing outside -- Correlated subquery
+	Where t.emp_no = s.emp_no AND t.from_date = s.from_date)
+	From salaries AS s
+	Order By emp_no
+
+Show The Most Recent Employees Salary
+
 
 
 Quick Note: Titles For Employees
 
+In the video "Using Subqueries" we see a query where we try to apply combine titles with salaries to see the salary changes per title live. In the video "Inner Join" we stated that each title change happens 2 days AFTER a salary bump.
+
+
+
+Our query did not take this fact into account and so for each employee we would only see the initial title, but not the subsequent title changes. In order to address this we need to add the following to the query:
+
+
+
+select emp_no, salary, from_date, 
+    (select title from titles as t 
+     where t.emp_no=s.emp_no and 
+    (t.from_date = s.from_date + interval '2 days' or t.from_date=s.from_date))
+from salaries as s
+order by emp_no;
+
+
+This will catch both the cases where the initial title was given and any salaries linked to a subsequent title change!
+
+
 
 Getting The Latest Salaries
 
+Show The Most Recent Employees Salary
+
+Select
+	emp_no,
+	salary AS "most recent salary",
+	from_date
+From salaries AS s
+Where from_date = (
+	Select MAX(from_date)
+	From salaries AS sp
+	--Correlated subquery
+	Where sp.emp_no = s.emp_no
+)
+Order By emp_no ASC
+This solution take too long.
+Joining is less expensive to do.
+
+
+
 Subquery Operators
+Operators That You Can
+Apply In The Where-Clause
+On Subqueries
+
+Exists
+Select firstname, lastname, income
+FROM customers as c
+Where Exists(
+Select * From orders as o
+Where c.customerid = o.customerid AND totalamount > 400
+)AND income > 90000
+
+Check If The Subquery Returns Any Rows
+
+
+IN
+Select prod_id
+From products
+Where category IN(
+	Select category From categories
+	Where categoryname IN ('Comedy', 'Family', 'Classics')
+)
+Check If The Value Is Equal To Any Of
+The Rows In The Return (Null Yields Null)
+
+Not In
+
+Select prod_id
+FROM products
+Where category IN(
+	Select category From categories
+	Where category_name NOT IN('Comedy','Family','Classics')
+)
+
+Check If The Value Is Not Equal To Any Of
+The Rows In The Return (Null Yields Null)
+
+
+ANY/SOME
+
+Select prod_id
+From products
+Where category = ANY (
+		Select category From categories
+		Where categoryname IN ('Comedy','Family','Classics')
+)
+
+Check Each Row Against The Operator
+And If Any Comparision Matches Return True
+
+
+ALL
+Select prod_id, title ,sales
+From products
+Join inventory as i Using(prod_id)
+Where i.sales > ALL (
+    Select AVG(sales) From inventory
+    Join products as p1 Using (prod_id)
+    Group By p1.category
+)
+
+Check Each Row Against The Operator
+And If All Comparision Match Return True
+
+Single Value Comparision
+
+Select prod_id
+From products
+Where category = (
+	Select category From categories
+	Where categoryname IN ('Comedy')
+)
+
+Subquery Must Return A Single Row
+Check Comparator Against Row
 
 
 Subquery Exercises
+
+/* TRY TO WRITE THESE AS JOINS FIRST */
+/*
+* DB: Store
+* Table: orders
+* Question: Get all orders from customers who live in Ohio (OH), New York (NY) or Oregon (OR) state
+* ordered by orderid
+*/
+
+Select firstname, lastname, orderid
+From orders as o,(
+    select customerid,state,firstname,lastname
+    From customers
+)as c
+WHERE c.customerid = o.orderid and c.state in ('NY','OH','OR')
+order by o.orderid;
+
+
+/*
+* DB: Employees
+* Table: employees
+* Question: Filter employees who have emp_no 110183 as a manager
+*/
+
+SELECT emp_no, first_name, last_name
+from employees
+Where emp_no in (
+select emp_no
+From dept_emp
+where dept_no = (
+        select dept_no
+        from dept_manager
+        where emp_no = 110183
+)
+)
+order by emp_no;

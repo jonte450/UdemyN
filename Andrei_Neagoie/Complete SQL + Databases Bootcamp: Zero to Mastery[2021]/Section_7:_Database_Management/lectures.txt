@@ -1,0 +1,735 @@
+Berfore We Get Started
+
+Throughout this section, you will find that we are taking a slightly different approach.
+
+When we approached querying it was beneficial to learn the concepts and what they do, applying them to certain scenarios.
+
+Doing all that before touching on exercises builds a solid foundation for applying knowledge.
+
+However, there are many different strategies to employ effective learning, throughout this bootcamp we’ve enjoyed everything from history to theory and practical exercises. In this section, you will find a healthy mix.
+
+From the get-go our plan was to build a solid foundation for you to start off your SQL mastery, as with any technology there are multiple avenues to walk when exploring SQL.
+
+The avenue of data creation and management is one that often crosses the realm of architecture and administrator. You see on the one hand you have the definition and creation of databases and the relationships between different tables and on the other hand, you have the management of roles, permissions, backups, and so forth.
+
+Very different skills indeed, nevertheless extremely valuable to know and use, SQL is so much more than just querying data - it’s a lifestyle! I joke, but I also digress.
+
+Throughout this section what you will find is a healthy mix of theory and practical application when it comes to management and the principles, as well as a practical example of database architecture and creation.
+
+There are many commands to master in this section, but the reality is once you go out there and start applying these skills that’s when the real learning will start, the foundation this course gives you sets you up for a life long journey of fun problem-solving with SQL!
+
+
+Time To Create Some Stuff!
+-The Different Types Of Data
+-How To Create A Database
+-How To Create Tables
+-How To Insert/Update/...Data
+-...So Much More
+
+Why Is It Important
+Creating And Maintaining Data
+Is Extremly Hard
+
+
+Data Definition Language
+Commands To Create, Modify, Delete
+Different Structures
+
+Data Manipulation Language
+Commands For Adding, Deleting, Modyfying Data
+
+
+
+
+Types Of Databases In A RDBMS
+-Regular
+-Template
+
+Databases management.
+In a startup you can do multiple things.
+If you are on operation you may
+doing sharding, replication, backups
+database.
+
+Template tells how to make a database.
+Template is a blueprint.
+
+When You Setup Your Postgres 3 Databases Were Created
+-Postgres
+-Template0
+-Template1
+
+
+
+
+Default PostGreSQL
+When you setup the databases three things is setup.
+-Postgres
+-Template0
+-Template1
+
+Data is something that continues to expand.
+
+Postgres Database
+This Is The Default Database That Is
+Created When You Setup Postgres (INITDB)
+
+Postgres Database
+So The First Time You Initialize
+Postgres You Can Connect To The
+Postgres Database To Setup
+Your First Database
+
+psql -U <user> <database>
+
+Postgres Database
+Postgres By Default Will Assume
+A Connection To A Database
+With The Same Name As The User
+If No Database Is Supplied
+
+psql -U postgres
+postgres-# \conninfo
+You are Connected To database "postgres" as user "postgres"
+via socket in "/tmp" at port "5432".
+
+This Command Shows You Your Current
+Connection
+
+Template0 Database
+This Is The Template That Is
+Used To Create Template1 - Never Change It
+
+Template0
+
+
+
+
+Template Databases
+
+Template0 Database
+This Is The Template That Is
+Used To Create Template1 - Never Change It
+
+Template0
+
+It is the backup for Template1.
+
+It is essence a backup Template
+
+Template1 Database
+This Is The Template That Is
+Used To Create New Databases
+
+Any Changes We Make To The Template
+Are Automatically Applied To All
+New Databases
+
+One Thing To Note Is That Because Template1
+Is The Default Template - If It Is Being
+Accessed/Connected To No New Databases
+Can Be Created Until The Connection Is
+Closed!
+
+psql -U postgres template1
+
+
+\conninfo 
+
+
+Template Databases
+You Can Create Your Own
+Template Database To Create
+Other Databases With This Is
+However Not Very Common!
+
+Create Database mysuperdupertemplate;
+--connect to mysuperdupertemplate and run
+
+Create Table superdupertable();
+--after creating the database connect to it
+--and  you will see superdupertable
+
+
+
+Creating A Database
+Create Database Name
+[[With] [Owner] [=] user_name]
+		[Template [=] [template]]
+		[Encoding [=] encoding]
+		[LC_Collate [=] lc_collate]
+		[LC_TYPE [=] lc_type]
+		[TableSpace [=] tablespace]
+		[CONNECTION LIMIT [=] connlimit]
+
+Setting 		 Default
+Template 		 template0
+Encoding 		 UTF8
+Connection Limit 100
+Owner			 Current User
+
+Let's Create An Example Database To
+Store Courses!
+
+Create Database ZTM;
+
+Database Organization
+Databases Often Contain Many Tables,
+View,ETC... Depending On How Much You
+Care, You May Want To Organize Them
+In A Logical Way!
+
+
+
+
+Database Organization
+Postgres Schemas
+Postgres Offers The Concept of "Schemas"
+Think Of It Like A Box In Which You Can
+Organize Tables, Views, Indexes, ETC.
+
+By Default Each Database Get's A "Public" Schema
+
+Unless You Specify A Schema
+The Default Is Always Assumed To
+Be Public!
+
+Select * From employees
+-- is the same as
+Select * From public.employees
+
+To Show all Schemas
+\dn
+
+To Create Schemas
+Create Schema Sales;
+
+Reasons To Use Schemas
+-To Allow Many Users To Use One Database
+ Without Interfering With Each Other
+
+-To Organize Database Objects Into Logical
+ Groups To Make Them More Manageable
+
+-Third-Party Applications Can Be Put Into
+ Separate Schemas So They Do Not Collide
+ With The Names Of Other Objects.
+
+Restricted 
+Creating Databases Is A Restricted Action
+Not Everyone Is Allowed To Do It!
+
+
+Roles In Postgre
+Roles Are Vital To Any DBMS They Determine
+What's Allowed!
+
+A Role Can Be A User Or A Group
+It Depends On How You Setup The
+Role
+
+Roles Have The Abiltity To Grant Membership
+To Another Role
+
+
+
+Role Attributes And Creation
+
+Role Attribute 
+When A Role Is Created It Is Given
+Certain Attributes
+
+The Priviliges Of A Role Are
+Determined In Part By Its
+Attributes
+
+Give A Role Certain Commands Rights.
+
+Attribute 				Purpose
+Login Privilige 		A role with the LOGIN
+						attribute can be
+						Considered the same
+						thing as a "database user"
+
+
+Superuser Status		A Database superuser bypasses
+						all permission checks
+
+
+Database Creation 		A role must be explicity given
+						permission to create databases
+
+Role Creation 			A role must be explicity given
+						permission to create more roles
+
+Password 				A password is only significant
+						if you give LOGIN privilige
+
+
+Creating Role
+
+Create Role readonly WITH LOGIN ENCRYPTED PASSWORD 'readonly';
+
+Always Encrypt When Storing A Role That Can Log In
+
+View Roles
+\du
+
+Creating Role
+By Default Only The Creator Of The Database
+Or Superuser Has Access To Its Objects
+
+
+Creating Users And Configuring Login
+CREATE role test_role_login WITH LOGIN ENCRYPTED PASSWORD 'password';
+
+CREATE USER test_user_with_login WITH ENCRYPTED PASSWORD 'password';
+
+\du
+
+createuser --interactive
+
+ psql -U test_interctive Employees -W
+
+ pg_hba.conf is a file that allows connections.
+
+postgressql.conf
+
+show hba_file: This command tells where you can find these files.
+Change Method From Trust in method will tell PSQL to use password.
+
+
+
+Priviliges
+Attributes Can Only Define So Many Privliges!
+When You Are Not A "Superuser"
+What You Can Do Is Fairly Limited
+Depending On What Default Privileges
+Are Set
+
+By Default Objects Are Only Available
+To The One Who Creates Them
+
+This Means Privileges Need To
+Be Granted For New Roles And
+Users To Have Access To Certain
+Data
+
+Granting Priviliges And Role Management
+
+Grant All Priviliges ON <table> TO <user>
+Grant All On All Tables [IN Schema <schema>] To <user>;
+Grant [Select, Update, Insert, ...] ON <table> [IN Schema <schema>] TO
+<user>;
+
+Be Wise About The Priviliges You Grant!
+
+createuser --interactive
+psql -U privilegetest Employees
+\conninfo
+Grant Select On titles TO privilegetest
+Revoke Select On Titles From privilegetest;
+
+Grant All On All Tables IN Schema public To Priviligetest
+
+
+
+
+
+
+Best Practices For Role Management
+When Managing Roles And Permissions
+Always Go With The "Principle Of Least Privilege"
+
+Don't Use Admin/Superuser By Default!
+
+
+
+Data Types & Boolean Type
+
+Before We Create A Full-Fledged Database
+It's Important To Know What Types Of Data
+We Can Store In A Database
+
+Data Types
+
+When We Talk About The Types Of Data
+We Can Store We Categorize Them
+Into Buckets Or "Types"
+
+Type
+-Numeric Types
+-Arrays
+-Character Types
+-Data/Time Types
+-Boolean Types
+-UUID Type
+
+Check the DOCS for which types
+
+A Data Type Is Nothing More Than
+A Constraint Place On A Field To
+Only Allow That Type Of Data To
+Be Filled In
+
+Specyfying A Type Is Important
+Because It Tells The System How
+It Can/Should Handle The Data In
+That Field
+
+It's Also What Allows The DBMS
+To Optimize Its Algorithms For
+Processing Data By Knowing Its
+Type
+
+Boolean 
+A Boolean Type Can Hold True False Or Null
+
+
+Storing Text
+
+Character
+Postgresql Provides Three Character Data Types:
+Char(n), Varchar(n), And Text
+
+Char(n)
+Fixed length with space padding
+
+
+Varchar(n)
+Variable length with no padding
+
+Text
+Unlimited length text
+
+
+Storing Numbers
+
+Numeric
+There Are 2 Types Of Numbers In Postgres:
+Integers And Floating Points
+
+Integers
+A Whole Number, A Number That Is Not A Fraction
+
+There Are 3 Types:
+Smallint, Int, Bigint
+
+Smallint
+Number That Can Range From
+-32,768 to 32,767
+
+
+Int
+Number That Can Range From
+-2,147,483,648 To 2,147,483,643
+
+
+Bigint
+Number That Can Range From
+-9223372036854775808 
+ To 9223372036854775808
+
+We are trying to save space.
+
+Floating Point
+Simply Put, Numbers That Can
+Contain A Decimal Point
+
+Float4/Float8
+
+Single Or Double Precision
+Meaning 6 or 15 Digits Precision
+
+Decimal/Numeric
+Up To 131072 Digits Before The Decimal Point;Up
+To 16383 Digits After The Decimal Point
+
+
+Storing Arrays
+
+Arrays
+An Array Is Nothing More Than
+A Group Of Elements Of The Same
+Type
+
+An Array Is Denoted By A Bracket Syntax
+
+Every Data Type In Postgres
+Has An Array Equivalent
+
+
+
+Data Models And Naming Conventions
+
+Let's Create Data!
+We've Created Our Database
+Al That's Left To Do Is Put
+Data In It Right?
+
+Before We Start
+Hold Up!
+What Do We Put In?
+
+Database Models
+Well Usually Before Creating
+A Database We Create A Model!
+
+What's A Model
+
+Important Note
+
+A Model Is A Design That Is
+Used To Visualize What We Are
+Going To Build!
+
+Important Note
+We've Seen A Lot Of Different
+Sample Databases So Far
+
+Important Note
+A Lot Of Them Do Not Follow
+The Best Practices!
+
+Important Note
+Now That We're Modelling Our
+Own Database It's Important
+To Follow The Common Standards!
+
+Naming Conventions
+Table Names Must Be Singular!
+
+Columns Must Be Lowercase
+With Underscores
+
+Columns With Mixed Case
+Are Acceptable
+
+Columns With Upper Case
+Are Unaccetpable
+
+Be Consistent!
+Write Down Your Rules!
+
+
+
+
+Create Table
+
+Let's Create Data!
+So Now That We Know
+What Rules We're going
+To Follow Let's Create A Table
+
+Create Table
+
+Create Table <Name> (
+ <col1> Type [Constraint]m
+ table_constraint [CONSTRAINT]
+)[Inherits <existing_table>];
+
+Student
+Create Table Student(
+student_id UUID Primary Key Default uuid_generate_v4(),
+first_name VARCHAR(255) Not Null,
+last_name VARCHAR(255), Not Null,
+email VARCHAR(255), Not Null,
+date_of_birth Date Not Null
+);
+
+
+We have to connect: psql -U postgres ztm
+
+
+Extra Information on Create TABLE
+
+The CREATE TABLE statement is the most important command when making a database, depending on the DBMS you are using the options may vary heavily. In Postgres there are many things you can do with this statement.
+
+We wanted to leave a couple of notes on the creation syntax!
+
+Normal tables
+
+By default any time you run the CREATE TABLE command you will be creating an object in the public schema, unless otherwise specified.
+
+Think of database design like drafting a blueprint for a house, and when you’re creating a table you’re drafting a blueprint for a specific room. What you put on that blueprint will determine how that room is going to look!
+
+In our videos you saw us using this syntax to create many different tables with varying constraints, types and keys.
+
+For the most part creating tables is the easy part, the hardest part is drafting the blueprint upfront so that you know what steps to follow. This is why database design and modelling is so crucial.
+
+Temporary tables
+One thing we did not touch on during these videos is the ability to create temporary tables. They are a type of table that exist in a special schema, so you cannot define a schema name when declaring a temporary table.
+
+
+These types of tables will be dropped at the end of your session. It’s important to also note that they are only visible to the creator.
+
+Now you may be wondering, why would I ever use these? Well if you’re writing intensive queries against a data set it might be beneficial to temporarily create a table based off another table.
+
+This is because:
+
+Temporary tables behave just like normal ones
+
+Postgres will apply less “rules” (logging, transaction locking, etc.) to temporary tables so they execute more quickly
+
+You have full access rights to the data, if you otherwise didn’t so you can test things out.
+
+Resources for this lecture
+
+
+
+Column Constraints
+
+Constraints
+Constraints Are A Tool
+To Apply Validation Methods
+Against Data That Will Be Inserted
+
+Column Constraints
+A Column Constraint Is Defined As
+Part Of A Column Definition.
+
+Constraint
+-Not Null: Cannot Be Null
+-Primary Key: Column Will Be The Primary Key
+-Unique: Can Only Contain Unique Values (NULL is Unique)
+-Check: Apply a special condition check against the
+		values in the column
+
+-References: Constrain the values of the column to only
+			 be values that exist in the column of 
+			 another table(Foreign Key)
+
+
+
+
+Table Constraints
+
+A Table Constraint Definition Is
+Not Tied To A Particular Column,
+And It Can Encompass More Than
+One Column.
+
+Constraint
+Unique(column_list): Can only contain Unique values (NULL is Unique)
+Primary Key(column_list): Columns that will be the primary key
+Check(condition): A condition to check when inserting or updating
+References: Foreign key relationships to a column
+
+Create Table student (
+student_id UUID Default uuid_generate_v4(),
+first_name VARCHAR(255) Not Null,
+last_name VARCHAR(255) Not Null,
+email VARCHAR(255) Not Null,
+date_of_birth Date Not Null,
+Constraint pk_student_id Primary Key (student_id)
+);
+
+
+Note That
+Every Column Constraint Can
+Be Written As A Table Constraint
+
+You can use a Regex to try to match with Check constraint.
+
+
+Regexes!
+
+When it comes to Regular Expressions there are many avenues to take to learn and apply this skill. It in itself is a language that crosses the barriers of each programming language and can be used to validate complex text patterns. Regex comes in multiple "flavours" or what we would like to call "variations".
+
+It usually finds its place in applying validations to make sure what a user is inputting matches an expectation. That expectation could be anything:
+
+An e-mail
+
+A phone number
+
+An address
+
+A postal code
+
+When it comes to data we often have unique ways of writing these things, and they vary from country to country so it is extremely important to be able to know what inputs are expected and validate/sanitize inputs so they match your expectation.
+
+Different languages can have slight variations on how they choose to implement Regex, but they often do not differ heavily.
+
+At the end of the day, what we want to achieve is clean data and we have all of these mechanisms in place to help us, writing constraints is a hard job. For learning Regex there are thousands of resources that can teach you, help you verify and supercharge your skills. We've curated a list here of learning resources that we found extremely valuable and helpful:
+
+
+
+Regex for regular folk - A fun, illustrative and simple guide to learning regex
+
+Regex Crossword - Challenging puzzles to practice your Regex-fu
+
+Regex Search - A tool to find quick and easy regex references
+
+Regex Tester - A Regex testing tool that supports multiple flavours
+
+
+
+
+UUID Explained
+Using UUID FIELDS
+Create extension IF NOT EXISTS "uuid-ossp"
+We Need To Install An Extension
+
+
+Extensions
+Select * From pg_available_extensions;
+
+These Are Pieces Of Software That Allow
+You To Expand What Postgres Can Do Or
+Expand How Certain Processes Run
+
+UUID
+This Extension Allows Us To
+Generate Unique Identifiers
+For Primary Keys
+
+UUID Stands For Universally
+Unique Indentifier
+
+'a9839a1f-edf5-4a77-9fde-b0dac8ea32d5'
+
+UUID
+PROS
+-Unique 
+-It's easier to shard
+-It's easier merge/replicate
+-You expose less information
+ about your system
+
+Cons
+-Larger values to store
+-Can have performance impact
+-More difficult to debug
+
+
+Custom Data Types And Domains
+
+
+Creating The Tables For ZTM
+
+
+Extra Information on ALTER TABLE
+
+
+Adding Students And Teachers
+
+
+Creating A Course
+
+
+Adding Feedback To A Course
+
+
+A Tale Of 2 Feedbacks
+
+SQL Exercises
+
+SQL Quiz
+
+Backups And Why They Are Important
+
+Backing Up In Postgres
+
+Restoring A Database
+
+Transactions
