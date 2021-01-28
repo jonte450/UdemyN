@@ -1,0 +1,98 @@
+Quote Generator Project Overview
+
+What you are is what you have been.
+What you'll be is what you do now.
+Buddha
+
+Add a cool background.
+
+When it takes long time to load we are
+signaling it to the user.
+
+
+
+Setting Up Our Project
+Go to Hero web-site.
+Choosing a background color
+Starting with stying the body.
+Choosing a Font.
+
+
+Styling and HTML Elements
+Adding button elements to the HTML-index file.
+Adding some Id tags to the style and the classes.
+Adding some text-style to the element.
+Fixing so that it can be viewed on the phones with media.
+
+
+
+Creating Beautiful Buttons
+Fixing when you are hovering over the buttons.
+Fixing that when you are hovering over the Twitter-button
+the button is turning blue.
+
+
+
+Fetching Data With JavaScript
+We used a free API called Forsensic.
+To get data and used some catch and try
+statements.
+
+And see the JSON object.
+
+
+Quick Note: 429 Error
+
+IMPORTANT:
+In the previous video, we we use the free proxy api from CORS anywhere. It often results in http status code 429, because there is too much traffic. You can't do anything about the 429 error other than just wait.
+
+However, if you are interested in a solution, you can check out the next optional lecture on creating your own proxy server to solve this issue.
+
+This is often a common issue when working with free APIs. However, we want to make sure that all of you can build all the projects in the course, so to demonstrate to you how you may work with multiple APIs (to achieve the same result) we have provided a bonus section at the end of this course: Appendix: Quote Generator Version 2 + CORS Issues where we will build this project exactly like we do in this section but using a different method and a different API. You can watch those videos after you finish this section or if you are having issues with the current API we are using.
+
+
+
+Optional Build Your Own Proxy Server
+
+In the previous video we saw that the CORS issue can be solved with something called a proxy server. Make sure you check out the resources attached to that lecture to learn more about this issue that comes up a lot when using free APIs.
+
+
+
+For now, we have also provided a bonus video in the Appendix: CORS Issues section at the end of the course if you want to learn more about this and want to build your own custom Proxy Server. This is completely optional and won't add much to your understanding to the rest of the course so you can even save it for the very end of the course!
+
+
+Manipulating DOM With JavaScript
+Adding 5 getElementById and after we are getting the
+tweets and give some if-statements to check every data.
+
+
+Creating A Loader With JavaScript
+Adding some div page that contains a loader element from the
+Tutorials page and 
+
+Code Review
+Because it is a single file.
+We are loading the spinner.
+Naming things in programmin is super important.
+When we work with others we want to make people 
+understandable.
+
+The best programmers are the best you understands.
+We have the recursive function.
+A common trick is to go to a infinit loop.
+We should maybe write out the error.
+
+
+Manipulating The DOM
+
+We recommend you bookmark this page as a useful resource for the rest of this course: https://htmldom.dev/
+
+
+
+At the end of the day, JavaScript is all about interacting with the Document Object Model to do interesting and useful things on a page. The above resource will show you all the methods and properties we have available to us to interact with this DOM. Enjoy!
+
+
+
+Sharing Your Projects
+
+Remember, once you are done creating your project, we have an ongoing list of everyone's customized projects HERE to which you can submit your repository so other students can check out your work :)

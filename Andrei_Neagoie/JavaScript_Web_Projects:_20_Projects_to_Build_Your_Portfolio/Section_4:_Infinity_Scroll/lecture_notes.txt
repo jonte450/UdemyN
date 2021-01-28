@@ -1,0 +1,134 @@
+Infinity Scroll Project Overview
+The goal of the project is to show
+how to scroll inifinity.
+Seems you are scrolling forever.
+
+Mobile responsive as well.
+
+
+
+Loader SVG
+Downloading the loader animation from the website.
+And after that placing the loader animation svg
+file in the inifinite scrool directory.
+
+
+
+Centering Elements On The Page
+Giving the color and placing the loader file
+in some position that is middle and hide it
+away.
+
+
+Responsive Layout
+Adding so the images is listed from top to bottom.
+With width: 100%;
+
+
+Fetching Data
+Getting the API-Key and added it to
+the JavaScript 
+
+
+JavaScript To Display Data
+Creating a function to create an a and
+a img element and a helper function to
+to store because of DRY.
+
+
+Infinite Scroll With JavaScript
+window.addEventListener('scroll', () => {
+    if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000)
+    getPhotos();
+});
+
+
+Infinite Scroll With JavaScript 2
+Adding a counter to count each photo against each load.
+After each load and scroll you check the window size.
+And after that you have checked it you set the 
+load photo.
+
+Code Review
+When we program websites we want
+to understand which are viewing our
+website.
+
+When we ge to the website just pick the
+photo we just need.
+
+Add the initial load.
+Add the count = 5 first.
+Add the count = 30 after.
+
+
+
+Exercises: Cleaning Up the Code
+
+In the previous video, you saw me update the code this way:
+
+
+// Unsplash API
+let count = 5;
+const apiKey = 'jFgS8tteGD425f4oZfygQVaVnD6gt6GucN2yyz3xFek';
+let apiUrl = `https://api.unsplash.com/photos/random?client_id=${apiKey}&count=${count}`;
+ 
+// Check if all images were loaded
+function imageLoaded() {
+  imagesLoaded++;
+  if (imagesLoaded === totalImages) {
+    ready = true;
+    loader.hidden = true;
+    count = 30
+    apiUrl = `https://api.unsplash.com/photos/random?client_id=${apiKey}&count=${count}`;
+  }
+}
+
+
+
+How could you clean up the code, even more, to make the code more readable and understandable? There are many solutions to this. I will provide my solution below as an example but try for yourself first.. scroll down for my suggestion:
+
+
+
+
+let isInitialLoad = true // NEW LINE ****
+ 
+// Unsplash API
+let initialCount = 5;
+const apiKey = 'jFgS8tteGD425f4oZfygQVaVnD6gt6GucN2yyz3xFek';
+let apiUrl = `https://api.unsplash.com/photos/random?client_id=${apiKey}&count=${initialCount}`;
+ 
+// NEW Block****
+function updateAPIURLWithNewCount (picCount) {
+  apiUrl = `https://api.unsplash.com/photos/random?client_id=${apiKey}&count=${picCount}`;
+}
+// NEW Block*****
+ 
+ 
+// Check if all images were loaded
+function imageLoaded() {
+  imagesLoaded++;
+  if (imagesLoaded === totalImages) {
+    ready = true;
+    loader.hidden = true;
+  }
+}
+ 
+ 
+ 
+.......
+ 
+// Get photos from Unsplash API
+async function getPhotos() {
+  try {
+    const response = await fetch(apiUrl);
+    photosArray = await response.json();
+    displayPhotos();
+    if (isInitialLoad) { // NEW LINE ****
+      updateAPIURLWithNewCount(30) // NEW LINE ****
+      isInitialLoad = false // NEW LINE ****
+    } // NEW LINE ****
+  } catch (error) {
+    // Catch Error Here
+  }
+}

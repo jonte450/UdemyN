@@ -1,0 +1,42 @@
+Picture In Picture Project Overview
+Picture in Picture.
+You can se in the Window to Window.
+Creating a virtual screen.
+
+Google Picture in Picture API.
+Supported in Android 8.
+Using it for video.
+Triggering button.
+
+
+
+Setting Up Our Project
+Adding the Start button to the project.
+Adding some style to the background.
+
+Styling and HTML Elements
+Styling the buttom element so that it has
+a box shadow and make look like you could
+click on it.
+
+
+Adding Functionality With JavaScript
+Making the buttom to active by pressing it
+and making when you press it make the 
+buttom disable and after that you
+make it active again.
+
+
+
+Code Review
+We have async await.
+Any programming language is evolving.
+And it follows ECMA-Script.
+A itent to keep the programming language live.
+
+You must keep up to the update about the
+JavaScript language and keep an eye
+on what browser that is used.
+
+
+Endorsments On Linkedin

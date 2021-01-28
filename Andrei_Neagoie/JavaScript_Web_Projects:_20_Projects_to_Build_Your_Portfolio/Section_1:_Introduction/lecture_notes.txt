@@ -1,0 +1,62 @@
+Course Outline
+-Developer Setup
+-Joke Teller
+-Drag n' Drop
+-Calculator
+-NASA APOD
+-Space Rock
+-Pic-in-Pic
+-Quote Generator
+-Paint Clone
+-Splash Page
+-Form Validator
+-Math Sprint
+-Infinity Scroll 
+-Light/Dark Mode
+-Animated Template
+-Navigation Nation
+-Custom Countdown
+-Video Player
+-Music Player
+-Book Keeper 
+-Pong
+
+
+The Purpose Of JavaScript
+The first website was static.
+With the help of JavaScript we could making websites
+interactive.
+
+Based on what the user does.
+Do Something based on the Input.
+
+function(input){
+	const output = JavaScript(input)
+	return output
+}
+
+We have a Window-Object.
+
+
+
+How To Get The Most Out Of The Course
+
+This course is very modular in that you can pick any section and just complete the specific project you are interested in. However, there are a few things we recommend if you want to make the most out of this course.
+
+1. Make sure you watch the Developer Setup videos coming up next in order to make sure you can follow along. We highly recommend you code along with us and follow the customization options to make each project "your own". Feel free to share your projects in #lookwhatimade or #js channels on Discord and get feedback. Finally, we will be collecting a running list of custom student projects here. If you would like to add your own project to showcase them to the community, you can submit to be added! (See 3. on how to use Github)
+
+2. The projects get more and more interesting as you go in order. We start off with some basic projects, and get into more and more complex projects. So we recommend going in order to make sure you don't miss anything as things get harder and harder.
+
+3. We provide a few Appendix sections for you if you want some extra help/advice to further your knowledge after the course:
+
+A. How JavaScript Works - internal workings of JavaScript so you understand how JavaScript actually runs on a browser.
+
+B. Git, Github, Open Source and Building a Portfolio - learn to use Git and Github, learn to contribute to open source, and how to build your own portfolio to showcase the projects you build in this course.
+
+C. CORS Issues - Learn how to solve the dreaded CORS issues when using free APIs.
+
+
+
+4. All project code and templates are provided for you in the upcoming section in the lecture titled Setting Up For the Course.
+
+

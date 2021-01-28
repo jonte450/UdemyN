@@ -704,32 +704,405 @@ Cons
 
 Custom Data Types And Domains
 
+Custom Data Types
+In This Data Model We Decided
+It Would Be Good To Show How
+To Make A Custom Data Type.
+
+This Particular Custom Data Type
+Isn't A Good Decision -
+But We'll Get To That
+
+Postgres Allows You To Create
+Custom Data Types To Store
+Shapes Of Data That Are Some
+Complex
+
+Create Domain Rating Smallint Check (Value > 0 And Value <= 5)
+
+Create Type Feedback As(
+	student_id UUID,
+	rating Rating,
+    feedback Text
+); 
+
+
+
 
 Creating The Tables For ZTM
+
+We are Creating the Student Table
+
+Create Table student (
+	student_id UUID Primary Key Default uuid_generate_v4(),
+	first_name Varchar(255) Not Null,
+	last_name Varchar(255), Not Null,
+	date_of_birth Date Not Null
+)
+
+
+We create table subject
+
+Create Table subject(
+  subject_id UUID Primary Key Default uuid_generate_v4(),
+  subject Text Not Null,
+  description Text
+)
+
+
+Create Table teacher(
+ teacher_id UUID Primary Key Default uuid_generate_v4(),
+ first_name Varchar(255) Not Null,
+ last_name Varchar(255) Not Null,
+ date_of_birth Date Not Null,
+ email Text
+)
+
+We forgot the to add an column to the student
+
+Alter Table student
+Add Column email Text;
+
+Create Table course(
+course_id UUID Primary Key Default uuid_generate_v4(),
+"name" Text Not Null,
+description Text,
+subject_id UUID References subject(subject_id),
+teacher_id UUID References teacher(teacher_id),
+feedback feedback[]
+)
+
+
+Create Table enrollment(
+course_id UUID References course(course_id),
+student_id UUID References student(student_id),
+enrollment_date Date Not Null,
+Constraint pk_enrollment Primary Key(course_id, student_id)
+)
+
 
 
 Extra Information on ALTER TABLE
 
+ALTER TABLE is a super powerful yet humble command, yes you heard me humble! I joke, but at the same time, this one command really has a large impact on your database.
+
+As you saw throughout this section I used it to correct some mistakes, add some constraints, etc. but we really didn’t dive deeply into the power that lies dormant in this command.
+
+You may be asking yourself why, but if I were to tell you every possible way you could apply this command there would be an endless amount of videos to supply for each use-case. Our main focus is to build your solid foundation and knowledge is power. Knowing how to apply this command is half the battle, knowing when and where to apply it, well that’s the fun puzzle that awaits you on your SQL journey!
+
+Syntax
+As you can see in the above image, the image ALTER command has many things that it can change, from adding and removing columns to renaming them and changing their definition. However, there’s so much more you can do with it!
+Change the SCHEMA of a table
+
+Change the name of a table-level CONSTRAINT
+
+Add and remove constraints
+
+Change a column level constraint
+
+Our main advice when using this command is to make sure you communicate changes early and set in place a plan for other systems/software to be able to migrate, the last thing you want to happen is changing a column and suddenly all your services start breaking!
 
 Adding Students And Teachers
 
+Insert Into student(
+ first_name,
+ last_name,
+ email,
+ date_of_birth
+)Values(
+'Mo',
+'Binni',
+'mo@binni.io',
+'1992-11-13' :: DATE
+);
 
 Creating A Course
+
+Insert Into subject(
+subject,
+description
+)Values(
+'SQL Zero to Mastery',
+'The art of SQL Mastery'
+)
+
+Delete From subject where subject =  'SQL Zero To Mastery';
+
+Insert Into course(
+"name",
+description
+)Values(
+'SQL',
+'A database management language'
+)
+
+
 
 
 Adding Feedback To A Course
 
+Insert Into enrollment (student_id, course_id, enrollment_date) VALUES(
+ 'id',
+ 'id',
+ NOW()::DATE
+);
+
+
 
 A Tale Of 2 Feedbacks
+We need to shape it to a table.
+Foreign Key, Primary Key.
+Arrays adds complexity.
+Student can add multiple feedbacks.
+Student_id and course id as Foreign keys.
+
+
+Create Table feedback(
+	student_id UUID References student(student_id),
+	course_id UUID References course(course_id),
+	feedback Text,
+	rating rating,
+	Constraint pk_feedback Primary Key(student_id,course_id)
+);
+
+Insert Into Feedback(
+student_id,
+course_id,
+feedback,
+rating,
+)Values(
+'id',
+'id',
+'Well this was great',
+ 4
+)
+)
+
 
 SQL Exercises
 
 SQL Quiz
 
+Question 1 of 25:
+
+What does SQL stand for?
+Structured Query Language
+
+Question 2 of 25:
+Which SQL statement is used to extract data from a database?
+
+Select
+
+Question 3 of 25:
+Which SQL statement is used to update data in a database?
+
+Update
+
+Question 4 of 25:
+Which SQL statement is used to delete data from a database?
+
+Delete
+
+Question 5 of 25:
+Which SQL statement is used to insert new data in a database?
+
+Insert Into
+
+Question 6 of 25:
+With SQL, how do you select a column named "FirstName" from a table named "Persons"?
+Select FirstName From Persons
+
+Question 7 of 25:
+With SQL, how do you select all the columns from a table named "Persons"?
+Select * From Persons;
+
+Question 8 of 25:
+With SQL, how do you select all the records from a table named "Persons" where the value of the column "FirstName" is "Peter"?
+
+Select * From Persons Where FirstName = 'Peter';
+
+Question 9 of 25:
+With SQL, how do you select all the records from a table named "Persons" where the value of the column "FirstName" starts with an "a"?
+
+Select *From Persons Where FirstName Like'%a';
+
+Question 10 of 25:
+The OR operator displays a record if ANY conditions listed are true. The AND operator displays a record if ALL of the conditions listed are true
+
+True
+
+Question 11 of 25:
+With SQL, how do you select all the records from a table named "Persons" where the "FirstName" is "Peter" and the "LastName" is "Jackson"?
+
+Select * From Persons Where FirstName = 'Peter' And LastName= 'Jackson'
+
+Question 12 of 25:
+With SQL, how do you select all the records from a table named "Persons" where the "LastName" is alphabetically between (and including) "Hansen" and "Pettersen"?
+
+SELECT * FROM Persons WHERE LastName BETWEEN 'Hansen' AND 'Pettersen'  
+
+
+Question 13 of 25:
+Which SQL statement is used to return only different values?
+
+SELECT DISTINCT  
+
+Question 14 of 25:
+Which SQL keyword is used to sort the result-set?
+ORDER BY  
+
+
+Question 15 of 25:
+With SQL, how can you return all the records from a table named "Persons" sorted descending by "FirstName"?
+SELECT * FROM Persons ORDER BY FirstName DESC  
+
+
+Question 16 of 25:
+With SQL, how can you insert a new record into the "Persons" table?
+INSERT INTO Persons VALUES ('Jimmy', 'Jackson')  
+
+Question 17 of 25:
+With SQL, how can you insert "Olsen" as the "LastName" in the "Persons" table?
+INSERT INTO Persons (LastName) VALUES ('Olsen')  
+
+Question 18 of 25:
+How can you change "Hansen" into "Nilsen" in the "LastName" column in the Persons table
+
+UPDATE Persons SET LastName='Nilsen' WHERE LastName='Hansen'  
+
+Question 19 of 25:
+With SQL, how can you delete the records where the "FirstName" is "Peter" in the Persons Table?
+
+
+DELETE FROM Persons WHERE FirstName = 'Peter'
+
+Question 20 of 25:
+With SQL, how can you return the number of records in the "Persons" table?
+
+SELECT COUNT(*) FROM Persons  
+
+Question 21 of 25:
+What is the most common type of join?
+
+INNER JOIN  
+
+Question 22 of 25:
+Which operator is used to select values within a range?
+BETWEEN
+
+Question 23 of 25:
+The NOT NULL constraint enforces a column to not accept NULL values.
+True
+
+
+Question 24 of 25:
+Which operator is used to search for a specified pattern in a column?
+Like
+
+
+Question 25 of 25:
+Which SQL statement is used to create a database table called 'Customers'?
+CREATE TABLE Customers  
+
 Backups And Why They Are Important
 
+Disaster Will Strike
+
+So It's Important
+
+Have A Plan
+1.Backup Plan
+2.Disaster Recovery Plan
+3.Test Your Plan
+
+What Can Go Wrong?
+1.Hardware Failures
+2.Viruses
+3.Power Outages
+4.Hackers
+5.Human Error
+
+How Do I Make A Plan
+1.Determine What Needs To Be Backed Up
+
+What To Backup
+1.Full Backup:Backup All The Data: Less Often
+2.Incremental:Backup Since Last Incremental: Often
+3.Differential:Backup Since Last Full Backup: Often
+4.Transaction Log:Backup Of The Database Transactions: A Lot
+
+How Do I Make A Plan
+2.What's The Appropriate Way To Back Up?
+
+
+3.Decide How Frequently You're Going To
+
+
+4.Decide Where You're Going To Store Them
+
+5.Have A Retention Policy For The Backup
+
+
 Backing Up In Postgres
+Creating A SQL-Dump files.
+Export them as scripts.
+Create them as back-up files.
+pgBackRest
+Structure Only:Table
+Struacutre And Recodrs: Take the table and the data.
+
+
 
 Restoring A Database
+Load Dump.
+Connection.
+Errors may occur when you are restoring databases.
+Make it difficult to make the backups.
+
 
 Transactions
+
+A Database Is A Shared Resource,
+So Many Users Access It
+Concurrently.
+
+A Transaction Is A Unit Of
+Instructions (Query For Instance)
+
+So How Do You Keep Things Consistent?
+
+The DBMS Has A Mechanism In Place
+To Manage Transactions
+
+Lifecycle
+
+Begin -> Active -> Partially Committed -> Committed -> End
+				-> Failed -> Aborted -> End
+
+\conninfo
+
+BEGIN; To Begin A Transaction
+
+You have separate sessions.
+RollBack: To the previous state.
+
+To Maintain The Integrity Of A Database,
+All Transactions Must Obey Acid Properties
+
+Atomicity 
+Either Execute Entirely Or Not At All
+
+Consistency
+Each Transaction Should Leave The Database
+In A Consistent State (Commit Or Rollback)
+
+Isolation
+Transaction Should Be Executed In Isolation
+From Other Transactions
+
+Durability
+After Complletion Of A Transaction,
+The Changes In The Database Should
+Persist
+
+

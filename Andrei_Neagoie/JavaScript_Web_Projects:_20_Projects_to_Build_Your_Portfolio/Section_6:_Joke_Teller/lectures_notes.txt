@@ -1,0 +1,32 @@
+Joke Teller Project Overview
+Got the idea from some assistans.
+We are going to call a Joke API.
+We have a Button that tells us a
+joke.
+
+
+Styling and HTML Elements
+Adding the background image.
+Adding a audio element.
+Adding a button.
+After that adding the robot image.
+
+
+Responsive Layout and Styling
+
+
+
+RapidAPI Disclaimer
+
+
+Javascript In The Project
+
+Javascript In The Project 2
+
+Javascript In The Project 3
+
+
+Finishing Up The Project
+
+
+Code Review
