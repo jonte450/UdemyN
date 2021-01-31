@@ -13,20 +13,49 @@ After that adding the robot image.
 
 
 Responsive Layout and Styling
-
+Adding some styles of the button
+and 
 
 
 RapidAPI Disclaimer
 
+It has been brought to my attention that for some students the RapidAPI website doesn't work exactly as it does in the video. I apologize for any confusion or inconvenience.
+
+You don't need to follow along with the tasks on the RapidAPI website, it was intended as a guide to show how you'd choose an API you'd never used before and test it.
+
+Please continue on and work on the project code,
+the APIs will work in the code.
+
+Hope you've been enjoying the course so far! 
+
 
 Javascript In The Project
+We made contact to the Voice API.
+And got the API key.
+And after that we could hear the voice
+Hello World.
+
 
 Javascript In The Project 2
+Getting the API call from the Joke API.
+Making so that setup and delivery became
+one single string separating by ...
+
 
 Javascript In The Project 3
+Creatring a tellMe function.
+And input the joke string to the 
+audio api call.
+
 
 
 Finishing Up The Project
+Adding a toogle button that disables
+the button when it plays.
+And hides the audio.
 
 
 Code Review
+We could move the SDK code to another
+file and we must think about the API
+key in the Front-End.

@@ -1,0 +1,25 @@
+Light Dark Mode Project Overview
+We have a website that can change color
+And we can change the color to day and
+night light mode.
+
+
+HTML and CSS Setup
+
+
+Content In Our Project
+
+
+Toggle Theme With JavaScript
+
+
+Toggle Theme With JavaScript 2
+
+
+LocalStorage To Save User Data
+
+
+Code Review
+
+
+Exercise: Making Code More Readable
