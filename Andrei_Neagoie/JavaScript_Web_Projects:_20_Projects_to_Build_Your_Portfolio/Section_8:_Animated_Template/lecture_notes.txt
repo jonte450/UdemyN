@@ -1,0 +1,17 @@
+Animated Template Project Overview
+
+
+
+Setting Up Our Template
+
+
+Setting Up Our Content
+
+
+
+JavaScript Inside of HTML
+
+
+Animation On Scroll
+
+Code Review

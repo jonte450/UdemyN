@@ -1,0 +1,20 @@
+Class-Based Components
+
+
+
+Application Overview
+
+
+Scaffolding the App
+
+
+Getting a users Physical Location
+
+
+Resetting Gelocation Preferences 
+
+
+Handling Async Operators with Functional Components
+
+
+Refactoring from Functional to Class Components

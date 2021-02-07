@@ -1,0 +1,263 @@
+How to Get Help
+Reach out Udemy QA.
+ste.grider@gmail.com
+
+
+Join Our Community
+
+
+Our First App
+
+Best to write code.
+We are going to build a language translator.
+We are going to use a API.
+
+codesandbox.io/s/react-yud4c
+
+We're goint to write a lot of weird code very quickly
+You don't need to memorize any of it!
+We'll discuss it all in the next video.
+
+import Field from './components/field';
+import Languages from './components/languages';
+import Translate from './components/translate';
+
+
+<Field/>
+<Languages/>
+<hr />
+
+<Translate/>
+
+
+Critical Questions
+A Few Questions
+
+-What was that 'App' function?
+It is a plaintext function JSX that returns.
+Components handles input.
+
+ App Component
+ Produces JSX and handles user events
+ returns JSX
+
+ JSX
+ Set of instructions to tell React what
+ content we want to show on the screen
+
+ JSX Elements
+ Tell React to create a normal HTML element
+ -div
+ -span
+ -h1
+ -table
+ -nr
+ -input
+
+ Tell React to show another component
+ -Field
+ -Languages
+ -Translate
+
+
+
+-How did some content get displayed on the screen?
+ Whenever it loads makes a HTTP-request.
+ It will get the index.html file back.
+ bundle will get a bundle-file back.
+ bundle.js have the files index.js,app.js,react.js
+ Call tha App component and get back all the JSX and turn it into HTML.
+ In the index document.getElementById("root") will render all the React
+ files in there.
+
+
+-What's the difference between React and ReactDOM?
+ React
+  -Knows how to work with components
+  -Called a 'reconciler'
+
+ ReactDOM
+  -Knows how to take instructions on what we
+   want to show and turn it into HTML
+
+  -Called a 'renderer'
+
+
+-What was all the 'useState' stuff?
+ -Function for working with React's 'state' system
+ -State is used to keep track of data that changes
+  over time
+ -Used to make React update the HTML on the screen
+
+
+
+
+Installing Node JS
+Install/Update Node JS
+Install create-react-app
+Generate 
+
+
+
+
+
+Important Update About React App
+
+updated 1-7-2020
+
+In the upcoming lecture, we will be generating our first React project by using Create React App. As of v3.3.0 the library has dropped support for global installs.
+
+The recommended method for generating a project is now:
+npx create-react-app my-app
+
+If you get any errors about missing templates or how a global Create React App install is no longer supported even when using this command, you likely need to remove the global package from your system:
+
+npm uninstall -g create-react-app
+
+* Note - some students have mentioned that an extra step was needed for Mac / Linux users to manually delete the folder:
+
+rm -rf /usr/local/bin/create-react-app
+
+
+
+
+Generating a React Project
+npm stands for package manager.
+-g stands for globally.
+create-react-app
+
+
+Why Create React App?
+There a ton of dependcies that we are relying on.
+Babel ES5 is version of JavaScripts.
+-ES2015
+-ES2016
+-ES2017
+-ES2018
+-ES2019
+
+New syntaxes that helps us as a developers.
+Each of supports of different like ES2017-ES2019
+have poor support for theses Javascripts.
+Babel spits out of a new version before it get's to the
+user.
+
+
+Exploring a Create-React-Project
+-src: Folder where we put all the source code
+	  we write
+
+-public: Folder that stores static files,
+		 like images
+
+-node_modules: Folder that contains all of
+			   project dependcies
+
+-package.json: Records our project dependcies
+			   and configures our project
+
+-package-lock.json: Records the exact version
+					of packages that we install
+
+-README.md:	Instructions on how to use this project
+
+
+
+Starting and Stopping a React App
+npm start
+Automatically kicked over to the browser.
+
+Stopping the React App
+-Press Control+C at the terminal
+
+Starting the app up in the future
+-Run npm start in the project directory
+
+Once the app is started, you can visit
+at localhost:3000
+
+Two common errors:
+Port in use message
+
+localhost:3000 doesn't work
+
+
+
+Javascript Module Systems
+
+Create index.js
+//Import the React and ReactDOM libraries
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+
+
+//Create a react component
+
+
+
+//Take the react component and show it on the screen
+
+
+
+Important Note about Live Reloading
+
+There appears to be an issue in CRA in regards to fast refresh when code changes are made to the index.js file:
+
+https://github.com/facebook/create-react-app/issues/9904
+
+Manually refreshing will show the changes, also, any changes to components deeper in the file structure will cause an auto-refresh as expected.
+
+One workaround noted suggests putting the following in the index.js which enables reloading:
+
+if (module.hot) {
+  module.hot.accept();
+}
+
+
+Note - If you have spaces in your project directory name, reloading throughout the whole application can also fail.
+
+
+Displaying Content with Functional Components
+
+What is a React Component is a function or a class.
+-That produces HTML to show the user -> Using JSX
+-And handles feedback from the user -> Using Event Handlers
+
+
+
+//Import the React and ReactDOM libraries
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+
+
+//Create a react component
+const App = () => {
+	return <div> Hi There!</div>	
+};
+
+
+
+//Take the react component and show it on the screen
+ReactDOM.render(
+ <App/>,
+ document.querySelector('#root')
+);
+
+
+Course Resources
+
+Finished code is attached to each applicable lecture throughout the course. If you get stuck at any point you can download the code and compare it against yours with a diff tool like Diffchecker or VSCode's built-in comparison tool.
+
+
+The diagrams shown in the course can be found in the Github repository here:
+https://github.com/StephenGrider/redux-code
+
+
+https://www.diffchecker.com
+
+
+Common Questions About My Enviroment
+
+

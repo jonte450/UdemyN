@@ -5,21 +5,61 @@ night light mode.
 
 
 HTML and CSS Setup
+Add navbar and smooth scrooling.
+And after that adding some section
+tags to illustrate Projects and Contact.
 
 
 Content In Our Project
+Favicon to choose icons
+Google-Font to choose special fonts
+Undraw to choose SVG images.
 
 
 Toggle Theme With JavaScript
+Adding toogle button with [data-theme:dark] to the webpage.
+After you toggle the button you change the theme with the
+attribut.set and after that you change the theme.
 
 
 Toggle Theme With JavaScript 2
+Adding toggle with light mode and dark
+mode. And switching betweem these modes
+with a button and switching between two
+kinds of dark images and light images.
+
 
 
 LocalStorage To Save User Data
+Use localStorage to store the mode of the last.
+And when the visitor visits again it will 
+moving the switch automatically.
+
 
 
 Code Review
+We could perhaps apply DRY Don't Repeat Yourself.
+Only have one function that handles the dark and
+light mode and with a ternary operator.
 
 
 Exercise: Making Code More Readable
+
+In the previous video, we saw how we could clean up the code a little bit. What else would you change based on what you just saw?
+
+Perhaps these lines...
+
+toggleDarkLightMode(true)
+toggleDarkLightMode(false)
+
+The issue with the above is that the true/false doesn't really tell you what the function will do. Instead, maybe we can make this clearer. How would you solve this? Scroll to see my solution.....
+
+toggleDarkLightMode('dark')
+toggleDarkLightMode('light')
+The other thing I would change is to create two constants at the top of the JavaScript file:
+
+const DARK_THEME = 'dark'
+const LIGHT_THEME = 'light'
+
+Why?
+This way you can replace all the places you are using 'dark' and light' with these variables and in the future, if you ever need to change the strings, you have only one location to change them in. Or if you want to add another theme, it would be easier to do so!

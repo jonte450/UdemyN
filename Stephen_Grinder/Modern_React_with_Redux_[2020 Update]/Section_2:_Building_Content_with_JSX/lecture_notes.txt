@@ -1,0 +1,100 @@
+What is JSX?
+JSX gets converted to JavaScript code.
+A tool made by babeljs
+A call to React.createElement().
+Write the function calls and easier for us to understand it.
+
+
+
+Converting HTML to JSX
+
+JSX
+-Special dialect of JS(its not HTML!)
+
+-Browsers don't understand JSX code!
+ We write JSX then run tools to turn
+ it into normal JS
+
+-Very similar in form and function to HTML with
+ a couple differences
+
+
+codepen.io
+
+return (<div>
+<label class="label" for="name"> Enter name:</label>
+<input id="name" type="text" />
+<button>Submit</button>
+</div>)
+
+This creates an error in React.
+
+
+
+
+
+Inline Styling with JSX
+
+JSX vs HTML
+-Adding custom styling to an element uses different syntax
+-Adding a class to an element uses different syntax
+-JSX can reference JS variables 
+
+HTML: <div style="background-color: red;"> </div>
+JSX: <div style={{backgroundColor:'red'}}></div>
+
+
+Converting Styling to JSX Format
+<button style={{backgroundColor: 'blue', color:'white'}}>
+
+
+
+Class vs ClassName
+We don't want conflicting with the JavaScript
+in the browser so we use instead
+<label className="label" for="name">
+
+
+
+Referencing JS Variables in JSX
+const buttonText = 'Click Me!'
+<button>
+{buttonText}
+</button>
+
+We can reference JavaScript variables in
+the JSX-tags.
+
+
+Values JSX Can't Show
+{text:'Click Me'};
+Objects are not valid as a React Child.
+We can't reference on Object to an element.
+
+
+
+Finding Forbidden Property Names
+Warning:Invalid DOM property 'for'.
+for is htmlFor.
+
+
+Coding Exercise 1: Test Your Knowledge: JSX Interpolation
+
+<script type="text/babel" data-presets="env,react">
+    function getTime() {
+        return (new Date()).toLocaleTimeString()
+    }
+
+    // Creates a functional component
+    const App = () => {
+        return (
+            <div>
+                <div>Current Time:</div>
+                <h3>{getTime()} PM</h3>
+            </div>
+        );
+    }
+
+    // Renders the App component into a div with id 'root'
+    ReactDOM.render(<App />, document.querySelector('#root'));
+</script>

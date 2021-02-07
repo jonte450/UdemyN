@@ -1,0 +1,127 @@
+Module Introduction
+This Module just a quick refresher.
+
+
+JavaScript in a NutShell
+JavaScript Summary
+-Weakly Typed Language
+ -No explicit assignmen
+ -Data types can be dynamically switched
+
+
+-Object-Oriented Language
+ -Data can be organized in logical objects
+ -Primitive and reference types
+
+
+-Versatile Language
+ -Runs in browser & directly on a PC/ server
+ -Can perform a broad variety of tasks
+
+
+
+Refreshing the Core Syntax
+var name = 'Max';
+var age = 29;
+var hobbies = true;
+
+function summarizeUser(userName,userAge,userHasHobby){
+	return ' Name is ' + userName + ' age is ' + userAge + 'u ser has hobby ' + userHasHobby;	
+}
+console.log(name);
+
+console.log(summarizeUser(name,age,hobbies))
+
+
+
+
+let & const
+var is a keyword is a old syntax.
+
+const name = 'Max';
+let age = 29;
+let userHasHobby = true;
+
+name = 'maximilian';
+age = 30;
+
+Assign to a const raise a error.
+
+
+
+Understanding Arrow Functions
+const summarizeUser = (userName,userAge,userHasHobby) => {
+		return ' Name is ' + userName + ' age is ' + userAge + 'u ser has hobby ' + userHasHobby;
+}
+
+const add = (a,b) => a + b;
+
+
+console.log(add(1,2));
+
+
+Working with Objects, Properties & Methods
+const person = {
+	name: 'Max',
+	age: 29,
+	greet(){
+	 console.log('Hi, I am ' + this.name);
+	}
+};
+
+person.greet();
+
+
+
+Arrays & Array Methods
+const hobbies = ['Sports','Coocking', 1, true];
+You can have for-loops.
+for(let hobby of hobbies){
+	console.log(hobby);
+}
+
+console.log(hobbies.map( hobby =>  {
+	return 'Hobby: ' + hobby;
+}));
+
+Use the map method to apply on every element.
+
+
+Arrays, Objects & Reference Types
+
+
+
+Understanding Spread & Rest Operators
+const copiedArry = [...hobbies];
+Added to the new array.
+We got no nested array.
+
+
+const toArray (...args) => {
+	return args;
+}
+
+Restoperats stash up the arguments up to a array.
+
+
+
+Destructiring
+const printName = ({name, age}) => {
+	console.log(name);
+}
+
+printName(person);
+
+It pulls out the values from object.
+
+
+Async Code & Promises
+
+
+Template Literals
+
+
+Wrap Up 
+
+
+Useful Resources & Links

@@ -1,0 +1,516 @@
+Three Tenets of Components 
+Component Nesting: A Component can be shown inside of another
+
+Component Resuability: We want to make Components that can be
+					   easily reused through out application
+
+Component Configuration: We should be able to configure a component
+						 when it is created
+
+
+
+Application Overview
+We begin very naive and begin to
+create a single components and
+see problems are with it.
+
+
+
+Semantic UI CDN Link
+
+In the upcoming lecture, we will be getting the link for the Semantic UI CDN to put in our index.html. Since some students have been confused about which link to get I am placing it here for easy access:
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+
+
+
+
+Getting Some Free Styling
+import React from 'react';
+import ReactDom from 'react-dom';
+
+
+const App = () => {
+	return <div> Hi there! </div>
+};
+
+
+ReactDom.render(<App/>, document.querySelector('#root'));
+semantic-ui.com
+
+
+
+Naive Component Approach
+
+
+import React from 'react';
+import ReactDom from 'react-dom';
+
+
+const App = () => {
+	return (<div className="ui container comments">
+			<div className="comment">
+			<a href="/" className="avatar">
+			<img alt="avatar"/>
+			</a>
+			<div className="content">
+			<a href="/" className="author">
+			Sam
+			</a>
+			<div className="metadata">
+			<span className="date"> Today at 6:00PM</span>
+			</div>
+			<div className="text">Nice blog post!</div>
+
+			</div>
+			</div>
+			</div>
+	);
+};
+
+
+ReactDom.render(<App/>, document.querySelector('#root'));
+
+
+Important Note about Faker Images
+
+In the next lecture, we will be adding images to our component using the Faker library. Faker itself used the uifaces.com API, which was recently shut down. One of our students found the issues thread here:
+
+https://github.com/Marak/faker.js/issues/464#issuecomment-729893751
+
+There are two options to resolve. The first is to use a different image other than "avatar" from the list Faker provides, such as image, animals, people, or cats. 
+
+<img alt="avatar" src={faker.image.image()} />
+If the images are loading slow or not working, you also have the option of using the Unsplash API:
+
+<img alt="avatar" src='https://source.unsplash.com/random' />
+ 
+Note - The only endpoint that shows unique random images is faker.image.image(). Otherwise, you will instead see repeated images.
+
+
+Specifying Images in JSX
+faker js
+This helps you generate some fake data to your project.
+npm install --save faker
+
+import React from 'react';
+import ReactDom from 'react-dom';
+import faker from 'faker';
+
+
+const App = () => {
+	return (<div className="ui container comments">
+			<div className="comment">
+			<a href="/" className="avatar">
+			<img alt="avatar" src={faker.image.avatar()}/>
+			</a>
+			<div className="content">
+			<a href="/" className="author">
+			Sam
+			</a>
+			<div className="metadata">
+			<span className="date"> Today at 6:00PM</span>
+			</div>
+			<div className="text">Nice blog post!</div>
+
+			</div>
+			</div>
+			</div>
+	);
+};
+
+
+ReactDom.render(<App/>, document.querySelector('#root'));
+
+
+
+
+Duplicating a Single Component
+import React from 'react';
+import ReactDom from 'react-dom';
+import faker from 'faker';
+
+
+const App = () => {
+	return (<div className="ui container comments">
+			<div className="comment">
+			<a href="/" className="avatar">
+			<img alt="avatar" src={faker.image.avatar()}/>
+			</a>
+			<div className="content">
+			<a href="/" className="author">
+			Sam
+			</a>
+			<div className="metadata">
+			<span className="date"> Today at 6:00PM</span>
+			</div>
+			<div className="text">Nice blog post!</div>
+
+			</div>
+			</div>
+			</div>
+	);
+};
+This is getting messy because you must copy and paste for every user.
+You must scroll everything and it getting harder to make update
+to the real page.
+
+ReactDom.render(<App/>, document.querySelector('#root'));
+
+
+Extracting JSX to New Components
+
+Creating a Resuable 
+Configurable Component
+-Indentify the JSX that appears to be duplicated
+
+-What is the purpose of that block of JSX?
+ Think of a descriptive name for what it does
+
+-Create a new file to a house this new component - it
+ should have the same name as the component
+
+-Create a new component in the file, paste JSX into it
+
+-Make the new component configurable by using React's
+ 'props' system
+
+CommentDetail.js
+
+import React from 'react';
+
+const CommentDetail = () => {
+return(
+
+			<div className="comment">
+			<a href="/" className="avatar">
+			<img alt="avatar" src={faker.image.avatar()}/>
+			</a>
+			<div className="content">
+			<a href="/" className="author">
+			Sam
+			</a>
+			<div className="metadata">
+			<span className="date"> Today at 6:00PM</span>
+			</div>
+			<div className="text">Nice blog post!</div>
+
+			</div>
+			</div>
+	
+)};
+
+
+
+Component Nesting
+
+
+import React from 'react';
+import faker from 'faker';
+
+const CommentDetail = () => {
+return(
+
+			<div className="comment">
+			<a href="/" className="avatar">
+			<img alt="avatar" src={faker.image.avatar()}/>
+			</a>
+			<div className="content">
+			<a href="/" className="author">
+			Sam
+			</a>
+			<div className="metadata">
+			<span className="date"> Today at 6:00PM</span>
+			</div>
+			<div className="text">Nice blog post!</div>
+
+			</div>
+			</div>
+	
+)};
+
+export default CommentDetail;
+Makes this component available to another file.
+
+import React from 'react';
+import ReactDom from 'react-dom';
+import faker from 'faker';
+import CommentDetail from './CommentDetail';
+
+const App = () => {
+	return(<div className="ui container comments">
+			<CommentDetail/>
+			</div>
+
+ );
+};
+
+React's Props System
+
+-App  -> CommentDetail
+	  -> CommentDetail
+	  -> CommentDetail
+
+Component Hierarchy
+
+
+Props
+System for passing data from a parent
+component to a child component        -> Goal is to customize or configure
+										 a child component
+
+
+Passing and Receiving Props
+A child cannot pass a props from a child to a parent.
+Providing Props from parent to child
+
+<CommentDetail author="Same" />
+
+
+import React from 'react';
+import faker from 'faker';
+
+const CommentDetail = (props) => {
+return(
+
+			<div className="comment">
+			<a href="/" className="avatar">
+			<img alt="avatar" src={faker.image.avatar()}/>
+			</a>
+			<div className="content">
+			<a href="/" className="author">
+			{props.author}
+			</a>
+			<div className="metadata">
+			<span className="date"> Today at 6:00PM</span>
+			</div>
+			<div className="text">Nice blog post!</div>
+
+			</div>
+			</div>
+	
+)};
+
+
+
+
+Passing Multiple Props
+
+<CommentDetail author="Same" timeAgo="Today at 4:45PM"/>
+
+
+import React from 'react';
+import faker from 'faker';
+
+const CommentDetail = (props) => {
+return(
+
+			<div className="comment">
+			<a href="/" className="avatar">
+			<img alt="avatar" src={faker.image.avatar()}/>
+			</a>
+			<div className="content">
+			<a href="/" className="author">
+			{props.author}
+			</a>
+			<div className="metadata">
+			<span className="date">{props.timeAgo}</span>
+			</div>
+			<div className="text">Nice blog post!</div>
+
+			</div>
+			</div>
+	
+)};
+
+
+
+
+Passing Props - Solutions
+
+
+import React from 'react';
+import faker from 'faker';
+
+const CommentDetail = props => {
+return(
+
+			<div className="comment">
+			<a href="/" className="avatar">
+			<img alt="avatar" src={props.avatar}/>
+			</a>
+			<div className="content">
+			<a href="/" className="author">
+			{props.author}
+			</a>
+			<div className="metadata">
+			<span className="date">{props.timeAgo}</span>
+			</div>
+			<div className="text">{props.content}</div>
+
+			</div>
+			</div>
+	
+)};
+
+
+
+Component Reuse
+We are going to create a new componment.
+A Approval Card.
+
+
+
+Implementing an Approval Card
+
+import React from 'react';
+
+const ApprovalCard = () => {
+  return (
+    <div className="ui card">
+      <div className="content">Are you sure?</div>
+      <div className="extra content">
+        <div className="ui two buttons">
+          <div className="ui basic green button">Approve</div>
+          <div className="ui basic red button">Reject</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ApprovalCard;
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import faker from 'faker';
+import CommentDetail from './CommentDetail';
+import ApprovalCard from './ApprovalCard';
+
+const App = () => {
+  return (
+    <div className="ui container comments">
+      <ApprovalCard />
+      <CommentDetail
+        author="Sam"
+        timeAgo="Today at 4:45PM"
+        content="Nice blog post"
+        avatar={faker.image.avatar()}
+      />
+      <CommentDetail
+        author="Alex"
+        timeAgo="Today at 2:00AM"
+        content="I like the subject"
+        avatar={faker.image.avatar()}
+      />
+      <CommentDetail
+        author="Jane"
+        timeAgo="Yesterday at 5:00PM"
+        content="I like the writing"
+        avatar={faker.image.avatar()}
+      />
+    </div>
+  );
+};
+
+ReactDOM.render(<App />, document.querySelector('#root'));
+
+Showing Custom Children
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import faker from 'faker';
+import CommentDetail from './CommentDetail';
+import ApprovalCard from './ApprovalCard';
+
+const App = () => {
+  return (
+    <div className="ui container comments">
+      <ApprovalCard>
+      <CommentDetail
+        author="Sam"
+        timeAgo="Today at 4:45PM"
+        content="Nice blog post"
+        avatar={faker.image.avatar()}
+      />
+      </ApprovalCard>
+      <CommentDetail
+        author="Alex"
+        timeAgo="Today at 2:00AM"
+        content="I like the subject"
+        avatar={faker.image.avatar()}
+      />
+      <CommentDetail
+        author="Jane"
+        timeAgo="Yesterday at 5:00PM"
+        content="I like the writing"
+        avatar={faker.image.avatar()}
+      />
+    </div>
+  );
+};
+ReactDOM.render(<App />, document.querySelector('#root'));
+
+The ApprovalCard has the CommentDetail now as a child.
+With props.children
+
+
+
+Component Reuse
+
+
+Exercise - Props
+
+<script type="text/babel" data-presets="env,react">
+    const App = () => {
+        return (
+            <div>
+                <Message header="Changes in Service" text="We just updated our privacy policy here to better service our customers."/>
+            </div>
+        );
+    }
+    
+    const Message = (props) => {
+        return (
+            <div className="ui message">
+                <div className="header">{props.header}</div>
+                <p>{props.text}</p>
+            </div>
+        );
+    }
+    
+
+    // Renders the App component into a div with id 'root'
+    ReactDOM.render(<App />, document.querySelector('#root'));
+
+
+
+
+Exercise - Children
+
+<script type="text/babel" data-presets="env,react">
+    const App = () => {
+        return (
+            <div>
+                <segment>
+                    <div className="ui icon header">
+                        <i className="pdf file outline icon"></i>
+                        No documents are listed for this customer.
+                    </div>
+                    <div className="ui primary button">Add Document</div>
+                </segment>
+                <segment>
+                    <h4 class="ui header">For Your Information</h4>
+                    <p>
+                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+                    </p>
+                </segment>
+            </div>
+        );
+    }
+    
+    
+    const segment = (props) => {
+        return <div className="ui placeholder segment">{props.children}</div>
+    }
+
