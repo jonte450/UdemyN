@@ -1,0 +1,438 @@
+Module Introduction
+
+What's In This Module?
+-How Does The Web Work (Refresher)?
+
+-Creating a Node.js Server
+
+-Using Node Core Modules
+
+-Working with Requests & Responses(Basics)
+
+-Asynchronous Code & The Event Loop
+
+
+
+How The Web Works
+-User/Client(Browser)
+      | enters
+-http://my-page.com
+	  |
+-Domain Lookup
+
+Ŕequests to the server
+ 
+A response is sent back to the Client
+DONE with a Protocol: HTTP, HTTPS
+
+-HTTP: Hyper Text Transfer Protocol
+ A Protocol for Transferring Data
+ which is understood by Browser
+ and Server
+
+-HTTPS: Hyper Text Transfer Protocol Secure
+ HTTP + Data Encryption(during Transmission)
+
+
+
+Creating a Node Server
+
+Core Modules
+-http: Launch a server, send requests
+-https: Launch a SSL server
+-fs
+-path
+-os
+
+
+app.js
+const http = require('./http');
+
+const server = http.createServer((req,res) => {
+	console.log(req);
+});
+
+
+server.listen(3000);
+
+
+
+
+The Node Lifecycle & Event Loop
+
+Node.js Program Lifecycle
+
+node app.js -> Start Script -> Parse Code, ///next row 
+Register Variables, Functions->Event Loop
+
+Event Loop: Keeps on running as long there are
+			event listeners registred
+
+
+Node.js is just running on one thread.
+This Event-Loop is a core thing.
+
+process.exit(): quits the process
+
+
+
+
+Controlling the Nodejs Process
+
+Want to quit your running Node.js server?
+
+You can always do that by pressing CTRL + C in the terminal/ command prompt window where you started your server (i.e. where you ran node app.js).
+
+
+Understanding Requests
+
+When we have the requests with headers.
+There we see the host.
+Which browser we used.
+We see the methods and the headers.
+
+
+app.js
+const http = require('./http');
+
+const server = http.createServer((req,res) => {
+	console.log(req.url, req.method, req.headers);
+});
+
+
+server.listen(3000);
+
+
+Sending Responses
+
+We are using res to send a Html as a response
+
+app.js
+const http = require('./http');
+
+const server = http.createServer((req,res) => {
+	console.log(req.url, req.method, req.headers);
+	res.setHeader('Content-Type','text/html');
+	res.write('<html>');
+	res.write('<head><title>My First Page</title><head>');
+	res.write('<body><h1>Hello from my Node.js Server!</h1><body>');
+	res.write('</html>');
+	res.end();
+});
+
+
+server.listen(3000);
+
+
+
+
+Request & Response Headers
+
+On both requests and responses, Http headers are added to transport metadata from A to B.
+
+The following article provides a great overview of available headers and their role: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
+
+Whilst this article is a great resource, especially to dive deeper, please don't learn this list by heart though! You'll encounter many of these headers throughout the course and I'll explain them when we need them.
+
+
+
+
+Routing Requests
+
+
+app.js
+const http = require('./http');
+
+const server = http.createServer((req,res) => {
+	const url = req.url;
+	if(url == '/'){
+	res.write('<html>');
+	res.write('<head><title>My First Page</title><head>');
+
+	res.write('<body><form action='/message' method="POST">
+	<input type="text name="message">Send<button type="submit"><button>
+	</form><body>');
+
+	res.write('</html>');
+	return res.end();
+
+	}
+	console.log(req.url, req.method, req.headers);
+	res.setHeader('Content-Type','text/html');
+	res.write('<html>');
+	res.write('<head><title>My First Page</title><head>');
+	res.write('<body><h1>Hello from my Node.js Server!</h1><body>');
+	res.write('</html>');
+	res.end();
+});
+
+
+server.listen(3000);
+
+
+
+Redirecting Requests
+
+app.js
+const http = require('http');
+const fs = require('fs')
+
+const server = http.createServer((req,res) => {
+	const url = req.url;
+	const method = req.method;
+	if(url == '/'){
+	res.write('<html>');
+	res.write('<head><title>My First Page</title><head>');
+
+	res.write('<body><form action='/message' method="POST">
+	<input type="text name="message">Send<button type="submit"><button>
+	</form><body>');
+
+	res.write('</html>');
+	return res.end();
+
+	}
+
+	if(url === '/message' && method === 'POST'){
+		fs.writeFileSync('message.txt', 'DUMMY');
+		res.statusCode = 302;
+		res.setHeader('Location', '/');
+		return res.end()M
+	}
+
+	console.log(req.url, req.method, req.headers);
+	res.setHeader('Content-Type','text/html');
+	res.write('<html>');
+	res.write('<head><title>My First Page</title><head>');
+	res.write('<body><h1>Hello from my Node.js Server!</h1><body>');
+	res.write('</html>');
+	res.end();
+});
+
+
+server.listen(3000);
+
+
+
+Parsing Request Bodies
+
+Example: Incoming Requests
+
+Stream->Request Body Part 2->Request Body Part 3->Request Body Part 3->
+Request Body Part 4->  Fully Parsed
+
+Uses a buffer to get the chunks.
+Buffer is a concept to take in chunks.
+
+
+app.js
+const http = require('http');
+const fs = require('fs')
+
+const server = http.createServer((req,res) => {
+	const url = req.url;
+	const method = req.method;
+	if(url == '/'){
+	res.write('<html>');
+	res.write('<head><title>My First Page</title><head>');
+
+	res.write('<body><form action='/message' method="POST">
+	<input type="text name="message">Send<button type="submit"><button>
+	</form><body>');
+
+	res.write('</html>');
+	return res.end();
+
+	}
+	
+	if(url === '/message' && method === 'POST'){
+
+		const body = [];
+		req.on('data', (chunk) => {
+			console.log(chunk);
+			body.push(chunk);
+		});
+
+		req.on('end', () => {
+		const parsedBody = Buffer.concat(body).toString();
+		const message = parsedBody.split('=')[1];
+		fs.writeFileSync('message.txt', 'DUMMY');
+		})
+
+		res.statusCode = 302;
+		res.setHeader('Location', '/');
+		return res.end()M
+	}
+
+	console.log(req.url, req.method, req.headers);
+	res.setHeader('Content-Type','text/html');
+	res.write('<html>');
+	res.write('<head><title>My First Page</title><head>');
+	res.write('<body><h1>Hello from my Node.js Server!</h1><body>');
+	res.write('</html>');
+	res.end();
+});
+
+
+server.listen(3000);
+
+
+
+Understanding Event Driven Code Execution
+Node js uses a pattern when it passes a function to
+a function.
+Node js uses this pattern oftenly.
+Node js have internally event that's listen.
+
+Node js checks for event listener.
+
+Some code might run sometime in the future.
+Nodejs had to pause the whole time.
+We don't want to block our code.
+
+
+
+Blocking and Non-Blocking Code
+fs.writeFileSync('message.txt', message);
+This code will run synchrounsy.
+Other code will not run after.
+
+
+
+Node.Js- Looking Behind the Scenes
+
+Single Thread, Event Loop & Blocking Code
+
+
+Incomming Requests -> <Your Code> Single JavaScript Thread
+
+Event-Loop is automatically started.
+It is to handling event-callbacks.
+
+File-operations are sent to a worker pool.
+Runs on different threads.
+Do that in background.
+
+
+The Event Loop
+Is handling all the call-backs.
+Keeps on looping.
+On each iteration execute setTimeout Callbacks.
+
+Pending Callbacks.
+Execute I/O-related Callbacks
+That were deffered.
+Poll-phase look for new I/O events.
+
+Close Callbacks
+Execute all close' event callbacks
+process.exit if it is not any callbacks left.
+
+
+
+Using the Node Module System
+
+routes.js
+
+
+const fs = require('fs')
+
+const requestHandler = (req,res) => {
+  const url = req.url;
+  const method = req.method;
+
+		if(url == '/'){
+	res.write('<html>');
+	res.write('<head><title>My First Page</title><head>');
+
+	res.write('<body><form action='/message' method="POST">
+	<input type="text name="message">Send<button type="submit"><button>
+	</form><body>');
+
+	res.write('</html>');
+	return res.end();
+
+	}
+	
+	if(url === '/message' && method === 'POST'){
+
+		const body = [];
+		req.on('data', (chunk) => {
+			console.log(chunk);
+			body.push(chunk);
+		});
+
+		req.on('end', () => {
+		const parsedBody = Buffer.concat(body).toString();
+		const message = parsedBody.split('=')[1];
+		fs.writeFileSync('message.txt', 'DUMMY');
+		})
+
+		res.statusCode = 302;
+		res.setHeader('Location', '/');
+		return res.end()M
+	}
+
+	console.log(req.url, req.method, req.headers);
+	res.setHeader('Content-Type','text/html');
+	res.write('<html>');
+	res.write('<head><title>My First Page</title><head>');
+	res.write('<body><h1>Hello from my Node.js Server!</h1><body>');
+	res.write('</html>');
+	res.end();
+};
+ 
+
+module.exports = requestHandler;
+
+In the app.js file
+
+const http = require('http');
+const routes = require('./routes.js');
+
+const server = http.createServer(routes);
+
+server.listen(3000);
+
+
+Wrap Up
+
+How the Web Works
+
+Client => Request => Server => Response => Client
+
+Program Lifecycle & Event Loop
+-Node.js runs non-blocking JS code and uses an event-driven
+ code ('Event Loop') for running your logic
+
+-A Node program exits as soon as there is no more
+ work to do
+
+-Note:The createServer() event never finishes by
+ default
+
+
+Asynchronous Code
+-JS code is non-blocking
+-Use callbacks and events
+ => Order changes!
+
+This loops keeps up going.
+
+Reqeusts & Responses
+-Parse request data in chunks(Streams & Buffers)
+-Avoid "double responses"
+
+
+Node.js & Core Modules
+-Node.js ships with multiple core modules(http, fs, path, ...)
+-Core Modules can be imported into any file to be used there
+-Import via require('module')
+
+
+The Node Module System
+-Import via require(./path-to-file) for custom files
+ or require('module') fpr core & third-party modules
+
+-Export via module.exports (for multiple exports)
+
