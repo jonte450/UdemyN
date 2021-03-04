@@ -1,0 +1,471 @@
+Module Introduction
+Express.js
+Don't re-invent the Wheel!
+
+It is a Frameworks that helps you outsource
+and write cleaner code.
+
+What's In This Module?
+-What is Express.js?
+-Using Middleware
+-Working with Requests & Responses
+-Routing
+-Returning HTML Pages (Files)
+
+
+What is Express.js?
+What and Why?
+-Server Logic is Complex!
+-You want to focus on your Bussniess Logic,
+ not on the nitty gritty Details!
+-Use a Framework for the Heavy Lifting!
+ -Framework: Helper functions,tools & rules
+  that help you build your application
+
+Alternatives to Express.js
+ -Vanilla Node.js
+ -Adonis.js
+ -Koa
+ -Sails.js
+
+
+
+Installing Express.js
+
+npm install --save express
+
+const http = require('http');
+const express = require('express');
+const app = express();
+
+const server = http.createServer(app);
+
+server.listen(3000);
+
+
+
+Adding Middleware
+
+It's all about Middleware
+Request -> Middleware next() (req, res, next)=> {...}
+Middleware -> Middleware res.send() (req, res, next) => {...}
+Middleware -> Response
+
+You have the possibility to have multiple choices with functions
+to handle requests.
+
+
+const http = require('http');
+const express = require('express');
+const app = express();
+app.use((req, res, next) => {
+	console.log('In the MiddleWare');
+	next();
+});
+
+app.use((req, res, next) => {
+	console.log('In another MiddleWare');
+});
+
+const server = http.createServer(app);
+
+server.listen(3000);
+
+next() helps to continue to another middleware.
+
+
+How Middleware Works
+
+const http = require('http');
+const express = require('express');
+const app = express();
+app.use((req, res, next) => {
+	console.log('In the MiddleWare');
+	next();
+});
+
+app.use((req, res, next) => {
+	console.log('In another MiddleWare');
+	res.send('<h1> Hello from Express!</h1>');
+});
+
+const server = http.createServer(app);
+
+server.listen(3000);
+
+
+
+
+
+
+Express.js - Looking Behind the Scenes
+Checking the send function.
+Analysis the send are sending.
+If it does send does other things.
+
+
+const express = require('express');
+const app = express();
+app.use((req, res, next) => {
+	console.log('In the MiddleWare');
+	next();
+});
+
+app.use((req, res, next) => {
+	console.log('In another MiddleWare');
+	res.send('<h1> Hello from Express!</h1>');
+});
+
+app.listen(3000);
+
+We remove http.
+
+
+Handling Different Routes
+
+const express = require('express');
+const app = express();
+
+app.use('/add-product',(req, res, next) => {
+	console.log('In another MiddleWare');
+	res.send('<h1> The add product page!</h1>');
+});
+
+app.use('/',(req, res, next) => {
+	console.log('In another MiddleWare');
+	res.send('<h1> Hello from Express!</h1>');
+});
+
+app.listen(3000);
+
+You can use some paths.
+
+
+
+Assignment 2: Time to Practice - Express.js
+
+
+Parsing incomming Requests
+
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+This will parse things from the form.
+
+app.use(bodyParser.urlencoded());
+
+
+app.use('/add-product', (req, res, next) => {
+	res.send('<form action="/product"><input type="text" name ="title"><button type="Submit">Add Product</button>');
+});
+
+app.use('/product', (req, res, next) => {
+	console.log(req.body);
+	res.redirect('/');
+});
+
+
+app.use('/', (req, res, next) => {
+	res.send('<h1>Hello from Express!</h1>');
+});
+
+
+
+Liminting Middleware Execution to Post Requests
+
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+app.use(bodyParser.urlencoded({extended: false}));
+
+
+app.use('/add-product', (req, res, next) => {
+	res.send('<form action="/product"><input type="text" name ="title"><button type="Submit">Add Product</button>');
+});
+
+Allow to filter for get requests when you are using app.get or app.post.
+
+app.post('/product', (req, res, next) => {
+	console.log(req.body);
+	res.redirect('/');
+});
+
+
+app.use('/', (req, res, next) => {
+	res.send('<h1>Hello from Express!</h1>');
+});
+
+
+
+Using Express Router
+Adding routes.
+One is admin.js another one is shop.js
+
+Admin.js
+
+
+const express = require('express');
+const router = express.Router();
+
+
+router.get('/add-product', (req, res, next) => {
+	res.send('<form action="/product"><input type="text" name ="title"><button type="Submit">Add Product</button>');
+});
+
+
+router.post('/product', (req, res, next) => {
+	console.log(req.body);
+	res.redirect('/');
+});
+
+module.exports = router;
+
+In App.js file
+
+const app = express();
+
+app.use(bodyParser.urlencoded({extended: false}));
+
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
+
+app.use(adminRoutes);
+app.use(shopRoutes);
+
+app.listen(3000);
+
+In shop.js file
+
+const express = require('express');
+const router = express.Router();
+
+app.get('/', (req, res, next) => {
+	res.send('<h1>Hello from Express!</h1>');
+});
+
+module.exports = router;
+
+
+
+
+Adding a 404 Error Page
+
+const app = express();
+
+app.use(bodyParser.urlencoded({extended: false}));
+
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
+
+app.use(adminRoutes);
+app.use(shopRoutes);
+
+
+app.use((req, res, next) => {
+	res.status(404).send('<h1>Page not found! </h1>');
+});
+
+app.listen(3000);
+
+
+Filtering Paths
+
+const app = express();
+
+app.use(bodyParser.urlencoded({extended: false}));
+
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
+
+We can add this as a filter if the requests starts
+with the same path.
+
+app.use('/admin',adminRoutes);
+app.use(shopRoutes);
+
+
+app.use((req, res, next) => {
+	res.status(404).send('<h1>Page not found! </h1>');
+});
+
+app.listen(3000); 
+
+
+Creating HTML Pages
+
+Creating a folder views.
+
+add-product.html
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Product</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Shop</a></li>
+                <li><a href="/admin/add-product">Add Product</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <form action="/add-product" method="POST">
+            <input type="text" name="title">
+            <button type="submit">Add Product</button>
+        </form>
+    </main>
+</body>
+
+</html>
+
+shop.html
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Product</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Shop</a></li>
+                <li><a href="/admin/add-product">Add Product</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>My Products</h1>
+        <p>List of all the products...</p>
+    </main>
+</body>
+
+</html>
+
+
+
+Serving HTML Pages
+
+const express = require('express');
+const path = require('path');
+
+const router = express.Router();
+
+router.get('/', (req, res, next) => {
+  res.sendFile(path.join(__dirname,'...','views','shop.html'));
+});
+
+module.exports = router;
+
+Returning s 404 Page
+
+
+Using a Helper Function for Navigation
+
+Creating a new folder.
+path.js file
+
+const path = require('path');
+
+module.exports = path.dirname(process.mainModule.filename);
+
+
+const express = require('express');
+const path = require('path');
+const rootDir = require('../util/path');
+
+const router = express.Router();
+
+router.get('/', (req, res, next) => {
+  res.sendFile(path.join(rootDir, views','shop.html'));
+});
+
+module.exports = router;
+
+
+Styling our Pages
+Too much CSS and this is not a CSS course.
+
+
+Serving Files Statically
+Create a public folder.
+app.use(express.static(path.join(__dirname, 'public')));
+Use static for CCS files.
+
+
+Assignment 3: Time to Practice - Navigaton 
+
+
+Wrap up
+What is Express.js?
+
+-Express.js is Node.js framework -a
+ package that adds a bunch of utility
+ functions and tools and a clear set
+ of rules on how the app should be
+ built (middleware)
+
+-It's highly extensible and other packages
+ can be plugged into it (middleware!)
+
+ 
+Middleware, next() and res()
+-Express.js relies heavily on middleware
+ functions you can easily add them by
+ calling use()
+
+-Middleware functions handle a request
+ and should call next() to forward the
+ request to the next function in line
+ or send a response
+
+Routing
+ -You can filter requests by path and method
+
+ -If you filter by method, paths are matched exactly
+  otherwise, the first segment of a URL is matched
+
+ -You can use the express.Router to split your routes
+  across files elegantly
+
+
+Serve Files
+ -You're not limited to serving dummy
+  text as a response
+
+ -You can sendFile()s to your users-e.g. HTML files
+
+ -If a request is directly made for a file
+  (e.g. a .css file is requested), you can
+  enable static serving for such files via
+  express.static()
+
+
+Useful resources & Links
+
+Attached, you find the source code for this section.
+
+When using my source code, make sure to run npm install in the extracted folder!
+
+Useful resources:
+
+Express.js Official Docs: https://expressjs.com/en/starter/installing.html
