@@ -1,0 +1,121 @@
+How We Got Here - React Native History
+
+To run on a particular Operating System.
+Iphone and Android.
+
+You can't use a Android on Iphone.
+Iphones and Android the 2 major operating system in the world.
+They run 99%.
+We have to build 2 apps for IOS and for Android.
+With App-store you have to use Objective-C
+And with Google App-Store we have to use Java.
+
+People can get creative.
+Web-view bundle into mobile application.
+Web-view was a little slower.
+We have the weird app.
+Progressive-Web-App is a website to download.
+Use the web-workers.
+They are more web.
+
+
+How We Got Here 2- React Native History
+
+Native-like app you need 2 separate teams to work on.
+Native-like tools.
+Converts the code to native code.
+React-Native took off with native.
+Cordova runs with the web.
+React Native with JavaScript that get's converted to native code.
+To have something to write to keep up.
+
+
+Why React Native?
+-Big Community
+-Big Companies
+-Cross Platform
+
+
+Our First React Native App
+React-Native docs.
+Go off on your own.
+Interactive web-app.
+Placed in a queue.
+Expo app a app to download it.
+Core Components and Native Components.
+The view is the building block.
+Core components are the building blocks for us to use.
+React Native compiles this automatic to native code or native view.
+Gives us API's.
+
+There is a path when you working with React.
+Without React-library you can't use React-Native.
+
+React Native Components
+-Community Components
+-Core Components
+-Your Native Components
+
+1. import React from 'react';
+   import {StyleSheet, Text, View} from 'react-native';
+
+
+2. function ZeroToMastery(){
+	return (
+	<View style={style.containet}>
+	<Text>
+	It's me Mario!
+	</Text>
+	</View>
+	);
+    }
+
+ 3. const styles = StyleSheet.create({
+ container: {
+  marginTop: 50,
+  color: 'red',
+ },
+ });
+
+ 4. export default ZeroToMastery;
+ 
+
+
+React Native Internals
+React-Native that have componments.
+Writing the React-Native code in JavaScript.
+View-Layer that get's converted.
+
+Logic-That happens when a user click on  a image.
+1. React-Native compiles the views to Native Views
+2. Needs a JavaScript Engine that have a engine.
+   A JavaScript core.
+   Communicates with the telephone.
+
+
+Compile into Native Views and Native Platform/API
+RN Bridge will talk to the Native Platform/API
+
+Called Message Broken Pattern.
+Creates Threads to comunicate.
+Communication between the main thread and the javascript thread.
+
+
+React Native Internals 2
+React-Native allows us to comunicate with IOS.
+And Git-Repo has Object-C and Java.
+
+Chrome will use V8 engine.
+Babel JavaScript Compiler and use arrow functions.
+
+Using Hermes is new way of using JavaScriptCore.
+
+
+
+Exercise: Is There CSS?
+
+Is there CSS in React
+Technically React Native dosen't have CSS.
+React Native uses a mobile tools.
+We have StyleSheet class.
+Layout it uses Flexbox.

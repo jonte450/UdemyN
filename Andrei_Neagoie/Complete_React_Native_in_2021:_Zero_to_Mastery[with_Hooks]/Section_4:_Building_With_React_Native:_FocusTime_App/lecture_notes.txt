@@ -1,0 +1,439 @@
+FocusTime DEMO
+The App we are going to build is going to help you to 
+focus on.
+
+If you are doing a choir.
+We want to focus on that Task.
+We are going to focus 20 min.
+We can switch the amount of time.
+We want to pause cut it short.
+Éven after we exit the app we are going to 
+through.
+There a lot of curve-balls that we are going to
+Throw on you.
+
+
+
+Introduction To Expo
+Make you fall in love with React Native.
+There a lot to be learn.
+Get's you building fully performly apps.
+You can do development on your locally.
+
+
+
+Getting Ready To Hit The Ground
+1.Create An Expo Account
+2.Get A Snack
+3.Code Focus Time
+
+
+
+Who Likes Snacks?
+We are mainly focus on creating.
+We are seeing it on the simulator.
+There are limited possibilities to queue up.
+
+
+
+Running Snacks On Your Device
+We can run into our own device.
+expo.
+Download the Expo App and you can see your App
+live.
+ 
+
+
+Running The FocusTime Demo On Your Device
+Run the expo app to see how it should work!
+
+
+Proper Preparation Prevents Poor Snacking
+
+We add some simple hello world here!
+
+import * as React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import Constants from 'expo-constants';
+
+// You can import from local files
+
+// or any pure javascript modules available in npm
+import { Card } from 'react-native-paper';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <Text>Hello World!</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 50,
+  }
+});
+
+
+Quick Recap On What We've Done So Far
+
+It is going to show if your phone is connected.
+Hello World!,
+The ability to code from our browser.
+Quickly from the browser.
+
+A Rundown Of What's In Our Snack
+But being to visualize you is hard thing.
+React is one piece of the puzzle.
+Pulling the right components that we need.
+Position it on the.
+Give the text a specific color.
+
+Export the main thing expo-constants.
+See the function body.
+Refrencing the DOC container.
+Familiar to flexbox.
+
+It is a way to make the UI fit.
+Container is the top-level.
+StyleSheet.create has some optimizations.
+
+
+
+
+Building A Simple Navigaton
+
+import React, { useState } from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+
+// You can import from local files
+
+// or any pure javascript modules available in npm
+import { Card } from 'react-native-paper';
+
+export default function App() {
+  const [focusSubject, setFocusSubject] = useState('Hello World!');
+  return (
+    <View style={styles.container}>
+      <Text>{focusSubject ? <Text> I have a subject </Text>: <Text> I don't have a subject!</Text> }</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 50,
+  
+  },
+});
+
+
+
+Creating Our Focus Feature
+
+We create an js component.
+
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+
+
+export const Focus = () => {
+  return (
+    <View style={styles.container}>
+    <Text> What would you like to focus on? </Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 50,
+  
+  },
+});
+
+In the App.js file we import our Component!
+
+import React, { useState } from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import {Focus} from './src/features/focus/Focus';
+
+export default function App() {
+  const [focusSubject, setFocusSubject] = useState(null);
+  return (
+    <View style={styles.container}>
+      {focusSubject ? (
+        <Text> I have a subject </Text>)
+        : (
+          <Focus/>
+        )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#252',
+  
+  },
+});
+
+
+Adding An Input
+
+We are just adding some text-input here.
+
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import {TextInput } from "react-native-paper";
+
+
+export const Focus = () => {
+  return (
+    <View style={styles.container}>
+    <View style={styles.titleContainer}>
+    <Text style={styles.title}> What would you like to focus on? </Text>
+    <View style={styles.inputContainer}>
+    <TextInput/>
+    </View>
+    </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 50,
+  },
+  titleContainer: {
+    flex: 0.4,
+    padding: 15,
+    justifyContent: "center"
+  },
+  title: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 15
+  },
+  inputContainer:{
+    paddingTop: 20,
+  }
+});
+
+
+Storing The Focus Item
+
+Created a button from React Native and after that
+gave it the right properties in Styles
+
+
+import React from "react";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
+
+export const RoundedButton = ({
+  style = {},
+  textStyle = {},
+  size = 125,
+  ...props
+}) => {
+  return (
+    <TouchableOpacity
+      style={[styles(size).radius, style]}
+      onPress={props.onPress}
+    >
+      <Text style={[styles(size).text, textStyle]}>{props.title}</Text>
+    </TouchableOpacity>
+  );
+};
+
+const styles = (size) =>
+  StyleSheet.create({
+  radius: {
+    borderRadius: size / 2,
+    width: size,
+    height: size,
+    alignItems:'center',
+    borderColor: "#fff",
+    borderWidth: 2 
+    },
+  text: {color: "#fff", fontSize: size / 3},
+  });
+
+
+
+
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import {TextInput } from "react-native-paper";
+import { RoundedButton} from "../../components/RoundedButton";
+
+export const Focus = () => {
+  return (
+    <View style={styles.container}>
+    <View style={styles.titleContainer}>
+    <Text style={styles.title}> What would you like to focus on? </Text>
+    <View style={styles.inputContainer}>
+    <TextInput style={{flex: 1, marginRight: 23}} />
+    <RoundedButton size={50} title="+" />
+    </View>
+    </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 50,
+  },
+  titleContainer: {
+    flex: 0.4,
+    padding: 15,
+    justifyContent: "center"
+  },
+  title: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 15
+  },
+  inputContainer:{
+    paddingTop: 20,
+    flexDirection: "row"
+  }
+});
+
+
+
+
+RoundedButton On Press
+
+In the previous video we saw how we can create our own Button by leveraging `TouchableOpacity`. One thing we however need to add in order to make sure the button triggers is the `onPress` method. This method allows us to trigger the touch event of the user. Don't forget it!!
+
+
+
+<TouchableOpacity style={[styles(size).radius, style]}> 
+    <Text 
+        style={[styles(size).text, textStyle]} 
+        onPress={props.onPress}>
+            {props.title}
+    </Text> 
+</TouchableOpacity>
+
+
+
+Storing Our Focus Input
+
+Focus.js
+
+export const Focus = ({ addSubject }) => {
+  const [tmpItem, setTmpItem] = useState(null);
+  return (
+    <View style={styles.container}>
+    <View style={styles.titleContainer}>
+    <Text style={styles.title}> What would you like to focus on? </Text>
+    <View style={styles.inputContainer}>
+    <TextInput style={{flex: 1, marginRight: 23}} onSubmitEditing={({ nativeEvent}) => {
+      set(nativeEvent.text)
+    }} 
+    />
+    <RoundedButton size={50} title="+" />
+    </View>
+    </View>
+    </View>
+  );
+}
+
+In the App.js
+
+import React, { useState } from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import {Focus} from './src/features/focus/Focus';
+
+export default function App() {
+  const [focusSubject, setFocusSubject] = useState(null);
+  return (
+    <View style={styles.container}>
+      {focusSubject ? (
+        <Text> I have a subject </Text>)
+        : (
+          <Focus addSubject={setFocusSubject}/>
+        )}
+        <Text>{focusSubject}</Text>
+    </View>
+  );
+}
+
+
+
+Quick Note On The Docs
+You can go to the TextInput to store on how 
+it looks in the React Native Docs.
+
+Reach out to the React Native DOCS.
+
+
+
+Cleaning Up Our Styling
+
+
+Building The Timer Feature
+
+
+Building The Countdown Feature
+
+
+Building The Countdown Feature 2
+
+
+Building The Countdown Feature 3
+
+
+A Quick Note On Error Screens
+
+
+Reporting The Progress
+
+
+Preset Timing Buttons
+
+
+Keeping The App Awake
+
+Vibrating When Finished With A Task
+
+Going Full Circle
+
+
+Quick Cleanup
+
+Quick Review Of What We Have Accomplished So Far
+
+
+Clearing The Subject
+
+Storing Focus History
+
+
+Storing Focus History With Statuses
+
+Building The Focus History List
+
+Clearing The Focus History
+
+A Quick Note On AsyncStorage
+
+
+Reflection Time!
+
+Reflection Time Part 2!
+
+Reflection Time Part 3!
+
+Reflection Time Part 4!
+

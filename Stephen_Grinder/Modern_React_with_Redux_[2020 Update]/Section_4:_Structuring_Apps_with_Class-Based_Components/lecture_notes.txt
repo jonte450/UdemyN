@@ -1,20 +1,219 @@
 Class-Based Components
 
+A component is a -> Funtion or Class -> That produces HTML to
+										show the user         -> and handles feedback
+                                                                 from the user
+										(Using JSX)              (Using Event Handlers)
+
+How React Used to Be
+
+-Functional Components
+ -Can produce JSX to show content
+  to the user
+
+-Class Components
+ -Can produce JSX to show content to
+  the user
+
+ -Can use the Lifecycle Method system
+  to run code at specific points in
+  time
+
+ -Can use the 'state' system to update
+  content on the screen
+
+
+How React Is Now
+
+Class Components
+ -Can produce JSX
+  to show content
+  to the user
+
+ -Can use the Lifecycle Method
+  system to run code at specific
+  points in time
+
+ -Can use the 'state' system
+  to update content on the screen
+
+
+Function Components
+
+-Can produce JSX to show content
+ to the  user
+
+-Can use Hooks to run code at
+ specific points in time
+
+-Can use Hooks to access
+ state system and update
+ content on screen
+
+Class Components vs Function Components
+-Have the same capabilities
+ ...So...which one should we use?
+
+ -Companies with established projects
+  are using Class-based components
+
+ -Companies with newer projects may
+  be using Class-based or Function-based
+  components
+
+
+Really Hard -> Learn Hooks -> Learn Redux
+
+Much Easier -> Learn Class Components -> Learn Hooks -> Learn Redux
+
+
 
 
 Application Overview
 
+Functional Components: Good for simple content
+
+Class Components: Good for just about everything else
+
+Benefits of Class Components
+-Easier code organization
+-Can use 'state'(another React system)
+-Easier to handle user input
+-Understands lifecycle events
+-Easier to do things when the app first starts
+
+A silly application that compares the month and the hemisphere.
+
+App Challenges
+-Need to get the users physical location
+-Need to determine the current month
+-Need to change text and styling based on location + month
+
+
 
 Scaffolding the App
+Add an semantic-ui to the html.index.
+
+Create an new file called index.js
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const App = () => {
+  return <div>Hi there!</div>;
+};
+
+ReactDOM.render(<App />, document.querySelector('#root'));
+
+Has code to determine location + month
+
+App -> It is winter -> SeasonDisplay (Shows different text/icons based on props)
+
+Create an file called SeasonDisplay.js
+
+import React from 'react';
+
+const SeasonDisplay = () => {
+  return <div>Season Display</div>;
+};
+
+export default SeasonDisp
+
 
 
 Getting a users Physical Location
 
+We are going to use something called Geolocation API
+developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
+
+Make some changes to the index.js file.
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const App = () => {
+  window.navigator.geolocation.getCurrentPosition(
+    position => console.log(position),
+    err => console.log(err)
+  );
+
+  return <div>Hi there!</div>;
+};
+
+ReactDOM.render(<App />, document.querySelector('#root'));
+
+We are going to use the latitude to decide the weather.
+
+
 
 Resetting Gelocation Preferences 
+A good understanding if the call fails.
+If the user Deny to show location.
+We want to develop our application even if the user declines.
+
 
 
 Handling Async Operators with Functional Components
 
+Understand why functional component is not a good choice here.
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const App = () => {
+  window.navigator.geolocation.getCurrentPosition(
+    position => console.log(position),
+    err => console.log(err)
+  );
+
+  return <div>Hi there!</div>;
+};
+
+ReactDOM.render(<App />, document.querySelector('#root'));
+
+Timeline
+JS file loaded by browser -> App component gets created -> 
+-> We call geolocation service -> App returns JSX, gets rendered to page as HTML
+-> ... -> We get result of geolocation
+
 
 Refactoring from Functional to Class Components
+
+It takes some time to recieve the result from the geolocation
+APP.
+
+And the App is already rendered.
+
+Time
+JS file loaded by browser -> App component gets created -> We call geolocation service
+-> App returns JSX, gets rendered to page as HTML -> ... -> We get result of geolocation
+-> Tell the component to rerender itself with this new information
+
+Rules Of Class
+-Must be a Javascript Class
+-Must extend (subclass) React.Component
+-Must define a 'render' method that returns some
+ amount of JSX
+
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class App extends React.Component {
+	render(){
+	window.navigator.geolocation.getCurrentPosition(
+	position => console.log(position),
+	err => console.log(err)
+	);
+
+	return <div>Latitude: </div>;
+	}
+}
+
+ReactDOM.render(<App />, document.querySelector('#root'));
+
+React Methods borrows methods allows us into our class.
+We are subclassing the functional component.

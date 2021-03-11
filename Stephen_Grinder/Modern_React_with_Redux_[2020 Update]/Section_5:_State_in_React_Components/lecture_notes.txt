@@ -1,0 +1,256 @@
+The Rules of State
+
+The Refactoring is not going to solve the problem.
+
+Rules of State
+-Only usable with class components
+
+
+-You will confuse props with state :(
+
+-'State' is a JS object that contains data
+  relevant to a component
+
+-Updating 'state' on a component causes the component
+ to (almost) instantly rerender
+
+-State must be initialized when a component is created
+
+-State can only be updated using the function 'setState'
+
+
+
+
+Important Note About super(props)
+
+
+In the upcoming lecture, we will be adding a constructor to our component and passing super(props) like so:
+
+  constructor(props) {
+    super(props);
+  }
+Some students have noticed that their code editors have added a strikethrough to the super and a note that it has been deprecated.
+
+The use of super(props) has not been deprecated, per the official React docs:
+
+https://reactjs.org/docs/react-component.html#constructor
+
+This not an actual error or issue, and you do not need to refactor your code to fix anything. This is a bug between TypeScript, React, and the code editor.
+
+----------------------------------------------------------
+
+You can read about the issue and the ongoing development to resolve the bug in the following TypeScript threads:
+
+Resolve microsoft/TypeScript#40511
+
+PROBLEM:
+
+The final overload here marks the second argument ("context") as optional. This optional Legacy Context argument is deprecated, so the overload is correctly marked as deprecated. However, because the deprecated argument is itself optional, even perfectly acceptable super(props) calls in plain JS are flagged as deprecated.
+
+SOLUTION:
+
+Modify the first overload so that it accepts props simply of P. The "context" argument of the second overload should no longer be marked as optional. After testing in VS Code, this resolves the incorrect behavior, while preserving the deprecation warning from JSDocs when providing a second parameter.
+
+https://github.com/DefinitelyTyped/DefinitelyTyped/pull/47784
+
+https://github.com/microsoft/TypeScript/issues/39509
+
+
+
+
+Intializing State Through Constructors
+
+
+We implement the constructor is the very first function
+That is being called before anything else.
+
+This base class has some overwritten some React components.
+We call super(props) it is call to the parent class.
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { lat: null };
+  }
+
+  // React says we have to define render!!
+  render() {
+    window.navigator.geolocation.getCurrentPosition(
+      position => console.log(position),
+      err => console.log(err)
+    );
+
+    return <div>Latitude: </div>;
+  }
+}
+
+ReactDOM.render(<App />, document.querySelector('#root'));
+
+
+
+Updating State Properties
+
+We intially the state and the latitude.
+We assigned the this.state in the constructor.
+We might initilize and and access it.
+Instantly update our state object.
+The render method will be called  every time.
+So we moved out window.navigator.
+Always when we update we will call setState function.
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    // THIS IS THE ONLY TIME we do direct assignment
+    // to this.state
+    this.state = { lat: null };
+
+    window.navigator.geolocation.getCurrentPosition(
+      position => {
+        // we called setstate!!!!
+        this.setState({ lat: position.coords.latitude });
+      },
+      err => console.log(err)
+    );
+  }
+
+  // React says we have to define render!!
+  render() {
+    return <div>Latitude: {this.state.lat}</div>;
+  }
+}
+
+ReactDOM.render(<App />, document.querySelector('#root'));
+
+
+
+
+App Lifecycle Walkthrough
+
+Time-Lap
+Instance of App component is created -> App components 'constructor'
+										function gets called
+
+-> State object is created and assigned to the 'this.state' property
+
+-> We call geolocation service
+
+-> React calls the components render method
+
+-> App returns JSX, gets rendered to page as HTML
+
+-> We get result of geolocation!
+
+-> We update our state object the state of a component
+
+-> React calls our 'render' method a second time
+
+-> Render method returns some (updated) JSX
+
+-> React takes the JSX and updates content on the screen
+
+
+
+Handling Errors Gracefully
+
+
+We are going to update error property message.
+This time we are blocking the location.
+Pass in a object.
+When we call a state.
+Chaning the state.
+
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    // THIS IS THE ONLY TIME we do direct assignment
+    // to this.state
+    this.state = { lat: null, errorMessage: '' };
+
+    window.navigator.geolocation.getCurrentPosition(
+      (position) => {
+        // we called setstate!!!!
+        this.setState({ lat: position.coords.latitude });
+      },
+      (err) => {
+        this.setState({ errorMessage: err.message });
+      }
+    );
+  }
+
+  // React says we have to define render!!
+  render() {
+    return (
+      <div>
+        Latitude: {this.state.lat}
+        <br />
+        Error: {this.state.errorMessage}
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.querySelector('#root'));
+
+
+
+Conditionally Rendering Content
+
+We want to make sure it is not rendering a error message.
+Making it show the right load-up.
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    // THIS IS THE ONLY TIME we do direct assignment
+    // to this.state
+    this.state = { lat: null, errorMessage: '' };
+
+    window.navigator.geolocation.getCurrentPosition(
+      position => {
+        // we called setstate!!!!
+        this.setState({ lat: position.coords.latitude });
+      },
+      err => {
+        this.setState({ errorMessage: err.message });
+      }
+    );
+  }
+
+  // React says we have to define render!!
+  render() {
+    if (this.state.errorMessage && !this.state.lat) {
+      return <div>Error: {this.state.errorMessage}</div>;
+    }
+
+    if (!this.state.errorMessage && this.state.lat) {
+      return <div>Latitude: {this.state.lat}</div>;
+    }
+
+    return <div>Loading!</div>;
+  }
+}
+
+ReactDOM.render(<App />, document.querySelector('#root'));
+

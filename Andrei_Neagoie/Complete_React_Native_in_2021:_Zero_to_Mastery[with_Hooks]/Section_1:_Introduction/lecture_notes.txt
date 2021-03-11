@@ -1,0 +1,28 @@
+Course Outline
+Build any OS-app.
+-React Native Foundations
+-React
+-Native Navigation
+-Firebase
+-CCS in JS
+-Payments stripe
+-Google Maps API
+-Animations
+
+ -iOS
+ -Android
+ -Device Permissions
+ -Styling + Layout
+ -React Hooks
+ -Debugging
+ -Available on the App Store
+ -Get it on Google Play
+
+
+
+
+
+Meeting Bruno
+Bruno hired you as a lead developer.
+People love to be on the phone.
+Build a mobile app to discover new places to eat.

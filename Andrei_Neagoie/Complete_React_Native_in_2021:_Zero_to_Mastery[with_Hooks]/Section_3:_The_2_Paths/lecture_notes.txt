@@ -1,0 +1,31 @@
+The 2 Paths
+-I don't know React
+-I know React
+
+Created a Appendix Section.
+When you have the fundamentals with React.
+
+
+React DOM vs React Native
+In React we should use something like tags.
+There is no browser.
+You have to use View-tags.
+React have the React-DOM.
+We are using Native React Componments.
+We have Stylesheet.
+Learn the differences it is the same almost.
+
+
+
+Recommended Setup
+Do you want to test on your Device or you can use 
+a simulator so that you can get feedback.
+You can use the Expo client.
+Ship the React Native to your phone.
+The reason for using Expo.
+You can eject from your App.
+
+
+
+
+Endorsments On LinkedIN
