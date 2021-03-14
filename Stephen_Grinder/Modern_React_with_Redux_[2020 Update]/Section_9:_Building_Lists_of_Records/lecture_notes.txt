@@ -1,0 +1,160 @@
+Rendering Lists
+Discuss how we will create the ImageList.js file.
+
+import React from 'react';
+
+const ImageList = props => {
+  console.log(props.images);
+
+  return <div>ImageList</div>;
+};
+
+export default ImageList;
+
+Wire it into the App.js file.
+And we will comunicate down to the imagelist file.
+
+
+import React from 'react';
+import unsplash from '../api/unsplash';
+import SearchBar from './SearchBar';
+import ImageList from './ImageList';
+
+class App extends React.Component {
+  state = { images: [] };
+
+  onSearchSubmit = async term => {
+    const response = await unsplash.get('/search/photos', {
+      params: { query: term }
+    });
+
+    this.setState({ images: response.data.results });
+  };
+
+  render() {
+    return (
+      <div className="ui container" style={{ marginTop: '10px' }}>
+        <SearchBar onSubmit={this.onSearchSubmit} />
+        <ImageList images={this.state.images} />
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
+
+Review of Map Statements
+
+const numbers = [0,1,2,3,4];
+
+
+let newNumbers = [];
+
+for(let i = 0; i < numbers.length; i++){
+	newNumbers.push(numbers[i] * 10);
+}
+
+Map will return a brand new array.
+
+numbers.map((num) = > {
+	return num * 10;
+});
+
+This is much shorter-
+
+
+
+Rendering Lists of Components
+
+Using the image property.
+It will become indentically.
+
+
+import React from 'react';
+
+const ImageList = props => {
+  const images = props.images.map(image => {
+    return <img src={image.urls.regular} />;
+  });
+
+  return <div>{images}</div>;
+};
+
+export default ImageList;
+
+
+
+
+The Purpose of Keys in Lists
+We got a warning.
+React would prefer we would do something different.
+Warning.
+
+List of 'To Do' Items 					Rendered List
+{id: 1, task: 'Take out thrash'} -> <div>Take out trash</div>
+{id: 2, task: 'Wash the car'} ->  <div>Wash the car </div>
+{id: 3, task: 'Walk the dog'} -> <div>Walk the dog </div>
+{id: 4, task: 'Mow the lawn'} -> <div>Mow the lawn </div>
+
+Now React needs to rerender the image.
+What React want's to know what's in the DOM.
+And skip to rerender it.
+
+To let React to do it we must add key-props.
+
+
+
+Implementing Keys in Lists
+
+Now we are going to render this key.props.
+Assign the key to the element we are returning.
+
+
+import React from 'react';
+
+const ImageList = props => {
+  const images = props.images.map(({ description, id, urls }) => {
+    return <img alt={description} key={id} src={urls.regular} />;
+  });
+
+  return <div>{images}</div>;
+};
+
+export default ImageList;
+
+
+
+Exercise Overview - Lists Building
+Building lists you are going to get as a React Developer.
+Each user will be displayed.
+In each li must be unique.
+
+
+
+Coding Exercise 7: Practicing List Building
+
+
+import React from 'react';
+
+const users = [
+  { id: 1, name: 'Leanne Graham' },
+  { id: 2, name: 'Ervin Howell' },
+  { id: 3, name: 'Clementine Bauch' },
+  { id: 4, name: 'Patricia Lebsack' }
+];
+
+
+export default class App extends React.Component {
+  render() {
+      const renderUsers = users.map(({id,name}) => {
+          return <li key={id}>{name} </li>;
+      }
+      )
+    return (
+        <ul>{renderUsers}</ul>
+    );
+  }
+}
+

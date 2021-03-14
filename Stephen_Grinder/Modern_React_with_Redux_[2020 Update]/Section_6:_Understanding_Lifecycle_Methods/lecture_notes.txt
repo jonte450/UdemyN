@@ -274,29 +274,361 @@ import "semantic-ui-css/semantic.min.css";
 
 
 Showing Icons
+Go to the semantic-ui.com.
+Click on any tag to get the i-tag.
+Produce the name of the sun or snowflake.
+
+
+import React from 'react';
+
+const getSeason = (lat, month) => {
+  if (month > 2 && month < 9) {
+    return lat > 0 ? 'summer' : 'winter';
+  } else {
+    return lat > 0 ? 'winter' : 'summer';
+  }
+};
+
+const SeasonDisplay = props => {
+  const season = getSeason(props.lat, new Date().getMonth());
+  const text =
+    season === 'winter' ? 'Burr, it is chilly' : 'Lets hit the beach';
+  const icon = season === 'winter' ? 'snowflake' : 'sun';
+
+  return (
+    <div>
+      <i className={`${icon} icon`} />
+      <h1>{text}</h1>
+      <i className={`${icon} icon`} />
+    </div>
+  );
+};
+
+export default SeasonDisplay;
 
 
 Extracting Options to Config Objects
+Showing a pattern.
+Create a new configuration.
+Add config object with the text and iconame.
+
+
+import React from 'react';
+
+const seasonConfig = {
+  summer: {
+    text: "Let's hit the beach!",
+    iconName: 'sun'
+  },
+  winter: {
+    text: 'Burr it is cold!',
+    iconName: 'snowflake'
+  }
+};
+
+const getSeason = (lat, month) => {
+  if (month > 2 && month < 9) {
+    return lat > 0 ? 'summer' : 'winter';
+  } else {
+    return lat > 0 ? 'winter' : 'summer';
+  }
+};
+
+const SeasonDisplay = props => {
+  const season = getSeason(props.lat, new Date().getMonth());
+  const { text, iconName } = seasonConfig[season];
+
+  return (
+    <div>
+      <i className={`${iconName} icon`} />
+      <h1>{text}</h1>
+      <i className={`${iconName} icon`} />
+    </div>
+  );
+};
+
+export default SeasonDisplay;
+
 
 
 Adding Some Styling
 
 
+import './SeasonDisplay.css';
+import React from 'react';
+
+const seasonConfig = {
+  summer: {
+    text: "Let's hit the beach!",
+    iconName: 'sun'
+  },
+  winter: {
+    text: 'Burr it is cold!',
+    iconName: 'snowflake'
+  }
+};
+
+const getSeason = (lat, month) => {
+  if (month > 2 && month < 9) {
+    return lat > 0 ? 'summer' : 'winter';
+  } else {
+    return lat > 0 ? 'winter' : 'summer';
+  }
+};
+
+const SeasonDisplay = props => {
+  const season = getSeason(props.lat, new Date().getMonth());
+  const { text, iconName } = seasonConfig[season];
+
+  return (
+    <div className={`season-display ${season}`}>
+      <i className={`icon-left massive ${iconName} icon`} />
+      <h1>{text}</h1>
+      <i className={`icon-right massive ${iconName} icon`} />
+    </div>
+  );
+};
+
+export default SeasonDisplay;
+
+
+
+Adding a classname.
+Placing the icons in the right position.
+Make the text placec on the center.
+
+
+
+Create a CCS-file.
+
+.icon-left {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.icon-right {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.season-display.winter i {
+  color: blue;
+}
+
+.season-display.summer i {
+  color: red;
+}
+
+.season-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.winter {
+  background-color: aliceblue;
+}
+
+.summer {
+  background-color: orange;
+}
+
+
+
 Showing a Loading Spinner
+When we are loading it shows some ugly text.
+We should try to get a better interface.
+Flip over to the Semantic-UI.
+
+Rather than sticking in some JSX-text we should make an new
+componenent.
+
+Spinner.js
+
+import React from 'react';
+
+const Spinner = () => {
+  return (
+    <div className="ui active dimmer">
+      <div className="ui big text loader">Loading...</div>
+    </div>
+  );
+};
+
+export default Spinner;
+
+And in the index.js file.
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import SeasonDisplay from './SeasonDisplay';
+import Spinner from './Spinner';
+
+class App extends React.Component {
+  state = { lat: null, errorMessage: '' };
+
+  componentDidMount() {
+    window.navigator.geolocation.getCurrentPosition(
+      position => this.setState({ lat: position.coords.latitude }),
+      err => this.setState({ errorMessage: err.message })
+    );
+  }
+
+  // React says we have to define render!!
+  render() {
+    if (this.state.errorMessage && !this.state.lat) {
+      return <div>Error: {this.state.errorMessage}</div>;
+    }
+
+    if (!this.state.errorMessage && this.state.lat) {
+      return <SeasonDisplay lat={this.state.lat} />;
+    }
+
+    return <Spinner />;
+  }
+}
+
+ReactDOM.render(<App />, document.querySelector('#root'));
+
+
 
 
 Specifying Default Props
+Anybody to customize a component.
+We put a props inside the spinner.js file.
+We put togheter the spinner component.
+
+
+Inside Spinner.js.
+
+
+import React from 'react';
+
+const Spinner = props => {
+  return (
+    <div className="ui active dimmer">
+      <div className="ui big text loader">{props.message}</div>
+    </div>
+  );
+};
+
+If we forget to add some props into the component.
+We want to use the default props.
+
+Spinner.defaultProps = {
+  message: 'Loading...'
+};
+
+export default Spinner;
+
 
 
 Avoiding Conditionals in Render
+If we had some crazy requirement like having a red-border.
+We are creating a helper function instead.
+
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import SeasonDisplay from './SeasonDisplay';
+import Spinner from './Spinner';
+
+class App extends React.Component {
+  state = { lat: null, errorMessage: '' };
+
+  componentDidMount() {
+    window.navigator.geolocation.getCurrentPosition(
+      position => this.setState({ lat: position.coords.latitude }),
+      err => this.setState({ errorMessage: err.message })
+    );
+  }
+
+  renderContent() {
+    if (this.state.errorMessage && !this.state.lat) {
+      return <div>Error: {this.state.errorMessage}</div>;
+    }
+
+    if (!this.state.errorMessage && this.state.lat) {
+      return <SeasonDisplay lat={this.state.lat} />;
+    }
+
+    return <Spinner message="Please accept location request" />;
+  }
+
+  render() {
+    return <div className="border red">{this.renderContent()}</div>;
+  }
+}
+
+ReactDOM.render(<App />, document.querySelector('#root'));  
+
 
 
 Breather and Review
+We are going through a review.
+
+Benefits of..
+
+Class Components-> Easier Code Organization
+				
+				 -> Can use 'state'
+				    (another React system) -> Easier to handle
+				    						  user input
+
+				-> Understands lifecycle events -> Easier to do things
+												   when the app first
+												   starts
+
+
+Season Config hard to understand.
+If we wanted to move up the component.
+
+Rules of Class Components
+-Must be a JavaScript Class
+-Must extend (subclass) React.Component
+-Must define a 'render' method that returns some amount of JSX
+
 
 
 Coding Exercise 4: Class-Based Components
 
+We maked a render-method and added the keyword
+class.
 
-Exercise Solution - Class-Based Components
+    class UserForm extends React.Component {
+        render() {
+            return(
+            <form>
+                <label>Enter a username:</label>
+                <input />
+            </form>
+            );
+        }
+    }
+
+
 
 Coding Exercise 5: Updating Components with State
+
+
+    class Clock extends React.Component {
+        state = {time: ''};
+        componentDidMount() {
+            setInterval(() => {
+                this.setState({time: 
+                new Date().toLocaleTimeString()})    
+            }, 1000)
+        }
+        
+        render() {
+            return (
+                <div className="time">
+                    The time is: {this.state.time}
+                </div>
+            );
+        }
+    }

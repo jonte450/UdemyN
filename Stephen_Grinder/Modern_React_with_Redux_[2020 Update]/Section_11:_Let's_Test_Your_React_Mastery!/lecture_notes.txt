@@ -1,0 +1,1074 @@
+App Overview
+
+This is an optional app!
+If you want to get to Redux, pause
+now and go to the next section
+
+A Youtube browser Application.
+Entering a Search Request.
+
+We are going to make a Search for some Youtube videos.
+The user can click on each of the videos.
+And it shows some description.
+
+
+
+Component Design
+-SearchBar
+-VideoDetail
+-VideoList
+-VideoItem
+
+And every time the user add a SearchTerm and rendering the whole
+videolist.
+VideoItem is going to contain.
+VideoDetail shows how to play the Youtube playing.
+It is not going to be any fake videos.
+
+App -> Searchbar
+     
+    -> VideoDetail
+
+    -> VideoList -> VideoItem
+
+
+
+
+Scaffolding the App
+
+Create a index.js file.
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/App';
+
+ReactDOM.render(<App />, document.querySelector('#root'));
+
+Creating a App.js file
+
+import React from 'react';
+import SearchBar from './SearchBar';
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <SearchBar />
+      </div>
+    );
+  }
+}
+
+export default App;
+
+Begin to work on the Searchbar.js file.
+
+import React from 'react';
+
+class SearchBar extends React.Component {
+  render() {
+    return <div>SearchBar</div>;
+  }
+}
+
+export default SearchBar;
+
+
+
+
+Reminder on Event Handlers
+We add an link-tag to the Semantic-CSS.
+
+Adding to the Searchbar.js.
+Place a label.
+And save this.
+We got a nice Text-Field.
+UI-Container put in some margin.
+We haven't wired up an eventhandler.
+If we don't allow it to change.
+We cannot put in any text.
+
+
+import React from 'react';
+
+class SearchBar extends React.Component {
+  state = { term: 'lkajflkajsdf' };
+
+  onInputChange = () => {};
+
+  render() {
+    return (
+      <div className="search-bar ui segment">
+        <form className="ui form">
+          <div className="field">
+            <label>Video Search</label>
+            <input
+              type="text"
+              value={this.state.term}
+              onChange={this.onInputChange}
+            />
+          </div>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default SearchBar;
+
+
+Handling From Submittal
+
+Update the onInputChange() handler.
+When we call onChange.
+onSubmit we are going to call onFormSubmit with calling
+event.preventDefault().
+We are to make sure it.
+
+
+import React from 'react';
+
+class SearchBar extends React.Component {
+  state = { term: '' };
+
+  onInputChange = event => {
+    this.setState({ term: event.target.value });
+  };
+
+  onFormSubmit = event => {
+    event.preventDefault();
+
+    // TODO: Make sure we call
+    // callback from parent component
+  };
+
+  render() {
+    return (
+      <div className="search-bar ui segment">
+        <form onSubmit={this.onFormSubmit} className="ui form">
+          <div className="field">
+            <label>Video Search</label>
+            <input
+              type="text"
+              value={this.state.term}
+              onChange={this.onInputChange}
+            />
+          </div>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default SearchBar;
+
+
+
+
+Accessing the Youtube API
+We need to have access to the YouTube Api.
+
+YouTube Api.
+
+As before we are using YouTube API that are going
+to respond to our Axios.
+
+console.developers.google.com
+
+In our browsers.
+
+Enter a new project.
+
+Enable API's and Services.
+
+YouTube Data API.
+
+Create Credentials.
+End up in some form.
+Where are we going to call the API from.
+
+Create a youtube.js with key.
+A very common question.
+Without a little effort the user can get access.
+We can restrict key also.
+We can use some websites only can use the API-key.
+
+
+
+Axios Version Bug & 400 "Required Parameter: part" Error
+
+Updated 8-25-2020
+
+Important Note - Axios v0.20.0 has been released which resolves this bug. These instructions will be left up for anyone who may be using older code and versions of the library.
+
+In the upcoming lecture, we will be creating an axios config instance to call the YouTube API. Starting with release v0.19.0 there is a bug that fails to merge the parameters from the config instance. This will cause a 400 error failure with the message "Required Parameter : part"
+
+Here are two ways we can deal with this:
+
+1. Install a specific version of axios:
+
+npm install axios@0.20.0
+
+2. Move the Params object to the App.js axios call
+
+This is what your axios code should look like at the end of "Putting it all Together" lecture
+
+apis/youtube.js:
+
+import axios from "axios";
+ 
+export default axios.create({
+  baseURL: "https://www.googleapis.com/youtube/v3"
+});
+App.js:
+
+import React from 'react';
+import SearchBar from './SearchBar';
+import youtube from '../apis/youtube';
+ 
+const KEY = "YOUR_KEY";
+ 
+class App extends React.Component {
+ 
+  onTermSubmit = term => {
+    youtube.get("/search", {
+      params: {
+        q: term,
+        part: "snippet",
+        maxResults: 5,
+        key: KEY
+      }
+    });
+  };
+...
+
+
+This is what your axios code should look like at the end of the project:
+
+apis/youtube.js:
+
+import axios from "axios";
+ 
+export default axios.create({
+  baseURL: "https://www.googleapis.com/youtube/v3"
+});
+App.js:
+
+import React from 'react';
+import SearchBar from './SearchBar';
+import youtube from '../apis/youtube';
+import VideoList from './VideoList';
+import VideoDetail from './VideoDetail';
+ 
+const KEY = "YOUR_KEY";
+ 
+class App extends React.Component {
+ 
+...
+ 
+  onTermSubmit = async term => {
+    const response = await youtube.get("/search", {
+      params: {
+        q: term,
+        part: "snippet",
+        maxResults: 5,
+        type: 'video',
+        key: KEY
+      }
+    });
+  };
+...
+
+
+
+Searching for Videos
+
+Check YouTube API.
+We need to make a get request to
+https://www.googleapis.com/youtube/v3/search
+
+Pass in part.
+snippet says to send back a snippet back to the user.
+We put in maxResults.
+
+For our application.
+q for the searchterm.
+
+import axios from 'axios';
+
+const KEY = 'API_KEY';
+
+export default axios.create({
+	baseURL: 'https://www.googleapis.com/youtube/v3',
+	params: { 
+	part: 'snippet',
+    maxResults: 5 ,
+    key: KEY, 
+	}
+});
+
+
+
+Adding a Video Type
+
+
+updated 7-16-2020
+
+At some point in the course you may end up getting Warning: Each child in a list should have a unique "key" prop even after we add a key prop in the "Fixing a Few Warnings" lecture. To ensure that this is not an issue, we should add a type parameter to our axios config object to only search for videos and not playlists.
+
+If your params are in the youtube.js file, add the type parameter like so:
+
+apis/youtube.js:
+
+export default axios.create({
+    baseURL: 'https://www.googleapis.com/youtube/v3',
+    params: {
+      part: 'snippet', 
+      type: 'video',
+      maxResults: 5,
+      key: KEY
+  }
+});
+If your params are in the Apps.js component, add the type parameter like so:
+
+App.js:
+
+  onTermSubmit = term => {
+    youtube.get("/search", {
+      params: {
+        q: term,
+        part: "snippet",
+        type: 'video',
+        maxResults: 5,
+        key: KEY
+      }
+    });
+  };
+
+
+
+
+Putting it All Togheter
+
+
+We create a onTermSubmit.
+We call it every time with onFormSubmit.
+
+
+import React from 'react';
+import SearchBar from './SearchBar';
+import youtube from '../apis/youtube';
+
+const KEY = 'AIzaSyCN6e98GjAfa_d4E4mISSn8uCP6g5b1DvE';
+
+class App extends React.Component {
+  onTermSubmit = (term) => {
+    youtube.get('/search', {
+      params: {
+        q: term,
+        part: 'snippet',
+        maxResults: 5,
+        type: 'video',
+        key: KEY,
+      },
+    });
+  };
+  render() {
+    return (
+      <div className="ui container">
+        <SearchBar onFormSubmit={this.onTermSubmit} />
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
+And in the file SearchBar.js file.
+We make sure we call the callback function.
+
+import React from 'react';
+
+class SearchBar extends React.Component {
+  state = { term: '' };
+
+  onInputChange = event => {
+    this.setState({ term: event.target.value });
+  };
+
+  onFormSubmit = event => {
+    event.preventDefault();
+
+    this.props.onFormSubmit(this.state.term);
+  };
+
+  render() {
+    return (
+      <div className="search-bar ui segment">
+        <form onSubmit={this.onFormSubmit} className="ui form">
+          <div className="field">
+            <label>Video Search</label>
+            <input
+              type="text"
+              value={this.state.term}
+              onChange={this.onInputChange}
+            />
+          </div>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default SearchBar;
+
+And in the App.js.
+
+
+
+Updating State with Fetched Data
+
+Now we are able to get access the list.
+We will going to make sure we can render the videos.
+We need to use async wait.
+
+We only care about the Items property.
+
+
+import React from 'react';
+import SearchBar from './SearchBar';
+import youtube from '../apis/youtube';
+
+const KEY = 'AIzaSyCN6e98GjAfa_d4E4mISSn8uCP6g5b1DvE';
+
+class App extends React.Component {
+  state = { videos: [] };
+
+  onTermSubmit = async (term) => {
+    const response = await youtube.get('/search', {
+      params: {
+        q: term,
+        part: 'snippet',
+        maxResults: 5,
+        type: 'video',
+        key: KEY,
+      },
+    });
+    this.setState({ videos: response.data.items });
+  };
+
+  render() {
+    return (
+      <div className="ui container">
+        <SearchBar onFormSubmit={this.onTermSubmit} />I have{' '}
+        {this.state.videos.length} videos.
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
+
+
+
+Passing State as Props
+
+We are going to create to components
+-VideoList
+-VideoItem
+
+VideoList will render a VideoItem.
+
+import React from 'react';
+
+const VideoList = props => {
+  return <div>{props.videos.length}</div>;
+};
+
+export default VideoList;
+
+In the App.js file.
+We are going to give VideoList the Videos states
+as prop to the VideoList.
+
+
+import React from 'react';
+import SearchBar from './SearchBar';
+import youtube from '../apis/youtube';
+import VideoList from './VideoList';
+
+const KEY = 'AIzaSyCN6e98GjAfa_d4E4mISSn8uCP6g5b1DvE';
+
+class App extends React.Component {
+  state = { videos: [] };
+
+  onTermSubmit = async (term) => {
+    const response = await youtube.get('/search', {
+      params: {
+        q: term,
+        part: 'snippet',
+        maxResults: 5,
+        type: 'video',
+        key: KEY,
+      },
+    });
+
+    this.setState({ videos: response.data.items });
+  };
+
+  render() {
+    return (
+      <div className="ui container">
+        <SearchBar onFormSubmit={this.onTermSubmit} />
+        <VideoList videos={this.state.videos} />
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
+
+
+Rendering a List of Videos
+We could destruct the on the VideoList.
+
+import React from 'react';
+import VideoItem from './VideoItem';
+
+const VideoList = ({ videos }) => {
+  const renderedList = videos.map(video => {
+    return <VideoItem />;
+  });
+
+  return <div>{renderedList}</div>;
+};
+
+export default VideoList;
+
+In the VideoItem.js it will show information
+about the Video.
+
+
+import React from 'react';
+
+const VideoItem = props => {
+  return <div>Video Item</div>;
+};
+
+export default VideoItem;
+
+
+
+
+Rendering Video Thumbnails
+We really want's to put the thumbnail.
+What kind of properties are inside in.
+Destruct the VideoItem.
+video.snippet.title.
+We want the image as well.
+
+
+import React from 'react';
+import VideoItem from './VideoItem';
+
+const VideoList = ({ videos }) => {
+  const renderedList = videos.map((video) => {
+    return <VideoItem video={video} />;
+  });
+
+  return <div>{renderedList}</div>;
+};
+
+export default VideoList;
+
+import React from 'react';
+
+const VideoItem = ({ video }) => {
+  return (
+    <div>
+      <img src={video.snippet.thumbnails.medium.url} />
+    </div>
+  );
+};
+
+export default VideoItem;
+
+
+
+Styling a List
+
+Check the semantic-UI.
+We will use ui relaxed divided list
+And every VideoItem will have item className.
+Add a class ui image.
+
+
+import React from 'react';
+import VideoItem from './VideoItem';
+
+const VideoList = ({ videos }) => {
+  const renderedList = videos.map(video => {
+    return <VideoItem video={video} />;
+  });
+
+  return <div className="ui relaxed divided list">{renderedList}</div>;
+};
+
+export default VideoList;
+
+
+import './VideoItem.css';
+import React from 'react';
+
+const VideoItem = ({ video }) => {
+  return (
+    <div className="video-item item">
+      <img className="ui image" src={video.snippet.thumbnails.medium.url} />
+      <div className="content">
+        <div className="header">{video.snippet.title}</div>
+      </div>
+    </div>
+  );
+};
+
+export default VideoItem;
+
+We need to write a separate css file.
+
+VideoItem.css
+
+.video-item {
+  display: flex !important;
+  align-items: center !important;
+  cursor: pointer;
+}
+
+.video-item.item img {
+  max-width: 180px;
+}
+
+
+Communicating from Child to Parent
+
+One of the styles.
+We had a rule of cursor-pointer.
+And when you click on to the video-item.
+We are going to add SelectedVideo.
+It should update the SelectedVideo.
+We pass a callback onVideoSelect and pass it down to each videoItem.
+
+
+App 
+state
+-videos: [video, ...]
+-selectedVideo: video 
+
+->SearchBar
+->VideoDetail
+->VideoList -> VideoItem
+
+
+Deeply Nested Callbacks
+
+Add selectedVideo to the App.js.
+And add a function onVideoSelect.
+And pass the function to the VideoList.
+
+
+
+
+import React from 'react';
+import SearchBar from './SearchBar';
+import youtube from '../apis/youtube';
+import VideoList from './VideoList';
+
+const KEY = 'AIzaSyCN6e98GjAfa_d4E4mISSn8uCP6g5b1DvE';
+
+class App extends React.Component {
+  state = { videos: [], selectedVideo: null };
+
+  onTermSubmit = async (term) => {
+    const response = await youtube.get('/search', {
+      params: {
+        q: term,
+        part: 'snippet',
+        maxResults: 5,
+        type: 'video',
+        key: KEY,
+      },
+    });
+
+    this.setState({ videos: response.data.items });
+  };
+
+  onVideoSelect = (video) => {
+    console.log('From the App!', video);
+  };
+
+  render() {
+    return (
+      <div className="ui container">
+        <SearchBar onFormSubmit={this.onTermSubmit} />
+        <VideoList
+          onVideoSelect={this.onVideoSelect}
+          videos={this.state.videos}
+        />
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
+import React from 'react';
+import VideoItem from './VideoItem';
+
+const VideoList = ({ videos, onVideoSelect }) => {
+  const renderedList = videos.map(video => {
+    return <VideoItem onVideoSelect={onVideoSelect} video={video} />;
+  });
+
+  return <div className="ui relaxed divided list">{renderedList}</div>;
+};
+
+export default VideoList;
+
+
+And onClick we want to call the callBack function.
+And pass in the video.
+
+import './VideoItem.css';
+import React from 'react';
+
+const VideoItem = ({ video, onVideoSelect }) => {
+  return (
+    <div onClick={() => onVideoSelect(video)} className="video-item item">
+      <img className="ui image" src={video.snippet.thumbnails.medium.url} />
+      <div className="content">
+        <div className="header">{video.snippet.title}</div>
+      </div>
+    </div>
+  );
+};
+
+export default VideoItem;
+
+
+
+Conditional Rendering
+
+We want to update our state to the selectedVideo.
+Show some videoPlayer.
+Skipping the videoPlayer.
+
+
+import React from 'react';
+import SearchBar from './SearchBar';
+import youtube from '../apis/youtube';
+import VideoList from './VideoList';
+import VideoDetail from './VideoDetail';
+
+const KEY = 'AIzaSyCN6e98GjAfa_d4E4mISSn8uCP6g5b1DvE';
+
+class App extends React.Component {
+  state = { videos: [], selectedVideo: null };
+
+  onTermSubmit = async (term) => {
+    const response = await youtube.get('/search', {
+      params: {
+        q: term,
+        part: 'snippet',
+        maxResults: 5,
+        type: 'video',
+        key: KEY,
+      },
+    });
+
+    this.setState({ videos: response.data.items });
+  };
+
+  onVideoSelect = (video) => {
+    this.setState({ selectedVideo: video });
+  };
+
+  render() {
+    return (
+      <div className="ui container">
+        <SearchBar onFormSubmit={this.onTermSubmit} />
+        <VideoDetail video={this.state.selectedVideo} />
+        <VideoList
+          onVideoSelect={this.onVideoSelect}
+          videos={this.state.videos}
+        />
+      </div>
+    );
+  }
+}
+
+export default App;
+
+Creating a VideoDetail.js file.
+We use a if to check if the video is null.
+
+import React from 'react';
+
+const VideoDetail = ({ video }) => {
+  if (!video) {
+    return <div>Loading...</div>;
+  }
+
+  return <div>{video.snippet.title}</div>;
+};
+
+export default VideoDetail;
+
+
+
+Styling the VideoDetail
+
+We can go verify.
+Ge the Video description.
+
+
+import React from 'react';
+
+const VideoDetail = ({ video }) => {
+  if (!video) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <div className="ui segment">
+        <h4 className="ui header">{video.snippet.title}</h4>
+        <p>{video.snippet.description}</p>
+      </div>
+    </div>
+  );
+};
+
+export default VideoDetail;
+
+
+
+Displaying a Video Player
+
+We are going to create a Iframe-tag.
+So we are going to create the Iframe-tag.
+This is easier.
+Use ui embed.
+And use the video ID to get the video.
+After checking the API.
+
+
+import React from 'react';
+
+const VideoDetail = ({ video }) => {
+  if (!video) {
+    return <div>Loading...</div>;
+  }
+
+  const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}`;
+
+  return (
+    <div>
+      <div className="ui embed">
+        <iframe src={videoSrc} />
+      </div>
+      <div className="ui segment">
+        <h4 className="ui header">{video.snippet.title}</h4>
+        <p>{video.snippet.description}</p>
+      </div>
+    </div>
+  );
+};
+
+export default VideoDetail;
+
+
+
+Fixing a Few Warnings
+
+Add some title.
+Add some alt.
+
+import React from 'react';
+
+const VideoDetail = ({ video }) => {
+  if (!video) {
+    return <div>Loading...</div>;
+  }
+
+  const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}`;
+
+  return (
+    <div>
+      <div className="ui embed">
+        <iframe title="video player" src={videoSrc} />
+      </div>
+      <div className="ui segment">
+        <h4 className="ui header">{video.snippet.title}</h4>
+        <p>{video.snippet.description}</p>
+      </div>
+    </div>
+  );
+};
+
+export default VideoDetail;
+
+We need to add some id.
+As a Key-prop.
+
+
+import React from 'react';
+import VideoItem from './VideoItem';
+
+const VideoList = ({ videos, onVideoSelect }) => {
+  const renderedList = videos.map(video => {
+    return (
+      <VideoItem
+        key={video.id.videoId}
+        onVideoSelect={onVideoSelect}
+        video={video}
+      />
+    );
+  });
+
+  return <div className="ui relaxed divided list">{renderedList}</div>;
+};
+
+export default VideoList;
+
+
+
+Make sure add some styling with Grid-System.
+Use Semantic-UI Grid System.
+
+
+import React from 'react';
+import SearchBar from './SearchBar';
+import youtube from '../apis/youtube';
+import VideoList from './VideoList';
+import VideoDetail from './VideoDetail';
+
+const KEY = 'AIzaSyCN6e98GjAfa_d4E4mISSn8uCP6g5b1DvE';
+
+class App extends React.Component {
+  state = { videos: [], selectedVideo: null };
+
+  onTermSubmit = async (term) => {
+    const response = await youtube.get('/search', {
+      params: {
+        q: term,
+        part: 'snippet',
+        maxResults: 5,
+        type: 'video',
+        key: KEY,
+      },
+    });
+
+    this.setState({ videos: response.data.items });
+  };
+
+  onVideoSelect = (video) => {
+    this.setState({ selectedVideo: video });
+  };
+
+  render() {
+    return (
+      <div className="ui container">
+        <SearchBar onFormSubmit={this.onTermSubmit} />
+        <div className="ui grid">
+          <div className="ui row">
+            <div className="eleven wide column">
+              <VideoDetail video={this.state.selectedVideo} />
+            </div>
+            <div className="five wide column">
+              <VideoList
+                onVideoSelect={this.onVideoSelect}
+                videos={this.state.videos}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
+
+
+Defaulting Video Selection
+To show the videos.
+When we do some search take the first video as default.
+CompentDidMount will take some default video.
+While we are waiting selected video.
+
+import React from 'react';
+import SearchBar from './SearchBar';
+import youtube from '../apis/youtube';
+import VideoList from './VideoList';
+import VideoDetail from './VideoDetail';
+
+const KEY = 'AIzaSyCN6e98GjAfa_d4E4mISSn8uCP6g5b1DvE';
+
+class App extends React.Component {
+  state = { videos: [], selectedVideo: null };
+
+  componentDidMount() {
+    this.onTermSubmit('buildings');
+  }
+
+  onTermSubmit = async (term) => {
+    const response = await youtube.get('/search', {
+      params: {
+        q: term,
+        part: 'snippet',
+        maxResults: 5,
+        type: 'video',
+        key: KEY,
+      },
+    });
+
+    this.setState({
+      videos: response.data.items,
+      selectedVideo: response.data.items[0],
+    });
+  };
+
+  onVideoSelect = (video) => {
+    this.setState({ selectedVideo: video });
+  };
+
+  render() {
+    return (
+      <div className="ui container">
+        <SearchBar onFormSubmit={this.onTermSubmit} />
+        <div className="ui grid">
+          <div className="ui row">
+            <div className="eleven wide column">
+              <VideoDetail video={this.state.selectedVideo} />
+            </div>
+            <div className="five wide column">
+              <VideoList
+                onVideoSelect={this.onVideoSelect}
+                videos={this.state.videos}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default App;
