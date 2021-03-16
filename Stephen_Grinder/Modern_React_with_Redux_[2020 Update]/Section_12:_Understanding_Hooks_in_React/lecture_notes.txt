@@ -1,0 +1,2440 @@
+React Hooks
+
+The Hooks System
+
+Much Easier -> Lean Class Components -> Learn Hooks -> Learn Redux
+
+-useState -> Function that lets you use state in a functional component
+-useEffect -> Function that lets you use something like lifecycle methods
+			  in a functional component
+
+-useRef -> Function that lets you create a 'ref' in a function component
+
+Hooks are a way yo write reusable code, instead of more classic techniques
+like Inheritance
+
+
+
+Primitive Hooks
+-useState
+-useEffect
+-useContext
+-useReducer
+-useCallback
+-useMemo
+-useRef
+-useImperativeHandle
+-useLayoutEffect
+-useDebugValue
+
+-> Custom Hook
+ -useTranslate
+  -useState
+  -useEffect
+
+
+Important Note
+
+
+There appears to be a missing video that aimed to describe what will be built over the next few sections and start the app generation. We hope to have a replacement video recorded and posted sometime soon.
+
+To summarize what was to be in this lecture, we will be building a Widget application that will include multiple components. These components will be:
+
+An Accordion component
+
+A Wikipedia API search component
+
+A Dropdown item selection component
+
+A Google Translate API component
+
+We will then wrap up the Widgets application by building our own navigation using JS and React without a third-party library like React Router. This will be used to navigate between the different widget components that were built.
+
+Before continuing on to the next lecture, make sure to generate the project by running the following:
+
+npx create-react-app widgets
+
+
+
+
+App Architecture
+
+-V What is React?
+ React is a JavaScript front-end library.
+ It is used to show content to users and
+ handle user events.
+ Engineers use React to create reusable
+ components
+
+-How do we show content with React?
+
+
+-Why is React useful for engineers?
+
+-App(items) -> Accordian
+
+We want to use the Accordian usable.
+Pass the items props to the Accordian.
+Items will be a list of objects
+-title
+-content
+
+Which question is being clicked by the user.
+
+State called activeIndex.
+Which question is expanded in time.
+
+
+Create an App.js file
+
+Import React from 'react';
+
+export default () => {
+	return <h1>Widgets App</h1>;
+};
+
+
+Create an index.js file.
+
+Import React from 'react';
+Import ReactDOM from 'react-dom';
+Import App from './App';
+
+ReactDOM.render(<App /> document.querySelector('#root'));
+
+
+
+Communicating the Items Prop
+Create a folder called components.
+
+Accordion.js
+
+import React from 'react';
+
+const Accordian = () => {
+	return <h1>Accordion</h1>;
+}
+
+export default Accordion;
+
+
+Import React from 'react';
+import Accordion from './components/Accordion';
+
+const items = [{
+	title: 'What is React?',
+	content: 'React is a front end javascript framework'
+},
+{
+	title: 'Why use React?',
+	content: 'React is a favorite JS library among engineers'
+},
+
+{
+	title: 'How do you use React?',
+	content: 'You use React by creating components'
+}
+
+];
+
+export default () => {
+	return <div>
+	<Accordion items={items}/>
+	</div>
+};
+
+
+import React from 'react';
+
+const Accordian = ({items}) => {
+	return <h1>{items.length}</h1>;
+};
+
+export default Accordion;
+
+
+
+
+
+Building and Styling the Accordion
+
+In the Accordion.js file.
+We give the key-property.
+We want to return React.Fragment.
+
+
+import React from 'react';
+
+const Accordion = ({ items }) => {
+  const renderedItems = items.map((item) => {
+    return (
+      <React.Fragment key={item.title}>
+        <div className="title active">
+          <i className="dropdown icon"></i>
+          {item.title}
+        </div>
+        <div className="content active">
+          <p>{item.content}</p>
+        </div>
+      </React.Fragment>
+    );
+  });
+
+  return <div className="ui styled accordion">{renderedItems}</div>;
+};
+
+export default Accordion;
+
+
+
+Helper Functions in Function Components
+
+We are trying to decide with index that should be expanded.
+Maybe we need a lot of code to work with this.
+In a function-component it is harder to organize the code.
+The functions-component will become a cluttered when you are
+writing helper-functions.
+
+
+import React from 'react';
+
+const Accordion = ({ items }) => {
+  const onTitleClick = (index) => {
+    console.log('Title clicked', index);
+  };
+
+  const renderedItems = items.map((item, index) => {
+    return (
+      <React.Fragment key={item.title}>
+        <div className="title active" onClick={() => onTitleClick(index)}>
+          <i className="dropdown icon"></i>
+          {item.title}
+        </div>
+        <div className="content active">
+          <p>{item.content}</p>
+        </div>
+      </React.Fragment>
+    );
+  });
+
+  return <div className="ui styled accordion">{renderedItems}</div>;
+};
+
+export default Accordion;
+
+
+
+
+Introducing useState
+
+If we had Accordion as a Class-Compenent.
+
+-We first need to initialize a state in a component.
+-And a helper function.
+-And we need to reference the value.
+
+
+
+import React, { useState } from 'react';
+
+const Accordion = ({ items }) => {
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const onTitleClick = (index) => {
+    setActiveIndex(index);
+  };
+
+  const renderedItems = items.map((item, index) => {
+    return (
+      <React.Fragment key={item.title}>
+        <div className="title active" onClick={() => onTitleClick(index)}>
+          <i className="dropdown icon"></i>
+          {item.title}
+        </div>
+        <div className="content active">
+          <p>{item.content}</p>
+        </div>
+      </React.Fragment>
+    );
+  });
+
+  return (
+    <div className="ui styled accordion">
+      {renderedItems}
+      <h1>{activeIndex}</h1>
+    </div>
+  );
+};
+
+export default Accordion;
+
+
+
+Understanding useState
+We imported useState.
+
+const [activeIndex, setActiveIndex] = useState(null);
+Array destructring.
+A shortcut to get access to an array.
+useState gives back an array with 2 elements.
+
+activeIndex reference to a variable.
+setActiveIndex to update a variabe.
+
+If we have another piece of state.
+
+Class Components
+Intialization: state = {activeIndex: 0} 
+Reference: this.state.activeIndex
+Updates: this.setState({activeIndex: 10})
+
+Compared to a functional component.
+Intialization: useState(0);
+Reference: activeIndex
+Updates: setActiveIndex(10);
+
+In functional components we have to call useState several times.
+If we want to have multiple states.
+
+
+
+Setter Functions
+Every time we are going to call a hook.
+We are going to rerender the functional component.
+The Second Component.
+
+
+Expanding the Accordion
+
+Active class name controls if a individuale item.
+If they are equal we wanna display,
+active variable to check if they are equal.
+
+
+import React, { useState } from 'react';
+
+const Accordion = ({ items }) => {
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const onTitleClick = (index) => {
+    setActiveIndex(index);
+  };
+
+  const renderedItems = items.map((item, index) => {
+    const active = index === activeIndex ? 'active' : '';
+
+    return (
+      <React.Fragment key={item.title}>
+        <div className={`title ${active}`} onClick={() => onTitleClick(index)}>
+          <i className="dropdown icon"></i>
+          {item.title}
+        </div>
+        <div className={`content ${active}`}>
+          <p>{item.content}</p>
+        </div>
+      </React.Fragment>
+    );
+  });
+
+  return <div className="ui styled accordion">{renderedItems}</div>;
+};
+
+export default Accordion;
+
+
+
+Exercise Overview
+Building a simple counting component.
+Whenever the user click the button.
+So go ahead.
+
+
+import React from 'react';
+// Don't modify this line. It is here to make React
+// work correctly in this exercise environment.
+const useState = React.useState;
+
+// don't change the Component name "App"
+export default function App() {
+    const onButtonClick = () => {
+        setVal(currentVal+1);
+    };
+    
+    const [currentVal, setVal] = useState(0);
+    
+    return (
+        <div>
+            <button onClick={onButtonClick}>Click Me!</button>
+            
+            <h1>{currentVal}:</h1>
+        </div>
+    );
+}
+
+
+
+
+Creating Additional Widgets
+Instead we are trying to build out widgets.
+And do some searchs.
+Four separate pages.
+We work on each additional widgets.
+We going to have a list of links.
+
+Building 4 separate widgets.
+
+Build each of the widgets first.
+Show you a lot of the React-Hooks.
+Using
+-useEffect
+-useState
+-useRef
+
+
+
+The Search Widget Architecture
+We re going to search on Wikipedi.
+Giving us back results.
+Showing some summary from the article.
+How do we use Wikipedia API.
+
+en.wikipedia.org/w/api.php?action=query&list=search&format=json&srsearch=SEARCHTERM
+
+Building everything within the component.
+-term
+-results
+
+
+
+Scaffolding the Widget
+Make a new file called Search.js.
+
+import React from 'react';
+
+const Search = () => {
+	return <h1>Search</h1>;
+};
+
+export default Search;
+
+
+
+
+Text Inputs with Hooks
+
+We only have the text-Input.
+Add some code.
+There is no submit button.
+We are using hooks.
+We are going assign a handler that keeps
+track of the text.
+We need to create a state with useState().
+
+
+
+import React, { useState } from 'react';
+
+const Search = () => {
+  const [term, setTerm] = useState('');
+
+  return (
+    <div>
+      <div className="ui form">
+        <div className="field">
+          <label>Enter Search Term</label>
+          <input
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}
+            className="input"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Search;
+
+
+When do we Search?
+Where are we going to write the code to make that.
+
+Option #1
+User types in input
+-> onChange event handler called
+-> We take value from input and make requests to API
+-> ....
+-> Get response
+-> Update 'results' piece of state
+-> Component rerenders, we show list of results
+
+Option #2
+User types in input
+-> onChange event handler called
+-> Update 'term' piece of state
+-> Component rerenders
+->We add code to detect that 'term' has changed!
+-> Make requests to API
+-> ....
+-> Get response
+-> Update 'results' piece of state
+-> Component rerenders, we show a list of results
+
+Option #1
+-Search instantly when onChange event triggers
+-> Tightly couples 'onChange' event with search
+
+Option #2
+-Search when 'term' piece of state changes
+-> Can easily trigger a search when other
+   parameters change!
+
+-> Easier to extract code out into a more reusable function!
+
+useEffect helps us to find if the search has been triggered.
+
+
+The useEffect Hook
+Allows function components to use something like lifecycle methods
+
+We configure the hook to run some code automatically in one of three
+scenarios
+
+1. When the component is rerendered for the first time only
+2. When the component is rerendered for the first time and
+   whenever it rerenders
+
+3. When the component is rerendered for the first time and
+   (whenever it rerenders and some piece of data has changed)
+
+
+import React, { useState, useEffect } from 'react';
+
+const Search = () => {
+  const [term, setTerm] = useState('');
+
+  useEffect(() => {
+    console.log('asdlfkj');
+  }, []);
+
+  The second argument is to decide to when the useEffect
+  should be activated.
+
+  Will always be array with something inside of it.
+
+
+  return (
+    <div>
+      <div className="ui form">
+        <div className="field">
+          <label>Enter Search Term</label>
+          <input
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}
+            className="input"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Search;
+
+UseEffect Second Argument
+[]: Run at initial render
+...nothing...: Run at initial render -> Run after every rerender
+[data]: Run at initial render -> Run after every rerender if data
+		has changed since last rerender.
+
+
+
+
+
+
+Testing Execution
+
+We rerender only when term is changed.
+
+
+import React, { useState, useEffect } from 'react';
+
+const Search = () => {
+  const [term, setTerm] = useState('');
+
+  console.log('I RUN WITH EVERY RENDER');
+
+  useEffect(() => {
+    console.log('I RUN AFTER EVERY RENDER AND AT INITIAL RENDER');
+  }, [term]);
+
+  return (
+    <div>
+      <div className="ui form">
+        <div className="field">
+          <label>Enter Search Term</label>
+          <input
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}
+            className="input"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Search;
+
+
+
+Quiz 1: When Does It Run?
+
+Question 1:
+Take a look at the following code. After running it, how many console logs would you expect to see, and when would you see them?
+
+import React, { useEffect } from 'react';
+import ReactDOM from 'react-dom';
+ 
+const App = () => {
+  useEffect(() => {
+    console.log('TEST!');
+  }, []);
+ 
+  return <div>This is a test component</div>;
+};
+ 
+ReactDOM.render(<App />, document.querySelector('#root'));
+
+
+I would see one log statement of 'TEST!'.
+This would show up right after the component
+is rendered.
+
+
+
+Question 2:
+
+Take a look at the following code. Imagine that it is executed, then a user clicked on the button element three times.  How many log statements would you expect to see printed?
+
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+ 
+const App = () => {
+  const [count, setCount] = useState(0);
+ 
+  useEffect(() => {
+    console.log('TEST!');
+  }, []);
+ 
+  const onClick = () => {
+    setCount(count + 1);
+  };
+ 
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={onClick}>Click me!</button>
+    </div>
+  );
+};
+ 
+ReactDOM.render(<App />, document.querySelector('#root'));
+
+I would see one console log of 'TEST'
+
+
+
+Question 3:
+Take a look at the following code snippet. It is identical to the last question, except now useEffect has an array with a single argument inside of it. 
+
+How many time would you expect to see the log statement after a user clicks on the button three times?
+
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+ 
+const App = () => {
+  const [count, setCount] = useState(0);
+ 
+  useEffect(() => {
+    console.log('TEST!');
+  }, [count]);
+ 
+  const onClick = () => {
+    setCount(count + 1);
+  };
+ 
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={onClick}>Click me!</button>
+    </div>
+  );
+};
+ 
+ReactDOM.render(<App />, document.querySelector('#root'));
+
+
+I woud expect to see four log statements
+
+
+
+Async Code in useEffect
+
+Mark a functions as async.
+We cannot use async directly in useEffect().
+We can make a temporarily function in the useEffect().
+And then call it directly after.
+We could use Promises.
+
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const Search = () => {
+  const [term, setTerm] = useState('');
+
+  useEffect(() => {
+    const search = async () => {
+      await axios.get('asldkfj');
+    };
+
+    search();
+  }, [term]);
+
+  return (
+    <div>
+      <div className="ui form">
+        <div className="field">
+          <label>Enter Search Term</label>
+          <input
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}
+            className="input"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Search;
+
+
+
+Executing the Request from useEffect
+
+We update the search.js component to make requests.
+We want to search the wikipedia form.
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const Search = () => {
+  const [term, setTerm] = useState('');
+
+  useEffect(() => {
+    const search = async () => {
+      await axios.get('https://en.wikipedia.org/w/api.php', {
+        params: {
+          action: 'query',
+          list: 'search',
+          origin: '*',
+          format: 'json',
+          srsearch: term,
+        },
+      });
+    };
+
+    search();
+  }, [term]);
+
+  return (
+    <div>
+      <div className="ui form">
+        <div className="field">
+          <label>Enter Search Term</label>
+          <input
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}
+            className="input"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Search;
+
+
+Deafult Search Terms
+
+As a Deafult value we want to have an empty
+array.
+
+We must to provide a Default search term.
+Instead of calling search only if the term is assigned.
+Or instead define a default search term.
+
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const Search = () => {
+  const [term, setTerm] = useState('programming');
+  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    const search = async () => {
+      const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
+        params: {
+          action: 'query',
+          list: 'search',
+          origin: '*',
+          format: 'json',
+          srsearch: term,
+        },
+      });
+
+      setResults(data.query.search);
+    };
+
+    search();
+  }, [term]);
+
+  return (
+    <div>
+      <div className="ui form">
+        <div className="field">
+          <label>Enter Search Term</label>
+          <input
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}
+            className="input"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Search;
+
+
+
+List Building!
+
+We are making some list.
+With additional information.
+Print out the rendered results.
+Add the pageid as key-property.
+
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const Search = () => {
+  const [term, setTerm] = useState('programming');
+  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    const search = async () => {
+      const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
+        params: {
+          action: 'query',
+          list: 'search',
+          origin: '*',
+          format: 'json',
+          srsearch: term,
+        },
+      });
+
+      setResults(data.query.search);
+    };
+
+    search();
+  }, [term]);
+
+  const renderedResults = results.map((result) => {
+    return (
+      <div key={result.pageid} className="item">
+        <div className="content">
+          <div className="header">{result.title}</div>
+          {result.snippet}
+        </div>
+      </div>
+    );
+  });
+
+  return (
+    <div>
+      <div className="ui form">
+        <div className="field">
+          <label>Enter Search Term</label>
+          <input
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}
+            className="input"
+          />
+        </div>
+      </div>
+      <div className="ui celled list">{renderedResults}</div>
+    </div>
+  );
+};
+
+export default Search;
+
+
+
+
+
+XSS Attacks in React
+
+We could make a bind or replace.
+To remove spans.
+Rendered out the content as HTML-tags.
+Put in __html:result.snippet.
+Everytime you take a String you can take a XSS-attack.
+Render some html from some untrustworthy source.
+
+
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const Search = () => {
+  const [term, setTerm] = useState('programming');
+  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    const search = async () => {
+      const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
+        params: {
+          action: 'query',
+          list: 'search',
+          origin: '*',
+          format: 'json',
+          srsearch: term,
+        },
+      });
+
+      setResults(data.query.search);
+    };
+
+    search();
+  }, [term]);
+
+  const renderedResults = results.map((result) => {
+    return (
+      <div key={result.pageid} className="item">
+        <div className="content">
+          <div className="header">{result.title}</div>
+          <span dangerouslySetInnerHTML={{ __html: result.snippet }}></span>
+        </div>
+      </div>
+    );
+  });
+
+  return (
+    <div>
+      <div className="ui form">
+        <div className="field">
+          <label>Enter Search Term</label>
+          <input
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}
+            className="input"
+          />
+        </div>
+      </div>
+      <div className="ui celled list">{renderedResults}</div>
+    </div>
+  );
+};
+
+export default Search;
+
+
+
+XSS Server Code
+
+Want to try the XSS attack on your own? Here’s what to do:
+
+1.Download the zip file called ‘023-widgets-xss.zip’ attached to this lecture
+  and extract it
+
+2.Open a new terminal window and change into the extracted folder
+
+3.Run ‘npm install’ in the folder
+
+4.After the ‘npm install’ is complete, run ‘node index.js’
+
+5.Back in your editor, change the request URL to ‘http://localhost:3001’ and 
+  save the file
+
+6.In the browser, search for the letter “t”. That is a special search term 
+  that will cause the server to send you an XSS payload
+
+
+
+
+Linking to a Wikipedia Page
+
+Give search.js file a-tag.
+Sign a href property.
+A Go button click on it.
+
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const Search = () => {
+  const [term, setTerm] = useState('programming');
+  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    const search = async () => {
+      const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
+        params: {
+          action: 'query',
+          list: 'search',
+          origin: '*',
+          format: 'json',
+          srsearch: term,
+        },
+      });
+
+      setResults(data.query.search);
+    };
+
+    search();
+  }, [term]);
+
+  const renderedResults = results.map((result) => {
+    return (
+      <div key={result.pageid} className="item">
+        <div className="right floated content">
+          <a
+            className="ui button"
+            href={`https://en.wikipedia.org?curid=${result.pageid}`}
+          >
+            Go
+          </a>
+        </div>
+        <div className="content">
+          <div className="header">{result.title}</div>
+          <span dangerouslySetInnerHTML={{ __html: result.snippet }}></span>
+        </div>
+      </div>
+    );
+  });
+
+  return (
+    <div>
+      <div className="ui form">
+        <div className="field">
+          <label>Enter Search Term</label>
+          <input
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}
+            className="input"
+          />
+        </div>
+      </div>
+      <div className="ui celled list">{renderedResults}</div>
+    </div>
+  );
+};
+
+export default Search;
+
+
+
+
+Only Search with a Term
+
+Run the search when only when the term exists.
+if(term){
+	search();
+}
+
+
+
+Throttling API Requests
+We don't make an API requests everytime the user makes a input.
+Input Change -> Wait for 500ms -> No additional changes!
+After 500ms time the search.
+Create an new timer until the user goes without type in.
+
+
+Reminder on setTimeout
+
+Find the if-term.
+Wrap the setTimeout.
+How to cancel the timer.
+clearTimeout is to clearing the timer.
+
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const Search = () => {
+  const [term, setTerm] = useState('programming');
+  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    const search = async () => {
+      const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
+        params: {
+          action: 'query',
+          list: 'search',
+          origin: '*',
+          format: 'json',
+          srsearch: term,
+        },
+      });
+
+      setResults(data.query.search);
+    };
+
+    const timeoutId = setTimeout(() => {
+      if (term) {
+        search();
+      }
+    }, 500);
+  }, [term]);
+
+  const renderedResults = results.map((result) => {
+    return (
+      <div key={result.pageid} className="item">
+        <div className="right floated content">
+          <a
+            className="ui button"
+            href={`https://en.wikipedia.org?curid=${result.pageid}`}
+          >
+            Go
+          </a>
+        </div>
+        <div className="content">
+          <div className="header">{result.title}</div>
+          <span dangerouslySetInnerHTML={{ __html: result.snippet }}></span>
+        </div>
+      </div>
+    );
+  });
+
+  return (
+    <div>
+      <div className="ui form">
+        <div className="field">
+          <label>Enter Search Term</label>
+          <input
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}
+            className="input"
+          />
+        </div>
+      </div>
+      <div className="ui celled list">{renderedResults}</div>
+    </div>
+  );
+};
+
+export default Search;
+
+
+
+useEffect's Cleanup Function
+
+When whenever the time is to run the function again.
+
+Initial Component Render -> Func provided to useEffect Called
+->Return a Cleanup function.
+
+->Invoke the cleanup function.
+
+
+
+useEffect(() => {
+
+return () =>{
+	console.log('Cleanup');
+};	
+},[term]);
+
+
+
+Implementing a Delayed Request
+
+The cleanup function to set up the timer.
+And after that cancel the timer.
+Adjust the timeout.
+Second after.
+
+
+
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const Search = () => {
+  const [term, setTerm] = useState('programming');
+  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    const search = async () => {
+      const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
+        params: {
+          action: 'query',
+          list: 'search',
+          origin: '*',
+          format: 'json',
+          srsearch: term,
+        },
+      });
+
+      setResults(data.query.search);
+    };
+
+    const timeoutId = setTimeout(() => {
+      if (term) {
+        search();
+      }
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [term]);
+
+  const renderedResults = results.map((result) => {
+    return (
+      <div key={result.pageid} className="item">
+        <div className="right floated content">
+          <a
+            className="ui button"
+            href={`https://en.wikipedia.org?curid=${result.pageid}`}
+          >
+            Go
+          </a>
+        </div>
+        <div className="content">
+          <div className="header">{result.title}</div>
+          <span dangerouslySetInnerHTML={{ __html: result.snippet }}></span>
+        </div>
+      </div>
+    );
+  });
+
+  return (
+    <div>
+      <div className="ui form">
+        <div className="field">
+          <label>Enter Search Term</label>
+          <input
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}
+            className="input"
+          />
+        </div>
+      </div>
+      <div className="ui celled list">{renderedResults}</div>
+    </div>
+  );
+};
+
+export default Search;
+
+
+Searching on Initial Render
+
+If it is the first search we make the first search.
+And after that we begin to search.
+
+if( term && !results.length){
+  search();
+}else{
+
+    const timeoutId = setTimeout(() => {
+      if (term) {
+        search();
+      }
+    }, 500);
+  }, [term]);
+	
+}
+
+
+
+Edge Case When Clearing Out Input Form
+
+In the upcoming lecture, we will be adding a second useEffect to handle debouncing. In order to resolve the case where a user will clear out the input-form, we need to add a conditional (similar to the issue described in this earlier lecture):
+
+  useEffect(() => {
+    const search = async () => {
+      const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
+        params: {
+          action: 'query',
+          list: 'search',
+          origin: '*',
+          format: 'json',
+          srsearch: debouncedTerm,
+        },
+      });
+ 
+      setResults(data.query.search);
+    };
+    if (debouncedTerm) {
+      search();
+    }
+  }, [debouncedTerm]);
+
+
+
+Optional Video- Fixing a Warning
+React-Hook has a missing dependency.
+We are going to look at a tough situation
+around useEffect.
+
+When we use useEffect we will refer to some variables.
+Wants to reference to the useEffect.
+We have to reference in the useEffect.
+But adding the results.length are adding a second request.
+React will rerun the function again.
+We do another search.
+
+We solve it by introduce another state
+Setting up timer to the debouncingTerm.
+
+
+if( term && !results.length){
+  search();
+}else{
+
+    const timeoutId = setTimeout(() => {
+      if (term) {
+        search();
+      }
+    }, 500);
+  }, [term, results.length]);
+	
+}
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const Search = () => {
+  const [term, setTerm] = useState('programming');
+  const [debouncedTerm, setDebouncedTerm] = useState(term);
+  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedTerm(term);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [term]);
+
+  useEffect(() => {
+    const search = async () => {
+      const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
+        params: {
+          action: 'query',
+          list: 'search',
+          origin: '*',
+          format: 'json',
+          srsearch: debouncedTerm,
+        },
+      });
+
+      setResults(data.query.search);
+    };
+    search();
+  }, [debouncedTerm]);
+
+  const renderedResults = results.map((result) => {
+    return (
+      <div key={result.pageid} className="item">
+        <div className="right floated content">
+          <a
+            className="ui button"
+            href={`https://en.wikipedia.org?curid=${result.pageid}`}
+          >
+            Go
+          </a>
+        </div>
+        <div className="content">
+          <div className="header">{result.title}</div>
+          <span dangerouslySetInnerHTML={{ __html: result.snippet }}></span>
+        </div>
+      </div>
+    );
+  });
+
+  return (
+    <div>
+      <div className="ui form">
+        <div className="field">
+          <label>Enter Search Term</label>
+          <input
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}
+            className="input"
+          />
+        </div>
+      </div>
+      <div className="ui celled list">{renderedResults}</div>
+    </div>
+  );
+};
+
+export default Search;
+
+
+
+
+Dropdown Architecture
+
+We are finished with the dropdown.
+And making it to change color.
+
+App(list: options) -> Dropdown(props: options).
+When we  show some text to the user.
+
+We are going to have some states called selection.
+
+
+Scaffolding the Dropdown
+Think it like input-field.
+
+Create the Dropdown.
+
+import React from 'react';
+
+const Dropdown = () => {
+  return <h1>Dropdown</h1>;
+};
+
+export default Dropdown;
+
+And importing the Dropdown.js file.
+To the DropDown.
+
+And create some list with options.
+Pass it down as a props.
+
+
+import React from 'react';
+import Accordion from './components/Accordion';
+import Search from './components/Search';
+import Dropdown from './components/Dropdown';
+
+const items = [
+  {
+    title: 'What is React?',
+    content: 'React is a front end javascript framework',
+  },
+  {
+    title: 'Why use React?',
+    content: 'React is a favorite JS library among engineers',
+  },
+  {
+    title: 'How do you use React?',
+    content: 'You use React by creating components',
+  },
+];
+
+const options = [
+  {
+    label: 'The Color Red',
+    value: 'red',
+  },
+  {
+    label: 'The Color Green',
+    value: 'green',
+  },
+  {
+    label: 'A Shade of Blue',
+    value: 'blue',
+  },
+];
+
+export default () => {
+  return (
+    <div>
+      <Dropdown options={options} />
+    </div>
+  );
+};
+
+
+
+A Lot of JSX
+We make a rendered options with map.
+Embed in with a larger block.
+Print out bigger array of JSX.
+Extract the label-text in a later time.
+
+
+import React from 'react';
+
+const Dropdown = ({ options }) => {
+  const renderedOptions = options.map((option) => {
+    return (
+      <div key={option.value} className="item">
+        {option.label}
+      </div>
+    );
+  });
+
+  return (
+    <div className="ui form">
+      <div className="field">
+        <label className="label">Select a Color</label>
+        <div className="ui selection dropdown visible active">
+          <i className="dropdown icon"></i>
+          <div className="text">Select Color</div>
+          <div className="menu visible transition">{renderedOptions}</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dropdown;
+
+
+Selection State
+
+Maybe we must have two states.
+We must have some kinds of setter.
+Tell to update the component.
+Give setOptions to the DropDown.
+
+
+import React, { useState } from 'react';
+import Accordion from './components/Accordion';
+import Search from './components/Search';
+import Dropdown from './components/Dropdown';
+
+const items = [
+  {
+    title: 'What is React?',
+    content: 'React is a front end javascript framework',
+  },
+  {
+    title: 'Why use React?',
+    content: 'React is a favorite JS library among engineers',
+  },
+  {
+    title: 'How do you use React?',
+    content: 'You use React by creating components',
+  },
+];
+
+const options = [
+  {
+    label: 'The Color Red',
+    value: 'red',
+  },
+  {
+    label: 'The Color Green',
+    value: 'green',
+  },
+  {
+    label: 'A Shade of Blue',
+    value: 'blue',
+  },
+];
+
+export default () => {
+  const [selected, setSelected] = useState(options[0]);
+
+  return (
+    <div>
+      <Dropdown
+        selected={selected}
+        onSelectedChange={setSelected}
+        options={options}
+      />
+    </div>
+  );
+};
+
+
+And in the Dropdown.js file.
+And we add onClick eventHandler.
+
+
+import React from 'react';
+
+const Dropdown = ({ options, selected, onSelectedChange }) => {
+  const renderedOptions = options.map((option) => {
+    return (
+      <div
+        key={option.value}
+        className="item"
+        onClick={() => onSelectedChange(option)}
+      >
+        {option.label}
+      </div>
+    );
+  });
+
+  return (
+    <div className="ui form">
+      <div className="field">
+        <label className="label">Select a Color</label>
+        <div className="ui selection dropdown visible active">
+          <i className="dropdown icon"></i>
+          <div className="text">{selected.label}</div>
+          <div className="menu visible transition">{renderedOptions}</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dropdown;
+
+
+Filtering the Option List
+Controlling with a if-statement.
+Then return immediately return null.
+
+import React from 'react';
+
+const Dropdown = ({ options, selected, onSelectedChange }) => {
+  const renderedOptions = options.map((option) => {
+    if (option.value === selected.value) {
+      return null;
+    }
+
+    return (
+      <div
+        key={option.value}
+        className="item"
+        onClick={() => onSelectedChange(option)}
+      >
+        {option.label}
+      </div>
+    );
+  });
+
+  return (
+    <div className="ui form">
+      <div className="field">
+        <label className="label">Select a Color</label>
+        <div className="ui selection dropdown visible active">
+          <i className="dropdown icon"></i>
+          <div className="text">{selected.label}</div>
+          <div className="menu visible transition">{renderedOptions}</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dropdown;
+
+
+
+Hiding and Showing the Option List
+Hiding and show the dropdown menu.
+Apply a class with CSS class or remove them.
+Add a new piece of state to toogle.
+Show if it closed.
+Create a new state called open.
+Add onClick handler setOpen to !Open
+ 
+import React, { useState } from 'react';
+
+const Dropdown = ({ options, selected, onSelectedChange }) => {
+  const [open, setOpen] = useState(false);
+
+  const renderedOptions = options.map((option) => {
+    if (option.value === selected.value) {
+      return null;
+    }
+
+    return (
+      <div
+        key={option.value}
+        className="item"
+        onClick={() => onSelectedChange(option)}
+      >
+        {option.label}
+      </div>
+    );
+  });
+
+  return (
+    <div className="ui form">
+      <div className="field">
+        <label className="label">Select a Color</label>
+        <div
+          onClick={() => setOpen(!open)}
+          className={`ui selection dropdown ${open ? 'visible active' : ''}`}
+        >
+          <i className="dropdown icon"></i>
+          <div className="text">{selected.label}</div>
+          <div className={`menu ${open ? 'visible transition' : ''}`}>
+            {renderedOptions}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dropdown;
+
+
+
+Err... Why is this Hard?
+
+When we click outside the Dropdown we want to close 
+down.
+
+There is no element in the DropDown.
+Abbrivated.
+
+Whenever we creating some DropDown
+We can setup some event handlers.
+The DropDown can only watch some clicks on some elements.
+We cannot setup Event-Handlers.
+
+We wanna listen to DropDown outside the DropDown.
+
+
+
+
+
+Reminder on Event Bubbling
+We have following.
+html
+->body
+->div#root
+->Dropdown
+->div.ui.form
+->div.ui.selection onClick
+->div.ui.menu
+->div.item onClick
+->div.item onClick
+
+Browsers creates an event object.
+Browser gives the event-object.
+
+The event-object goes up to parent-elements.
+
+
+
+Applying What We've Learned
+
+What We've Got So Far
+-The Dropdown needs to detect a click event on any
+ element besides one it created
+
+-The Dropdown has a hard time setting up event handlers
+ on elements that it does not create
+
+-Event bubbling is a thing
+
+Solution
+The DropDown can set up a manual
+event listener (without React)
+on the body element
+
+A click on any element will bubble
+up on the body!
+
+document.body.addEventListener('click', () => 
+console.log('CLICK!!!')
+)
+
+
+
+Binding an Event Handler
+
+Use a useEffect handler.
+Run it one time.
+To close the we set Open to false.
+
+import React, { useState, useEffect } from 'react';
+
+const Dropdown = ({ options, selected, onSelectedChange }) => {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.addEventListener('click', () => {
+      setOpen(false);
+    });
+  }, []);
+
+  const renderedOptions = options.map((option) => {
+    if (option.value === selected.value) {
+      return null;
+    }
+
+    return (
+      <div
+        key={option.value}
+        className="item"
+        onClick={() => onSelectedChange(option)}
+      >
+        {option.label}
+      </div>
+    );
+  });
+
+  return (
+    <div className="ui form">
+      <div className="field">
+        <label className="label">Select a Color</label>
+        <div
+          onClick={() => setOpen(!open)}
+          className={`ui selection dropdown ${open ? 'visible active' : ''}`}
+        >
+          <i className="dropdown icon"></i>
+          <div className="text">{selected.label}</div>
+          <div className={`menu ${open ? 'visible transition' : ''}`}>
+            {renderedOptions}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dropdown;
+
+
+
+Why Stay Open!
+We can only close when we click outside.
+We are going with the order to see which
+click-event is occuring.
+If we think about Event-Bubbling.
+1.Body Click
+2.Item Click
+3.Dropdown Click
+
+Our React-Elements will be called later.
+Body is the first to be invoked.
+
+
+Which Element Was Clicked?
+
+Scenario #1
+User clicks on an element that is
+created by the Dropdown component.
+
+If a user clicks on one of these elements,
+the we probably don't want the body event
+listener to do anything
+
+Scenario #2
+User clicks on any element besides
+the ones created by the Dropdown
+
+If a user clicks on any of these
+elements, we do want the body
+event listener to close the dropdown
+
+We need to figure which element was clicked.
+
+With event.target.
+
+We are going to use useRef.
+
+
+
+Important Update for React v17
+
+In the next lecture at about 2:32 in the video, an important fix is shown to resolve an issue caused by the changes React v17 makes to events.
+
+Many students have been skipping or missing this fix, so I will share it here as well:
+
+if (ref.current.contains(event.target)) {
+
+should be:
+
+if (ref.current && ref.current.contains(event.target)) {
+
+Here is the full useEffect Hook code from the "Making Use of useRef" lecture:
+
+  useEffect(() => {
+    document.body.addEventListener('click', (event) => {
+      if (ref.current && ref.current.contains(event.target)) {
+        return;
+      }
+ 
+      setOpen(false);
+    });
+  }, []);
+ 
+Here is the full useEffect Hook code from the refactor in the "Body Event Listener Cleanup" lecture:
+
+  useEffect(() => {
+    const onBodyClick = (event) => {
+     if (ref.current && ref.current.contains(event.target)) {
+        return;
+      }
+ 
+      setOpen(false);
+    };
+ 
+    document.body.addEventListener('click', onBodyClick);
+ 
+    return () => {
+      document.body.removeEventListener('click', onBodyClick);
+    };
+  }, []);
+ 
+
+Making use of useRef
+
+We can use ref.current.
+Any time whenever i rerender the Dropdown component.
+If the clicked was inside our component we will do nothing.
+
+
+import React, { useState, useEffect, useRef } from 'react';
+
+const Dropdown = ({ options, selected, onSelectedChange }) => {
+  const [open, setOpen] = useState(false);
+  const ref = useRef();
+
+  useEffect(() => {
+    document.body.addEventListener('click', (event) => {
+      if (ref.current.contains(event.target)) {
+        return;
+      }
+
+      setOpen(false);
+    });
+  }, []);
+
+  const renderedOptions = options.map((option) => {
+    if (option.value === selected.value) {
+      return null;
+    }
+
+    return (
+      <div
+        key={option.value}
+        className="item"
+        onClick={() => onSelectedChange(option)}
+      >
+        {option.label}
+      </div>
+    );
+  });
+
+  return (
+    <div ref={ref} className="ui form">
+      <div className="field">
+        <label className="label">Select a Color</label>
+        <div
+          onClick={() => setOpen(!open)}
+          className={`ui selection dropdown ${open ? 'visible active' : ''}`}
+        >
+          <i className="dropdown icon"></i>
+          <div className="text">{selected.label}</div>
+          <div className={`menu ${open ? 'visible transition' : ''}`}>
+            {renderedOptions}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dropdown;
+
+
+
+Body Event Listener Cleanup
+
+Add a new state called add Dropdown.
+Add a toogle to it.
+We get a TypeError.
+We should turnoff the event listener.
+Return function to remove the eventlistener with a return function.
+
+
+import React, { useState } from 'react';
+import Accordion from './components/Accordion';
+import Search from './components/Search';
+import Dropdown from './components/Dropdown';
+
+const items = [
+  {
+    title: 'What is React?',
+    content: 'React is a front end javascript framework',
+  },
+  {
+    title: 'Why use React?',
+    content: 'React is a favorite JS library among engineers',
+  },
+  {
+    title: 'How do you use React?',
+    content: 'You use React by creating components',
+  },
+];
+
+const options = [
+  {
+    label: 'The Color Red',
+    value: 'red',
+  },
+  {
+    label: 'The Color Green',
+    value: 'green',
+  },
+  {
+    label: 'A Shade of Blue',
+    value: 'blue',
+  },
+];
+
+export default () => {
+  const [selected, setSelected] = useState(options[0]);
+  const [showDropdown, setShowDropdown] = useState(true);
+
+  return (
+    <div>
+      <button onClick={() => setShowDropdown(!showDropdown)}>
+        Toggle Dropdown
+      </button>
+      {showDropdown ? (
+        <Dropdown
+          selected={selected}
+          onSelectedChange={setSelected}
+          options={options}
+        />
+      ) : null}
+    </div>
+  );
+};
+
+
+import React, { useState, useEffect, useRef } from 'react';
+
+const Dropdown = ({ options, selected, onSelectedChange }) => {
+  const [open, setOpen] = useState(false);
+  const ref = useRef();
+
+  useEffect(() => {
+    const onBodyClick = (event) => {
+      if (ref.current.contains(event.target)) {
+        return;
+      }
+
+      setOpen(false);
+    };
+
+    document.body.addEventListener('click', onBodyClick);
+
+    return () => {
+      document.body.removeEventListener('click', onBodyClick);
+    };
+  }, []);
+
+
+
+
+
+
+The Translate Widget
+
+Translate a language.
+Show a list of laguages to translate to.
+
+App -> Translate: options, language, setLanguage -> Dropdown
+												 -> Convert
+
+Convert Component take in some language and convert it.
+
+Options will have an array of objects.
+The name of the language.
+
+Pass the Options to the Dropdown component.
+
+              
+
+
+Scaffolding the Translate Component
+
+
+setLanguage to set the Language.
+Return a div-tag.
+Translate itself will provide some tags.
+And write down some labels.
+List of options to the Dropdown.
+
+
+import React, { useState } from 'react';
+import Dropdown from './Dropdown';
+
+const options = [
+  {
+    label: 'Afrikaans',
+    value: 'af',
+  },
+  {
+    label: 'Arabic',
+    value: 'ar',
+  },
+  {
+    label: 'Hindi',
+    value: 'hi',
+  },
+];
+
+const Translate = () => {
+  const [language, setLanguage] = useState(options[0]);
+
+  return (
+    <div>
+      <Dropdown
+        selected={language}
+        onSelectedChange={setLanguage}
+        options={options}
+      />
+    </div>
+  );
+};
+
+export default Translate;
+
+Update the label to the Dropdown.
+
+
+
+Adding the Language Input
+
+Addng the label to the DropDown.js file.
+
+import React, { useState, useEffect, useRef } from 'react';
+
+const Dropdown = ({ label, options, selected, onSelectedChange }) => {
+  const [open, setOpen] = useState(false);
+  const ref = useRef();
+
+  useEffect(() => {
+    const onBodyClick = (event) => {
+      if (ref.current.contains(event.target)) {
+        return;
+      }
+
+      setOpen(false);
+    };
+
+    document.body.addEventListener('click', onBodyClick);
+
+    return () => {
+      document.body.removeEventListener('click', onBodyClick);
+    };
+  }, []);
+
+  const renderedOptions = options.map((option) => {
+    if (option.value === selected.value) {
+      return null;
+    }
+
+    return (
+      <div
+        key={option.value}
+        className="item"
+        onClick={() => onSelectedChange(option)}
+      >
+        {option.label}
+      </div>
+    );
+  });
+
+  return (
+    <div ref={ref} className="ui form">
+      <div className="field">
+        <label className="label">{label}</label>
+        <div
+          onClick={() => setOpen(!open)}
+          className={`ui selection dropdown ${open ? 'visible active' : ''}`}
+        >
+          <i className="dropdown icon"></i>
+          <div className="text">{selected.label}</div>
+          <div className={`menu ${open ? 'visible transition' : ''}`}>
+            {renderedOptions}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dropdown;
+
+We create useState() with text and setText.
+
+
+import React, { useState } from 'react';
+import Dropdown from './Dropdown';
+
+const options = [
+  {
+    label: 'Afrikaans',
+    value: 'af',
+  },
+  {
+    label: 'Arabic',
+    value: 'ar',
+  },
+  {
+    label: 'Hindi',
+    value: 'hi',
+  },
+];
+
+const Translate = () => {
+  const [language, setLanguage] = useState(options[0]);
+  const [text, setText] = useState('');
+
+  return (
+    <div>
+      <div className="ui form">
+        <div className="field">
+          <label>Enter Text</label>
+          <input value={text} onChange={(e) => setText(e.target.value)} />
+        </div>
+      </div>
+      <Dropdown
+        label="Select a Language"
+        selected={language}
+        onSelectedChange={setLanguage}
+        options={options}
+      />
+    </div>
+  );
+};
+
+export default Translate;
+
+Make the convert component.
+
+
+
+Understanding the Convert Component
+
+Convert
+Props: language, text ->
+
+A new value for 'language' or 'text' has appeared!
+We should convert it and show the output
+
+->Make request to Google Translate API
+
+-> Update state with data from response
+
+-> Show data from response on the screen
+
+
+
+Google Translate API Key
+
+This is the API key you should use for the Google Translate API. Copy paste this into the top of your ‘Translate.js’ file for right now. Of course, make sure you comment it out.
+
+AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM
+
+This API can only be used when your browser is at ‘http://localhost:3000’. If you try to make a request to the API from any other address, the request will fail.
+
+Google Translate API Docs
+
+-cloud.google.com/translate/docs
+
+-This is a paid api. I will give you an
+ API key in the next text lecture that
+ you can use for free
+
+-The API key will only work if you are
+ running your app on localhost:3000
+
+We need to provide languages code.
+
+
+Building the Convert Component
+
+We create a convert.js file.
+Need to recieve the language prop and text prop.
+We add useEffect().
+
+
+import React, { useState, useEffect } from 'react';
+
+const Convert = ({ language, text }) => {
+  useEffect(() => {
+    console.log('New language or text');
+  }, [language, text]);
+
+  return <div />;
+};
+
+export default Convert;
+
+
+
+Using the Google Translate API
+
+We make the request to the Google API.
+Put in the Url.
+Some information to send along with the body {}.
+
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const Convert = ({ language, text }) => {
+  useEffect(() => {
+    axios.post(
+      'https://translation.googleapis.com/language/translate/v2',
+      {},
+      {
+        params: {
+          q: text,
+          target: language.value,
+          key: 'AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM',
+        },
+      }
+    );
+  }, [language, text]);
+
+  return <div />;
+};
+
+export default Convert;
+
+
+
+Displaying Translated Text and Debouncing Translation Updates
+
+Take the response piece of data.
+Whenever we wrap the request.
+We make doTranslation.
+Take out the data.
+Set the translation.
+
+text === ''
+useEffect #1
+Set a timer to update
+'debouncedText' in 500ms
+-> Return a cleanup function
+   that cancels this timer
+
+
+debouncedText ===''
+Make a request with
+'debouncedText'
+
+We are going to implement this with
+2 useEffect().
+
+One that are being used when the user changes the
+text.
+
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const Convert = ({ language, text }) => {
+  const [translated, setTranslated] = useState('');
+  const [debouncedText, setDebouncedText] = useState(text);
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedText(text);
+    }, 500);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [text]);
+
+  useEffect(() => {
+    const doTranslation = async () => {
+      const { data } = await axios.post(
+        'https://translation.googleapis.com/language/translate/v2',
+        {},
+        {
+          params: {
+            q: debouncedText,
+            target: language.value,
+            key: 'AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM',
+          },
+        }
+      );
+
+      setTranslated(data.data.translations[0].translatedText);
+    };
+
+    doTranslation();
+  }, [language, debouncedText]);
+
+  return (
+    <div>
+      <h1 className="ui header">{translated}</h1>
+    </div>
+  );
+};
+
+export default Convert;
+
+
+
+Reviewing UseState and UseEffect
+Fetching a useEffect to fetch a list of users.
+
+
+
+Coding Exercise 9: Practincing With useState and useEffect
+
+import React from 'react';
+import {axios} from './axios';
+const { useState, useEffect } = React;
+
+const URL = 'https://jsonplaceholder.typicode.com/users';
+
+const App = () => {
+    const [users, setUsers] = useState([]);
+    
+    useEffect(() => {
+        // Add code here to fetch some users with axios and the URL variable
+        // then update the 'users' piece of state
+        const fetchUsers = async() => {
+        const {data} = await axios.get(URL);
+        console.log(data);
+        setUsers(data);
+        };
+        
+        fetchUsers();
+        
+        
+    }, []);
+     
+    const renderedUsers = users.map((user) => {
+        return <li key={user.id}>{user.name}</li>;
+    });
+
+    
+    return (
+        <ul>
+            {renderedUsers}
+        </ul>
+    );
+}
+
+export default App;
