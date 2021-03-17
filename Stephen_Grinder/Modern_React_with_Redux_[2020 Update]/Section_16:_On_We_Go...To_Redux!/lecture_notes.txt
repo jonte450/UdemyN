@@ -1,0 +1,263 @@
+Introduction to Redux
+
+What is Redux?
+-State management library
+-Makes creating complex applications easier
+-Not required to create a React app!
+-Not explicity designed to work with React!
+
+
+Extract states to the Redux library.
+A little bit easier to create complex projects.
+
+A little difficult to learn.
+
+
+
+Redux by Analogy
+Story (analogy) to help you understand Redux
+-> Write some code in Codepen with Redux only
+-> Work on a React App
+-> Understand how to integrate React with Redux
+
+Redux Cycle
+Action Creator
+-> Action
+-> dispatch
+-> Reducers
+-> State
+
+Let's build an isurance company!
+policy: Customer holds a 'policy' , if
+        bad stuff happens to them then
+        we pay them
+
+claim: Customer had something bad happen
+	   to them, we need to pay them
+
+These are insurance terms, not Redux terms
+
+
+Insurance Co
+
+Customer -> Form -> Form Reciever -> Form Claims history: Stores a list of all claims ever made
+                                  -> Policies: Stores a list of who has a policy with our
+                                               insurance company
+
+                                  -> Accounting: Stores a big bag of cash we pay people from this
+
+
+
+
+
+
+A Bit More Analogy
+
+Policies Department
+
+Form to sign up for a policy 
+-> List of Customers with Policies
+   -Fred							<- Tell me who has a policy right now <- Management
+   -Jane
+   -Alex
+   -Alexandria
+   -Juliet (new Customer)
+
+Place that in separate repository
+Because the management get's tired to ask for policies.
+
+
+
+Finishing the Analogy
+
+Form-> Claim:Type
+	   Name: Alexa
+	   Claim Amount: $500: Payload
+
+
+We need 3 different forms:
+
+Create Policy: Name: Alexa 
+			   Cash: 20$
+
+
+Create Claim:  Name: Alexa
+			   Claim Amount: $500
+
+Delete Policy: Name: Alexa
+
+
+Hey, here's  new form
+someone left. Also here's
+a list of all the claims
+we have
+
+->Claim
+  Claim
+  Claim
+
+  Form    
+
+
+ ->Claims History
+ -Ist the Form coming in a Claim 
+
+ -> Yes -> Pull the 'payload' part off
+ 		   the form, add it to the list
+ 		   of claims and dump the list
+ 		   back out front              -> List of claims with the new claim!
+
+
+    No->   Then i don't care just dump
+    	   the list of claims          -> List of claims unchanged
+
+
+
+
+
+
+
+Mapping the Analogy to Redux
+
+Redux Cycle
+
+Action Creator -> Action -> Dispatch -> Reducers -> State
+
+Person dropping
+
+off the form   -> the form -> form reciever -> Departments -> Compiled Department data
+
+
+
+
+Modeling with Redux
+
+console.clear();
+
+//People dropping off a form (Action Creators)
+const createPolicy = (name, amount) => {
+	return {
+	  type: 'CREATE_POLICY',
+	  payload: {
+	    name: 'Alex',
+	    amount: 20
+	  }
+
+	};
+};
+
+
+const deletePolicy = () => {
+	return {
+		type:'DELETE_POLICY',
+		payload{
+		   name: name
+		}
+	};
+};
+
+const createClaim = (name, amountOfMoneyToCollect) => {
+	return {
+	 type:'CREATE_CLAIM',
+	 payload: {
+	   name: name,
+	   amountOfMoneyToCollect: amountOfMoneyToCollect
+	 }
+	};
+};
+
+
+
+Creating Reducers
+
+//Reducers (Departments!)
+
+const claimHistory = (oldListOfClaims = [], action) => {
+	if(action.type){
+	 //we care about this action (FORM)
+	 oldListOfClaims.push(action.payload)
+	 return [...oldListOfClaims, action.payload];
+	}
+
+	///we don't care the action (form!!)
+	return oldListOfClaims;
+
+}
+
+const accounting = (bagOfMoney = 100, action) => {
+   if(action.type === 'CREATE_CLAIM')
+       return bagOfMoney - action.payload.amountOfMoneyToCollect;
+}else if(action.type === 'CREATE_POLICY'){
+	return bagOfMoney + action.payload.amount;
+}
+return bagOfMoney;
+};
+
+
+
+Rules of Reducers
+
+const policies = (listOfPolicies = [] , action) => {
+   if(action.type === 'CREATE_POLICY'){
+      return [...listOfPolicies, action.payload.name];
+   }else if( action.type === 'DELETE_POLICT') {
+      return listOfPolicies.filter(name => name !== action.payload.name);
+   };
+
+ return listOfPolicies;
+	
+};
+
+
+Testing Our Example
+
+const { createStore, combineReducers} = Redux;
+
+const ourDepartments = combineReducers({
+	accounting: accounting,
+	claimsHistory: claimsHistory,
+	policies: policies
+});
+
+
+const store = createStore(ourDepartments);
+
+const store = createPolicy('Alex', 20);
+
+store.dispatch(action);
+store.dispatch(createPolicy('Alex',20));
+store.dispatch(createPolicy('Jim',30));
+store.dispatch(createPolicy('Bob',40));
+
+store.dispatch(createClaim('Alex',120));
+store.dispatch(createClaim('Jim',50));
+
+store.dispatch(deletePolicy('Bob'));
+
+console.log(store.getState());
+
+
+
+
+
+console.log(store.getState());
+
+
+
+
+Important Redux Notes
+Redux Cycle
+To change state of
+our app, we call an ... -> Action Creator-> Produces an... 
+-> Action -> Get fed to... -> dispatch -> Forewards the action to...
+-> Reducers -> Creates new... -> State -> Wait until we need to update state again
+
+We cannot modify our state.
+
+
+Finished Insurance Policy Code
+
+
+Finished CodePen for the insurance company policy example:
+
+https://codepen.io/sgrider/pres/oQjBvG
