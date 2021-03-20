@@ -1,0 +1,395 @@
+App Overview
+This app is going to be a bit plain
+...for a very good reason
+
+
+App Goals
+-Absolutely understand the purpose of reducers
+-Absolutely understand making API requests with Redux
+-Absolutely understand the purpose of 'redux-thunk'
+
+We are going to simply rendering some simple blog-posts.
+Simple icon.
+
+Really to understand Redux.
+
+Making a Component called PostList.
+
+jsonplaceholder.typicode.com/
+
+chrome-extension.
+post has a id.
+
+
+
+Initial App Setup
+npm install --save redux react-redux axios redux-thunk
+
+redux -> The redux library
+react-redux -> Integration layer between react and redux
+axios -> Helps us make network requests
+redux-thunk -> Middleware to help us make requests
+			   in a redux application
+
+
+Term Middleware change behavior to the 
+Redux Store.
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+
+import App from './components/App';
+import reducers from './reducers';
+
+ReactDOM.render(
+  <Provider store={createStore(reducers)}>
+    <App />
+  </Provider>,
+  document.querySelector('#root')
+);
+
+
+Pass all the reducers to the Provider Component.
+
+
+
+Tricking Redux with Dummy Reducers
+
+We don't have any reducers yet.
+We want to work on other things.
+Put in a dummy key.
+Every time you start a project.
+
+import { combineReducers } from 'redux';
+
+export default combineReducers({
+  replaceMe: () => 'hi there'
+});
+
+
+
+A Touch More Setup
+Putting togheter the App.
+Creating a Post List.
+Put in the App-component.
+
+
+import React from 'react';
+
+class PostList extends React.Component {
+  render() {
+    return <div>Post List</div>;
+  }
+}
+
+export default PostList;
+
+
+
+How to Fetch Data in a Redux App
+
+General Data Loading with Redux
+
+Components are generally responsible for
+fetching data they need by calling an 
+action creator
+
+Component gets rendered onto the screen
+->Component's 'componentDidMount' lifecycle method gets called
+->We call action creator from 'componentDidMount'
+
+
+Action creators are responsible for making API requests
+(This is where Redux-Thunk comes into play)
+
+->Action creator runs code to make an API request
+->API responds with data
+
+->Action creator returns an 'action' with the fetched data
+  on the 'payload' property
+
+We get fetched data into a component by generating a new state
+in our redux store, then getting that into our component
+through mapStateToProps
+
+
+->Some reducer sees the action, return the data off the
+  'payload'
+
+->Because we generated some new state object, redux/react-redux
+  cause our React app to be rendered
+
+
+
+
+Wiring Up an Action Creator
+We are going to create a action creator.
+
+export const fetchPosts = () => {
+  return {
+    type: 'FETCH_POSTS'
+  };
+};
+
+
+And in the PostList.js file.
+We add a connect function.
+Add in the componentDidMount().
+
+
+import React from 'react';
+import { connect } from 'react-redux';
+import { fetchPosts } from '../actions';
+
+class PostList extends React.Component {
+  componentDidMount() {
+    this.props.fetchPosts();
+  }
+
+  render() {
+    return <div>Post List</div>;
+  }
+}
+
+export default connect(
+  null,
+  { fetchPosts }
+)(PostList);
+
+
+
+
+Making a Request From an Action Creator
+
+Creating a new file called jsonPlaceholder.js.
+
+import axios from 'axios';
+
+export default axios.create({
+  baseURL: 'https://jsonplaceholder.typicode.com'
+});
+
+
+In the action folder index.js.
+
+import jsonPlaceholder from '../apis/jsonPlaceholder';
+
+export const fetchPosts = async () => {
+  //This is a Bad approach!
+  const response = await jsonPlaceholder.get('/posts');
+
+  return {
+    type: 'FETCH_POSTS',
+    payload: response,
+  };
+};
+
+We get a error message:
+Error: Actions must be plain objects.
+Use custom middleware for async actions.
+
+
+
+Understanding Async Action Creators
+There is much likely to understand the error-message.
+
+What's wrong with 'fetchPosts'?
+-Action creators must return plain JS objects with a
+ type property we are not!
+
+-By the time our action gets to a reducer, we won't have
+ fetched our data!
+
+
+We get's the code transpiled to 2015 ES code.
+Because we have the Async/Await syntax.
+
+PostList.js 				Probably happening in React-Redux
+componentDidMount()			store.dispatch(fetchPosts());
+this.props.fetchPost() -> 
+}
+
+-> action/index.js
+export const fetchPosts = async () => {
+	const response = await jsonPlaceholder('/posts');
+	return {
+	  type: 'FETCH_POSTS',
+	  payload: response
+	};
+}
+
+But this is actually happening
+
+actions/index.js
+export const fetchPosts = async() => {
+	case 0:
+		return jsonPlaceholder.get('/posts')
+	case 1:
+	  return {type: 'FETCH_POSTS' , payload: response};
+	}
+
+We return the request object.
+Not a type property.
+
+
+
+
+More on Async Action Creators
+
+We remove the async/await and we get a promise back.
+This will not work as we aspect.
+
+
+import jsonPlaceholder from '../apis/jsonplaceholder';
+
+export const fetchPosts = () => {
+	const promise = jsonPlaceholder.get('./posts');
+
+	return {
+	  type: 'FETCH_POSTS',
+	  payload: promise
+	};
+};
+
+What's wrong with 'fetchPosts'?
+-Action creators must return plain JS objects with
+ a type property - we are not!
+
+-By the time our action gets to a reducer, we won't
+ have fetched our data!
+
+
+<- Action gets consumed in fractions of a second ->
+  |
+                                             |
+Action Creator -> Action -> dispatch ->  Reducers -> State
+
+
+Time
+-Action creator called
+-Action returned
+-Action sent to all reducers
+-Reducers run
+
+But long after that
+Request made to Typicode API -> We get response
+
+
+
+
+Middlewares in Redux
+
+-Synchronous action creator (Instantly returns an action with data ready to go)
+-Asynchronous action creator
+(Takes some amount of time for it to get its data ready to go)
+
+Middleware helps you deals with Asynchronous action creator.
+Actions is going to be send through a Middleware instead.
+
+Middleware in Redux
+-Function that gets called with every action we dispatch
+-Has the ability to STOP,MODIFY, or otherwise mess around with actions
+-Tons of open source middleware exist
+-Most popular use of middleware is for dealing with async actions
+-We are going to use a middleware called 'Redux-Thunk' to solve
+ our async issues
+
+
+
+
+Behind the Scenes of Redux Thunk
+
+Normal Rules
+-Action Creators must return action objects
+-Action must have a type property
+-Action can optionally have a 'payload'
+
+All purpose middleware.
+
+-> Rules with Redux Thunk
+   -Action Creators can return action objects
+
+-> or
+   -Action Creators can return functions!
+   -If an action object gets returned,
+    it must have a type
+   -If an action object gets returned,
+    it can optionally have a 'payload'
+
+
+import jsonPlaceholder from '../apis/jsonplaceholder';
+
+export const fetchPosts = () => {
+    return function(){
+	const promise = jsonPlaceholder.get('./posts');
+
+	return {
+	  type: 'FETCH_POSTS',
+	  payload: promise
+	};
+}
+};
+
+
+Inside the Redux Thunk it will look on the object.
+dispatch function will be sent through all the middlewares.
+With dispatch we can change any data we want.
+With getState we can get access to any data we want.
+With Redux-Thunk we can manually dispatch manually it
+will be a plain 
+
+import jsonPlaceholder from '../apis/jsonplaceholder';
+
+export const fetchPosts = () => {
+    return function(dispatch, getState){
+	const promise = jsonPlaceholder.get('./posts');
+
+	return {
+	  type: 'FETCH_POSTS',
+	  payload: promise
+	};
+}
+};
+
+github.com/reduxjs/redux-thunk
+
+
+Shortened Syntax with Redux Thunk
+We will check for store.
+We are going to applyMiddleware(thunk).
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+
+import App from './components/App';
+import reducers from './reducers';
+
+const store = createStore(reducers, applyMiddleware(thunk));
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.querySelector('#root')
+);
+
+
+We don't need to return a action.
+Call the dispatch and fetch the API.
+We often return a arrow-function.
+Remove the return key-word.
+
+
+import jsonPlaceholder from '../apis/jsonPlaceholder';
+
+export const fetchPosts = () => async dispatch => {
+  const response = await jsonPlaceholder.get('/posts');
+
+  dispatch({ type: 'FETCH_POSTS', payload: response });
+};

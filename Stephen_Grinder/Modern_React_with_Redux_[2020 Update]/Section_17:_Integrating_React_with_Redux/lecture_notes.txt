@@ -1,0 +1,547 @@
+React Cooperating with Redux
+
+Redux Cycle
+To change state
+of our app, we 
+call an...
+
+-> Action (Creator Produces an...)
+->Action (Gets fed to...)
+->dispatch (Forwards the action to)
+->Reducers (Creates new...)
+->State (Wait until we to update state again)
+
+We have list of songs.
+When a user click on the song the
+
+
+
+
+React, Redux, and...React-Redux!?
+-Songlist
+-Songdetail
+
+Render out the different songs.
+
+React (Same lib you're used to) -> React Redux (Gets React and Redux to work togheter) -> Redux (Same lib we just used in Codepen)
+
+
+Install React-Redux.
+
+import React from 'react';
+
+const App = () => {
+  return <div>App</div>;
+};
+
+export default App;
+
+Hook up Semantic UI
+
+
+Design of the Redux App
+Simple App component.
+How we will implement React-Redux.
+
+Without Redux!
+
+App: List of songs
+     Selected song -> SongList: List of songs
+			                    onSongSelect
+
+			        -> SongDetail: Selected song
+
+
+Redux
+Reducers
+Song list reducer
+Selected song reducer
+
+Action Creators
+Select Song
+
+App -> SongList
+    -> SongDetail
+
+
+
+How React-Redux Works
+
+Store
+Reducers
+-Song list reducer
+-Selected song reducer
+
+->Provider -> App -> Connect (Communicates with the 'Provider') -> SongList
+
+Acton Creators
+-Select Song
+
+We are going to create instances of 
+-Provider
+-Connect
+
+Songlist want to know about the list of song.
+
+Connect when it render and (Tell me about changes to the list of songs)
+Connect will take the list of songs an put it as a prop to the Song List.
+
+
+
+Redux Project Structure
+/src
+/actions -> Contains files related to action creators
+/components -> Files related to components
+/reducers -> Files related to reducers
+index.js -> Sets up both the react and redux sides of the app
+
+Creates the actions and reducers folders.
+
+
+Named vs Default Exports
+
+We are creating file to the action folder.
+
+// Action creator
+export const selectSong = song => {
+  // Return an action
+  return {
+    type: 'SONG_SELECTED',
+    payload: song
+  };
+};
+
+
+Export the function with the export keyword.
+
+
+Building Reducers
+
+Gives a list of songs.
+Gives a duration of the songs.
+Totally randomized.
+Default the selectedSong to a selectedSong a null value.
+If it is the case return the action.payload.
+
+
+const songsReducer = () => {
+  return [
+    { title: 'No Scrubs', duration: '4:05' },
+    { title: 'Macarena', duration: '2:30' },
+    { title: 'All Star', duration: '3:15' },
+    { title: 'I Want it That Way', duration: '1:45' }
+  ];
+};
+
+const selectedSongReducer = (selectedSong = null, action) => {
+  if (action.type === 'SONG_SELECTED') {
+    return action.payload;
+  }
+
+  return selectedSong;
+};
+
+
+
+Wiring  Up The Reducer
+
+Every time you are using some code.
+Check if you should using  curly-braces.
+
+
+import { combineReducers } from 'redux';
+
+const songsReducer = () => {
+  return [
+    { title: 'No Scrubs', duration: '4:05' },
+    { title: 'Macarena', duration: '2:30' },
+    { title: 'All Star', duration: '3:15' },
+    { title: 'I Want it That Way', duration: '1:45' }
+  ];
+};
+
+const selectedSongReducer = (selectedSong = null, action) => {
+  if (action.type === 'SONG_SELECTED') {
+    return action.payload;
+  }
+
+  return selectedSong;
+};
+
+export default combineReducers({
+  songs: songsReducer,
+  selectedSong: selectedSongReducer
+});
+
+Import a provider and createStore to index.js file.
+Wrap it up in a Reducers.
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import App from './components/App';
+import reducers from './reducers';
+
+ReactDOM.render(
+  <Provider store={createStore(reducers)}>
+    <App />
+  </Provider>,
+  document.querySelector('#root')
+);
+
+
+
+The Connect Function
+
+Just return a list called Songlist.
+Import the conncect from react-redux.
+
+
+
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+class SongList extends Component {
+  render() {
+    return <div>SongList</div>;
+  }
+}
+
+export default connect()(SongList);
+
+Import Songlist to the App.js file.
+
+
+import React from 'react';
+import SongList from './SongList';
+
+const App = () => {
+  return (
+    <div>
+      <SongList />
+    </div>
+  );
+};
+
+export default App;
+
+
+function connect(){
+	return function(){
+	 return 'Hi there!';
+	}
+}
+
+connect()()
+
+
+
+Configuring Connect with MapStateToProps
+
+We are going to take some states.
+This mapStateToProps will call the store.
+And get the list of songs.
+
+
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+class SongList extends Component {
+  render() {
+    console.log(this.props);
+    return <div>SongList</div>;
+  }
+}
+
+const mapStateToProps = state => {
+  return { songs: state.songs };
+};
+
+export default connect(mapStateToProps)(SongList);
+
+
+
+Building a List with Redux Data
+
+Loop over the SongsList and loop over them.
+Will return JSX.
+We are going to give a key.
+Place a button.
+
+Come down how we render.
+Class with content.
+Wire up an Event-Handler.
+
+
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+class SongList extends Component {
+  renderList() {
+    return this.props.songs.map(song => {
+      return (
+        <div className="item" key={song.title}>
+          <div className="right floated content">
+            <div className="ui button primary">Select</div>
+          </div>
+          <div className="content">{song.title}</div>
+        </div>
+      );
+    });
+  }
+
+  render() {
+    return <div className="ui divided list">{this.renderList()}</div>;
+  }
+}
+
+const mapStateToProps = state => {
+  return { songs: state.songs };
+};
+
+export default connect(mapStateToProps)(SongList);
+
+We have three nested div's.
+
+
+import React from 'react';
+import SongList from './SongList';
+
+const App = () => {
+  return (
+    <div className="ui container grid">
+      <div className="ui row">
+        <div className="column eight wide">
+          <SongList />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default App;
+
+
+Coding Exercise 11: Extracting More Data From Redux
+
+
+Solution below!  The only changed code is in the mapStateToProps function and in the renderList method. 
+
+The mapStateToProps function was updated to communicate the favoriteTitle piece of state into the component
+
+Because the mapStateToProps function is now returning an object with a favoriteTitle property, the React component now has access to a prop of this.props.favoriteTitle
+
+The mapping function inside of renderList compares the title of the current song it is iterating over to this.props.favoriteTitle
+
+import React from 'react';
+import { connect } from './react-redux';
+ 
+class _SongList extends React.Component {
+    renderList() {
+        return this.props.songs.map(song => {
+            return (
+                <div className="item" key={song.title}>
+                    <div className="right floated content">
+                        <div className="ui button primary">Select</div>
+                    </div>
+                    <div className="content">
+                        {song.title}
+                        <div>
+                            <b>{song.title === this.props.favoriteTitle && 'Favorite!'}</b>
+                        </div>
+                    </div>
+                </div>
+            );
+        });
+    }
+ 
+    render() {
+        return <div className="ui divided list">{this.renderList()}</div>;
+    }
+}
+ 
+const mapStateToProps = state => {
+    return { songs: state.songs, favoriteTitle: state.favoriteTitle };
+};
+ 
+export const SongList = connect(mapStateToProps)(_SongList);
+
+
+Calling Action Creators from Components
+
+When we created selectSong.
+Pass an object to the selectSong.
+Take the selectSong as props.
+Automatically create.
+We take the selectSong as call it.
+And it will send it to the Redux-Dispatch function.
+
+
+
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { selectSong } from '../actions';
+
+class SongList extends Component {
+  renderList() {
+    return this.props.songs.map(song => {
+      return (
+        <div className="item" key={song.title}>
+          <div className="right floated content">
+            <button
+              className="ui button primary"
+              onClick={() => this.props.selectSong(song)}
+            >
+              Select
+            </button>
+          </div>
+          <div className="content">{song.title}</div>
+        </div>
+      );
+    });
+  }
+
+  render() {
+    return <div className="ui divided list">{this.renderList()}</div>;
+  }
+}
+
+const mapStateToProps = state => {
+  console.log(state);
+  return { songs: state.songs };
+};
+
+export default connect(
+  mapStateToProps,
+  { selectSong }
+)(SongList);
+
+
+
+Redux is Not Magic!
+
+-Redux does not automatically detect action
+ creators being called
+
+-Redux does not automatically detect a function
+ returning an object that is an 'action'
+
+
+There is nothing inside the function magic detect and
+throw it out to any reducers.
+
+We have to pass it into the dispatch function.
+
+So if we to make sure to send it into the dispatch function.
+It looks into the function.
+
+
+Functional Components with Connect
+
+Wrap the SongDetail with the connect-function.
+Connect will take the selectedSong and add it as
+a prop to the SongDetail.js file.
+
+We want to reach out to the mapStateToProps 
+function and get access to the selectedSong.
+
+
+import React from 'react';
+import { connect } from 'react-redux';
+
+const SongDetail = props => {
+  console.log(props);
+  return <div>Song Detail</div>;
+};
+
+const mapStateToProps = state => {
+  return { song: state.selectedSong };
+};
+
+export default connect(mapStateToProps)(SongDetail);
+
+
+
+
+Conditional Rendering
+
+When we first render out we don't have a default value.
+So we want to make a condition to return "Select a song".
+
+
+import React from 'react';
+import { connect } from 'react-redux';
+
+const SongDetail = ({ song }) => {
+  if (!song) {
+    return <div>Select a song</div>;
+  }
+
+  return (
+    <div>
+      <h3>Details for:</h3>
+      <p>
+        Title: {song.title}
+        <br />
+        Duration: {song.duration}
+      </p>
+    </div>
+  );
+};
+
+const mapStateToProps = state => {
+  return { song: state.selectedSong };
+};
+
+export default connect(mapStateToProps)(SongDetail);
+
+
+Coding Exercise 12: Connecting Components to Redux
+
+
+<script type="text/babel" data-plugins="proposal-class-properties" data-presets="env,react">
+    // Action Creators - You don't need to change these
+    const increment = () => ({ type: 'increment' });
+    const decrement = () => ({ type: 'decrement' });
+    
+    const Counter = (props) => {
+        return (
+            <div>
+                <button onClick={props.increment} className="increment">Increment</button>
+                <button onClick={props.decrement} className="decrement">Decrement</button>
+                Current Count: <span>{props.count}</span>
+            </div>
+        );
+    };
+    
+
+    const mapStateToProps = (state) => {
+        return { count: state.count};
+    }
+    
+    const WrappedCounter = ReactRedux.connect(mapStateToProps, {increment, decrement})(Counter);
+    
+    // Only change code *before* me!
+    // -----------
+    
+    const store = Redux.createStore(Redux.combineReducers({
+        count: (count = 0, action) => {
+            if (action.type === 'increment') {
+                return count + 1;
+            } else if (action.type === 'decrement') {
+                return count - 1;
+            } else {
+                return count;
+            }
+        }
+    }));
+
+    ReactDOM.render(
+        <ReactRedux.Provider store={store}>
+            <WrappedCounter />
+        </ReactRedux.Provider>, 
+        document.querySelector('#root')
+    );
+</script>
