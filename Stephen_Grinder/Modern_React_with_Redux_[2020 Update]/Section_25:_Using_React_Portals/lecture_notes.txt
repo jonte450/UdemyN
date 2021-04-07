@@ -1,0 +1,689 @@
+Why Use Portals?
+We come to delete Modal.
+A modal prompt a user to take an action.
+
+Creating Modals in React is challenging.
+
+Normally, all components are a child
+of 'div with id root'
+body
+-> Div with id 'root'
+-> Provider
+-> App -> Route
+       -> Route
+       -> Route
+->StreamDelete
+->Modal
+->Button
+
+We render the application into the Div with	id 'root'.
+All our elements are nested in Div with id 'root'.
+
+We are going to use Portals.
+Why would we want to use a portals.
+
+create a file called modal.html
+
+
+<head>
+</head>
+<body>
+    I am a modal example
+</body>
+
+<head>
+<style>
+ .sidebar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 300px;
+  background-color: green;
+ }
+
+ .content {
+  margin-left: 300 px;
+
+ }
+</head>
+<body>
+    <div class="sidebar"> I am a sidebar</div>
+    <div class="content"> <h1>I am some content</h1> </div>
+</body>
+
+
+More on Using Portals
+
+We can use z-indez to the Application.
+If we give a z-index 10.
+I am a modal will become displayed on top.
+Modal will become deeply nested within the application.
+Everyone of the div.
+Wrap all within a div-tag.
+z-index creates a stacking context.
+Creates a new way to comparing stacking-context.
+Might working on component deeply nested modal.
+You might break the entire application.
+
+We are going to show the modal will become a child.
+Bend the rule.
+Make the modal as a child.
+
+
+<head>
+</head>
+<body>
+    I am a modal example
+</body>
+
+<head>
+<style>
+ .sidebar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 300px;
+  background-color: green;
+ }
+
+ .content {
+  margin-left: 300 px;
+
+  .modal-body {
+  background-color: white;
+  margin: auto;
+  height: 30%;
+  width: 30%;
+  }
+ 
+ .modal{
+   height: 100%;
+   width: 100%;
+   position: fixed;
+   background-color: grey;
+   left: 0;
+   top: 0;
+   z-index: 10;
+ }
+
+ .positioned {
+   position: relative;
+   z-index: 0;
+ }
+
+ }
+</head>
+<body>
+    <div class="positioned">
+    <div class="modal"> I am a sidebar</div>
+    <div class="modal-body"> <h1>I am some content</h1> </div>
+    </div>
+</body>
+
+
+
+Creating a Portal
+
+We are going to take ReactDOM.createPortal.
+And we try to attach some div-tag.
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const Modal = props => {
+  return ReactDOM.createPortal(
+    <div className="ui dimmer modals visible active">
+      <div className="ui standard modal visible active">
+        laksjdflakjsdf lkajsldfkjalsfdj
+      </div>
+    </div>,
+    document.querySelector('#modal')
+  );
+};
+
+export default Modal;
+
+Everytime we render we will show the Modal.
+
+
+import React from 'react';
+import Modal from '../Modal';
+
+const StreamDelete = () => {
+  return (
+    <div>
+      StreamDelete
+      <Modal />
+    </div>
+  );
+};
+
+export default StreamDelete;
+
+Introduce to a Server-side application.
+Server-side rendered application.
+
+
+
+Hiding a Modal
+
+We are using the styling.
+We can place div with a class.
+Divs with class.
+Delete text.
+One little issue.
+We want to dissmiss the modal window when the user
+clicks outside it.
+
+To make the modal to go away.
+With the user navigate to a other place.
+onClick somebody clicks we can navigate to a
+other window.
+e.stopPropagation will stop the eventHandlers.
+
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import history from '../history';
+
+const Modal = props => {
+  return ReactDOM.createPortal(
+    <div
+      onClick={() => history.push('/')}
+      className="ui dimmer modals visible active"
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        className="ui standard modal visible active"
+      >
+        <div className="header">Delete Stream</div>
+        <div className="content">
+          Are you sure you want to delete this stream?
+        </div>
+        <div className="actions">
+          <button className="ui primary button">Delete</button>
+          <button className="ui button">Cancel</button>
+        </div>
+      </div>
+    </div>,
+    document.querySelector('#modal')
+  );
+};
+
+export default Modal;
+
+
+
+
+Making the Modal Reusable
+We want to reuse the Modal component.
+We should configure the modal so we
+can use it again in the future.
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import history from '../history';
+
+const Modal = props => {
+  return ReactDOM.createPortal(
+    <div
+      onClick={() => history.push('/')}
+      className="ui dimmer modals visible active"
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        className="ui standard modal visible active"
+      >
+        <div className="header">{props.title}</div>
+        <div className="content">{props.content}</div>
+        <div className="actions">{props.actions}</div>
+      </div>
+    </div>,
+    document.querySelector('#modal')
+  );
+};
+
+export default Modal;
+
+Want to create actions to make the modals
+cusomable.
+
+With the help of actions.
+
+
+
+import React from 'react';
+import Modal from '../Modal';
+
+const StreamDelete = () => {
+  const actions = (
+    <div>
+      <button className="ui button negative">Delete</button>
+      <button className="ui button">Cancel</button>
+    </div>
+  );
+
+  return (
+    <div>
+      StreamDelete
+      <Modal
+        title="Delete Stream"
+        content="Are you sure you want to delete this stream?"
+        actions={actions}
+      />
+    </div>
+  );
+};
+
+export default StreamDelete;
+
+
+
+
+React Fragments
+
+We want to have the div.
+We are going to use React Fragments.
+Reacts.Fragments is something that as like 
+a invisible tag.
+
+import React from 'react';
+import Modal from '../Modal';
+
+const StreamDelete = () => {
+  const actions = (
+    <React.Fragment>
+      <button className="ui button negative">Delete</button>
+      <button className="ui button">Cancel</button>
+    </React.Fragment>
+  );
+
+  return (
+    <div>
+      StreamDelete
+      <Modal
+        title="Delete Stream"
+        content="Are you sure you want to delete this stream?"
+        actions={actions}
+      />
+    </div>
+  );
+};
+
+export default StreamDelete;
+
+
+
+OnDissmiss From the Parent
+
+Anytime when a user clicks it should click onDissmiss.
+The parent will provide this to the props.
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const Modal = props => {
+  return ReactDOM.createPortal(
+    <div onClick={props.onDismiss} className="ui dimmer modals visible active">
+      <div
+        onClick={e => e.stopPropagation()}
+        className="ui standard modal visible active"
+      >
+        <div className="header">{props.title}</div>
+        <div className="content">{props.content}</div>
+        <div className="actions">{props.actions}</div>
+      </div>
+    </div>,
+    document.querySelector('#modal')
+  );
+};
+
+export default Modal;
+
+Reminder on Path Params
+
+Making sure to delete the right stream.
+First rather to do want to show the modal.
+
+Replace the button with the link-element.
+
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchStreams } from '../../actions';
+
+class StreamList extends React.Component {
+  componentDidMount() {
+    this.props.fetchStreams();
+  }
+
+  renderAdmin(stream) {
+    if (stream.userId === this.props.currentUserId) {
+      return (
+        <div className="right floated content">
+          <Link to={`/streams/edit/${stream.id}`} className="ui button primary">
+            Edit
+          </Link>
+          <Link
+            to={`/streams/delete/${stream.id}`}
+            className="ui button negative"
+          >
+            Delete
+          </Link>
+        </div>
+      );
+    }
+  }
+
+  renderList() {
+    return this.props.streams.map(stream => {
+      return (
+        <div className="item" key={stream.id}>
+          {this.renderAdmin(stream)}
+          <i className="large middle aligned icon camera" />
+          <div className="content">
+            {stream.title}
+            <div className="description">{stream.description}</div>
+          </div>
+        </div>
+      );
+    });
+  }
+
+  renderCreate() {
+    if (this.props.isSignedIn) {
+      return (
+        <div style={{ textAlign: 'right' }}>
+          <Link to="/streams/new" className="ui button primary">
+            Create Stream
+          </Link>
+        </div>
+      );
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Streams</h2>
+        <div className="ui celled list">{this.renderList()}</div>
+        {this.renderCreate()}
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    streams: Object.values(state.streams),
+    currentUserId: state.auth.userId,
+    isSignedIn: state.auth.isSignedIn
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchStreams }
+)(StreamList);
+
+
+Fetching the Delection Stream
+
+Remake the StreamDelete to class component instead.
+Make sure you call the render Actions prop.
+Adding a LifeCycle method to fetch the information
+about the stream.
+
+
+import React from 'react';
+import { connect } from 'react-redux';
+import Modal from '../Modal';
+import history from '../../history';
+import { fetchStream } from '../../actions';
+
+class StreamDelete extends React.Component {
+  componentDidMount() {
+    this.props.fetchStream(this.props.match.params.id);
+  }
+
+  renderActions() {
+    return (
+      <React.Fragment>
+        <button className="ui button negative">Delete</button>
+        <button className="ui button">Cancel</button>
+      </React.Fragment>
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        StreamDelete
+        <Modal
+          title="Delete Stream"
+          content="Are you sure you want to delete this stream?"
+          actions={this.renderActions()}
+          onDismiss={() => history.push('/')}
+        />
+      </div>
+    );
+  }
+}
+
+export default connect(
+  null,
+  { fetchStream }
+)(StreamDelete);
+
+
+
+
+Conditionally Showing Stream Details
+
+We are going to return a props and check the id.
+Where the keys are the ids to the streams.
+Define a method called renderContent().
+
+
+import React from 'react';
+import { connect } from 'react-redux';
+import Modal from '../Modal';
+import history from '../../history';
+import { fetchStream } from '../../actions';
+
+class StreamDelete extends React.Component {
+  componentDidMount() {
+    this.props.fetchStream(this.props.match.params.id);
+  }
+
+  renderActions() {
+    return (
+      <React.Fragment>
+        <button className="ui button negative">Delete</button>
+        <button className="ui button">Cancel</button>
+      </React.Fragment>
+    );
+  }
+
+  renderContent() {
+    if (!this.props.stream) {
+      return 'Are you sure you want to delete this stream?';
+    }
+
+    return `Are you sure you want to delete the stream with title: ${
+      this.props.stream.title
+    }`;
+  }
+
+  render() {
+    return (
+      <Modal
+        title="Delete Stream"
+        content={this.renderContent()}
+        actions={this.renderActions()}
+        onDismiss={() => history.push('/')}
+      />
+    );
+  }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return { stream: state.streams[ownProps.match.params.id] };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchStream }
+)(StreamDelete);
+
+
+
+
+
+Delecting a Stream
+The last thing we want to do is to wire up to delete the stream.
+We want to call a action-creator to delete the particular stream.
+We destruct to get the id.
+
+
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Modal from '../Modal';
+import history from '../../history';
+import { fetchStream, deleteStream } from '../../actions';
+
+class StreamDelete extends React.Component {
+  componentDidMount() {
+    this.props.fetchStream(this.props.match.params.id);
+  }
+
+  renderActions() {
+    const { id } = this.props.match.params;
+
+    return (
+      <React.Fragment>
+        <button
+          onClick={() => this.props.deleteStream(id)}
+          className="ui button negative"
+        >
+          Delete
+        </button>
+        <Link to="/" className="ui button">
+          Cancel
+        </Link>
+      </React.Fragment>
+    );
+  }
+
+  renderContent() {
+    if (!this.props.stream) {
+      return 'Are you sure you want to delete this stream?';
+    }
+
+    return `Are you sure you want to delete the stream with title: ${
+      this.props.stream.title
+    }`;
+  }
+
+  render() {
+    return (
+      <Modal
+        title="Delete Stream"
+        content={this.renderContent()}
+        actions={this.renderActions()}
+        onDismiss={() => history.push('/')}
+      />
+    );
+  }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return { stream: state.streams[ownProps.match.params.id] };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchStream, deleteStream }
+)(StreamDelete);
+
+
+
+Exercise Overview - Closing the Modal
+Make the modal to close the element.
+
+
+
+Coding Exercise 15: Closing the Modal
+
+// You shouldn't need to change anything in here - check out the Modal.js file instead!
+
+import React from 'react';
+import { Modal } from './Modal';
+
+export default class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { open : false };
+    }
+    
+    showModal() {
+        if (this.state.open) {
+            return (
+                <Modal 
+                    open={this.state.open}
+                    onDismiss={() => this.setState({ open: false })}
+                    title="Modal Title"
+                    content="Modal Body"
+                    actions={<div className="ui button">Button</div>}
+                />
+            );
+        }
+    }
+    
+    render() {
+        return (
+            <div>
+                <button onClick={() => this.setState({ open: !this.state.open })}>
+                    Open Modal
+                </button>
+                {this.showModal()}
+                
+                <link
+                  rel="stylesheet"
+                  href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+                />
+                <div id="modal" />
+            </div>
+        )
+    
+    }
+}
+
+document.body.append(document.createElement('section'));
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+export const Modal = (props) => {
+    return ReactDOM.createPortal(
+        <div onClick={props.onDismiss} className="ui dimmer modals visible active">
+            <div
+                onClick={e => e.stopPropagation()}
+                className="ui standard modal visible active"
+            >
+                <i className="close icon" onClick={props.onDismiss}></i>
+                <div className="header">{props.title}</div>
+                <div className="content">{props.content}</div>
+                <div className="actions">{props.actions}</div>
+            </div>
+        </div>,
+        document.querySelector('section')
+    );
+}
