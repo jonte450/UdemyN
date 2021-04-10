@@ -1,0 +1,674 @@
+Viewing a Stream
+Viewing CRUD operations.
+Show some information about it.
+Import Link-tag.
+Give it a to-prop.
+Give back-ticks.
+
+
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchStreams } from '../../actions';
+
+class StreamList extends React.Component {
+  componentDidMount() {
+    this.props.fetchStreams();
+  }
+
+  renderAdmin(stream) {
+    if (stream.userId === this.props.currentUserId) {
+      return (
+        <div className="right floated content">
+          <Link to={`/streams/edit/${stream.id}`} className="ui button primary">
+            Edit
+          </Link>
+          <Link
+            to={`/streams/delete/${stream.id}`}
+            className="ui button negative"
+          >
+            Delete
+          </Link>
+        </div>
+      );
+    }
+  }
+
+  renderList() {
+    return this.props.streams.map(stream => {
+      return (
+        <div className="item" key={stream.id}>
+          {this.renderAdmin(stream)}
+          <i className="large middle aligned icon camera" />
+          <div className="content">
+            <Link to={`/streams/${stream.id}`} className="header">
+              {stream.title}
+            </Link>
+            <div className="description">{stream.description}</div>
+          </div>
+        </div>
+      );
+    });
+  }
+
+  renderCreate() {
+    if (this.props.isSignedIn) {
+      return (
+        <div style={{ textAlign: 'right' }}>
+          <Link to="/streams/new" className="ui button primary">
+            Create Stream
+          </Link>
+        </div>
+      );
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Streams</h2>
+        <div className="ui celled list">{this.renderList()}</div>
+        {this.renderCreate()}
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    streams: Object.values(state.streams),
+    currentUserId: state.auth.userId,
+    isSignedIn: state.auth.isSignedIn
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchStreams }
+)(StreamList);
+
+
+
+
+Switches with React-Router
+Going back to the streams create.
+We are seeing StreamShow and StreamCreate.
+We are running to a scenario when we are seeing two things
+at the same time.
+We are getting showed streams.
+
+Figure a way to show a component.
+Using Switch-Component.
+The only first path will be showed.
+
+
+import React from 'react';
+import { Router, Route, Switch } from 'react-router-dom';
+import StreamCreate from './streams/StreamCreate';
+import StreamEdit from './streams/StreamEdit';
+import StreamDelete from './streams/StreamDelete';
+import StreamList from './streams/StreamList';
+import StreamShow from './streams/StreamShow';
+import Header from './Header';
+import history from '../history';
+
+const App = () => {
+  return (
+    <div className="ui container">
+      <Router history={history}>
+        <div>
+          <Header />
+          <Switch>
+            <Route path="/" exact component={StreamList} />
+            <Route path="/streams/new" exact component={StreamCreate} />
+            <Route path="/streams/edit/:id" exact component={StreamEdit} />
+            <Route path="/streams/delete/:id" exact component={StreamDelete} />
+            <Route path="/streams/:id" exact component={StreamShow} />
+          </Switch>
+        </div>
+      </Router>
+    </div>
+  );
+};
+
+export default App;
+
+
+
+
+Showing a Stream
+
+Import some streams.
+And hook it up with the Connect Component.
+Return a div with componentDidMount().
+Pass in the id to fetch.
+Creating a number of streams.
+Define mapStateToProps.
+Connect mapStateToProps to the connect.
+Show a div showing Loading.
+
+
+import React from 'react';
+import { connect } from 'react-redux';
+import { fetchStream } from '../../actions';
+
+class StreamShow extends React.Component {
+  componentDidMount() {
+    this.props.fetchStream(this.props.match.params.id);
+  }
+
+  render() {
+    if (!this.props.stream) {
+      return <div>Loading...</div>;
+    }
+
+    const { title, description } = this.props.stream;
+
+    return (
+      <div>
+        <h1>{title}</h1>
+        <h5>{description}</h5>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return { stream: state.streams[ownProps.match.params.id] };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchStream }
+)(StreamShow);
+
+
+
+RTMP NodeMediaServer is not a constructor error fix
+
+In the next lecture we will install the Node Media Server package and create our RTMP server. Our index.js needs a slight modification to the import for v.2.1.0
+
+https://github.com/illuspas/Node-Media-Server#npm-version-recommended
+
+Instead of:
+
+const { NodeMediaServer } = require('node-media-server');
+we need to change the import to this:
+
+const NodeMediaServer = require('node-media-server');
+
+
+
+RTMP Server Setup
+Streaming is Optional.
+Streaming is not a required to understand React Redux.
+
+Streamer's Computer
+Open Broadcaster Software
+->(Stream id)
+->Real Time Messaging Protocol(RTMP) Server
+->Webserver that knows which streams are currently broadcasting
+->(A stream is available at mystreams.com/stream)
+->Viewer's Browser
+->(Request to get video feed with stream id)
+->Back to (Real Time Messaging Protocol (RTMP) Server)
+
+RTMP server will be really staright-forward.
+
+Using Singlecore mode.
+npm install --save node-media-server
+"start": "npm start"
+
+Start up the npm server.
+
+
+
+OBS Installation
+If someone is streaming on a server.
+We have one terminal window for RTM-server.
+We have one terminal for our API-server.
+We have one terminal for our React-Server.
+
+We want to test all of our servers.
+
+obsproject.com.
+Choose the appropriate Operating System.
+
+
+OBS Scene Setup
+
+Trying to configure the video.
+Using a different video recorder.
+Streming scene.
+Specify some scene.
+Different sources of quality.
+If you look at the video you see a red border.
+Entering a number of sources.
+Looking on the video carefully.
+Making a capture.
+Clicking on settings.
+
+
+Video Player Setup
+Setting up the OBS service.
+
+github.com/illuspas/Node-Media-Server
+
+We all kind of services.
+DASH and HLS.
+Using a much easier setup.
+Creating a video-element player.
+Calling flvPlayer.
+flv.js player.
+
+npmjs.com/package/flv.js
+npm install --save flv.js
+
+
+
+
+Implementing FLV JS
+
+Importing flv from flv.js.
+Refs to get access to the DOM.
+In order to get a references.
+Video is like constrained.
+Give the Video-element.
+Everytime we write the element.
+
+
+import React from 'react';
+import flv from 'flv.js';
+import { connect } from 'react-redux';
+import { fetchStream } from '../../actions';
+
+class StreamShow extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.videoRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.props.fetchStream(this.props.match.params.id);
+  }
+
+  render() {
+    if (!this.props.stream) {
+      return <div>Loading...</div>;
+    }
+
+    const { title, description } = this.props.stream;
+
+    return (
+      <div>
+        <video ref={this.videoRef} style={{ width: '100%' }} controls />
+        <h1>{title}</h1>
+        <h5>{description}</h5>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return { stream: state.streams[ownProps.match.params.id] };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchStream }
+)(StreamShow);
+
+
+
+Creating a FLV player
+
+flv.js file.
+Converting it into a file.
+Downloading the video-stream.
+Inside the create-Player.
+componentDidMount.
+
+import React from 'react';
+import flv from 'flv.js';
+import { connect } from 'react-redux';
+import { fetchStream } from '../../actions';
+
+class StreamShow extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.videoRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.props.fetchStream(this.props.match.params.id);
+    this.player = flv.createPlayer({
+     type: 'flv',
+     url: `http://localhost:8000/live/${id}.flv`
+    });
+    this.player.attachMediaElement(this.videoRef.current);
+    this.player.load();
+  }
+
+  render() {
+    if (!this.props.stream) {
+      return <div>Loading...</div>;
+    }
+
+    const { title, description } = this.props.stream;
+
+    return (
+      <div>
+        <video ref={this.videoRef} style={{ width: '100%' }} controls />
+        <h1>{title}</h1>
+        <h5>{description}</h5>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return { stream: state.streams[ownProps.match.params.id] };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchStream }
+)(StreamShow);
+
+
+Optional Player Building
+If we don't have a stream.
+Always show the videoPlayer.
+We shouldn't attach the videoPlayer.
+URL need to reference something like specify the URL.
+How can we fix this.
+We cannot rend the component until we fetch the stream.
+
+Define a helper method called buildPlayer().
+If we don't have a player just return.
+We will build the player if we don't have the stream.
+
+
+import React from "react";
+import flv from "flv.js";
+import { connect } from "react-redux";
+import { fetchStream } from "../../actions";
+
+class StreamShow extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.videoRef = React.createRef();
+  }
+
+  componentDidMount() {
+    const { id } = this.props.match.params;
+
+    this.props.fetchStream(id);
+    this.buildPlayer();
+  }
+
+  componentDidUpdate() {
+    this.buildPlayer();
+  }
+
+  buildPlayer() {
+    if (this.player || !this.props.stream) {
+      return;
+    }
+
+    const { id } = this.props.match.params;
+    this.player = flv.createPlayer({
+      type: "flv",
+      url: `http://localhost:8000/live/${id}.flv`,
+    });
+    this.player.attachMediaElement(this.videoRef.current);
+    this.player.load();
+  }
+
+  render() {
+    if (!this.props.stream) {
+      return <div>Loading...</div>;
+    }
+
+    const { title, description } = this.props.stream;
+
+    return (
+      <div>
+        <video ref={this.videoRef} style={{ width: "100%" }} controls />
+        <h1>{title}</h1>
+        <h5>{description}</h5>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return { stream: state.streams[ownProps.match.params.id] };
+};
+
+export default connect(mapStateToProps, { fetchStream })(StreamShow);
+
+
+
+It Works!
+Setting up an OBS.
+How to recieve an OBS.
+Stream Name.
+rtmp://localhost/live
+Start streaming.
+See the Stream.
+May take some time before the video is showing up.
+
+
+
+Cleaning Up with ComponentWillUnmount
+
+We get an error message that the streaming ended.
+When the component is unmounted.
+Even if we stop watching on unmounting.
+We still get error.
+
+We had different lifecycle methods.
+
+Add a componentWillUnmount().
+Take over resources.
+This will destroy the player.
+
+
+import React from 'react';
+import flv from 'flv.js';
+import { connect } from 'react-redux';
+import { fetchStream } from '../../actions';
+
+class StreamShow extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.videoRef = React.createRef();
+  }
+
+  componentDidMount() {
+    const { id } = this.props.match.params;
+
+    this.props.fetchStream(id);
+    this.buildPlayer();
+  }
+
+  componentDidUpdate() {
+    this.buildPlayer();
+  }
+
+  componentWillUnmount() {
+    this.player.destroy();
+  }
+
+  buildPlayer() {
+    if (this.player || !this.props.stream) {
+      return;
+    }
+
+    const { id } = this.props.match.params;
+    this.player = flv.createPlayer({
+      type: 'flv',
+      url: `http://localhost:8000/live/${id}.flv`
+    });
+    this.player.attachMediaElement(this.videoRef.current);
+    this.player.load();
+  }
+
+  render() {
+    if (!this.props.stream) {
+      return <div>Loading...</div>;
+    }
+
+    const { title, description } = this.props.stream;
+
+    return (
+      <div>
+        <video ref={this.videoRef} style={{ width: '100%' }} controls />
+        <h1>{title}</h1>
+        <h5>{description}</h5>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return { stream: state.streams[ownProps.match.params.id] };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchStream }
+)(StreamShow);
+
+
+
+
+Exercise Overview - Adding Some Filtering
+
+// You shouldn't need to change anything in this file - check out the StreamList.js file instead!
+
+
+import React from 'react';
+import { StreamList } from './StreamList';
+
+const streams = [
+    {
+      "title": "My Stream",
+      "description": "This is a great stream.",
+      "id": 1,
+      "userId": 20
+    },
+    {
+      "title": "Other Stream",
+      "description": "Here's some stream",
+      "id": 2,
+      "userId": 5
+    },
+    {
+      "title": "Me Streaming Component Reuse!",
+      "description": "This stream is about refactoring!!!",
+      "id": 4,
+      "userId": 5
+    },
+    {
+      "title": "An Interactive Stream",
+      "description": "Lets stream together",
+      "id": 4,
+      "userId": 32
+    }
+];
+
+export default class App extends React.Component {
+    render() {
+        return (
+            <div>
+                <StreamList 
+                    streams={streams} 
+                    fetchStreams={() => {}}
+                    currentUserId={5}
+                />
+                <link
+                  rel="stylesheet"
+                  href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+                />
+            </div>
+        );
+    }
+}
+
+
+
+import React from 'react';
+
+export class StreamList extends React.Component {
+  componentDidMount() {
+    this.props.fetchStreams();
+  }
+
+  renderAdmin(stream) {
+    if (stream.userId === this.props.currentUserId) {
+      return (
+        <div className="right floated content">
+          <a to={`/streams/edit/${stream.id}`} className="ui button primary">
+            Edit
+          </a>
+          <a
+            to={`/streams/delete/${stream.id}`}
+            className="ui button negative"
+          >
+            Delete
+          </a>
+        </div>
+      );
+    }
+  }
+
+  renderList() {
+    return this.props.streams.map(stream => {
+        if(this.props.currentUserId !== stream.userId){
+            return null;
+        }
+      return (
+        <div className="item" key={stream.id}>
+          {this.renderAdmin(stream)}
+          <i className="large middle aligned icon camera" />
+          <div className="content">
+            <a to={`/streams/${stream.id}`} className="header">
+              {stream.title}
+            </a>
+            <div className="description">{stream.description}</div>
+          </div>
+        </div>
+      );
+    });
+  }
+
+  renderCreate() {
+    if (this.props.isSignedIn) {
+      return (
+        <div style={{ textAlign: 'right' }}>
+          <a to="/streams/new" className="ui button primary">
+            Create Stream
+          </a>
+        </div>
+      );
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Streams</h2>
+        <div className="ui celled list">{this.renderList()}</div>
+        {this.renderCreate()}
+      </div>
+    );
+  }
+}
+
+
