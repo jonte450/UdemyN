@@ -374,66 +374,641 @@ export default function App() {
 Quick Note On The Docs
 You can go to the TextInput to store on how 
 it looks in the React Native Docs.
+You can got to the documentation to get information about
+the component.
+Reference to the props.
+Every time you are working on a new component go
+to React Native DOCS.
+
+
 
 Reach out to the React Native DOCS.
 
 
 
 Cleaning Up Our Styling
+We can create two separate files to add some constistency.
+
+export const colors = {
+  darkBlue: '#252250',
+  white: '#fff',
+}
+
+And Padding file.
+
+export const fontSizes = {
+  sm: 8,
+  md: 16,
+  lg: 24,
+  xl: 32,
+  xxl: 40,
+  xxxl: 80
+}
+
+
+
+export const paddingSizes = {
+  sm: 8,
+  md: 16,
+  lg: 24,
+  xl: 32,
+  xxl: 40,
+  xxxl: 80
+}
+
 
 
 Building The Timer Feature
 
+In this section we build the timer component
+and add some styles.
+
+import React from "react";
+import {View, StyleSheet ,Text} from "react-native";
+import {colors} from '../../utils/colors';
+import {paddingSizes} from '../../utils/sizes';
+
+
+export const Timer = ({focusSubject}) => {
+  return(
+    <View style={styles.container}>
+    <View style={{paddingTop: paddingSizes.xxl}}>
+       <Text style={styles.title}>Focusing on:</Text>
+       <Text style={styles.task}>{focusSubject}</Text>
+    </View>
+    </View>
+  )
+
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+  },
+  title: {
+    color: colors.white,
+    textAlign: 'center'
+  },
+  task: {
+    color: colors.white,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  }
+
+})
+
 
 Building The Countdown Feature
+
+Created a Countdown.js component and
+add some functions to convert and
+format the Seconds.
+
+
+import React, {useState} from "react";
+import {Text, View, StyleSheet} from "react-native";
+import {fontSizes, paddingSizes} from '../utils/sizes';
+import {colors} from '../utils/colors';
+
+const minutesToMillis = (min) => min * 1000 * 60;
+
+
+export const Countdown = ({
+  minutes = 20,
+  isPause,
+
+}) => {
+  const [millis, setMillis] = useState(minutesToMillis(minutes));
+  const formatTime = (time) => time < 10 ? `0${time}`: time;
+  const minute = Math.floor(millis / 1000 / 60 ) % 60;
+  const seconds = Math.floor(millis / 1000) % 60;
+
+
+  return (
+    <Text style={styles.text}>{formatTime(minute)}:{formatTime(seconds)}</Text>
+  )
+}
+
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize:fontSizes.xxxl,
+    fontWeight: 'bold',
+    color: colors.white,
+    padding: paddingSizes.lg,
+    backgroundColor: 'rgba(94,132,226,0.3)'
+  }
+})
+
 
 
 Building The Countdown Feature 2
 
+Adding a countDown method that will count down with
+the help of useEffect that will begin count it down
+with help of setIntervall.
+
+
+import React, {useState, useEffect} from "react";
+import {Text, View, StyleSheet} from "react-native";
+import {fontSizes, paddingSizes} from '../utils/sizes';
+import {colors} from '../utils/colors';
+
+const minutesToMillis = (min) => min * 1000 * 60;
+
+
+export const Countdown = ({
+  minutes = 20,
+  isPause,
+  
+}) => {
+  const interval = React.useRef(null);
+  const countDown = () => {
+    setMillis((time) => {
+      if(time === 0){
+        return time;
+      }
+      const timeLeft = time - 1000;
+      return timeLeft;
+    })
+  }
+  useEffect(() => {
+    interval.current = setInterval(countDown,1000);
+    return () => clearInterval(interval.current)
+  },[])
+
+  const [millis, setMillis] = useState(minutesToMillis(minutes));
+
+  const formatTime = (time) => time < 10 ? `0${time}`: time;
+  const minute = Math.floor(millis / 1000 / 60 ) % 60;
+  const seconds = Math.floor(millis / 1000) % 60;
+
+
+  return (
+    <Text style={styles.text}>{formatTime(minute)}:{formatTime(seconds)}</Text>
+  )
+}
+
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize:fontSizes.xxxl,
+    fontWeight: 'bold',
+    color: colors.white,
+    padding: paddingSizes.lg,
+    backgroundColor: 'rgba(94,132,226,0.3)'
+  }
+})
+
+
 
 Building The Countdown Feature 3
+
+Adding a view with you to center the Buttons
+and to pause and start the timer.
+
+
+import React, { useState } from "react";
+import {View, StyleSheet ,Text} from "react-native";
+import {colors} from '../../utils/colors';
+import {paddingSizes} from '../../utils/sizes';
+import {Countdown} from '../../components/Countdown';
+import {RoundedButton} from '../../components/RoundedButton';
+
+export const Timer = ({focusSubject}) => {
+  const [isStarted, setIsStarted] = useState(false);
+  return(
+    <View style={styles.container}>
+    <View style={styles.countdown}>
+        <Countdown isPaused={!isStarted}/>
+    </View>
+    <View style={{paddingTop: paddingSizes.xxl}}>
+       <Text style={styles.title}>Focusing on:</Text>
+       <Text style={styles.task}>{focusSubject}</Text>
+    </View>
+   <View style={styles.buttonWrapper}>
+    {isStarted ?(
+    <RoundedButton title="pause"  onPress={() => setIsStarted(false)} />
+       ) : (<RoundedButton title="start" onPress={() => setIsStarted(true)} />
+       )}
+    </View>
+    </View>
+  )
+
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+  },
+  title: {
+    color: colors.white,
+    textAlign: 'center'
+  },
+  task: {
+    color: colors.white,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  countdown: {
+    flex: 0.5,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+   buttonWrapper: {
+   flex: 0.3,
+   padding: 15,
+   justifyContent: 'center',
+   alignItems:'center'
+ },
+  buttonWrapper: {
+   flex: 0.3,
+   padding: 15,
+   justifyContent: 'center',
+   alignItems:'center'
+ }
+
+})
+
 
 
 A Quick Note On Error Screens
 
+You may see some errors like.
+Can't find variable:RoundedButton.
+When you hit some error.
+Expected corresponding JSX closing tag.
+
+
 
 Reporting The Progress
+
+Importing a react-native-paper and setting
+and creating a function that sets the progress.
+
+
+import React, { useState } from "react";
+import {View, StyleSheet ,Text} from "react-native";
+import {ProgressBar } from 'react-native-paper';
+import {colors} from '../../utils/colors';
+import {paddingSizes} from '../../utils/sizes';
+import {Countdown} from '../../components/Countdown';
+import {RoundedButton} from '../../components/RoundedButton';
+
+export const Timer = ({focusSubject}) => {
+  const [isStarted, setIsStarted] = useState(false);
+  const [progress, setProgress] = useState(1);
+  const onProgress = (progress) => {
+    setProgress(progress)
+  }
+  return(
+    <View style={styles.container}>
+    <View style={styles.countdown}>
+        <Countdown isPaused={!isStarted} onProgress={onProgress}/>
+    </View>
+    <View style={{paddingTop: paddingSizes.xxl}}>
+       <Text style={styles.title}>Focusing on:</Text>
+       <Text style={styles.task}>{focusSubject}</Text>
+    </View>
+    <View style={{paddingTop: paddingSizes.small}}>
+    <ProgressBar progress={progress} color='#5E84E2' style={{height:10}} />
+    </View>
+   <View style={styles.buttonWrapper}>
+    {isStarted ?(
+    <RoundedButton title="pause"  onPress={() => setIsStarted(false)} />
+       ) : (<RoundedButton title="start" onPress={() => setIsStarted(true)} />
+       )}
+    </View>
+    </View>
+  )
+
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+  },
+  title: {
+    color: colors.white,
+    textAlign: 'center'
+  },
+  task: {
+    color: colors.white,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  countdown: {
+    flex: 0.5,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+   buttonWrapper: {
+   flex: 0.3,
+   padding: 15,
+   justifyContent: 'center',
+   alignItems:'center'
+ },
+  buttonWrapper: {
+   flex: 0.3,
+   padding: 15,
+   justifyContent: 'center',
+   alignItems:'center'
+ }
+
+})
 
 
 Preset Timing Buttons
 
+Added buttons to setup the time so
+that you can preset the time.
+
+import React from "react";
+import {View, StyleSheet} from "react-native";
+
+import {RoundedButton} from '../../components/RoundedButton';
+
+export const Timing = ({onChangeTime} ) => {
+  return (
+    <>
+     <View style={styles.timingButton}>
+     <RoundedButton size={75} title="10" onPress={() => onChangeTime(10)} />
+     </View>
+
+     <View style={styles.timingButton}>
+     <RoundedButton size={75} title="15" onPress={() => onChangeTime(15)} />
+     </View>
+
+          <View style={styles.timingButton}>
+     <RoundedButton size={75} title="20" onPress={() => onChangeTime(20)} />
+     </View>
+    </>
+  )
+}
+
+
+const styles = StyleSheet.create({
+  timingButton: {
+    flex: 1,
+    alignItems: 'center'
+  }
+})
+
 
 Keeping The App Awake
+Just adding to the timer.js component.
+import {useKeepAwake} from 'expo-keep-awake';
+
+And in the timer.js function.
+useKeepAwake();
+
 
 Vibrating When Finished With A Task
 
+Adding some vibrate function to the timer.js component.
+And adding onEnd function to the
+
+  const vibrate = () => {
+    if(Platform.OS === 'ios') {
+      const interval = setInterval(() => Vibration.vibrate(), 1000);
+      setTimeout(() => clearInterval(interval), 1000)
+    }else {
+      Vibration.vibrate(10000);
+    }
+  }
+
+  const onEnd = () => {
+    vibrate();
+    setMinutes(DEFULT_TIME);
+    setProgress(1);
+    setIsStarted(false);
+  }
+
+And in the countDown component adding onEnd function. 
+
+  const countDown = () => {
+    setMillis((time) => {
+      if(time === 0){
+        clearInterval(interval.current);
+        onEnd();
+        return time;
+      }
+
+
 Going Full Circle
+
+Added an function that set the timer back to null
+and gave it to the function.
+
+And we could continue to write back to the function
+when the timer has ended. 
 
 
 Quick Cleanup
+Change setTmp and setTmpObject to a nicer name.
+
+const [subject, setSubject] = useState(null);
+
 
 Quick Review Of What We Have Accomplished So Far
+
+We created a shell.
+We added a shell to the focus Object.
+We need to have a source-folder.
+Components as a source folder.
+
+Once you have the source interface.
+Naming things is very hard.
+You should make reusable.
+Inject a style-class.
+
+Why did we created the feature-folder.
+We are building a screen to focus on.
+
+Utilities to encapsulate some things.
 
 
 Clearing The Subject
 
+Adding a button with - sign.
+And after that create a function to Reset the button.
+
+
 Storing Focus History
+
+Using useEffect and useState to store objects
+related to the history and useEffect to track
+the changes.
+
+const [focusHistory, setFocusHistory] = useState([]);
+
+useEffect(() => {
+    if(focusSubject){
+      setFocusHistory([...focusHistory, focusSubject]);
+    }
+}, [focusSubject]);
 
 
 Storing Focus History With Statuses
 
+With this we are storing the focus object and
+we can keep track of the status of every subject.
+
+<Timer
+   focusSubject={focusSubject}
+  onTimerEnd={() => {
+  addFocusHistoryWithState(focusSubject, STATUSES.COMPLETE);
+   setFocusSubject(null);
+  }}
+  clearSubject={() => {
+  addFocusHistoryWithState(focusSubject, STATUSES.CANCELLED);
+  setFocusSubject(null)
+  }}
+/>
+
+
+
 Building The Focus History List
+
+Created a component named FocusHistory.js file that
+we exported and this component and to render the 
+list Items as Red or Green.
+
+
+import React from "react";
+import {View, StyleSheet, FlatList, Text, SafeAreaView} from "react-native";
+
+import {fontSizes, paddingSizes} from "../../utils/sizes";
+import {RoundedButton} from "../../components/RoundedButton";
+
+
+const HistoryItem = ({item , index}) => {
+  return (
+    <Text style={styles.historyItem(item.status)}>
+    {item.subject}
+    </Text>
+  )
+}
+
+
+export const FocusHistory = ({focusHistory, onClear}) => {
+const clearHistory = () => {
+  onClear();
+}
+
+return (
+  <>
+  <SafeAreaView style={{ flex: 1, alignItems: 'center'}}>
+   <Text style={styles.title}> Things we've focused on </Text> 
+   {!!focusHistory.length &&(
+    <>  
+   <FlatList
+   style={{flex: 1}}
+   contentContainerStyle={{flex: 1, alignItems: 'center'}}
+   data={focusHistory}
+   renderItem={HistoryItem}
+
+   />
+   </>
+)}
+   </SafeAreaView>
+  </>
+);
+};
+
+const styles = StyleSheet.create({
+  historyItem: (status) => ({
+    color: status > 1 ? 'red' : 'green',
+    fontSize: fontSizes.md,
+  }),
+  title: {
+    color: 'white',
+    fontSize: fontSizes.lg
+  }
+})
+
+
 
 Clearing The Focus History
 
+Adding a functionality to clear the list of objects.
+
+const onClear = () => {
+    setFocusHistory([]);
+};
+
+And adding a button to the FocusHistory.js
+
+
 A Quick Note On AsyncStorage
+
+In the next video you'll be learning about persisting state when you open and close the app. This is through a package called AsyncStorage. For the longest time this was part of React Native's internals, however they decided to separate it out into it's own package.
+
+In the next video you'll see me import Async Storage from React Native DON'T DO THIS it will not work over time. Instead what you need to do is follow the next steps:
+
+Add this dependency to your package.json
+"@react-native-async-storage/async-storage": "*"
+
+Then to import it this way:
+
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+
+Storing And Loading The Focus Time
+
+After this snippet of code you can run 
+and go back to the App and get the
+list back.
+
+
+ const saveFocusHistory = async () => {
+    try{
+      AsyncStorage.setItem("focusHistory",JSON.stringify(focusHistory));
+    }catch(e){
+      console.log(e);
+    }
+  };
+
+  const loadFocusHistory = async () => {
+    try {
+     const history = await AsyncStorage.getItem("focusHistory");
+     if(history && JSON.parse(history).length){
+       setFocusHistory(JSON.parse(history));
+     }
+    }catch(e) {
+      console.log(e);
+    }
+  };
+   
+  useEffect(() => {
+    loadFocusHistory();
+  },[]);
+ 
+  useEffect(() => {
+    saveFocusHistory();
+  }, [focusHistory])
+
+
 
 
 Reflection Time!
+Move up the list of things to do up.
+
 
 Reflection Time Part 2!
+Use useEffect to change the progressbar.
 
 Reflection Time Part 3!
+We should add some keys to the property.
+
 
 Reflection Time Part 4!
 
+Move the onEnd function to the useEffect instead.
+
+  useEffect(() => {
+   onProgress(millis / minutesToMillis(minutes));
+   if(millis === 0){
+      onEnd();
+   }
+  },[millis])

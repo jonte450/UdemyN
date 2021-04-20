@@ -1,0 +1,514 @@
+The Context System
+With React 16 version Context System came out.
+
+Props System
+-Gets data from a parent component to
+ a direct child component
+
+Context System
+-Gets data from a parent component to any
+ nested child component
+
+
+Communicating with Props
+-App (buttonText)
+->Header(buttonText)
+->Button
+
+Communicating with Context
+App
+->Header
+->Button
+Communicating direct from the app to the button.
+
+
+
+
+An App with Context
+We are going to show a language selector.
+Showing some flags.
+Everytime the user clicks on a flag.
+We are going to rerender the flag.
+We are just focused on building some transalation.
+
+Components
+-App
+-UserCreate
+-Field
+-Button
+
+App (language) -> UserCreate (language) -> Field
+                                        -> Button  
+
+We are quickly realize it don't care about language in
+UserCreate.
+
+Here are we going to use Context System.
+
+
+App Generation
+Setting up all the directories.
+Inside the Components field.
+
+import React from 'react';
+
+class App extends React.Component {
+  render() {
+    return <div className="ui container">App</div>;
+  }
+}
+
+export default App;
+
+Wire up the Semantic UI.
+Putting in the link.
+
+
+
+Selecting a Language
+Import a language.
+We put some flags.
+We get something that will update the languages.
+Manage a function onLanguageChange.
+Put down in render-method.
+
+
+import React from 'react';
+
+class App extends React.Component {
+  state = { language: 'english' };
+
+  onLanguageChange = language => {
+    this.setState({ language });
+  };
+
+  render() {
+    return (
+      <div className="ui container">
+        <div>
+          Select a language:
+          <i
+            className="flag us"
+            onClick={() => this.onLanguageChange('english')}
+          />
+          <i
+            className="flag nl"
+            onClick={() => this.onLanguageChange('dutch')}
+          />
+        </div>
+        {this.state.language}
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
+
+A Touch More Setup
+Create some buttons and a field.
+
+
+import React from 'react';
+import Field from './Field';
+import Button from './Button';
+
+const UserCreate = () => {
+  return (
+    <div className="ui form">
+      <Field />
+      <Button />
+    </div>
+  );
+};
+
+export default UserCreate;
+
+Create a Field  component.
+
+import React from 'react';
+
+class Field extends React.Component {
+  render() {
+    return (
+      <div className="ui field">
+        <label>Name</label>
+        <input />
+      </div>
+    );
+  }
+}
+
+export default Field;
+
+Export the button component.
+
+
+import React from 'react';
+
+class Button extends React.Component {
+  render() {
+    return <button className="ui button primary">Submit</button>;
+  }
+}
+
+export default Button;
+
+And in the App-component you build the
+field and button.
+
+
+import React from 'react';
+import UserCreate from './UserCreate';
+
+class App extends React.Component {
+  state = { language: 'english' };
+
+  onLanguageChange = language => {
+    this.setState({ language });
+  };
+
+  render() {
+    return (
+      <div className="ui container">
+        <div>
+          Select a language:
+          <i
+            className="flag us"
+            onClick={() => this.onLanguageChange('english')}
+          />
+          <i
+            className="flag nl"
+            onClick={() => this.onLanguageChange('dutch')}
+          />
+        </div>
+        <UserCreate />
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
+
+
+Getting Data Out of Context
+We want to make sure that we want to communicate with the context.
+
+Parent Component
+  App
+->data (Contex)
+->Button / Field
+Context Object
+
+How do we get information in and out.
+
+-Two ways to get information in
+-Two ways to get information out
+
+
+Source of data
+-Default Value or Parent Component Provider
+
+-> Context Object (data)
+
+-Things that uses data
+-this.context
+-Consumer
+
+Set a default value or a Provider.
+
+
+
+Creating Context Objects
+
+import React from 'react';
+
+export default React.createContext('english');
+
+Creating a Context object.
+Make use of it.
+To get information out of it and into it.
+Connect with the context object.
+Use a consumer component.
+
+Set up a contextType property.
+Static adds a property.
+this.context can no get access to the property.
+
+
+import React from 'react';
+import LanguageContext from '../contexts/LanguageContext';
+
+class Button extends React.Component {
+  static contextType = LanguageContext;
+
+  render() {
+    console.log(this.context);
+    return <button className="ui button primary">Submit</button>;
+  }
+}
+
+export default Button;
+
+
+
+Consuming the Context Value
+Everytime we click on a flag will make the App to render.
+
+Ternary-statement to choose language.
+Reference text.
+
+
+import React from 'react';
+import LanguageContext from '../contexts/LanguageContext';
+
+class Button extends React.Component {
+  static contextType = LanguageContext;
+
+  render() {
+    const text = this.context === 'english' ? 'Submit' : 'Voorleggen';
+    return <button className="ui button primary">{text}</button>;
+  }
+}
+
+export default Button;
+
+ContextType will form a link.
+
+
+import React from 'react';
+import LanguageContext from '../contexts/LanguageContext';
+
+class Field extends React.Component {
+  static contextType = LanguageContext;
+
+  render() {
+    const text = this.context === 'english' ? 'Name' : 'Naam';
+
+    return (
+      <div className="ui field">
+        <label>{text}</label>
+        <input />
+      </div>
+    );
+  }
+}
+
+export default Field;
+
+
+
+The Context Provider
+Wrap the UserCreate with LanguageContext.Provider.
+To the value pass the we wanna choose state.language.
+
+
+import React from 'react';
+import UserCreate from './UserCreate';
+import LanguageContext from '../contexts/LanguageContext';
+
+class App extends React.Component {
+  state = { language: 'english' };
+
+  onLanguageChange = language => {
+    this.setState({ language });
+  };
+
+  render() {
+    return (
+      <div className="ui container">
+        <div>
+          Select a language:
+          <i
+            className="flag us"
+            onClick={() => this.onLanguageChange('english')}
+          />
+          <i
+            className="flag nl"
+            onClick={() => this.onLanguageChange('dutch')}
+          />
+        </div>
+        <LanguageContext.Provider value={this.state.language}>
+          <UserCreate />
+        </LanguageContext.Provider>
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
+
+Gotchas Around Providers
+import React from 'react';
+
+const context = React.createContext('english');
+
+console.log(context);
+
+export default context;
+
+We have a consumer and a Provider.
+
+Parent Component
+<Context.Provider value="english"/>
+-> Context Object.
+
+You want to change the language.
+
+Application loads up in the browser
+-> We create a context object with a default value of 'english'
+-> App component gets rendered, creates a Provider that wraps UserCreate
+-> Provider updates the value of the context object to 'this.state.language'
+-> Button and Field reach into context object, see the value from "this.state.language"
+->Button and Field render appropriate text to the screen
+
+
+Each separate use of LanguageContext.Provider creates a new,
+separate 'pipe' of information
+
+
+
+Accessing Data with Consumers
+Check the second way to use consumers.
+Use a consumer instead.
+Using a multi-line.
+Invoke the value.
+We are going to implement the same value.
+
+
+import React from 'react';
+import LanguageContext from '../contexts/LanguageContext';
+import ColorContext from '../contexts/ColorContext';
+
+class Button extends React.Component {
+  renderSubmit(value) {
+    return value === 'english' ? 'Submit' : 'Voorleggen';
+  }
+
+  renderButton(color) {
+    return (
+      <button className={`ui button ${color}`}>
+        <LanguageContext.Consumer>
+          {value => this.renderSubmit(value)}
+        </LanguageContext.Consumer>
+      </button>
+    );
+  }
+
+  render() {
+    return (
+      <ColorContext.Consumer>
+        {color => this.renderButton(color)}
+      </ColorContext.Consumer>
+    );
+  }
+}
+
+export default Button;
+
+
+
+Pulling From Multiple Contexts
+Why would we use consumers.
+We want to take information from multiple components.
+
+Create a new context type.
+
+import React from 'react';
+
+export default React.createContext();
+
+Import ColorContext.Provider.
+Hard code the value.
+We now have two different Context Provider.
+
+
+import React from 'react';
+import UserCreate from './UserCreate';
+import LanguageContext from '../contexts/LanguageContext';
+import ColorContext from '../contexts/ColorContext';
+
+class App extends React.Component {
+  state = { language: 'english' };
+
+  onLanguageChange = language => {
+    this.setState({ language });
+  };
+
+  render() {
+    return (
+      <div className="ui container">
+        <div>
+          Select a language:
+          <i
+            className="flag us"
+            onClick={() => this.onLanguageChange('english')}
+          />
+          <i
+            className="flag nl"
+            onClick={() => this.onLanguageChange('dutch')}
+          />
+        </div>
+
+        <ColorContext.Provider value="red">
+          <LanguageContext.Provider value={this.state.language}>
+            <UserCreate />
+          </LanguageContext.Provider>
+        </ColorContext.Provider>
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
+Access the value.
+
+import React from 'react';
+import LanguageContext from '../contexts/LanguageContext';
+import ColorContext from '../contexts/ColorContext';
+
+class Button extends React.Component {
+  renderSubmit(value) {
+    return value === 'english' ? 'Submit' : 'Voorleggen';
+  }
+
+  renderButton(color) {
+    return (
+      <button className={`ui button ${color}`}>
+        <LanguageContext.Consumer>
+          {value => this.renderSubmit(value)}
+        </LanguageContext.Consumer>
+      </button>
+    );
+  }
+
+  render() {
+    return (
+      <ColorContext.Consumer>
+        {color => this.renderButton(color)}
+      </ColorContext.Consumer>
+    );
+  }
+}
+
+export default Button;
+
+
+Exercise Overview - Consuming Context Values From Providers
+We got a header.
+All these different component is wired up to show different things.
+Pull a value from the context.
+
+Communicate the values.
+Wrap a provider.
+
+
+Coding Exercise 17: Creating and Consuming Context
+
