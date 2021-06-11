@@ -1,0 +1,1193 @@
+Time For Yoga
+
+We have used CSS-Syntax.
+React-Native feels like CSS.
+Because we call it YOGA.
+Put a piece of a puzzle.
+Laying out an engine is an endevour.
+Flex-Box trying to achieve to layout in some properties.
+
+
+Let's Do Some Yoga
+
+We have the Root-Container.
+In the phone-container we have a node.
+We can make the node Grow.
+They were fixing iteself with grow attribute.
+Yoga is used by React-Native.
+We can get a good idea how to use Yoga.
+
+
+React Native Flexbox And Snacks
+
+Why don't i use Yoga to build the whole UI.
+Understand how it works.
+Understanding how flex works.
+All of these priniciples.
+Yoga is same CSS in some differents.
+It behaves a little different.
+React-Native targets.
+
+
+Exercise App Layout
+Why use SafeAreaView.
+Purpose is to render content.
+Render everything without top.
+
+We put the Padding to 16 to give Search breathing-room.
+We gave Root-Container Flex:1 fill your parent.
+Grow base on the demand.
+Flex:1 to fill the parent.
+
+
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
+
+export default function App() {
+  return (
+    <>
+    <SafeAreaView style={{flex: 1, paddingTop: 25}}>
+    <View style={{padding: 16, backgroundColor: "green"}}>
+      <Text>Search</Text>
+    </View>
+
+    <View style={{flex: 1 , padding: 16, backgroundColor: "blue"}}> 
+    <Text>list</Text>
+    </View>
+  
+    </SafeAreaView>
+    <StatusBar style="auto" />
+
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+   
+});
+
+
+
+Android  StatusBar Issue
+
+SafeAreaView is only for IOS.
+We need a different solution that take.
+We need to make sure to account the padding.
+We have different sizes.
+We have a reference.
+We have constants that is currentHeight Android only.
+
+
+import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
+import React from 'react';
+import {StatusBar, SafeAreaView, StyleSheet, Text, TextInput, View, Platform } from 'react-native';
+
+
+
+
+export default function App() {
+  return (
+    <>
+    <SafeAreaView style={{flex: 1, marginTop: StatusBar.currentHeight}}>
+    <View style={{padding: 16, backgroundColor: "green"}}>
+      <Text>Search</Text>
+    </View>
+
+    <View style={{flex: 1 , padding: 16, backgroundColor: "blue"}}> 
+    <Text>list</Text>
+    </View>
+  
+    </SafeAreaView>
+    <ExpoStatusBar style="auto" />
+
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+   
+});
+
+
+Quick Note On Debugging
+
+We can use menus.
+We can reload the App.
+We can go into debugging mode.
+We have element inspector.
+Help you to figure out.
+How is the element looking like.
+
+
+
+Keeping Up With Code Step By Step
+Everytime we add something.
+Providing some a URL.
+What you will see to a point a time.
+Verify the code.
+
+
+Setting Up Eslint And Prettier
+Eslint is tool to fix up JavaScript code.
+Find errors.
+Enforce codestyles.
+
+Linting is the process to go through the style.
+prettier is a code format.
+We want consitent style.
+Prettier will format the code to look the same.
+
+
+
+Using Eslint
+
+Create a new script.
+In package.json
+"lint": "eslint . --ext .js"
+
+yarn lint command will tell us some problems.
+Both eslint and prettier can overlap each other
+and create conflicts.
+
+so in the eslintrc file.
+
+{
+    "extends": "@react-native-community",
+    "rules":{
+        "quotes": [2, "double", {"avoidEscape": true}]
+    }
+}
+
+And we can fix all these errors with.
+yarn lint --fix.
+
+
+
+
+Optimizing Eslint
+You can install the package in VSCode.
+
+
+Setting Up Prettier
+Go to settings-> Preferences and write in
+Format On Save.
+
+And install the Prettier package.
+Now you can save and Prettier is going to
+remove errors.
+
+
+Exercise SearchBar
+
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import React from "react";
+import { Searchbar } from "react-native-paper";
+import { StatusBar, SafeAreaView, StyleSheet, Text, View } from "react-native";
+
+export default function App() {
+  return (
+    <>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.search}>
+          <Searchbar placeholder="Searc" />
+        </View>
+
+        <View style={styles.list}>
+          <Text>list</Text>
+        </View>
+      </SafeAreaView>
+      <ExpoStatusBar style="auto" />
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight,
+  },
+  search: {
+    padding: 16,
+    backgroundColor: "white",
+  },
+  list: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: "blue",
+  },
+});
+
+
+Feature Overview Resturant List Item
+Build out the CardView.
+In order to that we have to make sure 
+that we have the data in place.
+-Rating
+-Adress
+-Picture
+-Dinner
+
+Resturant Info Setup Part 1
+
+Build a screen and a screen and resturantinfo component.
+
+import React from "react";
+import { Text } from "react-native";
+
+export const ResturantInfo = () => <Text>Resturants Info</Text>;
+
+
+And a resturantscreen component.
+
+import React from "react";
+import { Searchbar } from "react-native-paper";
+import { StatusBar, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { ResturantInfo } from "../components/resturant-info.component";
+
+export const ResturantsScreen = () => (
+  <SafeAreaView style={styles.container}>
+    <View style={styles.search}>
+      <Searchbar placeholder="Search" />
+    </View>
+
+    <View style={styles.list}>
+      <ResturantInfo />
+    </View>
+  </SafeAreaView>
+);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight,
+  },
+  search: {
+    padding: 16,
+    backgroundColor: "white",
+  },
+  list: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: "blue",
+  },
+});
+
+
+Resturant Info Setup Part 2
+Define some standard data to the ResturantInfo component.
+
+
+import React from "react";
+import { Text } from "react-native";
+
+export const ResturantInfo = ({ resturant = {} }) => {
+  const {
+    name = "Some Resturant",
+    icon,
+    photos = [
+      "https://eatforum.org/content/uploads/2018/05/table_with_food_top_view_900x700.jpg",
+    ],
+    address = "100 some random street",
+    openingHours = true,
+    rating = 4,
+    isClosedTemporarily,
+  } = resturant;
+
+  return <Text>Resturants Info</Text>;
+
+
+
+
+
+Exercise Resturant Info Card
+
+Adding some cover to the card and giving it some style.
+
+import React from "react";
+import { Text, StyleSheet } from "react-native";
+import { Card } from "react-native-paper";
+
+export const ResturantInfo = ({ resturant = {} }) => {
+  const {
+    name = "Some Resturant",
+    icon,
+    photos = [
+      "https://eatforum.org/content/uploads/2018/05/table_with_food_top_view_900x700.jpg",
+    ],
+    address = "100 some random street",
+    openingHours = true,
+    rating = 4,
+    isClosedTemporarily,
+  } = resturant;
+
+  return (
+    <Card elevation={5} style={styles.card}>
+      <Card.Cover key={name} style={styles.cover} source={{ uri: photos[0] }} />
+      <Text>{name}</Text>
+    </Card>
+  );
+};
+
+const styles = StyleSheet.create({
+  card: { backgroundColor: "white" },
+  cover: {
+    padding: 20,
+    backgroundColor: "white",
+  },
+});
+
+
+The Way We Are Styling Feels Weird
+Design Ops.
+When you are building the project.
+Taking constrains into option.
+Design system.
+One aspect is theme.
+A theme will provide constistency.
+Check styled components.
+Creating components that has components that has styles
+embedded.
+Set up a spacing object.
+Color-pallet.
+
+
+Trying Out Styled Components
+Trying out some snack.
+Add some dependcies.
+Add dependcies.
+Separate the components.
+Giving some styles.
+Because we are able with Template Strings.
+We kind of write some a more similar style.
+Write styles in a sort of a way.
+Give meaning to the components.
+
+
+Installed And Using Styled Component
+
+We can use styled component.
+And now we can change on only one place.
+
+const Title = styled.Text`
+  padding: 16px;
+  color: red;
+`;
+
+Quick Note On How To Look At Changes
+We are going to linking the page.
+And the Checkpoint in Time.
+We created nice visualistation.
+These Checkpoints will show why your syntax are failing.
+
+
+Exercise Migrating To Styled Components
+We are adding styled.
+To a component.
+
+import React from "react";
+import { Searchbar } from "react-native-paper";
+import { StatusBar, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { ResturantInfo } from "../components/resturant-info.component";
+import styled from "styled-components";
+
+const SafeArea = styled(SafeAreaView)`
+  flex: 1;
+  margin-top: ${StatusBar.currentHeight}px;
+`;
+
+const SearchContainer = styled.View`
+  padding: 16px;
+`;
+
+const ResturantListContainer = styled.View`
+  flex: 1;
+  padding: 16px;
+  background-color: blue;
+`;
+
+export const ResturantsScreen = () => (
+  <SafeArea>
+    <SearchContainer>
+      <Searchbar />
+    </SearchContainer>
+
+    <ResturantListContainer>
+      <ResturantInfo />
+    </ResturantListContainer>
+  </SafeArea>
+);
+
+
+How Do We Make Things Consistent
+
+When we go to the advanced settings
+we can see ThemeProvider.
+It's like a global state.
+Share things globally.
+You can put togheter a theme with all the properties.
+We can theme a bunch of things.
+
+
+Setting Up Our Theme
+We are setting up some global variables.
+Colors,Fonts,Sizes,Spacing.
+We increment.
+index.js file we are importing the all togehter.
+Put togheter.
+Now we can change the color.
+
+color: ${(props) => props.theme.colors.ui.error};
+
+
+
+Exercise Theme Cleanup
+
+Just adding some colors globals to the components.
+
+const Title = styled.Text`
+  padding: 16px;
+  color: ${(props) => props.theme.colors.ui.tertiary};
+`;
+
+const ResturantCard = styled(Card)`
+  background-color: ${(props) => props.theme.colors.ui.primary};
+`;
+
+const ResturantCardCover = styled(Card.Cover)`
+  padding: 20px;
+  background-color: ${(props) => props.theme.colors.ui.tertiary};
+`;
+
+
+Custom Fonts Fonts Fonts!
+We can see in the final app.
+The font is not applying to the text.
+We are going to build the specific font.
+
+
+
+Loading Custom Fonts
+There is the cool package to install the fonts.
+Pick up the font.
+We have to use the expo install.
+
+In the App.js file.
+
+import {
+  useFonts as useOswald,
+  Oswald_400Regular,
+} from "@expo-google-fonts/oswald";
+import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
+
+import React from "react";
+
+export default function App() {
+  const [oswaldLoaded] = useOswald({
+    Oswald_400Regular,
+  });
+
+  const [latoLoaded] = useLato({
+    Lato_400Regular,
+  });
+
+  if (!oswaldLoaded || !latoLoaded) {
+    return null;
+  }
+
+
+Adding The Adress
+
+Added a text style to the address.
+
+const Address = styled(Text)`
+font-family: ${(props) => props.theme.fonts.body};
+font-size ${(props) => props.theme.fontSizes.caption};
+`;
+
+
+Using SVG With Rating
+
+Added an Svg-Rating to the app.
+
+import React from "react";
+import styled from "styled-components";
+import { Text, StyleSheet } from "react-native";
+import { Card } from "react-native-paper";
+import { SvgXml } from "react-native-svg";
+import star from "../../../../assets/star";
+
+const Title = styled.Text`
+  font-family: ${(props) => props.theme.fonts.body};
+  font-size ${(props) => props.theme.fontSizes.body};
+  color: ${(props) => props.theme.colors.ui.primary};
+`;
+
+const Info = styled.View`
+  padding: ${(props) => props.theme.space[3]};
+`;
+
+const Rating = styled.View`
+  flex-direction: row;
+  padding-top: ${(props) => props.theme.space[2]};
+  padding-bottom: ${(props) => props.theme.space[2]};
+
+`;
+
+const Address = styled(Text)`
+font-family: ${(props) => props.theme.fonts.body};
+font-size ${(props) => props.theme.fontSizes.caption};
+`;
+
+const ResturantCard = styled(Card)`
+  background-color: ${(props) => props.theme.colors.ui.tertiary};
+`;
+
+const ResturantCardCover = styled(Card.Cover)`
+  padding: 20px;
+  background-color: ${(props) => props.theme.colors.ui.tertiary};
+`;
+
+export const ResturantInfo = ({ resturant = {} }) => {
+  const {
+    name = "Some Resturant",
+    icon,
+    photos = [
+      "https://eatforum.org/content/uploads/2018/05/table_with_food_top_view_900x700.jpg",
+    ],
+    address = "100 some random street",
+    openingHours = true,
+    rating = 4,
+    isClosedTemporarily,
+  } = resturant;
+
+  const ratingArray = Array.from(new Array(Math.floor(rating)));
+
+  return (
+    <ResturantCard elevation={5}>
+      <ResturantCardCover key={name} source={{ uri: photos[0] }} />
+      <Info>
+        <Title>{name}</Title>
+        <Rating>
+        {ratingArray.map(() => (
+          <SvgXml xml={star} width={20} height={20} />
+        ))}
+        </Rating>
+        <Address>{address}</Address>
+      </Info>
+    </ResturantCard>
+  );
+};
+
+
+
+Exercise Adding Open Now SVG
+Adding open svg and gave two variables.
+isOpenNow and isclosed rightnow.
+
+import React from "react";
+import styled from "styled-components";
+import { Text, View, Image } from "react-native";
+import { Card } from "react-native-paper";
+import { SvgXml } from "react-native-svg";
+
+import star from "../../../../assets/star";
+import open from "../../../../assets/open";
+
+const Title = styled.Text`
+  font-family: ${(props) => props.theme.fonts.body};
+  font-size ${(props) => props.theme.fontSizes.body};
+  color: ${(props) => props.theme.colors.ui.primary};
+`;
+
+const Info = styled.View`
+  padding: ${(props) => props.theme.space[3]};
+`;
+
+const Rating = styled.View`
+  flex-direction: row;
+  padding-top: ${(props) => props.theme.space[2]};
+  padding-bottom: ${(props) => props.theme.space[2]};
+`;
+
+const Section = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+const SectionEnd = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
+`;
+
+const Open = styled(SvgXml)``;
+
+const Address = styled(Text)`
+font-family: ${(props) => props.theme.fonts.body};
+font-size ${(props) => props.theme.fontSizes.caption};
+`;
+
+const ResturantCard = styled(Card)`
+  background-color: ${(props) => props.theme.colors.ui.tertiary};
+`;
+
+const ResturantCardCover = styled(Card.Cover)`
+  padding: 20px;
+  background-color: ${(props) => props.theme.colors.ui.tertiary};
+`;
+
+export const ResturantInfo = ({ resturant = {} }) => {
+  const {
+    name = "Some Resturant",
+    icon,
+    photos = [
+      "https://eatforum.org/content/uploads/2018/05/table_with_food_top_view_900x700.jpg",
+    ],
+    address = "100 some random street",
+    isOpenNow = true,
+    isClosedTemporarily = true,
+    openingHours = true,
+    rating = 4,
+  } = resturant;
+
+  const ratingArray = Array.from(new Array(Math.floor(rating)));
+
+  return (
+    <ResturantCard elevation={5}>
+      <ResturantCardCover key={name} source={{ uri: photos[0] }} />
+      <Info>
+        <Title>{name}</Title>
+        <Section>
+          <Rating>
+            {ratingArray.map(() => (
+              <SvgXml xml={star} width={20} height={20} />
+            ))}
+          </Rating>
+          <SectionEnd>
+            {isClosedTemporarily && (
+              <Text variant="label" style={{ color: "red" }}>
+                CLOSED TEMPORARILY
+              </Text>
+            )}
+            <View style={{ paddingLeft: 16 }} />
+            {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
+            <View style={{ paddingLeft: 16 }} />
+            <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
+          </SectionEnd>
+        </Section>
+        <Address>{address}</Address>
+      </Info>
+    </ResturantCard>
+  );
+};
+
+
+Quick Reminder
+
+
+In the following video you will be building out a spacer component, now I will quickly want to remind you that the videos in this course follow-up on each-other which means we might build something, test it in iOS and it breaks in Android.
+
+This is completely normal and follows the flow of the course DON'T PANIC, DON'T START A QA THREAD. Follow along and all will point itself out.
+
+If something starts breaking on Android, look ahead in the video list because there's a 99% chance we're covering this at most the next video or 2 further along.
+
+Again, breathe, have a sip of your favourite beverage of choice and enjoy the course! 🚀🥤
+
+
+
+
+Building A Spacer Component
+Adding a spacer component to the project.
+
+import React from "react";
+import { View } from "react-native";
+import styled from "styled-components/native";
+
+const TopSmall = styled.View`
+  margintop: ${(props) => props.theme.space[1]};
+`;
+
+const TopMedium = styled.View`
+  margintop: ${(props) => props.theme.space[2]};
+`;
+
+const TopLarge = styled.View`
+  margintop: ${(props) => props.theme.space[3]};
+`;
+
+const LeftSmall = styled.View`
+  margin-left: ${(props) => props.theme.space[1]};
+`;
+
+const LeftMedium = styled.View`
+  margin-left: ${(props) => props.theme.space[2]};
+`;
+
+const LeftLarge = styled.View`
+  margin-left: ${(props) => props.theme.space[3]};
+`;
+
+export const Spacer = ({ variant }) => {
+  if (variant === "top.medium") {
+    return <TopMedium />;
+  }
+
+  if (variant === "top.large") {
+    return <TopLarge />;
+  }
+
+  if (variant === "left.small") {
+    return <LeftSmall />;
+  }
+
+  if (variant === "left.medium") {
+    return <LeftMedium />;
+  }
+
+  if (variant === "left.large") {
+    return <LeftLarge />;
+  }
+
+  return <TopSmall />;
+};
+
+
+
+Wait A Second It Won't Render On Android
+
+We need to separate it out of.
+We need Child.
+We need property.
+Using the Theme.
+Now we have calculate the theme ahead of time.
+The Things in Android can keep to creep up.
+
+
+import React from "react";
+import styled, { useTheme } from "styled-components/native";
+
+const sizeVariant = {
+  small: 1,
+  medium: 2,
+  large: 3,
+};
+
+const postistionVariant = {
+  top: "marginTop",
+  left: "marginLeft",
+  right: "marginRight",
+  bottom: "marginBottom",
+};
+
+const getVariant = (position, size, theme) => {
+  const sizeIndex = sizeVariant[size];
+  const property = postistionVariant[position];
+  const value = theme.space[sizeIndex];
+
+  return `${property}:${value}`;
+};
+
+const SpacerView = styled.View`
+  ${({ variant }) => variant};
+`;
+
+export const Spacer = ({ position, size, children }) => {
+  const theme = useTheme();
+  const variant = getVariant(position, size, theme);
+  return <SpacerView variant={variant}>{children}</SpacerView>;
+};
+
+Spacer.defaultProps = {
+  position: "top",
+  size: "small",
+};
+
+
+Hold Up Why We Need Consistency
+
+You wanna code a consistency.
+You only job is to make positions.
+It is not perfectly correct.
+In a stylesheet it is going to nested all to the bottom.
+Our Text doesn't have any consistency.
+We only want to define once across the whole code-base.
+
+
+
+Creating A Typography Component And Cleanup
+Created an info-card-styles.js file.
+
+import styled from "styled-components/native";
+import { Card } from "react-native-paper";
+
+export const Icon = styled.Image`
+  width: 15px;
+  height: 15px;
+`;
+
+export const ResturantCard = styled(Card)`
+  background-color: ${(props) => props.theme.colors.ui.tertiary};
+`;
+
+export const ResturantCardCover = styled(Card.Cover)`
+  padding: 20px;
+  background-color: ${(props) => props.theme.colors.ui.tertiary};
+`;
+
+export const Address = styled.Text`
+font-family: ${(props) => props.theme.fonts.body};
+font-size ${(props) => props.theme.fontSizes.caption};
+`;
+
+export const Info = styled.View`
+  padding: ${(props) => props.theme.space[3]};
+`;
+
+export const Rating = styled.View`
+  flex-direction: row;
+  padding-top: ${(props) => props.theme.space[2]};
+  padding-bottom: ${(props) => props.theme.space[2]};
+`;
+
+export const Section = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const SectionEnd = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
+`;
+
+
+Solution Code CleanUp
+Using Themes.
+Putting all the styles you had to add exports.
+There are code that is styling.
+Add the Resturant-Card-Component is much cleaner.
+
+
+FlatList
+Putting all of these cards in a list.
+
+
+List It!
+Adding FlatList to our project.
+
+import React from "react";
+import { Searchbar } from "react-native-paper";
+import { StatusBar, SafeAreaView, FlatList } from "react-native";
+import { ResturantInfo } from "../components/resturant-info.component";
+import styled from "styled-components";
+import { ResturantCard } from "../components/resturant-info-card-styles";
+
+const SafeArea = styled(SafeAreaView)`
+  flex: 1;
+  margin-top: ${StatusBar.currentHeight}px;
+`;
+
+const SearchContainer = styled.View`
+  padding: ${(props) => props.theme.space[3]};
+`;
+
+const ResturantList = styled(FlatList)`
+  padding: ${(props) => props.theme.space[3]};
+`;
+
+export const ResturantsScreen = () => (
+  <SafeArea>
+    <SearchContainer>
+      <Searchbar />
+    </SearchContainer>
+    <FlatList
+      data={[{ name: 1 }, { name: 2 }]}
+      renderItem={() => <ResturantCard />}
+      keyExtractor={(item) => item.name}
+      contentContainerStyle={{ padding: 16 }}
+    />
+    <ResturantInfo />
+  </SafeArea>
+);
+
+
+Note On Content Container Style
+
+
+I wanted to leave this quick note here to address a minor semantic issue. I misspoke in the next video and referenced `contentContainerStyle` as the styling that is applied to each individual item.
+
+However it is not applied to each item individually rather it is applied to the holistic content inside the container. That is why you need to wrap the `Spacer` component around the rendered item.
+
+For more info read up on content container style: ScrollView · React Native
+
+
+No Inline Styles
+If created to ResturantList.
+It didn't do anything.
+
+const ResturantList = styled(FlatList).attributes({
+contentContainerStyle: {
+    padding: 16,
+  }
+})``;
+
+
+Why Is There A White Bar?
+
+SafeAreaView is helping us with Areas.
+With giving it flex 1 we are giving it something forced.
+
+
+Feature Overview: App Navigation
+Now that we have the major things we need some navigation.
+Navigation is the next crucial thing to focus on.
+
+
+
+Navigation Installation
+React Navigation.
+We are in React-Native.
+When we are looking on our phone.
+Where do you program the navigation.
+React Navigation is the best.
+yarn add @react-navigation/native
+
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+
+Exercise Tab Navigation
+
+We need React-Native-Bottom-Tab.
+We have to return a NavigationContainer.
+Added the Tab-Navigation to the App.js file.
+
+
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import { ResturantsScreen } from "./src/features/resturants/screens/resturants.screen";
+import { ThemeProvider } from "styled-components/native";
+import { theme } from "./src/infrastructure/theme";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Text } from "react-native";
+import { SafeArea } from "./src/components/utility/safe-area.component";
+
+import {
+  useFonts as useOswald,
+  Oswald_400Regular,
+} from "@expo-google-fonts/oswald";
+import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
+
+import React from "react";
+
+const Tab = createBottomTabNavigator();
+
+const Settings = () => (
+  <SafeArea>
+    <Text>Settings</Text>
+  </SafeArea>
+);
+const Map = () => (
+  <SafeArea>
+    <Text>Map</Text>
+  </SafeArea>
+);
+
+export default function App() {
+  const [oswaldLoaded] = useOswald({
+    Oswald_400Regular,
+  });
+
+  const [latoLoaded] = useLato({
+    Lato_400Regular,
+  });
+
+  if (!oswaldLoaded || !latoLoaded) {
+    return null;
+  }
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <NavigationContainer>
+          <Tab.Navigator>
+            <Tab.Screen name="Resturants" component={ResturantsScreen} />
+            <Tab.Screen name="Map" component={Map} />
+            <Tab.Screen name="Settings" component={Settings} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </ThemeProvider>
+      <ExpoStatusBar style="auto" />
+    </>
+  );
+}
+
+
+Exercise Tab Bar Icon
+
+Adding some icon from the expo-icon library.
+
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import { ResturantsScreen } from "./src/features/resturants/screens/resturants.screen";
+import { ThemeProvider } from "styled-components/native";
+import { theme } from "./src/infrastructure/theme";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Text } from "react-native";
+import { SafeArea } from "./src/components/utility/safe-area.component";
+import { Ionicons } from "@expo/vector-icons";
+
+
+import {
+  useFonts as useOswald,
+  Oswald_400Regular,
+} from "@expo-google-fonts/oswald";
+import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
+
+import React from "react";
+
+const Tab = createBottomTabNavigator();
+
+const Settings = () => (
+  <SafeArea>
+    <Text>Settings</Text>
+  </SafeArea>
+);
+const Map = () => (
+  <SafeArea>
+    <Text>Map</Text>
+  </SafeArea>
+);
+
+export default function App() {
+  const [oswaldLoaded] = useOswald({
+    Oswald_400Regular,
+  });
+
+  const [latoLoaded] = useLato({
+    Lato_400Regular,
+  });
+
+  if (!oswaldLoaded || !latoLoaded) {
+    return null;
+  }
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <NavigationContainer>
+          <Tab.Navigator
+            screenOptions={({ route }) => ({
+              tabBarIcon: ({ color, size }) => {
+                let iconName;
+
+                if (route.name === "Resturants") {
+                  iconName = "md-fast-food";
+                } else if (route.name === "Settings") {
+                  iconName = "md-settings";
+                } else if (route.name === "Map") {
+                  iconName = "md-map";
+                }
+
+                // You can return any component that you like here!
+                return <Ionicons name={iconName} size={size} color={color} />;
+              },
+            })}
+            tabBarOptions={{
+              activeTintColor: "blue",
+              inactiveTintColor: "gray",
+            }}
+          >
+            <Tab.Screen name="Resturants" component={ResturantsScreen} />
+            <Tab.Screen name="Map" component={Map} />
+            <Tab.Screen name="Settings" component={Settings} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </ThemeProvider>
+      <ExpoStatusBar style="auto" />
+    </>
+  );
+}
+
+
+Simplifying Tab Icon Logic
+Removed some code and added some easy screenOptions.
+
+
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import { ResturantsScreen } from "./src/features/resturants/screens/resturants.screen";
+import { ThemeProvider } from "styled-components/native";
+import { theme } from "./src/infrastructure/theme";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Text } from "react-native";
+import { SafeArea } from "./src/components/utility/safe-area.component";
+import { Ionicons } from "@expo/vector-icons";
+
+import {
+  useFonts as useOswald,
+  Oswald_400Regular,
+} from "@expo-google-fonts/oswald";
+import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
+
+import React from "react";
+
+const Tab = createBottomTabNavigator();
+
+const TAB_ICON = {
+  Resturants: "md-fast-food",
+  Map: "md-map",
+  Settings: "md-settings",
+};
+
+const screenOptions = ({ route }) => {
+  const iconName = TAB_ICON[route.name];
+  return {
+    tabBarIcon: ({ size, color }) => (
+      <Ionicons name={iconName} size={size} color={color} />
+    ),
+  };
+};
+
+const Settings = () => (
+  <SafeArea>
+    <Text>Settings</Text>
+  </SafeArea>
+);
+const Map = () => (
+  <SafeArea>
+    <Text>Map</Text>
+  </SafeArea>
+);
+
+export default function App() {
+  const [oswaldLoaded] = useOswald({
+    Oswald_400Regular,
+  });
+
+  const [latoLoaded] = useLato({
+    Lato_400Regular,
+  });
+
+  if (!oswaldLoaded || !latoLoaded) {
+    return null;
+  }
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <NavigationContainer>
+          <Tab.Navigator
+            screenOptions={screenOptions}
+            tabBarOptions={{
+              activeTintColor: "blue",
+              inactiveTintColor: "gray",
+            }}
+          >
+            <Tab.Screen name="Resturants" component={ResturantsScreen} />
+            <Tab.Screen name="Map" component={Map} />
+            <Tab.Screen name="Settings" component={Settings} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </ThemeProvider>
+      <ExpoStatusBar style="auto" />
+    </>
+  );
+}
+
