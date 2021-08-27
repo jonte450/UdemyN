@@ -1,0 +1,111 @@
+Interview Question #3-Trapping Water
+Given an array of integers representing an
+elevaton map where the width of each bar is 1,
+return how much rainwater can be trapped.
+
+
+[0,1,0,2,1,0,3,1,0,1,2]
+
+If rain flow into these charts how much water would become trapped.
+Visually easy logic.
+
+Step 1: Verify the Constraints.
+
+-Do the left and right sides of the graph count as walls?
+ No, the sides are not walls.
+
+
+-Will there be negative integers?
+ No, assume all integers are positive
+
+
+Step 2: Write out some test cases
+ [0,1,0,2,1,0,3,1,0,1,2] correct answer 8.
+ [] 0
+ [3] 0
+ [3,4,3] 0
+
+Step 3: Figure out a solution without code
+
+
+Thinking About A Logical Solution
+This question requires that we uses the entire array.
+Two of the lower heigts determines the water.
+The smaller of the two walls.
+
+currentWater = min(maxL,maxR) - cH.
+total = 0
+maxL = 0
+maxR = 0
+
+
+total = 0
+maxL = 0
+maxR = 2
+
+total = 0
+maxL = 0
+maxL =3
+
+
+total = 0
+maxL = 0
+maxR = 2
+
+
+total = 0
+
+Code:
+
+my_solution:
+const find_maximum_water(water):
+total = 0, maxL = 0, maxR = 0;
+count = 0;
+while(count < water.length){
+	if(water[count+1] > maxR){
+	  maxR = water[count]
+	}
+	if(count-1)
+	else if(water[count-1] > maxL){
+	   maxL = water[count-1]
+	}
+
+}
+increase = abs(currentWater = min(maxL,maxR) -cH);
+total += increase;
+
+
+
+
+Coding Our Brute Force
+
+[0,1,0,2,1,0,3,1,0,1,2]
+
+min(maxLeft, maxRight) - cH
+
+
+const getTrappedRainwater = function(heigts){
+ let totalWater = 0;
+ for(let p = 0; p < heigts.length; p++){
+   let leftP = p, rightP = p, maxLeft = 0, maxRight = 0;
+   while(leftP >= 0){
+     maxLeft = Math.max(maxLeft,heigts[leftP]);
+     leftp--;
+   }
+
+   while(rightP < heigts.length) {
+    maxRight = Math.max(maxRight, heights[rightP]);
+    rightP++;
+   }
+
+   const currentWater = Math.min(maxLeft, maxRight) - heights[p];
+
+   if(currentWater >= 0) {
+    totalWater += currentWater;
+   }
+ }
+ return totalWater;
+
+}
+
+

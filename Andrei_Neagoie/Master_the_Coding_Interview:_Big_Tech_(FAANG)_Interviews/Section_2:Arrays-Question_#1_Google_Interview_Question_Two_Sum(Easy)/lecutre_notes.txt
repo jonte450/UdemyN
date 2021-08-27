@@ -1,0 +1,229 @@
+Interview Question #1 Two Sum
+
+Arrays:
+
+Given an array of integers, return the
+indices of the two numbers that add up
+to a given target.
+
+[1,3,7,9,2]  11
+
+What's is two numbers in the array that can give us the target value.
+
+Correct answer for this question is 9 and 2.
+
+Verify the constraints.
+
+Step 1: Verify the constraints
+
+Are all the numbers positive or can there be negatives?
+
+All numbers are positive
+Are there duplicate numbers in the array?
+No, there are no duplicates
+
+Will there always be a solution available?
+No, there may not always be a solution.
+
+What do we return if there's no solution?
+Just return null.
+
+Can there be multiple pairs that add up to the targer?
+No, only 1 pair of numbers will add up to the target.
+
+
+Step 2: Write out some test cases
+
+
+How to approach our problem
+[1,3,7,9,2] t=11 answer = [3,4].
+
+[1,3,7,9,2] t = 25 return null.
+
+[] t=1  null
+no numbers to add to.
+
+[5] t=5  return null
+
+
+Step 3: Figure out a solution without code
+
+Thinking of a logical solution.
+How assure that you have a working solution.
+We want to think of a working solution.
+
+Pick one number first.
+Try the number all togheter.
+With 3 plus one.
+The moment you find an answer.
+Logical two-pointer technique.
+
+Pointer one points to the first element in the array.
+Move the pointer on some specific logic.
+number to find = target - nums[p1]
+11-1.
+
+Move forward p2 forward one space.
+
+We reach the end of the array.
+
+Step 4: Write out our solution in code
+
+
+
+Writing Our Brute Force Solution
+
+If solution exists
+
+const findTwoSum = function(nums,target){
+	for(p1 = 0; p1 <nums.length;p++){
+
+	 const numberToFind = target - nums[p1];
+
+	 for(p2 = p1 + 1; p2 < nums.length; p2++){
+	  if(numberToFind == nums[p2]){
+	  return[p1,p2]
+	  }
+	 }
+	}
+}
+
+return null; //No solution
+}
+
+
+Step 5: Double check for errors
+
+Make sure our all cases are working.
+Check for closing-tags.
+
+
+Step 6: Test our code with our test cases
+
+
+Testing Our Brute Force Solution With Our Test Cases
+
+initiate p = 0.
+p2 = 1.
+Iterate over the array.
+Now we end this iteration.
+
+
+Submitting To Leetcode
+
+var twoSum = function(nums, target) {
+	for(let p1 = 0; p1 < nums.length; p1++){
+	 const numberToFind = target - nums[p1];
+
+	 for(let p2 = p1 + 1; p2 < nums.length; p2++){
+	  if(numberToFind === nums[p2]){
+	   return [p1,p2];
+	  }
+	 }
+	}
+	return null;
+};
+
+
+Analyzing Space and Time Complexity
+
+Step 7: Space & Time Complexity
+
+Analyze the resources the code will consume.
+If nums grows 8 it will run 8 times.
+
+O(n^(2)) times.
+For every single iteration it will be N*N.
+But why is it still N.
+We are only touching the wors case.
+
+N + 4 is 4 more elements in the iteration.
+
+What is space complexity.
+O(1).
+
+Polynomial
+O(LogN) - Logarithmic
+O(N) - Linear
+O(N log N) - Linearithmic
+O(N^(2)) - Quadratic
+O(N^(3)) - Cubic
+
+There is a base N and x power of.
+
+Exponential
+O(2^(N)) - Exponential
+O(!N) - Factorial
+O(N^(N)) - Exponential
+
+Bad Polynomial times.
+
+Step 8: Can we optimize our solution
+
+
+Optimizing Our Solution
+
+Can we use more space to bring down the Time Complexity.
+Calculating the numberToFind.
+
+1. Calculate NTF
+2. num[p2] === NTF
+
+Let's check the second for-loop.
+We don't keep the numberToFind.
+Very wasteful.
+
+Let's utilize a HashMap.
+Capture the 2 steps togheter.
+
+Check to see if the value is there.
+We gonna move it again.
+We can store the number of NTF.
+
+
+
+
+Coding Our Optimal Solution
+const findTwoSum = function(nums,target){
+	const numsMap = {};
+	for(let p = 0; p nums.length;p++) {
+	const currentMapVal = numsMap[nums[p]];
+	if(currentMapVal >=){
+	 return [currentMapVal, p];
+	}else{
+	 const numerToFind = target-nums[p];
+	 numsMap[numerToFind] = p;
+	}
+	}
+	return null;
+}
+
+
+
+Testing Our Optimal Solution With Our Test Cases & Space and Time Complexity
+
+cmu = undefined.
+ntf = 10.
+
+Setting Keys with values.
+10:0
+8:1
+4:2
+2:3
+
+When we check 3 > 0 yes when p=9.
+
+T:O(N)
+S:O(N)
+
+
+Checking Performance On LeetCode
+
+We end up using currentMapVal some times in the solution.
+
+
+
+
+
+
+
